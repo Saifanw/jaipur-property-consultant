@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jaipur Property Consultant | Plots & Property in Jaipur</title>
+
+<meta name="description" content="Jaipur Property Consultant provides residential plots, property buying and selling assistance, property consultation, site visits and investment consultation across Jhotwara, Jagatpura, Sanganer and major Jaipur areas.">
+
+<meta name="keywords" content="Jaipur Property Consultant, plots for sale in Jaipur, residential plots in Jhotwara, property consultation in Jaipur, property buying assistance Jaipur, property selling assistance Jaipur, land for sale Jaipur, property investment Jaipur">
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+  color:#172033;
+  background:#fff;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* TOP BAR */
+
+.topbar{
+  background:#111827;
+  color:#fff;
+  padding:9px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:14px;
+}
+
+.topbar a{
+  font-weight:700;
+}
+
+/* HEADER */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  font-size:22px;
+  font-weight:800;
+  color:#111827;
+}
+
+.brand span{
+  display:block;
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:#a67c00;
+}
+
+.menu{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  font-size:14px;
+  font-weight:700;
+}
+
+.menu a:hover{
+  color:#a67c00;
+}
+
+.nav-actions{
+  display:flex;
+  gap:8px;
+}
+
+/* BUTTONS */
+
+.btn{
+  display:inline-block;
+  border-radius:8px;
+  padding:11px 17px;
+  font-weight:800;
+  border:1px solid transparent;
+  cursor:pointer;
+}
+
+.btn-call{
+  background:#111827;
+  color:#fff;
+}
+
+.btn-wa{
+  background:#168a52;
+  color:#fff;
+}
+
+.btn-gold{
+  background:#b88a18;
+  color:#fff;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(120deg,#111827,#263247,#3b4658);
+  color:#fff;
+}
+
+.hero-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 5%;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:40px;
+  align-items:center;
+}
+
+.eyebrow{
+  color:#e7c76b;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  font-size:13px;
+}
+
+h1{
+  font-size:48px;
+  line-height:1.08;
+  margin:13px 0 18px;
+}
+
+.hero p{
+  font-size:18px;
+  color:#e5e7eb;
+  max-width:680px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+/* ENQUIRY */
+
+.enquiry{
+  background:#fff;
+  color:#172033;
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 18px 50px rgba(0,0,0,.25);
+}
+
+.enquiry h2{
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+.enquiry p{
+  color:#667085;
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+form{
+  display:grid;
+  gap:11px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid #d5d9e0;
+  border-radius:8px;
+  font:inherit;
+  background:#fff;
+}
+
+textarea{
+  min-height:85px;
+  resize:vertical;
+}
+
+/* SECTIONS */
+
+.section{
+  padding:70px 5%;
+}
+
+.section-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-head{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 35px;
+}
+
+.section-head h2{
+  font-size:34px;
+  margin-bottom:9px;
+}
+
+.section-head p{
+  color:#667085;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  border:1px solid #e5e7eb;
+  border-radius:13px;
+  padding:25px;
+  background:#fff;
+  box-shadow:0 7px 25px rgba(17,24,39,.06);
+}
+
+.card h3{
+  margin-bottom:8px;
+  font-size:20px;
+}
+
+.card p{
+  color:#667085;
+  font-size:15px;
+}
+
+.icon{
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.soft{
+  background:#f7f7f5;
+}
+
+/* SERVICES */
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+.service{
+  padding:17px;
+  border:1px solid #e3e5e8;
+  background:#fff;
+  border-radius:9px;
+  font-weight:700;
+  font-size:14px;
+}
+
+/* LOCATIONS */
+
+.locations{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.location{
+  padding:9px 14px;
+  border-radius:30px;
+  background:#fff;
+  border:1px solid #dfe3e8;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* SPLIT */
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+/* OFFICE */
+
+.office{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  align-items:center;
+}
+
+.office img{
+  width:100%;
+  border-radius:14px;
+  display:block;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.contact-box{
+  background:#111827;
+  color:#fff;
+  border-radius:14px;
+  padding:28px;
+}
+
+.contact-box p{
+  margin:8px 0;
+  color:#e5e7eb;
+}
+
+/* CTA */
+
+.cta{
+  background:#b88a18;
+  color:#fff;
+  text-align:center;
+  padding:55px 5%;
+}
+
+.cta h2{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.cta p{
+  margin-bottom:20px;
+}
+
+/* FOOTER */
+
+.footer{
+  background:#0b1220;
+  color:#cbd5e1;
+  padding:35px 5%;
+  text-align:center;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+.mobile-bar{
+  display:none;
+}
+
+@media(max-width:900px){
+
+  .hero-inner,
+  .office,
+  .split{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .services{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .menu{
+    display:none;
+  }
+
+  h1{
+    font-size:39px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .topbar{
+    justify-content:center;
+    text-align:center;
+    font-size:12px;
+  }
+
+  .topbar span{
+    display:none;
+  }
+
+  .nav{
+    padding:12px 4%;
+  }
+
+  .brand{
+    font-size:18px;
+  }
+
+  .nav-actions .btn{
+    padding:9px 11px;
+    font-size:12px;
+  }
+
+  .hero-inner{
+    padding:52px 5% 85px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .cards,
+  .services{
+    grid-template-columns:1fr;
+  }
+
+  .section{
+    padding:52px 5%;
+  }
+
+  .section-head h2,
+  .cta h2{
+    font-size:28px;
+  }
+
+  .mobile-bar{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:2000;
+    background:#fff;
+    padding:8px;
+    gap:8px;
+    box-shadow:0 -3px 18px rgba(0,0,0,.15);
+  }
+
+  .mobile-bar a{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:7px;
+    color:#fff;
+    font-weight:800;
+  }
+
+  .mobile-call{
+    background:#111827;
+  }
+
+  .mobile-wa{
+    background:#168a52;
+  }
+
+  body{
+    padding-bottom:60px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP CONTACT BAR -->
+
+<div class="topbar">
+
+  <span>Jaipur & Jhotwara Property Consultation</span>
+
+  <div>
+    <a href="tel:+916350566010">📞 6350566010</a>
+    &nbsp; | &nbsp;
+    <a href="https://wa.me/916350566010" target="_blank">
+      💬 WhatsApp
+    </a>
+  </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<nav class="nav">
+
+  <a class="brand" href="#home">
+
+    Jaipur Property Consultant
+
+    <span>
+      PROPERTY • CONSULTATION • ASSISTANCE
+    </span>
+
+  </a>
+
+  <div class="menu">
+
+    <a href="#buy">Buy</a>
+    <a href="#sell">Sell</a>
+    <a href="#agents">Agents</a>
+    <a href="#services">Services</a>
+    <a href="#locations">Locations</a>
+    <a href="#contact">Contact</a>
+
+  </div>
+
+  <div class="nav-actions">
+
+    <a class="btn btn-call" href="tel:+916350566010">
+      Call
+    </a>
+
+    <a class="btn btn-wa"
+       href="https://wa.me/916350566010"
+       target="_blank">
+      WhatsApp
+    </a>
+
+  </div>
+
+</nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-inner">
+
+  <div>
+
+    <div class="eyebrow">
+      Real Estate Consultant • Jaipur
+    </div>
+
+    <h1>
+      Find the Right Property in Jaipur
+    </h1>
+
+    <p>
+      Residential plots, land and property consultation
+      for buyers, sellers, investors and property agents
+      across Jaipur and Jhotwara.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a class="btn btn-gold"
+         href="tel:+916350566010">
+        📞 Call 6350566010
+      </a>
+
+      <a class="btn btn-wa"
+         href="https://wa.me/916350566010"
+         target="_blank">
+        💬 Enquire on WhatsApp
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- ENQUIRY FORM -->
+
+  <div class="enquiry">
+
+    <h2>Property Enquiry</h2>
+
+    <p>
+      Tell us what property you are looking for.
+    </p>
+
+    <form onsubmit="sendEnquiry(event)">
+
+      <input
+        id="name"
+        type="text"
+        placeholder="Your Name"
+        required
+      >
+
+      <input
+        id="phone"
+        type="tel"
+        placeholder="Mobile Number"
+        required
+      >
+
+      <select id="requirement" required>
+
+        <option value="">
+          I want to...
+        </option>
+
+        <option>
+          Buy Property
+        </option>
+
+        <option>
+          Sell Property
+        </option>
+
+        <option>
+          Property Investment
+        </option>
+
+        <option>
+          Property Site Visit
+        </option>
+
+        <option>
+          Agent / Broker Enquiry
+        </option>
+
+      </select>
+
+      <input
+        id="location"
+        type="text"
+        placeholder="Preferred Jaipur Location"
+      >
+
+      <textarea
+        id="message"
+        placeholder="Property type, budget or requirement">
+      </textarea>
+
+      <button
+        class="btn btn-gold"
+        type="submit">
+
+        Send Enquiry on WhatsApp
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- BUY -->
+
+<section class="section" id="buy">
+
+<div class="section-inner">
+
+  <div class="section-head">
+
+    <h2>
+      Looking to Buy Property?
+    </h2>
+
+    <p>
+      Share your requirement and explore property options
+      according to your location, budget and purpose.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="icon">🏠</div>
+
+      <h3>
+        Residential Plots
+      </h3>
+
+      <p>
+        Assistance for residential plots in Jhotwara,
+        Jagatpura, Sanganer and other Jaipur locations.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🏢</div>
+
+      <h3>
+        Commercial Property
+      </h3>
+
+      <p>
+        Explore commercial property opportunities according
+        to your business and investment requirements.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🌳</div>
+
+      <h3>
+        Land & Investment
+      </h3>
+
+      <p>
+        Property and land options for buyers looking for
+        long-term investment opportunities.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- SELL -->
+
+<section class="section soft" id="sell">
+
+<div class="section-inner">
+
+  <div class="section-head">
+
+    <h2>
+      Want to Sell Your Property?
+    </h2>
+
+    <p>
+      Property owners can contact us to discuss their
+      selling requirement and connect with interested buyers.
+    </p>
+
+  </div>
+
+
+  <div class="split">
+
+    <div class="card">
+
+      <h3>
+        🏷️ Sell a Plot
+      </h3>
+
+      <p>
+        Share your plot location, size and expected price.
+        We can discuss the requirement and suitable buyer enquiries.
+      </p>
+
+      <br>
+
+      <a
+        class="btn btn-gold"
+        href="https://wa.me/916350566010?text=I%20want%20to%20sell%20my%20property"
+        target="_blank">
+
+        Sell Property on WhatsApp
+
+      </a>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+        🏠 Sell Residential / Commercial Property
+      </h3>
+
+      <p>
+        Property owners can contact us for consultation,
+        property details, site visit coordination and buyer assistance.
+      </p>
+
+      <br>
+
+      <a
+        class="btn btn-call"
+        href="tel:+916350566010">
+
+        Call for Property Selling
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- AGENTS -->
+
+<section class="section" id="agents">
+
+<div class="section-inner">
+
+  <div class="section-head">
+
+    <h2>
+      For Property Agents & Brokers
+    </h2>
+
+    <p>
+      Connect with us for property-related requirements,
+      buyer enquiries and collaboration opportunities.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="icon">🤝</div>
+
+      <h3>
+        Agent Collaboration
+      </h3>
+
+      <p>
+        Discuss property requirements and collaboration
+        opportunities with our consultancy.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📋</div>
+
+      <h3>
+        Property Sharing
+      </h3>
+
+      <p>
+        Share suitable property opportunities and
+        requirements for potential buyers.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📞</div>
+
+      <h3>
+        Direct Contact
+      </h3>
+
+      <p>
+        For agent or broker enquiries, call or send
+        your requirement directly on WhatsApp.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="section soft" id="services">
+
+<div class="section-inner">
+
+  <div class="section-head">
+
+    <h2>
+      Our Property Services
+    </h2>
+
+    <p>
+      Property buying, selling and consultation services
+      across Jaipur.
+    </p>
+
+  </div>
+
+
+  <div class="services">
+
+    <div class="service">
+      Residential Plot Buying & Selling
+    </div>
+
+    <div class="service">
+      Residential Property Consultation
+    </div>
+
+    <div class="service">
+      Plot Investment Consultation
+    </div>
+
+    <div class="service">
+      Residential Property Buying Assistance
+    </div>
+
+    <div class="service">
+      Residential Property Selling Assistance
+    </div>
+
+    <div class="service">
+      Commercial Property Consultation
+    </div>
+
+    <div class="service">
+      Commercial Property Buying & Selling
+    </div>
+
+    <div class="service">
+      Land Buying Assistance
+    </div>
+
+    <div class="service">
+      Land Selling Assistance
+    </div>
+
+    <div class="service">
+      Property Site Visit
+    </div>
+
+    <div class="service">
+      Property Shortlisting
+    </div>
+
+    <div class="service">
+      Property Documentation Assistance
+    </div>
+
+    <div class="service">
+      Property Verification Assistance
+    </div>
+
+    <div class="service">
+      Property Investment Consultation
+    </div>
+
+    <div class="service">
+      Real Estate Consultation
+    </div>
+
+    <div class="service">
+      Property Deal Assistance
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- LOCATIONS -->
+
+<section class="section" id="locations">
+
+<div class="section-inner">
+
+  <div class="section-head">
+
+    <h2>
+      Areas We Cover in Jaipur
+    </h2>
+
+    <p>
+      Property consultation and assistance across
+      major Jaipur locations.
+    </p>
+
+  </div>
+
+
+  <div class="locations">
+
+    <span class="location">Jhotwara</span>
+    <span class="location">Jagatpura</span>
+    <span class="location">Sanganer</span>
+    <span class="location">Mansarovar</span>
+    <span class="location">Vaishali Nagar</span>
+    <span class="location">Malviya Nagar</span>
+    <span class="location">Pratap Nagar</span>
+    <span class="location">Tonk Road</span>
+    <span class="location">Ajmer Road</span>
+    <span class="location">Vidhyadhar Nagar</span>
+    <span class="location">Kalwar Road</span>
+    <span class="location">Sirsi Road</span>
+    <span class="location">Niwaru Road</span>
+    <span class="location">Durgapura</span>
+    <span class="location">Gopalpura</span>
+    <span class="location">Murlipura</span>
+    <span class="location">VKI</span>
+    <span class="location">Amer</span>
+    <span class="location">Agra Road</span>
+    <span class="location">Delhi Road</span>
+    <span class="location">C-Scheme</span>
+    <span class="location">Civil Lines</span>
+    <span class="location">Sodala</span>
+    <span class="location">Shyam Nagar</span>
+    <span class="location">Muhana</span>
+    <span class="location">Mahapura</span>
+    <span class="location">Bhankrota</span>
+    <span class="location">Khatipura</span>
+    <span class="location">Bindayaka</span>
+    <span class="location">Vatika</span>
+    <span class="location">Chaksu</span>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- WHY US -->
+
+<section class="section soft">
+
+<div class="section-inner">
+
+  <div class="section-head">
+
+    <h2>
+      Why Contact Jaipur Property Consultant?
+    </h2>
+
+    <p>
+      Simple, requirement-based assistance for buyers,
+      sellers and property professionals.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <h3>
+        📍 Local Jaipur Focus
+      </h3>
+
+      <p>
+        Focus on Jaipur and nearby property markets
+        with attention to location-specific requirements.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+        🔎 Requirement Based
+      </h3>
+
+      <p>
+        Property options can be discussed according to
+        your preferred area, property type and budget.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>
+        🤝 Buyer & Seller Support
+      </h3>
+
+      <p>
+        Assistance for people looking to buy, sell,
+        invest or explore property opportunities.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- OFFICE -->
+
+<section class="section" id="contact">
+
+<div class="section-inner">
+
+  <div class="office">
+
+    <div>
+
+      <img
+        src="storefront.png"
+        alt="Jaipur Property Consultant office in Jhotwara Jaipur"
+      >
+
+    </div>
+
+
+    <div class="contact-box">
+
+      <h2>
+        Visit / Contact Our Office
+      </h2>
+
+      <p>
+        <strong>
+          Jaipur Property Consultant
+        </strong>
+      </p>
+
+      <p>
+        58A, Gosai Marg, Udyog Nagar,<br>
+        Jhotwara, Jaipur, Rajasthan 302012
+      </p>
+
+      <p>
+        📞 <strong>6350566010</strong>
+      </p>
+
+
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+
+        <a
+          class="btn btn-gold"
+          href="tel:+916350566010">
+
+          Call Now
+
+        </a>
+
+
+        <a
+          class="btn btn-wa"
+          href="https://wa.me/916350566010"
+          target="_blank">
+
+          WhatsApp
+
+        </a>
+
+
+        <a
+          class="btn"
+          style="background:#fff;color:#111827"
+          href="https://www.google.com/maps/search/?api=1&query=58A%2C%20Gosai%20Marg%2C%20Jhotwara%2C%20Jaipur%2C%20Rajasthan%20302012"
+          target="_blank">
+
+          Get Directions
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+  <h2>
+    Looking for Property in Jaipur?
+  </h2>
+
+  <p>
+    Tell us your requirement and contact us for property consultation.
+  </p>
+
+  <a
+    class="btn"
+    style="background:#111827;color:#fff"
+    href="https://wa.me/916350566010?text=Hello%2C%20I%20am%20looking%20for%20a%20property%20in%20Jaipur."
+    target="_blank">
+
+    💬 Start WhatsApp Enquiry
+
+  </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <p>
+    <strong>
+      Jaipur Property Consultant
+    </strong>
+  </p>
+
+  <p>
+    Real Estate Consultation • Property Buying •
+    Property Selling • Investment Assistance
+  </p>
+
+  <p style="margin-top:8px">
+    © 2026 Jaipur Property Consultant. All rights reserved.
+  </p>
+
+</footer>
+
+
+<!-- MOBILE CALL / WHATSAPP -->
+
+<div class="mobile-bar">
+
+  <a
+    class="mobile-call"
+    href="tel:+916350566010">
+
+    📞 Call
+
+  </a>
+
+  <a
+    class="mobile-wa"
+    href="https://wa.me/916350566010"
+    target="_blank">
+
+    💬 WhatsApp
+
+  </a>
+
+</div>
+
+
+<!-- WHATSAPP FORM SCRIPT -->
+
+<script>
+
+function sendEnquiry(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const requirement =
+    document.getElementById("requirement").value;
+
+  const location =
+    document.getElementById("location").value.trim();
+
+  const message =
+    document.getElementById("message").value.trim();
+
+
+  const text =
+    "Hello, I want a property enquiry.%0A%0A" +
+
+    "Name: " +
+    encodeURIComponent(name) +
+    "%0A" +
+
+    "Phone: " +
+    encodeURIComponent(phone) +
+    "%0A" +
+
+    "Requirement: " +
+    encodeURIComponent(requirement) +
+    "%0A" +
+
+    "Location: " +
+    encodeURIComponent(
+      location || "Not specified"
+    ) +
+    "%0A" +
+
+    "Details: " +
+    encodeURIComponent(
+      message || "Not specified"
+    );
+
+
+  window.open(
+    "https://wa.me/916350566010?text=" + text,
+    "_blank"
+  );
+
+}
+
+</script>
+
+</body>
+</html>

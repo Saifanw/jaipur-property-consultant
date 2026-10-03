@@ -15,3 +15,7 @@ The homepage now accepts buyer/seller submissions into the private `publicSubmis
 
 ### V3
 Added approved Properties page, property detail pages, review approval, customer-property matching, follow-up reminders, and CRM analytics.
+
+
+### Website Analytics
+Google Analytics 4 is included on the public pages using measurement ID `G-0DW0NBETML`. Use the Admin dashboard **Website Analytics** button to open Google Analytics.

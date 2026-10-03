@@ -100,3 +100,11 @@ After publishing the updated `firestore.rules`, approved cards appear automatica
 - New Firestore collections: `publicReviews`, `crmMatches`.
 - CRM fields `followUpDate` and `followUpNote` power the follow-up dashboard.
 - Public seller listings remain sanitized; owner contact and exact private address are not published.
+
+## Website Analytics (Google Analytics 4)
+
+The public pages include Google Analytics 4 using measurement ID `G-0DW0NBETML`. GA4 can show users, sessions, page views, traffic sources, locations, devices, and page performance.
+
+After publishing the updated files, open Google Analytics and select the property connected to the Firebase project. If no data appears, confirm that Google Analytics is enabled for the Firebase project and that the web data stream uses measurement ID `G-0DW0NBETML`.
+
+The Admin dashboard also includes a **Website Analytics** button for quick access.

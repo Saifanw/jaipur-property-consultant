@@ -59,6 +59,9 @@ button,input,select,textarea{font:inherit}
 .nav-links{display:flex;gap:22px;align-items:center;font-size:13px;font-weight:850;color:#334257}
 .nav-links a:hover{color:var(--gold)}
 .nav-cta{background:var(--green);color:#fff!important;padding:10px 15px;border-radius:9px}
+.nav-properties-cta{background:var(--gold);color:#fff!important;padding:12px 17px;border-radius:11px;font-weight:950;box-shadow:0 8px 18px rgba(199,154,37,.28);transform:translateY(-1px)}
+.nav-properties-cta:hover{background:var(--gold2)!important;color:var(--navy)!important;transform:translateY(-2px);box-shadow:0 10px 22px rgba(199,154,37,.34)}
+
 .menu-btn{display:none;border:0;background:var(--navy);color:#fff;border-radius:8px;padding:9px 11px}
 
 /* HERO */
@@ -297,7 +300,8 @@ button,input,select,textarea{font:inherit}
 .requirement-card .req-actions{display:flex;gap:8px;margin-top:15px}
 .requirement-card .req-actions .btn{font-size:11px;padding:9px 11px}
 .public-note{font-size:11px;color:var(--muted);margin-top:10px}
-@media(max-width:900px){.requirements-panel{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+.nav-properties-cta{display:inline-block}.requirements-panel{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.requirements-panel{grid-template-columns:1fr}}
 </style>
 </head>
@@ -327,12 +331,11 @@ button,input,select,textarea{font:inherit}
 
     <div class="nav-links" id="navLinks">
       <a href="#requirements">Buyers</a>
-      <a href="#properties">Properties</a>
       <a href="#sell">Sell</a>
       <a href="#agents">Agents</a>
       <a href="#services">Services</a>
       <a href="#locations">Locations</a>
-      <a href="properties.html">Properties</a>
+      <a href="properties.html" class="nav-properties-cta">🏘️ Properties</a>
       <a href="reviews.html">Reviews</a>
       <a href="#contact">Contact</a>
       <a href="admin.html" style="font-size:11px;opacity:.7">Admin Login</a>

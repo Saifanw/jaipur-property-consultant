@@ -17,7 +17,7 @@ header.app{background:#fff;border-bottom:1px solid var(--line);position:sticky;t
 .tabs{display:flex;gap:8px;overflow:auto;padding:18px 0 4px}.tab{border:1px solid var(--line);background:#fff;padding:10px 15px;border-radius:999px;font-weight:800;white-space:nowrap}.tab.active{background:var(--navy);color:#fff}
 main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat b{font-size:27px;display:block}.stat span{font-size:11px;color:var(--muted)}
 .panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:20px;margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.panel h2{margin:0;font-size:21px}.tools{display:flex;gap:8px;flex-wrap:wrap}
-.search{width:280px;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px}
+.search{width:280px;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid #edf0f3}.filter{padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;min-width:150px;color:var(--text)}.filter.small{min-width:125px;width:125px}.filter-count{font-size:11px;color:var(--muted);align-self:center;margin-left:auto}
 .table-wrap{overflow:auto;margin-top:15px}table{width:100%;border-collapse:collapse;min-width:850px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #edf0f3;font-size:12px;vertical-align:top}th{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.5px;background:#fafbfc}td strong{font-size:13px}.badge{display:inline-block;padding:4px 7px;border-radius:999px;background:#eef3f7;font-size:10px;font-weight:800}.badge.customer{background:#eef4ff;color:#275da8}.badge.seller{background:#fff7df;color:#8b6500}.badge.broker{background:#eaf8f0;color:#0e7b42}
 .empty{text-align:center;color:var(--muted);padding:35px}
 .modal{position:fixed;inset:0;background:rgba(7,17,30,.62);z-index:100;display:grid;place-items:center;padding:18px}.modal-card{width:min(850px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:23px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.close{border:0;background:#eef2f6;border-radius:50%;width:35px;height:35px;font-size:20px}
@@ -75,6 +75,15 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
           <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" class="hidden">
         </div>
       </div>
+      <div class="filters">
+        <select id="filterArea" class="filter"><option value="">All Areas / Locations</option></select>
+        <select id="filterProperty" class="filter"><option value="">All Property Types</option></select>
+        <select id="filterStatus" class="filter"><option value="">All Statuses</option></select>
+        <input id="filterMinBudget" class="filter small" type="number" min="0" placeholder="Min budget ₹">
+        <input id="filterMaxBudget" class="filter small" type="number" min="0" placeholder="Max budget ₹">
+        <button id="resetFilters" class="btn light">↺ Reset Filters</button>
+        <span id="filterCount" class="filter-count"></span>
+      </div>
       <div id="status"></div>
       <div class="table-wrap">
         <table><thead><tr>
@@ -131,6 +140,16 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
 
         <div class="section-label">Internal Notes</div>
         <div class="field full"><label>Private Notes / Follow-up Notes</label><textarea id="notes" placeholder="Anything you need to remember later..."></textarea></div>
+
+        <div class="section-label">Website Visibility</div>
+        <div class="field full">
+          <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
+            <input id="publicVisible" type="checkbox" style="width:18px;height:18px">
+            <span>Show this requirement on the public website</span>
+          </label>
+          <div class="muted">Only the selected public details are published. Mobile, WhatsApp, email, exact address and private notes are never published.</div>
+        </div>
+        <div class="field full"><label>Public Display Name (optional)</label><input id="publicDisplayName" placeholder="e.g. Hasin, Mr. A, Buyer from Jhotwara"></div>
       </div>
       <div id="formMsg"></div>
       <div class="actions"><button type="button" id="cancelBtn" class="btn light">Cancel</button><button type="submit" id="saveBtn" class="btn gold">Save Record</button></div>
@@ -171,6 +190,7 @@ let records = [];
 let currentFilter = "all";
 let unsubscribe = null;
 let editingImages = [];
+let filterOptionsReady = false;
 
 function isAdmin(user){
   return user?.email && ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(user.email.toLowerCase());
@@ -212,22 +232,57 @@ function loadRecords(){
   const q = query(collection(db,"crmContacts"), orderBy("updatedAt","desc"));
   unsubscribe = onSnapshot(q, snap=>{
     records = snap.docs.map(d=>({id:d.id,...d.data()}));
+    refreshFilterOptions();
     render();
   }, err=>showStatus("Could not read CRM: "+escapeHtml(err.message),"error"));
 }
 
-function render(){
+function normalizeText(v){ return String(v ?? "").trim().toLowerCase(); }
+
+function refreshFilterOptions(){
+  const area=$("filterArea"), prop=$("filterProperty"), status=$("filterStatus");
+  const oldArea=area.value, oldProp=prop.value, oldStatus=status.value;
+  const areas=[...new Set(records.map(r=>String(r.area||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  const props=[...new Set(records.map(r=>String(r.propertyType||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  const statuses=[...new Set(records.map(r=>String(r.status||"New").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  area.innerHTML='<option value="">All Areas / Locations</option>'+areas.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  prop.innerHTML='<option value="">All Property Types</option>'+props.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  status.innerHTML='<option value="">All Statuses</option>'+statuses.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  if(areas.includes(oldArea)) area.value=oldArea;
+  if(props.includes(oldProp)) prop.value=oldProp;
+  if(statuses.includes(oldStatus)) status.value=oldStatus;
+}
+
+function recordMatchesFilters(r){
   const term=$("search").value.trim().toLowerCase();
-  const filtered=records.filter(r=>{
-    const typeOk=currentFilter==="all" || r.type===currentFilter;
-    const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress].join(" ").toLowerCase();
-    return typeOk && (!term || hay.includes(term));
-  });
+  const area=normalizeText($("filterArea").value);
+  const prop=normalizeText($("filterProperty").value);
+  const status=normalizeText($("filterStatus").value);
+  const minBudget=Number($("filterMinBudget").value||0);
+  const maxBudget=Number($("filterMaxBudget").value||0);
+  const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress,r.propertyLocation].join(" ").toLowerCase();
+
+  const typeOk=currentFilter==="all" || r.type===currentFilter;
+  const termOk=!term || hay.includes(term);
+  const areaOk=!area || normalizeText(r.area)===area;
+  const propOk=!prop || normalizeText(r.propertyType)===prop;
+  const statusOk=!status || normalizeText(r.status||"New")===status;
+
+  const rMin=Number(r.budgetMin||0), rMax=Number(r.budgetMax||r.budgetMin||0);
+  const minOk=!minBudget || rMax>=minBudget;
+  const maxOk=!maxBudget || (rMin<=maxBudget || rMax<=maxBudget);
+
+  return typeOk && termOk && areaOk && propOk && statusOk && minOk && maxOk;
+}
+
+function render(){
+  const filtered=records.filter(recordMatchesFilters);
   $("allCount").textContent=records.length;
   $("customerCount").textContent=records.filter(r=>r.type==="customer").length;
   $("sellerCount").textContent=records.filter(r=>r.type==="seller").length;
   $("brokerCount").textContent=records.filter(r=>r.type==="broker").length;
   $("listTitle").textContent=currentFilter==="all"?"All Records":currentFilter==="customer"?"Customers":currentFilter==="seller"?"Sellers":"Brokers / Agents";
+  $("filterCount").textContent=`Showing ${filtered.length} of ${records.length} records`;
   $("rows").innerHTML=filtered.map(r=>`
     <tr>
       <td><span class="badge ${escapeHtml(r.type)}">${r.type==="customer"?"Customer":r.type==="seller"?"Seller":"Broker"}</span></td>
@@ -236,25 +291,38 @@ function render(){
       <td>${escapeHtml(r.area||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
       <td>${formatMoney(r.budgetMin)}${r.budgetMax?" – "+formatMoney(r.budgetMax):""}</td>
       <td>${escapeHtml(r.propertyType||"—")} ${r.size?"• "+escapeHtml(r.size):""}</td>
-      <td><span class="badge">${escapeHtml(r.status||"New")}</span></td>
+      <td><span class="badge">${escapeHtml(r.status||"New")}</span>${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}</td>
       <td>${fmtDate(r.updatedAt)}</td>
       <td><button class="btn light" data-edit="${r.id}">Edit</button> <button class="btn danger" data-delete="${r.id}">Delete</button></td>
     </tr>`).join("");
   $("empty").classList.toggle("hidden",filtered.length!==0);
 }
 $("search").oninput=render;
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");currentFilter=b.dataset.type;render()});
-
+["filterArea","filterProperty","filterStatus","filterMinBudget","filterMaxBudget"].forEach(id=>$(id).addEventListener("input",render));
+$("resetFilters").onclick=()=>{
+  $("search").value="";
+  $("filterArea").value="";
+  $("filterProperty").value="";
+  $("filterStatus").value="";
+  $("filterMinBudget").value="";
+  $("filterMaxBudget").value="";
+  render();
+};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active"); currentFilter=b.dataset.type; render();
+});
 $("rows").onclick=async e=>{
   const edit=e.target.closest("[data-edit]"), del=e.target.closest("[data-delete]");
   if(edit) openEdit(edit.dataset.edit);
   if(del && confirm("Delete this CRM record? This cannot be undone.")){
-    try{await deleteDoc(doc(db,"crmContacts",del.dataset.delete));showStatus("Record deleted.","ok")}catch(err){showStatus(err.message,"error")}
+    try{await deleteDoc(doc(db,"crmContacts",del.dataset.delete)); await deleteDoc(doc(db,"publicRequirements",del.dataset.delete)).catch(()=>{}); showStatus("Record deleted.","ok")}catch(err){showStatus(err.message,"error")}
   }
 };
 
 function resetForm(){
   $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New";
+  $("publicVisible").checked=false; $("publicDisplayName").value="";
   $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[];
 }
 function openNew(){resetForm();$("modal").classList.remove("hidden")}
@@ -263,6 +331,8 @@ async function openEdit(id){
   resetForm(); $("modalTitle").textContent="Edit CRM Record"; $("recordId").value=id;
   const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes"};
   Object.entries(map).forEach(([key,id2])=>$(id2).value=r[key]??"");
+  $("publicVisible").checked=!!r.publicVisible;
+  $("publicDisplayName").value=r.publicDisplayName||r.name||"";
   editingImages=r.images||[];
   $("preview").innerHTML=editingImages.map(u=>`<img src="${escapeHtml(u)}">`).join("");
   $("modal").classList.remove("hidden");
@@ -288,7 +358,10 @@ $("recordForm").onsubmit=async e=>{
       propertyType:$("propertyType").value,size:$("size").value.trim(),budgetMin:$("budgetMin").value?Number($("budgetMin").value):null,budgetMax:$("budgetMax").value?Number($("budgetMax").value):null,
       roadFacing:$("roadFacing").value.trim(),propertyLocation:$("propertyLocation").value.trim(),details:$("details").value.trim(),
       company:$("company").value.trim(),areasServed:$("areasServed").value.trim(),registrationNo:$("registrationNo").value.trim(),exactAddress:$("exactAddress").value.trim(),
-      notes:$("notes").value.trim(),updatedAt:serverTimestamp()
+      notes:$("notes").value.trim(),
+      publicVisible:$("publicVisible").checked,
+      publicDisplayName:$("publicDisplayName").value.trim() || $("name").value.trim(),
+      updatedAt:serverTimestamp()
     };
     let imageUrls=editingImages||[];
     const files=[...$("photos").files];
@@ -305,11 +378,36 @@ $("recordForm").onsubmit=async e=>{
       }
     }
     data.images=imageUrls;
+    let savedId=id;
     if(id){
       await setDoc(doc(db,"crmContacts",id),data,{merge:true});
     }else{
-      data.createdAt=serverTimestamp(); await addDoc(collection(db,"crmContacts"),data);
+      data.createdAt=serverTimestamp();
+      const created=await addDoc(collection(db,"crmContacts"),data);
+      savedId=created.id;
     }
+
+    // Public website gets only a sanitized copy; private contact details never leave the CRM.
+    const publicRef=doc(db,"publicRequirements",savedId);
+    if(data.publicVisible){
+      await setDoc(publicRef,{
+        id:savedId,
+        type:data.type,
+        displayName:data.publicDisplayName || data.name,
+        area:data.area,
+        city:data.city || "Jaipur",
+        propertyType:data.propertyType || "",
+        size:data.size || "",
+        budgetMin:data.budgetMin ?? null,
+        budgetMax:data.budgetMax ?? null,
+        details:data.details || "",
+        status:data.status || "New",
+        updatedAt:serverTimestamp()
+      });
+    }else{
+      await deleteDoc(publicRef).catch(()=>{});
+    }
+
     $("modal").classList.add("hidden"); showStatus("Record saved successfully.","ok");
   }catch(err){$("formMsg").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`}
   finally{$("saveBtn").disabled=false;$("saveBtn").textContent="Save Record"}
@@ -329,7 +427,7 @@ $("fileInput").onchange=async e=>{
         whatsapp:String(row.whatsapp||row.WhatsApp||""),email:row.email||row.Email||"",area:row.area||row.Area||row.Locality||"",city:row.city||row.City||"Jaipur",
         propertyType:row.propertyType||row["Property Type"]||"",size:row.size||row.Size||"",budgetMin:row.budgetMin||row["Budget Min"]||null,budgetMax:row.budgetMax||row["Budget Max"]||row.Budget||null,
         details:row.details||row.Details||row.Requirement||"",company:row.company||row.Company||"",status:row.status||row.Status||"New",notes:row.notes||row.Notes||"",
-        source:row.source||row.Source||"Excel Import",updatedAt:serverTimestamp(),createdAt:serverTimestamp()};
+        source:row.source||row.Source||"Excel Import",publicVisible:false,publicDisplayName:row.publicDisplayName||row["Public Display Name"]||"",updatedAt:serverTimestamp(),createdAt:serverTimestamp()};
       if(!["customer","seller","broker"].includes(normalized.type)) normalized.type="customer";
       if(!normalized.name || !normalized.mobile) continue;
       await addDoc(collection(db,"crmContacts"),normalized); count++;
@@ -342,7 +440,7 @@ $("fileInput").onchange=async e=>{
 $("exportBtn").onclick=()=>{
   const rows=records.map(r=>({Type:r.type,Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
     Property_Type:r.propertyType||"",Size:r.size||"",Budget_Min:r.budgetMin||"",Budget_Max:r.budgetMax||"",Status:r.status||"",Source:r.source||"",
-    Company:r.company||"",Areas_Served:r.areasServed||"",Property_Location:r.propertyLocation||"",Exact_Address_Private:r.exactAddress||"",Details:r.details||"",Notes:r.notes||""}));
+    Company:r.company||"",Areas_Served:r.areasServed||"",Property_Location:r.propertyLocation||"",Exact_Address_Private:r.exactAddress||"",Details:r.details||"",Notes:r.notes||"",Public_Visible:r.publicVisible?"Yes":"No",Public_Display_Name:r.publicDisplayName||""}));
   const ws=XLSX.utils.json_to_sheet(rows); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"CRM");
   XLSX.writeFile(wb,"jaipur-property-consultant-crm.xlsx");
 };

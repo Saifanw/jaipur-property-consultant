@@ -3,7 +3,6 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Replace saif.anwar1618@gmail.com with your actual Google admin email.
     function isAdmin() {
       return request.auth != null
         && request.auth.token.email == "saif.anwar1618@gmail.com";
@@ -14,8 +13,13 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
-    // Public property/enquiry collections will be added later.
-    // Keep everything else locked until those features are implemented.
+    // Public website: visitors can only READ the sanitized requirement cards.
+    // Only the admin can create/update/delete these public records.
+    match /publicRequirements/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

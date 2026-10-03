@@ -1,4 +1,4 @@
-# Jaipur Property Consultant — CRM V1
+# Jaipur Property Consultant — CRM V1.1
 
 This package adds a private CRM admin page to the existing GitHub Pages website.
 
@@ -8,14 +8,17 @@ This package adds a private CRM admin page to the existing GitHub Pages website.
 - Customer / Buyer records
 - Seller / Owner records
 - Broker / Agent records
-- Search and filter
+- Search and advanced filters (area, property type, status, budget)
+- Public website requirement cards with admin approval
 - Customer / seller / broker counts
 - Excel/CSV import
 - Excel export
 - Optional private image uploads to Firebase Storage
-- Private Firestore collection: `crmContacts`
+- Private Firestore collection: `crmContacts` (private)
+- Sanitized public requirement collection: `publicRequirements`
 - Private notes and exact address fields
 - Edit/delete records
+- Discreet Admin Login link from the public homepage
 
 ## 1. Add your admin Gmail
 
@@ -69,3 +72,21 @@ Rows without Name or Mobile are skipped.
 ## Important privacy rule
 
 Customer/owner phone numbers, exact addresses and private notes must never be put in the public property JSON or GitHub public files. They stay in Firebase behind admin authentication.
+
+
+## Public requirement cards
+
+When editing/creating a CRM record, use **Show this requirement on the public website** only for records you are authorized to publish.
+
+The public website reads only `publicRequirements`, not the private `crmContacts` collection. The public copy contains only:
+- Display name
+- Area / city
+- Property type
+- Size
+- Budget
+- Requirement/property details
+- Status
+
+It does **not** publish mobile number, WhatsApp number, email, exact address, private notes, or private images.
+
+After publishing the updated `firestore.rules`, approved cards appear automatically on the homepage under **Active Requirements**. The homepage also includes a small **Admin Login** link for the private CRM.

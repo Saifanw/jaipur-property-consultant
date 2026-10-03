@@ -261,6 +261,20 @@ button,input,select,textarea{font:inherit}
   .mobile-bar a{flex:1;text-align:center;padding:11px;border-radius:8px;color:#fff;font-weight:900;font-size:12px}
   .mobile-call{background:var(--navy)}.mobile-wa{background:var(--green)}
 }
+ 
+.requirements-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.requirement-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.requirement-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
+.requirement-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#275da8;font-size:10px;font-weight:900}
+.requirement-card h3{margin:0 0 8px;font-size:17px}
+.requirement-card .req-location{font-weight:800;color:#334155;margin-bottom:8px}
+.requirement-card .req-detail{font-size:13px;color:#53657a;line-height:1.55}
+.requirement-card .req-price{margin-top:12px;font-weight:900;color:#9a7200}
+.requirement-card .req-actions{display:flex;gap:8px;margin-top:15px}
+.requirement-card .req-actions .btn{font-size:11px;padding:9px 11px}
+.public-note{font-size:11px;color:var(--muted);margin-top:10px}
+@media(max-width:900px){.requirements-panel{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.requirements-panel{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -294,6 +308,7 @@ button,input,select,textarea{font:inherit}
       <a href="#services">Services</a>
       <a href="#locations">Locations</a>
       <a href="#contact">Contact</a>
+      <a href="admin.html" style="font-size:11px;opacity:.7">Admin Login</a>
       <a class="nav-cta" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur." target="_blank">WhatsApp</a>
     </div>
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
@@ -409,6 +424,18 @@ button,input,select,textarea{font:inherit}
       No matching sample property found.<br>
       <a class="btn btn-green" style="margin-top:12px" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I need a property in Jaipur. Please share suitable options.">💬 Send Requirement on WhatsApp</a>
     </div>
+  </div>
+</section>
+
+<section class="section soft" id="requirements" style="display:none">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Active Requirements</div>
+      <h2>Jaipur Mein Property Dhoondhne Wale Buyers</h2>
+      <p>Recent requirements shared with Jaipur Property Consultant. Contact details are kept private.</p>
+    </div>
+    <div class="requirements-panel" id="publicRequirementsGrid"></div>
+    <div class="public-note">📌 Public cards show only approved requirement details. Direct contact is handled by Jaipur Property Consultant.</div>
   </div>
 </section>
 
@@ -576,7 +603,70 @@ button,input,select,textarea{font:inherit}
   <strong style="color:#fff">Jaipur Property Consultant</strong><br>
   Real Estate Consultation • Property Buying • Property Selling • Investment Assistance<br>
   <span style="display:block;margin-top:6px">© 2026 Jaipur Property Consultant. All rights reserved.</span>
+  <a href="admin.html" style="display:inline-block;margin-top:9px;color:#e8c45c;text-decoration:none;font-weight:800">🔐 Admin Login</a>
 </footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
+  authDomain: "jaipur-property-consultant.firebaseapp.com",
+  projectId: "jaipur-property-consultant",
+  storageBucket: "jaipur-property-consultant.firebasestorage.app",
+  messagingSenderId: "502971407075",
+  appId: "1:502971407075:web:ee4dabc90db9f592ebc3d6",
+  measurementId: "G-0DW0NBETML"
+};
+
+const publicApp = initializeApp(firebaseConfig, "publicSite");
+const publicDb = getFirestore(publicApp);
+
+function publicMoney(min,max){
+  const fmt=n=>n==null||n===""?"":("₹"+Number(n).toLocaleString("en-IN"));
+  if(min!=null && max!=null) return `${fmt(min)} – ${fmt(max)}`;
+  if(max!=null) return `Up to ${fmt(max)}`;
+  if(min!=null) return `From ${fmt(min)}`;
+  return "Budget discussed";
+}
+
+function renderPublicRequirements(docs){
+  const section=document.getElementById("requirements");
+  const grid=document.getElementById("publicRequirementsGrid");
+  if(!docs.length){ section.style.display="none"; return; }
+  section.style.display="";
+  grid.innerHTML=docs.map(r=>{
+    const kind=r.type==="customer"?"Buyer Requirement":r.type==="seller"?"Property Available":"Agent / Broker";
+    const detail=[r.propertyType,r.size,r.details].filter(Boolean).join(" • ");
+    const msg=encodeURIComponent(`Hello, I saw a ${kind.toLowerCase()} on Jaipur Property Consultant website for ${r.area||"Jaipur"}. Please share details.`);
+    return `<article class="requirement-card">
+      <div class="requirement-top">
+        <span class="requirement-badge">${kind}</span>
+        <span style="font-size:10px;color:#718096">Recently added</span>
+      </div>
+      <h3>${escapeHtmlPublic(r.displayName||"Property Enquiry")}</h3>
+      <div class="req-location">📍 ${escapeHtmlPublic(r.area||"Jaipur")}, ${escapeHtmlPublic(r.city||"Jaipur")}</div>
+      <div class="req-detail">${escapeHtmlPublic(detail||"Property requirement details available on enquiry.")}</div>
+      ${r.budgetMin!=null||r.budgetMax!=null?`<div class="req-price">💰 ${publicMoney(r.budgetMin,r.budgetMax)}</div>`:""}
+      <div class="req-actions">
+        <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a>
+        <a class="btn btn-outline" href="tel:+916350566010">📞 Call</a>
+      </div>
+    </article>`;
+  }).join("");
+}
+function escapeHtmlPublic(s){
+  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+try{
+  const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));
+  onSnapshot(publicQuery,snap=>renderPublicRequirements(snap.docs.map(d=>d.data())),err=>{
+    console.warn("Public requirements unavailable:",err);
+  });
+}catch(err){ console.warn("Public requirements unavailable:",err); }
+</script>
 
 <script>
 const properties=[

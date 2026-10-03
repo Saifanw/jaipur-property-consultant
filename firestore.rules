@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Replace YOUR_ADMIN_GMAIL@gmail.com with your actual Google admin email.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "YOUR_ADMIN_GMAIL@gmail.com";
+    }
+
+    // Private CRM: only the admin can read/write customer, seller and broker records.
+    match /crmContacts/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Public property/enquiry collections will be added later.
+    // Keep everything else locked until those features are implemented.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

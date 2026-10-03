@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin CRM | Jaipur Property Consultant</title>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+:root{--navy:#111c2d;--navy2:#1b2b42;--gold:#c79a25;--green:#128a4d;--bg:#f4f7fa;--white:#fff;--text:#182437;--muted:#66758a;--line:#dfe5ec;--danger:#b42318;--soft:#eef3f7;--shadow:0 12px 35px rgba(17,28,45,.09)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}
+button{cursor:pointer}.hidden{display:none!important}.wrap{width:min(1250px,94%);margin:auto}
+.top{background:var(--navy);color:#fff;padding:13px 0}.top-in{display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-weight:900}.brand small{display:block;color:#e8c45c;font-size:9px;letter-spacing:1.5px}
+.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:800}.gold{background:var(--gold);color:#fff}.green{background:var(--green);color:#fff}.dark{background:var(--navy);color:#fff}.light{background:#fff;border:1px solid var(--line);color:var(--text)}.danger{background:#fff0ef;color:var(--danger);border:1px solid #ffd3cf}
+.login{min-height:100vh;display:grid;place-items:center;padding:25px;background:linear-gradient(135deg,#101d2e,#293e58)}
+.login-card{background:#fff;width:min(430px,94%);padding:35px;border-radius:22px;box-shadow:0 25px 70px rgba(0,0,0,.25);text-align:center}.login-card h1{margin:8px 0}.login-card p{color:var(--muted);font-size:13px}.google{width:100%;padding:13px;margin-top:12px}
+header.app{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}.head-in{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:18px 0 4px}.tab{border:1px solid var(--line);background:#fff;padding:10px 15px;border-radius:999px;font-weight:800;white-space:nowrap}.tab.active{background:var(--navy);color:#fff}
+main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat b{font-size:27px;display:block}.stat span{font-size:11px;color:var(--muted)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:20px;margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.panel h2{margin:0;font-size:21px}.tools{display:flex;gap:8px;flex-wrap:wrap}
+.search{width:280px;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px}
+.table-wrap{overflow:auto;margin-top:15px}table{width:100%;border-collapse:collapse;min-width:850px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #edf0f3;font-size:12px;vertical-align:top}th{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.5px;background:#fafbfc}td strong{font-size:13px}.badge{display:inline-block;padding:4px 7px;border-radius:999px;background:#eef3f7;font-size:10px;font-weight:800}.badge.customer{background:#eef4ff;color:#275da8}.badge.seller{background:#fff7df;color:#8b6500}.badge.broker{background:#eaf8f0;color:#0e7b42}
+.empty{text-align:center;color:var(--muted);padding:35px}
+.modal{position:fixed;inset:0;background:rgba(7,17,30,.62);z-index:100;display:grid;place-items:center;padding:18px}.modal-card{width:min(850px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:23px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.close{border:0;background:#eef2f6;border-radius:50%;width:35px;height:35px;font-size:20px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:850;color:#53657a}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #d3dde7;border-radius:9px;outline:0;background:#fff}.field textarea{min-height:85px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}.section-label{grid-column:1/-1;font-size:12px;font-weight:950;color:#a57400;border-bottom:1px solid var(--line);padding:8px 0 5px;margin-top:3px}
+.photo-box{border:1px dashed #bdc9d6;padding:15px;border-radius:12px;background:#fafcfd}.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.preview img{width:85px;height:65px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}
+.notice{padding:11px 13px;border-radius:9px;font-size:12px;margin:10px 0}.notice.info{background:#eef4ff;color:#275da8}.notice.error{background:#fff0ef;color:var(--danger)}.notice.ok{background:#eaf8f0;color:#0e7b42}
+.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.muted{color:var(--muted);font-size:11px}.danger-link{color:var(--danger);background:none;border:0;font-weight:800}
+@media(max-width:850px){.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.section-label{grid-column:auto}.top-in{align-items:flex-start}.head-in{align-items:flex-start;padding:12px 0}}
+</style>
+</head>
+<body>
+
+<div id="loginView" class="login">
+  <div class="login-card">
+    <div style="font-size:35px">🏠</div>
+    <h1>Jaipur Property Consultant</h1>
+    <p>Private Customer & Property CRM</p>
+    <div id="loginMsg" class="notice info">Sign in with your authorized Google account.</div>
+    <button id="googleBtn" class="btn dark google">🔐 Continue with Google</button>
+  </div>
+</div>
+
+<div id="appView" class="hidden">
+  <div class="top"><div class="wrap top-in">
+    <div class="brand">JP Consultant<small>PRIVATE CRM</small></div>
+    <div style="display:flex;align-items:center;gap:10px"><span id="userEmail" style="font-size:11px"></span><button id="logoutBtn" class="btn light">Logout</button></div>
+  </div></div>
+  <header class="app"><div class="wrap head-in">
+    <div><strong>Admin Dashboard</strong><div class="muted">Customers • Sellers • Brokers / Agents</div></div>
+    <button id="newBtn" class="btn gold">＋ New Record</button>
+  </div></header>
+
+  <main class="wrap">
+    <div class="tabs">
+      <button class="tab active" data-type="all">All</button>
+      <button class="tab" data-type="customer">👤 Customers</button>
+      <button class="tab" data-type="seller">🏠 Sellers</button>
+      <button class="tab" data-type="broker">🤝 Brokers / Agents</button>
+    </div>
+
+    <section class="stats">
+      <div class="stat"><b id="allCount">0</b><span>Total Records</span></div>
+      <div class="stat"><b id="customerCount">0</b><span>Customers</span></div>
+      <div class="stat"><b id="sellerCount">0</b><span>Sellers</span></div>
+      <div class="stat"><b id="brokerCount">0</b><span>Brokers / Agents</span></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h2 id="listTitle">All Records</h2><div class="muted">Data is stored in Cloud Firestore.</div></div>
+        <div class="tools">
+          <input id="search" class="search" placeholder="Search name, number, area, notes...">
+          <button id="importBtn" class="btn light">📥 Import Excel/CSV</button>
+          <button id="exportBtn" class="btn light">📤 Export Excel</button>
+          <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" class="hidden">
+        </div>
+      </div>
+      <div id="status"></div>
+      <div class="table-wrap">
+        <table><thead><tr>
+          <th>Type</th><th>Name / Company</th><th>Mobile</th><th>Area / Location</th><th>Budget / Price</th><th>Requirement / Property</th><th>Status</th><th>Updated</th><th>Action</th>
+        </tr></thead><tbody id="rows"></tbody></table>
+        <div id="empty" class="empty hidden">No records found.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head"><div><h2 id="modalTitle">New Record</h2><div class="muted">Private CRM record — not public.</div></div><button class="close" id="closeModal">×</button></div>
+    <form id="recordForm">
+      <input type="hidden" id="recordId">
+      <div class="form-grid">
+        <div class="section-label">Basic Information</div>
+        <div class="field"><label>Record Type *</label><select id="type" required><option value="customer">Customer / Buyer</option><option value="seller">Seller / Owner</option><option value="broker">Broker / Agent</option></select></div>
+        <div class="field"><label>Name / Contact Person *</label><input id="name" required></div>
+        <div class="field"><label>Mobile Number *</label><input id="mobile" inputmode="tel" required></div>
+        <div class="field"><label>WhatsApp Number</label><input id="whatsapp" inputmode="tel"></div>
+        <div class="field"><label>Alternate Number</label><input id="altMobile" inputmode="tel"></div>
+        <div class="field"><label>Email</label><input id="email" type="email"></div>
+        <div class="field"><label>Source</label><select id="source"><option>Website</option><option>Facebook</option><option>Instagram</option><option>Google</option><option>Referral</option><option>Walk-in</option><option>Phone</option><option>WhatsApp</option><option>Other</option></select></div>
+        <div class="field"><label>Status</label><select id="statusSelect"><option>New</option><option>Contacted</option><option>Interested</option><option>Site Visit</option><option>Negotiation</option><option>Follow-up</option><option>Closed</option><option>Not Interested</option></select></div>
+
+        <div class="section-label">Location & Property Need</div>
+        <div class="field"><label>Area / Locality *</label><input id="area" placeholder="e.g. Jhotwara, Suraj Nagar" required></div>
+        <div class="field"><label>City</label><input id="city" value="Jaipur"></div>
+        <div class="field"><label>Property Type</label><select id="propertyType"><option>Plot</option><option>House</option><option>Shop</option><option>Land</option><option>Villa</option><option>Commercial</option><option>Flat</option><option>Other</option></select></div>
+        <div class="field"><label>Size / Area</label><input id="size" placeholder="e.g. 50 Gaj, 100 Gaj, 1200 sqft"></div>
+        <div class="field"><label>Budget Min (₹)</label><input id="budgetMin" type="number" min="0"></div>
+        <div class="field"><label>Budget Max / Expected Price (₹)</label><input id="budgetMax" type="number" min="0"></div>
+        <div class="field"><label>Road Width / Facing</label><input id="roadFacing" placeholder="e.g. 30 ft road, East facing"></div>
+        <div class="field"><label>Preferred / Property Location</label><input id="propertyLocation" placeholder="Landmark or Google Maps link"></div>
+        <div class="field full"><label>Requirement / Property Details</label><textarea id="details" placeholder="Customer requirement or seller property details..."></textarea></div>
+
+        <div class="section-label">Seller / Broker Details</div>
+        <div class="field"><label>Company / Agency</label><input id="company" placeholder="Optional"></div>
+        <div class="field"><label>Areas Served</label><input id="areasServed" placeholder="e.g. Jhotwara, Vaishali Nagar"></div>
+        <div class="field"><label>RERA / Registration No. (if applicable)</label><input id="registrationNo"></div>
+        <div class="field"><label>Exact Address (PRIVATE)</label><input id="exactAddress" placeholder="Never shown publicly"></div>
+
+        <div class="section-label">Photos / Documents</div>
+        <div class="field full">
+          <div class="photo-box">
+            <label style="font-weight:850;font-size:11px">Upload images (optional)</label>
+            <input id="photos" type="file" accept="image/*" multiple style="display:block;margin-top:8px">
+            <div class="muted">Useful for seller/property records. Images are stored privately in Firebase Storage.</div>
+            <div id="preview" class="preview"></div>
+          </div>
+        </div>
+
+        <div class="section-label">Internal Notes</div>
+        <div class="field full"><label>Private Notes / Follow-up Notes</label><textarea id="notes" placeholder="Anything you need to remember later..."></textarea></div>
+      </div>
+      <div id="formMsg"></div>
+      <div class="actions"><button type="button" id="cancelBtn" class="btn light">Cancel</button><button type="submit" id="saveBtn" class="btn gold">Save Record</button></div>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
+  authDomain: "jaipur-property-consultant.firebaseapp.com",
+  projectId: "jaipur-property-consultant",
+  storageBucket: "jaipur-property-consultant.firebasestorage.app",
+  messagingSenderId: "502971407075",
+  appId: "1:502971407075:web:ee4dabc90db9f592ebc3d6",
+  measurementId: "G-0DW0NBETML"
+};
+
+// IMPORTANT: Replace this with the Gmail you will use as the private admin account.
+// Keep the same email in your Firestore/Storage Security Rules.
+const ADMIN_EMAILS = [
+  "YOUR_ADMIN_GMAIL@gmail.com"
+];
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+const provider = new GoogleAuthProvider();
+
+const $ = id => document.getElementById(id);
+let records = [];
+let currentFilter = "all";
+let unsubscribe = null;
+let editingImages = [];
+
+function isAdmin(user){
+  return user?.email && ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(user.email.toLowerCase());
+}
+function showStatus(msg, kind="info"){
+  $("status").innerHTML = msg ? `<div class="notice ${kind}">${msg}</div>` : "";
+}
+function formatMoney(n){
+  if(n===null || n===undefined || n==="") return "—";
+  const x = Number(n); if(!Number.isFinite(x)) return n;
+  return "₹" + x.toLocaleString("en-IN");
+}
+function escapeHtml(s){
+  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function fmtDate(ts){
+  try{ return ts?.toDate ? ts.toDate().toLocaleDateString("en-IN") : (ts ? new Date(ts).toLocaleDateString("en-IN") : "—"); }catch{return "—"}
+}
+
+$("googleBtn").onclick = async ()=>{
+  $("loginMsg").textContent = "Opening Google sign-in...";
+  try{ await signInWithPopup(auth, provider); }
+  catch(e){ $("loginMsg").className="notice error"; $("loginMsg").textContent = e.message || "Google sign-in failed."; }
+};
+$("logoutBtn").onclick = ()=>signOut(auth);
+onAuthStateChanged(auth, user=>{
+  if(!user){ $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden"); if(unsubscribe) unsubscribe(); return; }
+  if(!isAdmin(user)){
+    $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden");
+    $("loginMsg").className="notice error";
+    $("loginMsg").textContent = `Access denied for ${user.email}. Add this Gmail to ADMIN_EMAILS in admin.html and your Firestore/Storage rules.`;
+    signOut(auth); return;
+  }
+  $("loginView").classList.add("hidden"); $("appView").classList.remove("hidden"); $("userEmail").textContent=user.email;
+  loadRecords();
+});
+
+function loadRecords(){
+  const q = query(collection(db,"crmContacts"), orderBy("updatedAt","desc"));
+  unsubscribe = onSnapshot(q, snap=>{
+    records = snap.docs.map(d=>({id:d.id,...d.data()}));
+    render();
+  }, err=>showStatus("Could not read CRM: "+escapeHtml(err.message),"error"));
+}
+
+function render(){
+  const term=$("search").value.trim().toLowerCase();
+  const filtered=records.filter(r=>{
+    const typeOk=currentFilter==="all" || r.type===currentFilter;
+    const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress].join(" ").toLowerCase();
+    return typeOk && (!term || hay.includes(term));
+  });
+  $("allCount").textContent=records.length;
+  $("customerCount").textContent=records.filter(r=>r.type==="customer").length;
+  $("sellerCount").textContent=records.filter(r=>r.type==="seller").length;
+  $("brokerCount").textContent=records.filter(r=>r.type==="broker").length;
+  $("listTitle").textContent=currentFilter==="all"?"All Records":currentFilter==="customer"?"Customers":currentFilter==="seller"?"Sellers":"Brokers / Agents";
+  $("rows").innerHTML=filtered.map(r=>`
+    <tr>
+      <td><span class="badge ${escapeHtml(r.type)}">${r.type==="customer"?"Customer":r.type==="seller"?"Seller":"Broker"}</span></td>
+      <td><strong>${escapeHtml(r.name)}</strong>${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
+      <td>${escapeHtml(r.mobile||"—")}</td>
+      <td>${escapeHtml(r.area||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
+      <td>${formatMoney(r.budgetMin)}${r.budgetMax?" – "+formatMoney(r.budgetMax):""}</td>
+      <td>${escapeHtml(r.propertyType||"—")} ${r.size?"• "+escapeHtml(r.size):""}</td>
+      <td><span class="badge">${escapeHtml(r.status||"New")}</span></td>
+      <td>${fmtDate(r.updatedAt)}</td>
+      <td><button class="btn light" data-edit="${r.id}">Edit</button> <button class="btn danger" data-delete="${r.id}">Delete</button></td>
+    </tr>`).join("");
+  $("empty").classList.toggle("hidden",filtered.length!==0);
+}
+$("search").oninput=render;
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");currentFilter=b.dataset.type;render()});
+
+$("rows").onclick=async e=>{
+  const edit=e.target.closest("[data-edit]"), del=e.target.closest("[data-delete]");
+  if(edit) openEdit(edit.dataset.edit);
+  if(del && confirm("Delete this CRM record? This cannot be undone.")){
+    try{await deleteDoc(doc(db,"crmContacts",del.dataset.delete));showStatus("Record deleted.","ok")}catch(err){showStatus(err.message,"error")}
+  }
+};
+
+function resetForm(){
+  $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New";
+  $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[];
+}
+function openNew(){resetForm();$("modal").classList.remove("hidden")}
+async function openEdit(id){
+  const r=records.find(x=>x.id===id); if(!r)return;
+  resetForm(); $("modalTitle").textContent="Edit CRM Record"; $("recordId").value=id;
+  const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes"};
+  Object.entries(map).forEach(([key,id2])=>$(id2).value=r[key]??"");
+  editingImages=r.images||[];
+  $("preview").innerHTML=editingImages.map(u=>`<img src="${escapeHtml(u)}">`).join("");
+  $("modal").classList.remove("hidden");
+}
+$("newBtn").onclick=openNew; $("closeModal").onclick=()=>$("modal").classList.add("hidden"); $("cancelBtn").onclick=()=>$("modal").classList.add("hidden");
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.add("hidden")});
+
+$("photos").onchange=()=>{
+  const files=[...$("photos").files];
+  $("preview").innerHTML="";
+  files.forEach(f=>{const img=document.createElement("img");img.src=URL.createObjectURL(f);$("preview").appendChild(img)});
+  editingImages=[];
+};
+
+$("recordForm").onsubmit=async e=>{
+  e.preventDefault(); $("saveBtn").disabled=true; $("saveBtn").textContent="Saving...";
+  $("formMsg").innerHTML="";
+  try{
+    const id=$("recordId").value;
+    const data={
+      type:$("type").value,name:$("name").value.trim(),mobile:$("mobile").value.trim(),whatsapp:$("whatsapp").value.trim(),altMobile:$("altMobile").value.trim(),
+      email:$("email").value.trim(),source:$("source").value,status:$("statusSelect").value,area:$("area").value.trim(),city:$("city").value.trim(),
+      propertyType:$("propertyType").value,size:$("size").value.trim(),budgetMin:$("budgetMin").value?Number($("budgetMin").value):null,budgetMax:$("budgetMax").value?Number($("budgetMax").value):null,
+      roadFacing:$("roadFacing").value.trim(),propertyLocation:$("propertyLocation").value.trim(),details:$("details").value.trim(),
+      company:$("company").value.trim(),areasServed:$("areasServed").value.trim(),registrationNo:$("registrationNo").value.trim(),exactAddress:$("exactAddress").value.trim(),
+      notes:$("notes").value.trim(),updatedAt:serverTimestamp()
+    };
+    let imageUrls=editingImages||[];
+    const files=[...$("photos").files];
+    if(files.length){
+      imageUrls=[];
+      for(const f of files){
+        if(!f.type.startsWith("image/")) continue;
+        if(f.size>8*1024*1024) throw new Error(`${f.name} is larger than 8 MB.`);
+        const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+        const path=`crmContacts/${auth.currentUser.uid}/${id||"new"}-${Date.now()}-${safe}`;
+        const storageRef=ref(storage,path);
+        await uploadBytes(storageRef,f);
+        imageUrls.push(await getDownloadURL(storageRef));
+      }
+    }
+    data.images=imageUrls;
+    if(id){
+      await setDoc(doc(db,"crmContacts",id),data,{merge:true});
+    }else{
+      data.createdAt=serverTimestamp(); await addDoc(collection(db,"crmContacts"),data);
+    }
+    $("modal").classList.add("hidden"); showStatus("Record saved successfully.","ok");
+  }catch(err){$("formMsg").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`}
+  finally{$("saveBtn").disabled=false;$("saveBtn").textContent="Save Record"}
+};
+
+$("importBtn").onclick=()=>$("fileInput").click();
+$("fileInput").onchange=async e=>{
+  const file=e.target.files[0]; if(!file)return;
+  try{
+    const data=await file.arrayBuffer(), wb=XLSX.read(data,{type:"array"});
+    const sheet=wb.Sheets[wb.SheetNames[0]], rows=XLSX.utils.sheet_to_json(sheet,{defval:""});
+    if(!rows.length) throw new Error("No rows found.");
+    if(!confirm(`Import ${rows.length} records into CRM?`)) return;
+    let count=0;
+    for(const row of rows){
+      const normalized={type:String(row.type||row.Type||"customer").toLowerCase(),name:row.name||row.Name||"",mobile:String(row.mobile||row.Mobile||row["Mobile Number"]||""),
+        whatsapp:String(row.whatsapp||row.WhatsApp||""),email:row.email||row.Email||"",area:row.area||row.Area||row.Locality||"",city:row.city||row.City||"Jaipur",
+        propertyType:row.propertyType||row["Property Type"]||"",size:row.size||row.Size||"",budgetMin:row.budgetMin||row["Budget Min"]||null,budgetMax:row.budgetMax||row["Budget Max"]||row.Budget||null,
+        details:row.details||row.Details||row.Requirement||"",company:row.company||row.Company||"",status:row.status||row.Status||"New",notes:row.notes||row.Notes||"",
+        source:row.source||row.Source||"Excel Import",updatedAt:serverTimestamp(),createdAt:serverTimestamp()};
+      if(!["customer","seller","broker"].includes(normalized.type)) normalized.type="customer";
+      if(!normalized.name || !normalized.mobile) continue;
+      await addDoc(collection(db,"crmContacts"),normalized); count++;
+    }
+    showStatus(`${count} records imported successfully. Rows without name/mobile were skipped.`,"ok");
+  }catch(err){showStatus("Import failed: "+escapeHtml(err.message),"error")}
+  e.target.value="";
+};
+
+$("exportBtn").onclick=()=>{
+  const rows=records.map(r=>({Type:r.type,Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
+    Property_Type:r.propertyType||"",Size:r.size||"",Budget_Min:r.budgetMin||"",Budget_Max:r.budgetMax||"",Status:r.status||"",Source:r.source||"",
+    Company:r.company||"",Areas_Served:r.areasServed||"",Property_Location:r.propertyLocation||"",Exact_Address_Private:r.exactAddress||"",Details:r.details||"",Notes:r.notes||""}));
+  const ws=XLSX.utils.json_to_sheet(rows); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"CRM");
+  XLSX.writeFile(wb,"jaipur-property-consultant-crm.xlsx");
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Replace YOUR_ADMIN_GMAIL@gmail.com with your actual Google admin email.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "YOUR_ADMIN_GMAIL@gmail.com";
+    }
+
+    match /crmContacts/{allPaths=**} {
+      allow read, write: if isAdmin();
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

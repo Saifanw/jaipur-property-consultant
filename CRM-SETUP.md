@@ -21,7 +21,7 @@ This package adds a private CRM admin page to the existing GitHub Pages website.
 
 Open `admin.html` and replace:
 
-`YOUR_ADMIN_GMAIL@gmail.com`
+`saif.anwar1618@gmail.com`
 
 inside `ADMIN_EMAILS` with the Google account you will use.
 

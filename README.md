@@ -11,3 +11,7 @@ Jaipur Property Consultant – Buy, Sell &amp; Invest in Jaipur Properties. Resi
 
 ### Public submissions
 The homepage now accepts buyer/seller submissions into the private `publicSubmissions` collection. Admin reviews them under **Public Submissions** and can approve/reject. Approved entries create a private CRM record plus a sanitized `publicRequirements` record.
+
+
+### V3
+Added approved Properties page, property detail pages, review approval, customer-property matching, follow-up reminders, and CRM analytics.

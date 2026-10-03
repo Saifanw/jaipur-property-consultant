@@ -90,3 +90,13 @@ The public website reads only `publicRequirements`, not the private `crmContacts
 It does **not** publish mobile number, WhatsApp number, email, exact address, private notes, or private images.
 
 After publishing the updated `firestore.rules`, approved cards appear automatically on the homepage under **Active Requirements**. The homepage also includes a small **Admin Login** link for the private CRM.
+
+
+## V3 modules
+- `properties.html` — approved seller/property listings with location, type and budget filters.
+- `property.html?id=DOCUMENT_ID` — public property detail page.
+- `reviews.html` — public reviews submission and approved reviews.
+- Admin tabs: Public Submissions, Matching, Follow-ups, Reviews, Analytics.
+- New Firestore collections: `publicReviews`, `crmMatches`.
+- CRM fields `followUpDate` and `followUpNote` power the follow-up dashboard.
+- Public seller listings remain sanitized; owner contact and exact private address are not published.

@@ -332,6 +332,8 @@ button,input,select,textarea{font:inherit}
       <a href="#agents">Agents</a>
       <a href="#services">Services</a>
       <a href="#locations">Locations</a>
+      <a href="properties.html">Properties</a>
+      <a href="reviews.html">Reviews</a>
       <a href="#contact">Contact</a>
       <a href="admin.html" style="font-size:11px;opacity:.7">Admin Login</a>
       <a class="nav-cta" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur." target="_blank">WhatsApp</a>
@@ -427,7 +429,8 @@ button,input,select,textarea{font:inherit}
     <div class="section-head">
       <div class="kicker">Property Search</div>
       <h2>Find a Plot or Property in Jaipur</h2>
-      <p>Search by locality, property type and budget. Sample cards are ready to be replaced with your actual inventory.</p>
+      <p>Search by locality, property type and budget. Approved properties are shown through Jaipur Property Consultant.</p>
+      <a class="btn btn-gold" href="properties.html" style="display:inline-block;margin-top:10px">🏘️ View All Approved Properties</a>
     </div>
 
     <div class="search-panel">
@@ -606,6 +609,18 @@ button,input,select,textarea{font:inherit}
   </div>
 </section>
 
+<section class="section soft" id="reviewsPreview">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Community Reviews</div>
+      <h2>💬 Customer Reviews & Experiences</h2>
+      <p>Reviews are published only after approval. Aap bhi apna experience share kar sakte hain.</p>
+      <a class="btn btn-dark" href="reviews.html" style="display:inline-block;margin-top:8px">💬 View Reviews / Add Review</a>
+    </div>
+    <div class="requirements-panel" id="homepageReviewsGrid"></div>
+  </div>
+</section>
+
 <section class="section" id="contact">
   <div class="container">
     <div class="section-head">
@@ -681,7 +696,7 @@ button,input,select,textarea{font:inherit}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, query, where, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
@@ -956,6 +971,17 @@ function toggleMenu(){
 }
 
 renderProperties();
+
+// Approved reviews preview
+try{
+  const reviewQuery=query(collection(publicDb,"publicReviews"),where("status","==","approved"),limit(3));
+  onSnapshot(reviewQuery,snap=>{
+    const docs=snap.docs.map(d=>d.data()).filter(r=>r.status==="approved");
+    const grid=document.getElementById("homepageReviewsGrid");
+    if(!grid)return;
+    grid.innerHTML=docs.length?docs.map(r=>`<article class="requirement-card"><div class="requirement-body"><div class="review-stars">${"★".repeat(Math.max(1,Math.min(5,Number(r.rating)||5)))}</div><h3>${escapeHtmlPublic(r.name||"Customer")}</h3><div class="req-detail">${escapeHtmlPublic(r.comment||"")}</div><div class="req-location">${escapeHtmlPublic(r.area||"")}</div></div></article>`).join(""):'<div class="public-note">Abhi approved reviews nahi hain. Aap pehla review share kar sakte hain.</div>';
+  });
+}catch(err){console.warn("Reviews unavailable",err);}
 </script>
 </body>
 </html>

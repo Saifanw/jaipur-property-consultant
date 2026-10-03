@@ -29,6 +29,10 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
 
 .submission-panel{display:none}.submission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.submission-card{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fff}.submission-card.pending{border-color:#f0d58a}.submission-card.approved{border-color:#9ed9b8}.submission-card.rejected{border-color:#efb2ad;opacity:.78}.submission-card img{width:100%;height:155px;object-fit:cover;border-radius:10px;margin-bottom:10px}.submission-meta{font-size:11px;color:var(--muted);line-height:1.55}.submission-meta strong{color:var(--text)}.submission-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.submission-actions .btn{font-size:11px;padding:8px 10px}.status-pill{display:inline-block;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;background:#fff7df;color:#8b6500}.status-pill.approved{background:#eaf8f0;color:#0e7b42}.status-pill.rejected{background:#fff0ef;color:#b42318}
 @media(max-width:900px){.submission-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.submission-grid{grid-template-columns:1fr}}
+
+/* V3 CRM modules */
+.module-panel{display:none}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.module-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.module-card h3{margin:0 0 7px;font-size:16px}.module-card .big{font-size:28px;font-weight:950}.module-note{font-size:11px;color:var(--muted);line-height:1.55}.module-list{display:grid;gap:10px;margin-top:15px}.module-row{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.module-row.overdue{border-color:#efb2ad;background:#fff8f7}.module-row.today{border-color:#f0d58a;background:#fffdf5}.module-row .row-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.module-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.score{font-weight:950;color:#0e7b42}.bar-wrap{margin-top:12px}.bar-row{display:grid;grid-template-columns:150px 1fr 50px;gap:8px;align-items:center;margin:9px 0;font-size:11px}.bar{height:10px;background:#eef2f6;border-radius:999px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#c79a25,#128a4d);border-radius:999px}.review-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.review-stars{color:#c79a25;letter-spacing:1px}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.match-box{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fafcfd}.mini-label{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:900}.mini-value{font-weight:850;margin-top:3px}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#128a4d;margin-right:5px}.status-dot.warn{background:#c79a25}.status-dot.bad{background:#b42318}
+@media(max-width:900px){.module-grid{grid-template-columns:1fr 1fr}.match-grid{grid-template-columns:1fr}}@media(max-width:620px){.module-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:110px 1fr 40px}}
 </style>
 </head>
 <body>
@@ -60,6 +64,10 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
       <button class="tab" data-type="seller">🏠 Sellers</button>
       <button class="tab" data-type="broker">🤝 Brokers / Agents</button>
       <button class="tab" id="submissionsTab" data-view="submissions">📥 Public Submissions</button>
+      <button class="tab" data-view="matching">🎯 Matching</button>
+      <button class="tab" data-view="followups">📅 Follow-ups</button>
+      <button class="tab" data-view="reviews">💬 Reviews</button>
+      <button class="tab" data-view="analytics">📊 Analytics</button>
     </div>
 
     <section class="stats">
@@ -105,6 +113,41 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
       <div id="submissionStatus"></div>
       <div id="submissionGrid" class="submission-grid"></div>
       <div id="submissionEmpty" class="empty hidden">No public submissions found.</div>
+    </section>
+
+    <section id="matchingPanel" class="panel module-panel">
+      <div class="panel-head"><div><h2>🎯 Customer ↔ Property Matching</h2><div class="muted">Buyer requirements ko seller properties ke saath area, property type aur budget ke basis par match karein.</div></div></div>
+      <div class="match-grid" style="margin-top:15px">
+        <div class="match-box"><div class="mini-label">Customer / Buyer</div><select id="matchCustomer" class="filter" style="width:100%;margin-top:7px"><option value="">Select customer</option></select><div id="matchCustomerInfo" class="module-note" style="margin-top:10px">Customer select karne ke baad matching properties dikhengi.</div></div>
+        <div class="match-box"><div class="mini-label">Match settings</div><div class="module-note" style="margin-top:7px">Area = 40 points • Property type = 30 points • Budget overlap = 30 points</div><button id="findMatchesBtn" class="btn gold" style="margin-top:10px">🔎 Find Matches</button></div>
+      </div>
+      <div id="matchStatus"></div><div id="matchResults" class="module-list"></div>
+      <div class="panel-head" style="margin-top:22px"><div><h3 style="margin:0">Saved Matches</h3><div class="muted">Important customer-property pairs ko yahan save kar sakte hain.</div></div></div>
+      <div id="savedMatches" class="module-list"></div>
+    </section>
+
+    <section id="followupsPanel" class="panel module-panel">
+      <div class="panel-head"><div><h2>📅 Follow-up Reminders</h2><div class="muted">CRM records mein next follow-up date set karein. Overdue aur aaj ke follow-ups sabse upar dikhte hain.</div></div><button id="refreshFollowups" class="btn light">↻ Refresh</button></div>
+      <div class="module-grid">
+        <div class="module-card"><div class="mini-label">Overdue</div><div id="overdueCount" class="big">0</div></div>
+        <div class="module-card"><div class="mini-label">Due Today</div><div id="todayCount" class="big">0</div></div>
+        <div class="module-card"><div class="mini-label">Upcoming</div><div id="upcomingCount" class="big">0</div></div>
+      </div>
+      <div id="followupList" class="module-list"></div>
+    </section>
+
+    <section id="reviewsPanel" class="panel module-panel">
+      <div class="panel-head"><div><h2>💬 Reviews & Comments</h2><div class="muted">Public reviews pehle yahan aayenge. Approve karne ke baad reviews.html par visible honge.</div></div><select id="reviewStatusFilter" class="filter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select></div>
+      <div id="reviewStatus"></div><div id="reviewGrid" class="module-list"></div><div id="reviewEmpty" class="empty hidden">No reviews found.</div>
+    </section>
+
+    <section id="analyticsPanel" class="panel module-panel">
+      <div class="panel-head"><div><h2>📊 CRM Analytics</h2><div class="muted">Current CRM, public submission, property and follow-up snapshot.</div></div><button id="refreshAnalytics" class="btn light">↻ Refresh</button></div>
+      <div id="analyticsCards" class="module-grid"></div>
+      <div class="match-grid" style="margin-top:15px">
+        <div class="match-box"><h3 style="margin:0">CRM by Type</h3><div id="typeBars" class="bar-wrap"></div></div>
+        <div class="match-box"><h3 style="margin:0">CRM by Status</h3><div id="statusBars" class="bar-wrap"></div></div>
+      </div>
     </section>
   </main>
 </div>
@@ -155,6 +198,10 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
         <div class="section-label">Internal Notes</div>
         <div class="field full"><label>Private Notes / Follow-up Notes</label><textarea id="notes" placeholder="Anything you need to remember later..."></textarea></div>
 
+        <div class="section-label">Follow-up</div>
+        <div class="field"><label>Next Follow-up Date</label><input id="followUpDate" type="date"></div>
+        <div class="field"><label>Follow-up Reminder</label><input id="followUpNote" placeholder="e.g. Call about Jhotwara plot"></div>
+
         <div class="section-label">Website Visibility</div>
         <div class="field full">
           <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
@@ -174,7 +221,7 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, getDoc, setDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -208,6 +255,7 @@ let submissions = [];
 let editingImages = [];
 let filterOptionsReady = false;
 let currentAdminView = "crm";
+let reviews=[]; let reviewsUnsubscribe=null; let matches=[]; let matchesUnsubscribe=null;
 
 function isAdmin(user){
   return user?.email && ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(user.email.toLowerCase());
@@ -244,6 +292,8 @@ onAuthStateChanged(auth, user=>{
   $("loginView").classList.add("hidden"); $("appView").classList.remove("hidden"); $("userEmail").textContent=user.email;
   loadRecords();
   loadPublicSubmissions();
+  loadReviews();
+  loadMatches();
 });
 
 function loadRecords(){
@@ -263,6 +313,26 @@ function loadPublicSubmissions(){
     submissions=snap.docs.map(d=>({id:d.id,...d.data()}));
     renderSubmissions();
   },err=>{ $("submissionStatus").innerHTML=`<div class="notice error">Could not read public submissions: ${escapeHtml(err.message)}</div>`; });
+}
+function loadReviews(){
+  const q=query(collection(db,"publicReviews"),orderBy("submittedAt","desc"));
+  if(reviewsUnsubscribe) reviewsUnsubscribe();
+  reviewsUnsubscribe=onSnapshot(q,snap=>{reviews=snap.docs.map(d=>({id:d.id,...d.data()}));renderReviews();renderAnalytics();},err=>{$("reviewStatus").innerHTML=`<div class="notice error">Could not read reviews: ${escapeHtml(err.message)}</div>`;});
+}
+function renderReviews(){
+  const filter=$("reviewStatusFilter").value||"pending";
+  const list=reviews.filter(r=>filter==="all"||String(r.status||"pending")==filter);
+  $("reviewEmpty").classList.toggle("hidden",list.length!==0);
+  $("reviewGrid").innerHTML=list.map(r=>`<article class="review-card"><div class="row-head"><strong>${escapeHtml(r.name||"Visitor")}</strong><span class="status-pill ${escapeHtml(r.status||"pending")}">${escapeHtml(String(r.status||"pending").toUpperCase())}</span></div><div class="review-stars">${"★".repeat(Math.max(1,Math.min(5,Number(r.rating)||5)))}${"☆".repeat(5-Math.max(1,Math.min(5,Number(r.rating)||5)))}</div><div style="font-size:13px;margin-top:7px">${escapeHtml(r.comment||"")}</div><div class="module-note" style="margin-top:6px">${escapeHtml(r.area||"")} ${r.propertyType?"• "+escapeHtml(r.propertyType):""}</div><div class="module-actions">${r.status==="pending"?`<button class="btn green" data-approve-review="${r.id}">✓ Approve</button><button class="btn danger" data-reject-review="${r.id}">✕ Reject</button>`:`<button class="btn light" data-delete-review="${r.id}">Delete</button>`}</div></article>`).join("");
+}
+async function loadMatches(){
+  const q=query(collection(db,"crmMatches"),orderBy("createdAt","desc"));
+  if(matchesUnsubscribe) matchesUnsubscribe();
+  matchesUnsubscribe=onSnapshot(q,snap=>{matches=snap.docs.map(d=>({id:d.id,...d.data()}));renderSavedMatches();},err=>console.warn("Matches unavailable",err));
+}
+function renderSavedMatches(){
+  const html=matches.slice(0,30).map(m=>{const c=records.find(r=>r.id===m.customerId),p=records.find(r=>r.id===m.sellerId);return `<div class="module-row"><div class="row-head"><strong>${escapeHtml(c?.name||m.customerName||"Customer")}</strong><span class="score">${Number(m.score||0)}% match</span></div><div class="module-note">🏠 ${escapeHtml(p?.name||m.sellerName||"Property")} • ${escapeHtml(p?.area||m.area||"")} • ${escapeHtml(p?.propertyType||m.propertyType||"")}</div><div class="module-actions"><button class="btn danger" data-delete-match="${m.id}">Delete Match</button></div></div>`}).join("");
+  $("savedMatches").innerHTML=html||'<div class="empty">No saved matches yet.</div>';
 }
 function renderSubmissions(){
   const filter=$("submissionStatusFilter").value||"pending";
@@ -375,15 +445,19 @@ $("resetFilters").onclick=()=>{
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
   b.classList.add("active");
-  if(b.dataset.view==="submissions") showAdminView("submissions");
-  else { currentAdminView="crm"; currentFilter=b.dataset.type; showAdminView("crm"); render(); }
+  if(b.dataset.view) showAdminView(b.dataset.view);
+  else { currentFilter=b.dataset.type; showAdminView("crm"); }
 });
 function showAdminView(view){
   currentAdminView=view;
-  const crmPanel=document.querySelector("main .panel:not(#submissionsPanel)");
-  const subPanel=$("submissionsPanel");
-  if(view==="submissions"){crmPanel.style.display="none";subPanel.style.display="block";renderSubmissions();}
-  else {crmPanel.style.display="block";subPanel.style.display="none";}
+  const crmPanel=document.querySelector("main .panel:not(#submissionsPanel):not(#matchingPanel):not(#followupsPanel):not(#reviewsPanel):not(#analyticsPanel)");
+  ["submissionsPanel","matchingPanel","followupsPanel","reviewsPanel","analyticsPanel"].forEach(id=>$(id).style.display="none");
+  if(view==="crm"){crmPanel.style.display="block";render();}
+  if(view==="submissions"){ $("submissionsPanel").style.display="block"; renderSubmissions(); }
+  if(view==="matching"){ $("matchingPanel").style.display="block"; populateMatchCustomers(); renderSavedMatches(); }
+  if(view==="followups"){ $("followupsPanel").style.display="block"; renderFollowups(); }
+  if(view==="reviews"){ $("reviewsPanel").style.display="block"; renderReviews(); }
+  if(view==="analytics"){ $("analyticsPanel").style.display="block"; renderAnalytics(); }
 }
 $("rows").onclick=async e=>{
   const edit=e.target.closest("[data-edit]"), del=e.target.closest("[data-delete]");
@@ -395,14 +469,14 @@ $("rows").onclick=async e=>{
 
 function resetForm(){
   $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New";
-  $("publicVisible").checked=false; $("publicDisplayName").value="";
+  $("publicVisible").checked=false; $("publicDisplayName").value=""; $("followUpDate").value=""; $("followUpNote").value="";
   $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[];
 }
 function openNew(){resetForm();$("modal").classList.remove("hidden")}
 async function openEdit(id){
   const r=records.find(x=>x.id===id); if(!r)return;
   resetForm(); $("modalTitle").textContent="Edit CRM Record"; $("recordId").value=id;
-  const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes"};
+  const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes",followUpDate:"followUpDate",followUpNote:"followUpNote"};
   Object.entries(map).forEach(([key,id2])=>$(id2).value=r[key]??"");
   $("publicVisible").checked=!!r.publicVisible;
   $("publicDisplayName").value=r.publicDisplayName||r.name||"";
@@ -432,11 +506,13 @@ $("recordForm").onsubmit=async e=>{
       roadFacing:$("roadFacing").value.trim(),propertyLocation:$("propertyLocation").value.trim(),details:$("details").value.trim(),
       company:$("company").value.trim(),areasServed:$("areasServed").value.trim(),registrationNo:$("registrationNo").value.trim(),exactAddress:$("exactAddress").value.trim(),
       notes:$("notes").value.trim(),
+      followUpDate:$("followUpDate").value || "", followUpNote:$("followUpNote").value.trim(),
       publicVisible:$("publicVisible").checked,
       publicDisplayName:$("publicDisplayName").value.trim() || $("name").value.trim(),
       updatedAt:serverTimestamp()
     };
     let imageUrls=editingImages||[];
+    let publicImageUrls=[];
     const files=[...$("photos").files];
     if(files.length){
       imageUrls=[];
@@ -444,13 +520,21 @@ $("recordForm").onsubmit=async e=>{
         if(!f.type.startsWith("image/")) continue;
         if(f.size>8*1024*1024) throw new Error(`${f.name} is larger than 8 MB.`);
         const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-        const path=`crmContacts/${auth.currentUser.uid}/${id||"new"}-${Date.now()}-${safe}`;
+        const stamp=Date.now();
+        const path=`crmContacts/${auth.currentUser.uid}/${id||"new"}-${stamp}-${safe}`;
         const storageRef=ref(storage,path);
         await uploadBytes(storageRef,f);
         imageUrls.push(await getDownloadURL(storageRef));
+        if(data.publicVisible && data.type==="seller"){
+          const publicRef=ref(storage,`publicProperties/${id||"new"}-${stamp}-${safe}`);
+          await uploadBytes(publicRef,f);
+          publicImageUrls.push(await getDownloadURL(publicRef));
+        }
       }
     }
     data.images=imageUrls;
+    if(publicImageUrls.length) data.publicImageUrls=publicImageUrls;
+    else if(editingImages.length && data.type==="seller") data.publicImageUrls=records.find(r=>r.id===id)?.publicImageUrls||[];
     let savedId=id;
     if(id){
       await setDoc(doc(db,"crmContacts",id),data,{merge:true});
@@ -474,6 +558,8 @@ $("recordForm").onsubmit=async e=>{
         budgetMin:data.budgetMin ?? null,
         budgetMax:data.budgetMax ?? null,
         details:data.details || "",
+        imageDataUrl:(data.type==="seller" && data.publicImageUrls?.length) ? data.publicImageUrls[0] : "",
+        imageUrls:data.type==="seller" ? (data.publicImageUrls||[]) : [],
         status:data.status || "New",
         updatedAt:serverTimestamp()
       });
@@ -508,6 +594,83 @@ $("fileInput").onchange=async e=>{
     showStatus(`${count} records imported successfully. Rows without name/mobile were skipped.`,"ok");
   }catch(err){showStatus("Import failed: "+escapeHtml(err.message),"error")}
   e.target.value="";
+};
+
+function populateMatchCustomers(){
+  const sel=$("matchCustomer"), old=sel.value;
+  sel.innerHTML='<option value="">Select customer</option>'+records.filter(r=>r.type==="customer").map(r=>`<option value="${r.id}">${escapeHtml(r.name)} — ${escapeHtml(r.area||"")}</option>`).join("");
+  if(records.some(r=>r.id===old)) sel.value=old;
+  updateMatchCustomerInfo();
+}
+function overlap(aMin,aMax,bMin,bMax){
+  const a1=Number(aMin||0), a2=Number(aMax||aMin||0), b1=Number(bMin||0), b2=Number(bMax||bMin||0);
+  if(!a1&&!a2||!b1&&!b2) return false;
+  return Math.max(a1,b1)<=Math.min(a2||Infinity,b2||Infinity);
+}
+function calculateMatches(customer){
+  const area=(customer.area||"").toLowerCase(); const prop=(customer.propertyType||"").toLowerCase();
+  return records.filter(r=>r.type==="seller" && r.publicVisible!==false).map(p=>{
+    let score=0; const pa=(p.area||"").toLowerCase(); const pp=(p.propertyType||"").toLowerCase();
+    if(area && pa && (pa.includes(area)||area.includes(pa))) score+=40;
+    if(prop && pp && (pp.includes(prop)||prop.includes(pp))) score+=30;
+    if(overlap(customer.budgetMin,customer.budgetMax,p.budgetMin,p.budgetMax)) score+=30;
+    return {p,score};
+  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,20);
+}
+function updateMatchCustomerInfo(){
+  const c=records.find(r=>r.id===$("matchCustomer").value);
+  $("matchCustomerInfo").textContent=c?`${c.area||""} • ${c.propertyType||"Property"} • ${formatMoney(c.budgetMin)}${c.budgetMax?" – "+formatMoney(c.budgetMax):""}`:"Customer select karne ke baad matching properties dikhengi.";
+}
+function renderMatchResults(){
+  const c=records.find(r=>r.id===$("matchCustomer").value);
+  if(!c){$("matchResults").innerHTML="";return;}
+  const list=calculateMatches(c);
+  $("matchResults").innerHTML=list.length?list.map(x=>`<div class="module-row"><div class="row-head"><strong>${escapeHtml(x.p.name||"Property")}</strong><span class="score">${x.score}% match</span></div><div class="module-note">📍 ${escapeHtml(x.p.area||"")} • 🏠 ${escapeHtml(x.p.propertyType||"")} • 💰 ${formatMoney(x.p.budgetMin)}${x.p.budgetMax?" – "+formatMoney(x.p.budgetMax):""}<br>${escapeHtml(x.p.details||"")}</div><div class="module-actions"><button class="btn green" data-save-match="${x.p.id}">⭐ Save Match</button><button class="btn light" data-edit-match="${x.p.id}">Edit Property</button></div></div>`).join(""):'<div class="empty">No matching property found. Try adding area/property type/budget to seller records.</div>';
+}
+function renderFollowups(){
+  const today=new Date(); today.setHours(0,0,0,0); const iso=today.toISOString().slice(0,10);
+  const list=records.filter(r=>r.followUpDate).sort((a,b)=>String(a.followUpDate).localeCompare(String(b.followUpDate)));
+  const overdue=list.filter(r=>r.followUpDate<iso), due=list.filter(r=>r.followUpDate===iso), upcoming=list.filter(r=>r.followUpDate>iso);
+  $("overdueCount").textContent=overdue.length; $("todayCount").textContent=due.length; $("upcomingCount").textContent=upcoming.length;
+  $("followupList").innerHTML=list.length?list.map(r=>{const cls=r.followUpDate<iso?'overdue':r.followUpDate===iso?'today':'';const label=r.followUpDate<iso?'OVERDUE':r.followUpDate===iso?'TODAY':'UPCOMING';return `<div class="module-row ${cls}"><div class="row-head"><strong>${escapeHtml(r.name)}</strong><span class="status-pill ${cls==='overdue'?'rejected':cls==='today'?'':''}">${label} • ${escapeHtml(r.followUpDate)}</span></div><div class="module-note">${escapeHtml(r.mobile||"")} • ${escapeHtml(r.area||"")} • ${escapeHtml(r.propertyType||"")}<br>${escapeHtml(r.followUpNote||r.notes||"No reminder note")}</div><div class="module-actions"><button class="btn light" data-edit-follow="${r.id}">Edit</button><button class="btn green" data-done-follow="${r.id}">✓ Done</button><button class="btn gold" data-snooze-follow="${r.id}">+3 Days</button></div></div>`}).join(""):'<div class="empty">No follow-ups scheduled. Add a follow-up date while creating/editing a CRM record.</div>';
+}
+async function saveMatch(propertyId){
+  const c=records.find(r=>r.id===$("matchCustomer").value), p=records.find(r=>r.id===propertyId); if(!c||!p)return;
+  const found=calculateMatches(c).find(x=>x.p.id===propertyId); const score=found?.score||0;
+  try{await addDoc(collection(db,"crmMatches"),{customerId:c.id,customerName:c.name,sellerId:p.id,sellerName:p.name,area:p.area||"",propertyType:p.propertyType||"",score,createdAt:serverTimestamp(),status:"active"});$("matchStatus").innerHTML='<div class="notice ok">Match saved successfully.</div>';}catch(err){$("matchStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
+}
+function renderAnalytics(){
+  const total=records.length, customers=records.filter(r=>r.type==="customer").length, sellers=records.filter(r=>r.type==="seller").length, brokers=records.filter(r=>r.type==="broker").length;
+  const published=records.filter(r=>r.publicVisible && r.type==="seller").length, pending=submissions.filter(r=>String(r.status||"pending")==="pending").length, approved=submissions.filter(r=>r.status==="approved").length, reviewPending=reviews.filter(r=>String(r.status||"pending")==="pending").length;
+  const today=new Date().toISOString().slice(0,10), due=records.filter(r=>r.followUpDate && r.followUpDate<=today).length;
+  $("analyticsCards").innerHTML=[[total,"Total CRM Records"],[customers,"Customers / Buyers"],[sellers,"Sellers / Owners"],[published,"Published Properties"],[pending,"Pending Public Submissions"],[approved,"Approved Submissions"],[reviewPending,"Pending Reviews"],[due,"Due Follow-ups"]].map(x=>`<div class="module-card"><div class="mini-label">${x[1]}</div><div class="big">${x[0]}</div></div>`).join("");
+  const typeData=[['Customers',customers],['Sellers',sellers],['Brokers',brokers]]; const statusMap={}; records.forEach(r=>statusMap[r.status||'New']=(statusMap[r.status||'New']||0)+1); const statusData=Object.entries(statusMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const bars=(arr)=>{const max=Math.max(1,...arr.map(x=>x[1]));return arr.map(x=>`<div class="bar-row"><span>${escapeHtml(x[0])}</span><div class="bar"><i style="width:${Math.round(x[1]/max*100)}%"></i></div><b>${x[1]}</b></div>`).join('')||'<div class="module-note">No data</div>';};
+  $("typeBars").innerHTML=bars(typeData); $("statusBars").innerHTML=bars(statusData);
+}
+$("matchCustomer").onchange=()=>{updateMatchCustomerInfo();renderMatchResults();};
+$("findMatchesBtn").onclick=()=>renderMatchResults();
+$("refreshFollowups").onclick=renderFollowups;
+$("refreshAnalytics").onclick=renderAnalytics;
+$("reviewStatusFilter").onchange=renderReviews;
+$("reviewGrid").onclick=async e=>{
+  const a=e.target.closest('[data-approve-review]'), r=e.target.closest('[data-reject-review]'), d=e.target.closest('[data-delete-review]');
+  try{
+    if(a){await updateDoc(doc(db,"publicReviews",a.dataset.approveReview),{status:"approved",approvedAt:serverTimestamp()});$("reviewStatus").innerHTML='<div class="notice ok">Review approved.</div>';}
+    if(r){await updateDoc(doc(db,"publicReviews",r.dataset.rejectReview),{status:"rejected",rejectedAt:serverTimestamp()});$("reviewStatus").innerHTML='<div class="notice ok">Review rejected.</div>';}
+    if(d&&confirm('Delete this review permanently?')) await deleteDoc(doc(db,"publicReviews",d.dataset.deleteReview));
+  }catch(err){$("reviewStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
+};
+$("matchResults").onclick=async e=>{const save=e.target.closest('[data-save-match]'), edit=e.target.closest('[data-edit-match]');if(save)await saveMatch(save.dataset.saveMatch);if(edit)openEdit(edit.dataset.editMatch);};
+$("savedMatches").onclick=async e=>{const d=e.target.closest('[data-delete-match]');if(d&&confirm('Delete this saved match?'))await deleteDoc(doc(db,"crmMatches",d.dataset.deleteMatch));};
+$("followupList").onclick=async e=>{
+  const edit=e.target.closest('[data-edit-follow]'),done=e.target.closest('[data-done-follow]'),snooze=e.target.closest('[data-snooze-follow]');
+  if(edit){openEdit(edit.dataset.editFollow);return;}
+  try{
+    if(done){await updateDoc(doc(db,"crmContacts",done.dataset.doneFollow),{followUpDate:"",followUpNote:"",status:"Contacted",updatedAt:serverTimestamp()});}
+    if(snooze){const d=new Date();d.setDate(d.getDate()+3);await updateDoc(doc(db,"crmContacts",snooze.dataset.snoozeFollow),{followUpDate:d.toISOString().slice(0,10),updatedAt:serverTimestamp()});}
+    renderFollowups();
+  }catch(err){showStatus(err.message,'error');}
 };
 
 $("exportBtn").onclick=()=>{

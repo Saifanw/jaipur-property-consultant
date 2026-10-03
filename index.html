@@ -229,6 +229,30 @@ button,input,select,textarea{font:inherit}
   box-shadow:0 12px 30px rgba(23,165,83,.28)
 }
 
+
+/* PUBLIC REQUIREMENT ACTIONS */
+.hero-action-boxes{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0 8px;max-width:650px}
+.hero-action{border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:15px 16px;text-align:left;color:#fff;cursor:pointer;transition:.2s;box-shadow:0 10px 25px rgba(0,0,0,.12)}
+.hero-action:hover{transform:translateY(-3px)}
+.hero-action.buy{background:linear-gradient(135deg,#c79a25,#a97e11)}
+.hero-action.sell{background:linear-gradient(135deg,#128a4d,#0b6e3d)}
+.hero-action strong{display:block;font-size:16px}.hero-action span{display:block;font-size:10px;opacity:.9;margin-top:2px}
+.hero-action small{display:block;margin-top:7px;font-size:9px;opacity:.78}
+.public-live{background:#f3f6f9;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
+.public-live-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.public-live-head h2{font-size:23px;line-height:1.15}.public-live-head p{font-size:11px;color:var(--muted);margin-top:2px}
+.public-live-link{font-size:11px;font-weight:900;color:#176b43;white-space:nowrap}
+.requirements-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}
+.requirement-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px rgba(20,42,68,.06)}
+.requirement-photo{height:155px;background:linear-gradient(135deg,#dfe8f1,#bfcddd);overflow:hidden}.requirement-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.requirement-body{padding:17px}.requirement-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}.requirement-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#275da8;font-size:10px;font-weight:900}
+.requirement-card h3{margin:0 0 7px;font-size:17px}.req-location{font-weight:800;color:#334155;margin-bottom:7px;font-size:12px}.req-detail{font-size:11px;color:#5d6d80;min-height:34px}.req-price{font-size:15px;font-weight:950;margin-top:8px;color:var(--navy)}
+.req-actions{display:flex;gap:7px;margin-top:13px}.req-actions .btn{flex:1;padding:9px 8px;font-size:10px}.public-note{font-size:10px;color:#738297;margin-top:13px;text-align:center}
+.ticker-wrap{background:#111c2d;color:#fff;overflow:hidden}.ticker{height:38px;display:flex;align-items:center;white-space:nowrap}.ticker-label{background:#c79a25;padding:5px 10px;border-radius:6px;font-size:9px;font-weight:950;margin-right:13px;z-index:2}.ticker-track{overflow:hidden;flex:1}.ticker-text{display:inline-block;font-size:11px;font-weight:800;animation:tickerMove 28s linear infinite}.ticker-text span{margin-right:55px;color:#e7eef6}.ticker-text b{color:#e8c45c}@keyframes tickerMove{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
+.public-modal{position:fixed;inset:0;background:rgba(7,17,30,.68);z-index:2200;display:grid;place-items:center;padding:18px}.public-modal-card{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.3)}.public-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}.public-modal-head h2{margin:0;font-size:25px}.public-modal-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.public-close{border:0;background:#eef2f6;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer}.public-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.public-field{display:flex;flex-direction:column;gap:5px}.public-field.full{grid-column:1/-1}.public-field label{font-size:10px;font-weight:900;color:#53657a}.public-field input,.public-field select,.public-field textarea{width:100%;padding:11px 12px;border:1px solid #d3dde7;border-radius:9px;outline:0}.public-field textarea{min-height:82px;resize:vertical}.public-privacy{background:#f3f7fb;border:1px solid #dfe7ef;border-radius:11px;padding:11px;font-size:10px;color:#5c6c7e}.public-privacy strong{color:#18304b}.public-submit-row{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.public-photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:none;border:1px solid var(--line)}
+@media(max-width:850px){.requirements-panel{grid-template-columns:1fr 1fr}.hero-action-boxes{max-width:none}}
+@media(max-width:620px){.hero-action-boxes{grid-template-columns:1fr}.public-live-head{display:block}.public-live-link{display:inline-block;margin-top:6px}.requirements-panel{grid-template-columns:1fr}.public-form-grid{grid-template-columns:1fr}.public-field.full{grid-column:auto}.ticker-label{margin-right:8px}.ticker-text{font-size:10px}}
+
 /* MOBILE */
 .mobile-bar{display:none}
 @media(max-width:980px){
@@ -302,7 +326,8 @@ button,input,select,textarea{font:inherit}
     </a>
 
     <div class="nav-links" id="navLinks">
-      <a href="#buy">Buy</a>
+      <a href="#requirements">Buyers</a>
+      <a href="#properties">Properties</a>
       <a href="#sell">Sell</a>
       <a href="#agents">Agents</a>
       <a href="#services">Services</a>
@@ -325,10 +350,21 @@ button,input,select,textarea{font:inherit}
         investors and property agents across Jaipur and Jhotwara.
       </p>
 
+      <div class="hero-action-boxes">
+        <button class="hero-action buy" type="button" onclick="openPublicForm('buyer')">
+          <strong>🏠 मुझे प्रॉपर्टी खरीदनी है</strong>
+          <span>अपनी location, budget और requirement भेजें</span>
+          <small>आपका contact public नहीं होगा</small>
+        </button>
+        <button class="hero-action sell" type="button" onclick="openPublicForm('seller')">
+          <strong>🏡 मुझे प्रॉपर्टी बेचनी है</strong>
+          <span>Property details और photo submit करें</span>
+          <small>Approval के बाद listing public होगी</small>
+        </button>
+      </div>
       <div class="hero-buttons">
         <a class="btn btn-gold" href="#properties">🔎 Explore Properties</a>
         <a class="btn btn-green" href="https://wa.me/916350566010?text=Hello%2C%20I want to enquire about property in Jaipur." target="_blank">💬 Enquire on WhatsApp</a>
-        <a class="btn btn-outline" href="#sell">🏷️ Sell Your Property</a>
       </div>
 
       <div class="hero-trust">
@@ -364,17 +400,25 @@ button,input,select,textarea{font:inherit}
   </div>
 </section>
 
-<!-- MAIN DYNAMIC PLOT BUY/SELL STRIP -->
-<div class="dynamic-strip">
-  <div class="container dynamic-inner">
-    <div class="dynamic-left">
-      <span class="pulse"></span>
-      <div class="dynamic-copy">
-        <div class="dynamic-main" id="dynamicMain">🏡 <span>जयपुर में Plot खरीदने या बेचने के लिए संपर्क करें</span></div>
-        <div class="dynamic-sub" id="dynamicSub">अपनी location, budget या plot details WhatsApp पर भेजें।</div>
+<!-- LIVE PUBLIC REQUIREMENTS -->
+<section class="public-live" id="requirements">
+  <div class="container">
+    <div class="public-live-head">
+      <div>
+        <h2>🔥 Jaipur Mein Active Property Requirements</h2>
+        <p>Approved buyer requirements aur available properties — contact details private rakhe gaye hain.</p>
       </div>
+      <a class="public-live-link" href="javascript:void(0)" onclick="openPublicForm('buyer')">+ Apni Requirement Add Karein</a>
     </div>
-    <a class="dynamic-cta" id="dynamicCta" href="https://wa.me/916350566010?text=Namaste%2C%20mujhe%20Jaipur%20mein plot kharidna ya bechna hai." target="_blank">💬 WhatsApp पर बात करें →</a>
+    <div class="requirements-panel" id="publicRequirementsGrid"></div>
+    <div id="publicRequirementsEmpty" class="public-note">Abhi koi approved public requirement nahi hai. Aap apni requirement submit kar sakte hain.</div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="container ticker">
+    <div class="ticker-label">🔴 LIVE</div>
+    <div class="ticker-track"><div class="ticker-text" id="publicTicker">Jaipur property requirements loading...</div></div>
   </div>
 </div>
 
@@ -592,6 +636,35 @@ button,input,select,textarea{font:inherit}
   </div>
 </section>
 
+<!-- PUBLIC BUY / SELL SUBMISSION MODAL -->
+<div id="publicModal" class="public-modal" style="display:none">
+  <div class="public-modal-card">
+    <div class="public-modal-head">
+      <div><h2 id="publicModalTitle">मुझे प्रॉपर्टी खरीदनी है</h2><p id="publicModalSubtitle">Apni requirement submit karein. Pehle property manager review karega.</p></div>
+      <button class="public-close" type="button" onclick="closePublicForm()">×</button>
+    </div>
+    <form id="publicSubmissionForm">
+      <input type="hidden" id="publicSubmissionType" value="buyer">
+      <div class="public-form-grid">
+        <div class="public-field"><label>नाम *</label><input id="publicName" required placeholder="आपका नाम"></div>
+        <div class="public-field"><label>Mobile / WhatsApp * <span style="color:#b42318">(Private)</span></label><input id="publicMobile" required inputmode="tel" maxlength="10" placeholder="10 digit mobile number"></div>
+        <div class="public-field"><label>Area / Location *</label><input id="publicArea" required placeholder="जैसे Jhotwara, Vaishali Nagar"></div>
+        <div class="public-field"><label>City</label><input id="publicCity" value="Jaipur"></div>
+        <div class="public-field"><label>Property Type *</label><select id="publicPropertyType" required><option value="">Select property type</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
+        <div class="public-field"><label>Size / Area</label><input id="publicSize" placeholder="जैसे 50 Gaj / 1200 sqft"></div>
+        <div class="public-field"><label id="publicBudgetMinLabel">Minimum Budget (₹)</label><input id="publicBudgetMin" type="number" min="0" placeholder="₹"></div>
+        <div class="public-field"><label id="publicBudgetMaxLabel">Maximum Budget (₹)</label><input id="publicBudgetMax" type="number" min="0" placeholder="₹"></div>
+        <div class="public-field full"><label>Details / Requirement *</label><textarea id="publicDetails" required placeholder="Apni requirement ya property ki details likhein..."></textarea></div>
+        <div class="public-field full" id="publicPhotoField" style="display:none"><label>Property Photo</label><input id="publicPhoto" type="file" accept="image/*"><img id="publicPhotoPreview" class="public-photo-preview" alt="Property preview"><div class="muted" style="margin-top:5px">Ek clear photo upload karein. Approval ke baad public listing par dikh sakti hai.</div></div>
+        <div class="public-field full"><div class="public-privacy"><strong>🔐 Privacy & Approval:</strong> Aapka mobile, WhatsApp, email aur exact address public nahi kiya jayega. Submission pehle private admin/property manager review mein jayegi. Sirf approved details website par publish hongi.</div></div>
+        <div class="public-field full"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input id="publicConsent" type="checkbox" required style="width:17px;height:17px"><span>मैं सहमत हूँ कि मेरी property/requirement की selected details approval के बाद public website पर दिखाई जा सकती हैं.</span></label></div>
+      </div>
+      <div id="publicFormMsg"></div>
+      <div class="public-submit-row"><button type="button" class="btn light" onclick="closePublicForm()">Cancel</button><button type="submit" id="publicSubmitBtn" class="btn gold">Submit for Approval</button></div>
+    </form>
+  </div>
+</div>
+
 <a class="float-wa" href="https://wa.me/916350566010?text=Hello%2C%20I want property details in Jaipur." target="_blank" aria-label="WhatsApp">💬</a>
 
 <div class="mobile-bar">
@@ -608,7 +681,7 @@ button,input,select,textarea{font:inherit}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
@@ -632,33 +705,84 @@ function publicMoney(min,max){
 }
 
 function renderPublicRequirements(docs){
-  const section=document.getElementById("requirements");
   const grid=document.getElementById("publicRequirementsGrid");
-  if(!docs.length){ section.style.display="none"; return; }
-  section.style.display="";
+  const empty=document.getElementById("publicRequirementsEmpty");
+  if(!docs.length){ grid.innerHTML=""; empty.style.display="block"; document.getElementById("publicTicker").textContent="Jaipur mein apni property requirement ya property listing submit karein — approval ke baad public website par dikhayein."; return; }
+  empty.style.display="none";
   grid.innerHTML=docs.map(r=>{
     const kind=r.type==="customer"?"Buyer Requirement":r.type==="seller"?"Property Available":"Agent / Broker";
     const detail=[r.propertyType,r.size,r.details].filter(Boolean).join(" • ");
     const msg=encodeURIComponent(`Hello, I saw a ${kind.toLowerCase()} on Jaipur Property Consultant website for ${r.area||"Jaipur"}. Please share details.`);
-    return `<article class="requirement-card">
-      <div class="requirement-top">
-        <span class="requirement-badge">${kind}</span>
-        <span style="font-size:10px;color:#718096">Recently added</span>
-      </div>
-      <h3>${escapeHtmlPublic(r.displayName||"Property Enquiry")}</h3>
+    const photo=r.imageDataUrl?`<div class="requirement-photo"><img src="${escapeHtmlPublic(r.imageDataUrl)}" alt="Property"></div>`:"";
+    return `<article class="requirement-card">${photo}<div class="requirement-body">
+      <div class="requirement-top"><span class="requirement-badge">${kind}</span><span style="font-size:9px;color:#718096">Approved</span></div>
+      <h3>${escapeHtmlPublic(r.displayName|| (r.type==="seller"?"Property Available":"Buyer Requirement"))}</h3>
       <div class="req-location">📍 ${escapeHtmlPublic(r.area||"Jaipur")}, ${escapeHtmlPublic(r.city||"Jaipur")}</div>
-      <div class="req-detail">${escapeHtmlPublic(detail||"Property requirement details available on enquiry.")}</div>
+      <div class="req-detail">${escapeHtmlPublic(detail||"Property details available on enquiry.")}</div>
       ${r.budgetMin!=null||r.budgetMax!=null?`<div class="req-price">💰 ${publicMoney(r.budgetMin,r.budgetMax)}</div>`:""}
-      <div class="req-actions">
-        <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a>
-        <a class="btn btn-outline" href="tel:+916350566010">📞 Call</a>
-      </div>
-    </article>`;
+      <div class="req-actions"><a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a><a class="btn btn-outline" href="tel:+916350566010">📞 Call</a></div>
+    </div></article>`;
   }).join("");
+  const tickerItems=docs.map(r=>`${r.type==="seller"?"🏡 Available":"🏠 Required"}: ${r.area||"Jaipur"} • ${r.propertyType||"Property"}${r.size?" • "+r.size:""}${(r.budgetMin!=null||r.budgetMax!=null)?" • "+publicMoney(r.budgetMin,r.budgetMax):""}`);
+  document.getElementById("publicTicker").innerHTML=tickerItems.map(x=>`<span>${escapeHtmlPublic(x)}</span>`).join("");
 }
-function escapeHtmlPublic(s){
-  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+function escapeHtmlPublic(s){ return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
+
+let publicUnsubscribe=null;
+try{
+  const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));
+  publicUnsubscribe=onSnapshot(publicQuery,snap=>renderPublicRequirements(snap.docs.map(d=>d.data())),err=>console.warn("Public requirements unavailable:",err));
+}catch(err){ console.warn("Public requirements unavailable:",err); }
+
+function openPublicForm(type){
+  document.getElementById("publicSubmissionType").value=type;
+  const buyer=type==="buyer";
+  document.getElementById("publicModalTitle").textContent=buyer?"मुझे प्रॉपर्टी खरीदनी है":"मुझे प्रॉपर्टी बेचनी है";
+  document.getElementById("publicModalSubtitle").textContent=buyer?"Apni requirement submit karein. Property manager approval ke baad selected details public hongi.":"Property details aur photo submit karein. Property manager approval ke baad listing public hogi.";
+  document.getElementById("publicPhotoField").style.display=buyer?"none":"flex";
+  document.getElementById("publicBudgetMinLabel").textContent=buyer?"Minimum Budget (₹)":"Minimum / Expected Price (₹)";
+  document.getElementById("publicBudgetMaxLabel").textContent=buyer?"Maximum Budget (₹)":"Maximum Price (₹)";
+  document.getElementById("publicFormMsg").innerHTML="";
+  document.getElementById("publicModal").style.display="grid";
 }
+function closePublicForm(){document.getElementById("publicModal").style.display="none";}
+window.openPublicForm=openPublicForm; window.closePublicForm=closePublicForm;
+
+document.getElementById("publicPhoto")?.addEventListener("change",e=>{
+  const f=e.target.files?.[0], img=document.getElementById("publicPhotoPreview");
+  if(!f){img.style.display="none";return;} img.src=URL.createObjectURL(f); img.style.display="block";
+});
+function compressPublicImage(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader(); reader.onload=()=>{const img=new Image(); img.onload=()=>{const max=900; const scale=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement("canvas"); c.width=Math.round(img.width*scale); c.height=Math.round(img.height*scale); const ctx=c.getContext("2d"); ctx.drawImage(img,0,0,c.width,c.height); resolve(c.toDataURL("image/jpeg",.62));}; img.onerror=reject; img.src=reader.result;}; reader.onerror=reject; reader.readAsDataURL(file);
+  });
+}
+document.getElementById("publicSubmissionForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const btn=document.getElementById("publicSubmitBtn"), msg=document.getElementById("publicFormMsg"); btn.disabled=true; btn.textContent="Submitting..."; msg.innerHTML="";
+  try{
+    const type=document.getElementById("publicSubmissionType").value;
+    const mobile=document.getElementById("publicMobile").value.trim();
+    if(!/^\d{10}$/.test(mobile)) throw new Error("Please enter a valid 10-digit mobile number.");
+    const consent=document.getElementById("publicConsent").checked;
+    const file=document.getElementById("publicPhoto").files?.[0];
+    let imageDataUrl="";
+    if(file){ if(file.size>8*1024*1024) throw new Error("Photo should be under 8 MB."); imageDataUrl=await compressPublicImage(file); if(imageDataUrl.length>850000) throw new Error("Photo is still too large. Please choose a smaller image."); }
+    await addDoc(collection(publicDb,"publicSubmissions"),{
+      type:type==="buyer"?"customer":"seller", name:document.getElementById("publicName").value.trim(), mobile,
+      area:document.getElementById("publicArea").value.trim(), city:document.getElementById("publicCity").value.trim()||"Jaipur",
+      propertyType:document.getElementById("publicPropertyType").value, size:document.getElementById("publicSize").value.trim(),
+      budgetMin:document.getElementById("publicBudgetMin").value?Number(document.getElementById("publicBudgetMin").value):null,
+      budgetMax:document.getElementById("publicBudgetMax").value?Number(document.getElementById("publicBudgetMax").value):null,
+      details:document.getElementById("publicDetails").value.trim(), imageDataUrl, consentPublic:consent,
+      status:"pending", source:"Public Website", submittedAt:serverTimestamp()
+    });
+    msg.innerHTML='<div class="notice ok">✅ आपकी details successfully submit हो गई हैं. Property manager approval ke baad selected details website par दिखाई जा सकती हैं.</div>';
+    e.target.reset(); document.getElementById("publicCity").value="Jaipur"; document.getElementById("publicPhotoField").style.display="none"; document.getElementById("publicPhotoPreview").style.display="none";
+    setTimeout(closePublicForm,1800);
+  }catch(err){msg.innerHTML=`<div class="notice error">${escapeHtmlPublic(err.message)}</div>`}
+  finally{btn.disabled=false;btn.textContent="Submit for Approval";}
+});
 
 try{
   const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));

@@ -7,3 +7,7 @@ Jaipur Property Consultant – Buy, Sell &amp; Invest in Jaipur Properties. Resi
 - Admin Login link on the public website
 - Optional, admin-approved public requirement cards
 - Public requirement data is separated from private CRM data via `publicRequirements`
+
+
+### Public submissions
+The homepage now accepts buyer/seller submissions into the private `publicSubmissions` collection. Admin reviews them under **Public Submissions** and can approve/reject. Approved entries create a private CRM record plus a sanitized `publicRequirements` record.

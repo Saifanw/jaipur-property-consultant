@@ -26,6 +26,9 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
 .notice{padding:11px 13px;border-radius:9px;font-size:12px;margin:10px 0}.notice.info{background:#eef4ff;color:#275da8}.notice.error{background:#fff0ef;color:var(--danger)}.notice.ok{background:#eaf8f0;color:#0e7b42}
 .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.muted{color:var(--muted);font-size:11px}.danger-link{color:var(--danger);background:none;border:0;font-weight:800}
 @media(max-width:850px){.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.section-label{grid-column:auto}.top-in{align-items:flex-start}.head-in{align-items:flex-start;padding:12px 0}}
+
+.submission-panel{display:none}.submission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.submission-card{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fff}.submission-card.pending{border-color:#f0d58a}.submission-card.approved{border-color:#9ed9b8}.submission-card.rejected{border-color:#efb2ad;opacity:.78}.submission-card img{width:100%;height:155px;object-fit:cover;border-radius:10px;margin-bottom:10px}.submission-meta{font-size:11px;color:var(--muted);line-height:1.55}.submission-meta strong{color:var(--text)}.submission-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.submission-actions .btn{font-size:11px;padding:8px 10px}.status-pill{display:inline-block;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;background:#fff7df;color:#8b6500}.status-pill.approved{background:#eaf8f0;color:#0e7b42}.status-pill.rejected{background:#fff0ef;color:#b42318}
+@media(max-width:900px){.submission-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.submission-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -56,6 +59,7 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
       <button class="tab" data-type="customer">👤 Customers</button>
       <button class="tab" data-type="seller">🏠 Sellers</button>
       <button class="tab" data-type="broker">🤝 Brokers / Agents</button>
+      <button class="tab" id="submissionsTab" data-view="submissions">📥 Public Submissions</button>
     </div>
 
     <section class="stats">
@@ -91,6 +95,16 @@ main{padding:25px 0 60px}.stats{display:grid;grid-template-columns:repeat(4,1fr)
         </tr></thead><tbody id="rows"></tbody></table>
         <div id="empty" class="empty hidden">No records found.</div>
       </div>
+    </section>
+
+    <section id="submissionsPanel" class="panel submission-panel">
+      <div class="panel-head">
+        <div><h2>Public Submissions</h2><div class="muted">Website se aayi buyer/seller entries. Approval ke baad hi public website par show hongi.</div></div>
+        <div class="tools"><select id="submissionStatusFilter" class="filter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select><button id="refreshSubmissions" class="btn light">↻ Refresh</button></div>
+      </div>
+      <div id="submissionStatus"></div>
+      <div id="submissionGrid" class="submission-grid"></div>
+      <div id="submissionEmpty" class="empty hidden">No public submissions found.</div>
     </section>
   </main>
 </div>
@@ -189,8 +203,11 @@ const $ = id => document.getElementById(id);
 let records = [];
 let currentFilter = "all";
 let unsubscribe = null;
+let submissionsUnsubscribe = null;
+let submissions = [];
 let editingImages = [];
 let filterOptionsReady = false;
+let currentAdminView = "crm";
 
 function isAdmin(user){
   return user?.email && ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(user.email.toLowerCase());
@@ -217,7 +234,7 @@ $("googleBtn").onclick = async ()=>{
 };
 $("logoutBtn").onclick = ()=>signOut(auth);
 onAuthStateChanged(auth, user=>{
-  if(!user){ $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden"); if(unsubscribe) unsubscribe(); return; }
+  if(!user){ $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden"); if(unsubscribe) unsubscribe(); if(submissionsUnsubscribe) submissionsUnsubscribe(); return; }
   if(!isAdmin(user)){
     $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden");
     $("loginMsg").className="notice error";
@@ -226,6 +243,7 @@ onAuthStateChanged(auth, user=>{
   }
   $("loginView").classList.add("hidden"); $("appView").classList.remove("hidden"); $("userEmail").textContent=user.email;
   loadRecords();
+  loadPublicSubmissions();
 });
 
 function loadRecords(){
@@ -236,6 +254,52 @@ function loadRecords(){
     render();
   }, err=>showStatus("Could not read CRM: "+escapeHtml(err.message),"error"));
 }
+
+
+function loadPublicSubmissions(){
+  const q=query(collection(db,"publicSubmissions"),orderBy("submittedAt","desc"));
+  if(submissionsUnsubscribe) submissionsUnsubscribe();
+  submissionsUnsubscribe=onSnapshot(q,snap=>{
+    submissions=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderSubmissions();
+  },err=>{ $("submissionStatus").innerHTML=`<div class="notice error">Could not read public submissions: ${escapeHtml(err.message)}</div>`; });
+}
+function renderSubmissions(){
+  const filter=$("submissionStatusFilter").value||"pending";
+  const list=submissions.filter(s=>filter==="all"||String(s.status||"pending")==filter);
+  $("submissionEmpty").classList.toggle("hidden",list.length!==0);
+  $("submissionGrid").innerHTML=list.map(s=>{
+    const isSeller=s.type==="seller";
+    const status=String(s.status||"pending");
+    const photo=s.imageDataUrl?`<img src="${escapeHtml(s.imageDataUrl)}" alt="Submission photo">`:"";
+    return `<article class="submission-card ${status}">${photo}
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${escapeHtml(s.name||"Unnamed")}</strong><span class="status-pill ${status}">${status.toUpperCase()}</span></div>
+      <div class="submission-meta" style="margin-top:8px"><strong>${isSeller?"Seller / Owner":"Buyer / Customer"}</strong><br>📞 ${escapeHtml(s.mobile||"—")}<br>📍 ${escapeHtml(s.area||"—")}, ${escapeHtml(s.city||"Jaipur")}<br>🏠 ${escapeHtml(s.propertyType||"—")} ${s.size?"• "+escapeHtml(s.size):""}<br>💰 ${formatMoney(s.budgetMin)}${s.budgetMax?" – "+formatMoney(s.budgetMax):""}<br>📝 ${escapeHtml(s.details||"—")}</div>
+      <div class="submission-actions">${status==="pending"?`<button class="btn green" data-approve-sub="${s.id}">✓ Approve & Publish</button><button class="btn danger" data-reject-sub="${s.id}">✕ Reject</button>`:`<button class="btn light" data-delete-sub="${s.id}">Delete Submission</button>`}</div>
+    </article>`;
+  }).join("");
+}
+async function approveSubmission(id){
+  const s=submissions.find(x=>x.id===id); if(!s)return;
+  if(!confirm("Approve this submission and publish the selected details on the public website?"))return;
+  try{
+    const crmData={type:s.type||"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:s.type==="seller"?"Property Available":"Buyer Requirement",images:s.imageDataUrl?[s.imageDataUrl]:[],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+    const created=await addDoc(collection(db,"crmContacts"),crmData);
+    await setDoc(doc(db,"publicRequirements",created.id),{id:created.id,type:crmData.type,displayName:crmData.publicDisplayName,area:crmData.area,city:crmData.city,propertyType:crmData.propertyType,size:crmData.size,budgetMin:crmData.budgetMin,budgetMax:crmData.budgetMax,details:crmData.details,imageDataUrl:s.imageDataUrl||"",status:"Approved",updatedAt:serverTimestamp()});
+    await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:created.id},{merge:true});
+    $("submissionStatus").innerHTML='<div class="notice ok">Submission approved and published.</div>';
+  }catch(err){$("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
+}
+async function rejectSubmission(id){
+  if(!confirm("Reject this public submission? It will not be published."))return;
+  try{await setDoc(doc(db,"publicSubmissions",id),{status:"rejected",rejectedAt:serverTimestamp()},{merge:true});$("submissionStatus").innerHTML='<div class="notice ok">Submission rejected.</div>';}catch(err){$("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
+}
+$("submissionStatusFilter").onchange=renderSubmissions;
+$("refreshSubmissions").onclick=loadPublicSubmissions;
+$("submissionGrid").onclick=e=>{
+  const a=e.target.closest("[data-approve-sub]"),r=e.target.closest("[data-reject-sub]"),d=e.target.closest("[data-delete-sub]");
+  if(a) approveSubmission(a.dataset.approveSub); if(r) rejectSubmission(r.dataset.rejectSub); if(d && confirm("Delete this submission permanently?")) deleteDoc(doc(db,"publicSubmissions",d.dataset.deleteSub));
+};
 
 function normalizeText(v){ return String(v ?? "").trim().toLowerCase(); }
 
@@ -310,8 +374,17 @@ $("resetFilters").onclick=()=>{
 };
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); currentFilter=b.dataset.type; render();
+  b.classList.add("active");
+  if(b.dataset.view==="submissions") showAdminView("submissions");
+  else { currentAdminView="crm"; currentFilter=b.dataset.type; showAdminView("crm"); render(); }
 });
+function showAdminView(view){
+  currentAdminView=view;
+  const crmPanel=document.querySelector("main .panel:not(#submissionsPanel)");
+  const subPanel=$("submissionsPanel");
+  if(view==="submissions"){crmPanel.style.display="none";subPanel.style.display="block";renderSubmissions();}
+  else {crmPanel.style.display="block";subPanel.style.display="none";}
+}
 $("rows").onclick=async e=>{
   const edit=e.target.closest("[data-edit]"), del=e.target.closest("[data-delete]");
   if(edit) openEdit(edit.dataset.edit);

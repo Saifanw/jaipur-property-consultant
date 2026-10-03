@@ -8,16 +8,27 @@ service cloud.firestore {
         && request.auth.token.email == "saif.anwar1618@gmail.com";
     }
 
-    // Private CRM: only the admin can read/write customer, seller and broker records.
+    // Private CRM: only the admin can read/write.
     match /crmContacts/{docId} {
       allow read, write: if isAdmin();
     }
 
-    // Public website: visitors can only READ the sanitized requirement cards.
-    // Only the admin can create/update/delete these public records.
+    // Public website: visitors can only read sanitized, approved listings.
     match /publicRequirements/{docId} {
       allow read: if true;
       allow write: if isAdmin();
+    }
+
+    // Public submissions: anyone may submit a pending request, but only the admin can read/review/change it.
+    match /publicSubmissions/{docId} {
+      allow create: if request.resource.data.status == "pending"
+        && request.resource.data.source == "Public Website"
+        && request.resource.data.name is string
+        && request.resource.data.mobile is string
+        && request.resource.data.area is string
+        && request.resource.data.propertyType is string
+        && request.resource.data.details is string;
+      allow read, update, delete: if isAdmin();
     }
 
     match /{document=**} {

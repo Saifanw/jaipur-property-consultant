@@ -22,3 +22,10 @@ The product should not be marketed as “just a CRM”. The core promise is:
 **Capture every enquiry → never miss follow-ups → find matching properties → move leads toward a deal.**
 
 Use the demo page and screenshots to explain the business problem before discussing price.
+
+## WhatsApp Lead Follow-up
+- Select one or multiple CRM records from the All Records table.
+- Use the green WhatsApp toolbar to open a personalised WhatsApp queue.
+- Message template supports `{name}`, `{area}`, `{propertyType}`, and `{budget}` placeholders.
+- Each selected contact can be opened one-by-one with a pre-filled WhatsApp Web message.
+- Direct automatic sending is intentionally not enabled; WhatsApp Web requires the user to press Send. A true automated bulk sender would require the official WhatsApp Business/Cloud API and its credentials/approved templates.

@@ -23,6 +23,9 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
 .submission-panel{display:none}.submission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.submission-card{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fff}.submission-card.pending{border-color:#f0d58a}.submission-card.approved{border-color:#9ed9b8}.submission-card.rejected{border-color:#efb2ad;opacity:.78}.submission-card img{width:100%;height:155px;object-fit:cover;border-radius:10px;margin-bottom:10px}.submission-meta{font-size:11px;color:var(--muted);line-height:1.55}.submission-meta strong{color:var(--ink)}.submission-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.submission-actions .btn{font-size:11px;padding:8px 10px}.status-pill{display:inline-block;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;background:var(--amber2);color:#8b6500}.status-pill.approved{background:var(--green2);color:#0e7b42}.status-pill.rejected{background:var(--red2);color:var(--red)}
 .module-panel{display:none}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.module-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.module-card h3{margin:0 0 7px;font-size:16px}.module-card .big{font-size:28px;font-weight:950}.module-note{font-size:11px;color:var(--muted);line-height:1.55}.module-list{display:grid;gap:10px;margin-top:15px}.module-row{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.module-row.overdue{border-color:#efb2ad;background:#fff8f7}.module-row.today{border-color:#f0d58a;background:#fffdf5}.module-row .row-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.module-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.score{font-weight:950;color:#0e7b42}.bar-wrap{margin-top:12px}.bar-row{display:grid;grid-template-columns:150px 1fr 50px;gap:8px;align-items:center;margin:9px 0;font-size:11px}.bar{height:10px;background:#eef2f6;border-radius:999px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#c79a25,#128a4d);border-radius:999px}.review-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.review-stars{color:#c79a25;letter-spacing:1px}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.match-box{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fafcfd}.mini-label{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:900}.mini-value{font-weight:850;margin-top:3px}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#128a4d;margin-right:5px}.status-dot.warn{background:#c79a25}.status-dot.bad{background:#b42318}
 @media(max-width:950px){.welcome{grid-template-columns:1fr}.focus-grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.submission-grid{grid-template-columns:1fr 1fr}.module-grid{grid-template-columns:1fr 1fr}.match-grid{grid-template-columns:1fr}}@media(max-width:620px){.head-in{align-items:flex-start;padding:12px 0}.head-in .btn.light[href]{display:none}.welcome-card h1{font-size:22px}.focus-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full,.section-label{grid-column:auto}.submission-grid,.module-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:110px 1fr 40px}.quick-grid{grid-template-columns:1fr 1fr}}
+<style>
+.followup-cell{min-width:150px}.fu-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.2px}.fu-today{background:#fff3d6;color:#8a5a00}.fu-overdue{background:#fde8e8;color:#a61b1b}.fu-upcoming{background:#e8f2ff;color:#1557a6}.fu-done{background:#eaf8f0;color:#0e7b42}.fu-none{background:#f2f4f7;color:#667085}.fu-check{width:16px;height:16px;vertical-align:middle;margin-right:5px}.fu-action{border:0;background:transparent;cursor:pointer;font-weight:800;color:#0e7b42;margin-top:5px;padding:0}
+</style>
 </style>
 </head>
 <body>
@@ -523,6 +526,23 @@ async function openWhatsAppWithImage(r){
   }
 }
 
+
+function followUpState(r){
+  const date=String(r.followUpDate||"");
+  if(!date) return {key:r.followUpCompleted?"done":"none",label:r.followUpCompleted?"DONE":"No follow-up"};
+  const today=new Date(); today.setHours(0,0,0,0);
+  const d=new Date(date+"T00:00:00");
+  if(d<today) return {key:"overdue",label:"OVERDUE"};
+  if(d.getTime()===today.getTime()) return {key:"today",label:"TODAY"};
+  return {key:"upcoming",label:"UPCOMING"};
+}
+function followUpCell(r){
+  const s=followUpState(r);
+  if(s.key==="none") return `<div class="followup-cell"><span class="fu-badge fu-none">— No follow-up</span><button class="fu-action" data-set-follow="${escapeHtml(r.id)}">＋ Set follow-up</button></div>`;
+  if(s.key==="done") return `<div class="followup-cell"><span class="fu-badge fu-done">✓ DONE</span><div class="muted">Last: ${escapeHtml(r.lastFollowUpDate||"")}</div><button class="fu-action" data-set-follow="${escapeHtml(r.id)}">＋ Next follow-up</button></div>`;
+  return `<div class="followup-cell"><label><input class="fu-check" type="checkbox" data-done-inline="${escapeHtml(r.id)}"> <span class="fu-badge fu-${s.key}">${s.key==="overdue"?"🔴":s.key==="today"?"🟡":"🔵"} ${s.label}</span></label><div class="muted">📅 ${escapeHtml(r.followUpDate)}</div><div class="muted">${escapeHtml(r.followUpNote||"")}</div></div>`;
+}
+
 function render(){
   const filtered=records.filter(recordMatchesFilters);
   $("allCount").textContent=records.length;
@@ -550,6 +570,7 @@ function render(){
       <td>${formatMoney(r.budgetMin)}${r.budgetMax?" – "+formatMoney(r.budgetMax):""}</td>
       <td>${escapeHtml(r.propertyType||"—")} ${r.size?"• "+escapeHtml(r.size):""}</td>
       <td><span class="badge">${escapeHtml(r.status||"New")}</span>${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}</td>
+      <td>${followUpCell(r)}</td>
       <td>${fmtDate(r.updatedAt)}</td>
       <td><button class="wa-inline" data-wa-one="${escapeHtml(r.id)}">🟢 WA</button> <button class="btn light" data-edit="${r.id}">Edit</button> <button class="btn danger" data-delete="${r.id}">Delete</button></td>
     </tr>`).join("");
@@ -592,6 +613,29 @@ $("rows").onclick=async e=>{
     try{await deleteDoc(doc(db,"crmContacts",del.dataset.delete)); await deleteDoc(doc(db,"publicRequirements",del.dataset.delete)).catch(()=>{}); showStatus("Record deleted.","ok")}catch(err){showStatus(err.message,"error")}
   }
 };
+
+
+document.addEventListener("change",async e=>{
+  const done=e.target.closest("[data-done-inline]");
+  if(!done)return;
+  const id=done.dataset.doneInline, r=records.find(x=>x.id===id);
+  if(!r)return;
+  try{
+    const now=new Date().toISOString().slice(0,10);
+    const history=Array.isArray(r.followUpHistory)?r.followUpHistory:[];
+    history.push({date:r.followUpDate,note:r.followUpNote||"",completedAt:now});
+    await updateDoc(doc(db,"crmContacts",id),{
+      followUpDate:"",followUpNote:"",followUpCompleted:true,
+      lastFollowUpDate:r.followUpDate||now,followUpHistory:history,
+      status:(r.status==="New"?"Contacted":r.status||"Contacted"),updatedAt:serverTimestamp()
+    });
+    showStatus("✓ Follow-up completed. Lead moved to Contacted.","ok");
+  }catch(err){showStatus(err.message,"error");done.checked=false;}
+});
+document.addEventListener("click",e=>{
+  const set=e.target.closest("[data-set-follow]");
+  if(set){openEdit(set.dataset.setFollow); setTimeout(()=>$("followUpDate").focus(),100);}
+});
 
 $("selectAll").onchange=()=>{
   const visible=[...document.querySelectorAll(".row-check")].map(x=>x.dataset.selectId);
@@ -671,7 +715,7 @@ $("recordForm").onsubmit=async e=>{
       roadFacing:$("roadFacing").value.trim(),propertyLocation:$("propertyLocation").value.trim(),details:$("details").value.trim(),
       company:$("company").value.trim(),areasServed:$("areasServed").value.trim(),registrationNo:$("registrationNo").value.trim(),exactAddress:$("exactAddress").value.trim(),
       notes:$("notes").value.trim(),
-      followUpDate:$("followUpDate").value || "", followUpNote:$("followUpNote").value.trim(),
+      followUpDate:$("followUpDate").value || "", followUpNote:$("followUpNote").value.trim(), followUpCompleted:false,
       publicVisible:$("publicVisible").checked,
       publicDisplayName:$("publicDisplayName").value.trim() || $("name").value.trim(),
       updatedAt:serverTimestamp()
@@ -797,7 +841,18 @@ function renderFollowups(){
   const list=records.filter(r=>r.followUpDate).sort((a,b)=>String(a.followUpDate).localeCompare(String(b.followUpDate)));
   const overdue=list.filter(r=>r.followUpDate<iso), due=list.filter(r=>r.followUpDate===iso), upcoming=list.filter(r=>r.followUpDate>iso);
   $("overdueCount").textContent=overdue.length; $("todayCount").textContent=due.length; $("upcomingCount").textContent=upcoming.length;
-  $("followupList").innerHTML=list.length?list.map(r=>{const cls=r.followUpDate<iso?'overdue':r.followUpDate===iso?'today':'';const label=r.followUpDate<iso?'OVERDUE':r.followUpDate===iso?'TODAY':'UPCOMING';return `<div class="module-row ${cls}"><div class="row-head"><strong>${escapeHtml(r.name)}</strong><span class="status-pill ${cls==='overdue'?'rejected':cls==='today'?'':''}">${label} • ${escapeHtml(r.followUpDate)}</span></div><div class="module-note">${escapeHtml(r.mobile||"")} • ${escapeHtml(r.area||"")} • ${escapeHtml(r.propertyType||"")}<br>${escapeHtml(r.followUpNote||r.notes||"No reminder note")}</div><div class="module-actions"><button class="btn light" data-edit-follow="${r.id}">Edit</button><button class="btn green" data-done-follow="${r.id}">✓ Done</button><button class="btn gold" data-snooze-follow="${r.id}">+3 Days</button></div></div>`}).join(""):'<div class="empty">No follow-ups scheduled. Add a follow-up date while creating/editing a CRM record.</div>';
+  $("followupList").innerHTML=list.length?list.map(r=>{
+    const cls=r.followUpDate<iso?'overdue':r.followUpDate===iso?'today':'';
+    const label=r.followUpDate<iso?'OVERDUE':r.followUpDate===iso?'TODAY':'UPCOMING';
+    return `<div class="module-row ${cls}">
+      <div class="row-head"><strong>${escapeHtml(r.name)}</strong><span class="status-pill ${cls==='overdue'?'rejected':cls==='today'?'':''}">${label} • ${escapeHtml(r.followUpDate)}</span></div>
+      <div class="module-note">${escapeHtml(r.mobile||"")} • ${escapeHtml(r.area||"")} • ${escapeHtml(r.propertyType||"")}<br>${escapeHtml(r.followUpNote||r.notes||"No reminder note")}</div>
+      <div class="module-actions">
+        <label class="btn green" style="cursor:pointer"><input type="checkbox" data-done-follow="${r.id}" style="margin-right:6px"> ✓ Follow-up Done</label>
+        <button class="btn light" data-edit-follow="${r.id}">Edit</button>
+        <button class="btn gold" data-snooze-follow="${r.id}">+3 Days</button>
+      </div>
+    </div>`}).join(""):'<div class="empty">No follow-ups scheduled. Customer add/edit karte waqt Next Follow-up Date set karein.</div>';
 }
 async function saveMatch(propertyId){
   const c=records.find(r=>r.id===$("matchCustomer").value), p=records.find(r=>r.id===propertyId); if(!c||!p)return;
@@ -829,12 +884,28 @@ $("reviewGrid").onclick=async e=>{
 $("matchResults").onclick=async e=>{const save=e.target.closest('[data-save-match]'), edit=e.target.closest('[data-edit-match]');if(save)await saveMatch(save.dataset.saveMatch);if(edit)openEdit(edit.dataset.editMatch);};
 $("savedMatches").onclick=async e=>{const d=e.target.closest('[data-delete-match]');if(d&&confirm('Delete this saved match?'))await deleteDoc(doc(db,"crmMatches",d.dataset.deleteMatch));};
 $("followupList").onclick=async e=>{
-  const edit=e.target.closest('[data-edit-follow]'),done=e.target.closest('[data-done-follow]'),snooze=e.target.closest('[data-snooze-follow]');
+  const edit=e.target.closest('[data-edit-follow]'), done=e.target.closest('[data-done-follow]'), snooze=e.target.closest('[data-snooze-follow]');
   if(edit){openEdit(edit.dataset.editFollow);return;}
   try{
-    if(done){await updateDoc(doc(db,"crmContacts",done.dataset.doneFollow),{followUpDate:"",followUpNote:"",status:"Contacted",updatedAt:serverTimestamp()});}
-    if(snooze){const d=new Date();d.setDate(d.getDate()+3);await updateDoc(doc(db,"crmContacts",snooze.dataset.snoozeFollow),{followUpDate:d.toISOString().slice(0,10),updatedAt:serverTimestamp()});}
-    renderFollowups();
+    if(done){
+      const id=done.dataset.doneFollow, r=records.find(x=>x.id===id);
+      if(r){
+        const now=new Date().toISOString().slice(0,10);
+        const history=Array.isArray(r.followUpHistory)?r.followUpHistory:[];
+        history.push({date:r.followUpDate,note:r.followUpNote||"",completedAt:now});
+        await updateDoc(doc(db,"crmContacts",id),{
+          followUpDate:"", followUpNote:"", followUpCompleted:true,
+          lastFollowUpDate:r.followUpDate||now, followUpHistory:history,
+          status:(r.status==="New"?"Contacted":r.status||"Contacted"), updatedAt:serverTimestamp()
+        });
+      }
+    }
+    if(snooze){
+      const d=new Date(); d.setDate(d.getDate()+3);
+      await updateDoc(doc(db,"crmContacts",snooze.dataset.snoozeFollow),{
+        followUpDate:d.toISOString().slice(0,10), followUpCompleted:false, updatedAt:serverTimestamp()
+      });
+    }
   }catch(err){showStatus(err.message,'error');}
 };
 

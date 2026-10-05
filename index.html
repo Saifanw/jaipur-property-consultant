@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jaipur Property Consultant | Plots, Property Buy & Sell in Jaipur</title>
+<meta name="description" content="Jaipur Property Consultant for residential plots, land, property buying and selling assistance, site visits and property consultation across Jaipur and Jhotwara.">
+<meta name="keywords" content="Jaipur Property Consultant, plots for sale in Jaipur, plot for sale Jhotwara, residential plots Jaipur, buy plot Jaipur, sell plot Jaipur, property consultant Jhotwara, land Jaipur">
+
+<style>
+:root{
+  --navy:#111c2d;
+  --navy2:#1b2b42;
+  --blue:#245fc4;
+  --gold:#c79a25;
+  --gold2:#e8c45c;
+  --green:#128a4d;
+  --cream:#fbf8ef;
+  --bg:#f4f7fa;
+  --white:#fff;
+  --text:#182437;
+  --muted:#66758a;
+  --line:#dfe5ec;
+  --soft:#eef3f7;
+  --shadow:0 18px 45px rgba(17,28,45,.10);
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--text);background:#fff;line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+.container{width:min(1180px,92%);margin:auto}
+
+/* TOP BAR */
+.topbar{background:var(--navy);color:#fff;font-size:13px}
+.topbar-inner{min-height:42px;display:flex;justify-content:space-between;align-items:center}
+.topbar a{font-weight:800}.topbar a:hover{color:var(--gold2)}
+.top-right{display:flex;gap:14px;align-items:center}
+
+/* NAV */
+.nav-wrap{
+  position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+  box-shadow:0 4px 18px rgba(20,35,55,.05)
+}
+.nav{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:45px;height:45px;border-radius:12px;background:var(--navy);color:var(--gold2);
+  display:grid;place-items:center;font-weight:950;font-size:16px;border:1px solid #263952
+}
+.brand-name{font-size:21px;font-weight:950;line-height:1.05}
+.brand-sub{font-size:9px;letter-spacing:1.8px;color:#a27500;font-weight:950;margin-top:4px}
+.nav-links{display:flex;gap:22px;align-items:center;font-size:13px;font-weight:850;color:#334257}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--green);color:#fff!important;padding:10px 15px;border-radius:9px}
+.nav-properties-cta{background:var(--gold);color:#fff!important;padding:12px 17px;border-radius:11px;font-weight:950;box-shadow:0 8px 18px rgba(199,154,37,.28);transform:translateY(-1px)}
+.nav-properties-cta:hover{background:var(--gold2)!important;color:var(--navy)!important;transform:translateY(-2px);box-shadow:0 10px 22px rgba(199,154,37,.34)}
+
+.menu-btn{display:none;border:0;background:var(--navy);color:#fff;border-radius:8px;padding:9px 11px}
+
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;color:#fff;
+  background:
+    radial-gradient(circle at 78% 10%,rgba(232,196,92,.16),transparent 28%),
+    linear-gradient(125deg,#101d2e 0%,#1c2e46 58%,#293e58 100%);
+}
+.hero:after{
+  content:"";position:absolute;inset:0;opacity:.45;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:44px 44px
+}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;gap:55px;align-items:center;min-height:560px;padding:68px 0}
+.eyebrow{font-size:12px;letter-spacing:1.4px;color:var(--gold2);font-weight:950;margin-bottom:15px;text-transform:uppercase}
+.hero h1{font-size:clamp(43px,5.4vw,68px);line-height:1.02;letter-spacing:-2.5px;margin-bottom:20px}
+.hero h1 span{color:#fff}
+.hero-lead{max-width:700px;color:#dbe5f0;font-size:17px;margin-bottom:25px}
+.hero-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:0;border-radius:10px;padding:13px 17px;font-size:13px;font-weight:900;cursor:pointer
+}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#ad8316}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#0c773f}
+.btn-dark{background:var(--navy);color:#fff}.btn-white{background:#fff;color:var(--navy)}
+.btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.22)}
+.hero-trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:21px}
+.trust{font-size:10px;font-weight:850;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.055);padding:6px 9px;border-radius:999px}
+
+/* ENQUIRY CARD */
+.enquiry{
+  background:#fff;color:var(--text);border-radius:20px;padding:27px;
+  box-shadow:0 25px 65px rgba(0,0,0,.23)
+}
+.enquiry h2{font-size:27px;line-height:1.15;margin-bottom:6px}
+.enquiry>p{color:var(--muted);font-size:13px;margin-bottom:17px}
+.enquiry form{display:grid;gap:10px}
+.enquiry input,.enquiry select,.enquiry textarea{
+  width:100%;padding:12px 13px;border:1px solid #d2dce7;border-radius:9px;outline:none;background:#fff;color:var(--text)
+}
+.enquiry input:focus,.enquiry select:focus,.enquiry textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,95,196,.08)}
+.enquiry textarea{min-height:78px;resize:vertical}
+.form-note{text-align:center;color:#8a98aa;font-size:10px}
+
+/* DYNAMIC PULL-DOWN STRIP */
+.dynamic-strip{
+  background:#fff;border-bottom:1px solid var(--line);
+  box-shadow:0 8px 22px rgba(17,28,45,.06)
+}
+.dynamic-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.dynamic-left{display:flex;align-items:center;gap:12px;min-width:0}
+.pulse{
+  width:10px;height:10px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 6px rgba(199,154,37,.13);flex:none
+}
+.dynamic-copy{min-width:0}
+.dynamic-main{font-size:14px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dynamic-main span{color:#9d7100}
+.dynamic-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.dynamic-cta{white-space:nowrap;background:var(--green);color:#fff;padding:10px 14px;border-radius:9px;font-size:11px;font-weight:950}
+
+/* SECTIONS */
+.section{padding:78px 0}
+.section.soft{background:#f3f6f9}
+.section.cream{background:var(--cream)}
+.section-head{text-align:center;max-width:760px;margin:0 auto 39px}
+.kicker{font-size:11px;color:#a57400;font-weight:950;letter-spacing:1.5px;text-transform:uppercase}
+.section h2{font-size:37px;line-height:1.13;letter-spacing:-1px;margin:7px 0 9px}
+.section-head p{color:var(--muted);font-size:14px}
+
+/* SEARCH */
+.search-panel{
+  background:#fff;border:1px solid var(--line);border-radius:19px;padding:17px;
+  box-shadow:var(--shadow);margin-bottom:27px
+}
+.search-row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr auto;gap:9px}
+.search-row input,.search-row select{
+  min-width:0;padding:12px;border:1px solid #d6dfe8;border-radius:9px;outline:none;background:#fff
+}
+.search-row input:focus,.search-row select:focus{border-color:var(--gold)}
+.results-line{display:flex;justify-content:space-between;gap:10px;margin-top:11px;color:var(--muted);font-size:11px}
+.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.property-card{
+  background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(20,42,68,.06);transition:.2s
+}
+.property-card:hover{transform:translateY(-4px);box-shadow:0 17px 40px rgba(20,42,68,.12)}
+.property-img{
+  height:175px;position:relative;padding:14px;display:flex;align-items:flex-end;
+  background:linear-gradient(135deg,#dfe8f1,#bfcddd)
+}
+.property-img:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 35%,rgba(255,255,255,.34) 36%,transparent 60%)
+}
+.badge{position:relative;background:var(--navy);color:#fff;border-radius:7px;padding:6px 9px;font-size:9px;font-weight:950}
+.property-body{padding:18px}
+.property-body h3{font-size:17px;margin-bottom:3px}
+.location{font-size:11px;color:var(--muted);margin-bottom:12px}
+.meta{display:flex;gap:7px;flex-wrap:wrap;border-bottom:1px solid #e9eef3;padding-bottom:12px}
+.meta span{background:#f2f5f8;padding:4px 7px;border-radius:6px;color:#53657a;font-size:9px;font-weight:800}
+.price{font-size:18px;font-weight:950;margin-top:12px;color:var(--navy)}
+.price small{font-size:9px;color:#8a98a8;font-weight:600}
+.card-actions{display:flex;gap:8px;margin-top:11px}
+.card-btn{flex:1;text-align:center;padding:9px;border-radius:8px;font-size:10px;font-weight:900}
+.card-wa{background:#eaf8f0;color:#0e7b42}.card-call{background:#edf3ff;color:#275da8}
+.no-results{display:none;background:#fff;border:1px dashed #cbd6e1;border-radius:15px;padding:30px;text-align:center;color:var(--muted)}
+
+/* CATEGORIES */
+.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.category{
+  background:#fff;border:1px solid var(--line);border-radius:17px;padding:21px 12px;text-align:center;
+  transition:.2s;box-shadow:0 7px 22px rgba(20,42,68,.045)
+}
+.category:hover{transform:translateY(-4px);border-color:#d9bf72}
+.category-icon{font-size:26px;margin-bottom:7px}.category strong{display:block;font-size:13px}.category small{color:var(--muted);font-size:10px}
+
+/* BUY / SELL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:19px}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:27px;box-shadow:0 8px 28px rgba(20,42,68,.055)}
+.info-card h3{font-size:22px;margin:6px 0 7px}.info-card p{color:var(--muted);font-size:13px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.check{font-size:11px;font-weight:850}.check b{color:var(--green);margin-right:5px}
+
+/* SERVICES */
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.service{
+  background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px
+}
+.service-icon{font-size:24px}.service h3{font-size:16px;margin:8px 0 4px}.service p{font-size:11px;color:var(--muted)}
+
+/* AGENTS */
+.agent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.agent-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px}
+.agent-card h3{font-size:16px}.agent-card p{font-size:11px;color:var(--muted);margin:6px 0 13px}
+
+/* LOCATIONS */
+.location-grid{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.location-pill{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:999px;font-size:11px;font-weight:850}
+
+/* CONTACT */
+.office-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.office-photo{
+  min-height:330px;border-radius:20px;overflow:hidden;background:#dbe4ed;
+  display:flex;align-items:center;justify-content:center;color:#68798d;font-weight:800
+}
+.office-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.contact-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:27px;box-shadow:var(--shadow)}
+.contact-box h3{font-size:25px;margin-bottom:13px}
+.contact-line{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #e9edf2;font-size:12px}
+.contact-line:last-of-type{border-bottom:0}.contact-label{width:75px;color:#78879a;font-size:10px;font-weight:900;text-transform:uppercase}
+
+/* CTA */
+.cta{background:var(--cream);border-top:1px solid #eee5ca;border-bottom:1px solid #eee5ca;padding:63px 0}
+.cta-box{
+  background:linear-gradient(135deg,#101e30,#223750);color:#fff;border-radius:24px;padding:36px;
+  display:flex;align-items:center;justify-content:space-between;gap:25px;box-shadow:0 20px 50px rgba(17,28,45,.16)
+}
+.cta-box h2{font-size:34px;line-height:1.12;margin:6px 0}.cta-box p{font-size:13px;color:#d9e4ef;max-width:670px}
+
+/* FLOAT */
+.float-wa{
+  position:fixed;right:20px;bottom:20px;z-index:1200;width:55px;height:55px;border-radius:50%;
+  display:grid;place-items:center;background:#17a553;color:#fff;font-size:23px;
+  box-shadow:0 12px 30px rgba(23,165,83,.28)
+}
+
+
+/* PUBLIC REQUIREMENT ACTIONS */
+.hero-action-boxes{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0 8px;max-width:650px}
+.hero-action{border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:15px 16px;text-align:left;color:#fff;cursor:pointer;transition:.2s;box-shadow:0 10px 25px rgba(0,0,0,.12)}
+.hero-action:hover{transform:translateY(-3px)}
+.hero-action.buy{background:linear-gradient(135deg,#c79a25,#a97e11)}
+.hero-action.sell{background:linear-gradient(135deg,#128a4d,#0b6e3d)}
+.hero-action strong{display:block;font-size:16px}.hero-action span{display:block;font-size:10px;opacity:.9;margin-top:2px}
+.hero-action small{display:block;margin-top:7px;font-size:9px;opacity:.78}
+.public-live{background:#f3f6f9;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
+.public-live-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.public-live-head h2{font-size:23px;line-height:1.15}.public-live-head p{font-size:11px;color:var(--muted);margin-top:2px}
+.public-live-link{font-size:11px;font-weight:900;color:#176b43;white-space:nowrap}
+.requirements-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}
+.requirement-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px rgba(20,42,68,.06)}
+.requirement-photo{height:155px;background:linear-gradient(135deg,#dfe8f1,#bfcddd);overflow:hidden}.requirement-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.requirement-body{padding:17px}.requirement-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}.requirement-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#275da8;font-size:10px;font-weight:900}
+.requirement-card h3{margin:0 0 7px;font-size:17px}.req-location{font-weight:800;color:#334155;margin-bottom:7px;font-size:12px}.req-detail{font-size:11px;color:#5d6d80;min-height:34px}.req-price{font-size:15px;font-weight:950;margin-top:8px;color:var(--navy)}
+.req-actions{display:flex;gap:7px;margin-top:13px}.req-actions .btn{flex:1;padding:9px 8px;font-size:10px}.public-note{font-size:10px;color:#738297;margin-top:13px;text-align:center}
+.ticker-wrap{background:#111c2d;color:#fff;overflow:hidden}.ticker{height:38px;display:flex;align-items:center;white-space:nowrap}.ticker-label{background:#c79a25;padding:5px 10px;border-radius:6px;font-size:9px;font-weight:950;margin-right:13px;z-index:2}.ticker-track{overflow:hidden;flex:1}.ticker-text{display:inline-block;font-size:11px;font-weight:800;animation:tickerMove 28s linear infinite}.ticker-text span{margin-right:55px;color:#e7eef6}.ticker-text b{color:#e8c45c}@keyframes tickerMove{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
+.public-modal{position:fixed;inset:0;background:rgba(7,17,30,.68);z-index:2200;display:grid;place-items:center;padding:18px}.public-modal-card{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.3)}.public-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}.public-modal-head h2{margin:0;font-size:25px}.public-modal-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.public-close{border:0;background:#eef2f6;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer}.public-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.public-field{display:flex;flex-direction:column;gap:5px}.public-field.full{grid-column:1/-1}.public-field label{font-size:10px;font-weight:900;color:#53657a}.public-field input,.public-field select,.public-field textarea{width:100%;padding:11px 12px;border:1px solid #d3dde7;border-radius:9px;outline:0}.public-field textarea{min-height:82px;resize:vertical}.public-privacy{background:#f3f7fb;border:1px solid #dfe7ef;border-radius:11px;padding:11px;font-size:10px;color:#5c6c7e}.public-privacy strong{color:#18304b}.public-submit-row{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.public-photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:none;border:1px solid var(--line)}
+@media(max-width:850px){.requirements-panel{grid-template-columns:1fr 1fr}.hero-action-boxes{max-width:none}}
+@media(max-width:620px){.hero-action-boxes{grid-template-columns:1fr}.public-live-head{display:block}.public-live-link{display:inline-block;margin-top:6px}.requirements-panel{grid-template-columns:1fr}.public-form-grid{grid-template-columns:1fr}.public-field.full{grid-column:auto}.ticker-label{margin-right:8px}.ticker-text{font-size:10px}}
+
+/* MOBILE */
+.mobile-bar{display:none}
+@media(max-width:980px){
+  .nav-links{display:none}.menu-btn{display:block}
+  .hero-grid,.two-col,.office-grid{grid-template-columns:1fr}
+  .property-grid,.service-grid,.agent-grid{grid-template-columns:1fr 1fr}
+  .category-grid{grid-template-columns:repeat(3,1fr)}
+  .search-row{grid-template-columns:1fr 1fr}
+  .dynamic-inner{padding:10px 0}
+}
+@media(max-width:620px){
+  body{padding-bottom:62px}
+  .topbar-left{font-size:10px}.top-right{font-size:10px;gap:7px}
+  .top-right span{display:none}
+  .nav{min-height:67px}.brand-name{font-size:17px}.brand-sub{font-size:7px}.brand-mark{width:39px;height:39px}
+  .hero-grid{padding:48px 0}.hero h1{font-size:43px;letter-spacing:-1.7px}.hero-lead{font-size:15px}
+  .enquiry{padding:21px}
+  .dynamic-inner{display:block}.dynamic-left{margin-bottom:9px}.dynamic-main{white-space:normal}.dynamic-cta{display:inline-block}
+  .section{padding:54px 0}.section h2{font-size:30px}
+  .property-grid,.service-grid,.agent-grid,.two-col,.office-grid{grid-template-columns:1fr}
+  .category-grid{grid-template-columns:1fr 1fr}
+  .search-row{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .cta-box{display:block;padding:28px 22px}.cta-box h2{font-size:28px}.cta-box .btn{margin-top:18px}
+  .float-wa{display:none}
+  .mobile-bar{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:2000;
+    background:#fff;padding:8px;gap:8px;box-shadow:0 -4px 18px rgba(0,0,0,.13)
+  }
+  .mobile-bar a{flex:1;text-align:center;padding:11px;border-radius:8px;color:#fff;font-weight:900;font-size:12px}
+  .mobile-call{background:var(--navy)}.mobile-wa{background:var(--green)}
+}
+ 
+.requirements-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.requirement-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.requirement-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
+.requirement-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#275da8;font-size:10px;font-weight:900}
+.requirement-card h3{margin:0 0 8px;font-size:17px}
+.requirement-card .req-location{font-weight:800;color:#334155;margin-bottom:8px}
+.requirement-card .req-detail{font-size:13px;color:#53657a;line-height:1.55}
+.requirement-card .req-price{margin-top:12px;font-weight:900;color:#9a7200}
+.requirement-card .req-actions{display:flex;gap:8px;margin-top:15px}
+.requirement-card .req-actions .btn{font-size:11px;padding:9px 11px}
+.public-note{font-size:11px;color:var(--muted);margin-top:10px}
+@media(max-width:900px){
+.nav-properties-cta{display:inline-block}.requirements-panel{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.requirements-panel{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left">Jaipur & Jhotwara Property Consultation</div>
+    <div class="top-right">
+      <a href="tel:+916350566010">📞 6350566010</a>
+      <span>|</span>
+      <a href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <nav class="container nav">
+    <a class="brand" href="#home">
+      <div class="brand-mark">JP</div>
+      <div>
+        <div class="brand-name">Jaipur Property Consultant</div>
+        <div class="brand-sub">PROPERTY • CONSULTATION • ASSISTANCE</div>
+      </div>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#requirements">Buyers</a>
+      <a href="#sell">Sell</a>
+      <a href="#agents">Agents</a>
+      <a href="#services">Services</a>
+      <a href="#locations">Locations</a>
+      <a href="properties.html" class="nav-properties-cta">🏘️ Properties</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="admin.html" style="font-size:11px;opacity:.7">Admin Login</a>
+      <a class="nav-cta" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur." target="_blank">WhatsApp</a>
+    </div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </nav>
+</div>
+
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Real Estate Consultant • Jaipur</div>
+      <h1>Find the Right <span>Property in Jaipur</span></h1>
+      <p class="hero-lead">
+        Residential plots, land and property consultation for buyers, sellers,
+        investors and property agents across Jaipur and Jhotwara.
+      </p>
+
+      <div class="hero-action-boxes">
+        <button class="hero-action buy" type="button" onclick="openPublicForm('buyer')">
+          <strong>🏠 मुझे प्रॉपर्टी खरीदनी है</strong>
+          <span>अपनी location, budget और requirement भेजें</span>
+          <small>आपका contact public नहीं होगा</small>
+        </button>
+        <button class="hero-action sell" type="button" onclick="openPublicForm('seller')">
+          <strong>🏡 मुझे प्रॉपर्टी बेचनी है</strong>
+          <span>Property details और photo submit करें</span>
+          <small>Approval के बाद listing public होगी</small>
+        </button>
+      </div>
+      <div class="hero-buttons">
+        <a class="btn btn-gold" href="#properties">🔎 Explore Properties</a>
+        <a class="btn btn-green" href="https://wa.me/916350566010?text=Hello%2C%20I want to enquire about property in Jaipur." target="_blank">💬 Enquire on WhatsApp</a>
+      </div>
+
+      <div class="hero-trust">
+        <span class="trust">✓ Buyer Assistance</span>
+        <span class="trust">✓ Seller Consultation</span>
+        <span class="trust">✓ Site Visit Assistance</span>
+        <span class="trust">✓ Property Shortlisting</span>
+      </div>
+    </div>
+
+    <div class="enquiry">
+      <h2>Property Enquiry</h2>
+      <p>Tell us what property you are looking for.</p>
+      <form onsubmit="sendEnquiry(event)">
+        <input id="name" placeholder="Your Name" required>
+        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile Number" required>
+        <select id="requirement" required>
+          <option value="">I want to...</option>
+          <option>Buy a Plot</option>
+          <option>Sell a Plot</option>
+          <option>Buy Property</option>
+          <option>Sell Property</option>
+          <option>Property Investment</option>
+          <option>Property Site Visit</option>
+          <option>Agent / Broker Enquiry</option>
+        </select>
+        <input id="location" placeholder="Preferred Jaipur Location">
+        <textarea id="message" placeholder="Plot size, budget or other requirement"></textarea>
+        <button class="btn btn-gold" type="submit">💬 Send Enquiry on WhatsApp</button>
+        <div class="form-note">Your enquiry will open directly in WhatsApp.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE PUBLIC REQUIREMENTS -->
+<section class="public-live" id="requirements">
+  <div class="container">
+    <div class="public-live-head">
+      <div>
+        <h2>🔥 Jaipur Mein Active Property Requirements</h2>
+        <p>Approved buyer requirements aur available properties — contact details private rakhe gaye hain.</p>
+      </div>
+      <a class="public-live-link" href="javascript:void(0)" onclick="openPublicForm('buyer')">+ Apni Requirement Add Karein</a>
+    </div>
+    <div class="requirements-panel" id="publicRequirementsGrid"></div>
+    <div id="publicRequirementsEmpty" class="public-note">Abhi koi approved public requirement nahi hai. Aap apni requirement submit kar sakte hain.</div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="container ticker">
+    <div class="ticker-label">🔴 LIVE</div>
+    <div class="ticker-track"><div class="ticker-text" id="publicTicker">Jaipur property requirements loading...</div></div>
+  </div>
+</div>
+
+<section class="section" id="properties">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Property Search</div>
+      <h2>Find a Plot or Property in Jaipur</h2>
+      <p>Search by locality, property type and budget. Approved properties are shown through Jaipur Property Consultant.</p>
+      <a class="btn btn-gold" href="properties.html" style="display:inline-block;margin-top:10px">🏘️ View All Approved Properties</a>
+    </div>
+
+    <div class="search-panel">
+      <div class="search-row">
+        <input id="searchInput" placeholder="Search Jhotwara, plot, land..." oninput="filterProperties()">
+        <select id="typeFilter" onchange="filterProperties()">
+          <option value="">All Property Types</option>
+          <option value="Residential Plot">Residential Plot</option>
+          <option value="Flat / Villa">Flat / Villa</option>
+          <option value="Commercial">Commercial</option>
+          <option value="Land">Land</option>
+        </select>
+        <select id="locationFilter" onchange="filterProperties()">
+          <option value="">All Locations</option>
+          <option>Jhotwara</option>
+          <option>Jagatpura</option>
+          <option>Vaishali Nagar</option>
+          <option>Mansarovar</option>
+          <option>Ajmer Road</option>
+          <option>Sanganer</option>
+        </select>
+        <select id="budgetFilter" onchange="filterProperties()">
+          <option value="">Any Budget</option>
+          <option value="30">Under ₹30L</option>
+          <option value="50">Under ₹50L</option>
+          <option value="100">Under ₹1Cr</option>
+        </select>
+        <button class="btn btn-dark" onclick="clearFilters()">Reset</button>
+      </div>
+      <div class="results-line">
+        <span id="resultCount">Showing 6 sample properties</span>
+        <span>Need a different option? WhatsApp your requirement.</span>
+      </div>
+    </div>
+
+    <div class="property-grid" id="propertyGrid"></div>
+    <div class="no-results" id="noResults">
+      No matching sample property found.<br>
+      <a class="btn btn-green" style="margin-top:12px" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I need a property in Jaipur. Please share suitable options.">💬 Send Requirement on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="requirements" style="display:none">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Active Requirements</div>
+      <h2>Jaipur Mein Property Dhoondhne Wale Buyers</h2>
+      <p>Recent requirements shared with Jaipur Property Consultant. Contact details are kept private.</p>
+    </div>
+    <div class="requirements-panel" id="publicRequirementsGrid"></div>
+    <div class="public-note">📌 Public cards show only approved requirement details. Direct contact is handled by Jaipur Property Consultant.</div>
+  </div>
+</section>
+
+<section class="section soft" id="buy">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Buy Property</div>
+      <h2>Jaipur Mein Property Kharidni Hai?</h2>
+      <p>Share your preferred area, budget and property requirement to start a consultation.</p>
+    </div>
+
+    <div class="category-grid">
+      <a class="category" href="#properties" onclick="setType('Residential Plot')"><div class="category-icon">🏡</div><strong>Residential Plots</strong><small>Plot & land</small></a>
+      <a class="category" href="#properties" onclick="setType('Flat / Villa')"><div class="category-icon">🏢</div><strong>Flats & Villas</strong><small>Residential</small></a>
+      <a class="category" href="#properties" onclick="setType('Commercial')"><div class="category-icon">🏬</div><strong>Commercial</strong><small>Shop & office</small></a>
+      <a class="category" href="#properties" onclick="setType('Land')"><div class="category-icon">🌳</div><strong>Land</strong><small>Land options</small></a>
+      <a class="category" href="https://wa.me/916350566010?text=Hello%2C%20I want property investment consultation in Jaipur." target="_blank"><div class="category-icon">📈</div><strong>Investment</strong><small>Consultation</small></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sell">
+  <div class="container two-col">
+    <div class="info-card">
+      <div class="kicker">Sell Your Plot</div>
+      <h3>जयपुर में Plot बेचना है?</h3>
+      <p>Plot location, size and expected price share karke selling requirement par baat karein.</p>
+      <div class="check-grid">
+        <div class="check"><b>✓</b> Location discussion</div>
+        <div class="check"><b>✓</b> Plot details</div>
+        <div class="check"><b>✓</b> Buyer enquiry support</div>
+        <div class="check"><b>✓</b> Site visit coordination</div>
+      </div>
+      <a class="btn btn-gold" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want to sell my plot in Jaipur.">🏷️ Plot Sell Karne Ke Liye Contact Karein</a>
+    </div>
+
+    <div class="info-card">
+      <div class="kicker">Buy a Plot</div>
+      <h3>जयपुर में Plot खरीदना है?</h3>
+      <p>Apni preferred location, budget aur plot size batayein. Available options ke baare mein enquiry karein.</p>
+      <div class="check-grid">
+        <div class="check"><b>✓</b> Requirement discussion</div>
+        <div class="check"><b>✓</b> Location shortlisting</div>
+        <div class="check"><b>✓</b> Property enquiry</div>
+        <div class="check"><b>✓</b> Site visit assistance</div>
+      </div>
+      <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want to buy a plot in Jaipur.">🏡 Plot Kharidne Ke Liye Contact Karein</a>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="agents">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">For Property Agents</div>
+      <h2>Agent & Broker Collaboration</h2>
+      <p>Property requirements aur suitable opportunities ke liye direct communication.</p>
+    </div>
+    <div class="agent-grid">
+      <div class="agent-card"><h3>🤝 Agent Collaboration</h3><p>Property requirements aur collaboration opportunities discuss karein.</p><a class="btn btn-dark" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I am a property agent and want to discuss collaboration in Jaipur.">Contact Agent Desk</a></div>
+      <div class="agent-card"><h3>📋 Property Sharing</h3><p>Suitable property opportunities aur buyer requirements share karein.</p><a class="btn btn-gold" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want to share a property opportunity in Jaipur.">Share Property</a></div>
+      <div class="agent-card"><h3>📞 Direct Contact</h3><p>Broker enquiry ke liye call ya WhatsApp par requirement bhejein.</p><a class="btn btn-green" href="tel:+916350566010">Call 6350566010</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Our Services</div>
+      <h2>Property Buying, Selling & Consultation</h2>
+      <p>Simple, requirement-based assistance for buyers, sellers and property professionals.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service"><div class="service-icon">🏡</div><h3>Residential Plot Buying & Selling</h3><p>Residential plot requirements and enquiries.</p></div>
+      <div class="service"><div class="service-icon">🏠</div><h3>Residential Property</h3><p>Flats, villas and residential property consultation.</p></div>
+      <div class="service"><div class="service-icon">🏬</div><h3>Commercial Property</h3><p>Commercial buying and selling consultation.</p></div>
+      <div class="service"><div class="service-icon">🌳</div><h3>Land Assistance</h3><p>Land-related buying and selling requirements.</p></div>
+      <div class="service"><div class="service-icon">📍</div><h3>Property Site Visit</h3><p>Coordinate your shortlisted property visit.</p></div>
+      <div class="service"><div class="service-icon">🔎</div><h3>Property Shortlisting</h3><p>Compare options according to area and budget.</p></div>
+      <div class="service"><div class="service-icon">📑</div><h3>Documentation Assistance</h3><p>General guidance around property documentation.</p></div>
+      <div class="service"><div class="service-icon">🔐</div><h3>Property Verification Assistance</h3><p>Discuss available verification and documentation steps.</p></div>
+      <div class="service"><div class="service-icon">📈</div><h3>Investment Consultation</h3><p>Discuss location, budget and investment requirements.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="locations">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Jaipur Property Locations</div>
+      <h2>Areas We Cover in Jaipur</h2>
+      <p>Location-specific property consultation and enquiry across major Jaipur areas.</p>
+    </div>
+    <div class="location-grid">
+      <span class="location-pill">Jhotwara</span>
+      <span class="location-pill">Jagatpura</span>
+      <span class="location-pill">Sanganer</span>
+      <span class="location-pill">Mansarovar</span>
+      <span class="location-pill">Vaishali Nagar</span>
+      <span class="location-pill">Ajmer Road</span>
+      <span class="location-pill">Tonk Road</span>
+      <span class="location-pill">Kalwar Road</span>
+      <span class="location-pill">Mahapura</span>
+      <span class="location-pill">Bhankrota</span>
+      <span class="location-pill">Khatipura</span>
+      <span class="location-pill">Bindayaka</span>
+      <span class="location-pill">Vatika</span>
+      <span class="location-pill">Chaksu</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <div>
+        <div class="kicker" style="color:#f0c75e">JAIPUR PROPERTY CONSULTATION</div>
+        <h2>Plot Kharidna Ya Bechna Hai?</h2>
+        <p>Apni location, budget, plot size ya selling requirement WhatsApp par bhejein. Current property options aur enquiry ke liye direct contact karein.</p>
+      </div>
+      <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur mein plot kharidna ya bechna hai.">💬 WhatsApp Enquiry</a>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="reviewsPreview">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Community Reviews</div>
+      <h2>💬 Customer Reviews & Experiences</h2>
+      <p>Reviews are published only after approval. Aap bhi apna experience share kar sakte hain.</p>
+      <a class="btn btn-dark" href="reviews.html" style="display:inline-block;margin-top:8px">💬 View Reviews / Add Review</a>
+    </div>
+    <div class="requirements-panel" id="homepageReviewsGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Visit / Contact</div>
+      <h2>Jaipur Property Consultant</h2>
+      <p>Contact us for property consultation, buying, selling and current property enquiries.</p>
+    </div>
+
+    <div class="office-grid">
+      <div class="office-photo">
+        <img src="storefront.png" alt="Jaipur Property Consultant office in Jhotwara Jaipur" onerror="this.style.display='none';this.parentElement.innerHTML='<span>📍 Jhotwara, Jaipur</span>';">
+      </div>
+
+      <div class="contact-box">
+        <h3>Visit / Contact Our Office</h3>
+        <div class="contact-line"><span class="contact-label">Business</span><strong>Jaipur Property Consultant</strong></div>
+        <div class="contact-line"><span class="contact-label">Address</span><span>58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur, Rajasthan 302012</span></div>
+        <div class="contact-line"><span class="contact-label">Phone</span><strong>6350566010</strong></div>
+        <div class="contact-line"><span class="contact-label">Focus</span><span>Plots • Property • Land • Buy • Sell • Investment</span></div>
+
+        <div style="margin-top:18px;display:flex;gap:9px;flex-wrap:wrap">
+          <a class="btn btn-gold" href="tel:+916350566010">📞 Call Now</a>
+          <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want property consultation in Jaipur.">💬 WhatsApp</a>
+          <a class="btn btn-dark" target="_blank" href="https://www.google.com/maps/search/?api=1&query=58A%2C%20Gosai%20Marg%2C%20Jhotwara%2C%20Jaipur%2C%20Rajasthan%20302012">🗺️ Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIC BUY / SELL SUBMISSION MODAL -->
+<div id="publicModal" class="public-modal" style="display:none">
+  <div class="public-modal-card">
+    <div class="public-modal-head">
+      <div><h2 id="publicModalTitle">मुझे प्रॉपर्टी खरीदनी है</h2><p id="publicModalSubtitle">Apni requirement submit karein. Pehle property manager review karega.</p></div>
+      <button class="public-close" type="button" onclick="closePublicForm()">×</button>
+    </div>
+    <form id="publicSubmissionForm">
+      <input type="hidden" id="publicSubmissionType" value="buyer">
+      <div class="public-form-grid">
+        <div class="public-field"><label>नाम *</label><input id="publicName" required placeholder="आपका नाम"></div>
+        <div class="public-field"><label>Mobile / WhatsApp * <span style="color:#b42318">(Private)</span></label><input id="publicMobile" required inputmode="tel" maxlength="10" placeholder="10 digit mobile number"></div>
+        <div class="public-field"><label>Area / Location *</label><input id="publicArea" required placeholder="जैसे Jhotwara, Vaishali Nagar"></div>
+        <div class="public-field"><label>City</label><input id="publicCity" value="Jaipur"></div>
+        <div class="public-field"><label>Property Type *</label><select id="publicPropertyType" required><option value="">Select property type</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
+        <div class="public-field"><label>Size / Area</label><input id="publicSize" placeholder="जैसे 50 Gaj / 1200 sqft"></div>
+        <div class="public-field"><label id="publicBudgetMinLabel">Minimum Budget (₹)</label><input id="publicBudgetMin" type="number" min="0" placeholder="₹"></div>
+        <div class="public-field"><label id="publicBudgetMaxLabel">Maximum Budget (₹)</label><input id="publicBudgetMax" type="number" min="0" placeholder="₹"></div>
+        <div class="public-field full"><label>Details / Requirement *</label><textarea id="publicDetails" required placeholder="Apni requirement ya property ki details likhein..."></textarea></div>
+        <div class="public-field full" id="publicPhotoField" style="display:none"><label>Property Photo</label><input id="publicPhoto" type="file" accept="image/*"><img id="publicPhotoPreview" class="public-photo-preview" alt="Property preview"><div class="muted" style="margin-top:5px">Ek clear photo upload karein. Approval ke baad public listing par dikh sakti hai.</div></div>
+        <div class="public-field full"><div class="public-privacy"><strong>🔐 Privacy & Approval:</strong> Aapka mobile, WhatsApp, email aur exact address public nahi kiya jayega. Submission pehle private admin/property manager review mein jayegi. Sirf approved details website par publish hongi.</div></div>
+        <div class="public-field full"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input id="publicConsent" type="checkbox" required style="width:17px;height:17px"><span>मैं सहमत हूँ कि मेरी property/requirement की selected details approval के बाद public website पर दिखाई जा सकती हैं.</span></label></div>
+      </div>
+      <div id="publicFormMsg"></div>
+      <div class="public-submit-row"><button type="button" class="btn light" onclick="closePublicForm()">Cancel</button><button type="submit" id="publicSubmitBtn" class="btn gold">Submit for Approval</button></div>
+    </form>
+  </div>
+</div>
+
+<a class="float-wa" href="https://wa.me/916350566010?text=Hello%2C%20I want property details in Jaipur." target="_blank" aria-label="WhatsApp">💬</a>
+
+<div class="mobile-bar">
+  <a class="mobile-call" href="tel:+916350566010">📞 Call</a>
+  <a class="mobile-wa" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want property details in Jaipur.">💬 WhatsApp</a>
+</div>
+
+<footer style="background:#0b1725;color:#c8d3df;padding:29px 0;text-align:center;font-size:11px">
+  <strong style="color:#fff">Jaipur Property Consultant</strong><br>
+  Real Estate Consultation • Property Buying • Property Selling • Investment Assistance<br>
+  <span style="display:block;margin-top:6px">© 2026 Jaipur Property Consultant. All rights reserved.</span>
+  <a href="admin.html" style="display:inline-block;margin-top:9px;color:#e8c45c;text-decoration:none;font-weight:800">🔐 Admin Login</a>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getFirestore, collection, addDoc, query, where, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
+  authDomain: "jaipur-property-consultant.firebaseapp.com",
+  projectId: "jaipur-property-consultant",
+  storageBucket: "jaipur-property-consultant.firebasestorage.app",
+  messagingSenderId: "502971407075",
+  appId: "1:502971407075:web:ee4dabc90db9f592ebc3d6",
+  measurementId: "G-0DW0NBETML"
+};
+
+const publicApp = initializeApp(firebaseConfig, "publicSite");
+const publicDb = getFirestore(publicApp);
+
+function publicMoney(min,max){
+  const fmt=n=>n==null||n===""?"":("₹"+Number(n).toLocaleString("en-IN"));
+  if(min!=null && max!=null) return `${fmt(min)} – ${fmt(max)}`;
+  if(max!=null) return `Up to ${fmt(max)}`;
+  if(min!=null) return `From ${fmt(min)}`;
+  return "Budget discussed";
+}
+
+function renderPublicRequirements(docs){
+  const grid=document.getElementById("publicRequirementsGrid");
+  const empty=document.getElementById("publicRequirementsEmpty");
+  if(!docs.length){ grid.innerHTML=""; empty.style.display="block"; document.getElementById("publicTicker").textContent="Jaipur mein apni property requirement ya property listing submit karein — approval ke baad public website par dikhayein."; return; }
+  empty.style.display="none";
+  grid.innerHTML=docs.map(r=>{
+    const kind=r.type==="customer"?"Buyer Requirement":r.type==="seller"?"Property Available":"Agent / Broker";
+    const detail=[r.propertyType,r.size,r.details].filter(Boolean).join(" • ");
+    const msg=encodeURIComponent(`Hello, I saw a ${kind.toLowerCase()} on Jaipur Property Consultant website for ${r.area||"Jaipur"}. Please share details.`);
+    const photo=r.imageDataUrl?`<div class="requirement-photo"><img src="${escapeHtmlPublic(r.imageDataUrl)}" alt="Property"></div>`:"";
+    return `<article class="requirement-card">${photo}<div class="requirement-body">
+      <div class="requirement-top"><span class="requirement-badge">${kind}</span><span style="font-size:9px;color:#718096">Approved</span></div>
+      <h3>${escapeHtmlPublic(r.displayName|| (r.type==="seller"?"Property Available":"Buyer Requirement"))}</h3>
+      <div class="req-location">📍 ${escapeHtmlPublic(r.area||"Jaipur")}, ${escapeHtmlPublic(r.city||"Jaipur")}</div>
+      <div class="req-detail">${escapeHtmlPublic(detail||"Property details available on enquiry.")}</div>
+      ${r.budgetMin!=null||r.budgetMax!=null?`<div class="req-price">💰 ${publicMoney(r.budgetMin,r.budgetMax)}</div>`:""}
+      <div class="req-actions"><a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a><a class="btn btn-outline" href="tel:+916350566010">📞 Call</a></div>
+    </div></article>`;
+  }).join("");
+  const tickerItems=docs.map(r=>`${r.type==="seller"?"🏡 Available":"🏠 Required"}: ${r.area||"Jaipur"} • ${r.propertyType||"Property"}${r.size?" • "+r.size:""}${(r.budgetMin!=null||r.budgetMax!=null)?" • "+publicMoney(r.budgetMin,r.budgetMax):""}`);
+  document.getElementById("publicTicker").innerHTML=tickerItems.map(x=>`<span>${escapeHtmlPublic(x)}</span>`).join("");
+}
+function escapeHtmlPublic(s){ return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
+
+let publicUnsubscribe=null;
+try{
+  const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));
+  publicUnsubscribe=onSnapshot(publicQuery,snap=>renderPublicRequirements(snap.docs.map(d=>d.data())),err=>console.warn("Public requirements unavailable:",err));
+}catch(err){ console.warn("Public requirements unavailable:",err); }
+
+function openPublicForm(type){
+  document.getElementById("publicSubmissionType").value=type;
+  const buyer=type==="buyer";
+  document.getElementById("publicModalTitle").textContent=buyer?"मुझे प्रॉपर्टी खरीदनी है":"मुझे प्रॉपर्टी बेचनी है";
+  document.getElementById("publicModalSubtitle").textContent=buyer?"Apni requirement submit karein. Property manager approval ke baad selected details public hongi.":"Property details aur photo submit karein. Property manager approval ke baad listing public hogi.";
+  document.getElementById("publicPhotoField").style.display=buyer?"none":"flex";
+  document.getElementById("publicBudgetMinLabel").textContent=buyer?"Minimum Budget (₹)":"Minimum / Expected Price (₹)";
+  document.getElementById("publicBudgetMaxLabel").textContent=buyer?"Maximum Budget (₹)":"Maximum Price (₹)";
+  document.getElementById("publicFormMsg").innerHTML="";
+  document.getElementById("publicModal").style.display="grid";
+}
+function closePublicForm(){document.getElementById("publicModal").style.display="none";}
+window.openPublicForm=openPublicForm; window.closePublicForm=closePublicForm;
+
+document.getElementById("publicPhoto")?.addEventListener("change",e=>{
+  const f=e.target.files?.[0], img=document.getElementById("publicPhotoPreview");
+  if(!f){img.style.display="none";return;} img.src=URL.createObjectURL(f); img.style.display="block";
+});
+function compressPublicImage(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader(); reader.onload=()=>{const img=new Image(); img.onload=()=>{const max=900; const scale=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement("canvas"); c.width=Math.round(img.width*scale); c.height=Math.round(img.height*scale); const ctx=c.getContext("2d"); ctx.drawImage(img,0,0,c.width,c.height); resolve(c.toDataURL("image/jpeg",.62));}; img.onerror=reject; img.src=reader.result;}; reader.onerror=reject; reader.readAsDataURL(file);
+  });
+}
+document.getElementById("publicSubmissionForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const btn=document.getElementById("publicSubmitBtn"), msg=document.getElementById("publicFormMsg"); btn.disabled=true; btn.textContent="Submitting..."; msg.innerHTML="";
+  try{
+    const type=document.getElementById("publicSubmissionType").value;
+    const mobile=document.getElementById("publicMobile").value.trim();
+    if(!/^\d{10}$/.test(mobile)) throw new Error("Please enter a valid 10-digit mobile number.");
+    const consent=document.getElementById("publicConsent").checked;
+    const file=document.getElementById("publicPhoto").files?.[0];
+    let imageDataUrl="";
+    if(file){ if(file.size>8*1024*1024) throw new Error("Photo should be under 8 MB."); imageDataUrl=await compressPublicImage(file); if(imageDataUrl.length>850000) throw new Error("Photo is still too large. Please choose a smaller image."); }
+    await addDoc(collection(publicDb,"publicSubmissions"),{
+      type:type==="buyer"?"customer":"seller", name:document.getElementById("publicName").value.trim(), mobile,
+      area:document.getElementById("publicArea").value.trim(), city:document.getElementById("publicCity").value.trim()||"Jaipur",
+      propertyType:document.getElementById("publicPropertyType").value, size:document.getElementById("publicSize").value.trim(),
+      budgetMin:document.getElementById("publicBudgetMin").value?Number(document.getElementById("publicBudgetMin").value):null,
+      budgetMax:document.getElementById("publicBudgetMax").value?Number(document.getElementById("publicBudgetMax").value):null,
+      details:document.getElementById("publicDetails").value.trim(), imageDataUrl, consentPublic:consent,
+      status:"pending", source:"Public Website", submittedAt:serverTimestamp()
+    });
+    msg.innerHTML='<div class="notice ok">✅ आपकी details successfully submit हो गई हैं. Property manager approval ke baad selected details website par दिखाई जा सकती हैं.</div>';
+    e.target.reset(); document.getElementById("publicCity").value="Jaipur"; document.getElementById("publicPhotoField").style.display="none"; document.getElementById("publicPhotoPreview").style.display="none";
+    setTimeout(closePublicForm,1800);
+  }catch(err){msg.innerHTML=`<div class="notice error">${escapeHtmlPublic(err.message)}</div>`}
+  finally{btn.disabled=false;btn.textContent="Submit for Approval";}
+});
+
+try{
+  const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));
+  onSnapshot(publicQuery,snap=>renderPublicRequirements(snap.docs.map(d=>d.data())),err=>{
+    console.warn("Public requirements unavailable:",err);
+  });
+}catch(err){ console.warn("Public requirements unavailable:",err); }
+</script>
+
+<script>
+const properties=[
+  {title:"Residential Plot — Jhotwara",type:"Residential Plot",location:"Jhotwara",price:28,display:"₹28 Lakh*",meta:["Residential Plot","Site Visit","Enquiry"]},
+  {title:"Residential Property — Jagatpura",type:"Flat / Villa",location:"Jagatpura",price:45,display:"₹45 Lakh*",meta:["Residential","Location Discussion","Enquiry"]},
+  {title:"Commercial Property — Vaishali Nagar",type:"Commercial",location:"Vaishali Nagar",price:72,display:"₹72 Lakh*",meta:["Commercial","Consultation","Enquiry"]},
+  {title:"Residential Plot — Mansarovar",type:"Residential Plot",location:"Mansarovar",price:39,display:"₹39 Lakh*",meta:["Plot","Site Visit","Enquiry"]},
+  {title:"Land Opportunity — Ajmer Road",type:"Land",location:"Ajmer Road",price:65,display:"₹65 Lakh*",meta:["Land","Consultation","Enquiry"]},
+  {title:"Residential Property — Jhotwara",type:"Flat / Villa",location:"Jhotwara",price:52,display:"₹52 Lakh*",meta:["Residential","Site Visit","Enquiry"]}
+];
+
+const wa="916350566010";
+
+function renderProperties(list=properties){
+  const grid=document.getElementById("propertyGrid");
+  const empty=document.getElementById("noResults");
+  const count=document.getElementById("resultCount");
+  grid.innerHTML="";
+  if(!list.length){
+    empty.style.display="block";
+    count.textContent="No matching sample property";
+    return;
+  }
+  empty.style.display="none";
+  count.textContent=`Showing ${list.length} sample propert${list.length===1?"y":"ies"}`;
+  list.forEach(p=>{
+    const msg=encodeURIComponent(`Hello, I am interested in ${p.title}. Please share current details, price and availability.`);
+    const card=document.createElement("article");
+    card.className="property-card";
+    card.innerHTML=`
+      <div class="property-img"><span class="badge">${p.type.toUpperCase()}</span></div>
+      <div class="property-body">
+        <h3>${p.title}</h3>
+        <div class="location">📍 ${p.location}, Jaipur</div>
+        <div class="meta">${p.meta.map(x=>`<span>${x}</span>`).join("")}</div>
+        <div class="price">${p.display} <small>indicative demo listing</small></div>
+        <div class="card-actions">
+          <a class="card-btn card-wa" target="_blank" href="https://wa.me/${wa}?text=${msg}">💬 WhatsApp</a>
+          <a class="card-btn card-call" href="tel:+916350566010">📞 Call</a>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function filterProperties(){
+  const q=document.getElementById("searchInput").value.toLowerCase().trim();
+  const type=document.getElementById("typeFilter").value;
+  const loc=document.getElementById("locationFilter").value;
+  const budget=document.getElementById("budgetFilter").value;
+
+  const result=properties.filter(p=>{
+    const text=(p.title+" "+p.type+" "+p.location+" "+p.meta.join(" ")).toLowerCase();
+    return (!q || text.includes(q))
+      && (!type || p.type===type)
+      && (!loc || p.location===loc)
+      && (!budget || p.price<=Number(budget));
+  });
+  renderProperties(result);
+}
+
+function clearFilters(){
+  document.getElementById("searchInput").value="";
+  document.getElementById("typeFilter").value="";
+  document.getElementById("locationFilter").value="";
+  document.getElementById("budgetFilter").value="";
+  renderProperties();
+}
+
+function setType(type){
+  document.getElementById("typeFilter").value=type;
+  filterProperties();
+}
+
+function sendEnquiry(e){
+  e.preventDefault();
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const req=document.getElementById("requirement").value;
+  const location=document.getElementById("location").value.trim();
+  const message=document.getElementById("message").value.trim();
+
+  if(!/^\d{10}$/.test(phone)){
+    alert("Please enter a valid 10-digit mobile number.");
+    return;
+  }
+
+  const text=`*New Property Enquiry — Jaipur Property Consultant*
+
+Name: ${name}
+Mobile: ${phone}
+Requirement: ${req}
+Preferred Location: ${location || "Not specified"}
+Details: ${message || "Not specified"}
+
+Please share suitable property options and current details.`;
+
+  window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`,"_blank");
+}
+
+const dynamicMessages=[
+  {
+    main:"🏡 <span>जयपुर में Plot खरीदने या बेचने के लिए संपर्क करें</span>",
+    sub:"अपनी location, budget या plot details WhatsApp पर भेजें।",
+    cta:"https://wa.me/916350566010?text=Namaste%2C%20mujhe%20Jaipur%20mein plot kharidna ya bechna hai."
+  },
+  {
+    main:"📍 <span>Jhotwara में Plot खरीदना है?</span>",
+    sub:"अपनी budget और plot size की requirement बताएं।",
+    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jhotwara mein plot kharidna hai."
+  },
+  {
+    main:"🏷️ <span>जयपुर में Plot बेचना है?</span>",
+    sub:"Location, size और expected price के साथ enquiry करें।",
+    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur mein plot bechna hai."
+  },
+  {
+    main:"🔎 <span>जयपुर में सही Plot ढूंढ रहे हैं?</span>",
+    sub:"Location और budget share करके available options पूछें।",
+    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur mein plot kharidna hai."
+  },
+  {
+    main:"🤝 <span>Plot खरीदने या बेचने से पहले consultation लें</span>",
+    sub:"Property requirement पर direct WhatsApp conversation शुरू करें।",
+    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur property consultation chahiye."
+  }
+];
+
+let di=0;
+setInterval(()=>{
+  di=(di+1)%dynamicMessages.length;
+  const m=dynamicMessages[di];
+  const main=document.getElementById("dynamicMain");
+  const sub=document.getElementById("dynamicSub");
+  const cta=document.getElementById("dynamicCta");
+  main.style.opacity="0";
+  sub.style.opacity="0";
+  setTimeout(()=>{
+    main.innerHTML=m.main;
+    sub.textContent=m.sub;
+    cta.href=m.cta;
+    main.style.opacity="1";
+    sub.style.opacity="1";
+  },180);
+},4500);
+
+function toggleMenu(){
+  const nav=document.getElementById("navLinks");
+  if(nav.style.display==="flex"){
+    nav.style.display="";
+    return;
+  }
+  nav.style.display="flex";
+  nav.style.position="absolute";
+  nav.style.top="67px";
+  nav.style.left="0";
+  nav.style.right="0";
+  nav.style.background="#fff";
+  nav.style.padding="15px 4%";
+  nav.style.flexDirection="column";
+  nav.style.alignItems="stretch";
+  nav.style.borderBottom="1px solid #dfe5ec";
+}
+
+renderProperties();
+
+// Approved reviews preview
+try{
+  const reviewQuery=query(collection(publicDb,"publicReviews"),where("status","==","approved"),limit(3));
+  onSnapshot(reviewQuery,snap=>{
+    const docs=snap.docs.map(d=>d.data()).filter(r=>r.status==="approved");
+    const grid=document.getElementById("homepageReviewsGrid");
+    if(!grid)return;
+    grid.innerHTML=docs.length?docs.map(r=>`<article class="requirement-card"><div class="requirement-body"><div class="review-stars">${"★".repeat(Math.max(1,Math.min(5,Number(r.rating)||5)))}</div><h3>${escapeHtmlPublic(r.name||"Customer")}</h3><div class="req-detail">${escapeHtmlPublic(r.comment||"")}</div><div class="req-location">${escapeHtmlPublic(r.area||"")}</div></div></article>`).join(""):'<div class="public-note">Abhi approved reviews nahi hain. Aap pehla review share kar sakte hain.</div>';
+  });
+}catch(err){console.warn("Reviews unavailable",err);}
+</script>
+</body>
+</html>

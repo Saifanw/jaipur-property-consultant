@@ -1,929 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Property Business OS | Jaipur Property Consultant</title>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business OS — Private Admin</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
-:root{--ink:#142033;--ink2:#22324a;--gold:#c9962e;--gold2:#e9c66a;--green:#0d8b55;--green2:#e7f7ef;--blue:#3d6fe8;--blue2:#edf3ff;--red:#d34b42;--red2:#fff0ee;--amber:#d99218;--amber2:#fff7e5;--bg:#f5f7fb;--card:#fff;--muted:#6d7b8f;--line:#e5eaf0;--shadow:0 14px 40px rgba(20,32,51,.07);--shadow2:0 22px 60px rgba(20,32,51,.11)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 85% 0,#fff7df 0,transparent 25%),var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.wrap{width:min(1320px,94%);margin:auto}
-.btn{border:0;border-radius:11px;padding:10px 14px;font-weight:850;transition:.18s transform,.18s box-shadow,.18s background}.btn:hover{transform:translateY(-1px)}.gold{background:linear-gradient(135deg,#c48d20,#d9ae4b);color:#fff;box-shadow:0 8px 18px rgba(201,150,46,.22)}.green{background:var(--green);color:#fff}.dark{background:var(--ink);color:#fff}.light{background:#fff;border:1px solid var(--line);color:var(--ink)}.danger{background:var(--red2);color:var(--red);border:1px solid #ffd4cf}
-.login{min-height:100vh;display:grid;place-items:center;padding:25px;background:radial-gradient(circle at 15% 10%,#38516f,transparent 30%),linear-gradient(135deg,#0d1726,#253c58)}.login-card{background:rgba(255,255,255,.98);width:min(440px,94%);padding:38px;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.28);text-align:center}.login-card h1{margin:10px 0 4px}.login-card p{color:var(--muted);font-size:13px}.google{width:100%;padding:13px;margin-top:12px}
-.top{background:rgba(20,32,51,.98);color:#fff}.top-in{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:10px 0}.brand{font-weight:950;letter-spacing:.2px}.brand small{display:block;color:#e8c45c;font-size:8px;letter-spacing:2px;margin-top:2px}
-header.app{background:rgba(255,255,255,.93);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(16px)}.head-in{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px}.head-title{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#17253a,#31516f);display:grid;place-items:center;color:#fff;font-size:20px;box-shadow:0 8px 18px rgba(20,32,51,.18)}
-.tabs{display:flex;gap:8px;overflow:auto;padding:15px 0 4px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:999px;font-weight:850;white-space:nowrap;color:#34445a;box-shadow:0 2px 5px rgba(20,32,51,.025)}.tab.active{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:0 8px 18px rgba(20,32,51,.16)}
-main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55fr;gap:15px;margin:10px 0 16px}.welcome-card{position:relative;overflow:hidden;border-radius:24px;padding:24px;background:linear-gradient(135deg,#142033,#263b55);color:#fff;box-shadow:var(--shadow2)}.welcome-card:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-70px;top:-95px;background:rgba(233,198,106,.13)}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.8px;color:#e8c45c;font-weight:900}.welcome-card h1{font-size:27px;margin:7px 0 5px;position:relative;z-index:1}.welcome-card p{margin:0;color:#d9e1eb;font-size:13px;max-width:650px;position:relative;z-index:1}.quick-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center}.quick-title{font-size:11px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.8px;margin-bottom:9px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick{border:1px solid var(--line);background:#fbfcfe;border-radius:12px;padding:10px;text-align:left;font-weight:850;color:var(--ink);font-size:11px}.quick:hover{border-color:#cdd7e3;background:#fff;transform:translateY(-1px)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:15px}.stat{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px 18px;box-shadow:var(--shadow)}.stat:after{content:"";position:absolute;right:-22px;bottom:-28px;width:90px;height:90px;border-radius:50%;background:#f4f7fa}.stat b{font-size:28px;display:block;position:relative;z-index:1}.stat span{font-size:11px;color:var(--muted);position:relative;z-index:1}.stat small{display:block;color:var(--green);font-weight:800;font-size:10px;margin-top:5px}
-.focus-grid{display:grid;grid-template-columns:1.05fr .95fr 1fr;gap:14px;margin-bottom:18px}.focus-panel{background:#fff;border:1px solid var(--line);border-radius:19px;padding:16px;box-shadow:var(--shadow);min-height:210px}.focus-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.focus-head h3{margin:0;font-size:15px}.focus-head span{font-size:10px;color:var(--muted)}.lead-mini{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #edf0f4}.lead-mini:last-child{border-bottom:0}.lead-name{font-weight:850;font-size:12px}.lead-sub{font-size:10px;color:var(--muted);margin-top:2px}.mini-actions{display:flex;gap:5px}.mini-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:850}.mini-btn.call{color:var(--green);background:var(--green2);border-color:#c8ecd9}.pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pipe{padding:10px;border-radius:12px;background:#f8fafc;border:1px solid #edf0f3}.pipe b{font-size:18px;display:block}.pipe span{font-size:9px;color:var(--muted)}.pipe.hot{background:#fff8e8;border-color:#f2ddb0}.pipe.done{background:var(--green2);border-color:#ccebdd}
-.panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:19px;margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.panel h2{margin:0;font-size:19px}.tools{display:flex;gap:8px;flex-wrap:wrap}.search{width:285px;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fbfcfe;outline:none}.search:focus{border-color:#aebed0;background:#fff}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid #edf0f3}.filter{padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:150px;color:var(--ink)}.filter.small{min-width:125px;width:125px}.filter-count{font-size:11px;color:var(--muted);align-self:center;margin-left:auto}
-.wa-toolbar{display:none;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;padding:10px 12px;border:1px solid #cfe8dc;background:linear-gradient(135deg,#f2fff8,#fbfffd);border-radius:14px}.wa-toolbar.show{display:flex}.wa-count{font-weight:900;color:#087744;font-size:12px;margin-right:auto}.wa-btn{border:1px solid #bfe5d0;background:#eafaf1;color:#087744;border-radius:10px;padding:9px 12px;font-weight:900}.wa-btn.primary{background:#0d8b55;color:#fff;border-color:#0d8b55}.wa-btn.dark{background:#142033;color:#fff;border-color:#142033}.wa-btn:disabled{opacity:.45;cursor:not-allowed}.select-cell{width:34px;text-align:center}.row-check{width:16px;height:16px;accent-color:#0d8b55;cursor:pointer}.select-all{width:16px;height:16px;accent-color:#0d8b55;cursor:pointer}.wa-inline{border:1px solid #bfe5d0;background:#eafaf1;color:#087744;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:900;margin-left:4px}.wa-inline:hover,.wa-btn:hover{filter:brightness(.98);transform:translateY(-1px)}.wa-modal-card{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:23px;box-shadow:0 30px 90px rgba(0,0,0,.25)}.wa-template{min-height:135px;width:100%;padding:12px;border:1px solid #d3dde7;border-radius:12px;resize:vertical;outline:0}.wa-template:focus{border-color:#0d8b55;box-shadow:0 0 0 3px rgba(13,139,85,.1)}.wa-vars{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.wa-var{border:1px solid var(--line);background:#f8fafc;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:800;color:#53657a}.wa-queue{display:grid;gap:8px;margin-top:12px}.wa-queue-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}.wa-queue-row.done{background:#eefaf4;border-color:#ccebdd}.wa-queue-meta strong{display:block;font-size:12px}.wa-queue-meta span{display:block;color:var(--muted);font-size:10px;margin-top:2px}.wa-next{margin-top:12px;padding:10px 12px;border-radius:12px;background:#f7f9fc;border:1px solid var(--line);font-size:11px;color:#53657a}
-.wa-image-box{margin-top:12px;padding:13px;border:1px solid #cfe8dc;background:#f8fffb;border-radius:14px}.wa-image-title{font-weight:950;font-size:12px}.wa-image-help{font-size:10px;color:var(--muted);margin:4px 0 9px}.wa-image-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.wa-image-row .filter{min-width:230px}.wa-image-preview{margin-top:9px}.wa-image-preview img{width:130px;height:85px;object-fit:cover;border-radius:10px;border:1px solid #cfe0d7}.wa-image-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.wa-image-actions button{cursor:pointer}..table-wrap{overflow:auto;margin-top:14px}table{width:100%;border-collapse:separate;border-spacing:0;min-width:850px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #edf0f3;font-size:12px;vertical-align:top}th{color:#728096;font-size:9px;text-transform:uppercase;letter-spacing:.7px;background:#fafbfc}tbody tr:hover td{background:#fbfcfe}td strong{font-size:12px}.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef3f7;font-size:9px;font-weight:850}.badge.customer{background:var(--blue2);color:#315cb0}.badge.seller{background:var(--amber2);color:#936500}.badge.broker{background:var(--green2);color:#0e7b42}.empty{text-align:center;color:var(--muted);padding:35px}
-.modal{position:fixed;inset:0;background:rgba(7,17,30,.66);z-index:100;display:grid;place-items:center;padding:18px;backdrop-filter:blur(4px)}.modal-card{width:min(850px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:23px;box-shadow:0 30px 90px rgba(0,0,0,.25)}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.close{border:0;background:#eef2f6;border-radius:50%;width:35px;height:35px;font-size:20px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:10px;font-weight:900;color:#53657a}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #d3dde7;border-radius:10px;outline:0;background:#fff}.field textarea{min-height:85px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,150,46,.1)}.section-label{grid-column:1/-1;font-size:11px;font-weight:950;color:#a57400;border-bottom:1px solid var(--line);padding:8px 0 5px;margin-top:3px}.photo-box{border:1px dashed #bdc9d6;padding:15px;border-radius:12px;background:#fafcfd}.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.preview img{width:85px;height:65px;object-fit:cover;border-radius:7px;border:1px solid var(--line)}.notice{padding:11px 13px;border-radius:9px;font-size:12px;margin:10px 0}.notice.info{background:#eef4ff;color:#275da8}.notice.error{background:var(--red2);color:var(--red)}.notice.ok{background:var(--green2);color:#0e7b42}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.muted{color:var(--muted);font-size:11px}.danger-link{color:var(--red);background:none;border:0;font-weight:800}
-.submission-panel{display:none}.submission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.submission-card{border:1px solid var(--line);border-radius:15px;padding:15px;background:#fff}.submission-card.pending{border-color:#f0d58a}.submission-card.approved{border-color:#9ed9b8}.submission-card.rejected{border-color:#efb2ad;opacity:.78}.submission-card img{width:100%;height:155px;object-fit:cover;border-radius:10px;margin-bottom:10px}.submission-meta{font-size:11px;color:var(--muted);line-height:1.55}.submission-meta strong{color:var(--ink)}.submission-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.submission-actions .btn{font-size:11px;padding:8px 10px}.status-pill{display:inline-block;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;background:var(--amber2);color:#8b6500}.status-pill.approved{background:var(--green2);color:#0e7b42}.status-pill.rejected{background:var(--red2);color:var(--red)}
-.module-panel{display:none}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.module-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.module-card h3{margin:0 0 7px;font-size:16px}.module-card .big{font-size:28px;font-weight:950}.module-note{font-size:11px;color:var(--muted);line-height:1.55}.module-list{display:grid;gap:10px;margin-top:15px}.module-row{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.module-row.overdue{border-color:#efb2ad;background:#fff8f7}.module-row.today{border-color:#f0d58a;background:#fffdf5}.module-row .row-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.module-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.score{font-weight:950;color:#0e7b42}.bar-wrap{margin-top:12px}.bar-row{display:grid;grid-template-columns:150px 1fr 50px;gap:8px;align-items:center;margin:9px 0;font-size:11px}.bar{height:10px;background:#eef2f6;border-radius:999px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#c79a25,#128a4d);border-radius:999px}.review-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.review-stars{color:#c79a25;letter-spacing:1px}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.match-box{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fafcfd}.mini-label{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:900}.mini-value{font-weight:850;margin-top:3px}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#128a4d;margin-right:5px}.status-dot.warn{background:#c79a25}.status-dot.bad{background:#b42318}
-@media(max-width:950px){.welcome{grid-template-columns:1fr}.focus-grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.submission-grid{grid-template-columns:1fr 1fr}.module-grid{grid-template-columns:1fr 1fr}.match-grid{grid-template-columns:1fr}}@media(max-width:620px){.head-in{align-items:flex-start;padding:12px 0}.head-in .btn.light[href]{display:none}.welcome-card h1{font-size:22px}.focus-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full,.section-label{grid-column:auto}.submission-grid,.module-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:110px 1fr 40px}.quick-grid{grid-template-columns:1fr 1fr}}
-<style>
-.followup-cell{min-width:150px}.fu-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.2px}.fu-today{background:#fff3d6;color:#8a5a00}.fu-overdue{background:#fde8e8;color:#a61b1b}.fu-upcoming{background:#e8f2ff;color:#1557a6}.fu-done{background:#eaf8f0;color:#0e7b42}.fu-none{background:#f2f4f7;color:#667085}.fu-check{width:16px;height:16px;vertical-align:middle;margin-right:5px}.fu-action{border:0;background:transparent;cursor:pointer;font-weight:800;color:#0e7b42;margin-top:5px;padding:0}
+:root{--ink:#101827;--muted:#718096;--line:#e4e9f0;--bg:#f4f6f9;--card:#fff;--purple:#644cff;--green:#0b9b63;--navy:#111a2b;--orange:#f59e0b;--red:#df4b43}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.hidden{display:none!important}
+.top{height:74px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 38px;position:sticky;top:0;z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px;color:var(--ink);text-decoration:none}.brand i{width:34px;height:34px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;font-style:normal}.brand span{color:var(--purple)}.userbox{display:flex;align-items:center;gap:12px}.userbox small{display:block;color:var(--muted);font-size:9px}.userbox b{font-size:11px}.userbox button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;font-size:9px;font-weight:800;cursor:pointer}
+.login{min-height:calc(100vh - 74px);display:grid;place-items:center;padding:30px;background:radial-gradient(circle at 75% 25%,#e9e4ff 0,transparent 32%),radial-gradient(circle at 15% 80%,#e0f6ed 0,transparent 30%),var(--bg)}.login-card{width:min(470px,94vw);background:#fff;border:1px solid var(--line);border-radius:24px;padding:38px;box-shadow:0 25px 80px rgba(15,24,39,.12);text-align:center}.lock{width:58px;height:58px;margin:0 auto 18px;border-radius:17px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:24px}.login-card h1{font-size:30px;letter-spacing:-1px;margin:0 0 8px}.login-card p{color:var(--muted);font-size:12px;line-height:1.6;margin:0 auto 24px;max-width:350px}.google{width:100%;height:48px;border:1px solid #d8dee7;background:#fff;border-radius:11px;font-weight:900;font-size:12px;cursor:pointer}.google:hover{background:#fafbfc}.login-msg{font-size:10px;margin-top:12px;color:var(--red)}
+.app{display:grid;grid-template-columns:225px minmax(0,1fr);min-height:calc(100vh - 74px)}.side{background:var(--navy);color:#d9dfeb;padding:25px 15px;position:sticky;top:74px;height:calc(100vh - 74px)}.side-title{font-size:9px;letter-spacing:.16em;font-weight:900;color:#8e9bb1;padding:0 11px 12px}.side a{display:flex;align-items:center;gap:10px;padding:12px 11px;border-radius:10px;color:#cbd3e0;text-decoration:none;font-size:11px;font-weight:700;margin:3px 0}.side a.active,.side a:hover{background:#202b41;color:#fff}.side .bottom{position:absolute;left:15px;right:15px;bottom:20px;border:1px solid #2c3950;border-radius:13px;padding:13px}.side .bottom b{font-size:10px}.side .bottom p{font-size:8px;line-height:1.5;color:#8f9bb0;margin:6px 0 0}
+main{padding:35px 38px 65px;min-width:0;max-width:1550px;width:100%}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}.eyebrow{font-size:9px;letter-spacing:.17em;font-weight:900;color:#738096}.hero h1{font-size:42px;line-height:1;letter-spacing:-1.7px;margin:8px 0}.hero p{color:var(--muted);font-size:12px;margin:0}.hero-actions{display:flex;gap:8px;flex-wrap:wrap}.hero-actions button{height:42px;padding:0 15px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:10px;font-weight:900;cursor:pointer}.hero-actions .green{background:var(--green);border-color:var(--green);color:#fff}.hero-actions .purple{background:var(--purple);border-color:var(--purple);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;position:relative;overflow:hidden}.stat:after{content:"";position:absolute;right:-25px;bottom:-25px;width:70px;height:70px;border-radius:50%;background:#f5f7fa}.stat small{font-size:9px;color:#818da1}.stat strong{display:block;font-size:28px;letter-spacing:-1px;margin:6px 0}.stat em{font-size:8px;font-style:normal;color:var(--green);font-weight:800}.stat.real{background:linear-gradient(135deg,#fff,#f6f3ff)}.stat.hot{background:linear-gradient(135deg,#fff,#fff7e9)}.stat.won{background:linear-gradient(135deg,#fff,#effbf5)}
+.grid2{display:grid;grid-template-columns:1.65fr 1fr;gap:14px;margin-bottom:14px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.card-head h3{font-size:12px;margin:0}.card-head span{font-size:8px;color:var(--muted)}.chart-wrap{height:190px}.source-list{display:grid;gap:10px}.source-row{display:grid;grid-template-columns:110px 1fr 35px;gap:8px;align-items:center;font-size:9px}.bar{height:7px;background:#eef1f5;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#6a52ff,#9c8cff);border-radius:20px}
+.filter-card{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden}.filter-top{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;flex-wrap:wrap}.filter-top input,.filter-top select{height:39px;border:1px solid #dfe5ec;border-radius:9px;background:#fff;padding:0 10px;font-size:9px;color:#5f6b7d;outline:none}.filter-top input{flex:1;min-width:220px}.filter-top button{height:39px;border:1px solid #dfe5ec;border-radius:9px;background:#fff;padding:0 12px;font-size:9px;font-weight:900;cursor:pointer}.filter-top .reset{background:var(--navy);border-color:var(--navy);color:#fff}.filter-info{padding:9px 18px;background:#fafbfc;color:#7b8697;font-size:9px;display:flex;justify-content:space-between}.bulk{display:none;padding:10px 18px;background:#eefaf5;border-bottom:1px solid #ccebdd;align-items:center;justify-content:space-between;font-size:9px}.bulk.show{display:flex}.bulk button{border:0;border-radius:8px;padding:8px 11px;background:var(--green);color:#fff;font-size:9px;font-weight:900;cursor:pointer}
+.table{overflow:auto}.th,.tr{min-width:1080px;display:grid;grid-template-columns:30px 1.7fr 1.05fr 1.05fr .9fr 1fr 1.1fr 110px;gap:13px;align-items:center}.th{padding:11px 18px;background:#fafbfc;border-bottom:1px solid var(--line);font-size:8px;color:#8993a3;text-transform:uppercase;letter-spacing:.08em;font-weight:900}.tr{padding:14px 18px;border-bottom:1px solid #edf0f4;min-height:66px}.tr:hover{background:#fcfbff}.avatar{width:34px;height:34px;border-radius:10px;background:#eeeaff;color:#5e48dc;display:grid;place-items:center;font-size:9px;font-weight:900}.person{display:flex;gap:10px;align-items:center}.person b{font-size:10px}.person small,.cell small{display:block;color:#8a95a5;font-size:8px;margin-top:3px}.cell{font-size:9px;color:#445064}.tag{display:inline-block;padding:5px 7px;border-radius:6px;font-size:8px;font-weight:900;background:#edf1f6;color:#606c7d}.tag.real{background:#eeeaff;color:#5d46dc}.tag.edu{background:#eaf5ff;color:#3172a8}.tag.hot{background:#fff0cd;color:#956800}.tag.follow{background:#e8f1ff;color:#3567a7}.tag.won{background:#e2f7eb;color:#168052}.actions-cell{display:flex;gap:5px}.actions-cell button{width:29px;height:29px;border:1px solid #dfe4eb;border-radius:7px;background:#fff;cursor:pointer}.check{width:16px;height:16px}.empty{text-align:center;padding:60px;color:#8993a3;font-size:11px}
+.drawer-bg{display:none;position:fixed;inset:0;background:rgba(10,16,28,.38);backdrop-filter:blur(4px);z-index:50}.drawer-bg.show{display:block}.drawer{position:absolute;right:0;top:0;height:100%;width:min(520px,94vw);background:#fff;overflow:auto;box-shadow:-20px 0 70px rgba(0,0,0,.18);padding:25px}.drawer h2{margin:0;font-size:25px}.drawer .close{float:right;border:1px solid var(--line);background:#fff;border-radius:8px;width:34px;height:34px;cursor:pointer}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.form-grid label{font-size:8px;font-weight:900;color:#7a8596}.form-grid input,.form-grid select,.form-grid textarea{width:100%;margin-top:5px;border:1px solid #dfe4eb;border-radius:8px;padding:10px;font-size:10px}.form-grid textarea{min-height:90px;resize:vertical}.full{grid-column:1/-1}.save-btn{margin-top:15px;width:100%;height:44px;border:0;border-radius:9px;background:var(--green);color:#fff;font-size:10px;font-weight:900;cursor:pointer}
+@media(max-width:1050px){.app{grid-template-columns:75px 1fr}.side a span,.side-title,.side .bottom{display:none}.side a{justify-content:center}.stats{grid-template-columns:repeat(3,1fr)}.grid2{grid-template-columns:1fr}}@media(max-width:700px){.top{padding:0 15px}.app{grid-template-columns:1fr}.side{display:none}main{padding:25px 14px}.hero{display:block}.hero-actions{margin-top:15px}.stats{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}}
 </style>
+  <link rel="stylesheet" href="assets/luxury.css">
+<style>
+/* =========================================================
+   BUSINESS OS — ADMIN FULL-WIDTH V5
+   Remove the large navigation rail so the data workspace
+   uses the entire screen. Admin remains premium and usable.
+   ========================================================= */
+body{
+  overflow-x:hidden!important;
+}
+.app{
+  grid-template-columns:1fr!important;
+  width:100%!important;
+}
+.app > .side,
+.app > aside.side,
+.app .side{
+  display:none!important;
+}
+main{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-left:18px!important;
+  padding-right:18px!important;
+}
+.top{
+  padding-left:24px!important;
+  padding-right:24px!important;
+}
+.hero,.stats,.grid2,.filter-card{
+  width:100%!important;
+  max-width:none!important;
+}
+.filter-card{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+@media(max-width:800px){
+  main{padding-left:10px!important;padding-right:10px!important}
+  .top{padding-left:14px!important;padding-right:14px!important}
+}
 </style>
 </head>
 <body>
-
-<div id="loginView" class="login">
-  <div class="login-card">
-    <div style="font-size:35px">🏠</div>
-    <h1>Jaipur Property Consultant</h1>
-    <p>Private Customer & Property CRM</p>
-    <div id="loginMsg" class="notice info">Sign in with your authorized Google account.</div>
-    <button id="googleBtn" class="btn dark google">🔐 Continue with Google</button>
-  </div>
-</div>
-
-<div id="appView" class="hidden">
-  <div class="top"><div class="wrap top-in">
-    <div class="brand">JP Consultant<small>PRIVATE CRM</small></div>
-    <div style="display:flex;align-items:center;gap:10px"><span id="userEmail" style="font-size:11px"></span><button id="logoutBtn" class="btn light">Logout</button></div>
-  </div></div>
-  <header class="app"><div class="wrap head-in">
-    <div class="head-title"><div class="brand-mark">⌂</div><div><strong>Property Business OS</strong><div class="muted">Your leads • properties • follow-ups • deals</div></div></div>
-    <div style="display:flex;align-items:center;gap:8px"><button id="newBtn" class="btn gold">＋ Add Customer</button><a class="btn light" href="https://analytics.google.com/" target="_blank" rel="noopener">📊 Analytics</a></div>
-  </div></header>
-
-  <main class="wrap">
-    <div class="welcome"><section class="welcome-card"><div class="eyebrow">PRIVATE BUSINESS WORKSPACE</div><h1>Good afternoon 👋</h1><p>Know exactly who needs a call, which property fits, and where your next deal can come from.</p></section><section class="quick-card"><div class="quick-title">Quick actions</div><div class="quick-grid"><button id="quickAdd" class="quick">＋ Add customer</button><button id="quickProperty" class="quick">🏠 Add property</button><button id="quickMatch" class="quick">🎯 Find a match</button><button id="quickFollow" class="quick">📅 Follow-ups</button></div></section></div>
-    <div class="tabs">
-      <button class="tab active" data-type="all">All</button>
-      <button class="tab" data-type="customer">👤 Customers</button>
-      <button class="tab" data-type="seller">🏠 Sellers</button>
-      <button class="tab" data-type="broker">🤝 Brokers / Agents</button>
-      <button class="tab" id="submissionsTab" data-view="submissions">📥 Public Submissions</button>
-      <button class="tab" data-view="matching">🎯 Matching</button>
-      <button class="tab" data-view="followups">📅 Follow-ups</button>
-      <button class="tab" data-view="reviews">💬 Reviews</button>
-      <button class="tab" data-view="analytics">📊 Analytics</button>
-    </div>
-
-    <section class="stats">
-      <div class="stat"><b id="allCount">0</b><span>Total CRM Records</span><small>Everything in one place</small></div>
-      <div class="stat"><b id="customerCount">0</b><span>Buyers / Customers</span><small>People looking to buy</small></div>
-      <div class="stat"><b id="sellerCount">0</b><span>Properties / Sellers</span><small>Inventory you can offer</small></div>
-      <div class="stat"><b id="brokerCount">0</b><span>Brokers / Agents</span><small>Your local network</small></div>
-    </section>
-
-    <section class="focus-grid">
-      <div class="focus-panel"><div class="focus-head"><h3>🔥 Needs attention</h3><span>Hot leads</span></div><div id="hotLeads"><div class="empty" style="padding:25px 5px">Loading...</div></div></div>
-      <div class="focus-panel"><div class="focus-head"><h3>📅 Today's follow-ups</h3><span>Never miss a lead</span></div><div id="todayFocus"><div class="empty" style="padding:25px 5px">Loading...</div></div></div>
-      <div class="focus-panel"><div class="focus-head"><h3>📈 Sales pipeline</h3><span>Lead movement</span></div><div id="pipeline" class="pipeline"><div class="pipe"><b>0</b><span>New</span></div><div class="pipe"><b>0</b><span>Contacted</span></div><div class="pipe hot"><b>0</b><span>Interested</span></div><div class="pipe hot"><b>0</b><span>Site Visit</span></div><div class="pipe"><b>0</b><span>Negotiation</span></div><div class="pipe done"><b>0</b><span>Closed</span></div></div></div>
-    </section>
-
-    <section id="crmPanel" class="panel">
-      <div class="panel-head">
-        <div><h2 id="listTitle">All Records</h2><div class="muted">Data is stored in Cloud Firestore.</div></div>
-        <div class="tools">
-          <input id="search" class="search" placeholder="Search name, number, area, notes...">
-          <button id="importBtn" class="btn light">📥 Import Excel/CSV</button>
-          <button id="exportBtn" class="btn light">📤 Export Excel</button>
-          <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" class="hidden">
-        </div>
-      </div>
-      <div class="filters">
-        <select id="filterArea" class="filter"><option value="">All Areas / Locations</option></select>
-        <select id="filterProperty" class="filter"><option value="">All Property Types</option></select>
-        <select id="filterStatus" class="filter"><option value="">All Statuses</option></select>
-        <input id="filterMinBudget" class="filter small" type="number" min="0" placeholder="Min budget ₹">
-        <input id="filterMaxBudget" class="filter small" type="number" min="0" placeholder="Max budget ₹">
-        <button id="resetFilters" class="btn light">↺ Reset Filters</button>
-        <span id="filterCount" class="filter-count"></span>
-      </div>
-      <div id="waToolbar" class="wa-toolbar">
-        <span id="waSelectedCount" class="wa-count">0 selected</span>
-        <button id="waMessageBtn" class="wa-btn primary" disabled>🟢 WhatsApp selected</button>
-        <button id="waQueueBtn" class="wa-btn" disabled>📲 Send one-by-one</button>
-        <button id="waClearBtn" class="wa-btn dark" disabled>Clear selection</button>
-      </div>
-      <div id="status"></div>
-      <div class="table-wrap">
-        <table><thead><tr>
-          <th class="select-cell"><input id="selectAll" class="select-all" type="checkbox" title="Select all visible"></th><th>Type</th><th>Name / Company</th><th>Mobile</th><th>Area / Location</th><th>Budget / Price</th><th>Requirement / Property</th><th>Status</th><th>Updated</th><th>Action</th>
-        </tr></thead><tbody id="rows"></tbody></table>
-        <div id="empty" class="empty hidden">No records found.</div>
-      </div>
-    </section>
-
-    <section id="submissionsPanel" class="panel submission-panel">
-      <div class="panel-head">
-        <div><h2>Public Submissions</h2><div class="muted">Website se aayi buyer/seller entries. Approval ke baad hi public website par show hongi.</div></div>
-        <div class="tools"><select id="submissionStatusFilter" class="filter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select><button id="refreshSubmissions" class="btn light">↻ Refresh</button></div>
-      </div>
-      <div id="submissionStatus"></div>
-      <div id="submissionGrid" class="submission-grid"></div>
-      <div id="submissionEmpty" class="empty hidden">No public submissions found.</div>
-    </section>
-
-    <section id="matchingPanel" class="panel module-panel">
-      <div class="panel-head"><div><h2>🎯 Customer ↔ Property Matching</h2><div class="muted">Buyer requirements ko seller properties ke saath area, property type aur budget ke basis par match karein.</div></div></div>
-      <div class="match-grid" style="margin-top:15px">
-        <div class="match-box"><div class="mini-label">Customer / Buyer</div><select id="matchCustomer" class="filter" style="width:100%;margin-top:7px"><option value="">Select customer</option></select><div id="matchCustomerInfo" class="module-note" style="margin-top:10px">Customer select karne ke baad matching properties dikhengi.</div></div>
-        <div class="match-box"><div class="mini-label">Match settings</div><div class="module-note" style="margin-top:7px">Area = 40 points • Property type = 30 points • Budget overlap = 30 points</div><button id="findMatchesBtn" class="btn gold" style="margin-top:10px">🔎 Find Matches</button></div>
-      </div>
-      <div id="matchStatus"></div><div id="matchResults" class="module-list"></div>
-      <div class="panel-head" style="margin-top:22px"><div><h3 style="margin:0">Saved Matches</h3><div class="muted">Important customer-property pairs ko yahan save kar sakte hain.</div></div></div>
-      <div id="savedMatches" class="module-list"></div>
-    </section>
-
-    <section id="followupsPanel" class="panel module-panel">
-      <div class="panel-head"><div><h2>📅 Follow-up Reminders</h2><div class="muted">CRM records mein next follow-up date set karein. Overdue aur aaj ke follow-ups sabse upar dikhte hain.</div></div><button id="refreshFollowups" class="btn light">↻ Refresh</button></div>
-      <div class="module-grid">
-        <div class="module-card"><div class="mini-label">Overdue</div><div id="overdueCount" class="big">0</div></div>
-        <div class="module-card"><div class="mini-label">Due Today</div><div id="todayCount" class="big">0</div></div>
-        <div class="module-card"><div class="mini-label">Upcoming</div><div id="upcomingCount" class="big">0</div></div>
-      </div>
-      <div id="followupList" class="module-list"></div>
-    </section>
-
-    <section id="reviewsPanel" class="panel module-panel">
-      <div class="panel-head"><div><h2>💬 Reviews & Comments</h2><div class="muted">Public reviews pehle yahan aayenge. Approve karne ke baad reviews.html par visible honge.</div></div><select id="reviewStatusFilter" class="filter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select></div>
-      <div id="reviewStatus"></div><div id="reviewGrid" class="module-list"></div><div id="reviewEmpty" class="empty hidden">No reviews found.</div>
-    </section>
-
-    <section id="analyticsPanel" class="panel module-panel">
-      <div class="panel-head"><div><h2>📊 CRM Analytics</h2><div class="muted">Current CRM, public submission, property and follow-up snapshot.</div></div><button id="refreshAnalytics" class="btn light">↻ Refresh</button></div>
-      <div id="analyticsCards" class="module-grid"></div>
-      <div class="match-grid" style="margin-top:15px">
-        <div class="match-box"><h3 style="margin:0">CRM by Type</h3><div id="typeBars" class="bar-wrap"></div></div>
-        <div class="match-box"><h3 style="margin:0">CRM by Status</h3><div id="statusBars" class="bar-wrap"></div></div>
-      </div>
-    </section>
-  </main>
-</div>
-
-<div id="waModal" class="modal hidden">
-  <div class="wa-modal-card">
-    <div class="modal-head"><div><h2 style="margin:0">🟢 WhatsApp follow-up</h2><div class="muted">Selected customers ko personalised message ke saath contact karein.</div></div><button id="waClose" class="close">×</button></div>
-    <div class="notice info">WhatsApp Web message ko pre-fill karega. Browser se message automatically send nahi hota; aap WhatsApp mein <b>Send</b> press karenge.</div>
-    <label style="font-size:11px;font-weight:900;color:#53657a">Message template</label>
-    <textarea id="waMessage" class="wa-template" placeholder="Type your WhatsApp message..."></textarea>
-    <div class="wa-vars"><span class="wa-var">{name}</span><span class="wa-var">{area}</span><span class="wa-var">{propertyType}</span><span class="wa-var">{budget}</span></div>
-    <div class="wa-image-box">
-      <div class="wa-image-title">📷 Add image (optional)</div>
-      <div class="wa-image-help">Property ki photo bhi customer ko bhejni hai? Saved property image use karein ya ek common image choose karein.</div>
-      <div class="wa-image-row">
-        <select id="waImageMode" class="filter"><option value="record">Use selected record's first image</option><option value="common">Use one common image</option><option value="none">No image</option></select>
-        <input id="waImageFile" type="file" accept="image/*" class="filter" style="max-width:250px">
-      </div>
-      <div id="waImagePreview" class="wa-image-preview"></div>
-      <div class="wa-image-actions"><button id="waCopyImageOpen" type="button" class="wa-btn primary">📷 Copy image & open WhatsApp</button><button id="waOpenTextOnly" type="button" class="wa-btn">💬 Text only</button></div>
-      <div id="waImageStatus" class="muted" style="margin-top:7px"></div>
-    </div>
-    <div id="waQueue" class="wa-queue"></div>
-    <div class="wa-next" id="waNextHint"></div>
-    <div class="actions"><button id="waCancel" class="btn light">Cancel</button><button id="waOpenNext" class="wa-btn primary">Open next WhatsApp</button></div>
-  </div>
-</div>
-
-<div id="modal" class="modal hidden">
-  <div class="modal-card">
-    <div class="modal-head"><div><h2 id="modalTitle">New Record</h2><div class="muted">Private CRM record — not public.</div></div><button class="close" id="closeModal">×</button></div>
-    <form id="recordForm">
-      <input type="hidden" id="recordId">
-      <div class="form-grid">
-        <div class="section-label">Basic Information</div>
-        <div class="field"><label>Record Type *</label><select id="type" required><option value="customer">Customer / Buyer</option><option value="seller">Seller / Owner</option><option value="broker">Broker / Agent</option></select></div>
-        <div class="field"><label>Name / Contact Person *</label><input id="name" required></div>
-        <div class="field"><label>Mobile Number *</label><input id="mobile" inputmode="tel" required></div>
-        <div class="field"><label>WhatsApp Number</label><input id="whatsapp" inputmode="tel"></div>
-        <div class="field"><label>Alternate Number</label><input id="altMobile" inputmode="tel"></div>
-        <div class="field"><label>Email</label><input id="email" type="email"></div>
-        <div class="field"><label>Source</label><select id="source"><option>Website</option><option>Facebook</option><option>Instagram</option><option>Google</option><option>Referral</option><option>Walk-in</option><option>Phone</option><option>WhatsApp</option><option>Other</option></select></div>
-        <div class="field"><label>Status</label><select id="statusSelect"><option>New</option><option>Contacted</option><option>Interested</option><option>Site Visit</option><option>Negotiation</option><option>Follow-up</option><option>Closed</option><option>Not Interested</option></select></div>
-
-        <div class="section-label">Location & Property Need</div>
-        <div class="field"><label>Area / Locality *</label><input id="area" placeholder="e.g. Jhotwara, Suraj Nagar" required></div>
-        <div class="field"><label>City</label><input id="city" value="Jaipur"></div>
-        <div class="field"><label>Property Type</label><select id="propertyType"><option>Plot</option><option>House</option><option>Shop</option><option>Land</option><option>Villa</option><option>Commercial</option><option>Flat</option><option>Other</option></select></div>
-        <div class="field"><label>Size / Area</label><input id="size" placeholder="e.g. 50 Gaj, 100 Gaj, 1200 sqft"></div>
-        <div class="field"><label>Budget Min (₹)</label><input id="budgetMin" type="number" min="0"></div>
-        <div class="field"><label>Budget Max / Expected Price (₹)</label><input id="budgetMax" type="number" min="0"></div>
-        <div class="field"><label>Road Width / Facing</label><input id="roadFacing" placeholder="e.g. 30 ft road, East facing"></div>
-        <div class="field"><label>Preferred / Property Location</label><input id="propertyLocation" placeholder="Landmark or Google Maps link"></div>
-        <div class="field full"><label>Requirement / Property Details</label><textarea id="details" placeholder="Customer requirement or seller property details..."></textarea></div>
-
-        <div class="section-label">Seller / Broker Details</div>
-        <div class="field"><label>Company / Agency</label><input id="company" placeholder="Optional"></div>
-        <div class="field"><label>Areas Served</label><input id="areasServed" placeholder="e.g. Jhotwara, Vaishali Nagar"></div>
-        <div class="field"><label>RERA / Registration No. (if applicable)</label><input id="registrationNo"></div>
-        <div class="field"><label>Exact Address (PRIVATE)</label><input id="exactAddress" placeholder="Never shown publicly"></div>
-
-        <div class="section-label">Photos / Documents</div>
-        <div class="field full">
-          <div class="photo-box">
-            <label style="font-weight:850;font-size:11px">Upload images (optional)</label>
-            <input id="photos" type="file" accept="image/*" multiple style="display:block;margin-top:8px">
-            <div class="muted">Useful for seller/property records. Images are stored privately in Firebase Storage.</div>
-            <div id="preview" class="preview"></div>
-          </div>
-        </div>
-
-        <div class="section-label">Internal Notes</div>
-        <div class="field full"><label>Private Notes / Follow-up Notes</label><textarea id="notes" placeholder="Anything you need to remember later..."></textarea></div>
-
-        <div class="section-label">Follow-up</div>
-        <div class="field"><label>Next Follow-up Date</label><input id="followUpDate" type="date"></div>
-        <div class="field"><label>Follow-up Reminder</label><input id="followUpNote" placeholder="e.g. Call about Jhotwara plot"></div>
-
-        <div class="section-label">Website Visibility</div>
-        <div class="field full">
-          <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
-            <input id="publicVisible" type="checkbox" style="width:18px;height:18px">
-            <span>Show this requirement on the public website</span>
-          </label>
-          <div class="muted">Only the selected public details are published. Mobile, WhatsApp, email, exact address and private notes are never published.</div>
-        </div>
-        <div class="field full"><label>Public Display Name (optional)</label><input id="publicDisplayName" placeholder="e.g. Hasin, Mr. A, Buyer from Jhotwara"></div>
-      </div>
-      <div id="formMsg"></div>
-      <div class="actions"><button type="button" id="cancelBtn" class="btn light">Cancel</button><button type="submit" id="saveBtn" class="btn gold">Save Record</button></div>
-    </form>
-  </div>
-</div>
-
+<header class="top"><a class="brand" href="index.html"><i>B</i>Business<span>OS</span></a><div class="userbox hidden" id="userbox"><div><b id="userName">Admin</b><small id="userEmail"></small></div><button id="logoutBtn">Sign out</button></div></header>
+<section class="login" id="loginView"><div class="login-card"><div class="lock">🔐</div><h1>Private Admin</h1><p>Your Business OS data is protected. Sign in with the authorized Google account to access customers, prospects, follow-ups, imports and analytics.</p><button class="google" id="googleBtn">Continue with Google</button><div class="login-msg" id="loginMsg"></div></div></section>
+<section class="app hidden" id="appView">
+<aside class="side"><div class="side-title">BUSINESS OS</div><a class="active" href="admin.html">▦ <span>Admin Overview</span></a><a href="#contacts">♙ <span>All Contacts</span></a><a href="#analytics">▥ <span>Analytics</span></a><a href="customers.html">◎ <span>Customer Workspace</span></a><a href="business-finder.html">⌕ <span>Find Businesses</span></a><a href="whatsapp.html">◉ <span>WhatsApp</span></a><div class="bottom"><b>Private workspace</b><p>Only authorized Google accounts can open this panel.</p></div></aside>
+<main>
+<div class="hero"><div><div class="eyebrow">BUSINESS OS · PRIVATE CONTROL CENTER</div><h1>Admin Overview</h1><p>Customers, prospects, follow-ups aur business growth — ek clean control room.</p></div><div class="hero-actions"><button onclick="exportXlsx()">↓ Export Excel</button><button class="green" onclick="document.getElementById('file').click()">↑ Import Excel</button><button class="purple" onclick="openAdd()">＋ Add Contact</button><input id="file" type="file" accept=".xlsx,.xls,.csv" hidden></div></div>
+<section class="stats"><div class="stat"><small>All Contacts</small><strong id="sAll">0</strong><em>Live from Firestore</em></div><div class="stat real"><small>🏠 Real Estate</small><strong id="sReal">0</strong><em>Business segment</em></div><div class="stat"><small>📚 Education</small><strong id="sEdu">0</strong><em>Business segment</em></div><div class="stat hot"><small>🔥 Interested / Hot</small><strong id="sHot">0</strong><em>Needs attention</em></div><div class="stat won"><small>🏆 Won Deals</small><strong id="sWon">0</strong><em>Converted</em></div></section>
+<div class="grid2" id="analytics"><section class="card"><div class="card-head"><h3>Lead Movement</h3><span>Current database</span></div><div class="chart-wrap"><canvas id="pipelineChart"></canvas></div></section><section class="card"><div class="card-head"><h3>Lead Sources</h3><span>Where contacts came from</span></div><div class="source-list" id="sourceList"></div></section></div>
+<section class="filter-card" id="contacts"><div class="filter-top"><input id="q" placeholder="Search name, mobile, company..." oninput="render()"><select id="type" onchange="render()"><option value="">All Business Types</option><option>Real Estate</option><option>Education</option><option>Automobile</option><option>Consultancy</option><option>Solar</option><option>Healthcare</option><option>Retail</option><option>IT / Software</option><option>Finance / Insurance</option><option>Services</option><option>E-commerce</option><option>Other</option></select><select id="city" onchange="render()"><option value="">All Cities</option><option>Jaipur</option><option>Delhi</option><option>Mumbai</option><option>Ahmedabad</option><option>Other</option></select><select id="area" onchange="render()"><option value="">All Areas</option><option>Jhotwara</option><option>Mansarovar</option><option>Vaishali Nagar</option><option>Malviya Nagar</option><option>Murlipura</option><option>Other</option></select><select id="status" onchange="render()"><option value="">All Statuses</option><option>New</option><option>Contacted</option><option>Interested</option><option>Follow-up</option><option>Demo</option><option>Trial</option><option>Won</option><option>Lost</option></select><select id="source" onchange="render()"><option value="">All Sources</option><option>Google Maps</option><option>Website</option><option>WhatsApp</option><option>Facebook</option><option>Instagram</option><option>Referral</option><option>Walk-in</option><option>Excel Import</option><option>Manual Entry</option></select><select id="date" onchange="render()"><option value="">Any Date</option><option>Today</option><option>This Week</option><option>This Month</option></select><button class="reset" onclick="resetFilters()">Reset</button></div><div class="filter-info"><span><b id="showing">0</b> contacts matching filters</span><span>Filter → select → contact → follow-up → deal</span></div><div class="bulk" id="bulk"><span><b id="selCount">0</b> selected</span><button onclick="bulkWhatsApp()">💬 WhatsApp selected</button></div><div class="table"><div class="th"><div>✓</div><div>Business / Contact</div><div>Business Type</div><div>Location</div><div>Source</div><div>Status</div><div>Last / Next</div><div>Action</div></div><div id="rows"></div></div></section>
+</main></section>
+<div class="drawer-bg" id="drawerBg"><aside class="drawer"><button class="close" onclick="closeDrawer()">×</button><div class="eyebrow">NEW CONTACT</div><h2>Add business contact</h2><p style="color:#7b8697;font-size:10px">Add a customer, prospect or business manually.</p><form id="addForm"><div class="form-grid"><label>Business / Name<input id="fBusiness" required placeholder="Sharma Properties"></label><label>Contact Person<input id="fContact" placeholder="Rahul Sharma"></label><label>Mobile<input id="fPhone" placeholder="9876543210"></label><label>Business Type<select id="fType"><option>Real Estate</option><option>Education</option><option>Automobile</option><option>Consultancy</option><option>Solar</option><option>Healthcare</option><option>Retail</option><option>IT / Software</option><option>Finance / Insurance</option><option>Services</option><option>E-commerce</option><option>Other</option></select></label><label>City<input id="fCity" value="Jaipur"></label><label>Area<input id="fArea" placeholder="Jhotwara"></label><label>Status<select id="fStatus"><option>New</option><option>Contacted</option><option>Interested</option><option>Follow-up</option><option>Demo</option><option>Trial</option><option>Won</option><option>Lost</option></select></label><label>Source<select id="fSource"><option>Manual Entry</option><option>Google Maps</option><option>Website</option><option>WhatsApp</option><option>Facebook</option><option>Instagram</option><option>Referral</option><option>Walk-in</option><option>Excel Import</option></select></label><label class="full">Important Note<textarea id="fNote" placeholder="What should you remember about this contact?"></textarea></label></div><button class="save-btn">Save Contact</button><div id="formMsg" style="font-size:9px;margin-top:9px"></div></form></aside></div>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-storage.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
-  authDomain: "jaipur-property-consultant.firebaseapp.com",
-  projectId: "jaipur-property-consultant",
-  storageBucket: "jaipur-property-consultant.firebasestorage.app",
-  messagingSenderId: "502971407075",
-  appId: "1:502971407075:web:ee4dabc90db9f592ebc3d6",
-  measurementId: "G-0DW0NBETML"
-};
-
-// IMPORTANT: Replace this with the Gmail you will use as the private admin account.
-// Keep the same email in your Firestore/Storage Security Rules.
-const ADMIN_EMAILS = [
-  "saif.anwar1618@gmail.com"
-];
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-const provider = new GoogleAuthProvider();
-
-const $ = id => document.getElementById(id);
-let records = [];
-let currentFilter = "all";
-let unsubscribe = null;
-let submissionsUnsubscribe = null;
-let submissions = [];
-let editingImages = [];
-let filterOptionsReady = false;
-let currentAdminView = "crm";
-let reviews=[]; let reviewsUnsubscribe=null; let matches=[]; let matchesUnsubscribe=null;
-
-function isAdmin(user){
-  return user?.email && ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(user.email.toLowerCase());
-}
-function showStatus(msg, kind="info"){
-  $("status").innerHTML = msg ? `<div class="notice ${kind}">${msg}</div>` : "";
-}
-function formatMoney(n){
-  if(n===null || n===undefined || n==="") return "—";
-  const x = Number(n); if(!Number.isFinite(x)) return n;
-  return "₹" + x.toLocaleString("en-IN");
-}
-function escapeHtml(s){
-  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
-function fmtDate(ts){
-  try{ return ts?.toDate ? ts.toDate().toLocaleDateString("en-IN") : (ts ? new Date(ts).toLocaleDateString("en-IN") : "—"); }catch{return "—"}
-}
-
-$("googleBtn").onclick = async ()=>{
-  $("loginMsg").textContent = "Opening Google sign-in...";
-  try{ await signInWithPopup(auth, provider); }
-  catch(e){ $("loginMsg").className="notice error"; $("loginMsg").textContent = e.message || "Google sign-in failed."; }
-};
-$("logoutBtn").onclick = ()=>signOut(auth);
-onAuthStateChanged(auth, user=>{
-  if(!user){ $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden"); if(unsubscribe) unsubscribe(); if(submissionsUnsubscribe) submissionsUnsubscribe(); return; }
-  if(!isAdmin(user)){
-    $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden");
-    $("loginMsg").className="notice error";
-    $("loginMsg").textContent = `Access denied for ${user.email}. Add this Gmail to ADMIN_EMAILS in admin.html and your Firestore/Storage rules.`;
-    signOut(auth); return;
-  }
-  $("loginView").classList.add("hidden"); $("appView").classList.remove("hidden"); $("userEmail").textContent=user.email;
-  loadRecords();
-  loadPublicSubmissions();
-  loadReviews();
-  loadMatches();
-});
-
-function loadRecords(){
-  const q = query(collection(db,"crmContacts"), orderBy("updatedAt","desc"));
-  unsubscribe = onSnapshot(q, snap=>{
-    records = snap.docs.map(d=>({id:d.id,...d.data()}));
-    refreshFilterOptions();
-    render();
-  }, err=>showStatus("Could not read CRM: "+escapeHtml(err.message),"error"));
-}
-
-
-function loadPublicSubmissions(){
-  const q=query(collection(db,"publicSubmissions"),orderBy("submittedAt","desc"));
-  if(submissionsUnsubscribe) submissionsUnsubscribe();
-  submissionsUnsubscribe=onSnapshot(q,snap=>{
-    submissions=snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderSubmissions();
-  },err=>{ $("submissionStatus").innerHTML=`<div class="notice error">Could not read public submissions: ${escapeHtml(err.message)}</div>`; });
-}
-function loadReviews(){
-  const q=query(collection(db,"publicReviews"),orderBy("submittedAt","desc"));
-  if(reviewsUnsubscribe) reviewsUnsubscribe();
-  reviewsUnsubscribe=onSnapshot(q,snap=>{reviews=snap.docs.map(d=>({id:d.id,...d.data()}));renderReviews();renderAnalytics();},err=>{$("reviewStatus").innerHTML=`<div class="notice error">Could not read reviews: ${escapeHtml(err.message)}</div>`;});
-}
-function renderReviews(){
-  const filter=$("reviewStatusFilter").value||"pending";
-  const list=reviews.filter(r=>filter==="all"||String(r.status||"pending")==filter);
-  $("reviewEmpty").classList.toggle("hidden",list.length!==0);
-  $("reviewGrid").innerHTML=list.map(r=>`<article class="review-card"><div class="row-head"><strong>${escapeHtml(r.name||"Visitor")}</strong><span class="status-pill ${escapeHtml(r.status||"pending")}">${escapeHtml(String(r.status||"pending").toUpperCase())}</span></div><div class="review-stars">${"★".repeat(Math.max(1,Math.min(5,Number(r.rating)||5)))}${"☆".repeat(5-Math.max(1,Math.min(5,Number(r.rating)||5)))}</div><div style="font-size:13px;margin-top:7px">${escapeHtml(r.comment||"")}</div><div class="module-note" style="margin-top:6px">${escapeHtml(r.area||"")} ${r.propertyType?"• "+escapeHtml(r.propertyType):""}</div><div class="module-actions">${r.status==="pending"?`<button class="btn green" data-approve-review="${r.id}">✓ Approve</button><button class="btn danger" data-reject-review="${r.id}">✕ Reject</button>`:`<button class="btn light" data-delete-review="${r.id}">Delete</button>`}</div></article>`).join("");
-}
-async function loadMatches(){
-  const q=query(collection(db,"crmMatches"),orderBy("createdAt","desc"));
-  if(matchesUnsubscribe) matchesUnsubscribe();
-  matchesUnsubscribe=onSnapshot(q,snap=>{matches=snap.docs.map(d=>({id:d.id,...d.data()}));renderSavedMatches();},err=>console.warn("Matches unavailable",err));
-}
-function renderSavedMatches(){
-  const html=matches.slice(0,30).map(m=>{const c=records.find(r=>r.id===m.customerId),p=records.find(r=>r.id===m.sellerId);return `<div class="module-row"><div class="row-head"><strong>${escapeHtml(c?.name||m.customerName||"Customer")}</strong><span class="score">${Number(m.score||0)}% match</span></div><div class="module-note">🏠 ${escapeHtml(p?.name||m.sellerName||"Property")} • ${escapeHtml(p?.area||m.area||"")} • ${escapeHtml(p?.propertyType||m.propertyType||"")}</div><div class="module-actions"><button class="btn danger" data-delete-match="${m.id}">Delete Match</button></div></div>`}).join("");
-  $("savedMatches").innerHTML=html||'<div class="empty">No saved matches yet.</div>';
-}
-function renderSubmissions(){
-  const filter=$("submissionStatusFilter").value||"pending";
-  const list=submissions.filter(s=>filter==="all"||String(s.status||"pending")==filter);
-  $("submissionEmpty").classList.toggle("hidden",list.length!==0);
-  $("submissionGrid").innerHTML=list.map(s=>{
-    const isSeller=s.type==="seller";
-    const status=String(s.status||"pending");
-    const photo=s.imageDataUrl?`<img src="${escapeHtml(s.imageDataUrl)}" alt="Submission photo">`:"";
-    return `<article class="submission-card ${status}">${photo}
-      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${escapeHtml(s.name||"Unnamed")}</strong><span class="status-pill ${status}">${status.toUpperCase()}</span></div>
-      <div class="submission-meta" style="margin-top:8px"><strong>${isSeller?"Seller / Owner":"Buyer / Customer"}</strong><br>📞 ${escapeHtml(s.mobile||"—")}<br>📍 ${escapeHtml(s.area||"—")}, ${escapeHtml(s.city||"Jaipur")}<br>🏠 ${escapeHtml(s.propertyType||"—")} ${s.size?"• "+escapeHtml(s.size):""}<br>💰 ${formatMoney(s.budgetMin)}${s.budgetMax?" – "+formatMoney(s.budgetMax):""}<br>📝 ${escapeHtml(s.details||"—")}</div>
-      <div class="submission-actions">${status==="pending"?`<button class="btn green" data-approve-sub="${s.id}">✓ Approve & Publish</button><button class="btn danger" data-reject-sub="${s.id}">✕ Reject</button>`:`<button class="btn light" data-delete-sub="${s.id}">Delete Submission</button>`}</div>
-    </article>`;
-  }).join("");
-}
-async function approveSubmission(id){
-  const s=submissions.find(x=>x.id===id); if(!s)return;
-  if(!confirm("Approve this submission and publish the selected details on the public website?"))return;
-  try{
-    const crmData={type:s.type||"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:s.type==="seller"?"Property Available":"Buyer Requirement",images:s.imageDataUrl?[s.imageDataUrl]:[],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
-    const created=await addDoc(collection(db,"crmContacts"),crmData);
-    await setDoc(doc(db,"publicRequirements",created.id),{id:created.id,type:crmData.type,displayName:crmData.publicDisplayName,area:crmData.area,city:crmData.city,propertyType:crmData.propertyType,size:crmData.size,budgetMin:crmData.budgetMin,budgetMax:crmData.budgetMax,details:crmData.details,imageDataUrl:s.imageDataUrl||"",status:"Approved",updatedAt:serverTimestamp()});
-    await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:created.id},{merge:true});
-    $("submissionStatus").innerHTML='<div class="notice ok">Submission approved and published.</div>';
-  }catch(err){$("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
-}
-async function rejectSubmission(id){
-  if(!confirm("Reject this public submission? It will not be published."))return;
-  try{await setDoc(doc(db,"publicSubmissions",id),{status:"rejected",rejectedAt:serverTimestamp()},{merge:true});$("submissionStatus").innerHTML='<div class="notice ok">Submission rejected.</div>';}catch(err){$("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
-}
-$("submissionStatusFilter").onchange=renderSubmissions;
-$("refreshSubmissions").onclick=loadPublicSubmissions;
-$("submissionGrid").onclick=e=>{
-  const a=e.target.closest("[data-approve-sub]"),r=e.target.closest("[data-reject-sub]"),d=e.target.closest("[data-delete-sub]");
-  if(a) approveSubmission(a.dataset.approveSub); if(r) rejectSubmission(r.dataset.rejectSub); if(d && confirm("Delete this submission permanently?")) deleteDoc(doc(db,"publicSubmissions",d.dataset.deleteSub));
-};
-
-function normalizeText(v){ return String(v ?? "").trim().toLowerCase(); }
-
-function refreshFilterOptions(){
-  const area=$("filterArea"), prop=$("filterProperty"), status=$("filterStatus");
-  const oldArea=area.value, oldProp=prop.value, oldStatus=status.value;
-  const areas=[...new Set(records.map(r=>String(r.area||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  const props=[...new Set(records.map(r=>String(r.propertyType||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  const statuses=[...new Set(records.map(r=>String(r.status||"New").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  area.innerHTML='<option value="">All Areas / Locations</option>'+areas.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  prop.innerHTML='<option value="">All Property Types</option>'+props.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  status.innerHTML='<option value="">All Statuses</option>'+statuses.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  if(areas.includes(oldArea)) area.value=oldArea;
-  if(props.includes(oldProp)) prop.value=oldProp;
-  if(statuses.includes(oldStatus)) status.value=oldStatus;
-}
-
-function recordMatchesFilters(r){
-  const term=$("search").value.trim().toLowerCase();
-  const area=normalizeText($("filterArea").value);
-  const prop=normalizeText($("filterProperty").value);
-  const status=normalizeText($("filterStatus").value);
-  const minBudget=Number($("filterMinBudget").value||0);
-  const maxBudget=Number($("filterMaxBudget").value||0);
-  const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress,r.propertyLocation].join(" ").toLowerCase();
-
-  const typeOk=currentFilter==="all" || r.type===currentFilter;
-  const termOk=!term || hay.includes(term);
-  const areaOk=!area || normalizeText(r.area)===area;
-  const propOk=!prop || normalizeText(r.propertyType)===prop;
-  const statusOk=!status || normalizeText(r.status||"New")===status;
-
-  const rMin=Number(r.budgetMin||0), rMax=Number(r.budgetMax||r.budgetMin||0);
-  const minOk=!minBudget || rMax>=minBudget;
-  const maxOk=!maxBudget || (rMin<=maxBudget || rMax<=maxBudget);
-
-  return typeOk && termOk && areaOk && propOk && statusOk && minOk && maxOk;
-}
-
-const selectedIds=new Set();
-let waQueueIds=[];
-let waQueueIndex=0;
-const defaultWaMessage=`Namaste {name} ji, aapne {area} me {propertyType} ke liye enquiry ki thi. Aapki requirement ke hisaab se suitable options available hain. Agar aap interested hain to bataiye, main details/photos share kar deta hoon. – Jaipur Property Consultant`;
-function waNumber(r){
-  let n=String(r?.whatsapp||r?.mobile||"").replace(/\D/g,"");
-  if(!n) return "";
-  if(n.length===10) n="91"+n;
-  if(n.startsWith(0) && n.length===11) n="91"+n.slice(1);
-  return n;
-}
-function waText(r){
-  const budget=r?.budgetMin?formatMoney(r.budgetMin)+(r?.budgetMax?" – "+formatMoney(r.budgetMax):""):"";
-  return ($('waMessage')?.value||defaultWaMessage).replaceAll("{name}",r?.name||"ji").replaceAll("{area}",r?.area||"Jaipur").replaceAll("{propertyType}",r?.propertyType||"property").replaceAll("{budget}",budget);
-}
-function updateWaToolbar(){
-  const count=selectedIds.size;
-  $("waToolbar").classList.toggle("show",count>0);
-  $("waSelectedCount").textContent=`${count} selected`;
-  $("waMessageBtn").disabled=count===0; $("waQueueBtn").disabled=count===0; $("waClearBtn").disabled=count===0;
-  const visible=[...document.querySelectorAll(".row-check")].map(x=>x.dataset.selectId);
-  const allVisible=visible.length>0 && visible.every(id=>selectedIds.has(id));
-  $("selectAll").checked=allVisible;
-  $("selectAll").indeterminate=!allVisible && visible.some(id=>selectedIds.has(id));
-}
-function openWhatsApp(r){ return openWaTextFor(r); }
-function openWaComposer(ids){
-  waQueueIds=ids.filter(id=>records.some(r=>r.id===id)); waQueueIndex=0;
-  $("waMessage").value=defaultWaMessage;
-  renderWaQueue(); $("waModal").classList.remove("hidden");
-}
-function renderWaQueue(){
-  const valid=waQueueIds.map(id=>records.find(r=>r.id===id)).filter(Boolean);
-  $("waQueue").innerHTML=valid.length?valid.map((r,i)=>{const done=i<waQueueIndex;return `<div class="wa-queue-row ${done?"done":""}"><div class="wa-queue-meta"><strong>${escapeHtml(r.name||"Customer")}</strong><span>${escapeHtml(r.mobile||r.whatsapp||"No number")} • ${escapeHtml(r.area||"")} • ${escapeHtml(r.propertyType||"Property")}</span></div><span>${done?"✓ Opened":i===waQueueIndex?"Next":"Waiting"}</span></div>`}).join(""):"<div class='empty'>No contacts selected.</div>";
-  const next=valid[waQueueIndex];
-  $("waNextHint").textContent=next?`Next: ${next.name||"Customer"} • ${next.mobile||next.whatsapp||"No number"}`:"All selected contacts have been opened.";
-  $("waOpenNext").disabled=!next; $("waOpenNext").textContent=next?`Open ${waQueueIndex+1} / ${valid.length}`:"Done";
-  renderWaImagePreview();
-}
-
-let waCommonImageDataUrl="";
-let waCommonImageName="";
-function currentWaRecord(){
-  return records.find(x=>x.id===waQueueIds[waQueueIndex]) || records.find(x=>x.id===waQueueIds[0]) || null;
-}
-function getWaImageUrl(r){
-  const mode=$("waImageMode")?.value||"record";
-  if(mode==="none") return "";
-  if(mode==="common") return waCommonImageDataUrl||"";
-  return Array.isArray(r?.images) && r.images[0] ? r.images[0] : "";
-}
-function renderWaImagePreview(){
-  const r=currentWaRecord(); const mode=$("waImageMode")?.value||"record";
-  const url=getWaImageUrl(r);
-  $("waImagePreview").innerHTML=url?`<img src="${escapeHtml(url)}" alt="WhatsApp image preview">`:`<div class="muted">No image selected.</div>`;
-  $("waImageStatus").textContent=mode==="record" && r && !url ? "This record has no saved image. Choose a common image above." : "";
-}
-async function copyImageToClipboard(url){
-  if(!url) throw new Error("No image selected.");
-  const res=await fetch(url,{mode:"cors"});
-  if(!res.ok) throw new Error("Image could not be loaded.");
-  const blob=await res.blob();
-  if(!window.ClipboardItem || !navigator.clipboard?.write) throw new Error("Your browser does not allow image clipboard access here.");
-  const type=blob.type.startsWith("image/")?blob.type:"image/png";
-  await navigator.clipboard.write([new ClipboardItem({[type]:blob})]);
-}
-function openWaTextFor(r){
-  const n=waNumber(r); if(!n){showStatus("This record has no mobile/WhatsApp number.","error");return false;}
-  const url=`https://wa.me/${n}?text=${encodeURIComponent(waText(r))}`;
-  window.open(url,"_blank","noopener"); return true;
-}
-async function openWhatsAppWithImage(r){
-  const n=waNumber(r); if(!n){showStatus("This record has no mobile/WhatsApp number.","error");return false;}
-  const url=getWaImageUrl(r);
-  if(!url){openWaTextFor(r); return true;}
-  try{
-    await copyImageToClipboard(url);
-    const opened=openWaTextFor(r);
-    $("waImageStatus").textContent=opened?"Image copied. WhatsApp open hoga — message box par Ctrl+V karke image paste karein, then Send.":"Image copied.";
-    return opened;
-  }catch(err){
-    const opened=openWaTextFor(r);
-    $("waImageStatus").textContent=opened?"Image auto-copy nahi hui. Image ko download karke WhatsApp mein attach karein.":err.message;
-    return opened;
-  }
-}
-
-
-function followUpState(r){
-  const date=String(r.followUpDate||"");
-  if(!date) return {key:r.followUpCompleted?"done":"none",label:r.followUpCompleted?"DONE":"No follow-up"};
-  const today=new Date(); today.setHours(0,0,0,0);
-  const d=new Date(date+"T00:00:00");
-  if(d<today) return {key:"overdue",label:"OVERDUE"};
-  if(d.getTime()===today.getTime()) return {key:"today",label:"TODAY"};
-  return {key:"upcoming",label:"UPCOMING"};
-}
-function followUpCell(r){
-  const s=followUpState(r);
-  if(s.key==="none") return `<div class="followup-cell"><span class="fu-badge fu-none">— No follow-up</span><button class="fu-action" data-set-follow="${escapeHtml(r.id)}">＋ Set follow-up</button></div>`;
-  if(s.key==="done") return `<div class="followup-cell"><span class="fu-badge fu-done">✓ DONE</span><div class="muted">Last: ${escapeHtml(r.lastFollowUpDate||"")}</div><button class="fu-action" data-set-follow="${escapeHtml(r.id)}">＋ Next follow-up</button></div>`;
-  return `<div class="followup-cell"><label><input class="fu-check" type="checkbox" data-done-inline="${escapeHtml(r.id)}"> <span class="fu-badge fu-${s.key}">${s.key==="overdue"?"🔴":s.key==="today"?"🟡":"🔵"} ${s.label}</span></label><div class="muted">📅 ${escapeHtml(r.followUpDate)}</div><div class="muted">${escapeHtml(r.followUpNote||"")}</div></div>`;
-}
-
-function render(){
-  const filtered=records.filter(recordMatchesFilters);
-  $("allCount").textContent=records.length;
-  $("customerCount").textContent=records.filter(r=>r.type==="customer").length;
-  $("sellerCount").textContent=records.filter(r=>r.type==="seller").length;
-  $("brokerCount").textContent=records.filter(r=>r.type==="broker").length;
-  $("listTitle").textContent=currentFilter==="all"?"All Records":currentFilter==="customer"?"Customers":currentFilter==="seller"?"Sellers":"Brokers / Agents";
-  $("filterCount").textContent=`Showing ${filtered.length} of ${records.length} records`;
-  // Premium command-center widgets
-  const statusCount={}; records.forEach(r=>{const k=r.status||"New";statusCount[k]=(statusCount[k]||0)+1;});
-  const hot=records.filter(r=>["Interested","Site Visit","Negotiation"].includes(r.status)).slice(0,4);
-  $("hotLeads").innerHTML=hot.length?hot.map(r=>`<div class="lead-mini"><div><div class="lead-name">${escapeHtml(r.name||"Customer")}</div><div class="lead-sub">${escapeHtml(r.area||"Jaipur")} • ${escapeHtml(r.propertyType||"Property")} • ${formatMoney(r.budgetMin)}${r.budgetMax?" – "+formatMoney(r.budgetMax):""}</div></div><div class="mini-actions"><button class="mini-btn call" data-focus-call="${escapeHtml(r.mobile||"")}">📞 Call</button><button class="mini-btn" data-focus-wa="${r.id}">🟢 WA</button><button class="mini-btn" data-focus-edit="${r.id}">View</button></div></div>`).join(""):'<div class="empty" style="padding:25px 5px">No hot leads yet. Add customer status as Interested, Site Visit or Negotiation.</div>';
-  const todayIso=new Date().toISOString().slice(0,10);
-  const due=records.filter(r=>r.followUpDate===todayIso).slice(0,4);
-  $("todayFocus").innerHTML=due.length?due.map(r=>`<div class="lead-mini"><div><div class="lead-name">${escapeHtml(r.name||"Customer")}</div><div class="lead-sub">${escapeHtml(r.followUpNote||r.area||"Follow-up due today")}</div></div><div class="mini-actions"><button class="mini-btn call" data-focus-call="${escapeHtml(r.mobile||"")}">📞</button><button class="mini-btn" data-focus-wa="${r.id}">🟢</button><button class="mini-btn" data-focus-edit="${r.id}">✓</button></div></div>`).join(""):'<div class="empty" style="padding:25px 5px">No follow-ups due today 🎉</div>';
-  const stages=["New","Contacted","Interested","Site Visit","Negotiation","Closed"];
-  $("pipeline").innerHTML=stages.map((x,i)=>`<div class="pipe ${x==="Interested"||x==="Site Visit"?"hot":""} ${x==="Closed"?"done":""}"><b>${statusCount[x]||0}</b><span>${x}</span></div>`).join("");
-  $("rows").innerHTML=filtered.map(r=>`
-    <tr>
-      <td class="select-cell"><input class="row-check" type="checkbox" data-select-id="${escapeHtml(r.id)}" ${selectedIds.has(r.id)?"checked":""}></td>
-      <td><span class="badge ${escapeHtml(r.type)}">${r.type==="customer"?"Customer":r.type==="seller"?"Seller":"Broker"}</span></td>
-      <td><strong>${escapeHtml(r.name)}</strong>${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
-      <td>${escapeHtml(r.mobile||"—")}</td>
-      <td>${escapeHtml(r.area||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
-      <td>${formatMoney(r.budgetMin)}${r.budgetMax?" – "+formatMoney(r.budgetMax):""}</td>
-      <td>${escapeHtml(r.propertyType||"—")} ${r.size?"• "+escapeHtml(r.size):""}</td>
-      <td><span class="badge">${escapeHtml(r.status||"New")}</span>${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}</td>
-      <td>${followUpCell(r)}</td>
-      <td>${fmtDate(r.updatedAt)}</td>
-      <td><button class="wa-inline" data-wa-one="${escapeHtml(r.id)}">🟢 WA</button> <button class="btn light" data-edit="${r.id}">Edit</button> <button class="btn danger" data-delete="${r.id}">Delete</button></td>
-    </tr>`).join("");
-  $("empty").classList.toggle("hidden",filtered.length!==0);
-}
-$("search").oninput=render;
-["filterArea","filterProperty","filterStatus","filterMinBudget","filterMaxBudget"].forEach(id=>$(id).addEventListener("input",render));
-$("resetFilters").onclick=()=>{
-  $("search").value="";
-  $("filterArea").value="";
-  $("filterProperty").value="";
-  $("filterStatus").value="";
-  $("filterMinBudget").value="";
-  $("filterMaxBudget").value="";
-  render();
-};
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active");
-  if(b.dataset.view){ currentFilter="all"; showAdminView(b.dataset.view); }
-  else { currentFilter=b.dataset.type||"all"; showAdminView("crm"); window.scrollTo({top:document.querySelector(".tabs").offsetTop-12,behavior:"smooth"}); }
-}));
-function showAdminView(view){
-  currentAdminView=view;
-  const crmPanel=$("crmPanel");
-  ["submissionsPanel","matchingPanel","followupsPanel","reviewsPanel","analyticsPanel"].forEach(id=>$(id).style.display="none");
-  if(view==="crm"){crmPanel.style.display="block";render();}
-  if(view==="submissions"){ $("submissionsPanel").style.display="block"; renderSubmissions(); }
-  if(view==="matching"){ $("matchingPanel").style.display="block"; populateMatchCustomers(); renderSavedMatches(); }
-  if(view==="followups"){ $("followupsPanel").style.display="block"; renderFollowups(); }
-  if(view==="reviews"){ $("reviewsPanel").style.display="block"; renderReviews(); }
-  if(view==="analytics"){ $("analyticsPanel").style.display="block"; renderAnalytics(); }
-}
-$("rows").onclick=async e=>{
-  const check=e.target.closest("[data-select-id]"), wa=e.target.closest("[data-wa-one]"), edit=e.target.closest("[data-edit]"), del=e.target.closest("[data-delete]");
-  if(check){ if(check.checked) selectedIds.add(check.dataset.selectId); else selectedIds.delete(check.dataset.selectId); updateWaToolbar(); return; }
-  if(wa){ openWaComposer([wa.dataset.waOne]); return; }
-  if(edit) openEdit(edit.dataset.edit);
-  if(del && confirm("Delete this CRM record? This cannot be undone.")){
-    try{await deleteDoc(doc(db,"crmContacts",del.dataset.delete)); await deleteDoc(doc(db,"publicRequirements",del.dataset.delete)).catch(()=>{}); showStatus("Record deleted.","ok")}catch(err){showStatus(err.message,"error")}
-  }
-};
-
-
-document.addEventListener("change",async e=>{
-  const done=e.target.closest("[data-done-inline]");
-  if(!done)return;
-  const id=done.dataset.doneInline, r=records.find(x=>x.id===id);
-  if(!r)return;
-  try{
-    const now=new Date().toISOString().slice(0,10);
-    const history=Array.isArray(r.followUpHistory)?r.followUpHistory:[];
-    history.push({date:r.followUpDate,note:r.followUpNote||"",completedAt:now});
-    await updateDoc(doc(db,"crmContacts",id),{
-      followUpDate:"",followUpNote:"",followUpCompleted:true,
-      lastFollowUpDate:r.followUpDate||now,followUpHistory:history,
-      status:(r.status==="New"?"Contacted":r.status||"Contacted"),updatedAt:serverTimestamp()
-    });
-    showStatus("✓ Follow-up completed. Lead moved to Contacted.","ok");
-  }catch(err){showStatus(err.message,"error");done.checked=false;}
-});
-document.addEventListener("click",e=>{
-  const set=e.target.closest("[data-set-follow]");
-  if(set){openEdit(set.dataset.setFollow); setTimeout(()=>$("followUpDate").focus(),100);}
-});
-
-$("selectAll").onchange=()=>{
-  const visible=[...document.querySelectorAll(".row-check")].map(x=>x.dataset.selectId);
-  visible.forEach(id=>{if($("selectAll").checked) selectedIds.add(id); else selectedIds.delete(id);});
-  render(); updateWaToolbar();
-};
-$("waClearBtn").onclick=()=>{selectedIds.clear();render();updateWaToolbar();};
-$("waMessageBtn").onclick=()=>openWaComposer([...selectedIds]);
-$("waQueueBtn").onclick=()=>openWaComposer([...selectedIds]);
-$("waClose").onclick=()=>$("waModal").classList.add("hidden");
-$("waCancel").onclick=()=>$("waModal").classList.add("hidden");
-$("waModal").addEventListener("click",e=>{if(e.target===$("waModal"))$("waModal").classList.add("hidden")});
-$("waOpenNext").onclick=async()=>{
-  const r=records.find(x=>x.id===waQueueIds[waQueueIndex]);
-  if(!r)return;
-  const useImage=$("waImageMode")?.value!=="none" && (!!getWaImageUrl(r));
-  if(useImage) await openWhatsAppWithImage(r); else openWaTextFor(r);
-  waQueueIndex++; renderWaQueue();
-};
-$("waMessage").oninput=renderWaQueue;
-
-document.addEventListener("click",e=>{
-  const call=e.target.closest("[data-focus-call]"), wa=e.target.closest("[data-focus-wa]"), edit=e.target.closest("[data-focus-edit]");
-  if(call){ const n=String(call.dataset.focusCall||"").replace(/\D/g,""); if(n) window.location.href=`tel:${n}`; return; }
-  if(wa){ openWaComposer([wa.dataset.focusWa]); return; }
-  if(edit){ openEdit(edit.dataset.focusEdit); return; }
-});
-$("waImageMode").onchange=renderWaImagePreview;
-$("waImageFile").onchange=()=>{
-  const f=$("waImageFile").files?.[0];
-  if(!f){waCommonImageDataUrl="";waCommonImageName="";renderWaImagePreview();return;}
-  if(!f.type.startsWith("image/")){showStatus("Please choose an image file.","error");return;}
-  if(f.size>8*1024*1024){showStatus("Image should be below 8 MB.","error");return;}
-  const reader=new FileReader(); reader.onload=()=>{waCommonImageDataUrl=reader.result;waCommonImageName=f.name;$("waImageMode").value="common";renderWaImagePreview();}; reader.readAsDataURL(f);
-};
-$("waCopyImageOpen").onclick=async()=>{
-  const r=currentWaRecord(); if(!r)return; await openWhatsAppWithImage(r);
-};
-$("waOpenTextOnly").onclick=()=>{ const r=currentWaRecord(); if(r) openWaTextFor(r); };
-
-function resetForm(){
-  $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New";
-  $("publicVisible").checked=false; $("publicDisplayName").value=""; $("followUpDate").value=""; $("followUpNote").value="";
-  $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[];
-}
-function openNew(){resetForm();$("modal").classList.remove("hidden")}
-async function openEdit(id){
-  const r=records.find(x=>x.id===id); if(!r)return;
-  resetForm(); $("modalTitle").textContent="Edit CRM Record"; $("recordId").value=id;
-  const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes",followUpDate:"followUpDate",followUpNote:"followUpNote"};
-  Object.entries(map).forEach(([key,id2])=>$(id2).value=r[key]??"");
-  $("publicVisible").checked=!!r.publicVisible;
-  $("publicDisplayName").value=r.publicDisplayName||r.name||"";
-  editingImages=r.images||[];
-  $("preview").innerHTML=editingImages.map(u=>`<img src="${escapeHtml(u)}">`).join("");
-  $("modal").classList.remove("hidden");
-}
-$("newBtn").onclick=openNew; $("closeModal").onclick=()=>$("modal").classList.add("hidden"); $("cancelBtn").onclick=()=>$("modal").classList.add("hidden");
-$("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.add("hidden")});
-
-$("photos").onchange=()=>{
-  const files=[...$("photos").files];
-  $("preview").innerHTML="";
-  files.forEach(f=>{const img=document.createElement("img");img.src=URL.createObjectURL(f);$("preview").appendChild(img)});
-  editingImages=[];
-};
-
-$("recordForm").onsubmit=async e=>{
-  e.preventDefault(); $("saveBtn").disabled=true; $("saveBtn").textContent="Saving...";
-  $("formMsg").innerHTML="";
-  try{
-    const id=$("recordId").value;
-    const data={
-      type:$("type").value,name:$("name").value.trim(),mobile:$("mobile").value.trim(),whatsapp:$("whatsapp").value.trim(),altMobile:$("altMobile").value.trim(),
-      email:$("email").value.trim(),source:$("source").value,status:$("statusSelect").value,area:$("area").value.trim(),city:$("city").value.trim(),
-      propertyType:$("propertyType").value,size:$("size").value.trim(),budgetMin:$("budgetMin").value?Number($("budgetMin").value):null,budgetMax:$("budgetMax").value?Number($("budgetMax").value):null,
-      roadFacing:$("roadFacing").value.trim(),propertyLocation:$("propertyLocation").value.trim(),details:$("details").value.trim(),
-      company:$("company").value.trim(),areasServed:$("areasServed").value.trim(),registrationNo:$("registrationNo").value.trim(),exactAddress:$("exactAddress").value.trim(),
-      notes:$("notes").value.trim(),
-      followUpDate:$("followUpDate").value || "", followUpNote:$("followUpNote").value.trim(), followUpCompleted:false,
-      publicVisible:$("publicVisible").checked,
-      publicDisplayName:$("publicDisplayName").value.trim() || $("name").value.trim(),
-      updatedAt:serverTimestamp()
-    };
-    let imageUrls=editingImages||[];
-    let publicImageUrls=[];
-    const files=[...$("photos").files];
-    if(files.length){
-      imageUrls=[];
-      for(const f of files){
-        if(!f.type.startsWith("image/")) continue;
-        if(f.size>8*1024*1024) throw new Error(`${f.name} is larger than 8 MB.`);
-        const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-        const stamp=Date.now();
-        const path=`crmContacts/${auth.currentUser.uid}/${id||"new"}-${stamp}-${safe}`;
-        const storageRef=ref(storage,path);
-        await uploadBytes(storageRef,f);
-        imageUrls.push(await getDownloadURL(storageRef));
-        if(data.publicVisible && data.type==="seller"){
-          const publicRef=ref(storage,`publicProperties/${id||"new"}-${stamp}-${safe}`);
-          await uploadBytes(publicRef,f);
-          publicImageUrls.push(await getDownloadURL(publicRef));
-        }
-      }
-    }
-    data.images=imageUrls;
-    if(publicImageUrls.length) data.publicImageUrls=publicImageUrls;
-    else if(editingImages.length && data.type==="seller") data.publicImageUrls=records.find(r=>r.id===id)?.publicImageUrls||[];
-    let savedId=id;
-    if(id){
-      await setDoc(doc(db,"crmContacts",id),data,{merge:true});
-    }else{
-      data.createdAt=serverTimestamp();
-      const created=await addDoc(collection(db,"crmContacts"),data);
-      savedId=created.id;
-    }
-
-    // Public website gets only a sanitized copy; private contact details never leave the CRM.
-    const publicRef=doc(db,"publicRequirements",savedId);
-    if(data.publicVisible){
-      await setDoc(publicRef,{
-        id:savedId,
-        type:data.type,
-        displayName:data.publicDisplayName || data.name,
-        area:data.area,
-        city:data.city || "Jaipur",
-        propertyType:data.propertyType || "",
-        size:data.size || "",
-        budgetMin:data.budgetMin ?? null,
-        budgetMax:data.budgetMax ?? null,
-        details:data.details || "",
-        imageDataUrl:(data.type==="seller" && data.publicImageUrls?.length) ? data.publicImageUrls[0] : "",
-        imageUrls:data.type==="seller" ? (data.publicImageUrls||[]) : [],
-        status:data.status || "New",
-        updatedAt:serverTimestamp()
-      });
-    }else{
-      await deleteDoc(publicRef).catch(()=>{});
-    }
-
-    $("modal").classList.add("hidden"); showStatus("Record saved successfully.","ok");
-  }catch(err){$("formMsg").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`}
-  finally{$("saveBtn").disabled=false;$("saveBtn").textContent="Save Record"}
-};
-
-$("importBtn").onclick=()=>$("fileInput").click();
-$("fileInput").onchange=async e=>{
-  const file=e.target.files[0]; if(!file)return;
-  try{
-    const data=await file.arrayBuffer(), wb=XLSX.read(data,{type:"array"});
-    const sheet=wb.Sheets[wb.SheetNames[0]], rows=XLSX.utils.sheet_to_json(sheet,{defval:""});
-    if(!rows.length) throw new Error("No rows found.");
-    if(!confirm(`Import ${rows.length} records into CRM?`)) return;
-    let count=0;
-    for(const row of rows){
-      const normalized={type:String(row.type||row.Type||"customer").toLowerCase(),name:row.name||row.Name||"",mobile:String(row.mobile||row.Mobile||row["Mobile Number"]||""),
-        whatsapp:String(row.whatsapp||row.WhatsApp||""),email:row.email||row.Email||"",area:row.area||row.Area||row.Locality||"",city:row.city||row.City||"Jaipur",
-        propertyType:row.propertyType||row["Property Type"]||"",size:row.size||row.Size||"",budgetMin:row.budgetMin||row["Budget Min"]||null,budgetMax:row.budgetMax||row["Budget Max"]||row.Budget||null,
-        details:row.details||row.Details||row.Requirement||"",company:row.company||row.Company||"",status:row.status||row.Status||"New",notes:row.notes||row.Notes||"",
-        source:row.source||row.Source||"Excel Import",publicVisible:false,publicDisplayName:row.publicDisplayName||row["Public Display Name"]||"",updatedAt:serverTimestamp(),createdAt:serverTimestamp()};
-      if(!["customer","seller","broker"].includes(normalized.type)) normalized.type="customer";
-      if(!normalized.name || !normalized.mobile) continue;
-      await addDoc(collection(db,"crmContacts"),normalized); count++;
-    }
-    showStatus(`${count} records imported successfully. Rows without name/mobile were skipped.`,"ok");
-  }catch(err){showStatus("Import failed: "+escapeHtml(err.message),"error")}
-  e.target.value="";
-};
-
-function populateMatchCustomers(){
-  const sel=$("matchCustomer"), old=sel.value;
-  sel.innerHTML='<option value="">Select customer</option>'+records.filter(r=>r.type==="customer").map(r=>`<option value="${r.id}">${escapeHtml(r.name)} — ${escapeHtml(r.area||"")}</option>`).join("");
-  if(records.some(r=>r.id===old)) sel.value=old;
-  updateMatchCustomerInfo();
-}
-function overlap(aMin,aMax,bMin,bMax){
-  const a1=Number(aMin||0), a2=Number(aMax||aMin||0), b1=Number(bMin||0), b2=Number(bMax||bMin||0);
-  if(!a1&&!a2||!b1&&!b2) return false;
-  return Math.max(a1,b1)<=Math.min(a2||Infinity,b2||Infinity);
-}
-function calculateMatches(customer){
-  const area=(customer.area||"").toLowerCase(); const prop=(customer.propertyType||"").toLowerCase();
-  return records.filter(r=>r.type==="seller" && r.publicVisible!==false).map(p=>{
-    let score=0; const pa=(p.area||"").toLowerCase(); const pp=(p.propertyType||"").toLowerCase();
-    if(area && pa && (pa.includes(area)||area.includes(pa))) score+=40;
-    if(prop && pp && (pp.includes(prop)||prop.includes(pp))) score+=30;
-    if(overlap(customer.budgetMin,customer.budgetMax,p.budgetMin,p.budgetMax)) score+=30;
-    return {p,score};
-  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,20);
-}
-function updateMatchCustomerInfo(){
-  const c=records.find(r=>r.id===$("matchCustomer").value);
-  $("matchCustomerInfo").textContent=c?`${c.area||""} • ${c.propertyType||"Property"} • ${formatMoney(c.budgetMin)}${c.budgetMax?" – "+formatMoney(c.budgetMax):""}`:"Customer select karne ke baad matching properties dikhengi.";
-}
-function renderMatchResults(){
-  const c=records.find(r=>r.id===$("matchCustomer").value);
-  if(!c){$("matchResults").innerHTML="";return;}
-  const list=calculateMatches(c);
-  $("matchResults").innerHTML=list.length?list.map(x=>`<div class="module-row"><div class="row-head"><strong>${escapeHtml(x.p.name||"Property")}</strong><span class="score">${x.score}% match</span></div><div class="module-note">📍 ${escapeHtml(x.p.area||"")} • 🏠 ${escapeHtml(x.p.propertyType||"")} • 💰 ${formatMoney(x.p.budgetMin)}${x.p.budgetMax?" – "+formatMoney(x.p.budgetMax):""}<br>${escapeHtml(x.p.details||"")}</div><div class="module-actions"><button class="btn green" data-save-match="${x.p.id}">⭐ Save Match</button><button class="btn light" data-edit-match="${x.p.id}">Edit Property</button></div></div>`).join(""):'<div class="empty">No matching property found. Try adding area/property type/budget to seller records.</div>';
-}
-function renderFollowups(){
-  const today=new Date(); today.setHours(0,0,0,0); const iso=today.toISOString().slice(0,10);
-  const list=records.filter(r=>r.followUpDate).sort((a,b)=>String(a.followUpDate).localeCompare(String(b.followUpDate)));
-  const overdue=list.filter(r=>r.followUpDate<iso), due=list.filter(r=>r.followUpDate===iso), upcoming=list.filter(r=>r.followUpDate>iso);
-  $("overdueCount").textContent=overdue.length; $("todayCount").textContent=due.length; $("upcomingCount").textContent=upcoming.length;
-  $("followupList").innerHTML=list.length?list.map(r=>{
-    const cls=r.followUpDate<iso?'overdue':r.followUpDate===iso?'today':'';
-    const label=r.followUpDate<iso?'OVERDUE':r.followUpDate===iso?'TODAY':'UPCOMING';
-    return `<div class="module-row ${cls}">
-      <div class="row-head"><strong>${escapeHtml(r.name)}</strong><span class="status-pill ${cls==='overdue'?'rejected':cls==='today'?'':''}">${label} • ${escapeHtml(r.followUpDate)}</span></div>
-      <div class="module-note">${escapeHtml(r.mobile||"")} • ${escapeHtml(r.area||"")} • ${escapeHtml(r.propertyType||"")}<br>${escapeHtml(r.followUpNote||r.notes||"No reminder note")}</div>
-      <div class="module-actions">
-        <label class="btn green" style="cursor:pointer"><input type="checkbox" data-done-follow="${r.id}" style="margin-right:6px"> ✓ Follow-up Done</label>
-        <button class="btn light" data-edit-follow="${r.id}">Edit</button>
-        <button class="btn gold" data-snooze-follow="${r.id}">+3 Days</button>
-      </div>
-    </div>`}).join(""):'<div class="empty">No follow-ups scheduled. Customer add/edit karte waqt Next Follow-up Date set karein.</div>';
-}
-async function saveMatch(propertyId){
-  const c=records.find(r=>r.id===$("matchCustomer").value), p=records.find(r=>r.id===propertyId); if(!c||!p)return;
-  const found=calculateMatches(c).find(x=>x.p.id===propertyId); const score=found?.score||0;
-  try{await addDoc(collection(db,"crmMatches"),{customerId:c.id,customerName:c.name,sellerId:p.id,sellerName:p.name,area:p.area||"",propertyType:p.propertyType||"",score,createdAt:serverTimestamp(),status:"active"});$("matchStatus").innerHTML='<div class="notice ok">Match saved successfully.</div>';}catch(err){$("matchStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
-}
-function renderAnalytics(){
-  const total=records.length, customers=records.filter(r=>r.type==="customer").length, sellers=records.filter(r=>r.type==="seller").length, brokers=records.filter(r=>r.type==="broker").length;
-  const published=records.filter(r=>r.publicVisible && r.type==="seller").length, pending=submissions.filter(r=>String(r.status||"pending")==="pending").length, approved=submissions.filter(r=>r.status==="approved").length, reviewPending=reviews.filter(r=>String(r.status||"pending")==="pending").length;
-  const today=new Date().toISOString().slice(0,10), due=records.filter(r=>r.followUpDate && r.followUpDate<=today).length;
-  $("analyticsCards").innerHTML=[[total,"Total CRM Records"],[customers,"Customers / Buyers"],[sellers,"Sellers / Owners"],[published,"Published Properties"],[pending,"Pending Public Submissions"],[approved,"Approved Submissions"],[reviewPending,"Pending Reviews"],[due,"Due Follow-ups"]].map(x=>`<div class="module-card"><div class="mini-label">${x[1]}</div><div class="big">${x[0]}</div></div>`).join("");
-  const typeData=[['Customers',customers],['Sellers',sellers],['Brokers',brokers]]; const statusMap={}; records.forEach(r=>statusMap[r.status||'New']=(statusMap[r.status||'New']||0)+1); const statusData=Object.entries(statusMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  const bars=(arr)=>{const max=Math.max(1,...arr.map(x=>x[1]));return arr.map(x=>`<div class="bar-row"><span>${escapeHtml(x[0])}</span><div class="bar"><i style="width:${Math.round(x[1]/max*100)}%"></i></div><b>${x[1]}</b></div>`).join('')||'<div class="module-note">No data</div>';};
-  $("typeBars").innerHTML=bars(typeData); $("statusBars").innerHTML=bars(statusData);
-}
-$("matchCustomer").onchange=()=>{updateMatchCustomerInfo();renderMatchResults();};
-$("findMatchesBtn").onclick=()=>renderMatchResults();
-$("refreshFollowups").onclick=renderFollowups;
-$("refreshAnalytics").onclick=renderAnalytics;
-$("reviewStatusFilter").onchange=renderReviews;
-$("reviewGrid").onclick=async e=>{
-  const a=e.target.closest('[data-approve-review]'), r=e.target.closest('[data-reject-review]'), d=e.target.closest('[data-delete-review]');
-  try{
-    if(a){await updateDoc(doc(db,"publicReviews",a.dataset.approveReview),{status:"approved",approvedAt:serverTimestamp()});$("reviewStatus").innerHTML='<div class="notice ok">Review approved.</div>';}
-    if(r){await updateDoc(doc(db,"publicReviews",r.dataset.rejectReview),{status:"rejected",rejectedAt:serverTimestamp()});$("reviewStatus").innerHTML='<div class="notice ok">Review rejected.</div>';}
-    if(d&&confirm('Delete this review permanently?')) await deleteDoc(doc(db,"publicReviews",d.dataset.deleteReview));
-  }catch(err){$("reviewStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
-};
-$("matchResults").onclick=async e=>{const save=e.target.closest('[data-save-match]'), edit=e.target.closest('[data-edit-match]');if(save)await saveMatch(save.dataset.saveMatch);if(edit)openEdit(edit.dataset.editMatch);};
-$("savedMatches").onclick=async e=>{const d=e.target.closest('[data-delete-match]');if(d&&confirm('Delete this saved match?'))await deleteDoc(doc(db,"crmMatches",d.dataset.deleteMatch));};
-$("followupList").onclick=async e=>{
-  const edit=e.target.closest('[data-edit-follow]'), done=e.target.closest('[data-done-follow]'), snooze=e.target.closest('[data-snooze-follow]');
-  if(edit){openEdit(edit.dataset.editFollow);return;}
-  try{
-    if(done){
-      const id=done.dataset.doneFollow, r=records.find(x=>x.id===id);
-      if(r){
-        const now=new Date().toISOString().slice(0,10);
-        const history=Array.isArray(r.followUpHistory)?r.followUpHistory:[];
-        history.push({date:r.followUpDate,note:r.followUpNote||"",completedAt:now});
-        await updateDoc(doc(db,"crmContacts",id),{
-          followUpDate:"", followUpNote:"", followUpCompleted:true,
-          lastFollowUpDate:r.followUpDate||now, followUpHistory:history,
-          status:(r.status==="New"?"Contacted":r.status||"Contacted"), updatedAt:serverTimestamp()
-        });
-      }
-    }
-    if(snooze){
-      const d=new Date(); d.setDate(d.getDate()+3);
-      await updateDoc(doc(db,"crmContacts",snooze.dataset.snoozeFollow),{
-        followUpDate:d.toISOString().slice(0,10), followUpCompleted:false, updatedAt:serverTimestamp()
-      });
-    }
-  }catch(err){showStatus(err.message,'error');}
-};
-
-
-// Command-center interactions
-$("quickAdd").onclick=()=>openNew();
-$("quickProperty").onclick=()=>{openNew();$("type").value="seller";};
-$("quickMatch").onclick=()=>{document.querySelector('[data-view="matching"]').click();};
-$("quickFollow").onclick=()=>{document.querySelector('[data-view="followups"]').click();};
-$("hotLeads").onclick=e=>{const c=e.target.closest("[data-focus-edit]");const call=e.target.closest("[data-focus-call]");const wa=e.target.closest("[data-focus-wa]");if(c)openEdit(c.dataset.focusEdit);if(call&&call.dataset.focusCall)location.href="tel:"+call.dataset.focusCall;if(wa){const r=records.find(x=>x.id===wa.dataset.focusWa);if(r)openWaComposer([r.id]);}};
-$("todayFocus").onclick=e=>{const c=e.target.closest("[data-focus-edit]");const call=e.target.closest("[data-focus-call]");const wa=e.target.closest("[data-focus-wa]");if(c)openEdit(c.dataset.focusEdit);if(call&&call.dataset.focusCall)location.href="tel:"+call.dataset.focusCall;if(wa){const r=records.find(x=>x.id===wa.dataset.focusWa);if(r)openWaComposer([r.id]);}};
-$("exportBtn").onclick=()=>{
-  const rows=records.map(r=>({Type:r.type,Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
-    Property_Type:r.propertyType||"",Size:r.size||"",Budget_Min:r.budgetMin||"",Budget_Max:r.budgetMax||"",Status:r.status||"",Source:r.source||"",
-    Company:r.company||"",Areas_Served:r.areasServed||"",Property_Location:r.propertyLocation||"",Exact_Address_Private:r.exactAddress||"",Details:r.details||"",Notes:r.notes||"",Public_Visible:r.publicVisible?"Yes":"No",Public_Display_Name:r.publicDisplayName||""}));
-  const ws=XLSX.utils.json_to_sheet(rows); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"CRM");
-  XLSX.writeFile(wb,"jaipur-property-consultant-crm.xlsx");
-};
-</script>
-</body>
-</html>
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import{getFirestore,collection,addDoc,onSnapshot,query,orderBy,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+const cfg={apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6",measurementId:"G-0DW0NBETML"};
+const ADMIN_EMAILS=["saif.anwar1618@gmail.com"];
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app),provider=new GoogleAuthProvider();
+const $=id=>document.getElementById(id);let records=[],selected=new Set(),unsub=null,chart=null;
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+function admin(u){return u?.email&&ADMIN_EMAILS.includes(u.email.toLowerCase())}
+$("googleBtn").onclick=async()=>{ $("loginMsg").textContent="Opening Google sign-in...";try{await signInWithPopup(auth,provider)}catch(e){$("loginMsg").textContent=e.message||"Google sign-in failed."} };
+$("logoutBtn").onclick=()=>signOut(auth);
+onAuthStateChanged(auth,u=>{if(!u){$("loginView").classList.remove("hidden");$("appView").classList.add("hidden");$("userbox").classList.add("hidden");if(unsub)unsub();return}if(!admin(u)){ $("loginMsg").textContent=`Access denied for ${u.email}.`;signOut(auth);return}$("loginView").classList.add("hidden");$("appView").classList.remove("hidden");$("userbox").classList.remove("hidden");$("userEmail").textContent=u.email;$("userName").textContent=u.displayName||"Admin";load();});
+function load(){const q=query(collection(db,"crmContacts"),orderBy("updatedAt","desc"));unsub=onSnapshot(q,s=>{records=s.docs.map(d=>({id:d.id,...d.data()}));render() },e=>{console.error(e);records=[];render();});}
+function val(x,...keys){for(const k of keys){if(x?.[k]!==undefined&&x?.[k]!==null&&x?.[k]!=="")return x[k]}return ""}
+function norm(x){return String(x||"").toLowerCase()}
+function typeOf(x){return val(x,"businessType","industry","category")||((val(x,"type")==="seller"||val(x,"propertyType"))?"Real Estate":"Other")}
+function sourceOf(x){return val(x,"source")||"Manual Entry"}
+function cityOf(x){return val(x,"city")||"Jaipur"}
+function areaOf(x){return val(x,"area","location")||"Other"}
+function statusOf(x){return val(x,"status")||"New"}
+function nameOf(x){return val(x,"company","businessName","name")||"Unnamed Contact"}
+function personOf(x){return val(x,"contactPerson","contact","name")||nameOf(x)}
+function phoneOf(x){return val(x,"mobile","phone","whatsapp")||"—"}
+function dateText(x){const d=val(x,"updatedAt","createdAt","lastContact");try{return d?.toDate?d.toDate().toLocaleDateString("en-IN"):d?new Date(d).toLocaleDateString("en-IN"):"—"}catch{return"—"}}
+function nextText(x){return val(x,"followUpDate","nextFollowUp")||"Set follow-up"}
+function ini(n){return String(n).split(/\s+/).map(x=>x[0]).join("").slice(0,2).toUpperCase()||"NA"}
+function render(){const q=norm($("q").value),type=$("type").value,city=$("city").value,area=$("area").value,status=$("status").value,source=$("source").value,date=$("date").value;const arr=records.map((x,i)=>({x,i})).filter(({x})=>{const hay=norm(`${nameOf(x)} ${personOf(x)} ${phoneOf(x)} ${val(x,"email")}`);if(q&&!hay.includes(q))return false;if(type&&typeOf(x)!==type)return false;if(city&&cityOf(x)!==city)return false;if(area&&areaOf(x)!==area)return false;if(status&&statusOf(x)!==status)return false;if(source&&sourceOf(x)!==source)return false;if(date==="Today"&&!norm(nextText(x)).includes("today"))return false;return true});$("sAll").textContent=records.length;$("sReal").textContent=records.filter(x=>typeOf(x)==="Real Estate").length;$("sEdu").textContent=records.filter(x=>typeOf(x)==="Education").length;$("sHot").textContent=records.filter(x=>["Interested","Demo","Trial"].includes(statusOf(x))).length;$("sWon").textContent=records.filter(x=>statusOf(x)==="Won"||statusOf(x)==="Closed").length;$("showing").textContent=arr.length;
+$("rows").innerHTML=arr.length?arr.map(({x,i})=>{const t=typeOf(x),s=statusOf(x);return`<div class="tr"><div><input class="check" type="checkbox" ${selected.has(i)?"checked":""} onchange="toggle(${i})"></div><div class="person"><div class="avatar">${ini(personOf(x))}</div><div><b>${esc(nameOf(x))}</b><small>${esc(personOf(x))} · ${esc(phoneOf(x))}</small></div></div><div class="cell"><span class="tag ${t==="Real Estate"?"real":t==="Education"?"edu":""}">${esc(t)}</span></div><div class="cell">${esc(areaOf(x))}<small>${esc(cityOf(x))}</small></div><div class="cell">${esc(sourceOf(x))}</div><div class="cell"><span class="tag ${s==="Won"||s==="Closed"?"won":["Interested","Demo","Trial"].includes(s)?"hot":s==="Follow-up"?"follow":""}">${esc(s)}</span></div><div class="cell">${esc(dateText(x))}<small>${esc(nextText(x))}</small></div><div class="actions-cell"><button title="WhatsApp" onclick="wa(${i})">◉</button><button title="Email" onclick="email(${i})">✉</button><button title="Select" onclick="toggle(${i})">…</button></div></div>`}).join(""):'<div class="empty">No contacts match these filters.</div>';
+$("bulk").classList.toggle("show",selected.size>0);$("selCount").textContent=selected.size;renderAnalytics();}
+window.toggle=i=>{selected.has(i)?selected.delete(i):selected.add(i);render()};window.resetFilters=()=>{["q","type","city","area","status","source","date"].forEach(id=>$(id).value="");selected.clear();render()};window.wa=i=>{const p=records[i];window.open("https://wa.me/?text="+encodeURIComponent(`Hi ${personOf(p)}, I wanted to connect regarding your business.`),"_blank")};window.email=i=>{const p=records[i];location.href="mailto:"+val(p,"email")+"?subject="+encodeURIComponent("Business OS — customer management")};window.bulkWhatsApp=()=>{if(selected.size)wa([...selected][0])};
+function renderAnalytics(){const counts={New:0,Contacted:0,Interested:0,"Follow-up":0,Demo:0,Trial:0,Won:0,Lost:0};records.forEach(x=>{const s=statusOf(x);if(counts[s]!==undefined)counts[s]++});if(chart)chart.destroy();chart=new Chart($("pipelineChart"),{type:"bar",data:{labels:Object.keys(counts),datasets:[{data:Object.values(counts),borderRadius:7,backgroundColor:["#e7ebf1","#cfd8e8","#8f7bff","#80b6ff","#b59eff","#ffc766","#67d7a9","#ffaaa4"]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{beginAtZero:true,grid:{color:"#eef1f5"},ticks:{font:{size:9},precision:0}}}}});const src={};records.forEach(x=>src[sourceOf(x)]=(src[sourceOf(x)]||0)+1);const max=Math.max(1,...Object.values(src));$("sourceList").innerHTML=Object.entries(src).sort((a,b)=>b[1]-a[1]).slice(0,7).map(([k,v])=>`<div class="source-row"><span>${esc(k)}</span><div class="bar"><i style="width:${v/max*100}%"></i></div><b>${v}</b></div>`).join("")||'<div style="color:#8993a3;font-size:9px">No data yet.</div>'}
+window.openAdd=()=>$("drawerBg").classList.add("show");window.closeDrawer=()=>$("drawerBg").classList.remove("show");
+$("addForm").onsubmit=async e=>{e.preventDefault();const btn=e.target.querySelector("button");btn.disabled=true;btn.textContent="Saving...";try{await addDoc(collection(db,"crmContacts"),{company:$("fBusiness").value.trim(),businessName:$("fBusiness").value.trim(),name:$("fContact").value.trim()||$("fBusiness").value.trim(),contactPerson:$("fContact").value.trim(),mobile:$("fPhone").value.trim(),businessType:$("fType").value,city:$("fCity").value.trim(),area:$("fArea").value.trim(),status:$("fStatus").value,source:$("fSource").value,notes:$("fNote").value.trim(),createdAt:serverTimestamp(),updatedAt:serverTimestamp()});e.target.reset();$("fCity").value="Jaipur";$("formMsg").textContent="Saved successfully.";setTimeout(closeDrawer,500)}catch(err){$("formMsg").textContent=err.message}finally{btn.disabled=false;btn.textContent="Save Contact"}};
+$("file").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array"}),ws=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(ws,{defval:""});if(!rows.length){alert("No rows found.");return}const map={};rows.forEach(r=>Object.keys(r).forEach(k=>map[k.toLowerCase().trim()]=k));const get=(r,names)=>{for(const n of names){if(map[n]!==undefined&&r[map[n]]!=="")return r[map[n]]}return""};let ok=0;for(const r of rows){const business=get(r,["business","business name","company","company name","name"]);if(!business)continue;await addDoc(collection(db,"crmContacts"),{company:business,businessName:business,name:get(r,["contact","contact person","person name","name"])||business,contactPerson:get(r,["contact","contact person","person name"]),mobile:String(get(r,["mobile","phone","phone number","whatsapp"])),businessType:get(r,["business type","industry","category"])||"Other",city:get(r,["city"])||"Jaipur",area:get(r,["area","location"])||"Other",source:get(r,["source","lead source"])||"Excel Import",status:get(r,["status"])||"New",followUpDate:get(r,["next follow-up","follow-up","follow up"]),notes:get(r,["notes","note","important note"]),createdAt:serverTimestamp(),updatedAt:serverTimestamp()});ok++}alert(`${ok} contacts imported to Firestore.`)}catch(err){alert("Import failed: "+err.message)}finally{e.target.value=""}};
+window.exportXlsx=()=>{const rows=records.map(x=>({Business:nameOf(x),Contact:personOf(x),Mobile:phoneOf(x),"Business Type":typeOf(x),City:cityOf(x),Area:areaOf(x),Source:sourceOf(x),Status:statusOf(x),"Last Contact":dateText(x),"Next Follow-up":nextText(x)}));const ws=XLSX.utils.json_to_sheet(rows),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Contacts");XLSX.writeFile(wb,"Business-OS-Contacts.xlsx")};
+</script></body></html>

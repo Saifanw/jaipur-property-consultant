@@ -1,21 +1,25 @@
-# jaipur-property-consultant
-Jaipur Property Consultant – Buy, Sell &amp; Invest in Jaipur Properties. Residential Plots, Property Consultation, Land, Commercial Property and Real Estate Assistance in Jaipur.
+# Business OS SaaS V1
+Premium multi-page front-end prototype with interactive demo. Demo data is browser-local only.
 
 
-## CRM V1.1 update
-- Advanced CRM filters for large record sets
-- Admin Login link on the public website
-- Optional, admin-approved public requirement cards
-- Public requirement data is separated from private CRM data via `publicRequirements`
+## Luxury UI Layer — v1
+This build adds `assets/luxury.css`, a presentation layer for the existing Business OS product.
+The visual direction is premium SaaS / BI-inspired: executive KPI cards, Power BI-style analytics,
+glass/soft surfaces, cinematic gradients, refined spacing, premium navigation, and responsive layouts.
+Existing pages and JavaScript functionality are preserved.
 
 
-### Public submissions
-The homepage now accepts buyer/seller submissions into the private `publicSubmissions` collection. Admin reviews them under **Public Submissions** and can approve/reject. Approved entries create a private CRM record plus a sanitized `publicRequirements` record.
+## Customer Workspace Luxury V2
+Customer workspace typography, contrast, density, shadows and modal hierarchy are upgraded while the Admin Control Center remains intentionally unchanged.
 
 
-### V3
-Added approved Properties page, property detail pages, review approval, customer-property matching, follow-up reminders, and CRM analytics.
+## Customer Workspace Luxury V3
+Stronger contrast, larger typography, deeper shadows, denser customer rows and a more executive premium workspace. Admin remains unchanged.
 
 
-### Website Analytics
-Google Analytics 4 is included on the public pages using measurement ID `G-0DW0NBETML`. Use the Admin dashboard **Website Analytics** button to open Google Analytics.
+## Full-Screen CRM Table V4
+Customer list is presented as a full-width executive data table with compact rows, stronger contrast and premium depth. Existing data and JavaScript model are preserved.
+
+
+## Admin Full-Width V5
+The large dark navigation rail is hidden on the Admin Control Center so the dashboard and contact table use the full browser width.

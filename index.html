@@ -302,6 +302,12 @@ button,input,select,textarea{font:inherit}
 .requirement-card .req-actions .btn-outline{background:var(--green);color:#fff;border:1px solid var(--green);font-weight:900}
 .requirement-card .req-actions .btn-outline:hover{background:#0c773f;border-color:#0c773f}
 .public-note{font-size:11px;color:var(--muted);margin-top:10px}
+.buyer-requirements-section{background:#f8fafc;border-top:1px solid #e7edf3}
+.buyer-requirements-section .requirements-panel{margin-top:22px}
+.requirement-body{min-width:0}
+.requirement-card .req-actions .btn-outline{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.requirement-card .req-actions .btn-outline:hover{background:#0c773f!important;border-color:#0c773f!important}
+
 
 .quick-search{margin-top:18px;padding:16px;background:rgba(255,255,255,.97);border:1px solid #e6e9ef;border-radius:16px;box-shadow:0 12px 30px rgba(17,31,54,.08)}
 .quick-search-title{font-size:12px;font-weight:900;color:var(--gold-dark);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px}
@@ -439,18 +445,32 @@ button,input,select,textarea{font:inherit}
   </div>
 </section>
 
-<!-- LIVE PUBLIC REQUIREMENTS -->
-<section class="public-live" id="requirements">
+<!-- LIVE PUBLIC PROPERTY + BUYER SECTIONS -->
+<section class="public-live" id="available-properties">
   <div class="container">
     <div class="public-live-head">
       <div>
-        <h2>🔥 Jaipur Mein Active Property Requirements</h2>
-        <p>Approved buyer requirements aur available properties — contact details private rakhe gaye hain.</p>
+        <h2>🏠 Jaipur Mein Available Properties</h2>
+        <p>Approved seller property listings. Owner contact details private rakhe gaye hain.</p>
+      </div>
+      <a class="public-live-link" href="javascript:void(0)" onclick="openPublicForm('seller')">+ Apni Property Add Karein</a>
+    </div>
+    <div class="requirements-panel" id="publicPropertyGrid"></div>
+    <div id="publicPropertyEmpty" class="public-note">Abhi koi approved property listing available nahi hai.</div>
+  </div>
+</section>
+
+<section class="public-live buyer-requirements-section" id="buyer-requirements">
+  <div class="container">
+    <div class="public-live-head">
+      <div>
+        <h2>🔥 Jaipur Mein Property Dhoondhne Wale Buyers</h2>
+        <p>Approved buyer requirements. Customer contact details private rakhe gaye hain.</p>
       </div>
       <a class="public-live-link" href="javascript:void(0)" onclick="openPublicForm('buyer')">+ Apni Requirement Add Karein</a>
     </div>
-    <div class="requirements-panel" id="publicRequirementsGrid"></div>
-    <div id="publicRequirementsEmpty" class="public-note">Abhi koi approved public requirement nahi hai. Aap apni requirement submit kar sakte hain.</div>
+    <div class="requirements-panel" id="publicBuyerGrid"></div>
+    <div id="publicBuyerEmpty" class="public-note">Abhi koi approved buyer requirement available nahi hai.</div>
   </div>
 </section>
 
@@ -475,18 +495,6 @@ button,input,select,textarea{font:inherit}
         <span>Need something specific? WhatsApp your requirement.</span>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section soft" id="requirements" style="display:none">
-  <div class="container">
-    <div class="section-head">
-      <div class="kicker">Active Requirements</div>
-      <h2>Jaipur Mein Property Dhoondhne Wale Buyers</h2>
-      <p>Recent requirements shared with Jaipur Property Consultant. Contact details are kept private.</p>
-    </div>
-    <div class="requirements-panel" id="publicRequirementsGrid"></div>
-    <div class="public-note">📌 Public cards show only approved requirement details. Direct contact is handled by Jaipur Property Consultant.</div>
   </div>
 </section>
 
@@ -724,12 +732,17 @@ function publicMoney(min,max){
 }
 
 function renderPublicRequirements(docs){
-  const grid=document.getElementById("publicRequirementsGrid");
-  const empty=document.getElementById("publicRequirementsEmpty");
-  if(!docs.length){ grid.innerHTML=""; empty.style.display="block"; document.getElementById("publicTicker").textContent="Jaipur mein apni property requirement ya property listing submit karein — approval ke baad public website par dikhayein."; return; }
-  empty.style.display="none";
-  grid.innerHTML=docs.map(r=>{
-    const kind=r.type==="customer"?"Buyer Requirement":r.type==="seller"?"Property Available":"Agent / Broker";
+  const propertyGrid=document.getElementById("publicPropertyGrid");
+  const buyerGrid=document.getElementById("publicBuyerGrid");
+  const propertyEmpty=document.getElementById("publicPropertyEmpty");
+  const buyerEmpty=document.getElementById("publicBuyerEmpty");
+
+  const approved=docs.filter(r=>r.status==="Approved"||r.status==="approved");
+  const properties=approved.filter(r=>r.type==="seller");
+  const buyers=approved.filter(r=>r.type==="customer");
+
+  const card=r=>{
+    const kind=r.type==="seller"?"Property Available":"Buyer Requirement";
     const detail=[r.propertyType,r.size,r.details].filter(Boolean).join(" • ");
     const msg=encodeURIComponent(`Hello, I saw a ${kind.toLowerCase()} on Jaipur Property Consultant website for ${r.area||"Jaipur"}. Please share details.`);
     const photo=r.imageDataUrl?`<div class="requirement-photo"><img src="${escapeHtmlPublic(r.imageDataUrl)}" alt="Property"></div>`:"";
@@ -741,10 +754,17 @@ function renderPublicRequirements(docs){
       ${r.budgetMin!=null||r.budgetMax!=null?`<div class="req-price">💰 ${publicMoney(r.budgetMin,r.budgetMax)}</div>`:""}
       <div class="req-actions"><a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a><a class="btn btn-outline" href="property.html?id=${encodeURIComponent(r.id)}">📋 View Details</a></div>
     </div></article>`;
-  }).join("");
-  const tickerItems=docs.map(r=>`${r.type==="seller"?"🏡 Available":"🏠 Required"}: ${r.area||"Jaipur"} • ${r.propertyType||"Property"}${r.size?" • "+r.size:""}${(r.budgetMin!=null||r.budgetMax!=null)?" • "+publicMoney(r.budgetMin,r.budgetMax):""}`);
-  document.getElementById("publicTicker").innerHTML=tickerItems.map(x=>`<span>${escapeHtmlPublic(x)}</span>`).join("");
+  };
+
+  propertyGrid.innerHTML=properties.map(card).join("");
+  buyerGrid.innerHTML=buyers.map(card).join("");
+  propertyEmpty.style.display=properties.length?"none":"block";
+  buyerEmpty.style.display=buyers.length?"none":"block";
+
+  const tickerItems=approved.map(r=>`${r.type==="seller"?"🏡 Available":"🏠 Required"}: ${r.area||"Jaipur"} • ${r.propertyType||"Property"}${r.size?" • "+r.size:""}${(r.budgetMin!=null||r.budgetMax!=null)?" • "+publicMoney(r.budgetMin,r.budgetMax):""}`);
+  document.getElementById("publicTicker").innerHTML=tickerItems.length?tickerItems.map(x=>`<span>${escapeHtmlPublic(x)}</span>`).join(""):"<span>Jaipur mein property requirement ya property listing submit karein — approval ke baad public website par dikhayein.</span>";
 }
+
 function escapeHtmlPublic(s){ return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
 
 let publicUnsubscribe=null;

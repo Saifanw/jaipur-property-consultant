@@ -212,13 +212,17 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
         <div class="field"><label>RERA / Registration No. (if applicable)</label><input id="registrationNo"></div>
         <div class="field"><label>Exact Address (PRIVATE)</label><input id="exactAddress" placeholder="Never shown publicly"></div>
 
-        <div class="section-label">Photos / Documents</div>
+        <div class="section-label">Photos / Property Video</div>
         <div class="field full">
           <div class="photo-box">
-            <label style="font-weight:850;font-size:11px">Upload images (optional)</label>
+            <label style="font-weight:850;font-size:11px">Upload 2–3 property images (optional)</label>
             <input id="photos" type="file" accept="image/*" multiple style="display:block;margin-top:8px">
-            <div class="muted">Useful for seller/property records. Images are stored privately in Firebase Storage.</div>
+            <div class="muted">Select multiple images for the property gallery.</div>
             <div id="preview" class="preview"></div>
+            <label style="font-weight:850;font-size:11px;display:block;margin-top:14px">Upload property video (optional)</label>
+            <input id="propertyVideo" type="file" accept="video/*" style="display:block;margin-top:8px">
+            <div id="videoPreview" class="muted" style="margin-top:6px"></div>
+            <div class="muted" style="margin-top:5px">Recommended: MP4, up to 50 MB.</div>
           </div>
         </div>
 
@@ -280,6 +284,7 @@ let unsubscribe = null;
 let submissionsUnsubscribe = null;
 let submissions = [];
 let editingImages = [];
+let editingVideoUrl = "";
 let filterOptionsReady = false;
 let currentAdminView = "crm";
 let reviews=[]; let reviewsUnsubscribe=null; let matches=[]; let matchesUnsubscribe=null;
@@ -635,7 +640,7 @@ $("waOpenTextOnly").onclick=()=>{ const r=currentWaRecord(); if(r) openWaTextFor
 function resetForm(){
   $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New";
   $("publicVisible").checked=false; $("publicDisplayName").value=""; $("followUpDate").value=""; $("followUpNote").value="";
-  $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[];
+  $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[]; editingVideoUrl=""; if($("propertyVideo")) $("propertyVideo").value=""; if($("videoPreview")) $("videoPreview").textContent="";
 }
 function openNew(){resetForm();$("modal").classList.remove("hidden")}
 async function openEdit(id){
@@ -646,7 +651,9 @@ async function openEdit(id){
   $("publicVisible").checked=!!r.publicVisible;
   $("publicDisplayName").value=r.publicDisplayName||r.name||"";
   editingImages=r.images||[];
+  editingVideoUrl=r.publicVideoUrl||r.videoUrl||"";
   $("preview").innerHTML=editingImages.map(u=>`<img src="${escapeHtml(u)}">`).join("");
+  $("videoPreview").innerHTML=editingVideoUrl?`Current video: <a href="${escapeHtml(editingVideoUrl)}" target="_blank" rel="noopener">View video</a>`:"No video selected.";
   $("modal").classList.remove("hidden");
 }
 $("newBtn").onclick=openNew; $("closeModal").onclick=()=>$("modal").classList.add("hidden"); $("cancelBtn").onclick=()=>$("modal").classList.add("hidden");
@@ -654,9 +661,23 @@ $("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").clas
 
 $("photos").onchange=()=>{
   const files=[...$("photos").files];
+  if(files.length>3){
+    showStatus("Please select a maximum of 3 property images.","error");
+    $("photos").value="";
+    $("preview").innerHTML="";
+    return;
+  }
   $("preview").innerHTML="";
   files.forEach(f=>{const img=document.createElement("img");img.src=URL.createObjectURL(f);$("preview").appendChild(img)});
   editingImages=[];
+};
+
+$("propertyVideo").onchange=()=>{
+  const f=$("propertyVideo").files?.[0];
+  if(!f){$("videoPreview").textContent=editingVideoUrl?"Current video will be kept unless replaced.":"No video selected.";return;}
+  if(!f.type.startsWith("video/")){showStatus("Please choose a video file.","error"); $("propertyVideo").value=""; return;}
+  if(f.size>50*1024*1024){showStatus("Video should be below 50 MB.","error"); $("propertyVideo").value=""; return;}
+  $("videoPreview").textContent=`Selected: ${f.name}`;
 };
 
 $("recordForm").onsubmit=async e=>{
@@ -678,6 +699,7 @@ $("recordForm").onsubmit=async e=>{
     };
     let imageUrls=editingImages||[];
     let publicImageUrls=[];
+    let publicVideoUrl=editingVideoUrl||"";
     const files=[...$("photos").files];
     if(files.length){
       imageUrls=[];
@@ -697,9 +719,27 @@ $("recordForm").onsubmit=async e=>{
         }
       }
     }
+    const videoFile=$("propertyVideo").files?.[0];
+    if(videoFile){
+      if(!videoFile.type.startsWith("video/")) throw new Error("Please choose a valid video file.");
+      if(videoFile.size>50*1024*1024) throw new Error("Video should be below 50 MB.");
+      const vStamp=Date.now();
+      const safeVideo=videoFile.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+      const videoPath=(data.publicVisible && data.type==="seller")
+        ? `publicProperties/${id||"new"}-${vStamp}-${safeVideo}`
+        : `crmContacts/${auth.currentUser.uid}/${id||"new"}-${vStamp}-${safeVideo}`;
+      const videoRef=ref(storage,videoPath);
+      await uploadBytes(videoRef,videoFile);
+      const uploadedVideoUrl=await getDownloadURL(videoRef);
+      data.videoUrl=uploadedVideoUrl;
+      if(data.publicVisible && data.type==="seller"){
+        publicVideoUrl=uploadedVideoUrl;
+      }
+    }
     data.images=imageUrls;
     if(publicImageUrls.length) data.publicImageUrls=publicImageUrls;
     else if(editingImages.length && data.type==="seller") data.publicImageUrls=records.find(r=>r.id===id)?.publicImageUrls||[];
+    data.publicVideoUrl=publicVideoUrl;
     let savedId=id;
     if(id){
       await setDoc(doc(db,"crmContacts",id),data,{merge:true});
@@ -723,8 +763,11 @@ $("recordForm").onsubmit=async e=>{
         budgetMin:data.budgetMin ?? null,
         budgetMax:data.budgetMax ?? null,
         details:data.details || "",
+        roadFacing:data.roadFacing || "",
+        propertyLocation:data.propertyLocation || "",
         imageDataUrl:(data.type==="seller" && data.publicImageUrls?.length) ? data.publicImageUrls[0] : "",
         imageUrls:data.type==="seller" ? (data.publicImageUrls||[]) : [],
+        videoUrl:data.type==="seller" ? (data.publicVideoUrl||"") : "",
         status:data.status || "New",
         updatedAt:serverTimestamp()
       });

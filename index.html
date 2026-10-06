@@ -297,8 +297,10 @@ button,input,select,textarea{font:inherit}
 .requirement-card .req-location{font-weight:800;color:#334155;margin-bottom:8px}
 .requirement-card .req-detail{font-size:13px;color:#53657a;line-height:1.55}
 .requirement-card .req-price{margin-top:12px;font-weight:900;color:#9a7200}
-.requirement-card .req-actions{display:flex;gap:8px;margin-top:15px}
-.requirement-card .req-actions .btn{font-size:11px;padding:9px 11px}
+.requirement-card .req-actions{display:flex;gap:8px;margin-top:15px;align-items:stretch}
+.requirement-card .req-actions .btn{font-size:11px;padding:10px 14px;min-width:132px;height:40px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;white-space:nowrap}
+.requirement-card .req-actions .btn-outline{background:var(--green);color:#fff;border:1px solid var(--green);font-weight:900}
+.requirement-card .req-actions .btn-outline:hover{background:#0c773f;border-color:#0c773f}
 .public-note{font-size:11px;color:var(--muted);margin-top:10px}
 @media(max-width:900px){
 .nav-properties-cta{display:inline-block}.requirements-panel{grid-template-columns:1fr 1fr}}

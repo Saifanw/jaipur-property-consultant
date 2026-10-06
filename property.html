@@ -10,7 +10,7 @@ body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f4f7fa;col
 .wrap{width:min(980px,94%);margin:auto}.head{background:#111c2d;color:#fff;padding:18px 0}
 .head a{color:#e8c45c;text-decoration:none}.card{margin:35px auto;background:#fff;border:1px solid #dfe5ec;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(17,28,45,.1)}
 .heroimg{height:430px;background:#e9eef3;display:grid;place-items:center;overflow:hidden}.heroimg img{width:100%;height:100%;object-fit:cover}
-.body{padding:25px}.badge{display:inline-block;background:#eef4ff;color:#275da8;padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900}
+.body{padding:25px}.badge{display:inline-block;background:#eef4ff;color:#275da8;padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900}.availability{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:999px;font-size:12px;font-weight:950;margin:10px 0 12px}.availability.available{background:#e8f7ef;color:#08743e}.availability.offer{background:#fff7df;color:#8a6500}.availability.sold,.availability.off{background:#fff0ef;color:#b42318}
 .muted{color:#66758a;font-size:12px}.price{font-size:25px;font-weight:950;color:#8a6500;margin:15px 0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.item{background:#f5f7f9;border-radius:10px;padding:12px}.item b{display:block;font-size:10px;color:#66758a;text-transform:uppercase}.item span{display:block;margin-top:4px;font-weight:800}
 .section{margin-top:28px}.section h2{font-size:18px;margin:0 0 12px}.details-box{background:#f7f9fb;border:1px solid #e3e8ee;border-radius:13px;padding:16px;line-height:1.65;color:#435166;white-space:pre-line}
@@ -18,10 +18,10 @@ body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f4f7fa;col
 .video-wrap{background:#101923;border-radius:14px;overflow:hidden}.video-wrap video{display:block;width:100%;max-height:520px}
 .notice{padding:12px;border-radius:10px;background:#f3f7fb;font-size:11px;color:#5c6c7e}
 .btn{display:inline-block;padding:12px 16px;border-radius:9px;font-weight:850;text-decoration:none}.green{background:#128a4d;color:#fff}.gold{background:#c79a25;color:#fff}
-.actions{margin-top:18px;display:flex;gap:9px;flex-wrap:wrap}
+.actions{margin-top:18px;display:flex;gap:9px;flex-wrap:wrap}.comment-form{background:#f8fafc;border:1px solid #e1e7ee;border-radius:14px;padding:16px}.comment-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.comment-form input,.comment-form select,.comment-form textarea{width:100%;box-sizing:border-box;padding:11px;border:1px solid #d5dee7;border-radius:9px;background:#fff}.comment-form textarea{min-height:95px;resize:vertical}.comment-form button{border:0;border-radius:9px;padding:12px 17px;background:#111c2d;color:#fff;font-weight:900;cursor:pointer}.comments{display:grid;gap:10px}.comment{background:#fff;border:1px solid #e0e6ed;border-radius:12px;padding:13px}.comment .stars{color:#c79a25;letter-spacing:1px}
 .lightbox{position:fixed;inset:0;background:rgba(7,14,24,.88);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.lightbox.open{display:flex}
 .lightbox img{max-width:94vw;max-height:88vh;object-fit:contain;border-radius:12px}.close{position:absolute;top:18px;right:22px;border:0;background:#fff;color:#111;padding:9px 13px;border-radius:9px;font-weight:900;cursor:pointer}
-@media(max-width:650px){.heroimg{height:270px}.grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.gallery button{height:120px}.body{padding:19px}}
+@media(max-width:650px){.heroimg{height:270px}.grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.gallery button{height:120px}.body{padding:19px}.comment-form .row{grid-template-columns:1fr}}
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
@@ -37,7 +37,7 @@ body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f4f7fa;col
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import{getFirestore,doc,getDoc}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import{getFirestore,doc,getDoc,collection,query,where,onSnapshot,addDoc,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 const cfg={apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"};
 const db=getFirestore(initializeApp(cfg,"propertyDetail"));
 const $=id=>document.getElementById(id);
@@ -83,12 +83,26 @@ else{
 
   $("loading").innerHTML=`
     <span class="badge">${esc(p.propertyType||"Property")}</span>
+    ${(()=>{const a=String(p.availability||"Available");const cls=a==="Available"?"available":a==="Under Offer"?"offer":a==="Sold"?"sold":"off";const icon=a==="Available"?"🟢":a==="Under Offer"?"🟡":a==="Sold"?"🔴":"⚫";return `<div class="availability ${cls}">${icon} ${esc(a)}</div>`})()}
     <h1>${esc(p.publicDisplayName||"Property Available")}</h1>
     <div class="muted">📍 ${esc(p.area||"Jaipur")}, ${esc(p.city||"Jaipur")}</div>
     <div class="price">${money(p.budgetMin,p.budgetMax)}</div>
     <div class="grid">${details}</div>
     <section class="section"><h2>📋 Property Details</h2><div class="details-box">${esc(p.details||"Property details available on enquiry.")}</div></section>
     ${gallery}${video}
+    <section class="section" id="commentsSection">
+      <h2>💬 Customer Comments</h2>
+      <div id="commentsList" class="comments"><div class="notice">Loading approved comments...</div></div>
+      <form id="commentForm" class="comment-form" style="margin-top:12px">
+        <div class="row">
+          <div><label style="font-size:10px;font-weight:900;color:#53657a">Name *</label><input id="commentName" required placeholder="Your name"></div>
+          <div><label style="font-size:10px;font-weight:900;color:#53657a">Rating</label><select id="commentRating"><option value="5">★★★★★ 5</option><option value="4">★★★★☆ 4</option><option value="3">★★★☆☆ 3</option><option value="2">★★☆☆☆ 2</option><option value="1">★☆☆☆☆ 1</option></select></div>
+        </div>
+        <div style="margin-top:10px"><label style="font-size:10px;font-weight:900;color:#53657a">Comment *</label><textarea id="commentText" required placeholder="Is property ya enquiry ke baare mein comment karein..."></textarea></div>
+        <div id="commentMsg" class="notice" style="display:none"></div>
+        <button type="submit" style="margin-top:10px">💬 Submit Comment</button>
+      </form>
+    </section>
     <div class="notice" style="margin-top:24px">🔐 Owner contact and exact address are kept private. Enquiries are handled through Jaipur Property Consultant.</div>
     <div class="actions">
       <a class="btn green" target="_blank" href="https://wa.me/916350566010?text=${encodeURIComponent("Hello, I am interested in the property in "+(p.area||"Jaipur")+". Please share full details.")}">💬 Enquire</a>
@@ -96,7 +110,20 @@ else{
     </div>`;
 
   document.querySelectorAll("[data-photo]").forEach(b=>b.onclick=()=>openLightbox(b.dataset.photo));
- }).catch(()=>$("loading").textContent="Could not load this property.");
+
+  const commentsList=$("commentsList");
+  onSnapshot(query(collection(db,"publicReviews"),where("propertyId","==",p.id),where("status","==","approved")),snap=>{
+    const rows=snap.docs.map(d=>({id:d.id,...d.data()}));
+    commentsList.innerHTML=rows.length?rows.map(r=>{const n=Math.max(1,Math.min(5,Number(r.rating)||5));return `<article class="comment"><div class="stars">${"★".repeat(n)}${"☆".repeat(5-n)}</div><strong>${esc(r.name||"Customer")}</strong><div style="margin-top:5px;color:#435166;line-height:1.55">${esc(r.comment||"")}</div></article>`}).join(""): '<div class="notice">Abhi koi approved comment nahi hai. Aap pehla comment kar sakte hain.</div>';
+  },err=>{commentsList.innerHTML='<div class="notice">Comments abhi load nahi ho pa rahe.</div>';console.warn(err)});
+
+  $("commentForm").onsubmit=async e=>{
+    e.preventDefault();const b=e.target.querySelector("button"),m=$("commentMsg");b.disabled=true;b.textContent="Submitting...";m.style.display="block";
+    try{await addDoc(collection(db,"publicReviews"),{propertyId:p.id,propertyTitle:p.publicDisplayName||"Property Available",name:$("commentName").value.trim(),rating:Number($("commentRating").value),comment:$("commentText").value.trim(),area:p.area||"",propertyType:p.propertyType||"",consent:true,status:"pending",source:"Property Page",submittedAt:serverTimestamp()});m.textContent="✅ Comment submit ho gaya. Approval ke baad yahan dikhega.";e.target.reset();}
+    catch(err){m.textContent="Comment submit nahi ho saka. Please try again.";console.warn(err)}
+    finally{b.disabled=false;b.textContent="💬 Submit Comment"}
+  };
+ }).catch(()=>$('loading').textContent="Could not load this property.");
 }
 </script>
 </body>

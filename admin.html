@@ -200,6 +200,7 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
         <div class="field"><label>City</label><input id="city" value="Jaipur"></div>
         <div class="field"><label>Property Type</label><select id="propertyType"><option>Plot</option><option>House</option><option>Shop</option><option>Land</option><option>Villa</option><option>Commercial</option><option>Flat</option><option>Other</option></select></div>
         <div class="field"><label>Size / Area</label><input id="size" placeholder="e.g. 50 Gaj, 100 Gaj, 1200 sqft"></div>
+        <div class="field"><label>Property Availability</label><select id="availability"><option value="Available">🟢 Available</option><option value="Under Offer">🟡 Under Offer</option><option value="Sold">🔴 Sold</option><option value="Not Available">⚫ Not Available</option></select></div>
         <div class="field"><label>Budget Min (₹)</label><input id="budgetMin" type="number" min="0"></div>
         <div class="field"><label>Budget Max / Expected Price (₹)</label><input id="budgetMax" type="number" min="0"></div>
         <div class="field"><label>Road Width / Facing</label><input id="roadFacing" placeholder="e.g. 30 ft road, East facing"></div>
@@ -638,7 +639,7 @@ $("waCopyImageOpen").onclick=async()=>{
 $("waOpenTextOnly").onclick=()=>{ const r=currentWaRecord(); if(r) openWaTextFor(r); };
 
 function resetForm(){
-  $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New";
+  $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New"; $("availability").value="Available";
   $("publicVisible").checked=false; $("publicDisplayName").value=""; $("followUpDate").value=""; $("followUpNote").value="";
   $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[]; editingVideoUrl=""; if($("propertyVideo")) $("propertyVideo").value=""; if($("videoPreview")) $("videoPreview").textContent="";
 }
@@ -646,7 +647,7 @@ function openNew(){resetForm();$("modal").classList.remove("hidden")}
 async function openEdit(id){
   const r=records.find(x=>x.id===id); if(!r)return;
   resetForm(); $("modalTitle").textContent="Edit CRM Record"; $("recordId").value=id;
-  const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes",followUpDate:"followUpDate",followUpNote:"followUpNote"};
+  const map={type:"type",name:"name",mobile:"mobile",whatsapp:"whatsapp",altMobile:"altMobile",email:"email",source:"source",status:"statusSelect",area:"area",city:"city",propertyType:"propertyType",size:"size",availability:"availability",budgetMin:"budgetMin",budgetMax:"budgetMax",roadFacing:"roadFacing",propertyLocation:"propertyLocation",details:"details",company:"company",areasServed:"areasServed",registrationNo:"registrationNo",exactAddress:"exactAddress",notes:"notes",followUpDate:"followUpDate",followUpNote:"followUpNote"};
   Object.entries(map).forEach(([key,id2])=>$(id2).value=r[key]??"");
   $("publicVisible").checked=!!r.publicVisible;
   $("publicDisplayName").value=r.publicDisplayName||r.name||"";
@@ -688,7 +689,7 @@ $("recordForm").onsubmit=async e=>{
     const data={
       type:$("type").value,name:$("name").value.trim(),mobile:$("mobile").value.trim(),whatsapp:$("whatsapp").value.trim(),altMobile:$("altMobile").value.trim(),
       email:$("email").value.trim(),source:$("source").value,status:$("statusSelect").value,area:$("area").value.trim(),city:$("city").value.trim(),
-      propertyType:$("propertyType").value,size:$("size").value.trim(),budgetMin:$("budgetMin").value?Number($("budgetMin").value):null,budgetMax:$("budgetMax").value?Number($("budgetMax").value):null,
+      propertyType:$("propertyType").value,size:$("size").value.trim(),availability:$("availability").value,budgetMin:$("budgetMin").value?Number($("budgetMin").value):null,budgetMax:$("budgetMax").value?Number($("budgetMax").value):null,
       roadFacing:$("roadFacing").value.trim(),propertyLocation:$("propertyLocation").value.trim(),details:$("details").value.trim(),
       company:$("company").value.trim(),areasServed:$("areasServed").value.trim(),registrationNo:$("registrationNo").value.trim(),exactAddress:$("exactAddress").value.trim(),
       notes:$("notes").value.trim(),
@@ -760,6 +761,7 @@ $("recordForm").onsubmit=async e=>{
         city:data.city || "Jaipur",
         propertyType:data.propertyType || "",
         size:data.size || "",
+        availability:data.availability || "Available",
         budgetMin:data.budgetMin ?? null,
         budgetMax:data.budgetMax ?? null,
         details:data.details || "",

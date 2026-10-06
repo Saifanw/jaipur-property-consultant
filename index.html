@@ -302,6 +302,15 @@ button,input,select,textarea{font:inherit}
 .requirement-card .req-actions .btn-outline{background:var(--green);color:#fff;border:1px solid var(--green);font-weight:900}
 .requirement-card .req-actions .btn-outline:hover{background:#0c773f;border-color:#0c773f}
 .public-note{font-size:11px;color:var(--muted);margin-top:10px}
+
+.quick-search{margin-top:18px;padding:16px;background:rgba(255,255,255,.97);border:1px solid #e6e9ef;border-radius:16px;box-shadow:0 12px 30px rgba(17,31,54,.08)}
+.quick-search-title{font-size:12px;font-weight:900;color:var(--gold-dark);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px}
+.quick-search-row{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:9px}
+.quick-search-row input,.quick-search-row select{height:42px;border:1px solid #d9e0ea;border-radius:9px;padding:0 12px;font:inherit;color:var(--ink);background:#fff;min-width:0}
+.quick-search-row input:focus,.quick-search-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,24,.12)}
+.quick-search-note{font-size:10px;color:var(--muted);margin-top:8px}
+@media(max-width:900px){.quick-search-row{grid-template-columns:1fr 1fr}.quick-search-row .quick-search-go{grid-column:1/-1}}
+@media(max-width:600px){.quick-search-row{grid-template-columns:1fr}.quick-search-row .quick-search-go{grid-column:auto}}
 @media(max-width:900px){
 .nav-properties-cta{display:inline-block}.requirements-panel{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.requirements-panel{grid-template-columns:1fr}}
@@ -380,6 +389,29 @@ button,input,select,textarea{font:inherit}
         <span class="trust">✓ Site Visit Assistance</span>
         <span class="trust">✓ Property Shortlisting</span>
       </div>
+
+      <div class="quick-search">
+        <div class="quick-search-title">🔎 Quick Property Search</div>
+        <div class="quick-search-row">
+          <input id="homeSearch" placeholder="Search Jhotwara, plot, land...">
+          <select id="homeType">
+            <option value="">All Property Types</option>
+            <option value="Residential Plot">Residential Plot</option>
+            <option value="Flat / Villa">Flat / Villa</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Land">Land</option>
+          </select>
+          <select id="homeBudget">
+            <option value="">Any Budget</option>
+            <option value="2500000">Up to ₹25 Lakh</option>
+            <option value="5000000">Up to ₹50 Lakh</option>
+            <option value="10000000">Up to ₹1 Crore</option>
+            <option value="20000000">Up to ₹2 Crore</option>
+          </select>
+          <button type="button" class="btn btn-gold quick-search-go" onclick="goToPropertySearch()">Search</button>
+        </div>
+        <div class="quick-search-note">Approved listings only • Owner contact details remain private</div>
+      </div>
     </div>
 
     <div class="enquiry">
@@ -432,49 +464,16 @@ button,input,select,textarea{font:inherit}
 <section class="section" id="properties">
   <div class="container">
     <div class="section-head">
-      <div class="kicker">Property Search</div>
-      <h2>Find a Plot or Property in Jaipur</h2>
-      <p>Search by locality, property type and budget. Approved properties are shown through Jaipur Property Consultant.</p>
-      <a class="btn btn-gold" href="properties.html" style="display:inline-block;margin-top:10px">🏘️ View All Approved Properties</a>
+      <div class="kicker">Approved Properties</div>
+      <h2>Explore Real Property Listings in Jaipur</h2>
+      <p>Search and filter approved property listings. New listings will appear here as they are approved from the property manager.</p>
+      <a class="btn btn-gold" href="properties.html" style="display:inline-block;margin-top:10px">🏘️ Open Property Search</a>
     </div>
-
-    <div class="search-panel">
-      <div class="search-row">
-        <input id="searchInput" placeholder="Search Jhotwara, plot, land..." oninput="filterProperties()">
-        <select id="typeFilter" onchange="filterProperties()">
-          <option value="">All Property Types</option>
-          <option value="Residential Plot">Residential Plot</option>
-          <option value="Flat / Villa">Flat / Villa</option>
-          <option value="Commercial">Commercial</option>
-          <option value="Land">Land</option>
-        </select>
-        <select id="locationFilter" onchange="filterProperties()">
-          <option value="">All Locations</option>
-          <option>Jhotwara</option>
-          <option>Jagatpura</option>
-          <option>Vaishali Nagar</option>
-          <option>Mansarovar</option>
-          <option>Ajmer Road</option>
-          <option>Sanganer</option>
-        </select>
-        <select id="budgetFilter" onchange="filterProperties()">
-          <option value="">Any Budget</option>
-          <option value="30">Under ₹30L</option>
-          <option value="50">Under ₹50L</option>
-          <option value="100">Under ₹1Cr</option>
-        </select>
-        <button class="btn btn-dark" onclick="clearFilters()">Reset</button>
+    <div class="search-panel" style="max-width:900px;margin:0 auto">
+      <div class="results-line" style="padding:0">
+        <span>🔒 Only approved listings are shown.</span>
+        <span>Need something specific? WhatsApp your requirement.</span>
       </div>
-      <div class="results-line">
-        <span id="resultCount">Showing 6 sample properties</span>
-        <span>Need a different option? WhatsApp your requirement.</span>
-      </div>
-    </div>
-
-    <div class="property-grid" id="propertyGrid"></div>
-    <div class="no-results" id="noResults">
-      No matching sample property found.<br>
-      <a class="btn btn-green" style="margin-top:12px" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I need a property in Jaipur. Please share suitable options.">💬 Send Requirement on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -813,180 +812,16 @@ try{
 </script>
 
 <script>
-const properties=[
-  {title:"Residential Plot — Jhotwara",type:"Residential Plot",location:"Jhotwara",price:28,display:"₹28 Lakh*",meta:["Residential Plot","Site Visit","Enquiry"]},
-  {title:"Residential Property — Jagatpura",type:"Flat / Villa",location:"Jagatpura",price:45,display:"₹45 Lakh*",meta:["Residential","Location Discussion","Enquiry"]},
-  {title:"Commercial Property — Vaishali Nagar",type:"Commercial",location:"Vaishali Nagar",price:72,display:"₹72 Lakh*",meta:["Commercial","Consultation","Enquiry"]},
-  {title:"Residential Plot — Mansarovar",type:"Residential Plot",location:"Mansarovar",price:39,display:"₹39 Lakh*",meta:["Plot","Site Visit","Enquiry"]},
-  {title:"Land Opportunity — Ajmer Road",type:"Land",location:"Ajmer Road",price:65,display:"₹65 Lakh*",meta:["Land","Consultation","Enquiry"]},
-  {title:"Residential Property — Jhotwara",type:"Flat / Villa",location:"Jhotwara",price:52,display:"₹52 Lakh*",meta:["Residential","Site Visit","Enquiry"]}
-];
-
-const wa="916350566010";
-
-function renderProperties(list=properties){
-  const grid=document.getElementById("propertyGrid");
-  const empty=document.getElementById("noResults");
-  const count=document.getElementById("resultCount");
-  grid.innerHTML="";
-  if(!list.length){
-    empty.style.display="block";
-    count.textContent="No matching sample property";
-    return;
-  }
-  empty.style.display="none";
-  count.textContent=`Showing ${list.length} sample propert${list.length===1?"y":"ies"}`;
-  list.forEach(p=>{
-    const msg=encodeURIComponent(`Hello, I am interested in ${p.title}. Please share current details, price and availability.`);
-    const card=document.createElement("article");
-    card.className="property-card";
-    card.innerHTML=`
-      <div class="property-img"><span class="badge">${p.type.toUpperCase()}</span></div>
-      <div class="property-body">
-        <h3>${p.title}</h3>
-        <div class="location">📍 ${p.location}, Jaipur</div>
-        <div class="meta">${p.meta.map(x=>`<span>${x}</span>`).join("")}</div>
-        <div class="price">${p.display} <small>indicative demo listing</small></div>
-        <div class="card-actions">
-          <a class="card-btn card-wa" target="_blank" href="https://wa.me/${wa}?text=${msg}">💬 WhatsApp</a>
-          <a class="card-btn card-call" href="tel:+916350566010">📞 Call</a>
-        </div>
-      </div>`;
-    grid.appendChild(card);
-  });
+function goToPropertySearch(){
+  const params=new URLSearchParams();
+  const q=document.getElementById("homeSearch")?.value.trim();
+  const type=document.getElementById("homeType")?.value;
+  const budget=document.getElementById("homeBudget")?.value;
+  if(q) params.set("q",q);
+  if(type) params.set("type",type);
+  if(budget) params.set("budget",budget);
+  window.location.href="properties.html"+(params.toString()?"?"+params.toString():"");
 }
-
-function filterProperties(){
-  const q=document.getElementById("searchInput").value.toLowerCase().trim();
-  const type=document.getElementById("typeFilter").value;
-  const loc=document.getElementById("locationFilter").value;
-  const budget=document.getElementById("budgetFilter").value;
-
-  const result=properties.filter(p=>{
-    const text=(p.title+" "+p.type+" "+p.location+" "+p.meta.join(" ")).toLowerCase();
-    return (!q || text.includes(q))
-      && (!type || p.type===type)
-      && (!loc || p.location===loc)
-      && (!budget || p.price<=Number(budget));
-  });
-  renderProperties(result);
-}
-
-function clearFilters(){
-  document.getElementById("searchInput").value="";
-  document.getElementById("typeFilter").value="";
-  document.getElementById("locationFilter").value="";
-  document.getElementById("budgetFilter").value="";
-  renderProperties();
-}
-
-function setType(type){
-  document.getElementById("typeFilter").value=type;
-  filterProperties();
-}
-
-function sendEnquiry(e){
-  e.preventDefault();
-  const name=document.getElementById("name").value.trim();
-  const phone=document.getElementById("phone").value.trim();
-  const req=document.getElementById("requirement").value;
-  const location=document.getElementById("location").value.trim();
-  const message=document.getElementById("message").value.trim();
-
-  if(!/^\d{10}$/.test(phone)){
-    alert("Please enter a valid 10-digit mobile number.");
-    return;
-  }
-
-  const text=`*New Property Enquiry — Jaipur Property Consultant*
-
-Name: ${name}
-Mobile: ${phone}
-Requirement: ${req}
-Preferred Location: ${location || "Not specified"}
-Details: ${message || "Not specified"}
-
-Please share suitable property options and current details.`;
-
-  window.open(`https://wa.me/${wa}?text=${encodeURIComponent(text)}`,"_blank");
-}
-
-const dynamicMessages=[
-  {
-    main:"🏡 <span>जयपुर में Plot खरीदने या बेचने के लिए संपर्क करें</span>",
-    sub:"अपनी location, budget या plot details WhatsApp पर भेजें।",
-    cta:"https://wa.me/916350566010?text=Namaste%2C%20mujhe%20Jaipur%20mein plot kharidna ya bechna hai."
-  },
-  {
-    main:"📍 <span>Jhotwara में Plot खरीदना है?</span>",
-    sub:"अपनी budget और plot size की requirement बताएं।",
-    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jhotwara mein plot kharidna hai."
-  },
-  {
-    main:"🏷️ <span>जयपुर में Plot बेचना है?</span>",
-    sub:"Location, size और expected price के साथ enquiry करें।",
-    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur mein plot bechna hai."
-  },
-  {
-    main:"🔎 <span>जयपुर में सही Plot ढूंढ रहे हैं?</span>",
-    sub:"Location और budget share करके available options पूछें।",
-    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur mein plot kharidna hai."
-  },
-  {
-    main:"🤝 <span>Plot खरीदने या बेचने से पहले consultation लें</span>",
-    sub:"Property requirement पर direct WhatsApp conversation शुरू करें।",
-    cta:"https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur property consultation chahiye."
-  }
-];
-
-let di=0;
-setInterval(()=>{
-  di=(di+1)%dynamicMessages.length;
-  const m=dynamicMessages[di];
-  const main=document.getElementById("dynamicMain");
-  const sub=document.getElementById("dynamicSub");
-  const cta=document.getElementById("dynamicCta");
-  main.style.opacity="0";
-  sub.style.opacity="0";
-  setTimeout(()=>{
-    main.innerHTML=m.main;
-    sub.textContent=m.sub;
-    cta.href=m.cta;
-    main.style.opacity="1";
-    sub.style.opacity="1";
-  },180);
-},4500);
-
-function toggleMenu(){
-  const nav=document.getElementById("navLinks");
-  if(nav.style.display==="flex"){
-    nav.style.display="";
-    return;
-  }
-  nav.style.display="flex";
-  nav.style.position="absolute";
-  nav.style.top="67px";
-  nav.style.left="0";
-  nav.style.right="0";
-  nav.style.background="#fff";
-  nav.style.padding="15px 4%";
-  nav.style.flexDirection="column";
-  nav.style.alignItems="stretch";
-  nav.style.borderBottom="1px solid #dfe5ec";
-}
-
-renderProperties();
-
-// Approved reviews preview
-try{
-  const reviewQuery=query(collection(publicDb,"publicReviews"),where("status","==","approved"),limit(3));
-  onSnapshot(reviewQuery,snap=>{
-    const docs=snap.docs.map(d=>d.data()).filter(r=>r.status==="approved");
-    const grid=document.getElementById("homepageReviewsGrid");
-    if(!grid)return;
-    grid.innerHTML=docs.length?docs.map(r=>`<article class="requirement-card"><div class="requirement-body"><div class="review-stars">${"★".repeat(Math.max(1,Math.min(5,Number(r.rating)||5)))}</div><h3>${escapeHtmlPublic(r.name||"Customer")}</h3><div class="req-detail">${escapeHtmlPublic(r.comment||"")}</div><div class="req-location">${escapeHtmlPublic(r.area||"")}</div></div></article>`).join(""):'<div class="public-note">Abhi approved reviews nahi hain. Aap pehla review share kar sakte hain.</div>';
-  });
-}catch(err){console.warn("Reviews unavailable",err);}
 </script>
 </body>
 </html>

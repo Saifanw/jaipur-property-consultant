@@ -309,10 +309,11 @@ button,input,select,textarea{font:inherit}
 .requirement-card .req-actions .btn-outline:hover{background:#0c773f!important;border-color:#0c773f!important}
 
 
-.quick-search{margin-top:18px;padding:16px;background:rgba(255,255,255,.97);border:1px solid #e6e9ef;border-radius:16px;box-shadow:0 12px 30px rgba(17,31,54,.08)}
-.quick-search-title{font-size:12px;font-weight:900;color:var(--gold-dark);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px}
+.quick-search{margin-top:20px;padding:16px;background:rgba(255,255,255,.97);border:1px solid #e6e9ef;border-radius:16px;box-shadow:0 12px 30px rgba(17,31,54,.08)}
+.quick-search-title{font-size:12px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px}
 .quick-search-row{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:9px}
-.quick-search-row input,.quick-search-row select{height:42px;border:1px solid #d9e0ea;border-radius:9px;padding:0 12px;font:inherit;color:var(--ink);background:#fff;min-width:0}
+.quick-search-row input,.quick-search-row select{height:42px;border:1px solid #d9e0ea;border-radius:9px;padding:0 12px;font:inherit;color:#182437;background:#fff;min-width:0}
+.quick-search-row select option{color:#182437;background:#fff}
 .quick-search-row input:focus,.quick-search-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,24,.12)}
 .quick-search-note{font-size:10px;color:var(--muted);margin-top:8px}
 @media(max-width:900px){.quick-search-row{grid-template-columns:1fr 1fr}.quick-search-row .quick-search-go{grid-column:1/-1}}
@@ -372,6 +373,29 @@ button,input,select,textarea{font:inherit}
         investors and property agents across Jaipur and Jhotwara.
       </p>
 
+      <div class="quick-search">
+        <div class="quick-search-title">🔎 Quick Property Search</div>
+        <div class="quick-search-row">
+          <input id="homeSearch" placeholder="Search Jhotwara, plot, land...">
+          <select id="homeType">
+            <option value="">All Property Types</option>
+            <option value="Residential Plot">Residential Plot</option>
+            <option value="Flat / Villa">Flat / Villa</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Land">Land</option>
+          </select>
+          <select id="homeBudget">
+            <option value="">Any Budget</option>
+            <option value="2500000">Up to ₹25 Lakh</option>
+            <option value="5000000">Up to ₹50 Lakh</option>
+            <option value="10000000">Up to ₹1 Crore</option>
+            <option value="20000000">Up to ₹2 Crore</option>
+          </select>
+          <button type="button" class="btn btn-gold quick-search-go" onclick="goToPropertySearch()">Search</button>
+        </div>
+        <div class="quick-search-note">Approved listings only • Owner contact details remain private</div>
+      </div>
+
       <div class="hero-action-boxes">
         <button class="hero-action buy" type="button" onclick="openPublicForm('buyer')">
           <strong>🏠 मुझे प्रॉपर्टी खरीदनी है</strong>
@@ -396,28 +420,6 @@ button,input,select,textarea{font:inherit}
         <span class="trust">✓ Property Shortlisting</span>
       </div>
 
-      <div class="quick-search">
-        <div class="quick-search-title">🔎 Quick Property Search</div>
-        <div class="quick-search-row">
-          <input id="homeSearch" placeholder="Search Jhotwara, plot, land...">
-          <select id="homeType">
-            <option value="">All Property Types</option>
-            <option value="Residential Plot">Residential Plot</option>
-            <option value="Flat / Villa">Flat / Villa</option>
-            <option value="Commercial">Commercial</option>
-            <option value="Land">Land</option>
-          </select>
-          <select id="homeBudget">
-            <option value="">Any Budget</option>
-            <option value="2500000">Up to ₹25 Lakh</option>
-            <option value="5000000">Up to ₹50 Lakh</option>
-            <option value="10000000">Up to ₹1 Crore</option>
-            <option value="20000000">Up to ₹2 Crore</option>
-          </select>
-          <button type="button" class="btn btn-gold quick-search-go" onclick="goToPropertySearch()">Search</button>
-        </div>
-        <div class="quick-search-note">Approved listings only • Owner contact details remain private</div>
-      </div>
     </div>
 
     <div class="enquiry">

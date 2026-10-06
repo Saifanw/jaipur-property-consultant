@@ -738,7 +738,7 @@ function renderPublicRequirements(docs){
       <div class="req-location">📍 ${escapeHtmlPublic(r.area||"Jaipur")}, ${escapeHtmlPublic(r.city||"Jaipur")}</div>
       <div class="req-detail">${escapeHtmlPublic(detail||"Property details available on enquiry.")}</div>
       ${r.budgetMin!=null||r.budgetMax!=null?`<div class="req-price">💰 ${publicMoney(r.budgetMin,r.budgetMax)}</div>`:""}
-      <div class="req-actions"><a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a><a class="btn btn-outline" href="tel:+916350566010">📞 Call</a></div>
+      <div class="req-actions"><a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a><a class="btn btn-outline" href="property.html?id=${encodeURIComponent(r.id)}">📋 View Details</a></div>
     </div></article>`;
   }).join("");
   const tickerItems=docs.map(r=>`${r.type==="seller"?"🏡 Available":"🏠 Required"}: ${r.area||"Jaipur"} • ${r.propertyType||"Property"}${r.size?" • "+r.size:""}${(r.budgetMin!=null||r.budgetMax!=null)?" • "+publicMoney(r.budgetMin,r.budgetMax):""}`);

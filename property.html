@@ -53,8 +53,8 @@ $("lightbox").onclick=e=>{if(e.target===$("lightbox"))$("lightbox").classList.re
 if(!id){$("loading").textContent="Property not found."}
 else{
  getDoc(doc(db,"publicRequirements",id)).then(s=>{
-  if(!s.exists()||s.data().type!=="seller"||!["Approved","approved"].includes(s.data().status)){
-    $("loading").textContent="This property is not available.";return;
+  if(!s.exists()||!["Approved","approved"].includes(s.data().status)){
+    $("loading").textContent="This property/requirement is not available.";return;
   }
   const p={id:s.id,...s.data()};
   const images=[...new Set((Array.isArray(p.imageUrls)?p.imageUrls:[]).filter(Boolean))];

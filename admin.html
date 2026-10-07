@@ -782,50 +782,26 @@ $("recordForm").onsubmit=async e=>{
   finally{$("saveBtn").disabled=false;$("saveBtn").textContent="Save Record"}
 };
 
-$("importBtn").onclick=()=>$('"'"'fileInput'"'"').click();
+$("importBtn").onclick=()=>$("fileInput").click();
 $("fileInput").onchange=async e=>{
   const file=e.target.files[0]; if(!file)return;
   try{
     const data=await file.arrayBuffer(), wb=XLSX.read(data,{type:"array"});
     const sheet=wb.Sheets[wb.SheetNames[0]], rows=XLSX.utils.sheet_to_json(sheet,{defval:""});
     if(!rows.length) throw new Error("No rows found.");
-    const dealerImport=currentFilter==="broker";
-    const label=dealerImport?"dealer":"CRM";
-    if(!confirm(`Import ${rows.length} ${label} records into CRM?`)) return;
-    const cleanPhone=v=>String(v??"").replace(/[^0-9+]/g,"");
-    const existingPhones=new Set(records.map(r=>cleanPhone(r.mobile)).filter(Boolean));
-    const importedPhones=new Set();
-    let count=0, skipped=0, duplicates=0;
+    if(!confirm(`Import ${rows.length} records into CRM?`)) return;
+    let count=0;
     for(const row of rows){
-      const name=row.name||row.Name||row["Dealer / Company"]||row["Dealer Name"]||row["Company Name"]||row.Company||"";
-      const mobile=cleanPhone(row.mobile||row.Mobile||row["Mobile Number"]||row.Phone||row["Phone Number"]||"");
-      const normalized={
-        type:dealerImport?"broker":String(row.type||row.Type||"customer").toLowerCase(),
-        name:String(name).trim(), mobile,
-        whatsapp:cleanPhone(row.whatsapp||row.WhatsApp||row["WhatsApp Number"]||""),
-        email:row.email||row.Email||"",
-        area:row.area||row.Area||row.Locality||row["Area / Address"]||row.Address||"",
-        city:row.city||row.City||"Jaipur",
-        propertyType:row.propertyType||row["Property Type"]||"",
-        size:row.size||row.Size||"",
-        budgetMin:row.budgetMin||row["Budget Min"]||null,
-        budgetMax:row.budgetMax||row["Budget Max"]||row.Budget||null,
-        details:row.details||row.Details||row.Requirement||row["Purpose / Note"]||row.Note||"",
-        company:row.company||row.Company||row["Dealer / Company"]||row["Dealer Name"]||row["Company Name"]||"",
-        status:row.status||row.Status||"New",
-        notes:row.notes||row.Notes||row["Purpose / Note"]||row.Note||"",
-        priority:row.priority||row.Priority||"",
-        source:row.source||row.Source||(dealerImport?"Dealer Excel Import":"Excel Import"),
-        publicVisible:false, publicDisplayName:row.publicDisplayName||row["Public Display Name"]||"",
-        updatedAt:serverTimestamp(), createdAt:serverTimestamp()
-      };
+      const normalized={type:String(row.type||row.Type||"customer").toLowerCase(),name:row.name||row.Name||"",mobile:String(row.mobile||row.Mobile||row["Mobile Number"]||""),
+        whatsapp:String(row.whatsapp||row.WhatsApp||""),email:row.email||row.Email||"",area:row.area||row.Area||row.Locality||"",city:row.city||row.City||"Jaipur",
+        propertyType:row.propertyType||row["Property Type"]||"",size:row.size||row.Size||"",budgetMin:row.budgetMin||row["Budget Min"]||null,budgetMax:row.budgetMax||row["Budget Max"]||row.Budget||null,
+        details:row.details||row.Details||row.Requirement||"",company:row.company||row.Company||"",status:row.status||row.Status||"New",notes:row.notes||row.Notes||"",
+        source:row.source||row.Source||"Excel Import",publicVisible:false,publicDisplayName:row.publicDisplayName||row["Public Display Name"]||"",updatedAt:serverTimestamp(),createdAt:serverTimestamp()};
       if(!["customer","seller","broker"].includes(normalized.type)) normalized.type="customer";
-      if(!normalized.name || !normalized.mobile){ skipped++; continue; }
-      if(existingPhones.has(normalized.mobile) || importedPhones.has(normalized.mobile)){ duplicates++; continue; }
-      await addDoc(collection(db,"crmContacts"),normalized);
-      importedPhones.add(normalized.mobile); count++;
+      if(!normalized.name || !normalized.mobile) continue;
+      await addDoc(collection(db,"crmContacts"),normalized); count++;
     }
-    showStatus(`${count} ${label} records imported. ${duplicates} duplicates skipped, ${skipped} rows without name/mobile skipped.`,"ok");
+    showStatus(`${count} records imported successfully. Rows without name/mobile were skipped.`,"ok");
   }catch(err){showStatus("Import failed: "+escapeHtml(err.message),"error")}
   e.target.value="";
 };

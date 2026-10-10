@@ -53,7 +53,7 @@ $("lightbox").onclick=e=>{if(e.target===$("lightbox"))$("lightbox").classList.re
 if(!id){$("loading").textContent="Property not found."}
 else{
  getDoc(doc(db,"publicRequirements",id)).then(s=>{
-  if(!s.exists()||!["Approved","approved"].includes(s.data().status)){
+  if(!s.exists()||["rejected","hidden","draft","deleted"].includes(String(s.data().status||"").toLowerCase())){
     $("loading").textContent="This property/requirement is not available.";return;
   }
   const p={id:s.id,...s.data()};

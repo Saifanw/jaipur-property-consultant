@@ -17,7 +17,7 @@ function render(){const q=$("q").value.toLowerCase().trim(),loc=$("loc").value,t
 function fill(){const locs=[...new Set(all.map(x=>x.area).filter(Boolean))].sort();const types=[...new Set(all.map(x=>x.propertyType).filter(Boolean))].sort();$("loc").innerHTML='<option value="">All Locations</option>'+locs.map(x=>`<option>${esc(x)}</option>`).join("");$("type").innerHTML='<option value="">All Property Types</option>'+types.map(x=>`<option>${esc(x)}</option>`).join("")}
 ["q","loc","type","budget"].forEach(id=>$(id).addEventListener(id==="q"?"input":"change",render));$("reset").onclick=()=>{$("q").value=$("loc").value=$("type").value=$("budget").value="";render()};
 const initialParams=new URLSearchParams(window.location.search);
-onSnapshot(query(collection(db,"publicRequirements"),where("type","==","seller")),snap=>{all=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.status==="Approved"||x.status==="approved");fill();
+onSnapshot(query(collection(db,"publicRequirements"),where("type","==","seller")),snap=>{all=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>!["rejected","hidden","draft","deleted"].includes(String(x.status||"").toLowerCase()));fill();
   if(initialParams.has("q")) $("q").value=initialParams.get("q")||"";
   if(initialParams.has("type")) $("type").value=initialParams.get("type")||"";
   if(initialParams.has("budget")) $("budget").value=initialParams.get("budget")||"";

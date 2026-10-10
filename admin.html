@@ -367,6 +367,7 @@ function renderSavedMatches(){
   const html=matches.slice(0,30).map(m=>{const c=records.find(r=>r.id===m.customerId),p=records.find(r=>r.id===m.sellerId);return `<div class="module-row"><div class="row-head"><strong>${escapeHtml(c?.name||m.customerName||"Customer")}</strong><span class="score">${Number(m.score||0)}% match</span></div><div class="module-note">🏠 ${escapeHtml(p?.name||m.sellerName||"Property")} • ${escapeHtml(p?.area||m.area||"")} • ${escapeHtml(p?.propertyType||m.propertyType||"")}</div><div class="module-actions"><button class="btn danger" data-delete-match="${m.id}">Delete Match</button></div></div>`}).join("");
   $("savedMatches").innerHTML=html||'<div class="empty">No saved matches yet.</div>';
 }
+function subImages(s){const l=[...(Array.isArray(s.imageDataUrls)?s.imageDataUrls:[]),...(s.imageDataUrl?[s.imageDataUrl]:[])];return [...new Set(l.filter(Boolean))].slice(0,3)}
 function renderSubmissions(){
   const filter=$("submissionStatusFilter").value||"pending";
   const list=submissions.filter(s=>filter==="all"||String(s.status||"pending")==filter);
@@ -374,7 +375,7 @@ function renderSubmissions(){
   $("submissionGrid").innerHTML=list.map(s=>{
     const isSeller=s.type==="seller";
     const status=String(s.status||"pending");
-    const photo=s.imageDataUrl?`<img src="${escapeHtml(s.imageDataUrl)}" alt="Submission photo">`:"";
+    const photo=subImages(s).map((u,i)=>`<img src="${escapeHtml(u)}" alt="Submission photo ${i+1}" style="max-height:140px;object-fit:cover;margin-bottom:6px">`).join("");
     return `<article class="submission-card ${status}">${photo}
       <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${escapeHtml(s.name||"Unnamed")}</strong><span class="status-pill ${status}">${status.toUpperCase()}</span></div>
       <div class="submission-meta" style="margin-top:8px"><strong>${isSeller?"Seller / Owner":"Buyer / Customer"}</strong><br>📞 ${escapeHtml(s.mobile||"—")}<br>📍 ${escapeHtml(s.area||"—")}, ${escapeHtml(s.city||"Jaipur")}<br>🏠 ${escapeHtml(s.propertyType||"—")} ${s.size?"• "+escapeHtml(s.size):""}<br>💰 ${formatMoney(s.budgetMin)}${s.budgetMax?" – "+formatMoney(s.budgetMax):""}<br>📝 ${escapeHtml(s.details||"—")}</div>
@@ -386,9 +387,9 @@ async function approveSubmission(id){
   const s=submissions.find(x=>x.id===id); if(!s)return;
   if(!confirm("Approve this submission and publish the selected details on the public website?"))return;
   try{
-    const crmData={type:s.type||"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:s.type==="seller"?"Property Available":"Buyer Requirement",images:s.imageDataUrl?[s.imageDataUrl]:[],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+    const crmData={type:s.type||"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:s.type==="seller"?"Property Available":"Buyer Requirement",images:subImages(s),createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
     const created=await addDoc(collection(db,"crmContacts"),crmData);
-    await setDoc(doc(db,"publicRequirements",created.id),{id:created.id,type:crmData.type,displayName:crmData.publicDisplayName,area:crmData.area,city:crmData.city,propertyType:crmData.propertyType,size:crmData.size,budgetMin:crmData.budgetMin,budgetMax:crmData.budgetMax,details:crmData.details,imageDataUrl:s.imageDataUrl||"",status:"Approved",updatedAt:serverTimestamp()});
+    await setDoc(doc(db,"publicRequirements",created.id),{id:created.id,type:crmData.type,displayName:crmData.publicDisplayName,area:crmData.area,city:crmData.city,propertyType:crmData.propertyType,size:crmData.size,budgetMin:crmData.budgetMin,budgetMax:crmData.budgetMax,details:crmData.details,imageDataUrl:subImages(s)[0]||"",imageUrls:s.type==="seller"?subImages(s):[],availability:"Available",status:"Approved",updatedAt:serverTimestamp()});
     await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:created.id},{merge:true});
     $("submissionStatus").innerHTML='<div class="notice ok">Submission approved and published.</div>';
   }catch(err){$("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
@@ -739,7 +740,11 @@ $("recordForm").onsubmit=async e=>{
     }
     data.images=imageUrls;
     if(publicImageUrls.length) data.publicImageUrls=publicImageUrls;
-    else if(editingImages.length && data.type==="seller") data.publicImageUrls=records.find(r=>r.id===id)?.publicImageUrls||[];
+    else if(data.type==="seller"){
+      // keep earlier public photos; if the record was made public AFTER photos were uploaded, fall back to the saved photos
+      const prevPublic=records.find(r=>r.id===id)?.publicImageUrls||[];
+      data.publicImageUrls=prevPublic.length?prevPublic:(imageUrls||[]);
+    }
     data.publicVideoUrl=publicVideoUrl;
     let savedId=id;
     if(id){
@@ -770,7 +775,9 @@ $("recordForm").onsubmit=async e=>{
         imageDataUrl:(data.type==="seller" && data.publicImageUrls?.length) ? data.publicImageUrls[0] : "",
         imageUrls:data.type==="seller" ? (data.publicImageUrls||[]) : [],
         videoUrl:data.type==="seller" ? (data.publicVideoUrl||"") : "",
-        status:data.status || "New",
+        // Being published (publicVisible) IS the approval. The CRM pipeline status ("New", "Contacted"...) must not decide public visibility.
+        status:"Approved",
+        crmStatus:data.status || "New",
         updatedAt:serverTimestamp()
       });
     }else{

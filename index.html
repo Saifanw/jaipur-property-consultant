@@ -4,713 +4,722 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Jaipur Property Consultant | Plots, Property Buy & Sell in Jaipur</title>
-<meta name="description" content="Jaipur Property Consultant for residential plots, land, property buying and selling assistance, site visits and property consultation across Jaipur and Jhotwara.">
+<title>Jaipur Property Consultant | Plots, Land & Property in Jaipur – Jhotwara</title>
+<meta name="description" content="Jaipur Property Consultant – verified residential plots, land and property buying & selling help in Jaipur and Jhotwara. Visit our office at 58A Gosai Marg, Udyog Nagar, Jhotwara.">
 <meta name="keywords" content="Jaipur Property Consultant, plots for sale in Jaipur, plot for sale Jhotwara, residential plots Jaipur, buy plot Jaipur, sell plot Jaipur, property consultant Jhotwara, land Jaipur">
+<meta name="theme-color" content="#111c2d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jaipur Property Consultant – Plots & Property in Jaipur">
+<meta property="og:description" content="Verified plots, land and property in Jaipur & Jhotwara. Buy, sell and invest with a real local office.">
+<meta property="og:image" content="storefront.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Jaipur Property Consultant","image":"storefront.jpg","telephone":"+91-6350566010","address":{"@type":"PostalAddress","streetAddress":"58A, Gosai Marg, Udyog Nagar, Jhotwara","addressLocality":"Jaipur","addressRegion":"Rajasthan","postalCode":"302012","addressCountry":"IN"},"areaServed":"Jaipur"}
+</script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0DW0NBETML');</script>
 
 <style>
 :root{
-  --navy:#111c2d;
-  --navy2:#1b2b42;
-  --blue:#245fc4;
-  --gold:#c79a25;
-  --gold2:#e8c45c;
-  --green:#128a4d;
-  --cream:#fbf8ef;
-  --bg:#f4f7fa;
-  --white:#fff;
-  --text:#182437;
-  --muted:#66758a;
-  --line:#dfe5ec;
-  --soft:#eef3f7;
-  --shadow:0 18px 45px rgba(17,28,45,.10);
-  --radius:20px;
+  --navy:#0f1b2d; --navy2:#1a2b44; --gold:#b98a1e; --gold-soft:#f6edd5; --gold2:#e8c45c;
+  --green:#128a4d; --green-dark:#0c6f3d; --blue:#245fc4;
+  --bg:#f5f7fa; --white:#fff; --text:#17233a; --muted:#5d6c82; --line:#e1e7ee;
+  --shadow:0 10px 30px rgba(15,27,45,.08); --shadow-lg:0 22px 55px rgba(15,27,45,.16);
+  --radius:16px;
+  --font:Inter,"Segoe UI","Noto Sans Devanagari",Arial,sans-serif;
+  --font-head:"Plus Jakarta Sans",Inter,"Noto Sans Devanagari","Segoe UI",Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  color:var(--text);background:#fff;line-height:1.6;
-}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--font);color:var(--text);background:#fff;line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
-button,input,select,textarea{font:inherit}
-.container{width:min(1180px,92%);margin:auto}
+img{max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--font-head);line-height:1.15}
+.container{width:min(1200px,92%);margin:auto}
+.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-/* TOP BAR */
-.topbar{background:var(--navy);color:#fff;font-size:13px}
-.topbar-inner{min-height:42px;display:flex;justify-content:space-between;align-items:center}
-.topbar a{font-weight:800}.topbar a:hover{color:var(--gold2)}
-.top-right{display:flex;gap:14px;align-items:center}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:11px;padding:13px 20px;font-size:15px;font-weight:700;cursor:pointer;transition:.18s;white-space:nowrap;line-height:1.2}
+.btn .icon{width:18px;height:18px}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#9c7316}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:var(--green-dark)}
+.btn-dark{background:var(--navy);color:#fff}.btn-dark:hover{background:var(--navy2)}
+.btn-light{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn-light:hover{border-color:var(--gold)}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.28)}.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.btn-sm{padding:10px 14px;font-size:14px}
+.btn-block{width:100%}
 
-/* NAV */
-.nav-wrap{
-  position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
-  box-shadow:0 4px 18px rgba(20,35,55,.05)
-}
-.nav{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-mark{
-  width:45px;height:45px;border-radius:12px;background:var(--navy);color:var(--gold2);
-  display:grid;place-items:center;font-weight:950;font-size:16px;border:1px solid #263952
-}
-.brand-name{font-size:21px;font-weight:950;line-height:1.05}
-.brand-sub{font-size:9px;letter-spacing:1.8px;color:#a27500;font-weight:950;margin-top:4px}
-.nav-links{display:flex;gap:22px;align-items:center;font-size:13px;font-weight:850;color:#334257}
-.nav-links a:hover{color:var(--gold)}
-.nav-cta{background:var(--green);color:#fff!important;padding:10px 15px;border-radius:9px}
-.nav-properties-cta{background:var(--gold);color:#fff!important;padding:12px 17px;border-radius:11px;font-weight:950;box-shadow:0 8px 18px rgba(199,154,37,.28);transform:translateY(-1px)}
-.nav-properties-cta:hover{background:var(--gold2)!important;color:var(--navy)!important;transform:translateY(-2px);box-shadow:0 10px 22px rgba(199,154,37,.34)}
+/* topbar + nav */
+.topbar{background:var(--navy);color:#cfd8e4;font-size:13.5px}
+.topbar-inner{min-height:40px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top-right{display:flex;gap:18px;align-items:center}
+.top-right a{display:inline-flex;align-items:center;gap:6px;color:#fff;font-weight:600}
+.top-right a:hover{color:var(--gold2)}
+.top-right .icon{width:15px;height:15px}
+.nav-wrap{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{width:46px;height:46px;border-radius:12px;background:var(--navy);color:var(--gold2);display:grid;place-items:center;font:800 17px var(--font-head);flex:none}
+.brand-name{font:800 20px/1.1 var(--font-head);color:var(--navy)}
+.brand-sub{font-size:10px;letter-spacing:1.7px;color:var(--gold);font-weight:700;margin-top:4px;text-transform:uppercase}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{padding:9px 12px;border-radius:9px;font-size:14.5px;font-weight:600;color:#33445d}
+.nav-links a:hover{background:var(--bg);color:var(--navy)}
+.nav-links a.nav-primary{background:var(--navy);color:#fff}
+.nav-links a.nav-primary:hover{background:var(--navy2)}
+.nav-links a.nav-wa{background:var(--green);color:#fff;display:inline-flex;gap:7px;align-items:center;margin-left:4px}
+.nav-links a.nav-wa:hover{background:var(--green-dark)}
+.menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;width:44px;height:44px;place-items:center;cursor:pointer}
 
-.menu-btn{display:none;border:0;background:var(--navy);color:#fff;border-radius:8px;padding:9px 11px}
+/* hero */
+.hero{position:relative;color:#fff;overflow:hidden;background:radial-gradient(900px 400px at 85% 0%,rgba(232,196,92,.14),transparent 60%),linear-gradient(130deg,#0d1828 0%,#17283f 60%,#213650 100%)}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center;padding:64px 0 72px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.4px;color:var(--gold2);font-weight:700;text-transform:uppercase;margin-bottom:16px}
+.eyebrow:before{content:"";width:26px;height:2px;background:var(--gold2)}
+.hero h1{font-size:clamp(36px,5vw,60px);letter-spacing:-1.5px;margin-bottom:18px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero-lead{max-width:600px;color:#d5deea;font-size:18px;margin-bottom:26px}
+.search-card{background:#fff;color:var(--text);border-radius:18px;padding:16px;box-shadow:var(--shadow-lg);max-width:680px}
+.search-title{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.8px;text-transform:uppercase;margin:0 4px 10px}
+.search-row{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:10px}
+.search-row input,.search-row select{height:48px;border:1px solid #d5dde8;border-radius:11px;padding:0 13px;background:#fff;min-width:0;font-size:15px}
+.search-row input:focus,.search-row select:focus,.enq input:focus,.enq select:focus,.enq textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(185,138,30,.18)}
+.search-row .btn{height:48px}
+.search-note{display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted);margin:10px 4px 0}
+.search-note .icon{width:14px;height:14px;color:var(--green)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hero-actions .btn{padding:14px 22px}
+.hero-actions small{display:block;font-weight:500;font-size:12px;opacity:.85;margin-top:2px}
+.hero-actions .btn span{display:block;text-align:left}
 
-/* HERO */
-.hero{
-  position:relative;overflow:hidden;color:#fff;
-  background:
-    radial-gradient(circle at 78% 10%,rgba(232,196,92,.16),transparent 28%),
-    linear-gradient(125deg,#101d2e 0%,#1c2e46 58%,#293e58 100%);
-}
-.hero:after{
-  content:"";position:absolute;inset:0;opacity:.45;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:44px 44px
-}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;gap:55px;align-items:center;min-height:560px;padding:68px 0}
-.eyebrow{font-size:12px;letter-spacing:1.4px;color:var(--gold2);font-weight:950;margin-bottom:15px;text-transform:uppercase}
-.hero h1{font-size:clamp(43px,5.4vw,68px);line-height:1.02;letter-spacing:-2.5px;margin-bottom:20px}
-.hero h1 span{color:#fff}
-.hero-lead{max-width:700px;color:#dbe5f0;font-size:17px;margin-bottom:25px}
-.hero-buttons{display:flex;gap:10px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  border:0;border-radius:10px;padding:13px 17px;font-size:13px;font-weight:900;cursor:pointer
-}
-.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#ad8316}
-.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#0c773f}
-.btn-dark{background:var(--navy);color:#fff}.btn-white{background:#fff;color:var(--navy)}
-.btn-outline{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.22)}
-.hero-trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:21px}
-.trust{font-size:10px;font-weight:850;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.055);padding:6px 9px;border-radius:999px}
+.enq{background:#fff;color:var(--text);border-radius:22px;padding:28px;box-shadow:var(--shadow-lg)}
+.enq h2{font-size:25px;margin-bottom:4px}
+.enq>p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.enq form{display:grid;gap:11px}
+.enq input,.enq select,.enq textarea{width:100%;padding:13px 14px;border:1px solid #d5dde8;border-radius:11px;background:#fff;font-size:15px}
+.enq textarea{min-height:76px;resize:vertical}
+.enq .note{display:flex;gap:6px;justify-content:center;align-items:center;font-size:12.5px;color:var(--muted);text-align:center}
+.field-err{color:#b42318;font-size:13px;display:none}
 
-/* ENQUIRY CARD */
-.enquiry{
-  background:#fff;color:var(--text);border-radius:20px;padding:27px;
-  box-shadow:0 25px 65px rgba(0,0,0,.23)
-}
-.enquiry h2{font-size:27px;line-height:1.15;margin-bottom:6px}
-.enquiry>p{color:var(--muted);font-size:13px;margin-bottom:17px}
-.enquiry form{display:grid;gap:10px}
-.enquiry input,.enquiry select,.enquiry textarea{
-  width:100%;padding:12px 13px;border:1px solid #d2dce7;border-radius:9px;outline:none;background:#fff;color:var(--text)
-}
-.enquiry input:focus,.enquiry select:focus,.enquiry textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,95,196,.08)}
-.enquiry textarea{min-height:78px;resize:vertical}
-.form-note{text-align:center;color:#8a98aa;font-size:10px}
+/* trust strip */
+.trust-strip{background:#fff;border-bottom:1px solid var(--line)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:22px 0}
+.trust-item{display:flex;align-items:center;gap:12px;padding:6px 10px}
+.trust-ico{width:44px;height:44px;border-radius:12px;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;flex:none}
+.trust-item strong{display:block;font-size:14.5px;line-height:1.25}
+.trust-item span{font-size:13px;color:var(--muted);line-height:1.3;display:block}
 
-/* DYNAMIC PULL-DOWN STRIP */
-.dynamic-strip{
-  background:#fff;border-bottom:1px solid var(--line);
-  box-shadow:0 8px 22px rgba(17,28,45,.06)
-}
-.dynamic-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.dynamic-left{display:flex;align-items:center;gap:12px;min-width:0}
-.pulse{
-  width:10px;height:10px;border-radius:50%;background:var(--gold);
-  box-shadow:0 0 0 6px rgba(199,154,37,.13);flex:none
-}
-.dynamic-copy{min-width:0}
-.dynamic-main{font-size:14px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dynamic-main span{color:#9d7100}
-.dynamic-sub{font-size:10px;color:var(--muted);margin-top:1px}
-.dynamic-cta{white-space:nowrap;background:var(--green);color:#fff;padding:10px 14px;border-radius:9px;font-size:11px;font-weight:950}
+/* sections */
+.section{padding:76px 0}
+.section.alt{background:var(--bg)}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+.section-head.center{display:block;text-align:center;max-width:720px;margin:0 auto 38px}
+.kicker{font-size:12.5px;color:var(--gold);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:6px}
+.section h2.title{font-size:clamp(28px,3.4vw,38px);letter-spacing:-.8px;font-weight:800;color:var(--navy)}
+.section-head p{color:var(--muted);font-size:16px;margin-top:8px;max-width:640px}
+.section-head.center p{margin-left:auto;margin-right:auto}
+.link-arrow{font-weight:700;color:var(--navy);display:inline-flex;gap:6px;align-items:center;border-bottom:2px solid var(--gold);padding-bottom:2px}
+.link-arrow:hover{color:var(--gold)}
 
-/* SECTIONS */
-.section{padding:78px 0}
-.section.soft{background:#f3f6f9}
-.section.cream{background:var(--cream)}
-.section-head{text-align:center;max-width:760px;margin:0 auto 39px}
-.kicker{font-size:11px;color:#a57400;font-weight:950;letter-spacing:1.5px;text-transform:uppercase}
-.section h2{font-size:37px;line-height:1.13;letter-spacing:-1px;margin:7px 0 9px}
-.section-head p{color:var(--muted);font-size:14px}
+/* property cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.2s}
+.pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.slider{position:relative;aspect-ratio:4/3;background:#e9eef4;overflow:hidden}
+.slides{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.slides::-webkit-scrollbar{display:none}
+.slide{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;overflow:hidden;cursor:zoom-in;background:#dfe7f0}
+.slide .bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(18px) brightness(.85);}
+.slide .fg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.no-photo{display:grid;place-items:center;height:100%;color:#8aa0b8;text-align:center;font-size:13px;gap:6px;align-content:center}
+.no-photo .icon{width:46px;height:46px;stroke-width:1.4}
+.s-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--navy);display:grid;place-items:center;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.2);opacity:0;transition:.15s;z-index:2}
+.slider:hover .s-btn,.s-btn:focus-visible{opacity:1}
+@media(hover:none){.s-btn{opacity:.9}}
+.s-btn.prev{left:10px}.s-btn.next{right:10px}
+.s-btn .icon{width:18px;height:18px}
+.dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2;pointer-events:none}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.5)}
+.dot.on{background:#fff;width:18px;border-radius:5px}
+.s-count{position:absolute;right:10px;bottom:10px;background:rgba(15,27,45,.75);color:#fff;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;z-index:2;display:flex;align-items:center;gap:5px}
+.s-count .icon{width:13px;height:13px}
+.avail{position:absolute;left:10px;top:10px;z-index:2;font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;background:#fff;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.avail:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.avail.offer:before{background:#e0a100}.avail.sold:before,.avail.off:before{background:#d92d20}
+.pbody{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.ptype{font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px}
+.pbody h3{font-size:19px;margin:5px 0 4px;color:var(--navy);font-weight:700}
+.ploc{font-size:14px;color:var(--muted);display:flex;gap:5px;align-items:center}
+.ploc .icon{width:15px;height:15px;color:var(--gold)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0 4px}
+.chip{background:#f0f4f8;border-radius:8px;padding:5px 10px;font-size:12.5px;font-weight:600;color:#44566d;display:inline-flex;gap:5px;align-items:center}
+.chip .icon{width:13px;height:13px}
+.pdesc{font-size:14px;color:var(--muted);margin-top:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pfoot{margin-top:auto;padding-top:14px}
+.price{font:800 22px var(--font-head);color:var(--navy);margin-bottom:12px}
+.price small{font:500 12px var(--font);color:var(--muted);margin-left:4px}
+.pactions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 
-/* SEARCH */
-.search-panel{
-  background:#fff;border:1px solid var(--line);border-radius:19px;padding:17px;
-  box-shadow:var(--shadow);margin-bottom:27px
-}
-.search-row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr auto;gap:9px}
-.search-row input,.search-row select{
-  min-width:0;padding:12px;border:1px solid #d6dfe8;border-radius:9px;outline:none;background:#fff
-}
-.search-row input:focus,.search-row select:focus{border-color:var(--gold)}
-.results-line{display:flex;justify-content:space-between;gap:10px;margin-top:11px;color:var(--muted);font-size:11px}
-.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.property-card{
-  background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
-  box-shadow:0 8px 28px rgba(20,42,68,.06);transition:.2s
-}
-.property-card:hover{transform:translateY(-4px);box-shadow:0 17px 40px rgba(20,42,68,.12)}
-.property-img{
-  height:175px;position:relative;padding:14px;display:flex;align-items:flex-end;
-  background:linear-gradient(135deg,#dfe8f1,#bfcddd)
-}
-.property-img:before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent 35%,rgba(255,255,255,.34) 36%,transparent 60%)
-}
-.badge{position:relative;background:var(--navy);color:#fff;border-radius:7px;padding:6px 9px;font-size:9px;font-weight:950}
-.property-body{padding:18px}
-.property-body h3{font-size:17px;margin-bottom:3px}
-.location{font-size:11px;color:var(--muted);margin-bottom:12px}
-.meta{display:flex;gap:7px;flex-wrap:wrap;border-bottom:1px solid #e9eef3;padding-bottom:12px}
-.meta span{background:#f2f5f8;padding:4px 7px;border-radius:6px;color:#53657a;font-size:9px;font-weight:800}
-.price{font-size:18px;font-weight:950;margin-top:12px;color:var(--navy)}
-.price small{font-size:9px;color:#8a98a8;font-weight:600}
-.card-actions{display:flex;gap:8px;margin-top:11px}
-.card-btn{flex:1;text-align:center;padding:9px;border-radius:8px;font-size:10px;font-weight:900}
-.card-wa{background:#eaf8f0;color:#0e7b42}.card-call{background:#edf3ff;color:#275da8}
-.no-results{display:none;background:#fff;border:1px dashed #cbd6e1;border-radius:15px;padding:30px;text-align:center;color:var(--muted)}
+/* buyer cards */
+.bcard{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.bcard-top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.bavatar{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold2);display:grid;place-items:center;flex:none}
+.bavatar .icon{width:22px}
+.btag{font-size:12px;font-weight:700;color:var(--green);display:flex;gap:5px;align-items:center}
+.btag .icon{width:14px;height:14px}
+.bcard h3{font-size:18px;color:var(--navy)}
+.bcard .price{font-size:19px;margin:6px 0 4px;color:#8a6500}
+.bcard .pdesc{-webkit-line-clamp:3}
+.bcard .btn{margin-top:12px}
 
-/* CATEGORIES */
-.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
-.category{
-  background:#fff;border:1px solid var(--line);border-radius:17px;padding:21px 12px;text-align:center;
-  transition:.2s;box-shadow:0 7px 22px rgba(20,42,68,.045)
-}
-.category:hover{transform:translateY(-4px);border-color:#d9bf72}
-.category-icon{font-size:26px;margin-bottom:7px}.category strong{display:block;font-size:13px}.category small{color:var(--muted);font-size:10px}
+/* empty / skeleton */
+.empty-box{grid-column:1/-1;background:#fff;border:1.5px dashed #c9d4e1;border-radius:var(--radius);padding:34px 22px;text-align:center;color:var(--muted)}
+.empty-box strong{display:block;color:var(--navy);font-size:18px;margin-bottom:6px;font-family:var(--font-head)}
+.empty-box .btn{margin-top:14px}
+.skel{height:360px;border-radius:var(--radius);background:linear-gradient(100deg,#eef2f6 30%,#f8fafc 50%,#eef2f6 70%);background-size:200% 100%;animation:sk 1.3s infinite}
+@keyframes sk{to{background-position:-200% 0}}
 
-/* BUY / SELL */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:19px}
-.info-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:27px;box-shadow:0 8px 28px rgba(20,42,68,.055)}
-.info-card h3{font-size:22px;margin:6px 0 7px}.info-card p{color:var(--muted);font-size:13px}
-.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
-.check{font-size:11px;font-weight:850}.check b{color:var(--green);margin-right:5px}
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;position:relative}
+.step:before{counter-increment:s;content:"0" counter(s);font:800 14px var(--font-head);color:var(--gold);background:var(--gold-soft);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px}
+.step h3{font-size:19px;margin-bottom:6px;color:var(--navy)}
+.step p{font-size:15px;color:var(--muted)}
 
-/* SERVICES */
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.service{
-  background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px
-}
-.service-icon{font-size:24px}.service h3{font-size:16px;margin:8px 0 4px}.service p{font-size:11px;color:var(--muted)}
+/* sell / agents */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:var(--shadow)}
+.panel.dark{background:linear-gradient(135deg,#0f1b2d,#1f3550);color:#fff;border:0}
+.panel h3{font-size:24px;margin:4px 0 8px;color:var(--navy)}
+.panel.dark h3{color:#fff}
+.panel p{color:var(--muted);margin-bottom:14px}
+.panel.dark p{color:#cfdae8}
+.ticks{list-style:none;display:grid;gap:9px;margin:0 0 20px}
+.ticks li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.ticks .icon{color:var(--green);margin-top:2px;width:18px;height:18px}
+.panel.dark .ticks .icon{color:var(--gold2)}
+.panel .btns{display:flex;gap:10px;flex-wrap:wrap}
 
-/* AGENTS */
-.agent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.agent-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px}
-.agent-card h3{font-size:16px}.agent-card p{font-size:11px;color:var(--muted);margin:6px 0 13px}
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.service{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;gap:16px;align-items:flex-start;transition:.2s}
+.service:hover{border-color:#e3cc8b;box-shadow:var(--shadow)}
+.service .trust-ico{width:46px;height:46px}
+.service h3{font-size:16.5px;margin-bottom:3px;color:var(--navy);font-weight:700}
+.service p{font-size:14px;color:var(--muted);line-height:1.5}
 
-/* LOCATIONS */
-.location-grid{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
-.location-pill{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:999px;font-size:11px;font-weight:850}
+/* areas */
+.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pill{background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:999px;font-size:14.5px;font-weight:600;transition:.15s;display:inline-flex;gap:6px;align-items:center}
+.pill .icon{width:14px;height:14px;color:var(--gold)}
+.pill:hover{border-color:var(--gold);background:var(--gold-soft)}
 
-/* CONTACT */
-.office-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
-.office-photo{
-  min-height:330px;border-radius:20px;overflow:hidden;background:#dbe4ed;
-  display:flex;align-items:center;justify-content:center;color:#68798d;font-weight:800
-}
+/* reviews */
+.stars{color:#e0a100;letter-spacing:2px;font-size:17px}
+.rcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.rcard p{margin:10px 0 14px;color:#33445d;font-size:15px}
+.rcard .who{display:flex;gap:11px;align-items:center}
+.rcard .who b{display:block;font-size:15px}.rcard .who span{font-size:13px;color:var(--muted)}
+.rav{width:40px;height:40px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;font-weight:800}
+
+/* contact */
+.office{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
+.office-photo{border-radius:22px;overflow:hidden;position:relative;min-height:360px;background:#d9e2ec;box-shadow:var(--shadow-lg)}
 .office-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.contact-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:27px;box-shadow:var(--shadow)}
-.contact-box h3{font-size:25px;margin-bottom:13px}
-.contact-line{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #e9edf2;font-size:12px}
-.contact-line:last-of-type{border-bottom:0}.contact-label{width:75px;color:#78879a;font-size:10px;font-weight:900;text-transform:uppercase}
+.office-photo .cap{position:absolute;left:14px;bottom:14px;background:rgba(15,27,45,.88);color:#fff;border-radius:12px;padding:10px 14px;font-size:13.5px;max-width:calc(100% - 28px)}
+.office-photo .cap b{color:var(--gold2)}
+.contact-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+.contact-box h3{font-size:25px;margin-bottom:12px;color:var(--navy)}
+.cl{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #edf1f5;font-size:15px}
+.cl:last-of-type{border-bottom:0}
+.cl .lab{width:84px;flex:none;color:var(--muted);font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-top:2px}
+.map{margin-top:24px;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);height:320px}
+.map iframe{width:100%;height:100%;border:0;display:block}
 
-/* CTA */
-.cta{background:var(--cream);border-top:1px solid #eee5ca;border-bottom:1px solid #eee5ca;padding:63px 0}
-.cta-box{
-  background:linear-gradient(135deg,#101e30,#223750);color:#fff;border-radius:24px;padding:36px;
-  display:flex;align-items:center;justify-content:space-between;gap:25px;box-shadow:0 20px 50px rgba(17,28,45,.16)
-}
-.cta-box h2{font-size:34px;line-height:1.12;margin:6px 0}.cta-box p{font-size:13px;color:#d9e4ef;max-width:670px}
+/* CTA + footer */
+.cta-band{background:linear-gradient(135deg,#0f1b2d,#223a57);color:#fff;border-radius:24px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;box-shadow:var(--shadow-lg)}
+.cta-band h2{font-size:clamp(26px,3vw,34px);margin-bottom:6px}
+.cta-band p{color:#cfdae8;max-width:620px}
+.footer{background:#0a1422;color:#aab8c9;padding:44px 0 24px;margin-top:70px;font-size:14px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px;padding-bottom:28px;border-bottom:1px solid #1d2c42}
+.footer h4{color:#fff;font-size:15px;margin-bottom:12px;font-family:var(--font-head)}
+.footer a{display:block;padding:3px 0;color:#aab8c9}.footer a:hover{color:var(--gold2)}
+.footer .brand-name{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:20px;font-size:13px}
+.footer-bottom a{display:inline;color:#6f8099;font-size:12.5px}
 
-/* FLOAT */
-.float-wa{
-  position:fixed;right:20px;bottom:20px;z-index:1200;width:55px;height:55px;border-radius:50%;
-  display:grid;place-items:center;background:#17a553;color:#fff;font-size:23px;
-  box-shadow:0 12px 30px rgba(23,165,83,.28)
-}
-
-
-/* PUBLIC REQUIREMENT ACTIONS */
-.hero-action-boxes{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0 8px;max-width:650px}
-.hero-action{border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:15px 16px;text-align:left;color:#fff;cursor:pointer;transition:.2s;box-shadow:0 10px 25px rgba(0,0,0,.12)}
-.hero-action:hover{transform:translateY(-3px)}
-.hero-action.buy{background:linear-gradient(135deg,#c79a25,#a97e11)}
-.hero-action.sell{background:linear-gradient(135deg,#128a4d,#0b6e3d)}
-.hero-action strong{display:block;font-size:16px}.hero-action span{display:block;font-size:10px;opacity:.9;margin-top:2px}
-.hero-action small{display:block;margin-top:7px;font-size:9px;opacity:.78}
-.public-live{background:#f3f6f9;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
-.public-live-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
-.public-live-head h2{font-size:23px;line-height:1.15}.public-live-head p{font-size:11px;color:var(--muted);margin-top:2px}
-.public-live-link{font-size:11px;font-weight:900;color:#176b43;white-space:nowrap}
-.requirements-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}
-.requirement-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px rgba(20,42,68,.06)}
-.requirement-photo{height:155px;background:linear-gradient(135deg,#dfe8f1,#bfcddd);overflow:hidden}.requirement-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.requirement-body{padding:17px}.requirement-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}.requirement-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#275da8;font-size:10px;font-weight:900}
-.requirement-card h3{margin:0 0 7px;font-size:17px}.req-location{font-weight:800;color:#334155;margin-bottom:7px;font-size:12px}.req-detail{font-size:11px;color:#5d6d80;min-height:34px}.req-price{font-size:15px;font-weight:950;margin-top:8px;color:var(--navy)}
-.req-actions{display:flex;gap:7px;margin-top:13px}.req-actions .btn{flex:1;padding:9px 8px;font-size:10px}.public-note{font-size:10px;color:#738297;margin-top:13px;text-align:center}
-.ticker-wrap{background:#111c2d;color:#fff;overflow:hidden}.ticker{height:38px;display:flex;align-items:center;white-space:nowrap}.ticker-label{background:#c79a25;padding:5px 10px;border-radius:6px;font-size:9px;font-weight:950;margin-right:13px;z-index:2}.ticker-track{overflow:hidden;flex:1}.ticker-text{display:inline-block;font-size:11px;font-weight:800;animation:tickerMove 28s linear infinite}.ticker-text span{margin-right:55px;color:#e7eef6}.ticker-text b{color:#e8c45c}@keyframes tickerMove{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
-.public-modal{position:fixed;inset:0;background:rgba(7,17,30,.68);z-index:2200;display:grid;place-items:center;padding:18px}.public-modal-card{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.3)}.public-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}.public-modal-head h2{margin:0;font-size:25px}.public-modal-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.public-close{border:0;background:#eef2f6;border-radius:50%;width:34px;height:34px;font-size:20px;cursor:pointer}.public-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.public-field{display:flex;flex-direction:column;gap:5px}.public-field.full{grid-column:1/-1}.public-field label{font-size:10px;font-weight:900;color:#53657a}.public-field input,.public-field select,.public-field textarea{width:100%;padding:11px 12px;border:1px solid #d3dde7;border-radius:9px;outline:0}.public-field textarea{min-height:82px;resize:vertical}.public-privacy{background:#f3f7fb;border:1px solid #dfe7ef;border-radius:11px;padding:11px;font-size:10px;color:#5c6c7e}.public-privacy strong{color:#18304b}.public-submit-row{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.public-photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:none;border:1px solid var(--line)}
-@media(max-width:850px){.requirements-panel{grid-template-columns:1fr 1fr}.hero-action-boxes{max-width:none}}
-@media(max-width:620px){.hero-action-boxes{grid-template-columns:1fr}.public-live-head{display:block}.public-live-link{display:inline-block;margin-top:6px}.requirements-panel{grid-template-columns:1fr}.public-form-grid{grid-template-columns:1fr}.public-field.full{grid-column:auto}.ticker-label{margin-right:8px}.ticker-text{font-size:10px}}
-
-/* MOBILE */
+.float-wa{position:fixed;right:20px;bottom:22px;z-index:1200;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#1fb457;color:#fff;box-shadow:0 12px 28px rgba(18,138,77,.4)}
+.float-wa .icon{width:28px;height:28px;fill:#fff;stroke:none}
 .mobile-bar{display:none}
-@media(max-width:980px){
-  .nav-links{display:none}.menu-btn{display:block}
-  .hero-grid,.two-col,.office-grid{grid-template-columns:1fr}
-  .property-grid,.service-grid,.agent-grid{grid-template-columns:1fr 1fr}
-  .category-grid{grid-template-columns:repeat(3,1fr)}
-  .search-row{grid-template-columns:1fr 1fr}
-  .dynamic-inner{padding:10px 0}
+
+/* modal + lightbox */
+.modal{position:fixed;inset:0;background:rgba(7,15,28,.7);z-index:2200;display:none;place-items:center;padding:16px}
+.modal.open{display:grid}
+.modal-card{width:min(740px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:26px}
+.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:16px}
+.modal-head h2{font-size:25px}.modal-head p{color:var(--muted);font-size:14px;margin-top:4px}
+.x-btn{border:0;background:#eef2f6;border-radius:50%;width:38px;height:38px;font-size:22px;cursor:pointer;flex:none;line-height:1}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld{display:flex;flex-direction:column;gap:5px}.fld.full{grid-column:1/-1}
+.fld label{font-size:13px;font-weight:600;color:#40526b}
+.fld input,.fld select,.fld textarea{width:100%;padding:12px 13px;border:1px solid #d5dde8;border-radius:10px;font-size:15px;background:#fff}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(185,138,30,.18)}
+.fld textarea{min-height:90px;resize:vertical}
+.privacy{background:#f1f6fb;border:1px solid #dbe6f1;border-radius:11px;padding:12px 14px;font-size:13px;color:#4a5d75}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.thumbs img{width:84px;height:66px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.msg{margin-top:12px;padding:12px 14px;border-radius:10px;font-size:14px}
+.msg.ok{background:#e8f7ef;color:#08743e}.msg.err{background:#fff0ef;color:#b42318}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.lightbox{position:fixed;inset:0;background:rgba(5,10,18,.94);z-index:3000;display:none;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:86vh;object-fit:contain;border-radius:8px}
+.lb-btn{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:rgba(255,255,255,.26)}
+.lb-prev{left:16px;top:50%;transform:translateY(-50%)}.lb-next{right:16px;top:50%;transform:translateY(-50%)}
+.lb-close{top:16px;right:16px}
+.lb-count{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#cfd9e6;font-size:14px}
+
+/* responsive */
+@media(max-width:1000px){
+  .hero-grid{grid-template-columns:1fr;gap:34px;padding:44px 0 52px}
+  .cards,.services{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .office,.two-col{grid-template-columns:1fr}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(15,27,45,.12);flex-direction:column;align-items:stretch;padding:12px 4%;gap:2px}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 12px;font-size:16px}
+  .nav-links a.nav-wa{margin:6px 0 0;justify-content:center}
+  .menu-btn{display:grid}
+  .nav{position:relative}
 }
-@media(max-width:620px){
-  body{padding-bottom:62px}
-  .topbar-left{font-size:10px}.top-right{font-size:10px;gap:7px}
-  .top-right span{display:none}
-  .nav{min-height:67px}.brand-name{font-size:17px}.brand-sub{font-size:7px}.brand-mark{width:39px;height:39px}
-  .hero-grid{padding:48px 0}.hero h1{font-size:43px;letter-spacing:-1.7px}.hero-lead{font-size:15px}
-  .enquiry{padding:21px}
-  .dynamic-inner{display:block}.dynamic-left{margin-bottom:9px}.dynamic-main{white-space:normal}.dynamic-cta{display:inline-block}
-  .section{padding:54px 0}.section h2{font-size:30px}
-  .property-grid,.service-grid,.agent-grid,.two-col,.office-grid{grid-template-columns:1fr}
-  .category-grid{grid-template-columns:1fr 1fr}
+@media(max-width:640px){
+  body{padding-bottom:66px;font-size:15.5px}
+  .topbar-left{display:none}.topbar-inner{justify-content:center}
+  .nav{min-height:66px}.brand-name{font-size:17px}.brand-sub{font-size:8.5px;letter-spacing:1.2px}.brand-mark{width:40px;height:40px}
   .search-row{grid-template-columns:1fr}
-  .checks{grid-template-columns:1fr}
-  .cta-box{display:block;padding:28px 22px}.cta-box h2{font-size:28px}.cta-box .btn{margin-top:18px}
+  .hero-lead{font-size:16px}
+  .hero-actions .btn{flex:1;min-width:100%}
+  .enq{padding:22px}
+  .cards,.services,.fgrid,.trust-grid,.footer-grid{grid-template-columns:1fr}
+  .section{padding:54px 0}
+  .cta-band{padding:28px 22px}
   .float-wa{display:none}
-  .mobile-bar{
-    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:2000;
-    background:#fff;padding:8px;gap:8px;box-shadow:0 -4px 18px rgba(0,0,0,.13)
-  }
-  .mobile-bar a{flex:1;text-align:center;padding:11px;border-radius:8px;color:#fff;font-weight:900;font-size:12px}
-  .mobile-call{background:var(--navy)}.mobile-wa{background:var(--green)}
+  .mobile-bar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:2000;background:#fff;padding:8px;gap:8px;box-shadow:0 -4px 18px rgba(0,0,0,.14)}
+  .mobile-bar a{flex:1;text-align:center;padding:12px;border-radius:10px;color:#fff;font-weight:700;font-size:15px;display:flex;justify-content:center;gap:8px;align-items:center}
+  .mobile-bar .c{background:var(--navy)}.mobile-bar .w{background:var(--green)}
+  .cl{flex-direction:column;gap:3px}
+  .map{height:260px}
+  .lb-prev{left:6px}.lb-next{right:6px}
 }
- 
-.requirements-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
-.requirement-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
-.requirement-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
-.requirement-badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#275da8;font-size:10px;font-weight:900}
-.requirement-card h3{margin:0 0 8px;font-size:17px}
-.requirement-card .req-location{font-weight:800;color:#334155;margin-bottom:8px}
-.requirement-card .req-detail{font-size:13px;color:#53657a;line-height:1.55}
-.requirement-card .req-price{margin-top:12px;font-weight:900;color:#9a7200}
-.requirement-card .req-actions{display:flex;gap:8px;margin-top:15px;align-items:stretch}
-.requirement-card .req-actions .btn{font-size:11px;padding:10px 14px;min-width:132px;height:40px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;white-space:nowrap}
-.requirement-card .req-actions .btn-outline{background:var(--green);color:#fff;border:1px solid var(--green);font-weight:900}
-.requirement-card .req-actions .btn-outline:hover{background:#0c773f;border-color:#0c773f}
-.public-note{font-size:11px;color:var(--muted);margin-top:10px}
-.buyer-requirements-section{background:#f8fafc;border-top:1px solid #e7edf3}
-.buyer-requirements-section .requirements-panel{margin-top:22px}
-.requirement-body{min-width:0}
-.requirement-card .req-actions .btn-outline{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
-.requirement-card .req-actions .btn-outline:hover{background:#0c773f!important;border-color:#0c773f!important}
-
-
-.quick-search{margin-top:20px;padding:16px;background:rgba(255,255,255,.97);border:1px solid #e6e9ef;border-radius:16px;box-shadow:0 12px 30px rgba(17,31,54,.08)}
-.quick-search-title{font-size:12px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px}
-.quick-search-row{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:9px}
-.quick-search-row input,.quick-search-row select{height:42px;border:1px solid #d9e0ea;border-radius:9px;padding:0 12px;font:inherit;color:#182437;background:#fff;min-width:0}
-.quick-search-row select option{color:#182437;background:#fff}
-.quick-search-row input:focus,.quick-search-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,151,24,.12)}
-.quick-search-note{font-size:10px;color:var(--muted);margin-top:8px}
-@media(max-width:900px){.quick-search-row{grid-template-columns:1fr 1fr}.quick-search-row .quick-search-go{grid-column:1/-1}}
-@media(max-width:600px){.quick-search-row{grid-template-columns:1fr}.quick-search-row .quick-search-go{grid-column:auto}}
-@media(max-width:900px){
-.nav-properties-cta{display:inline-block}.requirements-panel{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.requirements-panel{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
-
 <body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.2-1.4A9.9 9.9 0 1 0 12.04 2zm5.8 14.1c-.25.7-1.4 1.3-1.95 1.35-.5.05-1.1.07-1.8-.12a14 14 0 0 1-1.6-.6c-2.8-1.2-4.6-4-4.75-4.2-.14-.2-1.1-1.5-1.1-2.8s.7-2 .95-2.25c.25-.27.55-.33.73-.33h.52c.17 0 .4-.06.62.48.25.6.85 2.1.92 2.25.08.15.12.33.02.52-.1.2-.15.32-.3.5-.15.17-.32.38-.45.5-.15.15-.3.3-.13.6.17.3.77 1.27 1.65 2.05 1.13 1 2.1 1.32 2.4 1.47.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.3.15.5.22.57.35.07.12.07.7-.18 1.4z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.5-4.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+    <symbol id="i-plot" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 22v-6"/><path d="M12 16c-4 0-6-2.5-6-5.5 0-2 1-3.5 2.5-4.3C9 4 10.3 2.5 12 2.5s3 1.5 3.5 3.7C17 7 18 8.500 18 10.500c0 3-2 5.500-6 5.500z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.100a4 4 0 0 1 0 7.800"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  </defs>
+</svg>
 
 <div class="topbar">
   <div class="container topbar-inner">
-    <div class="topbar-left">Jaipur & Jhotwara Property Consultation</div>
+    <div class="topbar-left">Jaipur &amp; Jhotwara Property Consultation</div>
     <div class="top-right">
-      <a href="tel:+916350566010">📞 6350566010</a>
-      <span>|</span>
-      <a href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." target="_blank">💬 WhatsApp</a>
+      <a href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>6350566010</a>
+      <a href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg>WhatsApp</a>
     </div>
   </div>
 </div>
 
-<div class="nav-wrap">
-  <nav class="container nav">
-    <a class="brand" href="#home">
+<header class="nav-wrap">
+  <nav class="container nav" aria-label="Main">
+    <a class="brand" href="#home" aria-label="Jaipur Property Consultant home">
       <div class="brand-mark">JP</div>
       <div>
         <div class="brand-name">Jaipur Property Consultant</div>
-        <div class="brand-sub">PROPERTY • CONSULTATION • ASSISTANCE</div>
+        <div class="brand-sub">Property • Consultation • Assistance</div>
       </div>
     </a>
-
     <div class="nav-links" id="navLinks">
+      <a href="properties.html" class="nav-primary">Properties</a>
       <a href="#requirements">Buyers</a>
       <a href="#sell">Sell</a>
-      <a href="#agents">Agents</a>
       <a href="#services">Services</a>
-      <a href="#locations">Locations</a>
-      <a href="properties.html" class="nav-properties-cta">🏘️ Properties</a>
-      <a href="reviews.html">Reviews</a>
+      <a href="#areas">Areas</a>
+      <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
-      <a href="admin.html" style="font-size:11px;opacity:.7">Admin Login</a>
-      <a class="nav-cta" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur." target="_blank">WhatsApp</a>
+      <a class="nav-wa" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur."><svg class="icon" style="width:17px;height:17px;fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a>
     </div>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg class="icon"><use href="#i-menu"/></svg></button>
   </nav>
-</div>
+</header>
 
+<main>
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div>
       <div class="eyebrow">Real Estate Consultant • Jaipur</div>
-      <h1>Find the Right <span>Property in Jaipur</span></h1>
-      <p class="hero-lead">
-        Residential plots, land and property consultation for buyers, sellers,
-        investors and property agents across Jaipur and Jhotwara.
-      </p>
+      <h1>Find the Right <em>Property in Jaipur</em></h1>
+      <p class="hero-lead">Residential plots, land and property consultation for buyers, sellers, investors and agents across Jaipur and Jhotwara — from a real local office.</p>
 
-      <div class="quick-search">
-        <div class="quick-search-title">🔎 Quick Property Search</div>
-        <div class="quick-search-row">
-          <input id="homeSearch" placeholder="Search Jhotwara, plot, land...">
-          <select id="homeType">
-            <option value="">All Property Types</option>
-            <option value="Residential Plot">Residential Plot</option>
-            <option value="Flat / Villa">Flat / Villa</option>
-            <option value="Commercial">Commercial</option>
-            <option value="Land">Land</option>
+      <div class="search-card">
+        <div class="search-title">Search approved properties</div>
+        <form class="search-row" id="homeSearchForm" role="search">
+          <input id="homeSearch" placeholder="Location or keyword, e.g. Jhotwara" aria-label="Location or keyword">
+          <select id="homeType" aria-label="Property type">
+            <option value="">All Types</option>
+            <option>Plot</option><option>House</option><option>Flat</option><option>Villa</option>
+            <option>Land</option><option>Shop</option><option>Commercial</option>
           </select>
-          <select id="homeBudget">
+          <select id="homeBudget" aria-label="Budget">
             <option value="">Any Budget</option>
             <option value="2500000">Up to ₹25 Lakh</option>
             <option value="5000000">Up to ₹50 Lakh</option>
             <option value="10000000">Up to ₹1 Crore</option>
             <option value="20000000">Up to ₹2 Crore</option>
           </select>
-          <button type="button" class="btn btn-gold quick-search-go" onclick="goToPropertySearch()">Search</button>
-        </div>
-        <div class="quick-search-note">Approved listings only • Owner contact details remain private</div>
+          <button class="btn btn-gold" type="submit"><svg class="icon"><use href="#i-search"/></svg>Search</button>
+        </form>
+        <div class="search-note"><svg class="icon"><use href="#i-lock"/></svg>Only approved listings are shown. Owner contact details stay private.</div>
       </div>
 
-      <div class="hero-action-boxes">
-        <button class="hero-action buy" type="button" onclick="openPublicForm('buyer')">
-          <strong>🏠 मुझे प्रॉपर्टी खरीदनी है</strong>
-          <span>अपनी location, budget और requirement भेजें</span>
-          <small>आपका contact public नहीं होगा</small>
-        </button>
-        <button class="hero-action sell" type="button" onclick="openPublicForm('seller')">
-          <strong>🏡 मुझे प्रॉपर्टी बेचनी है</strong>
-          <span>Property details और photo submit करें</span>
-          <small>Approval के बाद listing public होगी</small>
-        </button>
+      <div class="hero-actions">
+        <button class="btn btn-gold" type="button" data-open-form="buyer"><svg class="icon"><use href="#i-home"/></svg><span>I want to Buy<small>मुझे प्रॉपर्टी खरीदनी है</small></span></button>
+        <button class="btn btn-ghost" type="button" data-open-form="seller"><svg class="icon"><use href="#i-key"/></svg><span>I want to Sell<small>मुझे प्रॉपर्टी बेचनी है</small></span></button>
       </div>
-      <div class="hero-buttons">
-        <a class="btn btn-gold" href="#properties">🔎 Explore Properties</a>
-        <a class="btn btn-green" href="https://wa.me/916350566010?text=Hello%2C%20I want to enquire about property in Jaipur." target="_blank">💬 Enquire on WhatsApp</a>
-      </div>
-
-      <div class="hero-trust">
-        <span class="trust">✓ Buyer Assistance</span>
-        <span class="trust">✓ Seller Consultation</span>
-        <span class="trust">✓ Site Visit Assistance</span>
-        <span class="trust">✓ Property Shortlisting</span>
-      </div>
-
     </div>
 
-    <div class="enquiry">
-      <h2>Property Enquiry</h2>
-      <p>Tell us what property you are looking for.</p>
-      <form onsubmit="sendEnquiry(event)">
-        <input id="name" placeholder="Your Name" required>
-        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile Number" required>
-        <select id="requirement" required>
-          <option value="">I want to...</option>
-          <option>Buy a Plot</option>
-          <option>Sell a Plot</option>
-          <option>Buy Property</option>
-          <option>Sell Property</option>
-          <option>Property Investment</option>
-          <option>Property Site Visit</option>
-          <option>Agent / Broker Enquiry</option>
+    <aside class="enq" aria-labelledby="enqTitle">
+      <h2 id="enqTitle">Quick Enquiry</h2>
+      <p>Tell us what you are looking for — we’ll reply on WhatsApp.</p>
+      <form id="enqForm" novalidate>
+        <input id="name" placeholder="Your name" autocomplete="name" required aria-label="Your name">
+        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number (10 digits)" autocomplete="tel-national" required aria-label="Mobile number">
+        <select id="requirement" required aria-label="I want to">
+          <option value="">I want to…</option>
+          <option>Buy a Plot</option><option>Sell a Plot</option><option>Buy Property</option><option>Sell Property</option>
+          <option>Property Investment</option><option>Property Site Visit</option><option>Agent / Broker Enquiry</option>
         </select>
-        <input id="location" placeholder="Preferred Jaipur Location">
-        <textarea id="message" placeholder="Plot size, budget or other requirement"></textarea>
-        <button class="btn btn-gold" type="submit">💬 Send Enquiry on WhatsApp</button>
-        <div class="form-note">Your enquiry will open directly in WhatsApp.</div>
+        <input id="location" placeholder="Preferred Jaipur location (optional)" aria-label="Preferred location">
+        <textarea id="message" placeholder="Plot size, budget or other requirement (optional)" aria-label="Requirement details"></textarea>
+        <div class="field-err" id="enqErr" role="alert"></div>
+        <button class="btn btn-green btn-block" type="submit"><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>Send Enquiry on WhatsApp</button>
+        <div class="note"><svg class="icon" style="width:14px;height:14px"><use href="#i-lock"/></svg>Your number is never shown publicly.</div>
       </form>
-    </div>
+    </aside>
   </div>
 </section>
 
-<!-- LIVE PUBLIC PROPERTY + BUYER SECTIONS -->
-<section class="public-live" id="available-properties">
-  <div class="container">
-    <div class="public-live-head">
-      <div>
-        <h2>🏠 Jaipur Mein Available Properties</h2>
-        <p>Approved seller property listings. Owner contact details private rakhe gaye hain.</p>
-      </div>
-      <a class="public-live-link" href="javascript:void(0)" onclick="openPublicForm('seller')">+ Apni Property Add Karein</a>
-    </div>
-    <div class="requirements-panel" id="publicPropertyGrid"></div>
-    <div id="publicPropertyEmpty" class="public-note">Abhi koi approved property listing available nahi hai.</div>
+<section class="trust-strip" aria-label="Why choose us">
+  <div class="container trust-grid" id="trustGrid">
+    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-store"/></svg></div><div><strong>Real office in Jhotwara</strong><span>58A Gosai Marg, Udyog Nagar</span></div></div>
+    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>Approved listings only</strong><span>Every listing is reviewed first</span></div></div>
+    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-lock"/></svg></div><div><strong>Owner details private</strong><span>Contact only through our office</span></div></div>
+    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-pin"/></svg></div><div><strong>Site visit assistance</strong><span>We coordinate your shortlisted visits</span></div></div>
   </div>
 </section>
-
-<section class="public-live buyer-requirements-section" id="buyer-requirements">
-  <div class="container">
-    <div class="public-live-head">
-      <div>
-        <h2>🔥 Jaipur Mein Property Dhoondhne Wale Buyers</h2>
-        <p>Approved buyer requirements. Customer contact details private rakhe gaye hain.</p>
-      </div>
-      <a class="public-live-link" href="javascript:void(0)" onclick="openPublicForm('buyer')">+ Apni Requirement Add Karein</a>
-    </div>
-    <div class="requirements-panel" id="publicBuyerGrid"></div>
-    <div id="publicBuyerEmpty" class="public-note">Abhi koi approved buyer requirement available nahi hai.</div>
-  </div>
-</section>
-
-<div class="ticker-wrap">
-  <div class="container ticker">
-    <div class="ticker-label">🔴 LIVE</div>
-    <div class="ticker-track"><div class="ticker-text" id="publicTicker">Jaipur property requirements loading...</div></div>
-  </div>
-</div>
 
 <section class="section" id="properties">
   <div class="container">
     <div class="section-head">
-      <div class="kicker">Approved Properties</div>
-      <h2>Explore Real Property Listings in Jaipur</h2>
-      <p>Search and filter approved property listings. New listings will appear here as they are approved from the property manager.</p>
-      <a class="btn btn-gold" href="properties.html" style="display:inline-block;margin-top:10px">🏘️ Open Property Search</a>
-    </div>
-    <div class="search-panel" style="max-width:900px;margin:0 auto">
-      <div class="results-line" style="padding:0">
-        <span>🔒 Only approved listings are shown.</span>
-        <span>Need something specific? WhatsApp your requirement.</span>
+      <div>
+        <div class="kicker">Available now</div>
+        <h2 class="title">Properties Available in Jaipur</h2>
+        <p>Latest approved listings. Swipe or tap the arrows to see all photos, tap a photo to view it full size.</p>
       </div>
+      <a class="link-arrow" href="properties.html">View all properties <svg class="icon" style="width:16px;height:16px"><use href="#i-right"/></svg></a>
+    </div>
+    <div class="cards" id="propertyGrid" aria-live="polite">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
     </div>
   </div>
 </section>
 
-<section class="section soft" id="buy">
+<section class="section alt" id="requirements">
   <div class="container">
     <div class="section-head">
-      <div class="kicker">Buy Property</div>
-      <h2>Jaipur Mein Property Kharidni Hai?</h2>
-      <p>Share your preferred area, budget and property requirement to start a consultation.</p>
+      <div>
+        <div class="kicker">Buyer requirements</div>
+        <h2 class="title">Customers Looking for Property in Jaipur</h2>
+        <p>Approved buyer requirements. Have a matching property? Contact us — buyer phone numbers are kept private.</p>
+      </div>
+      <button class="btn btn-dark" type="button" data-open-form="buyer">+ Post your requirement</button>
     </div>
-
-    <div class="category-grid">
-      <a class="category" href="#properties" onclick="setType('Residential Plot')"><div class="category-icon">🏡</div><strong>Residential Plots</strong><small>Plot & land</small></a>
-      <a class="category" href="#properties" onclick="setType('Flat / Villa')"><div class="category-icon">🏢</div><strong>Flats & Villas</strong><small>Residential</small></a>
-      <a class="category" href="#properties" onclick="setType('Commercial')"><div class="category-icon">🏬</div><strong>Commercial</strong><small>Shop & office</small></a>
-      <a class="category" href="#properties" onclick="setType('Land')"><div class="category-icon">🌳</div><strong>Land</strong><small>Land options</small></a>
-      <a class="category" href="https://wa.me/916350566010?text=Hello%2C%20I want property investment consultation in Jaipur." target="_blank"><div class="category-icon">📈</div><strong>Investment</strong><small>Consultation</small></a>
+    <div class="cards" id="buyerGrid" aria-live="polite">
+      <div class="skel" style="height:220px"></div><div class="skel" style="height:220px"></div><div class="skel" style="height:220px"></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="sell">
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head center">
+      <div class="kicker">How it works</div>
+      <h2 class="title">Simple, Transparent Process</h2>
+      <p>From first enquiry to site visit, you deal directly with our office.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Share your requirement</h3><p>Tell us your location, budget, plot size or what you want to sell — by form, WhatsApp or call.</p></div>
+      <div class="step"><h3>We shortlist &amp; verify</h3><p>We match you with suitable options and guide you on documentation and verification steps.</p></div>
+      <div class="step"><h3>Site visit &amp; deal support</h3><p>We coordinate the visit and the discussion between buyer and seller until you are comfortable.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="sell">
   <div class="container two-col">
-    <div class="info-card">
-      <div class="kicker">Sell Your Plot</div>
-      <h3>जयपुर में Plot बेचना है?</h3>
-      <p>Plot location, size and expected price share karke selling requirement par baat karein.</p>
-      <div class="check-grid">
-        <div class="check"><b>✓</b> Location discussion</div>
-        <div class="check"><b>✓</b> Plot details</div>
-        <div class="check"><b>✓</b> Buyer enquiry support</div>
-        <div class="check"><b>✓</b> Site visit coordination</div>
+    <div class="panel">
+      <div class="kicker">For property owners</div>
+      <h3>Want to sell your plot or property?</h3>
+      <p>List it with us and reach genuine buyers without giving out your phone number publicly.</p>
+      <ul class="ticks">
+        <li><svg class="icon"><use href="#i-check"/></svg>Add up to 3 photos of your property</li>
+        <li><svg class="icon"><use href="#i-check"/></svg>Listing goes live only after our review</li>
+        <li><svg class="icon"><use href="#i-check"/></svg>Buyer enquiries handled by our office</li>
+        <li><svg class="icon"><use href="#i-check"/></svg>Site visit coordination</li>
+      </ul>
+      <div class="btns">
+        <button class="btn btn-gold" type="button" data-open-form="seller">List my property</button>
+        <a class="btn btn-light" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20to%20sell%20my%20property%20in%20Jaipur.">WhatsApp us</a>
       </div>
-      <a class="btn btn-gold" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want to sell my plot in Jaipur.">🏷️ Plot Sell Karne Ke Liye Contact Karein</a>
     </div>
-
-    <div class="info-card">
-      <div class="kicker">Buy a Plot</div>
-      <h3>जयपुर में Plot खरीदना है?</h3>
-      <p>Apni preferred location, budget aur plot size batayein. Available options ke baare mein enquiry karein.</p>
-      <div class="check-grid">
-        <div class="check"><b>✓</b> Requirement discussion</div>
-        <div class="check"><b>✓</b> Location shortlisting</div>
-        <div class="check"><b>✓</b> Property enquiry</div>
-        <div class="check"><b>✓</b> Site visit assistance</div>
+    <div class="panel dark" id="agents">
+      <div class="kicker" style="color:var(--gold2)">For agents &amp; brokers</div>
+      <h3>Collaborate with our desk</h3>
+      <p>Share buyer requirements and property opportunities with us and work together on genuine deals.</p>
+      <ul class="ticks">
+        <li><svg class="icon"><use href="#i-check"/></svg>Share your buyer requirements</li>
+        <li><svg class="icon"><use href="#i-check"/></svg>Get access to current opportunities</li>
+        <li><svg class="icon"><use href="#i-check"/></svg>Direct call / WhatsApp with the desk</li>
+      </ul>
+      <div class="btns">
+        <a class="btn btn-gold" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20am%20a%20property%20agent%20and%20want%20to%20discuss%20collaboration%20in%20Jaipur.">Contact agent desk</a>
+        <a class="btn btn-ghost" href="tel:+916350566010">Call 6350566010</a>
       </div>
-      <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want to buy a plot in Jaipur.">🏡 Plot Kharidne Ke Liye Contact Karein</a>
-    </div>
-  </div>
-</section>
-
-<section class="section soft" id="agents">
-  <div class="container">
-    <div class="section-head">
-      <div class="kicker">For Property Agents</div>
-      <h2>Agent & Broker Collaboration</h2>
-      <p>Property requirements aur suitable opportunities ke liye direct communication.</p>
-    </div>
-    <div class="agent-grid">
-      <div class="agent-card"><h3>🤝 Agent Collaboration</h3><p>Property requirements aur collaboration opportunities discuss karein.</p><a class="btn btn-dark" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I am a property agent and want to discuss collaboration in Jaipur.">Contact Agent Desk</a></div>
-      <div class="agent-card"><h3>📋 Property Sharing</h3><p>Suitable property opportunities aur buyer requirements share karein.</p><a class="btn btn-gold" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want to share a property opportunity in Jaipur.">Share Property</a></div>
-      <div class="agent-card"><h3>📞 Direct Contact</h3><p>Broker enquiry ke liye call ya WhatsApp par requirement bhejein.</p><a class="btn btn-green" href="tel:+916350566010">Call 6350566010</a></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="services">
   <div class="container">
-    <div class="section-head">
-      <div class="kicker">Our Services</div>
-      <h2>Property Buying, Selling & Consultation</h2>
-      <p>Simple, requirement-based assistance for buyers, sellers and property professionals.</p>
+    <div class="section-head center">
+      <div class="kicker">Our services</div>
+      <h2 class="title">Buying, Selling &amp; Consultation</h2>
+      <p>Requirement-based help for buyers, sellers, investors and property professionals.</p>
     </div>
-    <div class="service-grid">
-      <div class="service"><div class="service-icon">🏡</div><h3>Residential Plot Buying & Selling</h3><p>Residential plot requirements and enquiries.</p></div>
-      <div class="service"><div class="service-icon">🏠</div><h3>Residential Property</h3><p>Flats, villas and residential property consultation.</p></div>
-      <div class="service"><div class="service-icon">🏬</div><h3>Commercial Property</h3><p>Commercial buying and selling consultation.</p></div>
-      <div class="service"><div class="service-icon">🌳</div><h3>Land Assistance</h3><p>Land-related buying and selling requirements.</p></div>
-      <div class="service"><div class="service-icon">📍</div><h3>Property Site Visit</h3><p>Coordinate your shortlisted property visit.</p></div>
-      <div class="service"><div class="service-icon">🔎</div><h3>Property Shortlisting</h3><p>Compare options according to area and budget.</p></div>
-      <div class="service"><div class="service-icon">📑</div><h3>Documentation Assistance</h3><p>General guidance around property documentation.</p></div>
-      <div class="service"><div class="service-icon">🔐</div><h3>Property Verification Assistance</h3><p>Discuss available verification and documentation steps.</p></div>
-      <div class="service"><div class="service-icon">📈</div><h3>Investment Consultation</h3><p>Discuss location, budget and investment requirements.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section soft" id="locations">
-  <div class="container">
-    <div class="section-head">
-      <div class="kicker">Jaipur Property Locations</div>
-      <h2>Areas We Cover in Jaipur</h2>
-      <p>Location-specific property consultation and enquiry across major Jaipur areas.</p>
-    </div>
-    <div class="location-grid">
-      <span class="location-pill">Jhotwara</span>
-      <span class="location-pill">Jagatpura</span>
-      <span class="location-pill">Sanganer</span>
-      <span class="location-pill">Mansarovar</span>
-      <span class="location-pill">Vaishali Nagar</span>
-      <span class="location-pill">Ajmer Road</span>
-      <span class="location-pill">Tonk Road</span>
-      <span class="location-pill">Kalwar Road</span>
-      <span class="location-pill">Mahapura</span>
-      <span class="location-pill">Bhankrota</span>
-      <span class="location-pill">Khatipura</span>
-      <span class="location-pill">Bindayaka</span>
-      <span class="location-pill">Vatika</span>
-      <span class="location-pill">Chaksu</span>
+    <div class="services">
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-plot"/></svg></div><div><h3>Residential Plots</h3><p>Plot buying and selling in Jaipur’s growing areas.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-home"/></svg></div><div><h3>Houses, Flats &amp; Villas</h3><p>Residential property consultation.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-building"/></svg></div><div><h3>Commercial Property</h3><p>Shops, offices and commercial buy/sell help.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-tree"/></svg></div><div><h3>Land Assistance</h3><p>Land-related buying and selling requirements.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-pin"/></svg></div><div><h3>Site Visit Support</h3><p>We coordinate your shortlisted property visits.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-doc"/></svg></div><div><h3>Documentation Guidance</h3><p>General guidance on property paperwork and verification steps.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-search"/></svg></div><div><h3>Property Shortlisting</h3><p>Compare options by area, budget and size.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-trend"/></svg></div><div><h3>Investment Consultation</h3><p>Discuss location, budget and investment goals.</p></div></div>
+      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-users"/></svg></div><div><h3>Agent Collaboration</h3><p>Work with our desk on buyer and seller requirements.</p></div></div>
     </div>
   </div>
 </section>
 
-<section class="cta">
+<section class="section alt" id="areas">
   <div class="container">
-    <div class="cta-box">
+    <div class="section-head center">
+      <div class="kicker">Locations</div>
+      <h2 class="title">Areas We Cover in Jaipur</h2>
+      <p>Tap an area to see approved properties there.</p>
+    </div>
+    <div class="pills" id="areaPills"></div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-head">
       <div>
-        <div class="kicker" style="color:#f0c75e">JAIPUR PROPERTY CONSULTATION</div>
-        <h2>Plot Kharidna Ya Bechna Hai?</h2>
-        <p>Apni location, budget, plot size ya selling requirement WhatsApp par bhejein. Current property options aur enquiry ke liye direct contact karein.</p>
+        <div class="kicker">Customer reviews</div>
+        <h2 class="title">What Our Customers Say</h2>
+        <p>Reviews are published only after approval.</p>
       </div>
-      <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20mujhe Jaipur mein plot kharidna ya bechna hai.">💬 WhatsApp Enquiry</a>
+      <a class="btn btn-dark" href="reviews.html">Read all / Add your review</a>
     </div>
+    <div class="cards" id="reviewGrid" aria-live="polite"></div>
   </div>
 </section>
 
-<section class="section soft" id="reviewsPreview">
+<section class="section alt" id="contact">
   <div class="container">
-    <div class="section-head">
-      <div class="kicker">Community Reviews</div>
-      <h2>💬 Customer Reviews & Experiences</h2>
-      <p>Reviews are published only after approval. Aap bhi apna experience share kar sakte hain.</p>
-      <a class="btn btn-dark" href="reviews.html" style="display:inline-block;margin-top:8px">💬 View Reviews / Add Review</a>
-    </div>
-    <div class="requirements-panel" id="homepageReviewsGrid"></div>
-  </div>
-</section>
-
-<section class="section" id="contact">
-  <div class="container">
-    <div class="section-head">
+    <div class="section-head center">
       <div class="kicker">Visit / Contact</div>
-      <h2>Jaipur Property Consultant</h2>
-      <p>Contact us for property consultation, buying, selling and current property enquiries.</p>
+      <h2 class="title">Visit Our Office in Jhotwara</h2>
+      <p>Talk to us in person, on the phone or on WhatsApp.</p>
     </div>
-
-    <div class="office-grid">
+    <div class="office">
       <div class="office-photo">
-        <img src="storefront.png" alt="Jaipur Property Consultant office in Jhotwara Jaipur" onerror="this.style.display='none';this.parentElement.innerHTML='<span>📍 Jhotwara, Jaipur</span>';">
+        <img src="storefront.jpg" alt="Jaipur Property Consultant office, 58A Gosai Marg, Udyog Nagar, Jhotwara, Jaipur" loading="lazy" width="1400" height="1052">
+        <div class="cap"><b>Our office</b> — 58A, Gosai Marg, Udyog Nagar, Jhotwara</div>
       </div>
-
       <div class="contact-box">
-        <h3>Visit / Contact Our Office</h3>
-        <div class="contact-line"><span class="contact-label">Business</span><strong>Jaipur Property Consultant</strong></div>
-        <div class="contact-line"><span class="contact-label">Address</span><span>58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur, Rajasthan 302012</span></div>
-        <div class="contact-line"><span class="contact-label">Phone</span><strong>6350566010</strong></div>
-        <div class="contact-line"><span class="contact-label">Focus</span><span>Plots • Property • Land • Buy • Sell • Investment</span></div>
-
-        <div style="margin-top:18px;display:flex;gap:9px;flex-wrap:wrap">
-          <a class="btn btn-gold" href="tel:+916350566010">📞 Call Now</a>
-          <a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want property consultation in Jaipur.">💬 WhatsApp</a>
-          <a class="btn btn-dark" target="_blank" href="https://www.google.com/maps/search/?api=1&query=58A%2C%20Gosai%20Marg%2C%20Jhotwara%2C%20Jaipur%2C%20Rajasthan%20302012">🗺️ Get Directions</a>
+        <h3>Jaipur Property Consultant</h3>
+        <div class="cl"><span class="lab">Address</span><span>58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur, Rajasthan 302012</span></div>
+        <div class="cl"><span class="lab">Phone</span><a href="tel:+916350566010"><strong>6350566010</strong></a></div>
+        <div class="cl"><span class="lab">We deal in</span><span>Plots • Houses &amp; Flats • Land • Commercial • Investment</span></div>
+        <div class="cl" id="clExtra" style="display:none"></div>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-gold" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>Call now</a>
+          <a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur."><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a>
+          <a class="btn btn-light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=58A%2C%20Gosai%20Marg%2C%20Udyog%20Nagar%2C%20Jhotwara%2C%20Jaipur%2C%20Rajasthan%20302012"><svg class="icon"><use href="#i-pin"/></svg>Directions</a>
         </div>
       </div>
     </div>
+    <div class="map">
+      <iframe title="Office location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=58A%20Gosai%20Marg%2C%20Udyog%20Nagar%2C%20Jhotwara%2C%20Jaipur%20302012&amp;output=embed"></iframe>
+    </div>
   </div>
 </section>
 
-<!-- PUBLIC BUY / SELL SUBMISSION MODAL -->
-<div id="publicModal" class="public-modal" style="display:none">
-  <div class="public-modal-card">
-    <div class="public-modal-head">
-      <div><h2 id="publicModalTitle">मुझे प्रॉपर्टी खरीदनी है</h2><p id="publicModalSubtitle">Apni requirement submit karein. Pehle property manager review karega.</p></div>
-      <button class="public-close" type="button" onclick="closePublicForm()">×</button>
-    </div>
-    <form id="publicSubmissionForm">
-      <input type="hidden" id="publicSubmissionType" value="buyer">
-      <div class="public-form-grid">
-        <div class="public-field"><label>नाम *</label><input id="publicName" required placeholder="आपका नाम"></div>
-        <div class="public-field"><label>Mobile / WhatsApp * <span style="color:#b42318">(Private)</span></label><input id="publicMobile" required inputmode="tel" maxlength="10" placeholder="10 digit mobile number"></div>
-        <div class="public-field"><label>Area / Location *</label><input id="publicArea" required placeholder="जैसे Jhotwara, Vaishali Nagar"></div>
-        <div class="public-field"><label>City</label><input id="publicCity" value="Jaipur"></div>
-        <div class="public-field"><label>Property Type *</label><select id="publicPropertyType" required><option value="">Select property type</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
-        <div class="public-field"><label>Size / Area</label><input id="publicSize" placeholder="जैसे 50 Gaj / 1200 sqft"></div>
-        <div class="public-field"><label id="publicBudgetMinLabel">Minimum Budget (₹)</label><input id="publicBudgetMin" type="number" min="0" placeholder="₹"></div>
-        <div class="public-field"><label id="publicBudgetMaxLabel">Maximum Budget (₹)</label><input id="publicBudgetMax" type="number" min="0" placeholder="₹"></div>
-        <div class="public-field full"><label>Details / Requirement *</label><textarea id="publicDetails" required placeholder="Apni requirement ya property ki details likhein..."></textarea></div>
-        <div class="public-field full" id="publicPhotoField" style="display:none"><label>Property Photo</label><input id="publicPhoto" type="file" accept="image/*"><img id="publicPhotoPreview" class="public-photo-preview" alt="Property preview"><div class="muted" style="margin-top:5px">Ek clear photo upload karein. Approval ke baad public listing par dikh sakti hai.</div></div>
-        <div class="public-field full"><div class="public-privacy"><strong>🔐 Privacy & Approval:</strong> Aapka mobile, WhatsApp, email aur exact address public nahi kiya jayega. Submission pehle private admin/property manager review mein jayegi. Sirf approved details website par publish hongi.</div></div>
-        <div class="public-field full"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input id="publicConsent" type="checkbox" required style="width:17px;height:17px"><span>मैं सहमत हूँ कि मेरी property/requirement की selected details approval के बाद public website पर दिखाई जा सकती हैं.</span></label></div>
+<section style="padding:70px 0 0">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>Plot kharidna ya bechna hai?</h2>
+        <p>Apni location, budget ya selling requirement WhatsApp par bhejein — hum current options ke saath aapse sampark karenge.</p>
       </div>
-      <div id="publicFormMsg"></div>
-      <div class="public-submit-row"><button type="button" class="btn light" onclick="closePublicForm()">Cancel</button><button type="submit" id="publicSubmitBtn" class="btn gold">Submit for Approval</button></div>
+      <a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20mujhe%20Jaipur%20mein%20plot%20kharidna%20ya%20bechna%20hai."><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp Enquiry</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:12px"><div class="brand-mark">JP</div><div><div class="brand-name">Jaipur Property Consultant</div></div></div>
+        <p>Real estate consultation for plots, land and property buying, selling and investment in Jaipur &amp; Jhotwara.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <a href="properties.html">Properties</a>
+        <a href="#requirements">Buyer requirements</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="tel:+916350566010">6350566010</a>
+        <span style="display:block;padding:3px 0">58A, Gosai Marg, Udyog Nagar,<br>Jhotwara, Jaipur 302012</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Jaipur Property Consultant. All rights reserved.</span>
+      <a href="admin.html" rel="nofollow">Staff login</a>
+    </div>
+  </div>
+</footer>
+
+<a class="float-wa" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." aria-label="Chat on WhatsApp"><svg class="icon"><use href="#i-wa"/></svg></a>
+<div class="mobile-bar">
+  <a class="c" href="tel:+916350566010"><svg class="icon" style="width:18px;height:18px"><use href="#i-phone"/></svg>Call</a>
+  <a class="w" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur."><svg class="icon" style="width:18px;height:18px;fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a>
+</div>
+
+<!-- Submission modal -->
+<div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div><h2 id="formTitle">मुझे प्रॉपर्टी खरीदनी है</h2><p id="formSub">Submit your requirement. Our team reviews it before anything is published.</p></div>
+      <button class="x-btn" type="button" data-close-form aria-label="Close">×</button>
+    </div>
+    <form id="submitForm">
+      <input type="hidden" id="subType" value="buyer">
+      <div class="fgrid">
+        <div class="fld"><label for="sName">Name *</label><input id="sName" required placeholder="Your name" autocomplete="name"></div>
+        <div class="fld"><label for="sMobile">Mobile / WhatsApp * <span style="color:#b42318;font-weight:500">(private)</span></label><input id="sMobile" required inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" autocomplete="tel-national"></div>
+        <div class="fld"><label for="sArea">Area / Location *</label><input id="sArea" required placeholder="e.g. Jhotwara, Vaishali Nagar"></div>
+        <div class="fld"><label for="sCity">City</label><input id="sCity" value="Jaipur"></div>
+        <div class="fld"><label for="sType">Property type *</label><select id="sType" required><option value="">Select type</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
+        <div class="fld"><label for="sSize">Size / Area</label><input id="sSize" placeholder="e.g. 50 Gaj / 1200 sqft"></div>
+        <div class="fld"><label for="sMin" id="sMinL">Minimum budget (₹)</label><input id="sMin" type="number" min="0" inputmode="numeric" placeholder="₹"></div>
+        <div class="fld"><label for="sMax" id="sMaxL">Maximum budget (₹)</label><input id="sMax" type="number" min="0" inputmode="numeric" placeholder="₹"></div>
+        <div class="fld full"><label for="sDetails">Details / requirement *</label><textarea id="sDetails" required placeholder="Describe your requirement or property…"></textarea></div>
+        <div class="fld full" id="sPhotoField" style="display:none">
+          <label for="sPhotos">Property photos (up to 3)</label>
+          <input id="sPhotos" type="file" accept="image/*" multiple>
+          <div class="thumbs" id="sThumbs"></div>
+          <div style="font-size:12.5px;color:var(--muted)">Clear photos help buyers trust the listing. Shown only after approval.</div>
+        </div>
+        <div class="fld full"><div class="privacy"><strong>Privacy &amp; approval:</strong> your mobile, WhatsApp and exact address are never published. Your submission is reviewed by our team first; only approved details appear on the website.</div></div>
+        <div class="fld full"><label style="display:flex;gap:9px;align-items:flex-start;font-weight:500;cursor:pointer"><input id="sConsent" type="checkbox" required style="width:18px;height:18px;margin-top:2px;flex:none"><span>I agree that the selected details of my property / requirement may be shown publicly after approval.</span></label></div>
+      </div>
+      <div id="formMsg" role="status"></div>
+      <div class="modal-actions"><button type="button" class="btn btn-light" data-close-form>Cancel</button><button type="submit" id="subBtn" class="btn btn-gold">Submit for approval</button></div>
     </form>
   </div>
 </div>
 
-<a class="float-wa" href="https://wa.me/916350566010?text=Hello%2C%20I want property details in Jaipur." target="_blank" aria-label="WhatsApp">💬</a>
-
-<div class="mobile-bar">
-  <a class="mobile-call" href="tel:+916350566010">📞 Call</a>
-  <a class="mobile-wa" target="_blank" href="https://wa.me/916350566010?text=Hello%2C%20I want property details in Jaipur.">💬 WhatsApp</a>
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-btn lb-close" type="button" id="lbClose" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" id="lbPrev" aria-label="Previous photo"><svg class="icon"><use href="#i-left"/></svg></button>
+  <img id="lbImg" alt="Property photo">
+  <button class="lb-btn lb-next" type="button" id="lbNext" aria-label="Next photo"><svg class="icon"><use href="#i-right"/></svg></button>
+  <div class="lb-count" id="lbCount"></div>
 </div>
 
-<footer style="background:#0b1725;color:#c8d3df;padding:29px 0;text-align:center;font-size:11px">
-  <strong style="color:#fff">Jaipur Property Consultant</strong><br>
-  Real Estate Consultation • Property Buying • Property Selling • Investment Assistance<br>
-  <span style="display:block;margin-top:6px">© 2026 Jaipur Property Consultant. All rights reserved.</span>
-  <a href="admin.html" style="display:inline-block;margin-top:9px;color:#e8c45c;text-decoration:none;font-weight:800">🔐 Admin Login</a>
-</footer>
+<script>
+/* ============ SITE SETTINGS — fill these in; empty items are simply hidden ============ */
+const SITE = {
+  phone: "6350566010",
+  whatsapp: "916350566010",
+  reraNo: "",            // e.g. "RAJ/A/2021/1234"  (shown in trust strip + contact box)
+  yearsExperience: "",   // e.g. "8+ years"
+  propertiesHelped: "",  // e.g. "150+ properties"
+  officeHours: "",       // e.g. "Mon–Sat, 10 AM – 7 PM"
+  areas: ["Jhotwara","Jagatpura","Sanganer","Mansarovar","Vaishali Nagar","Ajmer Road","Tonk Road","Kalwar Road","Mahapura","Bhankrota","Khatipura","Bindayaka","Vatika","Chaksu"]
+};
+</script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getFirestore, collection, addDoc, query, where, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, query, where, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
@@ -721,129 +730,307 @@ const firebaseConfig = {
   appId: "1:502971407075:web:ee4dabc90db9f592ebc3d6",
   measurementId: "G-0DW0NBETML"
 };
+const db = getFirestore(initializeApp(firebaseConfig, "publicSite"));
 
-const publicApp = initializeApp(firebaseConfig, "publicSite");
-const publicDb = getFirestore(publicApp);
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const ico = (n, cls="") => `<svg class="icon ${cls}"><use href="#i-${n}"/></svg>`;
+const wa = txt => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(txt)}`;
+const hidden = s => ["rejected","hidden","draft","deleted"].includes(String(s||"").toLowerCase());
+const millis = v => (v && typeof v.toMillis === "function") ? v.toMillis() : (v && v.seconds ? v.seconds*1000 : 0);
 
-function publicMoney(min,max){
-  const fmt=n=>n==null||n===""?"":("₹"+Number(n).toLocaleString("en-IN"));
-  if(min!=null && max!=null) return `${fmt(min)} – ${fmt(max)}`;
-  if(max!=null) return `Up to ${fmt(max)}`;
-  if(min!=null) return `From ${fmt(min)}`;
-  return "Budget discussed";
+function inr(n){
+  n = Number(n);
+  if(!isFinite(n)) return "";
+  if(n >= 1e7){ const v = n/1e7; return "₹" + (Math.round(v*100)/100) + " Cr"; }
+  if(n >= 1e5){ const v = n/1e5; return "₹" + (Math.round(v*100)/100) + " Lakh"; }
+  return "₹" + n.toLocaleString("en-IN");
+}
+function priceText(min, max, fallback){
+  const a = min == null || min === "" ? null : Number(min);
+  const b = max == null || max === "" ? null : Number(max);
+  if(a != null && b != null) return a === b ? inr(a) : `${inr(a)} – ${inr(b)}`;
+  if(b != null) return `Up to ${inr(b)}`;
+  if(a != null) return `From ${inr(a)}`;
+  return fallback;
+}
+function photosOf(p){
+  const list = [...(Array.isArray(p.imageUrls) ? p.imageUrls : []), ...(Array.isArray(p.imageDataUrls) ? p.imageDataUrls : [])];
+  if(p.imageDataUrl) list.push(p.imageDataUrl);
+  return [...new Set(list.filter(Boolean))].slice(0, 6);
+}
+function availClass(a){ a = String(a||"Available"); return a === "Available" ? "" : a === "Under Offer" ? "offer" : a === "Sold" ? "sold" : "off"; }
+
+/* ---------- photo gallery (shared by all cards + lightbox) ---------- */
+const GALLERY = {};   // id -> [urls]
+function sliderHTML(p){
+  const imgs = photosOf(p);
+  GALLERY[p.id] = imgs;
+  const a = String(p.availability || "Available");
+  const badge = `<span class="avail ${availClass(a)}">${esc(a)}</span>`;
+  if(!imgs.length){
+    return `<div class="slider">${badge}<div class="no-photo">${ico("camera")}<span>Photos on request</span></div></div>`;
+  }
+  const slides = imgs.map((u,i) => `<div class="slide" data-zoom="${esc(p.id)}" data-i="${i}"><img class="bg" src="${esc(u)}" alt="" aria-hidden="true" loading="lazy"><img class="fg" src="${esc(u)}" alt="${esc((p.propertyType||"Property")+" in "+(p.area||"Jaipur")+" – photo "+(i+1))}" loading="lazy"></div>`).join("");
+  const multi = imgs.length > 1;
+  return `<div class="slider" data-n="${imgs.length}">${badge}<div class="slides">${slides}</div>
+    ${multi ? `<button class="s-btn prev" type="button" data-slide="-1" aria-label="Previous photo">${ico("left")}</button><button class="s-btn next" type="button" data-slide="1" aria-label="Next photo">${ico("right")}</button>
+    <div class="dots">${imgs.map((_,i)=>`<span class="dot${i===0?" on":""}"></span>`).join("")}</div>
+    <span class="s-count">${ico("camera")}<span><b>1</b> / ${imgs.length}</span></span>` : ""}
+  </div>`;
 }
 
-function renderPublicRequirements(docs){
-  const propertyGrid=document.getElementById("publicPropertyGrid");
-  const buyerGrid=document.getElementById("publicBuyerGrid");
-  const propertyEmpty=document.getElementById("publicPropertyEmpty");
-  const buyerEmpty=document.getElementById("publicBuyerEmpty");
-
-  const approved=docs.filter(r=>r.status==="Approved"||r.status==="approved");
-  const properties=approved.filter(r=>r.type==="seller");
-  const buyers=approved.filter(r=>r.type==="customer");
-
-  const card=r=>{
-    const kind=r.type==="seller"?"Property Available":"Buyer Requirement";
-    const detail=[r.propertyType,r.size,r.details].filter(Boolean).join(" • ");
-    const msg=encodeURIComponent(`Hello, I saw a ${kind.toLowerCase()} on Jaipur Property Consultant website for ${r.area||"Jaipur"}. Please share details.`);
-    const photo=r.imageDataUrl?`<div class="requirement-photo"><img src="${escapeHtmlPublic(r.imageDataUrl)}" alt="Property"></div>`:"";
-    return `<article class="requirement-card">${photo}<div class="requirement-body">
-      <div class="requirement-top"><span class="requirement-badge">${kind}</span><span style="font-size:9px;color:#718096">Approved</span></div>
-      <h3>${escapeHtmlPublic(r.displayName|| (r.type==="seller"?"Property Available":"Buyer Requirement"))}</h3>
-      <div class="req-location">📍 ${escapeHtmlPublic(r.area||"Jaipur")}, ${escapeHtmlPublic(r.city||"Jaipur")}</div>
-      <div class="req-detail">${escapeHtmlPublic(detail||"Property details available on enquiry.")}</div>
-      ${r.budgetMin!=null||r.budgetMax!=null?`<div class="req-price">💰 ${publicMoney(r.budgetMin,r.budgetMax)}</div>`:""}
-      <div class="req-actions"><a class="btn btn-green" target="_blank" href="https://wa.me/916350566010?text=${msg}">💬 Enquire</a><a class="btn btn-outline" href="property.html?id=${encodeURIComponent(r.id)}">📋 View Details</a></div>
+function propertyCard(p){
+  const title = `${p.size ? p.size + " " : ""}${p.propertyType || "Property"} in ${p.area || "Jaipur"}`;
+  const msg = `Hello, I am interested in the ${p.propertyType || "property"} in ${p.area || "Jaipur"} (${p.size || "size on enquiry"}) listed on your website. Please share details.`;
+  const n = photosOf(p).length;
+  const chips = [
+    p.size ? `<span class="chip">${ico("ruler")}${esc(p.size)}</span>` : "",
+    p.roadFacing ? `<span class="chip">${esc(p.roadFacing)}</span>` : "",
+    n > 1 ? `<span class="chip">${ico("camera")}${n} photos</span>` : "",
+    p.videoUrl ? `<span class="chip">${ico("video")}Video</span>` : ""
+  ].join("");
+  return `<article class="pcard">${sliderHTML(p)}
+    <div class="pbody">
+      <div class="ptype">${esc(p.propertyType || "Property")}</div>
+      <h3>${esc(title)}</h3>
+      <div class="ploc">${ico("pin")}${esc(p.area || "Jaipur")}, ${esc(p.city || "Jaipur")}</div>
+      ${chips ? `<div class="chips">${chips}</div>` : ""}
+      ${p.details ? `<div class="pdesc">${esc(p.details)}</div>` : ""}
+      <div class="pfoot">
+        <div class="price">${esc(priceText(p.budgetMin, p.budgetMax, "Price on enquiry"))}</div>
+        <div class="pactions">
+          <a class="btn btn-green btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">${ico("wa","")}Enquire</a>
+          <a class="btn btn-dark btn-sm" href="property.html?id=${encodeURIComponent(p.id)}">View details</a>
+        </div>
+      </div>
     </div></article>`;
-  };
-
-  propertyGrid.innerHTML=properties.map(card).join("");
-  buyerGrid.innerHTML=buyers.map(card).join("");
-  propertyEmpty.style.display=properties.length?"none":"block";
-  buyerEmpty.style.display=buyers.length?"none":"block";
-
-  const tickerItems=approved.map(r=>`${r.type==="seller"?"🏡 Available":"🏠 Required"}: ${r.area||"Jaipur"} • ${r.propertyType||"Property"}${r.size?" • "+r.size:""}${(r.budgetMin!=null||r.budgetMax!=null)?" • "+publicMoney(r.budgetMin,r.budgetMax):""}`);
-  document.getElementById("publicTicker").innerHTML=tickerItems.length?tickerItems.map(x=>`<span>${escapeHtmlPublic(x)}</span>`).join(""):"<span>Jaipur mein property requirement ya property listing submit karein — approval ke baad public website par dikhayein.</span>";
 }
 
-function escapeHtmlPublic(s){ return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
-
-let publicUnsubscribe=null;
-try{
-  const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));
-  publicUnsubscribe=onSnapshot(publicQuery,snap=>renderPublicRequirements(snap.docs.map(d=>d.data())),err=>console.warn("Public requirements unavailable:",err));
-}catch(err){ console.warn("Public requirements unavailable:",err); }
-
-function openPublicForm(type){
-  document.getElementById("publicSubmissionType").value=type;
-  const buyer=type==="buyer";
-  document.getElementById("publicModalTitle").textContent=buyer?"मुझे प्रॉपर्टी खरीदनी है":"मुझे प्रॉपर्टी बेचनी है";
-  document.getElementById("publicModalSubtitle").textContent=buyer?"Apni requirement submit karein. Property manager approval ke baad selected details public hongi.":"Property details aur photo submit karein. Property manager approval ke baad listing public hogi.";
-  document.getElementById("publicPhotoField").style.display=buyer?"none":"flex";
-  document.getElementById("publicBudgetMinLabel").textContent=buyer?"Minimum Budget (₹)":"Minimum / Expected Price (₹)";
-  document.getElementById("publicBudgetMaxLabel").textContent=buyer?"Maximum Budget (₹)":"Maximum Price (₹)";
-  document.getElementById("publicFormMsg").innerHTML="";
-  document.getElementById("publicModal").style.display="grid";
+function buyerCard(r){
+  const what = `${r.size ? r.size + " " : ""}${r.propertyType || "Property"}`;
+  const msg = `Hello, I have a ${what} available in ${r.area || "Jaipur"} that may match a buyer requirement I saw on your website. Please connect.`;
+  return `<article class="bcard">
+    <div class="bcard-top"><div class="bavatar">${ico("user")}</div><div><div class="btag">${ico("shield")}Approved requirement</div><div class="ploc">${ico("pin")}${esc(r.area || "Jaipur")}, ${esc(r.city || "Jaipur")}</div></div></div>
+    <h3>Looking for ${esc(what)} in ${esc(r.area || "Jaipur")}</h3>
+    <div class="price">${esc(priceText(r.budgetMin, r.budgetMax, "Budget on discussion"))}</div>
+    ${r.details ? `<div class="pdesc">${esc(r.details)}</div>` : ""}
+    <a class="btn btn-light btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">I have a matching property</a>
+  </article>`;
 }
-function closePublicForm(){document.getElementById("publicModal").style.display="none";}
-window.openPublicForm=openPublicForm; window.closePublicForm=closePublicForm;
 
-document.getElementById("publicPhoto")?.addEventListener("change",e=>{
-  const f=e.target.files?.[0], img=document.getElementById("publicPhotoPreview");
-  if(!f){img.style.display="none";return;} img.src=URL.createObjectURL(f); img.style.display="block";
-});
-function compressPublicImage(file){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader(); reader.onload=()=>{const img=new Image(); img.onload=()=>{const max=900; const scale=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement("canvas"); c.width=Math.round(img.width*scale); c.height=Math.round(img.height*scale); const ctx=c.getContext("2d"); ctx.drawImage(img,0,0,c.width,c.height); resolve(c.toDataURL("image/jpeg",.62));}; img.onerror=reject; img.src=reader.result;}; reader.onerror=reject; reader.readAsDataURL(file);
-  });
-}
-document.getElementById("publicSubmissionForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const btn=document.getElementById("publicSubmitBtn"), msg=document.getElementById("publicFormMsg"); btn.disabled=true; btn.textContent="Submitting..."; msg.innerHTML="";
+function emptyBox(title, text, btn){ return `<div class="empty-box"><strong>${title}</strong>${text}<br>${btn}</div>`; }
+
+/* ---------- live data ---------- */
+function listen(type, onData, onErr){
   try{
-    const type=document.getElementById("publicSubmissionType").value;
-    const mobile=document.getElementById("publicMobile").value.trim();
-    if(!/^\d{10}$/.test(mobile)) throw new Error("Please enter a valid 10-digit mobile number.");
-    const consent=document.getElementById("publicConsent").checked;
-    const file=document.getElementById("publicPhoto").files?.[0];
-    let imageDataUrl="";
-    if(file){ if(file.size>8*1024*1024) throw new Error("Photo should be under 8 MB."); imageDataUrl=await compressPublicImage(file); if(imageDataUrl.length>850000) throw new Error("Photo is still too large. Please choose a smaller image."); }
-    await addDoc(collection(publicDb,"publicSubmissions"),{
-      type:type==="buyer"?"customer":"seller", name:document.getElementById("publicName").value.trim(), mobile,
-      area:document.getElementById("publicArea").value.trim(), city:document.getElementById("publicCity").value.trim()||"Jaipur",
-      propertyType:document.getElementById("publicPropertyType").value, size:document.getElementById("publicSize").value.trim(),
-      budgetMin:document.getElementById("publicBudgetMin").value?Number(document.getElementById("publicBudgetMin").value):null,
-      budgetMax:document.getElementById("publicBudgetMax").value?Number(document.getElementById("publicBudgetMax").value):null,
-      details:document.getElementById("publicDetails").value.trim(), imageDataUrl, consentPublic:consent,
-      status:"pending", source:"Public Website", submittedAt:serverTimestamp()
-    });
-    msg.innerHTML='<div class="notice ok">✅ आपकी details successfully submit हो गई हैं. Property manager approval ke baad selected details website par दिखाई जा सकती हैं.</div>';
-    e.target.reset(); document.getElementById("publicCity").value="Jaipur"; document.getElementById("publicPhotoField").style.display="none"; document.getElementById("publicPhotoPreview").style.display="none";
-    setTimeout(closePublicForm,1800);
-  }catch(err){msg.innerHTML=`<div class="notice error">${escapeHtmlPublic(err.message)}</div>`}
-  finally{btn.disabled=false;btn.textContent="Submit for Approval";}
+    return onSnapshot(query(collection(db,"publicRequirements"), where("type","==",type)), snap => {
+      const rows = snap.docs.map(d => ({ id:d.id, ...d.data() })).filter(r => !hidden(r.status));
+      rows.sort((a,b) => millis(b.updatedAt) - millis(a.updatedAt));
+      onData(rows);
+    }, onErr);
+  }catch(e){ onErr(e); }
+}
+const failBox = `<div class="empty-box"><strong>Listings could not be loaded right now</strong>Please check your internet connection or message us on WhatsApp for current options.<br><a class="btn btn-green" style="margin-top:14px" target="_blank" rel="noopener" href="${wa("Hello, I want to see current property options in Jaipur.")}">WhatsApp us</a></div>`;
+
+listen("seller", rows => {
+  const live = rows.filter(r => String(r.availability||"Available") !== "Not Available").slice(0, 6);
+  $("propertyGrid").innerHTML = live.length ? live.map(propertyCard).join("") :
+    emptyBox("New listings are being added", "Tell us what you need and we’ll find options for you.", `<a class="btn btn-gold" target="_blank" rel="noopener" href="${wa("Hello, I am looking for a property in Jaipur.")}">Ask on WhatsApp</a>`);
+}, () => { $("propertyGrid").innerHTML = failBox; });
+
+listen("customer", rows => {
+  const live = rows.slice(0, 6);
+  $("buyerGrid").innerHTML = live.length ? live.map(buyerCard).join("") :
+    emptyBox("No public buyer requirements yet", "Looking to buy? Post your requirement and owners and agents can reach us.", `<button class="btn btn-dark" type="button" data-open-form="buyer">Post your requirement</button>`);
+}, () => { $("buyerGrid").innerHTML = failBox; });
+
+/* reviews */
+try{
+  onSnapshot(query(collection(db,"publicReviews"), where("status","==","approved")), snap => {
+    const rows = snap.docs.map(d => d.data()).sort((a,b) => millis(b.submittedAt) - millis(a.submittedAt)).slice(0,3);
+    $("reviewGrid").innerHTML = rows.length ? rows.map(r => {
+      const n = Math.max(1, Math.min(5, Number(r.rating)||5));
+      const nm = r.name || "Customer";
+      return `<article class="rcard"><div class="stars" aria-label="${n} out of 5">${"★".repeat(n)}${"☆".repeat(5-n)}</div><p>“${esc(r.comment||"")}”</p><div class="who"><div class="rav">${esc(nm.trim().charAt(0).toUpperCase()||"C")}</div><div><b>${esc(nm)}</b><span>${esc([r.area, r.propertyType].filter(Boolean).join(" • ") || "Customer")}</span></div></div></article>`;
+    }).join("") : emptyBox("No reviews yet", "Worked with us? Your honest feedback helps other buyers and sellers.", `<a class="btn btn-gold" href="reviews.html">Write a review</a>`);
+  }, () => { $("reviewGrid").innerHTML = emptyBox("Reviews", "See what customers say.", `<a class="btn btn-gold" href="reviews.html">Open reviews</a>`); });
+}catch(e){}
+
+/* ---------- slider + lightbox interactions (event delegation) ---------- */
+function currentIndex(track){ return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
+document.addEventListener("click", e => {
+  const sb = e.target.closest("[data-slide]");
+  if(sb){
+    const track = sb.closest(".slider").querySelector(".slides");
+    const n = sb.closest(".slider").dataset.n | 0;
+    const next = Math.min(n-1, Math.max(0, currentIndex(track) + Number(sb.dataset.slide)));
+    track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
+    return;
+  }
+  const z = e.target.closest("[data-zoom]");
+  if(z){ openLightbox(z.dataset.zoom, Number(z.dataset.i)||0); return; }
+  const o = e.target.closest("[data-open-form]");
+  if(o){ openForm(o.dataset.openForm); return; }
+  if(e.target.closest("[data-close-form]") || e.target === $("formModal")) closeForm();
+});
+document.addEventListener("scroll", e => {
+  const t = e.target;
+  if(!(t instanceof Element) || !t.classList.contains("slides")) return;
+  const s = t.closest(".slider"), i = currentIndex(t);
+  s.querySelectorAll(".dot").forEach((d,k) => d.classList.toggle("on", k === i));
+  const c = s.querySelector(".s-count b"); if(c) c.textContent = i + 1;
+}, true);
+
+let lb = { id:null, i:0 };
+function lbShow(){
+  const list = GALLERY[lb.id] || [];
+  if(!list.length) return;
+  lb.i = (lb.i + list.length) % list.length;
+  $("lbImg").src = list[lb.i];
+  $("lbCount").textContent = list.length > 1 ? `${lb.i+1} / ${list.length}` : "";
+  $("lbPrev").style.display = $("lbNext").style.display = list.length > 1 ? "grid" : "none";
+}
+function openLightbox(id, i){ lb = { id, i }; $("lightbox").classList.add("open"); lbShow(); $("lbClose").focus(); }
+function closeLightbox(){ $("lightbox").classList.remove("open"); $("lbImg").src = ""; }
+$("lbClose").onclick = closeLightbox;
+$("lbPrev").onclick = () => { lb.i--; lbShow(); };
+$("lbNext").onclick = () => { lb.i++; lbShow(); };
+$("lightbox").addEventListener("click", e => { if(e.target === $("lightbox")) closeLightbox(); });
+document.addEventListener("keydown", e => {
+  if($("lightbox").classList.contains("open")){
+    if(e.key === "Escape") closeLightbox();
+    if(e.key === "ArrowLeft"){ lb.i--; lbShow(); }
+    if(e.key === "ArrowRight"){ lb.i++; lbShow(); }
+  } else if(e.key === "Escape"){ closeForm(); closeMenu(); }
+});
+let tx = null;
+$("lightbox").addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, {passive:true});
+$("lightbox").addEventListener("touchend", e => {
+  if(tx == null) return;
+  const dx = e.changedTouches[0].clientX - tx; tx = null;
+  if(Math.abs(dx) > 50){ lb.i += dx < 0 ? 1 : -1; lbShow(); }
 });
 
-try{
-  const publicQuery=query(collection(publicDb,"publicRequirements"),orderBy("updatedAt","desc"),limit(6));
-  onSnapshot(publicQuery,snap=>renderPublicRequirements(snap.docs.map(d=>d.data())),err=>{
-    console.warn("Public requirements unavailable:",err);
-  });
-}catch(err){ console.warn("Public requirements unavailable:",err); }
-</script>
+/* ---------- mobile menu ---------- */
+function closeMenu(){ $("navLinks").classList.remove("open"); $("menuBtn").setAttribute("aria-expanded","false"); }
+$("menuBtn").onclick = () => { const o = $("navLinks").classList.toggle("open"); $("menuBtn").setAttribute("aria-expanded", String(o)); };
+$("navLinks").addEventListener("click", e => { if(e.target.closest("a")) closeMenu(); });
 
-<script>
-function goToPropertySearch(){
-  const params=new URLSearchParams();
-  const q=document.getElementById("homeSearch")?.value.trim();
-  const type=document.getElementById("homeType")?.value;
-  const budget=document.getElementById("homeBudget")?.value;
-  if(q) params.set("q",q);
-  if(type) params.set("type",type);
-  if(budget) params.set("budget",budget);
-  window.location.href="properties.html"+(params.toString()?"?"+params.toString():"");
+/* ---------- hero search ---------- */
+$("homeSearchForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const p = new URLSearchParams();
+  const q = $("homeSearch").value.trim(), t = $("homeType").value, b = $("homeBudget").value;
+  if(q) p.set("q", q); if(t) p.set("type", t); if(b) p.set("budget", b);
+  location.href = "properties.html" + (p.toString() ? "?" + p : "");
+});
+
+/* ---------- quick enquiry -> WhatsApp ---------- */
+$("enqForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const err = $("enqErr"); err.style.display = "none";
+  const name = $("name").value.trim(), phone = $("phone").value.trim(), req = $("requirement").value;
+  const fail = m => { err.textContent = m; err.style.display = "block"; };
+  if(!name) return fail("Please enter your name.");
+  if(!/^[6-9]\d{9}$/.test(phone)) return fail("Please enter a valid 10-digit mobile number.");
+  if(!req) return fail("Please choose what you want to do.");
+  const loc = $("location").value.trim(), m = $("message").value.trim();
+  const text = `Hello, my name is ${name}.\nI want to: ${req}${loc ? "\nLocation: " + loc : ""}${m ? "\nDetails: " + m : ""}\nMy mobile: ${phone}`;
+  window.open(wa(text), "_blank", "noopener");
+  if(typeof gtag === "function") gtag("event","generate_lead",{method:"quick_enquiry_whatsapp"});
+});
+
+/* ---------- public submission modal (buyer / seller) ---------- */
+let photoData = [];
+function openForm(type){
+  const buyer = type === "buyer";
+  $("subType").value = type;
+  $("formTitle").textContent = buyer ? "मुझे प्रॉपर्टी खरीदनी है" : "मुझे प्रॉपर्टी बेचनी है";
+  $("formSub").textContent = buyer ? "Submit your requirement. Our team reviews it before any detail is published." : "Submit your property details and photos. Your listing goes live only after our review.";
+  $("sPhotoField").style.display = buyer ? "none" : "flex";
+  $("sMinL").textContent = buyer ? "Minimum budget (₹)" : "Minimum / expected price (₹)";
+  $("sMaxL").textContent = buyer ? "Maximum budget (₹)" : "Maximum price (₹)";
+  $("formMsg").innerHTML = "";
+  $("formModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => $("sName").focus(), 50);
 }
+function closeForm(){ $("formModal").classList.remove("open"); document.body.style.overflow = ""; }
+
+function compress(file){
+  return new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => { const im = new Image(); im.onload = () => {
+      const max = 1000, k = Math.min(1, max / Math.max(im.width, im.height));
+      const c = document.createElement("canvas"); c.width = Math.round(im.width*k); c.height = Math.round(im.height*k);
+      c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+      res(c.toDataURL("image/jpeg", .6));
+    }; im.onerror = rej; im.src = fr.result; };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+$("sPhotos").addEventListener("change", async e => {
+  const files = [...e.target.files];
+  const box = $("sThumbs"); box.innerHTML = ""; photoData = [];
+  if(files.length > 3){ $("formMsg").innerHTML = '<div class="msg err">Please select a maximum of 3 photos.</div>'; e.target.value = ""; return; }
+  $("formMsg").innerHTML = "";
+  for(const f of files){
+    if(!f.type.startsWith("image/")) continue;
+    if(f.size > 12*1024*1024){ $("formMsg").innerHTML = `<div class="msg err">${esc(f.name)} is larger than 12 MB.</div>`; continue; }
+    try{ const d = await compress(f); photoData.push(d); const im = document.createElement("img"); im.src = d; im.alt = "Selected photo"; box.appendChild(im); }catch(_){}
+  }
+});
+
+$("submitForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("subBtn"), msg = $("formMsg"); btn.disabled = true; btn.textContent = "Submitting…"; msg.innerHTML = "";
+  try{
+    const type = $("subType").value;
+    const mobile = $("sMobile").value.trim();
+    if(!/^[6-9]\d{9}$/.test(mobile)) throw new Error("Please enter a valid 10-digit mobile number.");
+    const total = photoData.reduce((a,b) => a + b.length, 0);
+    if(total > 850000) throw new Error("Photos are too large together. Please choose smaller photos or fewer photos.");
+    const num = id => $(id).value ? Number($(id).value) : null;
+    await addDoc(collection(db,"publicSubmissions"), {
+      type: type === "buyer" ? "customer" : "seller",
+      name: $("sName").value.trim(), mobile,
+      area: $("sArea").value.trim(), city: $("sCity").value.trim() || "Jaipur",
+      propertyType: $("sType").value, size: $("sSize").value.trim(),
+      budgetMin: num("sMin"), budgetMax: num("sMax"),
+      details: $("sDetails").value.trim(),
+      imageDataUrl: type === "seller" ? (photoData[0] || "") : "",
+      imageDataUrls: type === "seller" ? photoData : [],
+      consentPublic: $("sConsent").checked,
+      status: "pending", source: "Public Website", submittedAt: serverTimestamp()
+    });
+    msg.innerHTML = '<div class="msg ok">✅ Thank you! Your details were submitted. Our team will review them and contact you.</div>';
+    e.target.reset(); $("sCity").value = "Jaipur"; $("sThumbs").innerHTML = ""; photoData = [];
+    if(typeof gtag === "function") gtag("event","generate_lead",{method:"public_submission_"+type});
+    setTimeout(closeForm, 2200);
+  }catch(err){ msg.innerHTML = `<div class="msg err">${esc(err.message || "Could not submit. Please try again.")}</div>`; }
+  finally{ btn.disabled = false; btn.textContent = "Submit for approval"; }
+});
+
+/* ---------- static bits driven by SITE settings ---------- */
+$("areaPills").innerHTML = SITE.areas.map(a => `<a class="pill" href="properties.html?q=${encodeURIComponent(a)}">${ico("pin")}${esc(a)}</a>`).join("");
+(function trustExtras(){
+  const extra = [];
+  if(SITE.reraNo) extra.push({i:"shield", t:"RERA registered", s:SITE.reraNo});
+  if(SITE.yearsExperience) extra.push({i:"clock", t:SITE.yearsExperience, s:"in Jaipur real estate"});
+  if(SITE.propertiesHelped) extra.push({i:"home", t:SITE.propertiesHelped, s:"buyers & sellers helped"});
+  if(extra.length){
+    const grid = $("trustGrid");
+    // replace the least-specific generic items so the strip stays 4 wide
+    const items = [...grid.children];
+    extra.slice(0,2).forEach((x,k) => { items[items.length-1-k].outerHTML = `<div class="trust-item"><div class="trust-ico">${ico(x.i)}</div><div><strong>${esc(x.t)}</strong><span>${esc(x.s)}</span></div></div>`; });
+  }
+  const rows = [];
+  if(SITE.officeHours) rows.push(`<span class="lab">Hours</span><span>${esc(SITE.officeHours)}</span>`);
+  if(SITE.reraNo) rows.push(`<span class="lab">RERA</span><span>${esc(SITE.reraNo)}</span>`);
+  if(rows.length){ const c = $("clExtra"); c.style.display = "block"; c.style.padding = "0"; c.innerHTML = rows.map(r => `<div class="cl">${r}</div>`).join(""); }
+})();
 </script>
 </body>
 </html>

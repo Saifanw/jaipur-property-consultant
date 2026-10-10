@@ -83,6 +83,17 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
 /* hero */
 .hero{position:relative;color:#fff;overflow:hidden;background:radial-gradient(900px 400px at 85% 0%,rgba(232,196,92,.14),transparent 60%),linear-gradient(130deg,#0d1828 0%,#17283f 60%,#213650 100%)}
 .hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px}
+.hero-compact{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:34px 0 38px}
+.hero-compact h1{font-size:clamp(30px,3.8vw,44px);letter-spacing:-1px;margin-bottom:10px}
+.hero-compact .hero-lead{font-size:16px;margin-bottom:16px}
+.hero-compact .eyebrow{margin-bottom:10px}
+.hero-compact .search-card{max-width:none}
+.hero-compact .search-row{grid-template-columns:1fr 1fr;}
+.hero-compact .search-row input{grid-column:1/-1}
+.hero-compact .search-row .btn{grid-column:1/-1}
+.section.props{padding-top:44px;background:#fff}
+.enq-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.trust-list{display:grid;gap:14px}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center;padding:64px 0 72px}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.4px;color:var(--gold2);font-weight:700;text-transform:uppercase;margin-bottom:16px}
 .eyebrow:before{content:"";width:26px;height:2px;background:var(--gold2)}
@@ -290,8 +301,28 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
 .lb-close{top:16px;right:16px}
 .lb-count{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#cfd9e6;font-size:14px}
 
+
+/* first-view tightening: listings must be visible without scrolling */
+@media(min-width:1001px){
+  .hero-compact{grid-template-columns:1fr;gap:16px;padding:22px 0 26px}
+  .hero-compact .hero-text{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .hero-compact .eyebrow,.hero-compact .hero-lead{display:none}
+  .hero-compact h1{margin:0;font-size:34px;letter-spacing:-.8px}
+  .hero-compact .hero-actions{margin:0}
+  .hero-compact .search-card{padding:12px;border-radius:16px}
+  .hero-compact .search-title,.hero-compact .search-note{display:none}
+  .hero-compact .search-row{grid-template-columns:1.5fr 1fr 1fr auto}
+  .hero-compact .search-row input,.hero-compact .search-row .btn{grid-column:auto}
+}
+.section.props{padding-top:26px}
+.section.props .section-head{margin-bottom:18px}
+.section.props .section-head p,.section.props .kicker{display:none}
+.section.props h2.title{font-size:clamp(24px,2.6vw,30px)}
+
 /* responsive */
 @media(max-width:1000px){
+  .hero-compact,.enq-wrap{grid-template-columns:1fr;gap:22px}
+  .hero-compact{padding:26px 0 30px}
   .hero-grid{grid-template-columns:1fr;gap:34px;padding:44px 0 52px}
   .cards,.services{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr}
@@ -305,12 +336,15 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   .nav{position:relative}
 }
 @media(max-width:640px){
+  .hero-compact .hero-lead{display:none}
+  .hero-compact h1{font-size:28px}
+  .hero-actions .btn{min-width:0;flex:1}
+  .section.props{padding-top:28px}
   body{padding-bottom:66px;font-size:15.5px}
   .topbar-left{display:none}.topbar-inner{justify-content:center}
   .nav{min-height:66px}.brand-name{font-size:17px}.brand-sub{font-size:8.5px;letter-spacing:1.2px}.brand-mark{width:40px;height:40px}
   .search-row{grid-template-columns:1fr}
   .hero-lead{font-size:16px}
-  .hero-actions .btn{flex:1;min-width:100%}
   .enq{padding:22px}
   .cards,.services,.fgrid,.trust-grid,.footer-grid{grid-template-columns:1fr}
   .section{padding:54px 0}
@@ -394,76 +428,37 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
 
 <main>
 <section class="hero" id="home">
-  <div class="container hero-grid">
-    <div>
+  <div class="container hero-compact">
+    <div class="hero-text">
       <div class="eyebrow">Real Estate Consultant • Jaipur</div>
       <h1>Find the Right <em>Property in Jaipur</em></h1>
-      <p class="hero-lead">Residential plots, land and property consultation for buyers, sellers, investors and agents across Jaipur and Jhotwara — from a real local office.</p>
-
-      <div class="search-card">
-        <div class="search-title">Search approved properties</div>
-        <form class="search-row" id="homeSearchForm" role="search">
-          <input id="homeSearch" placeholder="Location or keyword, e.g. Jhotwara" aria-label="Location or keyword">
-          <select id="homeType" aria-label="Property type">
-            <option value="">All Types</option>
-            <option>Plot</option><option>House</option><option>Flat</option><option>Villa</option>
-            <option>Land</option><option>Shop</option><option>Commercial</option>
-          </select>
-          <select id="homeBudget" aria-label="Budget">
-            <option value="">Any Budget</option>
-            <option value="2500000">Up to ₹25 Lakh</option>
-            <option value="5000000">Up to ₹50 Lakh</option>
-            <option value="10000000">Up to ₹1 Crore</option>
-            <option value="20000000">Up to ₹2 Crore</option>
-          </select>
-          <button class="btn btn-gold" type="submit"><svg class="icon"><use href="#i-search"/></svg>Search</button>
-        </form>
-        <div class="search-note"><svg class="icon"><use href="#i-lock"/></svg>Only approved listings are shown. Owner contact details stay private.</div>
-      </div>
-
+      <p class="hero-lead">Verified plots, houses and land in Jaipur &amp; Jhotwara — from a real local office.</p>
       <div class="hero-actions">
-        <button class="btn btn-gold" type="button" data-open-form="buyer"><svg class="icon"><use href="#i-home"/></svg><span>I want to Buy<small>मुझे प्रॉपर्टी खरीदनी है</small></span></button>
-        <button class="btn btn-ghost" type="button" data-open-form="seller"><svg class="icon"><use href="#i-key"/></svg><span>I want to Sell<small>मुझे प्रॉपर्टी बेचनी है</small></span></button>
+        <button class="btn btn-gold btn-sm" type="button" data-open-form="buyer"><svg class="icon"><use href="#i-home"/></svg>I want to Buy</button>
+        <button class="btn btn-ghost btn-sm" type="button" data-open-form="seller"><svg class="icon"><use href="#i-key"/></svg>I want to Sell</button>
+        <a class="btn btn-ghost btn-sm" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>Call us</a>
       </div>
     </div>
-
-    <aside class="enq" aria-labelledby="enqTitle">
-      <h2 id="enqTitle">Quick Enquiry</h2>
-      <p>Tell us what you are looking for — we’ll reply on WhatsApp.</p>
-      <form id="enqForm" novalidate>
-        <input id="name" placeholder="Your name" autocomplete="name" required aria-label="Your name">
-        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number (10 digits)" autocomplete="tel-national" required aria-label="Mobile number">
-        <select id="requirement" required aria-label="I want to">
-          <option value="">I want to…</option>
-          <option>Buy a Plot</option><option>Sell a Plot</option><option>Buy Property</option><option>Sell Property</option>
-          <option>Property Investment</option><option>Property Site Visit</option><option>Agent / Broker Enquiry</option>
-        </select>
-        <input id="location" placeholder="Preferred Jaipur location (optional)" aria-label="Preferred location">
-        <textarea id="message" placeholder="Plot size, budget or other requirement (optional)" aria-label="Requirement details"></textarea>
-        <div class="field-err" id="enqErr" role="alert"></div>
-        <button class="btn btn-green btn-block" type="submit"><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>Send Enquiry on WhatsApp</button>
-        <div class="note"><svg class="icon" style="width:14px;height:14px"><use href="#i-lock"/></svg>Your number is never shown publicly.</div>
+    <div class="search-card">
+      <div class="search-title">Search approved properties</div>
+      <form class="search-row" id="homeSearchForm" role="search">
+        <input id="homeSearch" placeholder="Location, e.g. Jhotwara" aria-label="Location or keyword">
+        <select id="homeType" aria-label="Property type"><option value="">All Types</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option></select>
+        <select id="homeBudget" aria-label="Budget"><option value="">Any Budget</option><option value="2500000">Up to ₹25 Lakh</option><option value="5000000">Up to ₹50 Lakh</option><option value="10000000">Up to ₹1 Crore</option><option value="20000000">Up to ₹2 Crore</option></select>
+        <button class="btn btn-gold" type="submit"><svg class="icon"><use href="#i-search"/></svg>Search</button>
       </form>
-    </aside>
+      <div class="search-note"><svg class="icon"><use href="#i-lock"/></svg>Approved listings only. Owner contact stays private.</div>
+    </div>
   </div>
 </section>
 
-<section class="trust-strip" aria-label="Why choose us">
-  <div class="container trust-grid" id="trustGrid">
-    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-store"/></svg></div><div><strong>Real office in Jhotwara</strong><span>58A Gosai Marg, Udyog Nagar</span></div></div>
-    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>Approved listings only</strong><span>Every listing is reviewed first</span></div></div>
-    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-lock"/></svg></div><div><strong>Owner details private</strong><span>Contact only through our office</span></div></div>
-    <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-pin"/></svg></div><div><strong>Site visit assistance</strong><span>We coordinate your shortlisted visits</span></div></div>
-  </div>
-</section>
-
-<section class="section" id="properties">
+<section class="section props" id="properties">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="kicker">Available now</div>
         <h2 class="title">Properties Available in Jaipur</h2>
-        <p>Latest approved listings. Swipe or tap the arrows to see all photos, tap a photo to view it full size.</p>
+        <p>Latest approved listings — swipe for more photos, tap a photo to view it full size.</p>
       </div>
       <a class="link-arrow" href="properties.html">View all properties <svg class="icon" style="width:16px;height:16px"><use href="#i-right"/></svg></a>
     </div>
@@ -489,7 +484,41 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   </div>
 </section>
 
-<section class="section" id="how">
+<section class="section" id="enquiry">
+  <div class="container enq-wrap">
+    <div>
+      <div class="kicker">Quick enquiry</div>
+      <h2 class="title">Tell us what you need — we’ll find it</h2>
+      <p style="color:var(--muted);margin:10px 0 22px;max-width:520px">Share your requirement and our office will reply on WhatsApp with matching options.</p>
+      <div class="trust-list" id="trustGrid">
+        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-store"/></svg></div><div><strong>Real office in Jhotwara</strong><span>58A Gosai Marg, Udyog Nagar</span></div></div>
+        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>Approved listings only</strong><span>Every listing is reviewed first</span></div></div>
+        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-lock"/></svg></div><div><strong>Owner details private</strong><span>Contact only through our office</span></div></div>
+        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-pin"/></svg></div><div><strong>Site visit assistance</strong><span>We coordinate your shortlisted visits</span></div></div>
+      </div>
+    </div>
+    <aside class="enq" aria-labelledby="enqTitle">
+      <h2 id="enqTitle">Quick Enquiry</h2>
+      <p>Tell us what you are looking for — we’ll reply on WhatsApp.</p>
+      <form id="enqForm" novalidate>
+        <input id="name" placeholder="Your name" autocomplete="name" required aria-label="Your name">
+        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number (10 digits)" autocomplete="tel-national" required aria-label="Mobile number">
+        <select id="requirement" required aria-label="I want to">
+          <option value="">I want to…</option>
+          <option>Buy a Plot</option><option>Sell a Plot</option><option>Buy Property</option><option>Sell Property</option>
+          <option>Property Investment</option><option>Property Site Visit</option><option>Agent / Broker Enquiry</option>
+        </select>
+        <input id="location" placeholder="Preferred Jaipur location (optional)" aria-label="Preferred location">
+        <textarea id="message" placeholder="Plot size, budget or other requirement (optional)" aria-label="Requirement details"></textarea>
+        <div class="field-err" id="enqErr" role="alert"></div>
+        <button class="btn btn-green btn-block" type="submit"><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>Send Enquiry on WhatsApp</button>
+        <div class="note"><svg class="icon" style="width:14px;height:14px"><use href="#i-lock"/></svg>Your number is never shown publicly.</div>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<section class="section alt" id="how">
   <div class="container">
     <div class="section-head center">
       <div class="kicker">How it works</div>
@@ -504,7 +533,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   </div>
 </section>
 
-<section class="section alt" id="sell">
+<section class="section" id="sell">
   <div class="container two-col">
     <div class="panel">
       <div class="kicker">For property owners</div>
@@ -538,7 +567,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   </div>
 </section>
 
-<section class="section" id="services">
+<section class="section alt" id="services">
   <div class="container">
     <div class="section-head center">
       <div class="kicker">Our services</div>
@@ -559,7 +588,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   </div>
 </section>
 
-<section class="section alt" id="areas">
+<section class="section" id="areas">
   <div class="container">
     <div class="section-head center">
       <div class="kicker">Locations</div>
@@ -570,7 +599,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   </div>
 </section>
 
-<section class="section" id="reviews">
+<section class="section alt" id="reviews">
   <div class="container">
     <div class="section-head">
       <div>
@@ -584,7 +613,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
   </div>
 </section>
 
-<section class="section alt" id="contact">
+<section class="section" id="contact">
   <div class="container">
     <div class="section-head center">
       <div class="kicker">Visit / Contact</div>
@@ -740,6 +769,16 @@ const wa = txt => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(txt)
 const hidden = s => ["rejected","hidden","draft","deleted"].includes(String(s||"").toLowerCase());
 const millis = v => (v && typeof v.toMillis === "function") ? v.toMillis() : (v && v.seconds ? v.seconds*1000 : 0);
 
+
+const EMOJI=/[^\p{L}\p{M}\p{N}\s.,:;!?()\-\/₹%&'"+]/gu;
+const tidy=t=>String(t??"").replace(EMOJI," ").replace(/\s+/g," ").trim();
+function cleanArea(a){
+  let x=tidy(String(a||"").split(/[|\n]/)[0]).split(",")[0].trim();
+  if(x.length>2 && x===x.toUpperCase()) x=x.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());
+  return x.length>38?x.slice(0,36).trim()+"…":(x||"Jaipur");
+}
+const unitSize=z=>/[a-z\u0900-\u097f]/i.test(String(z||""));
+
 function inr(n){
   n = Number(n);
   if(!isFinite(n)) return "";
@@ -772,7 +811,7 @@ function sliderHTML(p){
   if(!imgs.length){
     return `<div class="slider">${badge}<div class="no-photo">${ico("camera")}<span>Photos on request</span></div></div>`;
   }
-  const slides = imgs.map((u,i) => `<div class="slide" data-zoom="${esc(p.id)}" data-i="${i}"><img class="bg" src="${esc(u)}" alt="" aria-hidden="true" loading="lazy"><img class="fg" src="${esc(u)}" alt="${esc((p.propertyType||"Property")+" in "+(p.area||"Jaipur")+" – photo "+(i+1))}" loading="lazy"></div>`).join("");
+  const slides = imgs.map((u,i) => `<div class="slide" data-zoom="${esc(p.id)}" data-i="${i}"><img class="bg" src="${esc(u)}" alt="" aria-hidden="true" loading="lazy"><img class="fg" src="${esc(u)}" alt="${esc((p.propertyType||"Property")+" in "+cleanArea(p.area)+" – photo "+(i+1))}" loading="lazy"></div>`).join("");
   const multi = imgs.length > 1;
   return `<div class="slider" data-n="${imgs.length}">${badge}<div class="slides">${slides}</div>
     ${multi ? `<button class="s-btn prev" type="button" data-slide="-1" aria-label="Previous photo">${ico("left")}</button><button class="s-btn next" type="button" data-slide="1" aria-label="Next photo">${ico("right")}</button>
@@ -782,12 +821,13 @@ function sliderHTML(p){
 }
 
 function propertyCard(p){
-  const title = `${p.size ? p.size + " " : ""}${p.propertyType || "Property"} in ${p.area || "Jaipur"}`;
-  const msg = `Hello, I am interested in the ${p.propertyType || "property"} in ${p.area || "Jaipur"} (${p.size || "size on enquiry"}) listed on your website. Please share details.`;
+  const area = cleanArea(p.area);
+  const title = `${unitSize(p.size) ? tidy(p.size) + " " : ""}${p.propertyType || "Property"} in ${area}`;
+  const msg = `Hello, I am interested in the ${p.propertyType || "property"} in ${area} listed on your website. Please share details.`;
   const n = photosOf(p).length;
   const chips = [
-    p.size ? `<span class="chip">${ico("ruler")}${esc(p.size)}</span>` : "",
-    p.roadFacing ? `<span class="chip">${esc(p.roadFacing)}</span>` : "",
+    p.size ? `<span class="chip">${ico("ruler")}${esc(tidy(p.size))}</span>` : "",
+    p.roadFacing ? `<span class="chip">${esc(tidy(p.roadFacing))}</span>` : "",
     n > 1 ? `<span class="chip">${ico("camera")}${n} photos</span>` : "",
     p.videoUrl ? `<span class="chip">${ico("video")}Video</span>` : ""
   ].join("");
@@ -795,9 +835,9 @@ function propertyCard(p){
     <div class="pbody">
       <div class="ptype">${esc(p.propertyType || "Property")}</div>
       <h3>${esc(title)}</h3>
-      <div class="ploc">${ico("pin")}${esc(p.area || "Jaipur")}, ${esc(p.city || "Jaipur")}</div>
+      <div class="ploc">${ico("pin")}${esc(area)}, ${esc(tidy(p.city) || "Jaipur")}</div>
       ${chips ? `<div class="chips">${chips}</div>` : ""}
-      ${p.details ? `<div class="pdesc">${esc(p.details)}</div>` : ""}
+      ${tidy(p.details) ? `<div class="pdesc">${esc(tidy(p.details))}</div>` : ""}
       <div class="pfoot">
         <div class="price">${esc(priceText(p.budgetMin, p.budgetMax, "Price on enquiry"))}</div>
         <div class="pactions">
@@ -809,13 +849,14 @@ function propertyCard(p){
 }
 
 function buyerCard(r){
-  const what = `${r.size ? r.size + " " : ""}${r.propertyType || "Property"}`;
-  const msg = `Hello, I have a ${what} available in ${r.area || "Jaipur"} that may match a buyer requirement I saw on your website. Please connect.`;
+  const area = cleanArea(r.area);
+  const what = `${unitSize(r.size) ? tidy(r.size) + " " : ""}${r.propertyType || "Property"}`;
+  const msg = `Hello, I have a ${what} available in ${area} that may match a buyer requirement I saw on your website. Please connect.`;
   return `<article class="bcard">
-    <div class="bcard-top"><div class="bavatar">${ico("user")}</div><div><div class="btag">${ico("shield")}Approved requirement</div><div class="ploc">${ico("pin")}${esc(r.area || "Jaipur")}, ${esc(r.city || "Jaipur")}</div></div></div>
-    <h3>Looking for ${esc(what)} in ${esc(r.area || "Jaipur")}</h3>
+    <div class="bcard-top"><div class="bavatar">${ico("user")}</div><div><div class="btag">${ico("shield")}Approved requirement</div><div class="ploc">${ico("pin")}${esc(area)}, ${esc(tidy(r.city) || "Jaipur")}</div></div></div>
+    <h3>Looking for ${esc(what)} in ${esc(area)}</h3>
     <div class="price">${esc(priceText(r.budgetMin, r.budgetMax, "Budget on discussion"))}</div>
-    ${r.details ? `<div class="pdesc">${esc(r.details)}</div>` : ""}
+    ${tidy(r.details) ? `<div class="pdesc">${esc(tidy(r.details))}</div>` : ""}
     <a class="btn btn-light btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">I have a matching property</a>
   </article>`;
 }

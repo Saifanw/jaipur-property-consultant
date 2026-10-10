@@ -78,6 +78,53 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
   .today-actions .btn{white-space:nowrap;padding:10px 6px;font-size:12.5px}.today-actions .btn .ic{margin-right:3px;width:15px;height:15px}
   .toast{bottom:16px}
 }
+
+/* ===== Phase 2: detail drawer ===== */
+.namelink{cursor:pointer}.namelink:hover{color:#9d7100;text-decoration:underline}
+body.noscroll{overflow:hidden}
+.drawer-back{position:fixed;inset:0;background:rgba(7,17,30,.45);z-index:150}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(500px,100%);background:#fff;z-index:160;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(20,32,51,.22);animation:dwin .2s ease}
+@keyframes dwin{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+.dw-head{padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+.dw-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.dw-top h3{margin:0;font-size:19px;line-height:1.2;overflow-wrap:anywhere}
+.dw-sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+.dw-x{border:0;background:#eef2f6;border-radius:50%;width:38px;height:38px;font-size:22px;line-height:1;flex:none}
+.dw-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.dw-btns .btn,.dw-btns a.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 8px;font-size:13.5px;text-decoration:none;min-height:44px}
+.dw-btns .btn.off{opacity:.4;pointer-events:none}
+.dw-body{flex:1;overflow:auto;padding:6px 16px 18px;-webkit-overflow-scrolling:touch}
+.dw-foot{border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fafbfc}
+.dw-sec{margin-top:18px}.dw-sec h4{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.dw-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dw-fact{background:#f6f8fb;border-radius:10px;padding:9px 11px}.dw-fact.full{grid-column:1/-1}
+.dw-fact b{display:block;font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.5px}
+.dw-fact span{font-weight:700;font-size:13.5px;overflow-wrap:anywhere;white-space:pre-wrap}
+.dw-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dw-row input[type=date],.dw-row input[type=text],.dw-sec select,.dw-sec textarea,.dw-foot input,.dw-foot textarea{border:1px solid #d3dde7;border-radius:10px;padding:10px 11px;font-size:14px;background:#fff;min-width:0}
+.dw-sec textarea{width:100%;min-height:110px;resize:vertical;line-height:1.5}
+.chipbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:800;color:#34445a;min-height:36px}
+.chipbtn:hover{border-color:#b9c7d6;background:#f6f9fc}
+.chipbtn.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.fu-now{background:var(--amber2);border:1px solid #f2ddb0;color:#7a5600;border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:8px;font-weight:700}
+.fu-now.bad{background:var(--red2);border-color:#ffd4cf;color:#b53a31}
+.mrow{border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:8px}
+.mrow .mt{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.mrow .mt strong{font-size:14px;cursor:pointer}.mrow .mt strong:hover{color:#9d7100}
+.mrow .ms{font-size:12.5px;color:var(--muted);margin-top:2px}
+.mrow .why{font-size:11px;color:#0e7b42;font-weight:800;margin-top:5px}
+.mscore{font-weight:900;color:#0e7b42;font-size:13px;white-space:nowrap}
+.mrow .dw-row{margin-top:9px}
+.tl{border-left:2px solid #e3e9f0;margin-left:5px;padding-left:16px}
+.tl-item{position:relative;padding:0 0 14px}
+.tl-item:before{content:"";position:absolute;left:-23px;top:4px;width:10px;height:10px;border-radius:50%;background:#c9d4e1;border:2px solid #fff;box-shadow:0 0 0 1px #d5dde8}
+.tl-item.note:before{background:#c9962e}.tl-item.call:before{background:#0d8b55}.tl-item.wa:before{background:#25a85b}.tl-item.status:before{background:#3d6fe8}.tl-item.visit:before{background:#8b5cf6}
+.tl-time{font-size:11px;color:var(--muted)}.tl-text{font-size:13.5px;white-space:pre-wrap;overflow-wrap:anywhere}
+.dw-photos{display:flex;gap:8px;flex-wrap:wrap}.dw-photos a img{width:92px;height:70px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block}
+.dw-kinds{display:flex;gap:6px;margin-bottom:8px}
+.dw-add{display:flex;gap:8px}.dw-add textarea{flex:1;min-height:44px;max-height:110px;resize:none}
+.dw-add .btn{min-height:44px;padding:0 16px}
+@media(max-width:620px){.drawer{width:100%}.dw-facts{grid-template-columns:1fr 1fr}.dw-btns .btn,.dw-btns a.btn{font-size:13px}}
 </style>
 </head>
 <body>
@@ -296,6 +343,16 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
     </form>
   </div>
 </div>
+
+<div id="drawerBack" class="drawer-back hidden"></div>
+<aside id="drawer" class="drawer hidden" role="dialog" aria-modal="true" aria-label="Record details">
+  <div class="dw-head" id="dwHead"></div>
+  <div class="dw-body" id="dwBody"></div>
+  <div class="dw-foot" id="dwFoot">
+    <div class="dw-kinds" id="dwKinds"><button type="button" class="chipbtn on" data-kind="note">Note</button><button type="button" class="chipbtn" data-kind="call">Called</button><button type="button" class="chipbtn" data-kind="visit">Site visit</button></div>
+    <div class="dw-add"><textarea id="dwNote" rows="1" placeholder="Kya baat hui? Note likhein..."></textarea><button type="button" id="dwAddNote" class="btn gold">Add</button></div>
+  </div>
+</aside>
 <div id="popMenu" class="popmenu hidden"></div>
 <div id="toast" class="toast hidden"><span id="toastMsg"></span><button id="toastBtn" type="button"></button></div>
 
@@ -373,7 +430,7 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp, deleteField, arrayUnion } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -460,6 +517,7 @@ function loadRecords(){
     refreshFilterOptions();
     render(); renderTrash();
     if(currentAdminView==="followups") renderFollowups();
+    if(typeof dw!=="undefined"&&dw.id) renderDrawer();
   }, err=>showStatus("Could not read CRM: "+escapeHtml(err.message),"error"));
 }
 
@@ -735,7 +793,7 @@ function render(){
     <tr>
       <td class="select-cell"><input class="row-check" type="checkbox" data-select-id="${escapeHtml(r.id)}" ${selectedIds.has(r.id)?"checked":""}></td>
       <td><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span></td>
-      <td><strong>${escapeHtml(r.name||"—")}</strong>${flags(r)}${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
+      <td><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
       <td>${escapeHtml(r.mobile||"—")}</td>
       <td>${escapeHtml(r.area||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
       <td>${escapeHtml(budgetText(r))}</td>
@@ -744,7 +802,7 @@ function render(){
       <td>${fmtDate(r.updatedAt)}</td>
       <td>${actionBtns(r)}</td>
     </tr>`).join("");
-  $("cards").innerHTML=filtered.map(r=>`<div class="rcard2"><div class="top2"><div><strong>${escapeHtml(r.name||"—")}</strong>${flags(r)}<div class="sub">${typeLabel(r.type)} • ${escapeHtml(r.area||"—")} • ${escapeHtml(r.propertyType||"—")}${r.size?" • "+escapeHtml(r.size):""}</div></div>${statusSelect(r)}</div><div class="bud">${escapeHtml(budgetText(r))}${r.followUpDate?` <span class="muted">• Follow-up ${escapeHtml(r.followUpDate)}</span>`:""}</div>${actionBtns(r)}</div>`).join("");
+  $("cards").innerHTML=filtered.map(r=>`<div class="rcard2"><div class="top2"><div><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}<div class="sub">${typeLabel(r.type)} • ${escapeHtml(r.area||"—")} • ${escapeHtml(r.propertyType||"—")}${r.size?" • "+escapeHtml(r.size):""}</div></div>${statusSelect(r)}</div><div class="bud">${escapeHtml(budgetText(r))}${r.followUpDate?` <span class="muted">• Follow-up ${escapeHtml(r.followUpDate)}</span>`:""}</div>${actionBtns(r)}</div>`).join("");
   $("empty").classList.toggle("hidden",filtered.length!==0);
   renderToday();
   updateWaToolbar();
@@ -843,7 +901,8 @@ $("emptyTrashBtn").onclick=async()=>{
 };
 
 async function listClick(e){
-  const check=e.target.closest("[data-select-id]"), wa=e.target.closest("[data-wa-one]"), edit=e.target.closest("[data-edit]"), more=e.target.closest("[data-more]");
+  const check=e.target.closest("[data-select-id]"), wa=e.target.closest("[data-wa-one]"), edit=e.target.closest("[data-edit]"), more=e.target.closest("[data-more]"), opn=e.target.closest("[data-open]");
+  if(opn){ openDrawer(opn.dataset.open); return; }
   if(check){ if(check.checked) selectedIds.add(check.dataset.selectId); else selectedIds.delete(check.dataset.selectId); updateWaToolbar(); return; }
   if(wa){ openWaComposer([wa.dataset.waOne]); return; }
   if(edit){ openEdit(edit.dataset.edit); return; }
@@ -851,11 +910,11 @@ async function listClick(e){
 }
 async function listChange(e){
   const sel=e.target.closest("[data-status-id]"); if(!sel) return;
-  try{ await updateDoc(doc(db,"crmContacts",sel.dataset.statusId),{status:sel.value,updatedAt:serverTimestamp()}); toast("Status → "+sel.value); }
+  try{ const old=(allRecords.find(x=>x.id===sel.dataset.statusId)?.status)||"New"; await updateDoc(doc(db,"crmContacts",sel.dataset.statusId),{status:sel.value,updatedAt:serverTimestamp(),timeline:arrayUnion(tlEntry(`Status: ${old} → ${sel.value}`,"status"))}); toast("Status → "+sel.value); }
   catch(err){ showStatus(escapeHtml(err.message),"error"); }
 }
 $("rows").onclick=listClick; $("cards").onclick=listClick;
-$("rows").onchange=listChange; $("cards").onchange=listChange;
+$("rows").onchange=listChange; $("cards").onchange=listChange; $("dwBody").onchange=listChange;
 $("pipeline").onclick=e=>{const p=e.target.closest("[data-stage]");if(!p)return;document.querySelector('.tab[data-type="all"]').click();$("filterStatus").value=p.dataset.stage;if($("filterStatus").value!==p.dataset.stage){$("filterStatus").value="";}render();document.getElementById("crmPanel").scrollIntoView({behavior:"smooth"});};
 $("todayChips").onclick=e=>{const c=e.target.closest("[data-go]");if(!c)return;const g=c.dataset.go;if(g==="hot"){document.getElementById("hotLeads").scrollIntoView({behavior:"smooth",block:"center"});}else jump(g);};
 
@@ -883,7 +942,7 @@ document.addEventListener("click",e=>{
   const call=e.target.closest("[data-focus-call]"), wa=e.target.closest("[data-focus-wa]"), edit=e.target.closest("[data-focus-edit]");
   if(call){ const n=String(call.dataset.focusCall||"").replace(/\D/g,""); if(n) window.location.href=`tel:${n}`; return; }
   if(wa){ openWaComposer([wa.dataset.focusWa]); return; }
-  if(edit){ openEdit(edit.dataset.focusEdit); return; }
+  if(edit){ openDrawer(edit.dataset.focusEdit); return; }
 });
 $("waImageMode").onchange=renderWaImagePreview;
 $("waImageFile").onchange=()=>{
@@ -1083,15 +1142,18 @@ function overlap(aMin,aMax,bMin,bMax){
   if(!a1&&!a2||!b1&&!b2) return false;
   return Math.max(a1,b1)<=Math.min(a2||Infinity,b2||Infinity);
 }
+function matchScore(c,p){
+  let score=0; const why=[];
+  const ca=(c.area||"").toLowerCase().trim(), pa=(p.area||"").toLowerCase().trim();
+  const ct=(c.propertyType||"").toLowerCase().trim(), pt=(p.propertyType||"").toLowerCase().trim();
+  if(ca&&pa&&(pa.includes(ca)||ca.includes(pa))){score+=40;why.push("Same area");}
+  if(ct&&pt&&(pt.includes(ct)||ct.includes(pt))){score+=30;why.push("Same type");}
+  if(overlap(c.budgetMin,c.budgetMax,p.budgetMin,p.budgetMax)){score+=30;why.push("Budget fits");}
+  return {score,why};
+}
 function calculateMatches(customer){
-  const area=(customer.area||"").toLowerCase(); const prop=(customer.propertyType||"").toLowerCase();
-  return records.filter(r=>r.type==="seller" && r.publicVisible!==false).map(p=>{
-    let score=0; const pa=(p.area||"").toLowerCase(); const pp=(p.propertyType||"").toLowerCase();
-    if(area && pa && (pa.includes(area)||area.includes(pa))) score+=40;
-    if(prop && pp && (pp.includes(prop)||prop.includes(pp))) score+=30;
-    if(overlap(customer.budgetMin,customer.budgetMax,p.budgetMin,p.budgetMax)) score+=30;
-    return {p,score};
-  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,20);
+  return records.filter(r=>r.type==="seller" && r.publicVisible!==false).map(p=>({p,...matchScore(customer,p)}))
+    .filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,20);
 }
 function updateMatchCustomerInfo(){
   const c=records.find(r=>r.id===$("matchCustomer").value);
@@ -1101,7 +1163,7 @@ function renderMatchResults(){
   const c=records.find(r=>r.id===$("matchCustomer").value);
   if(!c){$("matchResults").innerHTML="";return;}
   const list=calculateMatches(c);
-  $("matchResults").innerHTML=list.length?list.map(x=>`<div class="module-row"><div class="row-head"><strong>${escapeHtml(x.p.name||"Property")}</strong><span class="score">${x.score}% match</span></div><div class="module-note">📍 ${escapeHtml(x.p.area||"")} • 🏠 ${escapeHtml(x.p.propertyType||"")} • 💰 ${formatMoney(x.p.budgetMin)}${x.p.budgetMax?" – "+formatMoney(x.p.budgetMax):""}<br>${escapeHtml(x.p.details||"")}</div><div class="module-actions"><button class="btn green" data-save-match="${x.p.id}">⭐ Save Match</button><button class="btn light" data-edit-match="${x.p.id}">Edit Property</button></div></div>`).join(""):'<div class="empty">No matching property found. Try adding area/property type/budget to seller records.</div>';
+  $("matchResults").innerHTML=list.length?list.map(x=>`<div class="module-row"><div class="row-head"><strong>${escapeHtml(x.p.name||"Property")}</strong><span class="score">${x.score}% match</span></div><div class="module-note" style="color:#0e7b42;font-weight:800">${escapeHtml((x.why||[]).join(" • "))}</div><div class="module-note">📍 ${escapeHtml(x.p.area||"")} • 🏠 ${escapeHtml(x.p.propertyType||"")} • 💰 ${formatMoney(x.p.budgetMin)}${x.p.budgetMax?" – "+formatMoney(x.p.budgetMax):""}<br>${escapeHtml(x.p.details||"")}</div><div class="module-actions"><button class="btn green" data-save-match="${x.p.id}">⭐ Save Match</button><button class="btn light" data-edit-match="${x.p.id}">Edit Property</button></div></div>`).join(""):'<div class="empty">No matching property found. Try adding area/property type/budget to seller records.</div>';
 }
 function renderFollowups(){
   const iso=localISO();
@@ -1141,7 +1203,7 @@ $("matchResults").onclick=async e=>{const save=e.target.closest('[data-save-matc
 $("savedMatches").onclick=async e=>{const d=e.target.closest('[data-delete-match]');if(d&&confirm('Delete this saved match?'))await deleteDoc(doc(db,"crmMatches",d.dataset.deleteMatch));};
 $("followupList").onclick=async e=>{
   const edit=e.target.closest('[data-edit-follow]'),done=e.target.closest('[data-done-follow]'),snooze=e.target.closest('[data-snooze-follow]');
-  if(edit){openEdit(edit.dataset.editFollow);return;}
+  if(edit){openDrawer(edit.dataset.editFollow);return;}
   try{
     if(done){const rr=records.find(x=>x.id===done.dataset.doneFollow);const upd={followUpDate:"",followUpNote:"",updatedAt:serverTimestamp()};if(!rr?.status||rr.status==="New")upd.status="Contacted";await updateDoc(doc(db,"crmContacts",done.dataset.doneFollow),upd);}
     if(snooze){const d=new Date();d.setDate(d.getDate()+3);await updateDoc(doc(db,"crmContacts",snooze.dataset.snoozeFollow),{followUpDate:localISO(d),updatedAt:serverTimestamp()});}
@@ -1202,6 +1264,161 @@ $("newBtn").onclick=()=>openQuick("customer");
 $("quickAdd").onclick=()=>openQuick("customer");
 $("quickProperty").onclick=()=>openQuick("seller");
 $("quickMatch").onclick=()=>jump("matching");
+
+/* ================= Phase 2: record detail drawer ================= */
+const EMOJI_RE=/[^\p{L}\p{M}\p{N}\s.,:;!?()\-\/₹%&'"+]/gu;
+const tidyTxt=t=>String(t??"").replace(EMOJI_RE," ").replace(/\s+/g," ").trim();
+function niceArea(a){let x=tidyTxt(String(a||"").split(/[|\n]/)[0]).split(",")[0].trim();if(x.length>2&&x===x.toUpperCase())x=x.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());return x.length>40?x.slice(0,38).trim()+"…":x;}
+const tlEntry=(text,kind="note")=>({at:Date.now(),kind,text});
+const dw={id:null,tpl:"hello",tplText:null,kind:"note"};
+const TPL=[
+  {k:"hello",l:"Intro / Namaste",f:["customer"],t:"Namaste {name} ji, main Jaipur Property Consultant se bol raha hoon. Aapne {area} mein {propertyType} ke liye enquiry ki thi. Aapki requirement ({budget}) ke hisaab se kuch options hain. Aap kab baat kar sakte hain?"},
+  {k:"visit",l:"Site visit ke liye",f:["customer"],t:"Namaste {name} ji, aapki shortlisted property ki site visit kab karni hai? Aap time bata dijiye, hum visit arrange kar denge. – Jaipur Property Consultant"},
+  {k:"follow",l:"Follow-up",f:["customer","seller","broker"],t:"Namaste {name} ji, kal baat hui thi uske baare mein follow-up kar raha hoon. Kya aap abhi baat kar sakte hain? – Jaipur Property Consultant"},
+  {k:"price",l:"Price / negotiation",f:["customer","seller"],t:"Namaste {name} ji, price ke baare mein maine baat ki hai. Kuch adjustment ke saath deal ho sakti hai. Aap kab free hain baat karne ke liye? – Jaipur Property Consultant"},
+  {k:"seller",l:"Seller update",f:["seller"],t:"Namaste {name} ji, aapki {area} wali {propertyType} ke liye buyers ki enquiry aa rahi hai. Kya property abhi available hai aur rate wahi hai? Please confirm kar dijiye. – Jaipur Property Consultant"},
+  {k:"broker",l:"Broker collaboration",f:["broker"],t:"Namaste {name} ji, mere paas {area} mein buyers ki requirement hai. Aapke paas koi suitable property ho to share kijiye. – Jaipur Property Consultant"},
+  {k:"thanks",l:"Thank you",f:["customer","seller","broker"],t:"Namaste {name} ji, aapke samay ke liye dhanyavaad. Kisi bhi madad ke liye hum yahin hain. – Jaipur Property Consultant"}
+];
+const KIND_LABEL={note:"Note",call:"Call",visit:"Site visit",wa:"WhatsApp",status:"Update"};
+function firstName(r){const n=String(r.name||"").replace(/\(.*?\)/g," ").trim();if(!n||suspectName(r))return "";return n.split(/\s+/)[0];}
+function tplFill(r,t){
+  return t.replaceAll("{name}",firstName(r)).replaceAll("{area}",niceArea(r.area)||"Jaipur").replaceAll("{propertyType}",(r.propertyType||"property").toLowerCase()).replaceAll("{budget}",budgetText(r)==="—"?"aapka budget":budgetText(r)).replace(/  +/g," ").replace(/Namaste ji/g,"Namaste ji");
+}
+function fmtDT(ms){try{return new Date(ms).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});}catch{return "";}}
+function openDrawer(id){
+  if(!records.find(x=>x.id===id)) return;
+  if(dw.id!==id){dw.tplText=null;dw.tpl="hello";dw.kind="note";$("dwNote").value="";}
+  dw.id=id; closePop();
+  $("drawer").classList.remove("hidden"); $("drawerBack").classList.remove("hidden"); document.body.classList.add("noscroll");
+  renderDrawer(); $("dwBody").scrollTop=0;
+}
+function closeDrawer(){dw.id=null;$("drawer").classList.add("hidden");$("drawerBack").classList.add("hidden");document.body.classList.remove("noscroll");}
+function propLink(p){
+  if(!p.publicVisible) return "";
+  return location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(p.id);
+}
+function propSummary(p){return `${tidyTxt(p.size)&&/[a-zऀ-ॿ]/i.test(p.size)?tidyTxt(p.size)+" ":""}${p.propertyType||"Property"}, ${niceArea(p.area)||"Jaipur"}`;}
+function matchesFor(r){
+  let list=[];
+  if(r.type==="customer") list=records.filter(x=>x.type==="seller"&&!["Sold","Not Available"].includes(x.availability)).map(o=>({o,...matchScore(r,o)}));
+  else if(r.type==="seller") list=records.filter(x=>x.type==="customer"&&!["Closed","Not Interested"].includes(x.status)).map(o=>({o,...matchScore(o,r)}));
+  return list.filter(m=>m.score>=30).sort((a,b)=>b.score-a.score).slice(0,5);
+}
+function renderDrawer(){
+  const r=records.find(x=>x.id===dw.id);
+  if(!r){ if(dw.id) closeDrawer(); return; }
+  const keep=$("dwBody").scrollTop;
+  const n=last10(r.mobile), ok=n.length===10, iso=localISO(), isSeller=r.type==="seller";
+  $("dwHead").innerHTML=`<div class="dw-top"><div><h3>${escapeHtml(r.name||"—")}</h3><div class="dw-sub"><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span> ${escapeHtml(niceArea(r.area)||"Jaipur")}${r.company?" • "+escapeHtml(r.company):""}</div></div><button class="dw-x" id="dwClose" type="button" aria-label="Close">×</button></div>
+    <div class="dw-btns"><a class="btn green ${ok?"":"off"}" id="dwCall" href="tel:+91${n}">${ic("phone")}Call</a><button class="btn light ${ok?"":"off"}" type="button" data-dw="wa-open">${ic("wa")}WhatsApp</button><button class="btn light" type="button" data-dw="edit">${ic("edit")}Edit</button></div>`;
+  // facts
+  const fact=(l,v,full)=>v?`<div class="dw-fact ${full?"full":""}"><b>${escapeHtml(l)}</b><span>${escapeHtml(v)}</span></div>`:"";
+  const facts=[
+    fact("Mobile",r.mobile),fact("Area",[niceArea(r.area),r.city].filter(Boolean).join(", ")),
+    fact(isSeller?"Price":"Budget",budgetText(r)==="—"?"":budgetText(r)),
+    fact("Type / size",[r.propertyType,r.size].filter(Boolean).join(" • ")),
+    fact("Source",r.source),fact("Added",r.createdAt?fmtDate(r.createdAt):""),
+    isSeller?fact("Availability",r.availability):"",isSeller?fact("On website",r.publicVisible?"Yes — public":"No"):"",
+    fact("Road / facing",r.roadFacing),fact("Exact address (private)",r.exactAddress,true),
+    fact("Details",tidyTxt(r.details)?String(r.details).replace(EMOJI_RE," ").replace(/[ \t]+/g," ").trim():"",true),
+    fact("Private notes",r.notes,true)
+  ].join("");
+  // follow-up
+  const fu=r.followUpDate||"";
+  const fuBanner=fu?`<div class="fu-now ${fu<iso?"bad":""}">${fu<iso?"Overdue":fu===iso?"Aaj":"Next"} follow-up: ${escapeHtml(fu)}${r.followUpNote?" — "+escapeHtml(r.followUpNote):""}</div>`:"";
+  // templates
+  const tpls=TPL.filter(t=>t.f.includes(r.type));
+  if(!tpls.find(t=>t.k===dw.tpl)) dw.tpl=tpls[0]?.k||"hello";
+  const cur=TPL.find(t=>t.k===dw.tpl)||TPL[0];
+  const text=dw.tplText??tplFill(r,cur.t);
+  // matches
+  const ms=matchesFor(r);
+  const mHTML=ms.length?ms.map(m=>{const o=m.o;return `<div class="mrow"><div class="mt"><div><strong data-dw-open="${escapeHtml(o.id)}">${escapeHtml(o.type==="seller"?propSummary(o):(o.name||"Customer"))}</strong><div class="ms">${escapeHtml(o.type==="seller"?"Owner: "+(o.name||"—"):(niceArea(o.area)||"Jaipur")+" • "+(o.propertyType||""))} • ${escapeHtml(budgetText(o))}</div></div><span class="mscore">${m.score}%</span></div><div class="why">${escapeHtml(m.why.join(" • "))}</div><div class="dw-row"><button class="chipbtn" type="button" data-dw-send="${escapeHtml(o.id)}">${ic("wa")} ${isSeller?"Send this property to buyer":"Send this property"}</button><button class="chipbtn" type="button" data-dw-open="${escapeHtml(o.id)}">Open</button></div></div>`}).join(""):`<div class="muted" style="padding:6px 0">${r.type==="broker"?"Brokers ke liye matching nahi hoti.":"Abhi koi match nahi mila. Area, type aur budget bharein to match milenge."}</div>`;
+  // photos
+  const imgs=Array.isArray(r.images)?r.images.filter(u=>/^https?:|^data:image/.test(u)).slice(0,3):[];
+  const vid=r.publicVideoUrl||r.videoUrl||"";
+  const photos=isSeller&&(imgs.length||vid)?`<div class="dw-sec"><h4>Photos</h4><div class="dw-photos">${imgs.map(u=>`<a href="${escapeHtml(u)}" target="_blank" rel="noopener"><img src="${escapeHtml(u)}" alt="Property photo" loading="lazy"></a>`).join("")}</div>${vid?`<div style="margin-top:8px"><a class="chipbtn" style="display:inline-block;text-decoration:none" href="${escapeHtml(vid)}" target="_blank" rel="noopener">Open video</a></div>`:""}</div>`:"";
+  // timeline
+  const tl=[...(Array.isArray(r.timeline)?r.timeline:[])].sort((a,b)=>(b.at||0)-(a.at||0));
+  const created=r.createdAt?.toMillis?r.createdAt.toMillis():0;
+  const tlHTML=tl.map(e=>`<div class="tl-item ${escapeHtml(e.kind||"note")}"><div class="tl-time">${escapeHtml(KIND_LABEL[e.kind]||"Note")} • ${escapeHtml(fmtDT(e.at))}</div><div class="tl-text">${escapeHtml(e.text||"")}</div></div>`).join("")+(created?`<div class="tl-item"><div class="tl-time">${escapeHtml(fmtDT(created))}</div><div class="tl-text">Added to CRM${r.source?" ("+escapeHtml(r.source)+")":""}</div></div>`:"");
+  $("dwBody").innerHTML=`
+    <div class="dw-sec" style="margin-top:12px"><div class="dw-facts">${facts}</div></div>
+    <div class="dw-sec"><h4>Status &amp; follow-up</h4>${fuBanner}
+      <div class="dw-row" style="margin-bottom:8px">${statusSelect(r)}</div>
+      <div class="dw-row"><input type="date" id="dwFuDate" value="${escapeHtml(fu)}"><input type="text" id="dwFuNote" placeholder="Reminder note" value="${escapeHtml(r.followUpNote||"")}" style="flex:1;min-width:120px"><button class="chipbtn" type="button" data-dw="fu-save">Save</button></div>
+      <div class="dw-row" style="margin-top:8px"><button class="chipbtn" type="button" data-fu="1">Kal</button><button class="chipbtn" type="button" data-fu="3">3 din</button><button class="chipbtn" type="button" data-fu="7">7 din</button>${fu?`<button class="chipbtn" type="button" data-dw="fu-done">${ic("check")} Done</button>`:""}</div>
+    </div>
+    <div class="dw-sec"><h4>WhatsApp message</h4>
+      <div class="dw-row" style="margin-bottom:8px"><select id="dwTpl" style="flex:1">${tpls.map(t=>`<option value="${t.k}" ${t.k===dw.tpl?"selected":""}>${escapeHtml(t.l)}</option>`).join("")}</select></div>
+      <textarea id="dwTplText">${escapeHtml(text)}</textarea>
+      <div class="dw-row" style="margin-top:8px"><button class="btn green" type="button" data-dw="wa-send" style="flex:1;min-height:44px">${ic("wa")}Open in WhatsApp</button></div>
+    </div>
+    ${r.type!=="broker"?`<div class="dw-sec"><h4>${isSeller?"Matching buyers":"Matching properties"}</h4>${mHTML}</div>`:""}
+    ${photos}
+    <div class="dw-sec"><h4>Timeline</h4><div class="tl">${tlHTML||'<div class="muted">Abhi koi activity nahi. Neeche note likhkar shuru karein.</div>'}</div></div>`;
+  $("dwBody").scrollTop=keep;
+  document.querySelectorAll("#dwKinds [data-kind]").forEach(b=>b.classList.toggle("on",b.dataset.kind===dw.kind));
+}
+async function addTL(id,text,kind,extra={}){
+  await updateDoc(doc(db,"crmContacts",id),{timeline:arrayUnion(tlEntry(text,kind)),updatedAt:serverTimestamp(),...extra});
+}
+function openWaWith(r,text){
+  const n=waNumber(r); if(!n){toast("Is record mein mobile number nahi hai");return false;}
+  window.open(`https://wa.me/${n}?text=${encodeURIComponent(text)}`,"_blank","noopener"); return true;
+}
+$("drawerBack").onclick=closeDrawer;
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&dw.id&&$("modal").classList.contains("hidden")&&$("quickModal").classList.contains("hidden")&&$("waModal").classList.contains("hidden")) closeDrawer(); });
+$("dwKinds").onclick=e=>{const b=e.target.closest("[data-kind]");if(!b)return;dw.kind=b.dataset.kind;document.querySelectorAll("#dwKinds [data-kind]").forEach(x=>x.classList.toggle("on",x===b));};
+$("dwAddNote").onclick=async()=>{
+  const r=records.find(x=>x.id===dw.id); if(!r) return;
+  const txt=$("dwNote").value.trim();
+  if(dw.kind==="note"&&!txt){toast("Pehle note likhein");return;}
+  const label=dw.kind==="call"?"Called":dw.kind==="visit"?"Site visit":"";
+  const full=label?(label+(txt?": "+txt:"")):txt;
+  try{ await addTL(r.id,full,dw.kind); $("dwNote").value=""; toast("Saved"); }catch(err){ toast(err.message); }
+};
+$("dwHead").addEventListener("click",e=>{
+  if(e.target.closest("#dwClose")){closeDrawer();return;}
+  const b=e.target.closest("[data-dw]"); const r=records.find(x=>x.id===dw.id); if(!b||!r) return;
+  if(b.dataset.dw==="edit"){closeDrawer();openEdit(r.id);}
+  if(b.dataset.dw==="wa-open"){ const t=$("dwBody").querySelector("#dwTplText")?.value||tplFill(r,TPL[0].t); if(openWaWith(r,t)) addTL(r.id,"WhatsApp opened","wa").catch(()=>{}); }
+  const call=e.target.closest("#dwCall"); if(call&&!call.classList.contains("off")) addTL(r.id,"Call started","call").catch(()=>{});
+});
+$("dwBody").addEventListener("input",e=>{ if(e.target.id==="dwTplText") dw.tplText=e.target.value; });
+$("dwBody").addEventListener("change",e=>{ if(e.target.id==="dwTpl"){dw.tpl=e.target.value;dw.tplText=null;renderDrawer();} });
+$("dwBody").addEventListener("click",async e=>{
+  const r=records.find(x=>x.id===dw.id); if(!r) return;
+  const open=e.target.closest("[data-dw-open]"), send=e.target.closest("[data-dw-send]"), fu=e.target.closest("[data-fu]"), act=e.target.closest("[data-dw]");
+  try{
+    if(open){ openDrawer(open.dataset.dwOpen); return; }
+    if(send){
+      const other=records.find(x=>x.id===send.dataset.dwSend); if(!other) return;
+      const buyer=r.type==="customer"?r:other, prop=r.type==="customer"?other:r;
+      const link=propLink(prop);
+      const text=`Namaste ${firstName(buyer)} ji, aapki requirement ke hisaab se yeh property suitable lagi:\n${propSummary(prop)}\nPrice: ${budgetText(prop)}\n${link?link+"\n":""}Site visit karna chahein to bataiye. – Jaipur Property Consultant`.replace("Namaste  ji","Namaste ji");
+      if(openWaWith(buyer,text)) await addTL(buyer.id,`Property bheji (WhatsApp): ${propSummary(prop)}`,"wa");
+      return;
+    }
+    if(fu){ const d=new Date(); d.setDate(d.getDate()+Number(fu.dataset.fu)); $("dwFuDate").value=localISO(d); return; }
+    if(!act) return;
+    if(act.dataset.dw==="fu-save"){
+      const d=$("dwFuDate").value, note=$("dwFuNote").value.trim();
+      if(!d){ await updateDoc(doc(db,"crmContacts",r.id),{followUpDate:"",followUpNote:"",updatedAt:serverTimestamp()}); toast("Follow-up cleared"); return; }
+      await addTL(r.id,`Follow-up set for ${d}${note?": "+note:""}`,"status",{followUpDate:d,followUpNote:note}); toast("Follow-up saved");
+    }
+    if(act.dataset.dw==="fu-done"){
+      const extra={followUpDate:"",followUpNote:""}; if(!r.status||r.status==="New") extra.status="Contacted";
+      await addTL(r.id,"Follow-up done","status",extra); toast("Follow-up done");
+    }
+    if(act.dataset.dw==="wa-send"){
+      const t=$("dwTplText").value; const lab=TPL.find(x=>x.k===dw.tpl)?.l||"Message";
+      if(openWaWith(r,t)) await addTL(r.id,`WhatsApp: ${lab}`,"wa");
+    }
+  }catch(err){ toast(err.message||"Error"); }
+});
+
 $("exportBtn").onclick=()=>{
   const rows=records.map(r=>({Type:r.type,Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
     Property_Type:r.propertyType||"",Size:r.size||"",Budget_Min:r.budgetMin||"",Budget_Max:r.budgetMax||"",Status:r.status||"",Source:r.source||"",

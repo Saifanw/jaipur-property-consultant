@@ -179,7 +179,7 @@ function chrome(){
   const waHello = wa("Hello, I want property consultation in Jaipur.");
   document.body.insertAdjacentHTML("afterbegin", `<div class="topbar"><div class="container topbar-inner"><div class="topbar-left">Jaipur &amp; Jhotwara property consultation</div><div class="top-right"><a href="tel:+91${esc(SITE.phone)}">${ico("phone")}${esc(SITE.phone)}</a><a href="${waHello}" target="_blank" rel="noopener">${ico("wa")}WhatsApp</a></div></div></div>
   <header class="nav-wrap"><nav class="container nav" aria-label="Main"><a class="brand" href="index.html" aria-label="${esc(SITE.brand.name)} home"><div class="brand-mark">${ico("logo")}</div><div><div class="brand-name">${esc(SITE.brand.name)}</div><div class="brand-sub">${esc(SITE.brand.tagline)}</div></div></a>
-  <div class="nav-links" id="navLinks">${nav("properties.html","Properties","properties")}${nav("partner.html","Sell &amp; earn","partner")}${nav("reviews.html","Reviews","reviews")}${nav("index.html#contact","Contact","contact")}<a href="properties.html?saved=1" class="nav-saved">${ico("heart")}Saved<span class="saved-count" style="display:none"></span></a><a class="nav-wa" target="_blank" rel="noopener" href="${waHello}">${ico("wa")}WhatsApp</a></div>
+  <div class="nav-links" id="navLinks">${nav("properties.html","Properties","properties")}${nav("partner.html","Sell &amp; earn","partner")}${nav("reviews.html","Reviews","reviews")}<a class="nav-call" href="tel:+91${esc(SITE.phone)}">${ico("phone")}Call Now</a><a href="properties.html?saved=1" class="nav-saved">${ico("heart")}Saved<span class="saved-count" style="display:none"></span></a><a class="nav-wa" target="_blank" rel="noopener" href="${waHello}">${ico("wa")}WhatsApp</a></div>
   <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">${ico("menu")}</button></nav></header>`);
   document.body.insertAdjacentHTML("beforeend", `<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand" style="margin-bottom:12px"><div class="brand-mark">${ico("logo")}</div><div><div class="brand-name">${esc(SITE.brand.name)}</div></div></div><p>Real estate consultation for plots, land and property buying, selling and investment in Jaipur &amp; Jhotwara.</p></div><div><h4>Explore</h4><a href="properties.html">Properties</a><a href="partner.html">Sell with us</a><a href="partner.html#agents">Agent programme</a><a href="reviews.html">Reviews</a></div><div><h4>Contact</h4><a href="tel:+91${esc(SITE.phone)}">${esc(SITE.phone)}</a><span style="display:block;padding:3px 0">${esc(SITE.address)}</span>${SITE.officeHours ? `<span style="display:block;padding:3px 0">${esc(SITE.officeHours)}</span>` : ""}</div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} ${esc(SITE.brand.name)}. All rights reserved.${SITE.reraNo ? " RERA " + esc(SITE.reraNo) : ""}</span><a href="admin.html" rel="nofollow">Staff login</a></div></div></footer>
   <a class="float-wa" target="_blank" rel="noopener" href="${waHello}" aria-label="Chat on WhatsApp"><svg class="icon" style="width:28px;height:28px;fill:#fff;stroke:none"><use href="#i-wa"/></svg></a>
@@ -188,10 +188,40 @@ function chrome(){
   mb.onclick = () => { const o = nl.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); };
   nl.addEventListener("click", e => { if(e.target.closest("a")){ nl.classList.remove("open"); mb.setAttribute("aria-expanded","false"); } });
 }
+
+/* ---------------- admin shortcuts on the public site (only for the owner) ----------------
+   admin.html sets a local flag after you sign in; only then do we load Firebase Auth here and check your e-mail.
+   Normal visitors never load it and never see anything. */
+function adminTools(){
+  let flag = false; try{ flag = localStorage.getItem("jpc_admin") === "1"; }catch(_){}
+  if(!flag || !SITE.firebase) return;
+  const emails = (SITE.adminEmails || []).map(e => String(e).toLowerCase());
+  Promise.all([import("https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js"), import("https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js")]).then(([A, Au]) => {
+    const app = A.getApps().find(x => x.name === "[DEFAULT]") || A.initializeApp(SITE.firebase);
+    Au.onAuthStateChanged(Au.getAuth(app), u => { if(u && u.email && emails.includes(u.email.toLowerCase())) enableAdmin(); });
+  }).catch(() => {});
+}
+function enableAdmin(){
+  if(document.body.classList.contains("is-admin")) return;
+  document.body.classList.add("is-admin");
+  const st = document.createElement("style");
+  st.textContent = ".adm-pill{position:fixed;left:14px;bottom:84px;z-index:2500;display:flex;gap:8px;align-items:center}.adm-pill a{background:#2f5bff;color:#fff;font:700 14px/1 Inter,system-ui,sans-serif;padding:12px 16px;border-radius:999px;box-shadow:0 8px 22px rgba(47,91,255,.45);text-decoration:none;display:inline-flex;gap:6px;align-items:center}.adm-pill a.d{background:#0f172a}.ed-btn{position:absolute;top:12px;right:14px;z-index:6;background:#2f5bff;color:#fff!important;font:700 13px/1 Inter,system-ui,sans-serif;padding:9px 13px;border-radius:999px;box-shadow:0 6px 16px rgba(47,91,255,.35);text-decoration:none}.pbody{position:relative}";
+  document.head.appendChild(st);
+  const q = new URLSearchParams(location.search), onDetail = /property\.html$/.test(location.pathname) && q.get("id");
+  const pill = document.createElement("div"); pill.className = "adm-pill";
+  pill.innerHTML = (onDetail ? `<a href="admin.html?edit=${encodeURIComponent(q.get("id"))}">\u270F\uFE0F Edit this property</a>` : "") + `<a class="d" href="admin.html">\uD83D\uDEE0 Admin</a>`;
+  document.body.appendChild(pill);
+  const paint = () => document.querySelectorAll(".pcard:not([data-ed])").forEach(c => {
+    c.dataset.ed = "1"; const a = c.querySelector('a[href*="property.html?id="]'); if(!a) return;
+    const id = new URL(a.getAttribute("href"), location.href).searchParams.get("id"); if(!id) return;
+    (c.querySelector(".pbody")||c).insertAdjacentHTML("afterbegin", `<a class="ed-btn" href="admin.html?edit=${encodeURIComponent(id)}">\u270F\uFE0F Edit</a>`);
+  });
+  paint(); new MutationObserver(paint).observe(document.body, {childList:true, subtree:true});
+}
 function init(){
   document.body.insertAdjacentHTML("afterbegin", EXTRA_ICONS);
   if(document.querySelector("[data-chrome]") && !document.querySelector("#i-phone")) document.body.insertAdjacentHTML("afterbegin", window.JPC_SPRITE || "");
-  chrome(); paintSaved();
+  chrome(); paintSaved(); adminTools();
   document.addEventListener("jpc:rendered", paintSaved);
 }
 if("serviceWorker" in navigator && location.protocol !== "file:") addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));

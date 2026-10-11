@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Property Desk | Jaipur Property Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0a0f1d;--panel:#111a2e;--panel2:#16213a;--line:#24324f;--text:#eef1f8;--mute:#8d9bb8;--brass:#e8c46c;--rose:#e59b86;--mint:#4fd6a5;--red:#ff7b6b;--serif:'Fraunces',Georgia,serif;--sans:'Manrope',system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);color:var(--text);background:var(--night);min-height:100vh;
+background-image:radial-gradient(900px 520px at 12% -8%,rgba(229,155,134,.22),transparent 60%),radial-gradient(800px 500px at 100% 0,rgba(232,196,108,.13),transparent 60%)}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}.hide{display:none!important}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.wrap{width:min(1240px,94%);margin:auto}
+/* login */
+#login{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center}
+#login h1{font:800 clamp(30px,6vw,52px)/1.05 var(--serif);margin:0 0 10px}
+#login p{color:var(--mute);margin:0 0 22px}
+.btn{border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:11px 16px;font-weight:800;transition:.18s}
+.btn:hover{border-color:var(--brass)}
+.gold{background:linear-gradient(135deg,#d9a940,#f0d27f);color:#1b1405;border:0}
+.gold:hover{filter:brightness(1.07)}
+/* hero */
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:18px 0}
+.bar a{color:var(--mute);font-weight:700;font-size:14px}.bar a:hover{color:var(--brass)}
+.hero{padding:18px 0 26px}
+.hero h1{font:800 clamp(34px,6.5vw,68px)/1 var(--serif);margin:0;letter-spacing:-.02em;background:linear-gradient(100deg,var(--text) 35%,var(--brass) 50%,var(--text) 65%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sweep 2.6s .3s ease-out 1 both}
+@keyframes sweep{from{background-position:100% 0}to{background-position:0 0}}
+.hero p{color:var(--mute);margin:12px 0 0;max-width:560px;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.stat{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px}
+.stat b{font:800 32px var(--serif);display:block}.stat span{font-size:12px;color:var(--mute)}
+.stat.warn b{color:var(--red)}.stat.ok b{color:var(--mint)}
+/* tools */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.search{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 16px;font-size:15px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{background:transparent;border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--mute)}
+.chip.on{background:var(--brass);border-color:var(--brass);color:#1b1405}
+/* grid */
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;padding-bottom:80px}
+.card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s,transform .2s}
+.card:hover{border-color:#3a4d75}
+.card.open{grid-column:1/-1;border-color:var(--brass)}
+.head{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:16px;cursor:pointer}
+.plate{font:800 20px var(--serif);letter-spacing:.04em;color:#1b1405;background:linear-gradient(135deg,#d9a940,#f6dd90);padding:12px 14px;border-radius:10px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.18)}
+.head h3{margin:0 0 4px;font-size:16px}.head p{margin:0;color:var(--mute);font-size:13px}
+.cnt{text-align:right;font-size:12px;color:var(--mute)}.cnt b{display:block;font:800 26px var(--serif);color:var(--text)}
+.cnt i{font-style:normal;color:var(--red);font-weight:800;display:block}
+.tag{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:2px 7px;margin-left:6px;background:rgba(79,214,165,.14);color:var(--mint)}
+.tag.sold{background:rgba(255,123,107,.14);color:var(--red)}
+.panel{border-top:1px solid var(--line);padding:16px;animation:rise .25s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.panel h4{margin:0 0 10px;font:700 15px var(--serif);color:var(--brass)}
+.row{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:rgba(10,15,29,.5)}
+.row.due{border-color:var(--red)}.row.today{border-color:var(--brass)}
+.nm{font-weight:800}.sub{font-size:12px;color:var(--mute);margin-top:3px}.last{font-size:12px;color:var(--rose);margin-top:5px}
+select,input[type=date],.in{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 10px;width:100%}
+.acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.mini{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:8px 10px;font-size:12px;font-weight:800}
+.mini.call{background:rgba(79,214,165,.14);color:var(--mint);border-color:transparent}
+.mini.wa{background:#1f7a4d;border-color:transparent}
+.mini:hover{border-color:var(--brass)}
+.add{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.fu{font-size:12px;font-weight:800;margin-bottom:5px}.fu.due{color:var(--red)}.fu.today{color:var(--brass)}
+.empty{color:var(--mute);padding:18px;text-align:center;border:1px dashed var(--line);border-radius:12px}
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--brass);border-radius:18px;padding:22px;width:min(460px,92%)}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+dialog h2{font:800 24px var(--serif);margin:0 0 14px}
+dialog label{display:block;font-size:12px;color:var(--mute);margin:10px 0 4px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--brass);color:#1b1405;font-weight:800;padding:12px 18px;border-radius:12px;z-index:9;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.row,.add{grid-template-columns:1fr}.acts{justify-content:flex-start}.head{grid-template-columns:auto 1fr}.cnt{grid-column:1/-1;text-align:left;display:flex;gap:10px;align-items:baseline}.cnt b{display:inline}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero h1{color:var(--text);background:none}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div>
+    <h1>Property Desk</h1>
+    <p>Har property ka code. Har code ke neeche uske customers.</p>
+    <button id="gBtn" class="btn gold">Google se login karein</button>
+    <p id="lmsg" style="margin-top:14px;font-size:13px"></p>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <div class="wrap">
+    <div class="bar"><a href="admin.html">← Poora CRM</a><button id="out" class="btn">Logout</button></div>
+    <section class="hero">
+      <h1>Property Desk</h1>
+      <p>Property ka code chunein, customer jodein, follow-up date lagayein. Aaj kise call karna hai, yahan sabse upar dikhega.</p>
+    </section>
+    <section class="stats">
+      <div class="stat"><b id="sProps">0</b><span>Properties</span></div>
+      <div class="stat"><b id="sLinks">0</b><span>Interested customers</span></div>
+      <div class="stat warn"><b id="sDue">0</b><span>Follow-up baki ya aaj</span></div>
+      <div class="stat ok"><b id="sHot">0</b><span>Site visit / negotiation</span></div>
+    </section>
+    <div class="tools">
+      <input id="q" class="search" type="search" placeholder="Code, area ya customer ka naam (jaise JPC-012)" autocomplete="off">
+      <button id="addProp" class="btn gold">+ Nayi property</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="grid"></div>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <h2>Nayi property</h2>
+  <label>Owner ka naam</label><input id="pOwner" class="in">
+  <label>Owner ka mobile</label><input id="pMob" class="in" inputmode="numeric" maxlength="14">
+  <label>Type</label>
+  <select id="pType"><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Commercial</option><option>Land</option></select>
+  <label>Size (jaise 100 gaj)</label><input id="pSize" class="in">
+  <label>Area</label><input id="pArea" class="in" list="areas">
+  <datalist id="areas"></datalist>
+  <label>Price (lakh me)</label><input id="pPrice" class="in" inputmode="decimal">
+  <div style="display:flex;gap:10px;margin-top:18px"><button id="pSave" class="btn gold">Code ke saath save karein</button><button id="pCancel" class="btn">Band karein</button></div>
+</dialog>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, query, orderBy, serverTimestamp, arrayUnion } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const cfg={apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"};
+const ADMINS=["saif.anwar1618@gmail.com"];
+const db=getFirestore(initializeApp(cfg)),auth=getAuth();
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const last10=m=>String(m||"").replace(/\D/g,"").slice(-10);
+const iso=(d=new Date())=>{const p=n=>String(n).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`};
+const inDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const STATUS=["New","Contacted","Interested","Site Visit","Negotiation","Follow-up","Closed","Not Interested"];
+const HOT=["Site Visit","Negotiation"];
+const inr=n=>{n=Number(n);if(!n)return"Price baki";return n>=1e7?"₹"+(+(n/1e7).toFixed(2))+" Cr":n>=1e5?"₹"+(+(n/1e5).toFixed(2))+" L":"₹"+n.toLocaleString("en-IN")};
+const lbl=p=>`${p.propertyType||"Property"}${p.size?" "+p.size:""} • ${String(p.area||"Jaipur").split(",")[0]}`;
+const ints=c=>Array.isArray(c.interests)?c.interests.filter(i=>i&&i.id):[];
+const ago=ms=>{const d=Math.floor((Date.now()-ms)/864e5);return d<=0?"aaj":d===1?"kal":d+" din pehle"};
+
+let all=[],rec=[],open=null,flt="all",pend=false,toastT;
+const props=()=>rec.filter(r=>r.type==="seller");
+const custs=p=>rec.filter(r=>r.type==="customer"&&ints(r).some(i=>i.id===p.id));
+const codeNum=c=>{const m=String(c||"").match(/(\d+)$/);return m?+m[1]:0};
+const nextCode=()=>"JPC-"+String(Math.max(0,...all.map(r=>codeNum(r.code)))+1).padStart(3,"0");
+function toast(t){clearTimeout(toastT);document.querySelector(".toast")?.remove();const e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);toastT=setTimeout(()=>e.remove(),3500)}
+const tl=(text,kind="note")=>({at:Date.now(),kind,text});
+const upd=(id,data)=>updateDoc(doc(db,"crmContacts",id),{...data,updatedAt:serverTimestamp()});
+
+$("gBtn").onclick=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>$("lmsg").textContent=e.message);
+$("out").onclick=()=>signOut(auth);
+let unsub=null;
+onAuthStateChanged(auth,u=>{
+  if(!u||!ADMINS.includes((u.email||"").toLowerCase())){
+    $("login").classList.remove("hide");$("app").classList.add("hide");unsub&&unsub();
+    if(u){$("lmsg").textContent="Access nahi mila: "+u.email;signOut(auth)}return}
+  $("login").classList.add("hide");$("app").classList.remove("hide");
+  unsub=onSnapshot(query(collection(db,"crmContacts"),orderBy("updatedAt","desc")),s=>{
+    all=s.docs.map(d=>({id:d.id,...d.data()}));rec=all.filter(r=>!r.deletedAt);draw()},e=>toast("Data load nahi hua: "+e.message));
+});
+
+function dueOf(c){const f=c.followUpDate;return !f?0:f<iso()?2:f===iso()?1:0}
+function draw(){
+  if(document.activeElement?.closest("#grid input,#grid select")){pend=true;return}
+  pend=false;
+  const P=props(),links=new Set();let due=0,hot=0;
+  rec.filter(r=>r.type==="customer"&&ints(r).length).forEach(c=>{links.add(c.id);if(dueOf(c))due++;if(HOT.includes(c.status))hot++});
+  $("sProps").textContent=P.length;$("sLinks").textContent=links.size;$("sDue").textContent=due;$("sHot").textContent=hot;
+  const dl=[...new Set(P.map(p=>String(p.area||"").split(",")[0]).filter(Boolean))];
+  $("areas").innerHTML=dl.map(a=>`<option value="${esc(a)}">`).join("");
+  const F=[["all","Sab"],["due","Follow-up baki"],["has","Customer wali"],["none","Bina customer"],["avail","Available"]];
+  $("chips").innerHTML=F.map(([k,t])=>`<button class="chip ${flt===k?"on":""}" data-f="${k}">${t}</button>`).join("");
+  const t=$("q").value.trim().toLowerCase();
+  let list=P.map(p=>({p,c:custs(p)})).filter(({p,c})=>{
+    if(t&&![p.code,p.area,p.propertyType,p.size,p.name,...c.map(x=>x.name+" "+x.mobile)].join(" ").toLowerCase().includes(t))return false;
+    if(flt==="due")return c.some(dueOf);if(flt==="has")return c.length;if(flt==="none")return !c.length;
+    if(flt==="avail")return !["Sold","Not Available"].includes(p.availability);return true});
+  list.sort((a,b)=>b.c.filter(dueOf).length-a.c.filter(dueOf).length||codeNum(b.p.code)-codeNum(a.p.code));
+  $("grid").innerHTML=list.length?list.map(({p,c})=>card(p,c)).join(""):`<div class="empty" style="grid-column:1/-1">Koi property nahi mili. "+ Nayi property" se pehli property jodein.</div>`;
+}
+function card(p,c){
+  const d=c.filter(dueOf).length,sold=["Sold","Not Available"].includes(p.availability);
+  return `<article class="card ${open===p.id?"open":""}" data-id="${esc(p.id)}">
+  <div class="head" data-t="${esc(p.id)}"><div class="plate">${esc(p.code||"—")}</div>
+  <div><h3>${esc(lbl(p))}</h3><p>${inr(p.budgetMax||p.budgetMin)} · ${esc(p.name||"Owner")}<span class="tag ${sold?"sold":""}">${esc(p.availability||"Available")}</span></p></div>
+  <div class="cnt"><b>${c.length}</b>customers${d?`<i>${d} follow-up</i>`:""}</div></div>${open===p.id?panel(p,c):""}</article>`}
+function panel(p,c){
+  c=[...c].sort((a,b)=>(dueOf(b)-dueOf(a))||String(a.followUpDate||"9").localeCompare(String(b.followUpDate||"9")));
+  const rows=c.map(x=>{const n=last10(x.mobile),dv=dueOf(x),last=(x.timeline||[]).slice(-1)[0],f=x.followUpDate;
+   return `<div class="row ${dv===2?"due":dv===1?"today":""}" data-c="${esc(x.id)}">
+   <div><div class="nm">${esc(x.name)}</div><div class="sub">${esc(x.mobile||"")}</div>${last?`<div class="last">${esc(last.text)} (${ago(last.at)})</div>`:""}</div>
+   <div><select data-st>${STATUS.map(s=>`<option ${s===(x.status||"New")?"selected":""}>${s}</option>`).join("")}</select></div>
+   <div><div class="fu ${dv===2?"due":dv===1?"today":""}">${!f?"Follow-up set nahi":dv===2?"Baki: "+f:dv===1?"Aaj call karein":"Agla: "+f}</div><input type="date" data-fu value="${esc(f||"")}"></div>
+   <div class="acts"><a class="mini call" href="tel:+91${n}">Call</a>
+   <a class="mini wa" target="_blank" rel="noopener" href="https://wa.me/91${n}?text=${encodeURIComponent(`Namaste ${(x.name||"").split(" ")[0]} ji, ${p.code} (${lbl(p)}) ke baare mein follow-up kar raha hoon. Kya aap abhi baat kar sakte hain? – Jaipur Property Consultant`)}">WhatsApp</a>
+   <button class="mini" data-a="note">Note</button><button class="mini" data-a="done">Ho gaya</button><button class="mini" data-a="snz">+3 din</button><button class="mini" data-a="rm" title="Is property se hatayein">×</button></div></div>`}).join("");
+  return `<div class="panel"><h4>${esc(p.code)} ke interested customers</h4>${rows||`<div class="empty">Abhi koi customer nahi. Neeche naam aur mobile daalkar jodein.</div>`}
+  <div class="add" data-p="${esc(p.id)}"><input class="in" id="aN" list="cl" placeholder="Customer ka naam"><datalist id="cl">${rec.filter(r=>r.type==="customer").map(r=>`<option value="${esc(r.name)}">${esc(r.mobile||"")}</option>`).join("")}</datalist>
+  <input class="in" id="aM" inputmode="numeric" placeholder="Mobile (10 digit)"><input class="in" id="aD" type="date" value="${inDays(1)}"><button class="btn gold" data-a="link">${esc(p.code)} se jodein</button></div></div>`}
+
+$("q").oninput=draw;
+$("grid").addEventListener("focusout",()=>setTimeout(()=>{if(pend)draw()},150));
+$("grid").addEventListener("input",e=>{if(e.target.id==="aN"){const c=rec.find(r=>r.type==="customer"&&r.name===e.target.value);if(c)$("aM").value=last10(c.mobile)}});
+$("chips").onclick=e=>{const b=e.target.closest("[data-f]");if(b){flt=b.dataset.f;draw()}};
+$("grid").addEventListener("change",async e=>{
+  const row=e.target.closest("[data-c]");if(!row)return;const id=row.dataset.c;
+  try{
+   if(e.target.matches("[data-st]")){await upd(id,{status:e.target.value,timeline:arrayUnion(tl("Status: "+e.target.value,"status"))});toast("Status badal gaya")}
+   if(e.target.matches("[data-fu]")){await upd(id,{followUpDate:e.target.value});toast("Follow-up date save")}
+  }catch(err){toast(err.message)}});
+$("grid").addEventListener("click",async e=>{
+  const t=e.target.closest("[data-t]");if(t){open=open===t.dataset.t?null:t.dataset.t;draw();return}
+  const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
+  try{
+   if(a==="link"){const box=b.closest("[data-p]");await link(rec.find(r=>r.id===box.dataset.p),$("aN").value.trim(),$("aM").value,$("aD").value);return}
+   const row=b.closest("[data-c]"),c=rec.find(r=>r.id===row.dataset.c),p=rec.find(r=>r.id===open);
+   if(a==="note"){const x=prompt("Aaj kya baat hui?");if(x){await upd(c.id,{timeline:arrayUnion(tl(x.trim()))});toast("Note save")}}
+   if(a==="done"){await upd(c.id,{followUpDate:"",followUpNote:"",status:(!c.status||c.status==="New")?"Contacted":c.status,timeline:arrayUnion(tl("Follow-up ho gaya","call"))});toast("Follow-up complete")}
+   if(a==="snz"){await upd(c.id,{followUpDate:inDays(3)});toast("3 din baad yaad dilayenge")}
+   if(a==="rm"&&confirm(c.name+" ko "+p.code+" se hatayein?")){const nx=ints(c).filter(i=>i.id!==p.id);await upd(c.id,{interests:nx,interestCode:nx[0]?.code||"",timeline:arrayUnion(tl(p.code+" se hataya"))});toast("Hata diya")}
+  }catch(err){toast(err.message)}});
+
+async function link(p,name,mob,fd){
+  const n=last10(mob),ex=rec.find(r=>r.type==="customer"&&n.length===10&&last10(r.mobile)===n);
+  const it={id:p.id,code:p.code||"",label:lbl(p),at:Date.now()};
+  if(ex){
+    if(ints(ex).some(i=>i.id===p.id))return toast("Ye customer pehle se juda hai");
+    const nx=[...ints(ex),it];
+    await upd(ex.id,{interests:nx,interestCode:nx[0].code,status:(!ex.status||ex.status==="New")?"Interested":ex.status,followUpDate:fd||ex.followUpDate||"",timeline:arrayUnion(tl("Interested in "+p.code+" "+lbl(p)))});
+    return toast(ex.name+" "+p.code+" se jud gaya")}
+  if(!name||n.length!==10)return toast("Naam aur 10 digit mobile daalein");
+  await addDoc(collection(db,"crmContacts"),{type:"customer",name,mobile:n,whatsapp:n,email:"",altMobile:"",source:"Property Desk",status:"Interested",area:p.area||"",city:"Jaipur",propertyType:p.propertyType||"",size:"",budgetMin:null,budgetMax:null,details:"",notes:"",company:"",areasServed:"",exactAddress:"",followUpDate:fd||"",followUpNote:"",interests:[it],interestCode:it.code,timeline:[tl("Interested in "+p.code+" "+lbl(p))],publicVisible:false,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+  toast("Naya customer "+p.code+" ke neeche add hua")}
+
+$("addProp").onclick=()=>$("dlg").showModal();
+$("pCancel").onclick=()=>$("dlg").close();
+$("pSave").onclick=async()=>{
+  const owner=$("pOwner").value.trim(),area=$("pArea").value.trim();
+  if(!owner||!area)return toast("Owner ka naam aur area zaroori hai");
+  const price=Math.round(parseFloat($("pPrice").value||0)*1e5)||null,code=nextCode();
+  try{
+   await addDoc(collection(db,"crmContacts"),{type:"seller",name:owner,mobile:last10($("pMob").value),whatsapp:last10($("pMob").value),email:"",altMobile:"",source:"Property Desk",status:"New",area,city:"Jaipur",propertyType:$("pType").value,size:$("pSize").value.trim(),budgetMin:price,budgetMax:price,availability:"Available",code,details:"",notes:"",company:"",areasServed:"",exactAddress:"",followUpDate:"",followUpNote:"",publicVisible:false,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+   $("dlg").close();["pOwner","pMob","pSize","pArea","pPrice"].forEach(i=>$(i).value="");toast("Property save: "+code);
+  }catch(err){toast(err.message)}};
+</script>
+</body>
+</html>

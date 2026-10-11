@@ -448,6 +448,24 @@ function parseINR(t){t=String(t??"").toLowerCase().replace(/,/g,"").trim();if(!t
 function setMoney(id,val){const el=$(id);el.value=val?inr(val).replace("₹",""):"";el.dataset.txt=el.value;el.dataset.val=val||""}
 function getMoney(id){const el=$(id);return el.value===el.dataset.txt&&el.dataset.val?Number(el.dataset.val):parseINR(el.value)}
 function budgetText(r){const a=inr(r.budgetMin),b=inr(r.budgetMax);if(a&&b)return a===b?a:a+" – "+b;if(b)return"Up to "+b;if(a)return"From "+a;return"—"}
+
+/* ---------- LIVE ALERTS: popup + sound + tab title when something new arrives ---------- */
+const BASE_TITLE=document.title,ready={};
+function beep(){try{const C=window.AudioContext||window.webkitAudioContext,c=new C(),o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=.08;o.connect(g);g.connect(c.destination);o.start();setTimeout(()=>{o.stop();c.close()},200)}catch(e){}}
+function popup(m){
+  let box=$("ntf");if(!box){box=document.createElement("div");box.id="ntf";box.style.cssText="position:fixed;top:74px;right:16px;z-index:200;display:grid;gap:10px;width:min(340px,calc(100vw - 32px))";document.body.appendChild(box)}
+  const el=document.createElement("div");el.style.cssText="background:#fff;border:1px solid #dbe3f3;border-left:5px solid #3558ff;border-radius:12px;box-shadow:0 14px 40px #0f172a30;padding:12px 14px;display:grid;gap:4px;cursor:pointer";
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><b>${m.ic} ${esc(m.t)}</b><span data-x style="cursor:pointer;color:#8896aa">✕</span></div><div style="font-size:13px;color:#4b5a73;overflow-wrap:anywhere">${esc(String(m.b).slice(0,140))}</div><div style="font-size:12px;color:#3558ff;font-weight:700">Inbox kholne ke liye click karo →</div>`;
+  el.onclick=e=>{if(!e.target.closest("[data-x]")){ibMode=m.mode;setView("inbox");renderInbox()}el.remove()};
+  box.prepend(el);setTimeout(()=>el.remove(),20000);beep();
+  try{if("Notification" in window&&Notification.permission==="granted"&&document.hidden)new Notification(m.t,{body:String(m.b).slice(0,120)})}catch(e){}}
+function ping(kind,s){
+  if(!ready[kind]){ready[kind]=1;return}
+  s.docChanges().forEach(c=>{if(c.type!=="added")return;const d=c.doc.data();if((d.status||"pending")!=="pending")return;
+    popup({subs:{ic:"📨",t:d.kind==="enquiry"?"Naya property enquiry":d.kind==="partner"?"Sell & earn form aaya":"Nayi website submission",b:`${d.name||""} • ${d.mobile||""} ${d.details||""}`,mode:"sub"},
+      qs:{ic:"❓",t:"Naya sawaal",b:`${d.name||""}: ${d.question||""}`,mode:"qa"},
+      revs:{ic:"⭐",t:"Naya comment / review",b:`${d.name||""}: ${d.comment||""}`,mode:"rev"}}[kind])})}
+document.addEventListener("click",()=>{try{if("Notification" in window&&Notification.permission==="default")Notification.requestPermission()}catch(e){}},{once:true});
 function toast(m,bad){const t=$("toast");t.textContent=m;t.className="toast"+(bad?" bad":"");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add("hidden"),3000)}
 
 /* ---------- state ---------- */
@@ -507,9 +525,9 @@ function listen(){
     all=s.docs.map(d=>({id:d.id,...d.data({serverTimestamps:"estimate"})}));recs=all.filter(r=>!r.deletedAt);loaded=true;
     $("err").classList.add("hidden");refreshAll();backfillCodes();openFromUrl();
   },e=>{loaded=true;$("err").textContent="Data load nahi hua: "+(e.code||e.message);$("err").classList.remove("hidden");refreshAll()}));
-  unsubs.push(onSnapshot(collection(db,"publicSubmissions"),s=>{subs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("subs",e)));
-  unsubs.push(onSnapshot(collection(db,"publicQuestions"),s=>{qs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("qs",e)));
-  unsubs.push(onSnapshot(collection(db,"publicReviews"),s=>{revs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("revs",e)));
+  unsubs.push(onSnapshot(collection(db,"publicSubmissions"),s=>{ping("subs",s);subs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("subs",e)));
+  unsubs.push(onSnapshot(collection(db,"publicQuestions"),s=>{ping("qs",s);qs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("qs",e)));
+  unsubs.push(onSnapshot(collection(db,"publicReviews"),s=>{ping("revs",s);revs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("revs",e)));
 }
 onAuthStateChanged(auth,u=>{user=u;
   if(!u){$("app").classList.add("hidden");$("auth").classList.remove("hidden");unsubs.forEach(x=>x());unsubs=[];return}
@@ -524,7 +542,7 @@ $("avBtn").onclick=e=>{e.stopPropagation();$("dd").classList.toggle("hidden")};d
 function fillSel(id,label,vals){const s=$(id),cur=s.value;s.innerHTML=`<option value="">${label}</option>`+[...new Set(vals.map(clean).filter(Boolean))].sort().map(v=>`<option>${esc(v)}</option>`).join("");s.value=[...s.options].some(o=>o.value===cur)?cur:""}
 function refreshAll(){navBadges();dash();opts();renderProps();renderContacts();renderFollow();renderInbox();renderMatch();renderTools();datalists()}
 function navBadges(){const n=recs.filter(r=>["td","od"].includes(fuState(r))).length;$("navFu").textContent=n;$("navFu").classList.toggle("hidden",!n);
-  const i=subs.filter(s=>(s.status||"pending")==="pending").length+revs.filter(r=>(r.status||"pending")==="pending").length+qs.filter(r=>(r.status||"pending")==="pending").length;$("navIn").textContent=i;$("navIn").classList.toggle("hidden",!i)}
+  const i=subs.filter(s=>(s.status||"pending")==="pending").length+revs.filter(r=>(r.status||"pending")==="pending").length+qs.filter(r=>(r.status||"pending")==="pending").length;$("navIn").textContent=i;document.title=(i?"("+i+") ":"")+BASE_TITLE;$("navIn").classList.toggle("hidden",!i)}
 function opts(){fillSel("pf_area","All areas",props().map(areaOf));fillSel("pf_type","All types",props().map(p=>p.propertyType));fillSel("pf_av","Any availability",props().map(p=>p.availability||"Available"));
   fillSel("cf_area","All areas",recs.map(areaOf));fillSel("cf_status","All statuses",[...STATUSES,...recs.map(r=>r.status)]);fillSel("cf_src","All sources",recs.map(r=>r.source))}
 function datalists(){$("codeList").innerHTML=props().sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.code||"")}">${esc(lbl(p))}</option>`).join("");

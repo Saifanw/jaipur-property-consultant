@@ -1,0 +1,39 @@
+{
+  "name": "Jaipur Property Consultant",
+  "short_name": "JPC",
+  "description": "Plots, houses and property in Jaipur & Jhotwara",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1b2d",
+  "theme_color": "#0f1b2d",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Properties",
+      "url": "properties.html"
+    },
+    {
+      "name": "Sell & earn",
+      "url": "partner.html"
+    }
+  ]
+}

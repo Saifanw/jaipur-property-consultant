@@ -1,11 +1,81 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Reviews | Jaipur Property Consultant</title><style>:root{--navy:#111c2d;--gold:#c79a25;--green:#128a4d;--bg:#f4f7fa;--text:#182437;--muted:#66758a;--line:#dfe5ec}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}.wrap{width:min(980px,94%);margin:auto}.head{background:#fff;border-bottom:1px solid var(--line);padding:17px 0}.head-in{display:flex;justify-content:space-between;gap:15px;align-items:center}.brand{font-size:21px;font-weight:950}.nav{display:flex;gap:14px;font-size:12px;font-weight:800}.hero{background:linear-gradient(135deg,#132238,#233b57);color:#fff;padding:42px 0}.hero h1{font-size:38px;margin:8px 0}.hero p{color:#d8e1eb}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:25px 0}.review{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.stars{color:#c79a25;letter-spacing:2px}.muted{font-size:11px;color:var(--muted)}.form{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin:25px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}.field label{font-size:10px;font-weight:900;color:#53657a}.field input,.field select,.field textarea{padding:11px;border:1px solid var(--line);border-radius:9px}.field textarea{min-height:100px}.btn{border:0;border-radius:9px;padding:11px 14px;font-weight:850;cursor:pointer}.gold{background:var(--gold);color:#fff}.notice{padding:11px;border-radius:9px;background:#eef4ff;color:#275da8;font-size:11px;margin-top:10px}.footer{background:#0b1725;color:#c8d3df;padding:25px 0;text-align:center;font-size:11px;margin-top:50px}@media(max-width:650px){.grid,.fields{grid-template-columns:1fr}.full{grid-column:auto}.hero h1{font-size:30px}.head-in{display:block}.nav{margin-top:10px}}
-</style>
-<!-- Google Analytics 4 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Reviews | Jaipur Property Consultant</title>
+<meta name="description" content="Read honest reviews from buyers and sellers who worked with Jaipur Property Consultant, or share your own experience.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0DW0NBETML');
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0DW0NBETML');</script>
+</head>
+<body>
+<div data-chrome="reviews"></div>
+<main>
+<section class="phero" style="padding:30px 0 26px"><div class="container"><div class="crumbs"><a href="index.html">Home</a> / Reviews</div><h1>What customers say</h1><p>Only reviews we have checked are shown. Nothing is edited or removed because it is critical.</p></div></section>
+<div class="container sec" style="padding-top:36px">
+  <div id="summary"></div>
+  <div class="rlist" id="list"></div>
+
+  <div class="twoup" style="align-items:start;margin-top:40px">
+    <div><h2 style="font-size:26px">Worked with us? Tell others.</h2><p class="lead">A few honest lines help the next buyer or seller. Your review appears after our team checks it.</p></div>
+    <form class="panel" id="rForm" novalidate>
+      <div class="fld"><label id="rStarLbl">Your rating</label>
+        <div class="starpick" role="radiogroup" aria-labelledby="rStarLbl">
+          <input type="radio" name="rate" id="s5" value="5" checked><label for="s5" title="5 stars">★</label>
+          <input type="radio" name="rate" id="s4" value="4"><label for="s4" title="4 stars">★</label>
+          <input type="radio" name="rate" id="s3" value="3"><label for="s3" title="3 stars">★</label>
+          <input type="radio" name="rate" id="s2" value="2"><label for="s2" title="2 stars">★</label>
+          <input type="radio" name="rate" id="s1" value="1"><label for="s1" title="1 star">★</label>
+        </div></div>
+      <div class="fld"><label for="rName">Your name</label><input id="rName" autocomplete="name" required></div>
+      <div class="fld"><label for="rArea">Area (optional)</label><input id="rArea" placeholder="e.g. Jhotwara"></div>
+      <div class="fld"><label for="rText">Your experience</label><textarea id="rText" required placeholder="What did we help you with? How was it?"></textarea></div>
+      <button class="btn btn-gold btn-block" id="rBtn" type="submit">Submit review</button>
+      <div id="rMsg" class="msg" style="display:none"></div>
+    </form>
+  </div>
+</div>
+</main>
+<script src="assets/config.js"></script>
+<script src="assets/sprite.js"></script>
+<script src="assets/app.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot, query, where, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+const db = getFirestore(initializeApp({apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"},"publicSite"));
+const { $, esc, millis, tidy } = JPC;
+const stars = n => "★".repeat(n) + "☆".repeat(5 - n);
+onSnapshot(query(collection(db, "publicReviews"), where("status", "==", "approved")), snap => {
+  const rows = snap.docs.map(d => d.data()).sort((a,b) => millis(b.submittedAt) - millis(a.submittedAt));
+  if(!rows.length){
+    $("summary").innerHTML = '<div class="empty-box"><strong>No reviews yet</strong>Be the first to share your experience below.</div>'; $("list").innerHTML = ""; return;
+  }
+  const rate = r => Math.max(1, Math.min(5, Number(r.rating) || 5));
+  const avg = rows.reduce((a,r) => a + rate(r), 0) / rows.length;
+  const dist = [5,4,3,2,1].map(n => rows.filter(r => rate(r) === n).length);
+  $("summary").innerHTML = `<div class="rsum"><div><div class="avg">${avg.toFixed(1)}</div><div class="stars" aria-label="${avg.toFixed(1)} out of 5">${stars(Math.round(avg))}</div><div class="fine">${rows.length} ${rows.length === 1 ? "review" : "reviews"}</div></div><div class="bars">${dist.map((c,i) => `<div class="bar"><span>${5-i} ★</span><i><s style="width:${Math.round(c/rows.length*100)}%"></s></i><span>${c}</span></div>`).join("")}</div></div>`;
+  $("list").innerHTML = rows.map(r => { const n = rate(r), nm = tidy(r.name) || "Customer", ctx = [r.propertyType, r.area].filter(Boolean).map(tidy).join(" • ");
+    return `<article class="rcard"><div class="stars" aria-label="${n} out of 5">${stars(n)}</div><p>“${esc(r.comment || "")}”</p><div class="who"><div class="rav">${esc(nm.charAt(0).toUpperCase())}</div><div><strong>${esc(nm)}</strong>${ctx ? `<span>${esc(ctx)}</span>` : ""}</div></div></article>`; }).join("");
+}, () => { $("summary").innerHTML = '<div class="empty-box"><strong>Reviews could not be loaded right now</strong>Please try again in a moment.</div>'; });
+
+$("rForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("rMsg"), btn = $("rBtn"), show = (t, ok) => { msg.style.display = "block"; msg.className = "msg " + (ok ? "ok" : "err"); msg.textContent = t; };
+  const name = $("rName").value.trim(), text = $("rText").value.trim(), rating = Number(document.querySelector('input[name=rate]:checked')?.value || 5);
+  if(!name) return show("Please enter your name.");
+  if(text.length < 10) return show("Please write a few words about your experience.");
+  btn.disabled = true; btn.textContent = "Submitting…";
+  try{
+    await addDoc(collection(db, "publicReviews"), { name, rating, comment: text, area: $("rArea").value.trim(), consent: true, status: "pending", source: "Public Website", submittedAt: serverTimestamp() });
+    show("Thank you. Your review will appear after our team checks it.", true); e.target.reset();
+  }catch(err){ show("Could not submit right now. Please try again."); }
+  finally{ btn.disabled = false; btn.textContent = "Submit review"; }
+});
 </script>
-</head><body><header class="head"><div class="wrap head-in"><a href="index.html"><div class="brand">Jaipur Property Consultant</div></a><nav class="nav"><a href="index.html">Home</a><a href="properties.html">Properties</a><a href="reviews.html">Reviews</a><a href="admin.html">Admin</a></nav></div></header><section class="hero"><div class="wrap"><div style="font-size:10px;color:#e8c45c;font-weight:900;letter-spacing:1.5px">COMMUNITY FEEDBACK</div><h1>💬 Customer Reviews & Experiences</h1><p>Reviews submit kiye ja sakte hain. Public website par sirf approved reviews dikhte hain.</p></div></section><main class="wrap"><div class="grid" id="reviews"><div class="review">Loading reviews...</div></div><form class="form" id="reviewForm"><h2>Apna Review Share Karein</h2><div class="fields"><div class="field"><label>Name *</label><input id="name" required placeholder="Your name"></div><div class="field"><label>Rating *</label><select id="rating"><option value="5">★★★★★ 5</option><option value="4">★★★★☆ 4</option><option value="3">★★★☆☆ 3</option><option value="2">★★☆☆☆ 2</option><option value="1">★☆☆☆☆ 1</option></select></div><div class="field"><label>Area / Location</label><input id="area" placeholder="e.g. Jhotwara"></div><div class="field"><label>Property Type</label><input id="propertyType" placeholder="Plot / House / Flat"></div><div class="field full"><label>Comment *</label><textarea id="comment" required placeholder="Apna experience ya feedback likhein..."></textarea></div><div class="field full"><label><input id="consent" type="checkbox" required> I agree that this review may be published after approval.</label></div></div><div id="msg"></div><button class="btn gold" id="submit">Submit Review</button></form></main><footer class="footer">Jaipur Property Consultant • Jhotwara, Jaipur • <a href="index.html" style="color:#e8c45c">Home</a></footer><script type="module">import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";import{getFirestore,collection,addDoc,query,where,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";const cfg={apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"};const db=getFirestore(initializeApp(cfg,"reviewsPage"));const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));function render(docs){const list=docs.filter(d=>d.status==="approved");document.getElementById("reviews").innerHTML=list.length?list.map(r=>`<article class="review"><div class="stars">${"★".repeat(Number(r.rating)||5)}${"☆".repeat(5-(Number(r.rating)||5))}</div><h3>${esc(r.name||"Customer")}</h3><div>${esc(r.comment||"")}</div><div class="muted" style="margin-top:8px">${esc(r.area||"")} ${r.propertyType?"• "+esc(r.propertyType):""}</div></article>`).join(""):'<div class="review">Abhi approved reviews nahi hain. Aap pehla review share kar sakte hain.</div>'}onSnapshot(query(collection(db,"publicReviews"),where("status","==","approved")),snap=>render(snap.docs.map(d=>d.data())),err=>console.warn(err));document.getElementById("reviewForm").onsubmit=async e=>{e.preventDefault();const b=document.getElementById("submit"),m=document.getElementById("msg");b.disabled=true;b.textContent="Submitting...";try{await addDoc(collection(db,"publicReviews"),{name:document.getElementById("name").value.trim(),rating:Number(document.getElementById("rating").value),area:document.getElementById("area").value.trim(),propertyType:document.getElementById("propertyType").value.trim(),comment:document.getElementById("comment").value.trim(),consent:true,status:"pending",source:"Public Website",submittedAt:serverTimestamp()});m.innerHTML='<div class="notice">✅ Review submit ho gaya. Approval ke baad public hoga.</div>';e.target.reset()}catch(err){m.innerHTML=`<div class="notice" style="background:#fff0ef;color:#b42318">${esc(err.message)}</div>`}finally{b.disabled=false;b.textContent="Submit Review"}};</script></body></html>
+</body>
+</html>

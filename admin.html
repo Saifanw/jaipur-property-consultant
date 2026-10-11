@@ -24,6 +24,80 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
 .module-panel{display:none}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.module-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow)}.module-card h3{margin:0 0 7px;font-size:16px}.module-card .big{font-size:28px;font-weight:950}.module-note{font-size:11px;color:var(--muted);line-height:1.55}.module-list{display:grid;gap:10px;margin-top:15px}.module-row{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.module-row.overdue{border-color:#efb2ad;background:#fff8f7}.module-row.today{border-color:#f0d58a;background:#fffdf5}.module-row .row-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.module-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.score{font-weight:950;color:#0e7b42}.bar-wrap{margin-top:12px}.bar-row{display:grid;grid-template-columns:150px 1fr 50px;gap:8px;align-items:center;margin:9px 0;font-size:11px}.bar{height:10px;background:#eef2f6;border-radius:999px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#c79a25,#128a4d);border-radius:999px}.review-card{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff}.review-stars{color:#c79a25;letter-spacing:1px}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.match-box{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fafcfd}.mini-label{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:900}.mini-value{font-weight:850;margin-top:3px}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#128a4d;margin-right:5px}.status-dot.warn{background:#c79a25}.status-dot.bad{background:#b42318}
 @media(max-width:950px){.welcome{grid-template-columns:1fr}.focus-grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.submission-grid{grid-template-columns:1fr 1fr}.module-grid{grid-template-columns:1fr 1fr}.match-grid{grid-template-columns:1fr}}@media(max-width:620px){.head-in{align-items:flex-start;padding:12px 0}.head-in .btn.light[href]{display:none}.welcome-card h1{font-size:22px}.focus-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full,.section-label{grid-column:auto}.submission-grid,.module-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:110px 1fr 40px}.quick-grid{grid-template-columns:1fr 1fr}}
 
+
+/* ===== filter bar (clean) ===== */
+.fbar{display:grid;grid-template-columns:minmax(220px,1.5fr) minmax(0,3.6fr) auto;gap:10px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid #edf0f3}
+.fsearch{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fbfcfe;border-radius:11px;padding:0 12px;height:44px;min-width:0}
+.fsearch:focus-within{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(201,150,46,.14)}
+.fsearch .ic{color:var(--muted)}
+.fsearch input{border:0;outline:0;background:none;width:100%;font-size:14px;height:42px;min-width:0}
+.fsearch input:focus,.fsearch input:focus-visible{outline:none!important;box-shadow:none!important}
+.fsel{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.fsel .filter{width:100%;min-width:0;height:44px;border-radius:11px;font-size:13.5px;padding:0 10px;text-overflow:ellipsis}
+.fsel .filter.on{border-color:var(--gold);background:#fffaf0;font-weight:700}
+.fbar .btn{height:44px;white-space:nowrap}
+.ftoggle{display:none}
+.fmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;min-height:28px}
+.fchips{display:flex;gap:6px;flex-wrap:wrap}
+.fchip{display:inline-flex;align-items:center;gap:6px;background:#fff7e5;border:1px solid #f2ddb0;color:#7a5600;border-radius:999px;padding:4px 6px 4px 11px;font-size:12px;font-weight:700}
+.fchip button{border:0;background:rgba(0,0,0,.07);width:18px;height:18px;border-radius:50%;line-height:1;font-size:12px;color:inherit;padding:0}
+.filter-count{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap}
+select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.status-sel:focus{outline:2px solid var(--gold);outline-offset:1px}
+@media(max-width:1180px){.fsel{grid-template-columns:repeat(3,minmax(0,1fr))}.fbar{grid-template-columns:minmax(200px,1fr) auto}.fsel{grid-column:1/-1;order:3}.freset{order:2}}
+@media(max-width:760px){
+  .fbar{grid-template-columns:1fr auto;gap:8px}
+  .fsearch{grid-column:1}.ftoggle{display:inline-flex;align-items:center;grid-column:2}
+  .freset{display:none}
+  .fsel{display:none;grid-template-columns:1fr 1fr;grid-column:1/-1;order:3}
+  .fbar.open .fsel{display:grid}
+  .fbar.open .freset{display:inline-flex;grid-column:1/-1;order:4;justify-content:center}
+  .fmeta{flex-direction:column;align-items:flex-start;gap:4px}.filter-count{margin-left:0}
+}
+
+
+/* ===== photo manager ===== */
+.pm-head{display:flex;justify-content:space-between;align-items:center}
+.pm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px;margin-bottom:10px}
+.pm-item{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.pm-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#eef2f6}
+.pm-item.cover{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,150,46,.25)}
+.pm-tag{position:absolute;left:6px;top:6px;background:var(--gold);color:#fff;font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px}
+.pm-tag.new{background:#3d6fe8}
+.pm-bar{display:flex;border-top:1px solid var(--line)}
+.pm-bar button{flex:1;border:0;background:#fff;padding:9px 0;font-size:14px;color:#34445a;min-height:38px}
+.pm-bar button+button{border-left:1px solid var(--line)}.pm-bar button:hover{background:#f3f6fa}.pm-bar button.del{color:var(--red)}
+.pm-bar button:disabled{opacity:.3;cursor:default}
+.pm-add{display:inline-flex;align-items:center;cursor:pointer;min-height:42px}
+.pm-empty{grid-column:1/-1;border:1.5px dashed #c9d4e1;border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+
+/* ===== interested property / codes ===== */
+.code{display:inline-block;font:800 11px/1 inherit;letter-spacing:.3px;background:#fff4d6;color:#8a5d00;border:1px solid #f1d68c;border-radius:6px;padding:3px 6px;white-space:nowrap}
+button.code{cursor:pointer}button.code:hover{background:#ffeaa8}
+.mob{display:inline-block;font-weight:900;font-size:14.5px;letter-spacing:.3px;background:#eaf8f0;color:#0b6a3b;border:1px solid #bfe6d0;border-radius:8px;padding:4px 9px;text-decoration:none;white-space:nowrap}
+.mob:hover{background:#d9f3e5}.mob.off{background:#f3f5f8;color:#8a97a8;border-color:var(--line)}
+.dcell{font-weight:700;font-size:13px;white-space:nowrap}.dcell small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.ints{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.int-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12.5px}
+.int-row .lbl{color:#34445a;font-weight:600}
+.fup{font-size:12px;margin-top:4px;font-weight:700;color:#5d6c82}.fup.bad{color:#c62d2d}.fup.today{color:#b36b00}
+.who{display:inline-flex;gap:6px;align-items:center;background:#eef3ff;color:#2a4fb5;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:800;border:0;cursor:pointer}
+.ipick{position:relative;border:1px solid var(--line);border-radius:11px;padding:6px;background:#fff}
+.ip-chips{display:flex;flex-wrap:wrap;gap:6px}
+.ip-chips:not(:empty){margin-bottom:6px}
+.ip-chip{display:inline-flex;gap:6px;align-items:center;background:#fff4d6;border:1px solid #f1d68c;border-radius:999px;padding:4px 4px 4px 10px;font-size:12.5px;font-weight:700;color:#6b4a00}
+.ip-chip button{border:0;background:rgba(0,0,0,.08);width:20px;height:20px;border-radius:50%;line-height:1;padding:0;font-size:13px}
+.ip-in{width:100%;border:0!important;outline:0;box-shadow:none!important;padding:8px 6px!important;min-height:36px;background:none}
+.ip-list{position:absolute;left:0;right:0;top:100%;margin-top:4px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(15,27,45,.18);max-height:260px;overflow:auto;z-index:50}
+.ip-opt{display:flex;gap:8px;align-items:center;padding:9px 11px;cursor:pointer;border-bottom:1px solid #f0f3f6;font-size:13px}
+.ip-opt:hover{background:#fff8e6}.ip-opt .m{color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}
+.ip-empty{padding:12px;color:var(--muted);font-size:13px}
+.dw-int{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.cust-row{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;padding:9px 0;border-bottom:1px solid #eef1f5}
+.cust-row .nm{font-weight:800;cursor:pointer}.cust-row .sm{font-size:12px;color:var(--muted);margin-top:2px}
+#dwNext{border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:13px;max-width:118px;min-height:40px}
+
 /* ===== Phase 1 ===== */
 .ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-4px}
 .ic.f{fill:currentColor;stroke:none}
@@ -70,8 +144,7 @@ main{padding:20px 0 70px}.welcome{display:grid;grid-template-columns:1.45fr .55f
   .table-wrap{display:none}.cards-list{display:grid}
   .stats{grid-template-columns:1fr 1fr!important}
   .today h1{font-size:18px}.today-actions{width:100%}.today-actions .btn{flex:1}
-  .search{width:100%}.tools{width:100%}.tools .btn{flex:1}
-  .filter{min-width:0;flex:1 1 44%}.filter.small{width:auto;flex:1 1 44%}
+  .tools{width:100%}.tools .btn{flex:1}
   .panel{padding:14px;border-radius:16px}.top-in .brand small{display:none}
   .head-title .muted{display:none}
   .head-in{align-items:center!important}.head-in .btn{white-space:nowrap;padding:10px 12px}.head-in a.btn{display:none}.head-title strong{font-size:14px}
@@ -149,6 +222,7 @@ body.noscroll{overflow:hidden}
 <symbol id="ic-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
 <symbol id="ic-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 3-7"/></symbol>
 <symbol id="ic-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="ic-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
 <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.5-4.5"/></symbol>
 </defs></svg>
 
@@ -214,22 +288,33 @@ body.noscroll{overflow:hidden}
       <div class="panel-head">
         <div><h2 id="listTitle">All Records</h2><div class="muted">Data is stored in Cloud Firestore.</div></div>
         <div class="tools">
-          <input id="search" class="search" placeholder="Search name, number, area, notes...">
           <button id="importBtn" class="btn light"><svg class="ic"><use href="#ic-up"/></svg>Import</button>
           <button id="exportBtn" class="btn light"><svg class="ic"><use href="#ic-down"/></svg>Export Excel</button>
           <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" class="hidden">
         </div>
       </div>
-      <div class="filters">
-        <select id="filterArea" class="filter"><option value="">All Areas / Locations</option></select>
-        <select id="filterProperty" class="filter"><option value="">All Property Types</option></select>
-        <select id="filterStatus" class="filter"><option value="">All Statuses</option></select>
-        <input id="filterMinBudget" class="filter small" type="number" min="0" placeholder="Min budget ₹">
-        <input id="filterMaxBudget" class="filter small" type="number" min="0" placeholder="Max budget ₹">
-        <select id="sortBy" class="filter sortsel"><option value="updated">Sort: Recently updated</option><option value="name">Sort: Name A–Z</option><option value="budget">Sort: Budget high → low</option><option value="follow">Sort: Follow-up date</option></select>
-        <button id="resetFilters" class="btn light">Reset</button>
-        <span id="filterCount" class="filter-count"></span>
+      <div class="fbar" id="fbar">
+        <label class="fsearch"><svg class="ic"><use href="#ic-search"/></svg><input id="search" type="search" placeholder="Search name, mobile, area, notes" autocomplete="off" aria-label="Search records"></label>
+        <button id="filterToggle" class="btn light ftoggle" type="button" aria-expanded="false" aria-controls="fsel"><svg class="ic"><use href="#ic-filter"/></svg>Filters<span class="tbadge alert" id="filterBadge"></span></button>
+        <div class="fsel" id="fsel">
+          <select id="filterArea" class="filter" aria-label="Area"><option value="">All areas</option></select>
+          <select id="filterProperty" class="filter" aria-label="Property type"><option value="">All types</option></select>
+          <select id="filterStatus" class="filter" aria-label="Status"><option value="">All statuses</option></select>
+          <select id="filterInterest" class="filter" aria-label="Interested property"><option value="">All properties</option></select>
+          <select id="filterBudget" class="filter" aria-label="Budget">
+            <option value="">Any budget</option>
+            <option value="0-2500000">Up to ₹25 L</option>
+            <option value="2500000-5000000">₹25 L – ₹50 L</option>
+            <option value="5000000-10000000">₹50 L – ₹1 Cr</option>
+            <option value="10000000-20000000">₹1 Cr – ₹2 Cr</option>
+            <option value="20000000-">Above ₹2 Cr</option>
+            <option value="none">Budget not set</option>
+          </select>
+          <select id="sortBy" class="filter" aria-label="Sort"><option value="updated">Recently updated</option><option value="added">Newest added</option><option value="name">Name A–Z</option><option value="budget">Budget high → low</option><option value="follow">Follow-up date</option></select>
+        </div>
+        <button id="resetFilters" class="btn light freset" type="button">Reset</button>
       </div>
+      <div class="fmeta"><div id="fchips" class="fchips"></div><span id="filterCount" class="filter-count"></span></div>
       <div id="waToolbar" class="wa-toolbar">
         <span id="waSelectedCount" class="wa-count">0 selected</span>
         <button id="waMessageBtn" class="wa-btn primary" disabled>🟢 WhatsApp selected</button>
@@ -239,7 +324,7 @@ body.noscroll{overflow:hidden}
       <div id="status"></div>
       <div class="table-wrap">
         <table><thead><tr>
-          <th class="select-cell"><input id="selectAll" class="select-all" type="checkbox" title="Select all visible"></th><th>Type</th><th>Name / Company</th><th>Mobile</th><th>Area / Location</th><th>Budget / Price</th><th>Requirement / Property</th><th>Status</th><th>Updated</th><th>Action</th>
+          <th class="select-cell"><input id="selectAll" class="select-all" type="checkbox" title="Select all visible"></th><th>Date</th><th>Name</th><th>Mobile</th><th>Interested in / Requirement</th><th>Location</th><th>Budget</th><th>Status &amp; follow-up</th><th>Action</th>
         </tr></thead><tbody id="rows"></tbody></table>
         <div id="empty" class="empty hidden">No records found.</div>
       </div>
@@ -331,6 +416,7 @@ body.noscroll{overflow:hidden}
         <div class="field"><label>Name *</label><input id="qName" autocomplete="off"></div>
         <div class="field"><label>Mobile * (10 digit)</label><input id="qMobile" type="tel" inputmode="numeric" maxlength="10"></div>
         <div class="field"><label>Area / Location</label><input id="qArea" placeholder="e.g. Jhotwara"></div>
+        <div class="field full" id="qInterestField"><label>Interested in property (optional)</label><div class="ipick" id="qPick"><div class="ip-chips"></div><input class="ip-in" type="search" placeholder="House code ya area likhein — JPC-003 / Murlipura" autocomplete="off"><div class="ip-list hidden"></div></div></div>
         <div class="field"><label>Property type</label><select id="qProp"><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
         <div class="field"><label id="qMinL">Budget min</label><input id="qMin" placeholder="e.g. 30 lakh"><div class="hint" id="qMinH"></div></div>
         <div class="field"><label id="qMaxL">Budget max</label><input id="qMax" placeholder="e.g. 50 lakh / 1.2 cr"><div class="hint" id="qMaxH"></div></div>
@@ -350,7 +436,7 @@ body.noscroll{overflow:hidden}
   <div class="dw-body" id="dwBody"></div>
   <div class="dw-foot" id="dwFoot">
     <div class="dw-kinds" id="dwKinds"><button type="button" class="chipbtn on" data-kind="note">Note</button><button type="button" class="chipbtn" data-kind="call">Called</button><button type="button" class="chipbtn" data-kind="visit">Site visit</button></div>
-    <div class="dw-add"><textarea id="dwNote" rows="1" placeholder="Kya baat hui? Note likhein..."></textarea><button type="button" id="dwAddNote" class="btn gold">Add</button></div>
+    <div class="dw-add"><textarea id="dwNote" rows="1" placeholder="Kya baat hui? Note likhein..."></textarea><select id="dwNext" aria-label="Next follow-up" title="Next follow-up"><option value="keep">Follow-up: same</option><option value="1">Kal</option><option value="3">3 din</option><option value="7">7 din</option><option value="clear">Clear</option></select><button type="button" id="dwAddNote" class="btn gold">Add</button></div>
   </div>
 </aside>
 <div id="popMenu" class="popmenu hidden"></div>
@@ -373,6 +459,7 @@ body.noscroll{overflow:hidden}
         <div class="field"><label>Status</label><select id="statusSelect"><option>New</option><option>Contacted</option><option>Interested</option><option>Site Visit</option><option>Negotiation</option><option>Follow-up</option><option>Closed</option><option>Not Interested</option></select></div>
 
         <div class="section-label">Location & Property Need</div>
+        <div class="field full" id="fInterestField"><label>Interested in property (customer)</label><div class="ipick" id="fPick"><div class="ip-chips"></div><input class="ip-in" type="search" placeholder="House code ya area likhein — JPC-003 / Murlipura" autocomplete="off"><div class="ip-list hidden"></div></div><div class="hint">Customer kis property ke liye aaya — yahan select karein, list me code dikhega.</div></div>
         <div class="field"><label>Area / Locality *</label><input id="area" placeholder="e.g. Jhotwara, Suraj Nagar" required></div>
         <div class="field"><label>City</label><input id="city" value="Jaipur"></div>
         <div class="field"><label>Property Type</label><select id="propertyType"><option>Plot</option><option>House</option><option>Shop</option><option>Land</option><option>Villa</option><option>Commercial</option><option>Flat</option><option>Other</option></select></div>
@@ -393,10 +480,11 @@ body.noscroll{overflow:hidden}
         <div class="section-label">Photos / Property Video</div>
         <div class="field full">
           <div class="photo-box">
-            <label style="font-weight:850;font-size:11px">Upload 2–3 property images (optional)</label>
-            <input id="photos" type="file" accept="image/*" multiple style="display:block;margin-top:8px">
-            <div class="muted">Select multiple images for the property gallery.</div>
-            <div id="preview" class="preview"></div>
+            <div class="pm-head"><b>Property photos</b><span id="pmCount" class="muted">0 / 8</span></div>
+            <div class="muted" style="margin:2px 0 10px">Kam se kam 3 photo lagayein (bahar se, andar se, road). Pehli photo cover banti hai. Zyada photo = zyada enquiry.</div>
+            <div id="pmGrid" class="pm-grid"></div>
+            <label for="photos" class="btn light pm-add">+ Add photos</label>
+            <input id="photos" type="file" accept="image/*" multiple class="hidden">
             <label style="font-weight:850;font-size:11px;display:block;margin-top:14px">Upload property video (optional)</label>
             <input id="propertyVideo" type="file" accept="video/*" style="display:block;margin-top:8px">
             <div id="videoPreview" class="muted" style="margin-top:6px"></div>
@@ -464,6 +552,8 @@ let unsubscribe = null;
 let submissionsUnsubscribe = null;
 let submissions = [];
 let editingImages = [];
+let photoItems = [];
+const MAX_PHOTOS = 8;
 let editingVideoUrl = "";
 let filterOptionsReady = false;
 let currentAdminView = "crm";
@@ -515,7 +605,7 @@ function loadRecords(){
     records = allRecords.filter(r=>!r.deletedAt);
     trash = allRecords.filter(r=>r.deletedAt);
     refreshFilterOptions();
-    render(); renderTrash();
+    render(); renderTrash(); backfillCodes();
     if(currentAdminView==="followups") renderFollowups();
     if(typeof dw!=="undefined"&&dw.id) renderDrawer();
   }, err=>showStatus("Could not read CRM: "+escapeHtml(err.message),"error"));
@@ -560,19 +650,37 @@ function renderSubmissions(){
     const status=String(s.status||"pending");
     const photo=subImages(s).map((u,i)=>`<img src="${escapeHtml(u)}" alt="Submission photo ${i+1}" style="max-height:140px;object-fit:cover;margin-bottom:6px">`).join("");
     return `<article class="submission-card ${status}">${photo}
-      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${escapeHtml(s.name||"Unnamed")}</strong><span class="status-pill ${status}">${status.toUpperCase()}</span></div>
+      ${s.kind==="partner"?`<div class="notice ok" style="margin-bottom:6px">Sell &amp; earn form — ${escapeHtml(s.role||"")}</div>`:""}${s.kind==="enquiry"?`<div class="notice ok" style="margin-bottom:6px">Property enquiry${s.interestCode?" — "+escapeHtml(s.interestCode):""} ${escapeHtml(s.interestLabel||"")}</div>`:""}<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${escapeHtml(s.name||"Unnamed")}</strong><span class="status-pill ${status}">${status.toUpperCase()}</span></div>
       <div class="submission-meta" style="margin-top:8px"><strong>${isSeller?"Seller / Owner":"Buyer / Customer"}</strong><br>📞 ${escapeHtml(s.mobile||"—")}<br>📍 ${escapeHtml(s.area||"—")}, ${escapeHtml(s.city||"Jaipur")}<br>🏠 ${escapeHtml(s.propertyType||"—")} ${s.size?"• "+escapeHtml(s.size):""}<br>💰 ${formatMoney(s.budgetMin)}${s.budgetMax?" – "+formatMoney(s.budgetMax):""}<br>📝 ${escapeHtml(s.details||"—")}</div>
-      <div class="submission-actions">${status==="pending"?`<button class="btn green" data-approve-sub="${s.id}">✓ Approve & Publish</button><button class="btn danger" data-reject-sub="${s.id}">✕ Reject</button>`:`<button class="btn light" data-delete-sub="${s.id}">Delete Submission</button>`}</div>
+      <div class="submission-actions">${status==="pending"?`<button class="btn green" data-approve-sub="${s.id}">${(s.kind==="enquiry"||s.kind==="partner")?"+ Add to CRM":"✓ Approve & Publish"}</button><button class="btn danger" data-reject-sub="${s.id}">✕ Reject</button>`:`<button class="btn light" data-delete-sub="${s.id}">Delete Submission</button>`}</div>
     </article>`;
   }).join("");
 }
+async function approveEnquiry(s,id){
+  if(s.kind==="partner"){
+    const roleLbl={owner:"Owner wants to sell",agent:"Agent / broker",referrer:"Referrer"}[s.role]||"Partner";
+    const t=s.type==="seller"?"seller":"broker";
+    const d={type:t,name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Website — Sell & earn",status:"New",area:s.area||"",city:"Jaipur",propertyType:s.propertyType||"",size:"",budgetMin:null,budgetMax:null,details:"",notes:`${roleLbl}. ${s.details||""}`.trim(),publicVisible:false,publicDisplayName:s.name||"",images:[],followUpDate:localISO(),followUpNote:"Call back — "+roleLbl,timeline:[tlEntry("Submitted the Sell & earn form: "+roleLbl,"note")],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+    if(t==="seller"){d.code=fmtCode(nextCodeNum());d.availability="Available";}
+    const created=await addDoc(collection(db,"crmContacts"),d);
+    await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:created.id},{merge:true});
+    $("submissionStatus").innerHTML=`<div class="notice ok">Added to CRM as ${t} (private, not published).</div>`; return;
+  }
+  const ints=s.interestPropertyId?[{id:s.interestPropertyId,code:s.interestCode||"",label:s.interestLabel||"",at:Date.now()}]:[];
+  const crmData={type:"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Website enquiry",status:ints.length?"Interested":"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:"",notes:s.details||"",publicVisible:false,publicDisplayName:s.name||"",images:[],interests:ints,interestCode:ints[0]?.code||"",followUpDate:localISO(),followUpNote:"Website enquiry — call back",timeline:[tlEntry(`Website enquiry${ints.length?" for "+(ints[0].code||"")+" "+ints[0].label:""}`,"note")],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+  const created=await addDoc(collection(db,"crmContacts"),crmData);
+  await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:created.id},{merge:true});
+  $("submissionStatus").innerHTML='<div class="notice ok">Enquiry added to your CRM as a customer (private).</div>';
+}
 async function approveSubmission(id){
   const s=submissions.find(x=>x.id===id); if(!s)return;
+  if(s.kind==="enquiry"||s.kind==="partner"){ try{ await approveEnquiry(s,id); }catch(err){ $("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`; } return; }
   if(!confirm("Approve this submission and publish the selected details on the public website?"))return;
   try{
-    const crmData={type:s.type||"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:s.type==="seller"?"Property Available":"Buyer Requirement",images:subImages(s),createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+    const newCode=(s.type==="seller")?fmtCode(nextCodeNum()):"";
+    const crmData={type:s.type||"customer",code:newCode,name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:s.type==="seller"?"Property Available":"Buyer Requirement",images:subImages(s),createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
     const created=await addDoc(collection(db,"crmContacts"),crmData);
-    await setDoc(doc(db,"publicRequirements",created.id),{id:created.id,type:crmData.type,displayName:crmData.publicDisplayName,area:crmData.area,city:crmData.city,propertyType:crmData.propertyType,size:crmData.size,budgetMin:crmData.budgetMin,budgetMax:crmData.budgetMax,details:crmData.details,imageDataUrl:subImages(s)[0]||"",imageUrls:s.type==="seller"?subImages(s):[],availability:"Available",status:"Approved",updatedAt:serverTimestamp()});
+    await setDoc(doc(db,"publicRequirements",created.id),{id:created.id,code:newCode,type:crmData.type,displayName:crmData.publicDisplayName,area:crmData.area,city:crmData.city,propertyType:crmData.propertyType,size:crmData.size,budgetMin:crmData.budgetMin,budgetMax:crmData.budgetMax,details:crmData.details,imageDataUrl:subImages(s)[0]||"",imageUrls:s.type==="seller"?subImages(s):[],availability:"Available",status:"Approved",updatedAt:serverTimestamp()});
     await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:created.id},{merge:true});
     $("submissionStatus").innerHTML='<div class="notice ok">Submission approved and published.</div>';
   }catch(err){$("submissionStatus").innerHTML=`<div class="notice error">${escapeHtml(err.message)}</div>`;}
@@ -588,42 +696,67 @@ $("submissionGrid").onclick=e=>{
   if(a) approveSubmission(a.dataset.approveSub); if(r) rejectSubmission(r.dataset.rejectSub); if(d && confirm("Delete this submission permanently?")) deleteDoc(doc(db,"publicSubmissions",d.dataset.deleteSub));
 };
 
+const areaKey=r=>niceArea(r.area).toLowerCase();
+const BUDGETS={"0-2500000":"Up to ₹25 L","2500000-5000000":"₹25 L – ₹50 L","5000000-10000000":"₹50 L – ₹1 Cr","10000000-20000000":"₹1 Cr – ₹2 Cr","20000000-":"Above ₹2 Cr","none":"Budget not set"};
+function recordMatchesFilters(r){
+  const term=$("search").value.trim().toLowerCase();
+  const area=$("filterArea").value;
+  const prop=normalizeText($("filterProperty").value);
+  const status=normalizeText($("filterStatus").value);
+  const bud=$("filterBudget").value;
+  const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress,r.propertyLocation,r.code,...interestsOf(r).map(i=>i.code+" "+i.label)].join(" ").toLowerCase();
+  const intId=$("filterInterest").value;
+  const typeOk=currentFilter==="all" || r.type===currentFilter;
+  const termOk=!term || hay.includes(term) || last10(term).length>=4&&last10(r.mobile).includes(term.replace(/\D/g,""));
+  const areaOk=!area || areaKey(r)===area;
+  const propOk=!prop || normalizeText(r.propertyType)===prop;
+  const statusOk=!status || normalizeText(r.status||"New")===status;
+  let budOk=true;
+  if(bud){
+    const lo=Number(r.budgetMin||0), hi=Number(r.budgetMax||r.budgetMin||0);
+    if(bud==="none") budOk=!lo&&!hi;
+    else{ const [a,b]=bud.split("-"); const A=Number(a||0), B=b===""?Infinity:Number(b); budOk=(lo||hi)&&Math.max(lo,A)<=Math.min(hi||lo,B); }
+  }
+  const intOk=!intId || r.id===intId || interestsOf(r).some(i=>i.id===intId);
+  return typeOk && termOk && areaOk && propOk && statusOk && budOk && intOk;
+}
 function normalizeText(v){ return String(v ?? "").trim().toLowerCase(); }
-
 function refreshFilterOptions(){
-  const area=$("filterArea"), prop=$("filterProperty"), status=$("filterStatus");
+  const area=$("filterArea"), prop=$("filterProperty"), status=$("filterStatus"), inter=$("filterInterest");
+  const oldInt=inter.value;
   const oldArea=area.value, oldProp=prop.value, oldStatus=status.value;
-  const areas=[...new Set(records.map(r=>String(r.area||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  const areaMap=new Map(); records.forEach(r=>{const k=areaKey(r); if(k&&!areaMap.has(k)) areaMap.set(k,niceArea(r.area));});
+  const areas=[...areaMap.entries()].sort((a,b)=>a[1].localeCompare(b[1]));
   const props=[...new Set(records.map(r=>String(r.propertyType||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  const statuses=[...new Set(records.map(r=>String(r.status||"New").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
-  area.innerHTML='<option value="">All Areas / Locations</option>'+areas.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  prop.innerHTML='<option value="">All Property Types</option>'+props.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  status.innerHTML='<option value="">All Statuses</option>'+statuses.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-  if(areas.includes(oldArea)) area.value=oldArea;
+  const statuses=[...new Set([...STATUSES,...records.map(r=>String(r.status||"New").trim()).filter(Boolean)])];
+  area.innerHTML='<option value="">All areas</option>'+areas.map(([k,v])=>`<option value="${escapeHtml(k)}">${escapeHtml(v)}</option>`).join("");
+  prop.innerHTML='<option value="">All types</option>'+props.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  status.innerHTML='<option value="">All statuses</option>'+statuses.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  const sl=sellersList().sort((a,b)=>codeNum(b.code)-codeNum(a.code));
+  inter.innerHTML='<option value="">All properties</option>'+sl.map(p=>{const n=intersOf(p).length;return `<option value="${escapeHtml(p.id)}">${escapeHtml((p.code||"—")+" · "+cleanLbl(p)+(n?` (${n} interested)`:""))}</option>`;}).join("");
+  if(sl.some(p=>p.id===oldInt)) inter.value=oldInt;
+  if(areaMap.has(oldArea)) area.value=oldArea;
   if(props.includes(oldProp)) prop.value=oldProp;
   if(statuses.includes(oldStatus)) status.value=oldStatus;
 }
-
-function recordMatchesFilters(r){
-  const term=$("search").value.trim().toLowerCase();
-  const area=normalizeText($("filterArea").value);
-  const prop=normalizeText($("filterProperty").value);
-  const status=normalizeText($("filterStatus").value);
-  const minBudget=Number($("filterMinBudget").value||0);
-  const maxBudget=Number($("filterMaxBudget").value||0);
-  const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress,r.propertyLocation].join(" ").toLowerCase();
-
-  const typeOk=currentFilter==="all" || r.type===currentFilter;
-  const termOk=!term || hay.includes(term);
-  const areaOk=!area || normalizeText(r.area)===area;
-  const propOk=!prop || normalizeText(r.propertyType)===prop;
-  const statusOk=!status || normalizeText(r.status||"New")===status;
-
-  const rMin=Number(r.budgetMin||0), rMax=Number(r.budgetMax||r.budgetMin||0);
-  const minOk=!minBudget || rMax>=minBudget;
-  const maxOk=!maxBudget || (rMin<=maxBudget || rMax<=maxBudget);
-
-  return typeOk && termOk && areaOk && propOk && statusOk && minOk && maxOk;
+function activeFilters(){
+  const list=[];
+  const t=$("search").value.trim(); if(t) list.push({id:"search",label:`“${t}”`});
+  const sel=(id,label)=>{const e=$(id); if(e.value) list.push({id,label:label(e)});};
+  sel("filterArea",e=>e.selectedOptions[0].textContent);
+  sel("filterProperty",e=>e.value);
+  sel("filterStatus",e=>e.value);
+  sel("filterBudget",e=>BUDGETS[e.value]||e.value);
+  sel("filterInterest",e=>{const p=propById(e.value);return p?(p.code||"Property")+" interested":"Property";});
+  return list;
+}
+function renderFilterUI(){
+  const act=activeFilters();
+  ["filterArea","filterProperty","filterStatus","filterBudget","filterInterest"].forEach(id=>$(id).classList.toggle("on",!!$(id).value));
+  $("fchips").innerHTML=act.map(a=>`<span class="fchip">${escapeHtml(a.label)}<button type="button" data-clear="${a.id}" aria-label="Remove filter">×</button></span>`).join("");
+  const n=act.filter(a=>a.id!=="search").length;
+  $("filterBadge").textContent=n?String(n):"";
+  $("resetFilters").style.visibility=act.length?"visible":"hidden";
 }
 
 const selectedIds=new Set();
@@ -720,6 +853,56 @@ function localISO(d=new Date()){const p=n=>String(n).padStart(2,"0");return `${d
 function shortINR(n){n=Number(n);if(!Number.isFinite(n)||n<=0)return "";const r=v=>String(Math.round(v*100)/100);if(n>=1e7)return "₹"+r(n/1e7)+" Cr";if(n>=1e5)return "₹"+r(n/1e5)+" L";return "₹"+n.toLocaleString("en-IN");}
 function budgetText(r){const a=shortINR(r.budgetMin),b=shortINR(r.budgetMax);if(a&&b)return a===b?a:`${a} – ${b}`;if(b)return "Up to "+b;if(a)return "From "+a;return "—";}
 function last10(m){return String(m||"").replace(/\D/g,"").slice(-10);}
+
+/* ===== property codes + interested-property ===== */
+const codeNum=c=>{const m=String(c||"").match(/(\d+)$/);return m?Number(m[1]):0;};
+const fmtCode=n=>"JPC-"+String(n).padStart(3,"0");
+function nextCodeNum(){return Math.max(0,...allRecords.map(r=>codeNum(r.code)))+1;}
+const sellersList=()=>records.filter(r=>r.type==="seller");
+const propById=id=>records.find(r=>r.id===id);
+const cleanLbl=p=>`${p.propertyType||"Property"}${p.size?" "+tidyTxt(p.size):""} • ${niceArea(p.area)||"Jaipur"}`;
+const interestsOf=r=>Array.isArray(r.interests)?r.interests.filter(i=>i&&i.id):[];
+const intersOf=p=>records.filter(r=>r.type==="customer"&&interestsOf(r).some(i=>i.id===p.id));
+const mkInterest=p=>({id:p.id,code:p.code||"",label:cleanLbl(p),at:Date.now()});
+const codeChip=(c,id)=>c?(id?`<button type="button" data-open="${escapeHtml(id)}" class="code">${escapeHtml(c)}</button>`:`<span class="code">${escapeHtml(c)}</span>`):"";
+function agoText(ms){if(!ms)return"";const d=Math.floor((Date.now()-ms)/86400000);return d<=0?"Aaj":d===1?"Kal":d<30?d+" din pehle":Math.floor(d/30)+" mahine pehle";}
+const msOf=v=>{const m=v?.toMillis?v.toMillis():(v?.seconds?v.seconds*1000:0);return m>1e11?m:0;};
+let backfilling=false;
+async function backfillCodes(){
+  if(backfilling) return; const miss=records.filter(r=>r.type==="seller"&&!r.code); if(!miss.length) return;
+  backfilling=true;
+  try{
+    miss.sort((a,b)=>msOf(a.createdAt)-msOf(b.createdAt));
+    let n=nextCodeNum();
+    for(const r of miss){
+      const code=fmtCode(n++);
+      await updateDoc(doc(db,"crmContacts",r.id),{code});
+      if(r.publicVisible){ try{await setDoc(doc(db,"publicRequirements",r.id),{code},{merge:true});}catch(_){} }
+    }
+  }catch(e){console.warn("code backfill",e);}
+  finally{backfilling=false;}
+}
+const pickers={};
+function initPicker(rootId,onPick){
+  const root=$(rootId), chips=root.querySelector(".ip-chips"), inp=root.querySelector(".ip-in"), list=root.querySelector(".ip-list");
+  const st={sel:[],get(){return this.sel;},set(a){this.sel=[...a];draw();},clear(){this.sel=[];draw();inp.value="";list.classList.add("hidden");}};
+  pickers[rootId]=st;
+  function draw(){chips.innerHTML=st.sel.map((i,k)=>`<span class="ip-chip">${i.code?escapeHtml(i.code)+" • ":""}${escapeHtml(i.label||"")}<button type="button" data-rm="${k}" aria-label="Remove">×</button></span>`).join("");}
+  function show(){
+    const t=inp.value.trim().toLowerCase();
+    const have=new Set(st.sel.map(i=>i.id));
+    const opts=sellersList().filter(p=>!have.has(p.id)&&(!t||[p.code,p.area,p.propertyType,p.size,p.name].join(" ").toLowerCase().includes(t)))
+      .sort((a,b)=>codeNum(b.code)-codeNum(a.code)).slice(0,8);
+    list.innerHTML=opts.length?opts.map(p=>`<div class="ip-opt" data-pid="${escapeHtml(p.id)}"><span class="code">${escapeHtml(p.code||"—")}</span><span>${escapeHtml(cleanLbl(p))}</span><span class="m">${escapeHtml(budgetText(p))}</span></div>`).join(""):`<div class="ip-empty">${sellersList().length?"Koi property nahi mili.":"Abhi koi property (seller) saved nahi hai."}</div>`;
+    list.classList.remove("hidden");
+  }
+  inp.addEventListener("focus",show); inp.addEventListener("input",show);
+  list.addEventListener("mousedown",e=>{const o=e.target.closest("[data-pid]");if(!o)return;e.preventDefault();const p=propById(o.dataset.pid);if(!p)return;st.sel.push(mkInterest(p));draw();inp.value="";list.classList.add("hidden");onPick&&onPick(p,st);});
+  chips.addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){st.sel.splice(Number(b.dataset.rm),1);draw();}});
+  document.addEventListener("click",e=>{if(!root.contains(e.target))list.classList.add("hidden");});
+  return st;
+}
+
 function dupMap(){const m={};records.forEach(r=>{const k=last10(r.mobile);if(k.length===10)(m[k]=m[k]||[]).push(r.id);});return m;}
 function suspectName(r){const n=String(r.name||"").trim();return n.length<3||/\d/.test(n);}
 function parseMoney(v){
@@ -744,6 +927,7 @@ function sortList(list){
   const out=[...list];
   if(k==="name") out.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
   else if(k==="budget") out.sort((a,b)=>bud(b)-bud(a));
+  else if(k==="added") out.sort((a,b)=>msOf(b.createdAt)-msOf(a.createdAt));
   else if(k==="follow") out.sort((a,b)=>String(a.followUpDate||"9999").localeCompare(String(b.followUpDate||"9999")));
   else out.sort((a,b)=>ms(b)-ms(a));
   return out;
@@ -775,7 +959,8 @@ function render(){
   $("sellerCount").textContent=records.filter(r=>r.type==="seller").length;
   $("brokerCount").textContent=records.filter(r=>r.type==="broker").length;
   $("listTitle").textContent=currentFilter==="all"?"All Records":currentFilter==="customer"?"Customers":currentFilter==="seller"?"Sellers":"Brokers / Agents";
-  $("filterCount").textContent=`Showing ${filtered.length} of ${records.length}`;
+  $("filterCount").textContent=filtered.length===records.length?`${records.length} records`:`Showing ${filtered.length} of ${records.length}`;
+  renderFilterUI();
   const iso=localISO();
   const statusCount={}; records.forEach(r=>{const k=r.status||"New";statusCount[k]=(statusCount[k]||0)+1;});
   // Needs attention: overdue follow-ups first, then hot leads
@@ -787,38 +972,48 @@ function render(){
   $("todayFocus").innerHTML=due.length?due.map(r=>`<div class="lead-mini"><div><div class="lead-name">${escapeHtml(r.name||"Customer")}</div><div class="lead-sub">${escapeHtml(r.followUpNote||r.area||"Follow-up due today")}</div></div><div class="mini-actions"><button class="mini-btn call" data-focus-call="${escapeHtml(r.mobile||"")}">Call</button><button class="mini-btn" data-focus-wa="${r.id}">WA</button><button class="mini-btn" data-focus-edit="${r.id}">Open</button></div></div>`).join(""):'<div class="empty" style="padding:22px 5px">No follow-ups due today.</div>';
   const stages=["New","Contacted","Interested","Site Visit","Negotiation","Closed"];
   $("pipeline").innerHTML=stages.map(x=>`<div class="pipe ${x==="Interested"||x==="Site Visit"?"hot":""} ${x==="Closed"?"done":""}" data-stage="${x}"><b>${statusCount[x]||0}</b><span>${x}</span></div>`).join("");
+  const photoChip=r=>{if(r.type!=="seller")return"";const n=(r.images||[]).length;return `<div><span class="flag" style="${n>=3?"background:#eaf8f0;color:#0e7b42":""}">${n===0?"No photo":n+(n===1?" photo":" photos")}</span></div>`;};
   const dups=dupMap();
   const flags=r=>`${suspectName(r)?'<span class="flag">Check name</span>':""}${dups[last10(r.mobile)]?.length>1?'<span class="flag">Duplicate</span>':""}`;
+  const fuHTML=r=>{const f=r.followUpDate;if(!f)return"";const cls=f<iso?"bad":f===iso?"today":"";return `<div class="fup ${cls}">${f<iso?"⚠ Overdue":f===iso?"● Aaj":"Next"}: ${escapeHtml(f)}${r.followUpNote?" — "+escapeHtml(r.followUpNote):""}</div>`;};
+  const interestCell=r=>{
+    if(r.type==="customer"){
+      const it=interestsOf(r);
+      const chips=it.map(i=>{const p=propById(i.id);return `<div class="int-row">${codeChip(p?.code||i.code,i.id)}<span class="lbl">${escapeHtml(p?cleanLbl(p):i.label||"")}</span></div>`;}).join("");
+      const req=`${escapeHtml(r.propertyType||"—")}${r.size?" • "+escapeHtml(r.size):""}`;
+      return it.length?`<div class="ints">${chips}</div>`:`<span class="muted">${req}</span>`;
+    }
+    if(r.type==="seller"){
+      const n=intersOf(r).length;
+      return `${escapeHtml(r.propertyType||"—")}${r.size?" • "+escapeHtml(r.size):""}${photoChip(r)}${n?`<div style="margin-top:4px"><button type="button" class="who" data-open="${escapeHtml(r.id)}">${n} interested</button></div>`:""}`;
+    }
+    return escapeHtml(r.propertyType||"—");
+  };
+  const mobHTML=r=>{const n=last10(r.mobile);return n.length===10?`<a class="mob" href="tel:+91${n}">${escapeHtml(n)}</a>`:`<span class="mob off">${escapeHtml(r.mobile||"—")}</span>`;};
+  const dateHTML=r=>{const ms=msOf(r.createdAt)||msOf(r.updatedAt);return `<div class="dcell">${ms?escapeHtml(fmtDate(r.createdAt||r.updatedAt)):"—"}<small>${escapeHtml(agoText(ms))}</small></div>`;};
   $("rows").innerHTML=filtered.map(r=>`
     <tr>
       <td class="select-cell"><input class="row-check" type="checkbox" data-select-id="${escapeHtml(r.id)}" ${selectedIds.has(r.id)?"checked":""}></td>
-      <td><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span></td>
-      <td><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
-      <td>${escapeHtml(r.mobile||"—")}</td>
-      <td>${escapeHtml(r.area||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
-      <td>${escapeHtml(budgetText(r))}</td>
-      <td>${escapeHtml(r.propertyType||"—")} ${r.size?"• "+escapeHtml(r.size):""}</td>
-      <td>${statusSelect(r)}${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}${r.followUpDate?`<div class="muted" style="margin-top:3px">Follow-up ${escapeHtml(r.followUpDate)}</div>`:""}</td>
-      <td>${fmtDate(r.updatedAt)}</td>
+      <td>${dateHTML(r)}</td>
+      <td><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}<div style="margin-top:3px"><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span> ${r.type==="seller"?codeChip(r.code):""}</div>${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
+      <td>${mobHTML(r)}</td>
+      <td>${interestCell(r)}</td>
+      <td>${escapeHtml(niceArea(r.area)||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
+      <td><b>${escapeHtml(budgetText(r))}</b></td>
+      <td>${statusSelect(r)}${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}${fuHTML(r)}</td>
       <td>${actionBtns(r)}</td>
     </tr>`).join("");
-  $("cards").innerHTML=filtered.map(r=>`<div class="rcard2"><div class="top2"><div><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}<div class="sub">${typeLabel(r.type)} • ${escapeHtml(r.area||"—")} • ${escapeHtml(r.propertyType||"—")}${r.size?" • "+escapeHtml(r.size):""}</div></div>${statusSelect(r)}</div><div class="bud">${escapeHtml(budgetText(r))}${r.followUpDate?` <span class="muted">• Follow-up ${escapeHtml(r.followUpDate)}</span>`:""}</div>${actionBtns(r)}</div>`).join("");
+  $("cards").innerHTML=filtered.map(r=>{const ms=msOf(r.createdAt)||msOf(r.updatedAt);return `<div class="rcard2"><div class="top2"><div><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}<div class="sub">${typeLabel(r.type)}${r.type==="seller"&&r.code?" • "+escapeHtml(r.code):""} • ${escapeHtml(niceArea(r.area)||"—")} • ${ms?escapeHtml(fmtDate(r.createdAt||r.updatedAt)):""}</div></div>${statusSelect(r)}</div><div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">${mobHTML(r)}<span class="bud">${escapeHtml(budgetText(r))}</span></div><div style="margin-top:8px">${interestCell(r)}</div>${fuHTML(r)}${actionBtns(r)}</div>`;}).join("");
   $("empty").classList.toggle("hidden",filtered.length!==0);
   renderToday();
   updateWaToolbar();
 }
-$("search").oninput=render;
-$("sortBy").addEventListener("change",render);
-["filterArea","filterProperty","filterStatus","filterMinBudget","filterMaxBudget"].forEach(id=>$(id).addEventListener("input",render));
-$("resetFilters").onclick=()=>{
-  $("search").value="";
-  $("filterArea").value="";
-  $("filterProperty").value="";
-  $("filterStatus").value="";
-  $("filterMinBudget").value="";
-  $("filterMaxBudget").value="";
-  render();
-};
+$("search").addEventListener("input",render);
+["filterArea","filterProperty","filterStatus","filterBudget","filterInterest","sortBy"].forEach(id=>$(id).addEventListener("change",render));
+function resetFilters(){["search","filterArea","filterProperty","filterStatus","filterBudget","filterInterest"].forEach(id=>{$(id).value="";});render();}
+$("resetFilters").onclick=resetFilters;
+$("fchips").onclick=e=>{const b=e.target.closest("[data-clear]");if(!b)return;$(b.dataset.clear).value="";render();};
+$("filterToggle").onclick=()=>{const o=$("fbar").classList.toggle("open");$("filterToggle").setAttribute("aria-expanded",String(o));};
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
   b.classList.add("active");
@@ -957,12 +1152,72 @@ $("waCopyImageOpen").onclick=async()=>{
 };
 $("waOpenTextOnly").onclick=()=>{ const r=currentWaRecord(); if(r) openWaTextFor(r); };
 
+
+/* ---------- photo manager ---------- */
+function renderPhotoMgr(){
+  const g=$("pmGrid"); if(!g) return;
+  $("pmCount").textContent=`${photoItems.length} / ${MAX_PHOTOS}`;
+  g.innerHTML=photoItems.length?photoItems.map((it,i)=>{
+    const src=it.file?it.preview:it.url;
+    return `<div class="pm-item ${i===0?"cover":""}"><img src="${escapeHtml(src)}" alt="Photo ${i+1}">${i===0?'<span class="pm-tag">Cover</span>':it.file?'<span class="pm-tag new">New</span>':""}<div class="pm-bar"><button type="button" data-pm="left" data-i="${i}" ${i===0?"disabled":""} aria-label="Move earlier">◀</button><button type="button" data-pm="right" data-i="${i}" ${i===photoItems.length-1?"disabled":""} aria-label="Move later">▶</button><button type="button" class="del" data-pm="del" data-i="${i}" aria-label="Remove photo">✕</button></div></div>`;
+  }).join(""):'<div class="pm-empty">Abhi koi photo nahi. “+ Add photos” dabayein.</div>';
+}
+$("pmGrid").onclick=e=>{
+  const b=e.target.closest("[data-pm]"); if(!b) return; const i=Number(b.dataset.i), k=b.dataset.pm;
+  if(k==="del"){ const it=photoItems[i]; if(it?.preview) URL.revokeObjectURL(it.preview); photoItems.splice(i,1); }
+  if(k==="left"&&i>0) [photoItems[i-1],photoItems[i]]=[photoItems[i],photoItems[i-1]];
+  if(k==="right"&&i<photoItems.length-1) [photoItems[i+1],photoItems[i]]=[photoItems[i],photoItems[i+1]];
+  renderPhotoMgr();
+};
+$("photos").onchange=()=>{
+  const files=[...$("photos").files].filter(f=>f.type.startsWith("image/")); $("photos").value="";
+  const room=MAX_PHOTOS-photoItems.length;
+  if(files.length>room) toast(room>0?`Sirf ${room} aur photo add ho sakti hain (max ${MAX_PHOTOS}).`:`Max ${MAX_PHOTOS} photos ho gayi.`);
+  files.slice(0,Math.max(0,room)).forEach(f=>{
+    if(f.size>25*1024*1024){ toast(`${f.name} bahut badi hai (25 MB se kam chahiye).`); return; }
+    photoItems.push({file:f,preview:URL.createObjectURL(f)});
+  });
+  renderPhotoMgr();
+};
+function compressImage(blob,max=1600,q=0.82){
+  return new Promise(resolve=>{
+    const url=URL.createObjectURL(blob), im=new Image();
+    im.onload=()=>{
+      try{
+        const k=Math.min(1,max/Math.max(im.width,im.height));
+        if(k===1&&blob.size<400*1024&&blob.type==="image/jpeg"){URL.revokeObjectURL(url);return resolve(blob);}
+        const c=document.createElement("canvas"); c.width=Math.round(im.width*k); c.height=Math.round(im.height*k);
+        c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+        c.toBlob(b=>{URL.revokeObjectURL(url);resolve(b&&b.size<blob.size*1.2?b:blob);},"image/jpeg",q);
+      }catch(_){URL.revokeObjectURL(url);resolve(blob);}
+    };
+    im.onerror=()=>{URL.revokeObjectURL(url);resolve(blob);};
+    im.src=url;
+  });
+}
+async function uploadPhotos(items,{id,isPublicSeller},onProgress){
+  const out=[]; let n=0; const total=items.filter(it=>it.file||String(it.url||"").startsWith("data:")).length;
+  for(const it of items){
+    if(it.file||String(it.url||"").startsWith("data:")){
+      const src=it.file||await (await fetch(it.url)).blob();
+      const blob=await compressImage(src);
+      const stamp=Date.now()+"-"+(n+1);
+      const path=isPublicSeller?`publicProperties/${id||"new"}-${stamp}.jpg`:`crmContacts/${auth.currentUser.uid}/${id||"new"}-${stamp}.jpg`;
+      const r0=ref(storage,path);
+      await uploadBytes(r0,blob,{contentType:"image/jpeg"});
+      out.push(await getDownloadURL(r0)); n++; onProgress&&onProgress(n,total);
+    }else out.push(it.url);
+  }
+  return out;
+}
+
 function resetForm(){
   $("recordForm").reset(); $("recordId").value=""; $("city").value="Jaipur"; $("source").value="Website"; $("statusSelect").value="New"; $("availability").value="Available";
   $("publicVisible").checked=false; $("publicDisplayName").value=""; $("followUpDate").value=""; $("followUpNote").value="";
-  $("modalTitle").textContent="New CRM Record"; $("preview").innerHTML=""; $("formMsg").innerHTML=""; editingImages=[]; editingVideoUrl=""; if($("propertyVideo")) $("propertyVideo").value=""; if($("videoPreview")) $("videoPreview").textContent="";
+  $("modalTitle").textContent="New CRM Record"; photoItems=[]; renderPhotoMgr(); $("formMsg").innerHTML=""; editingImages=[]; pickers.fPick?.clear(); editingVideoUrl=""; if($("propertyVideo")) $("propertyVideo").value=""; if($("videoPreview")) $("videoPreview").textContent="";
 }
-function openNew(){resetForm();$("modal").classList.remove("hidden")}
+function syncInterestField(){const f=$("fInterestField");if(f)f.style.display=$("type").value==="customer"?"":"none";}
+function openNew(){resetForm();syncInterestField();$("modal").classList.remove("hidden")}
 async function openEdit(id){
   const r=records.find(x=>x.id===id); if(!r)return;
   resetForm(); $("modalTitle").textContent="Edit CRM Record"; $("recordId").value=id;
@@ -972,25 +1227,14 @@ async function openEdit(id){
   $("publicDisplayName").value=r.publicDisplayName||r.name||"";
   editingImages=r.images||[];
   editingVideoUrl=r.publicVideoUrl||r.videoUrl||"";
-  $("preview").innerHTML=editingImages.map(u=>`<img src="${escapeHtml(u)}">`).join("");
+  const have=(Array.isArray(r.images)&&r.images.length)?r.images:(Array.isArray(r.publicImageUrls)?r.publicImageUrls:[]);
+  photoItems=have.filter(Boolean).map(u=>({url:u})); renderPhotoMgr();
+  pickers.fPick?.set(interestsOf(r)); syncInterestField();
   $("videoPreview").innerHTML=editingVideoUrl?`Current video: <a href="${escapeHtml(editingVideoUrl)}" target="_blank" rel="noopener">View video</a>`:"No video selected.";
   $("modal").classList.remove("hidden");
 }
 $("closeModal").onclick=()=>$("modal").classList.add("hidden"); $("cancelBtn").onclick=()=>$("modal").classList.add("hidden");
 $("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.add("hidden")});
-
-$("photos").onchange=()=>{
-  const files=[...$("photos").files];
-  if(files.length>3){
-    showStatus("Please select a maximum of 3 property images.","error");
-    $("photos").value="";
-    $("preview").innerHTML="";
-    return;
-  }
-  $("preview").innerHTML="";
-  files.forEach(f=>{const img=document.createElement("img");img.src=URL.createObjectURL(f);$("preview").appendChild(img)});
-  editingImages=[];
-};
 
 $("propertyVideo").onchange=()=>{
   const f=$("propertyVideo").files?.[0];
@@ -1017,28 +1261,14 @@ $("recordForm").onsubmit=async e=>{
       publicDisplayName:$("publicDisplayName").value.trim() || $("name").value.trim(),
       updatedAt:serverTimestamp()
     };
-    let imageUrls=editingImages||[];
-    let publicImageUrls=[];
+    const prevRec=id?records.find(x=>x.id===id):null;
+    if(data.type==="seller"){ data.code=prevRec?.code||fmtCode(nextCodeNum()); }
+    if(data.type==="customer"){ const ints=pickers.fPick?pickers.fPick.get():[]; data.interests=ints; data.interestCode=ints[0]?.code||""; }
+    const isPublicSeller=!!(data.publicVisible && data.type==="seller");
     let publicVideoUrl=editingVideoUrl||"";
-    const files=[...$("photos").files];
-    if(files.length){
-      imageUrls=[];
-      for(const f of files){
-        if(!f.type.startsWith("image/")) continue;
-        if(f.size>8*1024*1024) throw new Error(`${f.name} is larger than 8 MB.`);
-        const safe=f.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-        const stamp=Date.now();
-        const path=`crmContacts/${auth.currentUser.uid}/${id||"new"}-${stamp}-${safe}`;
-        const storageRef=ref(storage,path);
-        await uploadBytes(storageRef,f);
-        imageUrls.push(await getDownloadURL(storageRef));
-        if(data.publicVisible && data.type==="seller"){
-          const publicRef=ref(storage,`publicProperties/${id||"new"}-${stamp}-${safe}`);
-          await uploadBytes(publicRef,f);
-          publicImageUrls.push(await getDownloadURL(publicRef));
-        }
-      }
-    }
+    $("saveBtn").textContent="Saving...";
+    const imageUrls=await uploadPhotos(photoItems,{id,isPublicSeller},(k,n)=>{$("saveBtn").textContent=`Uploading photo ${k}/${n}...`;});
+    photoItems=imageUrls.map(u=>({url:u}));
     const videoFile=$("propertyVideo").files?.[0];
     if(videoFile){
       if(!videoFile.type.startsWith("video/")) throw new Error("Please choose a valid video file.");
@@ -1057,12 +1287,8 @@ $("recordForm").onsubmit=async e=>{
       }
     }
     data.images=imageUrls;
-    if(publicImageUrls.length) data.publicImageUrls=publicImageUrls;
-    else if(data.type==="seller"){
-      // keep earlier public photos; if the record was made public AFTER photos were uploaded, fall back to the saved photos
-      const prevPublic=records.find(r=>r.id===id)?.publicImageUrls||[];
-      data.publicImageUrls=prevPublic.length?prevPublic:(imageUrls||[]);
-    }
+    // every photo in the manager goes to the public listing (same order, first = cover)
+    data.publicImageUrls=data.type==="seller"?imageUrls:[];
     data.publicVideoUrl=publicVideoUrl;
     let savedId=id;
     if(id){
@@ -1080,6 +1306,7 @@ $("recordForm").onsubmit=async e=>{
         id:savedId,
         type:data.type,
         displayName:data.publicDisplayName || data.name,
+        code:data.code||"",
         area:data.area,
         city:data.city || "Jaipur",
         propertyType:data.propertyType || "",
@@ -1219,9 +1446,10 @@ function setQType(t){
   $("qMinL").textContent=t==="seller"?"Price from (optional)":"Budget min";
   $("qMaxL").textContent=t==="seller"?"Expected price":"Budget max";
   $("qProp").parentElement.style.display=t==="broker"?"none":"";
+  $("qInterestField").style.display=t==="customer"?"":"none";
 }
 function openQuick(type="customer"){
-  $("quickForm").reset(); $("qWarn").innerHTML=""; $("qMinH").textContent=""; $("qMaxH").textContent=""; qDupAck=false; setQType(type);
+  $("quickForm").reset(); $("qWarn").innerHTML=""; $("qMinH").textContent=""; $("qMaxH").textContent=""; qDupAck=false; setQType(type); pickers.qPick?.clear();
   $("qFollow").value=type==="customer"?"1":""; $("quickModal").classList.remove("hidden"); setTimeout(()=>$("qName").focus(),60);
 }
 document.querySelectorAll("#qType [data-qt]").forEach(b=>b.onclick=()=>{setQType(b.dataset.qt);$("qFollow").value=b.dataset.qt==="customer"?"1":"";});
@@ -1244,6 +1472,8 @@ async function saveQuick(more){
     propertyType:qType==="broker"?"":$("qProp").value,size:"",availability:"Available",budgetMin:mn??null,budgetMax:mx??null,roadFacing:"",propertyLocation:"",details:"",
     company:"",areasServed:"",registrationNo:"",exactAddress:"",notes:$("qNote").value.trim(),followUpDate:fd===""?"":localISO(d),followUpNote:"",
     publicVisible:false,publicDisplayName:name,images:[],publicVideoUrl:"",createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+  if(qType==="seller") data.code=fmtCode(nextCodeNum());
+  if(qType==="customer"){ const ints=pickers.qPick?pickers.qPick.get():[]; data.interests=ints; data.interestCode=ints[0]?.code||""; if(ints.length) data.timeline=[tlEntry("Interested in: "+ints.map(i=>(i.code?i.code+" ":"")+i.label).join(", "),"note")]; if(ints.length&&data.status==="New") data.status="Interested"; }
   $("qSave").disabled=$("qSaveMore").disabled=true;
   try{
     const ref0=await addDoc(collection(db,"crmContacts"),data);
@@ -1255,10 +1485,12 @@ async function saveQuick(more){
 $("quickForm").addEventListener("submit",e=>{e.preventDefault();saveQuick(false);});
 $("qSaveMore").onclick=()=>saveQuick(true);
 $("qFull").onclick=()=>{
+  const qInts=pickers.qPick?[...pickers.qPick.get()]:[];
   const v={t:qType,n:$("qName").value,m:$("qMobile").value,a:$("qArea").value,p:$("qProp").value,mn:parseMoney($("qMin").value),mx:parseMoney($("qMax").value),note:$("qNote").value};
   $("quickModal").classList.add("hidden"); openNew();
   $("type").value=v.t;$("name").value=v.n;$("mobile").value=v.m;$("whatsapp").value=v.m;$("area").value=v.a;if(v.t!=="broker")$("propertyType").value=v.p;
   $("budgetMin").value=Number.isFinite(v.mn)&&v.mn!=null?v.mn:"";$("budgetMax").value=Number.isFinite(v.mx)&&v.mx!=null?v.mx:"";$("notes").value=v.note;
+  syncInterestField(); pickers.fPick?.set(qInts);
 };
 $("newBtn").onclick=()=>openQuick("customer");
 $("quickAdd").onclick=()=>openQuick("customer");
@@ -1268,7 +1500,7 @@ $("quickMatch").onclick=()=>jump("matching");
 /* ================= Phase 2: record detail drawer ================= */
 const EMOJI_RE=/[^\p{L}\p{M}\p{N}\s.,:;!?()\-\/₹%&'"+]/gu;
 const tidyTxt=t=>String(t??"").replace(EMOJI_RE," ").replace(/\s+/g," ").trim();
-function niceArea(a){let x=tidyTxt(String(a||"").split(/[|\n]/)[0]).split(",")[0].trim();if(x.length>2&&x===x.toUpperCase())x=x.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());return x.length>40?x.slice(0,38).trim()+"…":x;}
+function niceArea(a){let x=tidyTxt(String(a||"").split(/[|\n]/)[0]).split(",")[0].trim();if(x.length>2&&(x===x.toUpperCase()||x===x.toLowerCase()))x=x.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());return x.length>40?x.slice(0,38).trim()+"…":x;}
 const tlEntry=(text,kind="note")=>({at:Date.now(),kind,text});
 const dw={id:null,tpl:"hello",tplText:null,kind:"note"};
 const TPL=[
@@ -1310,12 +1542,12 @@ function renderDrawer(){
   if(!r){ if(dw.id) closeDrawer(); return; }
   const keep=$("dwBody").scrollTop;
   const n=last10(r.mobile), ok=n.length===10, iso=localISO(), isSeller=r.type==="seller";
-  $("dwHead").innerHTML=`<div class="dw-top"><div><h3>${escapeHtml(r.name||"—")}</h3><div class="dw-sub"><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span> ${escapeHtml(niceArea(r.area)||"Jaipur")}${r.company?" • "+escapeHtml(r.company):""}</div></div><button class="dw-x" id="dwClose" type="button" aria-label="Close">×</button></div>
+  $("dwHead").innerHTML=`<div class="dw-top"><div><h3>${escapeHtml(r.name||"—")}</h3><div class="dw-sub"><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span> ${isSeller?codeChip(r.code)+" ":""}${escapeHtml(niceArea(r.area)||"Jaipur")}${r.company?" • "+escapeHtml(r.company):""}</div></div><button class="dw-x" id="dwClose" type="button" aria-label="Close">×</button></div>
     <div class="dw-btns"><a class="btn green ${ok?"":"off"}" id="dwCall" href="tel:+91${n}">${ic("phone")}Call</a><button class="btn light ${ok?"":"off"}" type="button" data-dw="wa-open">${ic("wa")}WhatsApp</button><button class="btn light" type="button" data-dw="edit">${ic("edit")}Edit</button></div>`;
   // facts
   const fact=(l,v,full)=>v?`<div class="dw-fact ${full?"full":""}"><b>${escapeHtml(l)}</b><span>${escapeHtml(v)}</span></div>`:"";
   const facts=[
-    fact("Mobile",r.mobile),fact("Area",[niceArea(r.area),r.city].filter(Boolean).join(", ")),
+    isSeller?fact("House code",r.code):"",fact("Mobile",r.mobile),fact("Area",[niceArea(r.area),r.city].filter(Boolean).join(", ")),
     fact(isSeller?"Price":"Budget",budgetText(r)==="—"?"":budgetText(r)),
     fact("Type / size",[r.propertyType,r.size].filter(Boolean).join(" • ")),
     fact("Source",r.source),fact("Added",r.createdAt?fmtDate(r.createdAt):""),
@@ -1335,6 +1567,18 @@ function renderDrawer(){
   // matches
   const ms=matchesFor(r);
   const mHTML=ms.length?ms.map(m=>{const o=m.o;return `<div class="mrow"><div class="mt"><div><strong data-dw-open="${escapeHtml(o.id)}">${escapeHtml(o.type==="seller"?propSummary(o):(o.name||"Customer"))}</strong><div class="ms">${escapeHtml(o.type==="seller"?"Owner: "+(o.name||"—"):(niceArea(o.area)||"Jaipur")+" • "+(o.propertyType||""))} • ${escapeHtml(budgetText(o))}</div></div><span class="mscore">${m.score}%</span></div><div class="why">${escapeHtml(m.why.join(" • "))}</div><div class="dw-row"><button class="chipbtn" type="button" data-dw-send="${escapeHtml(o.id)}">${ic("wa")} ${isSeller?"Send this property to buyer":"Send this property"}</button><button class="chipbtn" type="button" data-dw-open="${escapeHtml(o.id)}">Open</button></div></div>`}).join(""):`<div class="muted" style="padding:6px 0">${r.type==="broker"?"Brokers ke liye matching nahi hoti.":"Abhi koi match nahi mila. Area, type aur budget bharein to match milenge."}</div>`;
+  // interested property / interested customers
+  let intHTML="";
+  if(r.type==="customer"){
+    const it=interestsOf(r);
+    const have=new Set(it.map(i=>i.id));
+    const opts=sellersList().filter(p=>!have.has(p.id)).sort((a,b)=>codeNum(b.code)-codeNum(a.code));
+    intHTML=`<div class="dw-sec"><h4>Interested in</h4>${it.length?it.map(i=>{const p=propById(i.id);return `<div class="dw-int">${codeChip(p?.code||i.code,i.id)}<span style="font-weight:700">${escapeHtml(p?cleanLbl(p):i.label||"")}</span>${p?`<span class="muted">${escapeHtml(budgetText(p))}</span>`:""}<button class="chipbtn" type="button" data-int-rm="${escapeHtml(i.id)}" aria-label="Remove">×</button></div>`;}).join(""):'<div class="muted" style="margin-bottom:8px">Abhi koi property select nahi. Neeche se add karein.</div>'}
+      <div class="dw-row"><select id="dwAddInt" style="flex:1"><option value="">+ Property add karein…</option>${opts.map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml((p.code||"—")+" · "+cleanLbl(p)+" · "+budgetText(p))}</option>`).join("")}</select></div></div>`;
+  }else if(isSeller){
+    const cs=intersOf(r);
+    intHTML=`<div class="dw-sec"><h4>Interested customers (${cs.length})</h4>${cs.length?cs.map(c=>{const f=c.followUpDate;const n=last10(c.mobile);return `<div class="cust-row"><div><div class="nm" data-dw-open="${escapeHtml(c.id)}">${escapeHtml(c.name||"—")}</div><div class="sm"><span class="status-pill">${escapeHtml(c.status||"New")}</span> ${budgetText(c)!=="—"?"• "+escapeHtml(budgetText(c)):""} ${f?"• Follow-up "+escapeHtml(f):""}</div></div><a class="mob" href="tel:+91${n}">${escapeHtml(n||c.mobile||"—")}</a></div>`;}).join(""):'<div class="muted">Is property ke liye abhi koi customer linked nahi hai.</div>'}</div>`;
+  }
   // photos
   const imgs=Array.isArray(r.images)?r.images.filter(u=>/^https?:|^data:image/.test(u)).slice(0,3):[];
   const vid=r.publicVideoUrl||r.videoUrl||"";
@@ -1345,6 +1589,7 @@ function renderDrawer(){
   const tlHTML=tl.map(e=>`<div class="tl-item ${escapeHtml(e.kind||"note")}"><div class="tl-time">${escapeHtml(KIND_LABEL[e.kind]||"Note")} • ${escapeHtml(fmtDT(e.at))}</div><div class="tl-text">${escapeHtml(e.text||"")}</div></div>`).join("")+(created?`<div class="tl-item"><div class="tl-time">${escapeHtml(fmtDT(created))}</div><div class="tl-text">Added to CRM${r.source?" ("+escapeHtml(r.source)+")":""}</div></div>`:"");
   $("dwBody").innerHTML=`
     <div class="dw-sec" style="margin-top:12px"><div class="dw-facts">${facts}</div></div>
+    ${intHTML}
     <div class="dw-sec"><h4>Status &amp; follow-up</h4>${fuBanner}
       <div class="dw-row" style="margin-bottom:8px">${statusSelect(r)}</div>
       <div class="dw-row"><input type="date" id="dwFuDate" value="${escapeHtml(fu)}"><input type="text" id="dwFuNote" placeholder="Reminder note" value="${escapeHtml(r.followUpNote||"")}" style="flex:1;min-width:120px"><button class="chipbtn" type="button" data-dw="fu-save">Save</button></div>
@@ -1377,7 +1622,11 @@ $("dwAddNote").onclick=async()=>{
   if(dw.kind==="note"&&!txt){toast("Pehle note likhein");return;}
   const label=dw.kind==="call"?"Called":dw.kind==="visit"?"Site visit":"";
   const full=label?(label+(txt?": "+txt:"")):txt;
-  try{ await addTL(r.id,full,dw.kind); $("dwNote").value=""; toast("Saved"); }catch(err){ toast(err.message); }
+  const extra={}; const nx=$("dwNext").value;
+  if(nx==="clear"){extra.followUpDate="";extra.followUpNote="";}
+  else if(nx!=="keep"){const d=new Date();d.setDate(d.getDate()+Number(nx));extra.followUpDate=localISO(d);if(txt)extra.followUpNote=txt.slice(0,80);}
+  if(r.type==="customer"){ if(dw.kind==="visit") extra.status="Site Visit"; else if(dw.kind==="call"&&(!r.status||r.status==="New")) extra.status="Contacted"; }
+  try{ await addTL(r.id,full,dw.kind,extra); $("dwNote").value=""; $("dwNext").value="keep"; toast(extra.followUpDate?"Saved • follow-up "+extra.followUpDate:"Saved"); }catch(err){ toast(err.message); }
 };
 $("dwHead").addEventListener("click",e=>{
   if(e.target.closest("#dwClose")){closeDrawer();return;}
@@ -1387,9 +1636,19 @@ $("dwHead").addEventListener("click",e=>{
   const call=e.target.closest("#dwCall"); if(call&&!call.classList.contains("off")) addTL(r.id,"Call started","call").catch(()=>{});
 });
 $("dwBody").addEventListener("input",e=>{ if(e.target.id==="dwTplText") dw.tplText=e.target.value; });
-$("dwBody").addEventListener("change",e=>{ if(e.target.id==="dwTpl"){dw.tpl=e.target.value;dw.tplText=null;renderDrawer();} });
+$("dwBody").addEventListener("change",async e=>{
+  if(e.target.id==="dwTpl"){dw.tpl=e.target.value;dw.tplText=null;renderDrawer();}
+  if(e.target.id==="dwAddInt"&&e.target.value){
+    const r=records.find(x=>x.id===dw.id), p=propById(e.target.value); if(!r||!p) return;
+    const next=[...interestsOf(r),mkInterest(p)];
+    const extra={interests:next,interestCode:next[0]?.code||""}; if(!r.status||r.status==="New") extra.status="Interested";
+    try{ await addTL(r.id,`Interested in: ${p.code?p.code+" ":""}${cleanLbl(p)}`,"note",extra); toast("Property linked"); }catch(err){ toast(err.message); }
+  }
+});
 $("dwBody").addEventListener("click",async e=>{
   const r=records.find(x=>x.id===dw.id); if(!r) return;
+  const rmI=e.target.closest("[data-int-rm]");
+  if(rmI){ const next=interestsOf(r).filter(i=>i.id!==rmI.dataset.intRm); try{ await addTL(r.id,"Property link removed","note",{interests:next,interestCode:next[0]?.code||""}); }catch(err){ toast(err.message); } return; }
   const open=e.target.closest("[data-dw-open]"), send=e.target.closest("[data-dw-send]"), fu=e.target.closest("[data-fu]"), act=e.target.closest("[data-dw]");
   try{
     if(open){ openDrawer(open.dataset.dwOpen); return; }
@@ -1419,8 +1678,10 @@ $("dwBody").addEventListener("click",async e=>{
   }catch(err){ toast(err.message||"Error"); }
 });
 
+initPicker("fPick"); initPicker("qPick",(p)=>{ if(!$("qArea").value.trim()) $("qArea").value=niceArea(p.area); const pt=p.propertyType; if(pt&&[...$("qProp").options].some(o=>o.value===pt||o.text===pt)) $("qProp").value=pt; });
+$("type").addEventListener("change",syncInterestField);
 $("exportBtn").onclick=()=>{
-  const rows=records.map(r=>({Type:r.type,Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
+  const rows=records.map(r=>({Type:r.type,House_Code:r.code||"",Interested_In:interestsOf(r).map(i=>i.code).join(", "),Added:r.createdAt?fmtDate(r.createdAt):"",Follow_Up:r.followUpDate||"",Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
     Property_Type:r.propertyType||"",Size:r.size||"",Budget_Min:r.budgetMin||"",Budget_Max:r.budgetMax||"",Status:r.status||"",Source:r.source||"",
     Company:r.company||"",Areas_Served:r.areasServed||"",Property_Location:r.propertyLocation||"",Exact_Address_Private:r.exactAddress||"",Details:r.details||"",Notes:r.notes||"",Public_Visible:r.publicVisible?"Yes":"No",Public_Display_Name:r.publicDisplayName||""}));
   const ws=XLSX.utils.json_to_sheet(rows); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"CRM");

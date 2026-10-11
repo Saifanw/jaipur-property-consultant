@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell Your Property or Earn Commission | Jaipur Property Consultant</title>
+<meta name="description" content="Sell your plot, house or shop in Jaipur through a local office, or earn a referral reward / joint-deal share as an agent. See commission rates and try the calculator.">
+<meta name="theme-color" content="#0f1b2d">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0DW0NBETML');</script>
+</head>
+<body>
+<div data-chrome="partner"></div>
+
+<main>
+<section class="phero">
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> / Sell &amp; earn</div>
+    <h1>Sell with a local office. Or earn by bringing us a deal.</h1>
+    <p>Property owners get genuine buyers and a team that handles calls, visits and paperwork. Agents and referrers earn a clear share when a deal closes.</p>
+    <div class="btns" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+      <a class="btn btn-gold" href="#join">Start now</a>
+      <a class="btn btn-ghost" href="#calc">Check my earning</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="rates">
+  <div class="container">
+    <h2>Simple rates, written down before you start</h2>
+    <p class="lead">Pick what fits you. The same numbers feed the calculator below.</p>
+    <div class="rate-grid" id="rateGrid"></div>
+    <p class="fine" id="disc"></p>
+  </div>
+</section>
+
+<section class="sec alt" id="calc">
+  <div class="container">
+    <h2>What will I earn? Try the calculator</h2>
+    <p class="lead">Enter the expected sale price and choose who you are.</p>
+    <div class="calc">
+      <div class="calc-in">
+        <label for="role">I am a</label>
+        <select id="role"><option value="owner">Property owner (selling)</option><option value="referrer">Referrer (I know someone)</option><option value="agent">Agent / broker (joint deal)</option></select>
+        <label for="price">Sale price (₹)</label>
+        <input id="price" type="number" min="100000" step="50000" value="4000000" inputmode="numeric">
+        <input id="priceRange" type="range" min="500000" max="30000000" step="100000" value="4000000" aria-label="Sale price slider">
+        <div class="fine" id="priceWords"></div>
+      </div>
+      <div class="calc-out" id="calcOut" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="container">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Tell us the details</h3><p>Fill the short form below or message us on WhatsApp with area, size and expected price.</p></div>
+      <div class="step"><div class="n">2</div><h3>We verify and list</h3><p>Our team checks the details, takes good photos and gives your property a reference code.</p></div>
+      <div class="step"><div class="n">3</div><h3>Buyers and visits</h3><p>Enquiries come to our office. We call, follow up and take serious buyers for site visits.</p></div>
+      <div class="step"><div class="n">4</div><h3>Registry and payout</h3><p id="payoutNote">Payment is made after the registry is done.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="agents">
+  <div class="container">
+    <h2>For agents and referrers</h2>
+    <p class="lead">You do not need a shop to earn. Bring a seller or a buyer and we do the rest.</p>
+    <div class="twoup">
+      <div class="panel"><h3 style="margin-bottom:8px">Referrer</h3><ul class="ticks"><li><svg class="icon"><use href="#i-check"/></svg>Share a seller or buyer you know</li><li><svg class="icon"><use href="#i-check"/></svg>We handle every call, visit and document</li><li><svg class="icon"><use href="#i-check"/></svg><span id="refLine"></span></li></ul></div>
+      <div class="panel dark"><h3 style="margin-bottom:8px">Agent / broker</h3><ul class="ticks"><li><svg class="icon"><use href="#i-check"/></svg>Bring your buyer, we bring the property (or the reverse)</li><li><svg class="icon"><use href="#i-check"/></svg>Your clients stay your clients</li><li><svg class="icon"><use href="#i-check"/></svg><span id="agentLine"></span></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="join">
+  <div class="container twoup" style="margin-top:0;align-items:start">
+    <div>
+      <h2>Tell us how to reach you</h2>
+      <p class="lead">We call back the same day. Your phone number is never shown on the website.</p>
+      <ul class="ticks" style="margin-top:18px">
+        <li><svg class="icon"><use href="#i-check"/></svg>Your number stays private</li>
+        <li><svg class="icon"><use href="#i-check"/></svg>No pressure, no spam</li>
+        <li id="freeLine"><svg class="icon"><use href="#i-check"/></svg>No upfront listing fee</li>
+      </ul>
+      <p class="fine" style="margin-top:18px">Prefer to talk? Call <a href="tel:+916350566010"><b>6350566010</b></a> or <a id="waDirect" target="_blank" rel="noopener" style="text-decoration:underline">message on WhatsApp</a>.</p>
+    </div>
+    <form class="panel" id="joinForm" novalidate>
+      <div class="fld"><label for="jRole">I am a</label><select id="jRole"><option value="owner">Property owner</option><option value="agent">Agent / broker</option><option value="referrer">Referrer</option></select></div>
+      <div class="fld"><label for="jName">Your name</label><input id="jName" autocomplete="name" required></div>
+      <div class="fld"><label for="jMobile">Mobile number</label><input id="jMobile" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" required></div>
+      <div class="fld"><label for="jArea">Area / colony</label><input id="jArea" placeholder="e.g. Jhotwara"></div>
+      <div class="fld"><label for="jType">Property type</label><select id="jType"><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
+      <div class="fld"><label for="jNote">Size, expected price, anything else</label><textarea id="jNote" placeholder="e.g. 100 Gaj plot, 40 lakh"></textarea></div>
+      <button class="btn btn-gold btn-block" id="jBtn" type="submit">Send my details</button>
+      <div id="jMsg" class="msg" style="display:none"></div>
+    </form>
+  </div>
+</section>
+
+<section class="sec alt" id="faq">
+  <div class="container">
+    <h2>Common questions</h2>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="cta-band"><div><h2>Ready to list or refer?</h2><p>One message is enough to start.</p></div><a id="waCta" class="btn btn-green" target="_blank" rel="noopener">Message on WhatsApp</a></div>
+  </div>
+</section>
+</main>
+
+<script src="assets/config.js"></script>
+<script src="assets/sprite.js"></script>
+<script src="assets/app.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+const db = getFirestore(initializeApp({apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"},"publicSite"));
+const { $, esc, ico, wa, SITE } = JPC, C = SITE.commission || {};
+const money = n => { n = Math.round(n); return n >= 1e7 ? "₹" + (n/1e7).toFixed(2).replace(/\.?0+$/,"") + " Cr" : n >= 1e5 ? "₹" + (n/1e5).toFixed(2).replace(/\.?0+$/,"") + " Lakh" : "₹" + n.toLocaleString("en-IN"); };
+const tick = t => `<li>${ico("check")}<span>${t}</span></li>`;
+
+$("rateGrid").innerHTML = `
+  <div class="rate"><h3>Property owners</h3><div class="big">${C.sellerPct}<small>%</small></div><p>of the sale price, paid only when your property is sold.</p><ul>${tick("Photos, listing and enquiry handling")}${tick("Site visits arranged by our office")}${tick("Help with registry paperwork")}</ul></div>
+  <div class="rate feat"><h3>Agents and brokers</h3><div class="big">${C.agentSplitPct}:${100-C.agentSplitPct}<small> split</small></div><p>of the brokerage on a joint deal. You keep ${C.agentSplitPct}%.</p><ul>${tick("Your client stays your client")}${tick("Access to our listings")}${tick("Clear payout after registry")}</ul></div>
+  <div class="rate"><h3>Referrers</h3><div class="big">${C.referralSharePct}<small>% of brokerage</small></div><p>for introducing a seller or a buyer who closes a deal with us.</p><ul>${tick("No selling work for you")}${tick("Share one name and number")}${tick("Paid after the deal closes")}</ul></div>`;
+$("disc").textContent = C.disclaimer || "";
+if(C.payoutNote) $("payoutNote").textContent = C.payoutNote;
+$("refLine").textContent = `Earn ${C.referralSharePct}% of our brokerage when the deal closes`;
+$("agentLine").textContent = `Keep ${C.agentSplitPct}% of the brokerage on joint deals`;
+if(C.freeListing === false) $("freeLine").remove();
+$("waDirect").href = $("waCta").href = wa("Hello, I want to sell a property / join as an agent through Jaipur Property Consultant.");
+
+/* calculator */
+function calc(){
+  const P = Math.max(0, Number($("price").value) || 0), role = $("role").value;
+  $("priceRange").value = Math.min(30000000, Math.max(500000, P));
+  $("priceWords").textContent = P ? money(P) : "";
+  const sell = P * C.sellerPct/100, buy = P * C.buyerPct/100, total = sell + buy;
+  let rows;
+  if(role === "owner") rows = [["Sale price", money(P)], [`Our brokerage (${C.sellerPct}%)`, money(sell)], ["You receive (before other costs)", money(P - sell), true]];
+  else if(role === "referrer") rows = [["Deal value", money(P)], [`Our total brokerage (${C.sellerPct + C.buyerPct}%)`, money(total)], [`Your reward (${C.referralSharePct}%)`, money(total * C.referralSharePct/100), true]];
+  else rows = [["Deal value", money(P)], [`Total brokerage (${C.sellerPct + C.buyerPct}%)`, money(total)], [`Your share (${C.agentSplitPct}%)`, money(total * C.agentSplitPct/100), true]];
+  $("calcOut").innerHTML = rows.map(r => `<div class="row${r[2] ? " hl" : ""}"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("") + `<div class="fine">${esc(C.disclaimer || "")}</div>`;
+}
+$("price").addEventListener("input", calc); $("role").addEventListener("change", calc);
+$("priceRange").addEventListener("input", e => { $("price").value = e.target.value; calc(); });
+calc();
+
+/* FAQ */
+const faq = [
+  ["When do I pay the brokerage?", C.payoutNote ? "Only after the deal is done. " + C.payoutNote : "Only after the deal is done."],
+  ["Is my phone number shown on the website?", "No. Buyers contact our office. Your number stays inside our records."],
+  ["Do you list every property?", "We check each property first. If something is unclear, such as ownership papers or the exact location, we will ask you before listing."],
+  ["How do I get my referral reward?", "Share the name and number of the seller or buyer. When that deal closes with us, your reward is paid as per the rate above."],
+  ["Can I list more than one property?", "Yes. Each property gets its own reference code so buyers and our team can find it quickly."]
+];
+if(C.freeListing !== false) faq.splice(1, 0, ["Is there a listing fee?", "No upfront listing fee. You pay brokerage only when the property is sold."]);
+$("faqList").innerHTML = faq.map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join("");
+
+/* lead form */
+$("jMobile").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10); });
+$("joinForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("jMsg"), btn = $("jBtn"), show = (t, ok) => { msg.style.display = "block"; msg.className = "msg " + (ok ? "ok" : "err"); msg.textContent = t; };
+  const name = $("jName").value.trim(), mobile = $("jMobile").value.trim(), role = $("jRole").value;
+  if(!name) return show("Please enter your name.");
+  if(!/^[6-9]\d{9}$/.test(mobile)) return show("Please enter a valid 10-digit mobile number.");
+  btn.disabled = true; btn.textContent = "Sending…";
+  try{
+    await addDoc(collection(db, "publicSubmissions"), {
+      kind: "partner", role, type: role === "owner" ? "seller" : "broker",
+      name, mobile, area: $("jArea").value.trim(), city: "Jaipur", propertyType: $("jType").value,
+      details: $("jNote").value.trim(), size: "", budgetMin: null, budgetMax: null,
+      status: "pending", source: "Public Website", submittedAt: serverTimestamp()
+    });
+    show("Thank you. We will call you back soon.", true); e.target.reset();
+    if(typeof gtag === "function") gtag("event", "generate_lead", { method: "partner_form_" + role });
+  }catch(err){ show("Could not send right now. Please call or message us on WhatsApp."); }
+  finally{ btn.disabled = false; btn.textContent = "Send my details"; }
+});
+</script>
+</body>
+</html>

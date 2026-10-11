@@ -19,3 +19,11 @@ Added approved Properties page, property detail pages, review approval, customer
 
 ### Website Analytics
 Google Analytics 4 is included on the public pages using measurement ID `G-0DW0NBETML`. Use the Admin dashboard **Website Analytics** button to open Google Analytics.
+
+## v3 changes
+- Public site shares `assets/site.css`, `assets/config.js`, `assets/sprite.js`, `assets/app.js` (config, helpers, slider, lightbox, save, share). Edit `assets/config.js` for phone, RERA, years, office hours, areas and commission rates.
+- New pages: `partner.html` (sell & earn, calculator, FAQ, lead form), rebuilt `properties.html` and `reviews.html`.
+- PWA basics: `manifest.json`, `sw.js`, `assets/icons/` (base for the future "Apna Ghar" app).
+- Admin: every property (seller) gets a code like JPC-001 (auto-assigned); customers link to the property they want; table shows date, highlighted mobile, interested property, location, budget, follow-up; "interested customers" list inside each property; multi-photo manager.
+- Website enquiries / partner form arrive in Public Submissions as "Add to CRM" (private, never published).
+- Rules unchanged: deploy `firestore.rules` and `storage.rules` as before.

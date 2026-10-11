@@ -165,10 +165,26 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
   .mobile-bar .c{background:var(--navy)}.mobile-bar .w{background:var(--green)}
   .lb-prev{left:6px}.lb-next{right:6px}
 }
+
+.refcode{display:inline-block;background:#fff4d6;color:#8a5d00;border:1px solid #f1d68c;border-radius:8px;padding:3px 9px;font-weight:800;font-size:13px;margin-left:8px;vertical-align:middle}
+.pg{font-size:13px;color:var(--muted);font-weight:600;margin-top:2px}
+.share-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.share-row .btn{padding:11px 8px;font-size:14px}
+.btn.saved{border-color:#d2365a;color:#d2365a}.btn.saved svg{fill:#d2365a}
+.cb{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
+.cb b{display:block;font-size:15px;margin-bottom:8px}
+.cb input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:15px;margin-bottom:8px;min-height:44px}
+.cb .m{font-size:13px;margin-top:8px;display:none}
+.rsm{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px;color:var(--muted)}
+.rsm b{font-size:30px;color:var(--navy);font-family:inherit}
+.toastp{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#0f1b2d;color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:5000;display:none}
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0DW0NBETML');</script>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0f1b2d">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -179,6 +195,9 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
 <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
 <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+<symbol id="i-logo" viewBox="0 0 32 32"><path d="M5 28V14.5C5 9 9.5 5 16 3c6.5 2 11 6 11 11.5V28" fill="none"/><path d="M10 28v-9a6 6 0 0 1 12 0v9" fill="none"/><path d="M3 28h26" fill="none"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
 <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></symbol>
 <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
 </defs></svg>
@@ -186,11 +205,12 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 <header class="nav-wrap">
   <div class="container nav">
     <a class="brand" href="index.html" aria-label="Jaipur Property Consultant home">
-      <div class="brand-mark">JP</div>
+      <div class="brand-mark"><svg class="icon" style="width:26px;height:26px;stroke:var(--gold2);stroke-width:1.8"><use href="#i-logo"/></svg></div>
       <div><div class="brand-name">Jaipur Property Consultant</div><div class="brand-sub">Property • Consultation • Assistance</div></div>
     </a>
     <div class="nav-right">
       <a class="nav-link" href="properties.html">All properties</a>
+      <a class="nav-link" href="partner.html">Sell &amp; earn</a>
       <a class="btn btn-green" style="padding:10px 16px" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur."><svg class="icon fill"><use href="#i-wa"/></svg>WhatsApp</a>
     </div>
   </div>
@@ -275,7 +295,8 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   const avail=String(p.availability||"Available");
   const price=priceText(p.budgetMin,p.budgetMax,isSeller?"Price on enquiry":"Budget on discussion");
   document.title=`${title} | Jaipur Property Consultant`;
-  const msg=`Hello, I am interested in the ${type} in ${area} (${price}) that I saw on your website. Please share full details.`;
+  const msg=`Hello, I am interested in the ${type} in ${area} (${price})${p.code?" — Ref "+p.code:""} that I saw on your website. Please share full details.`;
+  const pgaj=(()=>{const m=String(p.size||"").match(/(\d+(?:\.\d+)?)/),g=m?Number(m[1]):0,pr=p.budgetMax??p.budgetMin;if(!isSeller||!g||!pr||g<10||g>5000)return"";const v=Math.round(pr/g);return v>500?`≈ ${inr(v)} per Gaj`:""})();
 
   const facts=[
     ["Property type",p.propertyType],["Size / area",tidy1(p.size)],["Locality",area+", "+city],
@@ -299,10 +320,10 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     <div class="title-block">
       <div class="tb-left">
         <div class="badges"><span class="badge">${esc(type)}</span>${isSeller?`<span class="badge avail ${availCls(avail)}">${esc(avail)}</span>`:`<span class="badge avail">Buyer requirement</span>`}</div>
-        <h1>${esc(title)}</h1>
+        <h1>${esc(title)}${p.code?`<span class="refcode">Ref ${esc(p.code)}</span>`:""}</h1>
         <div class="loc">${ico("pin")}${esc(area)}, ${esc(city)}</div>
       </div>
-      <div class="tb-price"><div class="lab">${isSeller?"Price":"Budget"}</div><div class="val">${esc(price)}</div></div>
+      <div class="tb-price"><div class="lab">${isSeller?"Price":"Budget"}</div><div class="val">${esc(price)}</div>${pgaj?`<div class="pg">${esc(pgaj)}</div>`:""}</div>
     </div>
     <div class="layout">
       <div>
@@ -325,7 +346,9 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
         <div class="lab">${isSeller?"Price":"Budget"}</div><div class="val">${esc(price)}</div>
         <a class="btn btn-green btn-block" target="_blank" rel="noopener" id="enqBtn" href="${wa(msg)}">${ico("wa","fill")}Enquire on WhatsApp</a>
         <a class="btn btn-gold btn-block" href="tel:+916350566010">${ico("phone")}Call 6350566010</a>
-        <button class="btn btn-light btn-block" type="button" id="shareBtn">${ico("share")}Share this property</button>
+        <div class="share-row"><a class="btn btn-light" id="shareWa" target="_blank" rel="noopener">${ico("share")}Share</a><button class="btn btn-light" type="button" id="copyBtn">${ico("link")}Copy link</button></div>
+        <button class="btn btn-light btn-block" type="button" id="saveBtn" style="margin-top:8px">${ico("heart")}<span>Save property</span></button>
+        ${isSeller?`<form class="cb" id="cbForm" novalidate><b>Prefer a call back?</b><input id="cbName" placeholder="Your name" autocomplete="name"><input id="cbMobile" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" autocomplete="tel"><button class="btn btn-dark btn-block" type="submit">Request call back</button><div class="m" id="cbMsg"></div></form>`:""}
         <div class="side-note">${ico("lock")}<span>Owner contact and exact address are kept private. All enquiries are handled by Jaipur Property Consultant.</span></div>
         <div class="office"><strong>Jaipur Property Consultant</strong>58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur 302012</div>
       </div></aside>
@@ -342,10 +365,27 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     document.querySelectorAll(".thumb").forEach(t=>t.addEventListener("click",()=>showImg(Number(t.dataset.i))));
     swipe($("stage"));
   }
-  $("shareBtn").onclick=async()=>{
-    const data={title,text:`${title} – ${price}`,url:location.href};
-    try{if(navigator.share){await navigator.share(data)}else{window.open(wa(`${title} – ${price}\n${location.href}`),"_blank","noopener")}}catch(_){}
-  };
+  const shareText=`${title} — ${price}${p.code?" (Ref "+p.code+")":""}\nJaipur Property Consultant`;
+  $("shareWa").href="https://wa.me/?text="+encodeURIComponent(shareText+"\n"+location.href);
+  $("shareWa").addEventListener("click",e=>{if(navigator.share){e.preventDefault();navigator.share({title,text:shareText,url:location.href}).catch(()=>{})}});
+  const say=t=>{let el=$("toastp");if(!el){el=document.createElement("div");el.id="toastp";el.className="toastp";document.body.appendChild(el)}el.textContent=t;el.style.display="block";clearTimeout(say.t);say.t=setTimeout(()=>el.style.display="none",2000)};
+  $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText(location.href);say("Link copied")}catch(_){window.prompt("Copy this link",location.href)}};
+  const SK="jpc_saved",getS=()=>{try{const v=JSON.parse(localStorage.getItem(SK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
+  const paintS=()=>{const on=getS().includes(p.id);$("saveBtn").classList.toggle("saved",on);$("saveBtn").querySelector("span").textContent=on?"Saved":"Save property"};
+  $("saveBtn").onclick=()=>{const a=getS(),i=a.indexOf(p.id);if(i>=0)a.splice(i,1);else a.unshift(p.id);try{localStorage.setItem(SK,JSON.stringify(a))}catch(_){}paintS();say(i>=0?"Removed from saved":"Saved")};paintS();
+  if($("cbForm")){
+    $("cbMobile").addEventListener("input",e=>{e.target.value=e.target.value.replace(/\D/g,"").slice(0,10)});
+    $("cbForm").onsubmit=async e=>{
+      e.preventDefault();const m=$("cbMsg"),b=e.target.querySelector("button"),nm=$("cbName").value.trim(),mb=$("cbMobile").value.trim();
+      const show=(t,ok)=>{m.style.display="block";m.style.color=ok?"#0b6a3b":"#c62d2d";m.textContent=t};
+      if(!nm)return show("Please enter your name.");
+      if(!/^[6-9]\d{9}$/.test(mb))return show("Please enter a valid 10-digit mobile number.");
+      b.disabled=true;b.textContent="Sending…";
+      try{await addDoc(collection(db,"publicSubmissions"),{kind:"enquiry",type:"customer",name:nm,mobile:mb,area:p.area||"",city:p.city||"Jaipur",propertyType:p.propertyType||"",size:p.size||"",budgetMin:null,budgetMax:p.budgetMax??p.budgetMin??null,details:`Enquiry for ${p.code||p.id} — ${title}`,interestPropertyId:p.id,interestCode:p.code||"",interestLabel:`${type}${p.size?" "+tidy1(p.size):""} • ${area}`,status:"pending",source:"Public Website",submittedAt:serverTimestamp()});show("Thank you. We will call you back soon.",true);e.target.reset();if(typeof gtag==="function")gtag("event","generate_lead",{method:"property_callback"})}
+      catch(err){show("Could not send. Please call or use WhatsApp.");console.warn(err)}
+      finally{b.disabled=false;b.textContent="Request call back"}
+    };
+  }
   $("enqBtn").addEventListener("click",()=>{if(typeof gtag==="function")gtag("event","generate_lead",{method:"property_detail_whatsapp"})});
 
   /* similar properties (same type of record, other listings) */
@@ -364,11 +404,11 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   if(isSeller){
     onSnapshot(query(collection(db,"publicReviews"),where("propertyId","==",p.id),where("status","==","approved")),snap=>{
       const rows=snap.docs.map(d=>d.data());
-      $("commentsList").innerHTML=rows.length?rows.map(r=>{const n=Math.max(1,Math.min(5,Number(r.rating)||5));return`<article class="comment"><div class="stars">${"★".repeat(n)}${"☆".repeat(5-n)}</div><strong>${esc(r.name||"Customer")}</strong><div style="margin-top:5px;color:#435166">${esc(r.comment||"")}</div></article>`}).join(""):'<div class="notice">No approved comments yet. You can be the first to comment.</div>';
+      $("commentsList").innerHTML=(rows.length?`<div class="rsm"><b>${(rows.reduce((a,r)=>a+Math.max(1,Math.min(5,Number(r.rating)||5)),0)/rows.length).toFixed(1)}</b><span>average from ${rows.length} ${rows.length===1?"comment":"comments"}</span></div>`:"")+(rows.length?rows.map(r=>{const n=Math.max(1,Math.min(5,Number(r.rating)||5));return`<article class="comment"><div class="stars">${"★".repeat(n)}${"☆".repeat(5-n)}</div><strong>${esc(r.name||"Customer")}</strong><div style="margin-top:5px;color:#435166">${esc(r.comment||"")}</div></article>`}).join(""):'<div class="notice">No approved comments yet. You can be the first to comment.</div>');
     },()=>{$("commentsList").innerHTML='<div class="notice">Comments could not be loaded right now.</div>'});
     $("commentForm").onsubmit=async e=>{
       e.preventDefault();const b=e.target.querySelector("button"),m=$("cMsg");b.disabled=true;b.textContent="Submitting…";m.style.display="block";
-      try{await addDoc(collection(db,"publicReviews"),{propertyId:p.id,propertyTitle:title,name:$("cName").value.trim(),rating:Number($("cRate").value),comment:$("cText").value.trim(),area:p.area||"",propertyType:p.propertyType||"",consent:true,status:"pending",source:"Property Page",submittedAt:serverTimestamp()});m.textContent="✅ Comment submitted. It will appear after approval.";e.target.reset()}
+      try{await addDoc(collection(db,"publicReviews"),{propertyId:p.id,propertyTitle:title,name:$("cName").value.trim(),rating:Number($("cRate").value),comment:$("cText").value.trim(),area:p.area||"",propertyType:p.propertyType||"",consent:true,status:"pending",source:"Public Website",page:"property",submittedAt:serverTimestamp()});m.textContent="✅ Comment submitted. It will appear after approval.";e.target.reset()}
       catch(err){m.textContent="Could not submit the comment. Please try again.";console.warn(err)}
       finally{b.disabled=false;b.textContent="Submit comment"}
     };

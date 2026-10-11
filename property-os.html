@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Property Desk — Jaipur Property Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f172a;--mut:#64748b;--line:#e6eaf2;--bg:#f5f7fb;--blue:#2f5bff;--blue2:#1e40e0;--green:#0f9d6a;--amber:#d98a00;--red:#e0483f;--purple:#7c4dff}
+*{box-sizing:border-box;margin:0}html,body{overflow-x:hidden}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}.hidden{display:none!important}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.top{position:sticky;top:0;z-index:30;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1320px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#4f7bff,#2446e0);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px}
+.nav{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
+.nav button{border:0;background:none;padding:8px 14px;border-radius:9px;color:var(--mut);font-weight:600;font-size:13px;white-space:nowrap;display:flex;gap:7px;align-items:center}
+.nav button:hover{background:#f1f4fa;color:var(--ink)}.nav button.on{background:#eaf0ff;color:var(--blue)}
+.pill{background:var(--red);color:#fff;border-radius:99px;font-size:10px;padding:1px 6px;font-weight:700}
+.acts{display:flex;gap:10px;align-items:center}
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
+.btn:hover{border-color:#c9d3e6;background:#f8faff}.btn.p{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 16px #2f5bff33}.btn.p:hover{background:var(--blue2)}.btn.d{color:var(--red)}
+.menu{position:relative}.avatar{width:36px;height:36px;border-radius:50%;background:#e7edff;color:var(--blue);font-weight:700;display:grid;place-items:center;border:1px solid #d5defa}
+.dd{position:absolute;right:0;top:44px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px #0f172a1f;min-width:230px;padding:8px;z-index:40}
+.dd .em{padding:8px 10px;color:var(--mut);font-size:12px;border-bottom:1px solid var(--line);margin-bottom:6px;word-break:break-all}
+.dd a,.dd button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:600}.dd a:hover,.dd button:hover{background:#f3f6fc}
+main{max-width:1320px;margin:0 auto;padding:28px 24px 60px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.hero h1{font-size:28px;letter-spacing:-.03em;font-weight:800}.hero p{color:var(--mut);margin-top:2px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 2px #0f172a08}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi{padding:16px 18px}.kpi b{display:block;font-size:26px;font-weight:800;letter-spacing:-.03em}.kpi span{color:var(--mut);font-size:12px;font-weight:600}
+.kpi.w b{color:var(--red)}.kpi.g b{color:var(--green)}.kpi.a b{color:var(--amber)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 14px;font-weight:600;font-size:13px;display:flex;gap:8px;align-items:center}
+.chip b{background:#eef2f8;border-radius:99px;padding:0 8px;font-size:11px;line-height:20px;color:var(--mut)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}.chip.on b{background:#ffffff26;color:#fff}
+.tool{padding:16px;margin-bottom:14px}
+.search{position:relative;margin-bottom:12px}.search input{width:100%;border:1px solid var(--line);background:#f8faff;border-radius:11px;padding:11px 14px 11px 38px}.search:before{content:"⌕";position:absolute;left:14px;top:8px;color:var(--mut);font-size:18px}
+.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:10px;align-items:end}
+.filters label{display:grid;gap:4px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+select,input[type=text],input[type=date],input[type=tel],textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 10px;font-size:13px;font-weight:500;color:var(--ink)}
+.list{overflow:clip}
+.row{display:grid;gap:12px;align-items:center;padding:13px 18px;border-top:1px solid var(--line)}
+.row.head{border-top:0;background:#f8faff;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--mut);text-transform:uppercase;position:sticky;top:64px;z-index:5;padding:11px 18px}
+.rp{grid-template-columns:96px minmax(0,2.2fr) minmax(0,1fr) 110px 120px 150px}
+.rc{grid-template-columns:minmax(0,2fr) minmax(0,2fr) 140px minmax(0,1.2fr) 170px}
+.row.hv{cursor:pointer}.row.hv:hover{background:#fafcff}
+.code{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.02em;background:#eaf0ff;color:var(--blue);border:1px solid #d5defa;border-radius:8px;padding:4px 9px;white-space:nowrap}
+button.code{cursor:pointer}button.code:hover{background:#dce6ff}
+.who{display:flex;gap:12px;align-items:center;min-width:0}
+.av{width:38px;height:38px;border-radius:50%;background:#eaf0ff;color:var(--blue);display:grid;place-items:center;font-weight:700;font-size:12px;flex:none}
+.av.h{border-radius:11px;background:#fff3d6;color:#9a6200}
+.who b,.cell b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.who span,.cell span{display:block;color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .lastn{color:#475569;font-style:italic}
+.tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:#eef2f8;color:#475569;margin-left:6px;vertical-align:1px}
+.tag.customer{background:#e3f3fd;color:#0b6aa2}.tag.seller{background:#fff3d6;color:#9a6200}.tag.broker{background:#efe8ff;color:#5b34d6}
+.st{display:inline-block;font-size:12px;font-weight:700;padding:4px 11px;border-radius:99px;background:#eef2f8;color:#475569;white-space:nowrap}
+.st.Interested{background:#efe8ff;color:#5b34d6}.st.Follow-up{background:#fff3d6;color:#9a6200}.st.Closed{background:#e3f7ee;color:#0a7a50}.st.Not-Interested{background:#fdecea;color:var(--red)}.st.Contacted{background:#e3f3fd;color:#0b6aa2}.st.Site-Visit,.st.Negotiation{background:#ffeddc;color:#b4540a}
+.st.Available{background:#e3f7ee;color:#0a7a50}.st.Under-Offer{background:#fff3d6;color:#9a6200}.st.Sold{background:#fdecea;color:var(--red)}.st.Not-Available{background:#eef2f8;color:#475569}
+.ad{display:block;margin-top:3px;font-size:11px;color:#94a3b8}
+.nx.od b{color:var(--red)}.nx.td b{color:var(--amber)}.nx.up b{color:var(--green)}
+.setf{border:1px dashed #9db4ff;background:#fff;color:var(--blue);border-radius:9px;padding:5px 11px;font-size:12px;font-weight:700}
+.ra{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.mini{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;display:inline-block}.mini.wa{background:#e9f9f1;border-color:#c5ecd9;color:#0a7a50}.mini.v{background:var(--ink);border-color:var(--ink);color:#fff}.mini.x{padding:7px 9px;color:var(--red)}
+.intp{display:inline-flex;align-items:center;gap:6px;background:#efe8ff;color:#5b34d6;font-weight:800;border-radius:99px;padding:3px 11px;font-size:12px}
+.due{background:#fdecea;color:var(--red);font-weight:700;font-size:12px;border-radius:99px;padding:3px 10px}
+.detail{background:#fafbff;border-top:1px solid var(--line);padding:6px 18px 18px 18px}
+.detail h4{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:12px 0 8px;display:flex;justify-content:space-between;align-items:center}
+.sub{display:grid;grid-template-columns:minmax(0,1.8fr) 120px 140px minmax(0,1.6fr) 190px;gap:12px;align-items:center;padding:11px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.pinfo{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--mut);font-size:12.5px;margin:2px 0 4px}.pinfo b{color:var(--ink)}
+.empty{text-align:center;padding:44px 16px;color:var(--mut)}.empty b{display:block;color:var(--ink);font-size:16px;margin:6px 0 4px}.empty .btn{margin-top:14px}
+.err{background:#fff4f2;border:1px solid #f3c1bb;color:#9b2c22;border-radius:12px;padding:12px 16px;margin-bottom:14px}
+.ov{position:fixed;inset:0;background:#0f172a80;backdrop-filter:blur(3px);z-index:60;display:grid;place-items:center;padding:16px}
+.modal{background:#fff;border-radius:18px;width:min(680px,100%);max-height:92vh;overflow:hidden;display:flex;flex-direction:column}
+.mh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:22px 24px 14px}.mh h2{font-size:19px;margin:0 0 3px}.mh p{color:var(--mut);margin:0;font-size:13px}
+.mtabs{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--line)}
+.mtabs button{border:0;background:none;padding:11px 14px;font-weight:600;font-size:13.5px;color:var(--mut);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.mtabs button:hover{color:var(--ink)}.mtabs button.on{color:var(--ink);border-bottom-color:var(--blue)}
+.mbody{padding:20px 24px;overflow:auto;flex:1;min-height:min(400px,54vh)}
+.mq{font-size:13px;font-weight:700;margin-bottom:10px}
+.sc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:6px}
+.sc{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 11px;font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:8px;text-align:left;transition:.12s}
+.sc::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c,#64748b);flex:none}
+.sc:hover{border-color:var(--c,#64748b)}.sc.on{background:var(--c,#64748b);border-color:var(--c,#64748b);color:#fff}.sc.on::before{background:#fff}
+.sc[data-s="Contacted"]{--c:#0b6aa2}.sc[data-s="Interested"]{--c:#5b34d6}.sc[data-s="Follow-up"]{--c:#b7791f}.sc[data-s="Site Visit"],.sc[data-s="Negotiation"]{--c:#d9650b}.sc[data-s="Closed"]{--c:#0f9d6a}.sc[data-s="Not Interested"]{--c:#e0483f}
+.fu{margin-top:18px;padding:16px;background:#f8faff;border:1px solid var(--line);border-radius:14px}.fu h3{font-size:13.5px;font-weight:700;margin-bottom:10px}
+.qk{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.qk button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:12.5px;font-weight:600}.qk button:hover{border-color:var(--blue);color:var(--blue)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fg label,.lbl{display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--mut)}.fg .full{grid-column:1/-1}
+.hint{font-size:11.5px;color:var(--green);font-weight:600;min-height:14px}
+.lbl{margin-top:14px}
+.mf{display:flex;gap:10px;justify-content:space-between;padding:14px 24px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+.lk{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.lk .code{display:inline-flex;gap:7px;align-items:center}.lk .code i{font-style:normal;font-weight:600;color:var(--mut);font-size:11.5px}.lk .code button{border:0;background:none;color:var(--red);font-weight:800;padding:0 0 0 2px}
+.lkadd{display:flex;gap:8px}
+.tl{display:grid;gap:10px;margin-top:14px}
+.tle{display:grid;grid-template-columns:12px 1fr;gap:10px}.tle:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--blue);margin-top:5px}
+.tle b{font-size:13px;font-weight:600;display:block}.tle span{font-size:11.5px;color:var(--mut)}
+.noteadd{display:grid;grid-template-columns:120px 1fr auto;gap:8px}
+.fgrp{margin:6px 0 10px}.fgrp h3{font-size:13px;margin:12px 0 8px}
+.fl{padding:13px 16px;display:grid;grid-template-columns:90px minmax(0,2fr) minmax(0,2fr) 110px 150px;gap:12px;align-items:center;border-top:1px solid var(--line)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:11px;font-weight:600;z-index:90}.toast.bad{background:var(--red)}
+.auth{min-height:70vh;display:grid;place-items:center}.auth .card{max-width:380px;text-align:center;padding:34px}.auth h2{font-size:22px;margin:10px 0 6px}.auth p{color:var(--mut);margin-bottom:18px}
+.sk{height:16px;border-radius:8px;background:linear-gradient(90deg,#eef2f8,#f8faff,#eef2f8);background-size:200% 100%;animation:sk 1.2s infinite}@keyframes sk{to{background-position:-200% 0}}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.row.head{display:none}.rp,.rc,.sub,.fl{grid-template-columns:minmax(0,1fr);gap:6px;padding:15px 14px}.ra{justify-content:flex-start;margin-top:4px}.sc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.top-in{padding:10px 14px 0;gap:10px;flex-wrap:wrap;height:auto}.nav{order:3;flex-basis:100%;padding-bottom:8px}.acts .btn:not(.p){display:none}main{padding:18px 14px 50px}.hero h1{font-size:23px}.fg{grid-template-columns:1fr}.noteadd{grid-template-columns:1fr}.mh,.mtabs,.mbody,.mf{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand"><span class="logo">JPC</span>Property Desk</div>
+  <nav class="nav" id="nav">
+    <button class="on" data-v="props">🏠 Properties</button>
+    <button data-v="contacts">👥 All Contacts</button>
+    <button data-v="follow">📅 Follow-ups <span class="pill hidden" id="navFu">0</span></button>
+  </nav>
+  <div class="acts">
+    <button class="btn" id="addC">＋ Add Contact</button>
+    <button class="btn p" id="addP">＋ Add Property</button>
+    <div class="menu"><button class="avatar" id="avBtn" aria-label="Account">?</button>
+      <div class="dd hidden" id="dd"><div class="em" id="ddEm"></div><a href="admin.html">⚙ Old Admin (import, matching, reviews)</a><button id="out">Sign out</button></div></div>
+  </div>
+</div></header>
+
+<main>
+  <div id="auth" class="auth hidden"><div class="card"><div class="logo" style="margin:auto;width:46px;height:46px;font-size:15px">JPC</div><h2>Property Desk</h2><p>Sign in with your admin Google account.</p><button class="btn p" id="gbtn" style="width:100%;justify-content:center">Continue with Google</button><p id="aerr" style="color:var(--red);margin:12px 0 0;font-size:13px"></p></div></div>
+
+  <div id="app" class="hidden">
+    <div id="err" class="err hidden"></div>
+    <section class="kpis" id="kpis"></section>
+
+    <!-- PROPERTIES -->
+    <section id="v_props">
+      <div class="hero"><div><h1>Properties</h1><p id="pSub">Har property ka apna code. Interested customers usi ke neeche dikhte hain.</p></div></div>
+      <section class="card tool">
+        <div class="search"><input id="pq" type="text" placeholder="Search code, area, type, owner, customer name or mobile…" aria-label="Search properties"></div>
+        <div class="filters"><label>Area<select id="pf_area"></select></label><label>Property type<select id="pf_type"></select></label><label>Availability<select id="pf_av"></select></label><label>Show<select id="pf_show"><option value="">All properties</option><option value="int">With interested customers</option><option value="due">Follow-up due</option><option value="none">No enquiry yet</option></select></label><button class="btn" id="pReset">Reset</button></div>
+      </section>
+      <section class="card list">
+        <div class="row head rp"><div>Code</div><div>Property</div><div>Price</div><div>Interested</div><div>Follow-ups</div><div style="text-align:right">Actions</div></div>
+        <div id="pRows"></div>
+      </section>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="v_contacts" class="hidden">
+      <div class="hero"><div><h1>All Contacts</h1><p id="cSub">Buyers, sellers aur brokers — sab ek jagah.</p></div></div>
+      <div class="chips" id="cChips"></div>
+      <section class="card tool">
+        <div class="search"><input id="cq" type="text" placeholder="Search name, mobile, area, property code, notes…" aria-label="Search contacts"></div>
+        <div class="filters"><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option></select></label><button class="btn" id="cReset">Reset</button></div>
+      </section>
+      <section class="card list">
+        <div class="row head rc"><div>Contact</div><div>Requirement / Property</div><div>Status</div><div>Next follow-up</div><div style="text-align:right">Actions</div></div>
+        <div id="cRows"></div>
+        <div id="cMore" class="hidden" style="text-align:center;padding:16px;border-top:1px solid var(--line);color:var(--mut)"></div>
+      </section>
+    </section>
+
+    <!-- FOLLOW-UPS -->
+    <section id="v_follow" class="hidden">
+      <div class="hero"><div><h1>Follow-ups</h1><p>Aaj kise call karna hai — overdue, aaj aur aane wale 7 din.</p></div></div>
+      <div id="fRows"></div>
+    </section>
+  </div>
+</main>
+
+<!-- CONTACT MODAL -->
+<div id="mo" class="ov hidden"><div class="modal" role="dialog" aria-modal="true">
+  <div class="mh"><div><h2 id="mt">Add contact</h2><p id="ms">Saved to your private CRM.</p></div><span class="st" id="mBadge">New</span></div>
+  <div class="mtabs" id="mtabs"><button data-t="status" class="on">Status &amp; follow-up</button><button data-t="details">Details</button><button data-t="conv" id="convTab">Conversation</button></div>
+  <div class="mbody">
+    <div id="tp_status">
+      <div class="mq">Abhi ye kahan hai?</div>
+      <div class="sc-grid" id="mChips"></div>
+      <div class="fu"><h3>Next follow-up</h3>
+        <div class="fg"><label>Date<input id="m_date" type="date"></label><label>Kya karna hai<input id="m_fnote" type="text" placeholder="e.g. Site visit confirm karna hai"></label></div>
+        <div class="qk" id="qk"><button type="button" data-qd="0">Today</button><button type="button" data-qd="1">Tomorrow</button><button type="button" data-qd="3">In 3 days</button><button type="button" data-qd="7">Next week</button><button type="button" data-qd="x">Clear</button></div></div>
+      <label class="lbl">Notes (private)<textarea id="m_notes" rows="3" placeholder="Is customer ke baare mein kuch yaad rakhna ho"></textarea></label>
+    </div>
+    <div id="tp_details" class="hidden">
+      <div class="fg">
+        <label>Kaun hai *<select id="m_type"><option value="customer">Customer / Buyer</option><option value="seller">Seller / Owner</option><option value="broker">Broker / Agent</option></select></label>
+        <label>Name *<input id="m_name" type="text"></label>
+        <label>Mobile<input id="m_mobile" type="tel" inputmode="tel"></label>
+        <label>Source<select id="m_src"><option>Phone</option><option>WhatsApp</option><option>Walk-in</option><option>Referral</option><option>Website</option><option>Facebook</option><option>Instagram</option><option>Google</option><option>Other</option></select></label>
+        <label>Area / Location chahiye<input id="m_area" type="text" placeholder="e.g. Jagatpura, Mansarovar"></label>
+        <label>Property type<select id="m_ptype"><option value="">—</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Shop</option><option>Land</option><option>Commercial</option><option>Other</option></select></label>
+        <label>Budget min<input id="m_bmin" type="text" placeholder="e.g. 40 lakh"><span class="hint" id="h_bmin"></span></label>
+        <label>Budget max<input id="m_bmax" type="text" placeholder="e.g. 1.2 cr"><span class="hint" id="h_bmax"></span></label>
+        <label class="full">Requirement details<textarea id="m_details" rows="2" placeholder="Size, facing, loan, kab tak lena hai…"></textarea></label>
+      </div>
+      <div id="m_linkbox">
+        <div class="lbl">Interested property (code likho — JPC-012)</div>
+        <div class="lk" id="m_lk"></div>
+        <div class="lkadd"><input id="m_code" type="text" list="codeList" placeholder="JPC-012 ya sirf 12"><button class="btn" type="button" id="m_codeAdd">Link</button></div>
+        <datalist id="codeList"></datalist>
+      </div>
+    </div>
+    <div id="tp_conv" class="hidden">
+      <div class="noteadd"><select id="n_kind"><option value="call">📞 Call</option><option value="whatsapp">💬 WhatsApp</option><option value="visit">🏠 Site visit</option><option value="note">📝 Note</option></select><input id="n_text" type="text" placeholder="Kya baat hui? Enter dabao"><button class="btn p" id="n_add" type="button">Add</button></div>
+      <div class="tl" id="tl"></div>
+    </div>
+  </div>
+  <div class="mf"><div style="display:flex;gap:8px"><button class="btn d hidden" id="m_del">Delete</button></div><div style="display:flex;gap:8px"><button class="btn" id="m_cancel">Cancel</button><button class="btn p" id="m_save">Save</button></div></div>
+</div></div>
+
+<!-- PROPERTY MODAL -->
+<div id="po" class="ov hidden"><div class="modal" role="dialog" aria-modal="true">
+  <div class="mh"><div><h2 id="pt">Add property</h2><p>Code automatic milega — customers is code se link honge.</p></div><span class="code" id="pCode">JPC-—</span></div>
+  <div class="mbody">
+    <div class="fg">
+      <label>Property type *<select id="p_type"><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Shop</option><option>Land</option><option>Commercial</option><option>Other</option></select></label>
+      <label>Size<input id="p_size" type="text" placeholder="e.g. 100 gaj, 2 BHK, 1200 sq ft"></label>
+      <label>Area / Colony *<input id="p_area" type="text" placeholder="e.g. Jagatpura"></label>
+      <label>City<input id="p_city" type="text" value="Jaipur"></label>
+      <label>Price (maang)<input id="p_price" type="text" placeholder="e.g. 85 lakh, 1.2 cr"><span class="hint" id="h_price"></span></label>
+      <label>Availability<select id="p_av"><option value="Available">🟢 Available</option><option value="Under Offer">🟡 Under Offer</option><option value="Sold">🔴 Sold</option><option value="Not Available">⚫ Not Available</option></select></label>
+      <label>Owner / Seller name *<input id="p_owner" type="text"></label>
+      <label>Owner mobile<input id="p_mobile" type="tel" inputmode="tel"></label>
+      <label class="full">Road / Facing<input id="p_road" type="text" placeholder="e.g. 30 ft road, East facing"></label>
+      <label class="full">Property details<textarea id="p_details" rows="2" placeholder="Documents, patta/registry, condition…"></textarea></label>
+      <label class="full">Private notes<textarea id="p_notes" rows="2" placeholder="Sirf aapke liye"></textarea></label>
+    </div>
+  </div>
+  <div class="mf"><div><button class="btn d hidden" id="p_del">Delete</button></div><div style="display:flex;gap:8px"><button class="btn" id="p_cancel">Cancel</button><button class="btn p" id="p_save">Save property</button></div></div>
+</div></div>
+
+<!-- QUICK ADD INTERESTED CUSTOMER (from a property) -->
+<div id="qo" class="ov hidden"><div class="modal" style="width:min(520px,100%)" role="dialog" aria-modal="true">
+  <div class="mh"><div><h2>Add interested customer</h2><p id="qSub"></p></div></div>
+  <div class="mbody" style="min-height:0">
+    <div class="fg">
+      <label class="full">Name *<input id="q_name" type="text" list="custList" autocomplete="off" placeholder="Naya naam likho ya purane customer ko chuno"></label>
+      <datalist id="custList"></datalist>
+      <label>Mobile<input id="q_mobile" type="tel" inputmode="tel"></label>
+      <label>Follow-up date<input id="q_date" type="date"></label>
+      <label class="full">Kya baat hui<input id="q_note" type="text" placeholder="e.g. 85 lakh mein ready, Sunday visit chahiye"></label>
+    </div>
+    <p class="hint" id="q_hint" style="margin-top:10px"></p>
+  </div>
+  <div class="mf"><span></span><div style="display:flex;gap:8px"><button class="btn" id="q_cancel">Cancel</button><button class="btn p" id="q_save">Link customer</button></div></div>
+</div></div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import{getFirestore,collection,addDoc,doc,setDoc,updateDoc,onSnapshot,serverTimestamp,deleteField,arrayUnion}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+/* Same Firebase project + same collection (crmContacts) as admin.html — no data migration needed */
+const app=initializeApp({apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"});
+const ADMIN_EMAILS=["saif.anwar1618@gmail.com"];
+const auth=getAuth(app),db=getFirestore(app),COL="crmContacts";
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const clean=v=>String(v??"").replace(/\s+/g," ").trim();
+const ini=n=>clean(n||"?").split(" ").map(x=>x[0]).join("").slice(0,2).toUpperCase()||"?";
+const last10=m=>String(m||"").replace(/\D/g,"").slice(-10);
+const STATUSES=["New","Contacted","Interested","Site Visit","Negotiation","Follow-up","Closed","Not Interested"];
+const TERM=["Closed","Not Interested"];
+const TYPE_LBL={customer:"Buyer",seller:"Seller",broker:"Broker"};
+const cls=s=>String(s||"").replace(/\s+/g,"-");
+const iso=(d=new Date())=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const addDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const fmtMs=ms=>{if(!ms)return"";const d=new Date(ms),M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return d.getDate()+" "+M[d.getMonth()]+(d.getFullYear()!==new Date().getFullYear()?" "+d.getFullYear():"")};
+const fmtTime=ms=>{const d=new Date(ms);return d.toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"})};
+const msOf=v=>{const m=v?.toMillis?v.toMillis():(v?.seconds?v.seconds*1000:(typeof v==="number"?v:0));return m>1e11?m:0};
+const fmtFu=s=>{if(!s)return"";const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString("en-GB",{day:"2-digit",month:"short"})};
+function inr(n){n=Number(n);if(!Number.isFinite(n)||n<=0)return"";const r=v=>String(Math.round(v*100)/100);if(n>=1e7)return"₹"+r(n/1e7)+" Cr";if(n>=1e5)return"₹"+r(n/1e5)+" L";return"₹"+n.toLocaleString("en-IN")}
+function parseINR(t){t=String(t||"").toLowerCase().replace(/,/g,"").trim();if(!t)return null;const m=t.match(/(\d+(?:\.\d+)?)\s*(cr|crore|karod|l|lac|lakh|lakhs|k|thousand|hazar)?/);if(!m)return null;let n=parseFloat(m[1]);const u=m[2]||"";if(/^(cr|crore|karod)/.test(u))n*=1e7;else if(/^(l|lac|lakh)/.test(u))n*=1e5;else if(/^(k|thousand|hazar)/.test(u))n*=1e3;return Math.round(n)}
+function budgetText(r){const a=inr(r.budgetMin),b=inr(r.budgetMax);if(a&&b)return a===b?a:a+" – "+b;if(b)return"Up to "+b;if(a)return"From "+a;return"—"}
+function toast(m,bad){const t=$("toast");t.textContent=m;t.className="toast"+(bad?" bad":"");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add("hidden"),2800)}
+
+/* ---------- data ---------- */
+let user,unsub,all=[],recs=[],loaded=false,view="props",cChip="",openProp="",cShown=60,editId="",pEditId="",qProp=null;
+let mStatus="New",mLinks=[];
+const isAdmin=u=>u?.email&&ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(u.email.toLowerCase());
+const codeNum=c=>{const m=String(c||"").match(/(\d+)$/);return m?Number(m[1]):0};
+const fmtCode=n=>"JPC-"+String(n).padStart(3,"0");
+const nextCode=()=>fmtCode(Math.max(0,...all.map(r=>codeNum(r.code)))+1);
+const props=()=>recs.filter(r=>r.type==="seller");
+const propById=id=>recs.find(r=>r.id===id);
+const propByCode=c=>{const n=codeNum(c);return n?props().find(p=>codeNum(p.code)===n):null};
+const interestsOf=r=>Array.isArray(r.interests)?r.interests.filter(i=>i&&i.id):[];
+const buyersOf=p=>recs.filter(r=>r.type==="customer"&&interestsOf(r).some(i=>i.id===p.id));
+const lbl=p=>`${p.propertyType||"Property"}${p.size?" "+clean(p.size):""} • ${clean(String(p.area||"Jaipur").split(",")[0])}`;
+const mkInt=p=>({id:p.id,code:p.code||"",label:lbl(p),at:Date.now()});
+const tlEntry=(text,kind="note")=>({at:Date.now(),kind,text});
+const KIND={call:"📞",whatsapp:"💬",visit:"🏠",note:"📝",status:"🔖",link:"🔗"};
+const lastNote=r=>{const t=Array.isArray(r.timeline)?r.timeline.filter(x=>x&&x.text&&(x.kind==="call"||x.kind==="whatsapp"||x.kind==="visit"||x.kind==="note")).sort((a,b)=>(b.at||0)-(a.at||0))[0]:null;return t?t.text:(clean(r.followUpNote)||"")};
+const fuState=r=>{if(TERM.includes(r.status)||!r.followUpDate)return"none";const t=iso();return r.followUpDate<t?"od":r.followUpDate===t?"td":"up"};
+const waLink=(r,text)=>{let n=String(r.whatsapp||r.mobile||"").replace(/\D/g,"");if(n.length===10)n="91"+n;return n.length>=11?"https://wa.me/"+n+(text?"?text="+encodeURIComponent(text):""):""};
+
+let backfilling=false;
+async function backfillCodes(){
+  if(backfilling)return;const miss=recs.filter(r=>r.type==="seller"&&!r.code);if(!miss.length)return;backfilling=true;
+  try{miss.sort((a,b)=>msOf(a.createdAt)-msOf(b.createdAt));let n=Math.max(0,...all.map(r=>codeNum(r.code)))+1;
+    for(const r of miss){const code=fmtCode(n++);await updateDoc(doc(db,COL,r.id),{code});if(r.publicVisible){try{await setDoc(doc(db,"publicRequirements",r.id),{code},{merge:true})}catch(_){}}}
+  }catch(e){console.warn("backfill",e)}finally{backfilling=false}
+}
+
+function listen(){
+  if(unsub)unsub();
+  unsub=onSnapshot(collection(db,COL),s=>{
+    all=s.docs.map(d=>({id:d.id,...d.data({serverTimestamps:"estimate"})}));
+    recs=all.filter(r=>!r.deletedAt);loaded=true;$("err").classList.add("hidden");
+    refreshAll();backfillCodes();
+  },e=>{loaded=true;$("err").textContent="Data load nahi hua: "+(e.code||e.message);$("err").classList.remove("hidden");refreshAll()});
+}
+onAuthStateChanged(auth,u=>{user=u;
+  if(!u){$("app").classList.add("hidden");$("auth").classList.remove("hidden");if(unsub)unsub();return}
+  if(!isAdmin(u)){$("aerr").textContent="Access denied: "+u.email;$("app").classList.add("hidden");$("auth").classList.remove("hidden");signOut(auth);return}
+  $("aerr").textContent="";$("auth").classList.add("hidden");$("app").classList.remove("hidden");
+  $("avBtn").textContent=ini(u.displayName||u.email);$("ddEm").textContent=u.email;refreshAll();listen()});
+$("gbtn").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("aerr").textContent=e.message}};
+$("out").onclick=()=>signOut(auth);
+$("avBtn").onclick=e=>{e.stopPropagation();$("dd").classList.toggle("hidden")};document.addEventListener("click",()=>$("dd").classList.add("hidden"));
+
+/* ---------- render helpers ---------- */
+function fillSel(id,label,vals,keep=true){const s=$(id),cur=keep?s.value:"";s.innerHTML=`<option value="">${label}</option>`+[...new Set(vals.map(clean).filter(Boolean))].sort().map(v=>`<option>${esc(v)}</option>`).join("");s.value=[...s.options].some(o=>o.value===cur)?cur:""}
+const areaOf=r=>clean(String(r.area||"").split(",")[0]);
+function refreshAll(){kpis();opts();renderProps();renderContacts();renderFollow();datalists()}
+function kpis(){
+  const P=props(),linked=new Set();P.forEach(p=>buyersOf(p).forEach(c=>linked.add(c.id)));
+  const t=iso(),due=recs.filter(r=>fuState(r)==="td").length,od=recs.filter(r=>fuState(r)==="od").length;
+  $("kpis").innerHTML=[["",P.length,"Properties"],["g",linked.size,"Interested customers"],["a",due,"Follow-ups today"],["w",od,"Overdue follow-ups"]].map(k=>`<div class="card kpi ${k[0]}"><b>${k[1]}</b><span>${k[2]}</span></div>`).join("");
+  const n=due+od;$("navFu").textContent=n;$("navFu").classList.toggle("hidden",!n);
+}
+function opts(){
+  fillSel("pf_area","All areas",props().map(areaOf));fillSel("pf_type","All types",props().map(p=>p.propertyType));fillSel("pf_av","Any availability",props().map(p=>p.availability||"Available"));
+  fillSel("cf_area","All areas",recs.map(areaOf));fillSel("cf_status","All statuses",[...STATUSES,...recs.map(r=>r.status)]);fillSel("cf_src","All sources",recs.map(r=>r.source));
+}
+function datalists(){
+  $("codeList").innerHTML=props().sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.code||"")}">${esc(lbl(p))}</option>`).join("");
+  $("custList").innerHTML=recs.filter(r=>r.type==="customer").map(c=>`<option value="${esc(c.name||"")}">${esc(c.mobile||"")}</option>`).join("");
+}
+const skRows=cls=>Array(5).fill(`<div class="row ${cls}"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div></div></div>`).join("");
+
+/* ---------- PROPERTIES view ---------- */
+function renderProps(){
+  if(!loaded){$("pRows").innerHTML=skRows("rp");return}
+  const q=$("pq").value.trim().toLowerCase(),F={a:$("pf_area").value,t:$("pf_type").value,v:$("pf_av").value,s:$("pf_show").value};
+  const rows=props().map(p=>({p,c:buyersOf(p)})).filter(({p,c})=>{
+    if(F.a&&areaOf(p)!==F.a)return false;if(F.t&&clean(p.propertyType)!==F.t)return false;if(F.v&&(p.availability||"Available")!==F.v)return false;
+    const due=c.filter(x=>["td","od"].includes(fuState(x))).length;
+    if(F.s==="int"&&!c.length)return false;if(F.s==="due"&&!due)return false;if(F.s==="none"&&c.length)return false;
+    if(q&&![p.code,p.area,p.propertyType,p.size,p.name,p.mobile,p.details,...c.map(x=>x.name+" "+x.mobile)].map(clean).join(" ").toLowerCase().includes(q))return false;return true})
+    .sort((a,b)=>codeNum(b.p.code)-codeNum(a.p.code));
+  $("pSub").textContent=`${rows.length} of ${props().length} properties`;
+  if(!rows.length){$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏠</div><b>${props().length?"Koi property match nahi hui":"Abhi koi property nahi hai"}</b>${props().length?"Search ya filter badal ke dekho.":"Pehli property add karo — usse automatic code mil jayega."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
+  $("pRows").innerHTML=rows.map(({p,c})=>{
+    const d=c.filter(x=>["td","od"].includes(fuState(x))).length,open=openProp===p.id,av=p.availability||"Available";
+    return`<div class="row rp hv" data-pid="${esc(p.id)}"><div><span class="code">${esc(p.code||"—")}</span></div>
+      <div class="who"><div class="av h">🏠</div><div style="min-width:0"><b>${esc(lbl(p))}</b><span>${esc(p.name||"Owner —")}${p.mobile?" · "+esc(p.mobile):""}</span></div></div>
+      <div class="cell"><b>${esc(budgetText(p))}</b><span><span class="st ${cls(av)}" style="padding:1px 8px;font-size:11px">${esc(av)}</span></span></div>
+      <div>${c.length?`<span class="intp">👥 ${c.length}</span>`:`<span style="color:var(--mut)">—</span>`}</div>
+      <div>${d?`<span class="due">${d} due</span>`:`<span style="color:var(--mut)">—</span>`}</div>
+      <div class="ra"><button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini v" data-act="pEdit" data-id="${esc(p.id)}">Edit</button></div></div>
+      ${open?`<div class="detail">${propDetail(p,c)}</div>`:""}`}).join("");
+}
+function propDetail(p,c){
+  const info=[["Owner",p.name],["Mobile",p.mobile],["Road/Facing",p.roadFacing],["City",p.city],["Details",p.details]].filter(x=>clean(x[1])).map(x=>`<span>${x[0]}: <b>${esc(x[1])}</b></span>`).join("");
+  c=[...c].sort((a,b)=>(a.followUpDate||"9999").localeCompare(b.followUpDate||"9999"));
+  return`<div class="pinfo" style="margin-top:12px">${info||"<span>Aur details nahi bhari.</span>"}</div>
+   <h4><span>Is property ke interested customers (${c.length})</span><button class="btn p" style="padding:6px 12px" data-act="pLink" data-id="${esc(p.id)}">＋ Add customer</button></h4>
+   ${c.length?c.map(x=>subRow(x,p)).join(""):`<div class="empty" style="padding:22px">Abhi koi customer is property ke liye link nahi hua.</div>`}`;
+}
+function fuCell(r){const s=fuState(r);if(s==="none")return`<button class="setf" data-act="cEdit" data-id="${esc(r.id)}">+ Set follow-up</button>`;
+  return`<div class="cell nx ${s}"><b>${s==="td"?"Today":fmtFu(r.followUpDate)}${s==="od"?" · overdue":""}</b><span>${esc(r.followUpNote||"—")}</span></div>`}
+function subRow(x,p){const wa=waLink(x);
+  return`<div class="sub"><div class="who"><div class="av">${esc(ini(x.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(x.name||"Unnamed")}</b><span>${esc(x.mobile||"No mobile")}${x.source?" · "+esc(x.source):""}</span></div></div>
+   <div><span class="st ${cls(x.status||"New")}">${esc(x.status||"New")}</span></div>${fuCell(x)}
+   <div class="cell"><b>${esc(budgetText(x))}</b><span class="lastn">${esc(lastNote(x)||"Koi note nahi")}</span></div>
+   <div class="ra">${wa?`<a class="mini wa" target="_blank" rel="noopener" href="${wa}">WhatsApp</a>`:""}${x.mobile?`<a class="mini" href="tel:${esc(x.mobile)}">Call</a>`:""}<button class="mini v" data-act="cEdit" data-id="${esc(x.id)}">Open</button><button class="mini x" title="Unlink" data-act="unlink" data-id="${esc(x.id)}" data-pid="${esc(p.id)}">✕</button></div></div>`}
+
+/* ---------- CONTACTS view ---------- */
+function cList(){
+  const q=$("cq").value.trim().toLowerCase().replace(/\s+/g," "),F={a:$("cf_area").value,s:$("cf_status").value,r:$("cf_src").value,o:$("cf_sort").value};
+  let v=recs.filter(r=>{
+    if(cChip==="customer"||cChip==="seller"||cChip==="broker"){if(r.type!==cChip)return false}else if(cChip==="od"){if(fuState(r)!=="od")return false}else if(cChip==="td"){if(fuState(r)!=="td")return false}
+    if(F.a&&areaOf(r)!==F.a)return false;if(F.s&&(r.status||"New")!==F.s)return false;if(F.r&&clean(r.source)!==F.r)return false;
+    if(q&&![r.name,r.mobile,r.area,r.code,r.propertyType,r.details,r.notes,r.source,r.status,...interestsOf(r).map(i=>i.code+" "+i.label),lastNote(r)].map(clean).join(" ").toLowerCase().includes(q))return false;return true});
+  const ts=r=>msOf(r.updatedAt)||msOf(r.createdAt);
+  if(F.o==="follow")v.sort((a,b)=>(a.followUpDate||"9999").localeCompare(b.followUpDate||"9999"));else if(F.o==="name")v.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));else v.sort((a,b)=>ts(b)-ts(a));
+  return v}
+function renderContacts(){
+  const cnt=t=>recs.filter(r=>r.type===t).length,od=recs.filter(r=>fuState(r)==="od").length,td=recs.filter(r=>fuState(r)==="td").length;
+  const C=[["","All",recs.length],["customer","🧑 Buyers",cnt("customer")],["seller","🏠 Sellers",cnt("seller")],["broker","🤝 Brokers",cnt("broker")],["td","📅 Today",td],["od","⚠ Overdue",od]];
+  $("cChips").innerHTML=C.map(c=>`<button class="chip${cChip===c[0]?" on":""}" data-chip="${c[0]}">${c[1]} <b>${c[2]}</b></button>`).join("");
+  if(!loaded){$("cRows").innerHTML=skRows("rc");return}
+  const v=cList();$("cSub").textContent=`${v.length} of ${recs.length} contacts`;
+  const page=v.slice(0,cShown);
+  $("cRows").innerHTML=page.length?page.map(cRow).join(""):`<div class="empty"><div style="font-size:30px">🔎</div><b>Koi contact nahi mila</b>Search ya filter badal ke dekho.<br><button class="btn p" data-act="addC">＋ Add Contact</button></div>`;
+  const m=$("cMore");m.classList.toggle("hidden",v.length<=cShown);m.innerHTML=`Showing ${page.length} of ${v.length} · <button class="btn" data-act="more">Load more</button>`;
+}
+function cRow(r){
+  const nm=clean(r.name)||"Unnamed",wa=waLink(r),ints=interestsOf(r),created=msOf(r.createdAt);
+  const req=r.type==="seller"?`<b>${esc(r.code||"")} · ${esc(lbl(r))}</b><span>${esc(budgetText(r))}</span>`
+    :`<b>${esc([r.propertyType,areaOf(r)].filter(Boolean).join(" • ")||"No requirement noted")}</b><span>${esc(budgetText(r))}</span>`;
+  const chips=ints.length?`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">${ints.map(i=>`<button class="code" data-act="goProp" data-id="${esc(i.id)}" title="${esc(i.label||"")}">${esc(i.code||"Property")}</button>`).join("")}</div>`:"";
+  const ln=lastNote(r);
+  return`<div class="row rc hv" data-cid="${esc(r.id)}"><div class="who"><div class="av">${esc(ini(nm))}</div><div style="min-width:0"><b>${esc(nm)}<span class="tag ${r.type}">${TYPE_LBL[r.type]||"Contact"}</span></b><span>${esc(r.mobile||"No mobile")}${r.source?" · "+esc(r.source):""}</span></div></div>
+   <div class="cell">${req}${chips}${ln?`<span class="lastn" style="margin-top:3px">“${esc(ln)}”</span>`:""}</div>
+   <div><span class="st ${cls(r.status||"New")}">${esc(r.status||"New")}</span><small class="ad">${created?"Added "+fmtMs(created):"—"}</small></div>
+   <div>${fuCell(r)}</div>
+   <div class="ra">${wa?`<a class="mini wa" target="_blank" rel="noopener" href="${wa}">WhatsApp</a>`:""}<button class="mini v" data-act="cEdit" data-id="${esc(r.id)}">Open</button></div></div>`}
+
+/* ---------- FOLLOW-UPS view ---------- */
+function renderFollow(){
+  if(!loaded){$("fRows").innerHTML="";return}
+  const t=iso(),w=addDays(7),act=recs.filter(r=>r.followUpDate&&!TERM.includes(r.status));
+  const G=[["⚠ Overdue",act.filter(r=>r.followUpDate<t).sort((a,b)=>a.followUpDate.localeCompare(b.followUpDate))],["📅 Today",act.filter(r=>r.followUpDate===t)],["⏭ Next 7 days",act.filter(r=>r.followUpDate>t&&r.followUpDate<=w).sort((a,b)=>a.followUpDate.localeCompare(b.followUpDate))]];
+  if(!G.some(g=>g[1].length)){$("fRows").innerHTML=`<div class="card empty"><div style="font-size:30px">🎉</div><b>Koi follow-up pending nahi</b>Customer ya seller ke andar jaakar follow-up date set karo.</div>`;return}
+  $("fRows").innerHTML=G.filter(g=>g[1].length).map(g=>`<div class="fgrp"><h3>${g[0]} <span style="color:var(--mut);font-weight:600">(${g[1].length})</span></h3><section class="card list">${g[1].map(r=>{
+    const ints=interestsOf(r),wa=waLink(r);
+    return`<div class="fl"><div><span class="nx ${fuState(r)}"><b style="color:inherit">${fmtFu(r.followUpDate)}</b></span></div>
+     <div class="who"><div class="av">${esc(ini(r.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(r.name||"Unnamed")}<span class="tag ${r.type}">${TYPE_LBL[r.type]||""}</span></b><span>${esc(r.mobile||"")}</span></div></div>
+     <div class="cell"><b>${esc(r.followUpNote||"Follow-up")}</b><span class="lastn">${esc(ints.map(i=>i.code).join(", ")||lastNote(r)||"")}</span></div>
+     <div><span class="st ${cls(r.status||"New")}">${esc(r.status||"New")}</span></div>
+     <div class="ra">${wa?`<a class="mini wa" target="_blank" rel="noopener" href="${wa}">WhatsApp</a>`:""}<button class="mini" data-act="fDone" data-id="${esc(r.id)}">✓ Done</button><button class="mini v" data-act="cEdit" data-id="${esc(r.id)}">Open</button></div></div>`}).join("")}</section></div>`).join("");
+}
+
+/* ---------- CONTACT MODAL ---------- */
+function setTab(t){document.querySelectorAll("#mtabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));["status","details","conv"].forEach(k=>$("tp_"+k).classList.toggle("hidden",k!==t))}
+function setStatus(s){mStatus=s||"New";document.querySelectorAll("#mChips .sc").forEach(b=>b.classList.toggle("on",b.dataset.s===mStatus));const b=$("mBadge");b.textContent=mStatus;b.className="st "+cls(mStatus)}
+$("mChips").innerHTML=STATUSES.map(s=>`<button type="button" class="sc" data-s="${s}">${s}</button>`).join("");
+$("mChips").onclick=e=>{const b=e.target.closest(".sc");if(b)setStatus(b.dataset.s)};
+$("mtabs").onclick=e=>{const b=e.target.closest("[data-t]");if(b)setTab(b.dataset.t)};
+$("qk").onclick=e=>{const b=e.target.closest("[data-qd]");if(!b)return;$("m_date").value=b.dataset.qd==="x"?"":addDays(Number(b.dataset.qd))};
+function drawLinks(){$("m_lk").innerHTML=mLinks.length?mLinks.map((i,k)=>`<span class="code">${esc(i.code||"—")} <i>${esc(i.label||"")}</i><button type="button" data-rm="${k}" aria-label="Remove">×</button></span>`).join(""):`<span style="color:var(--mut);font-size:12.5px">Koi property link nahi.</span>`}
+$("m_lk").onclick=e=>{const b=e.target.closest("[data-rm]");if(b){mLinks.splice(Number(b.dataset.rm),1);drawLinks()}};
+function addLinkByCode(){const raw=clean($("m_code").value);if(!raw)return;const p=propByCode(raw);if(!p)return toast("Is code ki property nahi mili: "+raw,true);if(mLinks.some(i=>i.id===p.id)){$("m_code").value="";return}mLinks.push(mkInt(p));$("m_code").value="";drawLinks();if(mStatus==="New")setStatus("Interested")}
+$("m_codeAdd").onclick=addLinkByCode;$("m_code").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addLinkByCode()}});
+function typeUI(){const c=$("m_type").value==="customer";$("m_linkbox").classList.toggle("hidden",!c);$("convTab").classList.toggle("hidden",!editId)}
+$("m_type").onchange=typeUI;
+const hint=(i,h)=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value);$(h).textContent=n?"= "+inr(n):""});
+hint("m_bmin","h_bmin");hint("m_bmax","h_bmax");hint("p_price","h_price");
+function drawTL(r){const t=(Array.isArray(r?.timeline)?r.timeline:[]).filter(x=>x&&x.text).sort((a,b)=>(b.at||0)-(a.at||0));
+  $("tl").innerHTML=t.length?t.map(x=>`<div class="tle"><div><b>${KIND[x.kind]||"📝"} ${esc(x.text)}</b><span>${fmtMs(x.at)} · ${fmtTime(x.at)}</span></div></div>`).join(""):`<div class="empty" style="padding:24px">Abhi koi baat-cheet record nahi hui.</div>`}
+function openC(id,preType,preLink){
+  editId=id||"";const r=id?recs.find(x=>x.id===id)||{}:{};
+  $("mt").textContent=id?clean(r.name)||"Contact":"Add contact";$("ms").textContent=id?[TYPE_LBL[r.type],r.mobile,r.code].filter(Boolean).join(" · "):"Saved to your private CRM.";
+  $("m_type").value=r.type||preType||"customer";$("m_name").value=r.name||"";$("m_mobile").value=r.mobile||"";$("m_src").value=r.source||"Phone";
+  $("m_area").value=r.area||"";$("m_ptype").value=r.propertyType||"";$("m_bmin").value=r.budgetMin?inr(r.budgetMin).replace("₹",""):"";$("m_bmax").value=r.budgetMax?inr(r.budgetMax).replace("₹",""):"";
+  $("h_bmin").textContent=$("h_bmax").textContent="";$("m_details").value=r.details||"";$("m_notes").value=r.notes||"";$("m_date").value=r.followUpDate||"";$("m_fnote").value=r.followUpNote||"";
+  mLinks=interestsOf(r).map(i=>({...i}));if(preLink&&!mLinks.some(i=>i.id===preLink.id))mLinks.push(mkInt(preLink));
+  setStatus(r.status||"New");drawLinks();drawTL(r);typeUI();$("m_del").classList.toggle("hidden",!id);$("n_text").value="";
+  $("mo").classList.remove("hidden");setTab(id?"status":"details");if(!id)$("m_name").focus()}
+const closeC=()=>$("mo").classList.add("hidden");
+async function saveC(){
+  const name=clean($("m_name").value);if(!name){setTab("details");$("m_name").focus();return toast("Name zaroori hai",true)}
+  const type=$("m_type").value,mobile=clean($("m_mobile").value),m10=last10(mobile);
+  if(m10&&recs.some(c=>c.id!==editId&&last10(c.mobile)===m10&&c.type===type))return toast("Is mobile ka contact pehle se hai",true);
+  const d={type,name,mobile,whatsapp:mobile,source:$("m_src").value,status:mStatus,area:clean($("m_area").value),propertyType:$("m_ptype").value,
+    budgetMin:parseINR($("m_bmin").value),budgetMax:parseINR($("m_bmax").value),details:clean($("m_details").value),notes:$("m_notes").value.trim(),
+    followUpDate:$("m_date").value||"",followUpNote:clean($("m_fnote").value),updatedAt:serverTimestamp()};
+  if(!editId)d.city="Jaipur";
+  if(type==="customer"){d.interests=mLinks;d.interestCode=mLinks[0]?.code||""}
+  try{
+    if(editId){const old=recs.find(x=>x.id===editId)||{};const tl=[];
+      if(old.status&&old.status!==mStatus)tl.push(tlEntry("Status: "+old.status+" → "+mStatus,"status"));
+      if(type==="customer"){const o=new Set(interestsOf(old).map(i=>i.id));mLinks.filter(i=>!o.has(i.id)).forEach(i=>tl.push(tlEntry("Linked to "+i.code+" "+i.label,"link")))}
+      if(tl.length)d.timeline=arrayUnion(...tl);await updateDoc(doc(db,COL,editId),d)}
+    else{d.createdAt=serverTimestamp();d.publicVisible=false;d.publicDisplayName=name;d.images=[];
+      d.timeline=[tlEntry(type==="customer"&&mLinks.length?"Enquiry for "+mLinks.map(i=>i.code).join(", "):"Contact added","note")];await addDoc(collection(db,COL),d)}
+    closeC();toast(editId?"Saved":"Contact add ho gaya")}catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}}
+$("m_save").onclick=saveC;$("m_cancel").onclick=closeC;
+$("m_del").onclick=()=>softDelete(editId,closeC);
+async function softDelete(id,after){const r=recs.find(x=>x.id===id);if(!r||!confirm(`"${r.name||"Record"}" ko Trash me bhejna hai? (Old admin ke Trash se restore ho sakta hai)`))return;
+  try{await updateDoc(doc(db,COL,id),{deletedAt:serverTimestamp(),trashedWasPublic:!!r.publicVisible,publicVisible:false,updatedAt:serverTimestamp()});after&&after();toast("Trash me bhej diya")}catch(e){toast(e.message,true)}}
+async function addNote(){const text=clean($("n_text").value);if(!text||!editId)return;
+  try{await updateDoc(doc(db,COL,editId),{timeline:arrayUnion(tlEntry(text,$("n_kind").value)),updatedAt:serverTimestamp()});$("n_text").value="";drawTL(recs.find(x=>x.id===editId))}catch(e){toast(e.message,true)}}
+$("n_add").onclick=addNote;$("n_text").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addNote()}});
+
+/* ---------- PROPERTY MODAL ---------- */
+function openP(id){
+  pEditId=id||"";const p=id?propById(id)||{}:{};
+  $("pt").textContent=id?"Edit property":"Add property";$("pCode").textContent=id?(p.code||"JPC-—"):nextCode()+" (auto)";
+  $("p_type").value=p.propertyType||"Plot";$("p_size").value=p.size||"";$("p_area").value=p.area||"";$("p_city").value=p.city||"Jaipur";
+  $("p_price").value=p.budgetMax?inr(p.budgetMax).replace("₹",""):"";$("h_price").textContent="";$("p_av").value=p.availability||"Available";
+  $("p_owner").value=p.name||"";$("p_mobile").value=p.mobile||"";$("p_road").value=p.roadFacing||"";$("p_details").value=p.details||"";$("p_notes").value=p.notes||"";
+  $("p_del").classList.toggle("hidden",!id);$("po").classList.remove("hidden");$("p_area").focus()}
+const closeP=()=>$("po").classList.add("hidden");
+async function saveP(){
+  const area=clean($("p_area").value),owner=clean($("p_owner").value);
+  if(!area)return toast("Area likho",true);if(!owner)return toast("Owner ka naam likho",true);
+  const price=parseINR($("p_price").value),mobile=clean($("p_mobile").value);
+  const d={type:"seller",name:owner,mobile,whatsapp:mobile,propertyType:$("p_type").value,size:clean($("p_size").value),area,city:clean($("p_city").value)||"Jaipur",
+    budgetMin:price,budgetMax:price,availability:$("p_av").value,roadFacing:clean($("p_road").value),details:clean($("p_details").value),notes:$("p_notes").value.trim(),updatedAt:serverTimestamp()};
+  try{
+    if(pEditId){const old=propById(pEditId)||{};await updateDoc(doc(db,COL,pEditId),d);
+      if(old.publicVisible){try{await setDoc(doc(db,"publicRequirements",pEditId),{area:d.area,city:d.city,propertyType:d.propertyType,size:d.size,budgetMin:d.budgetMin,budgetMax:d.budgetMax,details:d.details,availability:d.availability,updatedAt:serverTimestamp()},{merge:true})}catch(_){}}}
+    else{d.code=nextCode();d.status="New";d.source="Property Desk";d.publicVisible=false;d.publicDisplayName="Property Available";d.images=[];d.createdAt=serverTimestamp();
+      d.timeline=[tlEntry("Property listed as "+d.code,"note")];const ref=await addDoc(collection(db,COL),d);openProp=ref.id;toast("Property add hui — code "+d.code)}
+    closeP();if(pEditId)toast("Property save ho gayi")}catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}}
+$("p_save").onclick=saveP;$("p_cancel").onclick=closeP;$("p_del").onclick=()=>softDelete(pEditId,closeP);
+
+/* ---------- QUICK ADD INTERESTED CUSTOMER ---------- */
+function openQ(pid){qProp=propById(pid);if(!qProp)return;$("qSub").textContent=(qProp.code||"")+" · "+lbl(qProp);
+  ["q_name","q_mobile","q_note"].forEach(i=>$(i).value="");$("q_date").value=addDays(1);$("q_hint").textContent="";$("qo").classList.remove("hidden");$("q_name").focus()}
+const closeQ=()=>$("qo").classList.add("hidden");
+function matchCust(){const m10=last10($("q_mobile").value),n=clean($("q_name").value).toLowerCase();
+  return recs.find(c=>c.type==="customer"&&((m10.length===10&&last10(c.mobile)===m10)||(!m10&&n&&clean(c.name).toLowerCase()===n)))}
+$("q_name").addEventListener("input",()=>{const c=recs.find(x=>x.type==="customer"&&clean(x.name).toLowerCase()===clean($("q_name").value).toLowerCase());if(c&&c.mobile&&!$("q_mobile").value)$("q_mobile").value=c.mobile;const m=matchCust();$("q_hint").textContent=m?"✓ Ye purana customer hai — naya duplicate nahi banega, sirf is property se link hoga.":""});
+$("q_mobile").addEventListener("input",()=>{const m=matchCust();$("q_hint").textContent=m?"✓ Is mobile ka customer pehle se hai — sirf link hoga ("+(m.name||"")+").":""});
+async function saveQ(){
+  const name=clean($("q_name").value);if(!name||!qProp)return toast("Customer ka naam likho",true);
+  const mobile=clean($("q_mobile").value),note=clean($("q_note").value),fd=$("q_date").value,ex=matchCust(),it=mkInt(qProp);
+  try{
+    if(ex){if(interestsOf(ex).some(i=>i.id===qProp.id)){closeQ();return toast("Ye customer pehle se linked hai")}
+      const nx=[...interestsOf(ex),it];const u={interests:nx,interestCode:nx[0].code,updatedAt:serverTimestamp(),timeline:arrayUnion(tlEntry("Linked to "+it.code+" "+it.label,"link"),...(note?[tlEntry(note,"call")]:[]))};
+      if(!ex.status||ex.status==="New")u.status="Interested";if(fd){u.followUpDate=fd;u.followUpNote=note||"Follow-up"}await updateDoc(doc(db,COL,ex.id),u)}
+    else await addDoc(collection(db,COL),{type:"customer",name,mobile,whatsapp:mobile,source:"Property Desk",status:"Interested",area:qProp.area||"",city:qProp.city||"Jaipur",propertyType:qProp.propertyType||"",budgetMin:null,budgetMax:null,details:"",notes:"",
+      followUpDate:fd||"",followUpNote:note||(fd?"Follow-up":""),interests:[it],interestCode:it.code,timeline:[tlEntry("Enquiry for "+it.code+" "+it.label,"link"),...(note?[tlEntry(note,"call")]:[])],publicVisible:false,publicDisplayName:name,images:[],createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+    closeQ();openProp=qProp.id;toast("Customer "+qProp.code+" ke neeche add ho gaya")}catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}}
+$("q_save").onclick=saveQ;$("q_cancel").onclick=closeQ;
+
+/* ---------- global events ---------- */
+function setView(v){view=v;document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));["props","contacts","follow"].forEach(k=>$("v_"+k).classList.toggle("hidden",k!==v))}
+$("nav").onclick=e=>{const b=e.target.closest("[data-v]");if(b)setView(b.dataset.v)};
+$("addC").onclick=()=>openC();$("addP").onclick=()=>openP();
+let st;[["pq",renderProps],["cq",()=>{cShown=60;renderContacts()}]].forEach(([i,f])=>$(i).addEventListener("input",()=>{clearTimeout(st);st=setTimeout(f,150)}));
+["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).addEventListener("change",renderProps));
+["cf_area","cf_status","cf_src","cf_sort"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
+$("pReset").onclick=()=>{$("pq").value="";["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps()};
+$("cReset").onclick=()=>{$("cq").value="";["cf_area","cf_status","cf_src"].forEach(i=>$(i).value="");$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
+document.addEventListener("click",async e=>{
+  const t=e.target;
+  const chip=t.closest("[data-chip]");if(chip){cChip=chip.dataset.chip===cChip?"":chip.dataset.chip;cShown=60;renderContacts();return}
+  const a=t.closest("[data-act]");
+  if(a){const id=a.dataset.id,act=a.dataset.act;
+    if(act==="addP")openP();else if(act==="addC")openC();else if(act==="more"){cShown+=60;renderContacts()}
+    else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="cEdit")openC(id);
+    else if(act==="goProp"){setView("props");openProp=id;renderProps();setTimeout(()=>document.querySelector(`[data-pid="${CSS.escape(id)}"]`)?.scrollIntoView({block:"center",behavior:"smooth"}),50)}
+    else if(act==="unlink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(!c||!p||!confirm(`${c.name} ko ${p.code} se unlink karna hai?`))return;
+      const nx=interestsOf(c).filter(i=>i.id!==p.id);try{await updateDoc(doc(db,COL,id),{interests:nx,interestCode:nx[0]?.code||"",timeline:arrayUnion(tlEntry(p.code+" link removed","link")),updatedAt:serverTimestamp()});toast("Unlink ho gaya")}catch(err){toast(err.message,true)}}
+    else if(act==="fDone"){try{await updateDoc(doc(db,COL,id),{followUpDate:"",followUpNote:"",timeline:arrayUnion(tlEntry("Follow-up done","note")),updatedAt:serverTimestamp()});toast("Follow-up done ✓")}catch(err){toast(err.message,true)}}
+    return}
+  if(t.closest("a,button,input,select"))return;
+  const pr=t.closest(".row[data-pid]");if(pr){openProp=openProp===pr.dataset.pid?"":pr.dataset.pid;renderProps();return}
+  const cr=t.closest(".row[data-cid]");if(cr)openC(cr.dataset.cid)});
+["mo","po","qo"].forEach(i=>$(i).addEventListener("click",e=>{if(e.target.id===i)$(i).classList.add("hidden")}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeC();closeP();closeQ()}});
+renderProps();renderContacts();
+</script>
+</body>
+</html>

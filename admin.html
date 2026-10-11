@@ -98,6 +98,38 @@ button.code{cursor:pointer}button.code:hover{background:#ffeaa8}
 .cust-row .nm{font-weight:800;cursor:pointer}.cust-row .sm{font-size:12px;color:var(--muted);margin-top:2px}
 #dwNext{border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:13px;max-width:118px;min-height:40px}
 
+/* ===== CRM list, reference style ===== */
+.fbar{grid-template-columns:1fr auto!important;row-gap:12px}
+.fsearch{grid-column:1/-1;height:46px;background:#f7f9ff}
+.fsel{grid-column:1;grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:10px}
+.fl{display:grid;gap:5px;min-width:0}
+.fl>span{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#5d6c82}
+.freset{align-self:end;grid-column:2;grid-row:2}
+.who2{display:flex;gap:12px;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+.who2 .nm{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.who2 .nm strong{font-size:15px}
+.tchip{font-size:11.5px;font-weight:700;background:#eef1f6;color:#4a5a70;border-radius:7px;padding:2px 8px}
+.tchip.seller{background:#fff1d8;color:#8a5d00}.tchip.broker{background:#e7f6ee;color:#0b6a3b}
+.sub2{margin-top:4px;font-size:12.5px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.rq b{display:block;font-size:14.5px;margin-top:3px}
+.stamp{font-size:11.5px;color:var(--muted);margin-top:5px}
+.na b{font-size:14.5px;display:block}.na small{font-size:12px;color:var(--muted);display:block;margin-top:2px}
+.na.nbad b{color:#c62d2d}.na.nnow b{color:#b36b00}
+.setfu{border:1.5px dashed #9db2ee;background:#f6f8ff;color:#3858c8;border-radius:10px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer}
+.setfu:hover{background:#e9eeff}
+.abtns{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.abtn{border:0;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:800;cursor:pointer;min-height:38px}
+.abtn.wa{background:#e3f6ec;color:#0b6a3b}.abtn.wa:hover{background:#cfeedd}
+.abtn.dark{background:#111c2d;color:#fff}.abtn.dark:hover{background:#1c2c45}
+.abtn.ghost{background:#fff;border:1px solid var(--line);color:#8a97a8;padding:0;width:38px;display:grid;place-items:center}
+.abtn.ghost:hover{color:#c62d2d;border-color:#f0c4c4}
+.abtn.ghost .ic{width:16px;height:16px}
+.status-sel{padding:6px 10px;font-size:12px}
+@media(max-width:1280px){.fsel{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:1180px){.fbar{grid-template-columns:1fr auto!important}.fsel{grid-column:1/-1!important;order:3}}
+@media(max-width:760px){.fsel{grid-template-columns:1fr 1fr!important}.fsearch{grid-column:1}.freset{grid-row:auto}}
+
 /* ===== Phase 1 ===== */
 .ic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-4px}
 .ic.f{fill:currentColor;stroke:none}
@@ -297,11 +329,11 @@ body.noscroll{overflow:hidden}
         <label class="fsearch"><svg class="ic"><use href="#ic-search"/></svg><input id="search" type="search" placeholder="Search name, mobile, area, notes" autocomplete="off" aria-label="Search records"></label>
         <button id="filterToggle" class="btn light ftoggle" type="button" aria-expanded="false" aria-controls="fsel"><svg class="ic"><use href="#ic-filter"/></svg>Filters<span class="tbadge alert" id="filterBadge"></span></button>
         <div class="fsel" id="fsel">
-          <select id="filterArea" class="filter" aria-label="Area"><option value="">All areas</option></select>
-          <select id="filterProperty" class="filter" aria-label="Property type"><option value="">All types</option></select>
-          <select id="filterStatus" class="filter" aria-label="Status"><option value="">All statuses</option></select>
-          <select id="filterInterest" class="filter" aria-label="Interested property"><option value="">All properties</option></select>
-          <select id="filterBudget" class="filter" aria-label="Budget">
+          <label class="fl"><span>Area</span><select id="filterArea" class="filter" aria-label="Area"><option value="">All areas</option></select></label>
+          <label class="fl"><span>Property type</span><select id="filterProperty" class="filter" aria-label="Property type"><option value="">All types</option></select></label>
+          <label class="fl"><span>Status</span><select id="filterStatus" class="filter" aria-label="Status"><option value="">All statuses</option></select></label>
+          <label class="fl"><span>Interested property</span><select id="filterInterest" class="filter" aria-label="Interested property"><option value="">All properties</option></select></label>
+          <label class="fl"><span>Budget</span><select id="filterBudget" class="filter" aria-label="Budget">
             <option value="">Any budget</option>
             <option value="0-2500000">Up to ₹25 L</option>
             <option value="2500000-5000000">₹25 L – ₹50 L</option>
@@ -309,8 +341,9 @@ body.noscroll{overflow:hidden}
             <option value="10000000-20000000">₹1 Cr – ₹2 Cr</option>
             <option value="20000000-">Above ₹2 Cr</option>
             <option value="none">Budget not set</option>
-          </select>
-          <select id="sortBy" class="filter" aria-label="Sort"><option value="updated">Recently updated</option><option value="added">Newest added</option><option value="name">Name A–Z</option><option value="budget">Budget high → low</option><option value="follow">Follow-up date</option></select>
+          </select></label>
+          <label class="fl"><span>Follow-up date</span><select id="filterFollow" class="filter" aria-label="Follow-up date"><option value="">Any date</option><option value="overdue">Overdue</option><option value="today">Today</option><option value="week">Next 7 days</option><option value="none">No follow-up</option></select></label>
+          <label class="fl"><span>Sort by</span><select id="sortBy" class="filter" aria-label="Sort"><option value="updated">Recently updated</option><option value="added">Newest added</option><option value="name">Name A–Z</option><option value="budget">Budget high → low</option><option value="follow">Follow-up date</option></select></label>
         </div>
         <button id="resetFilters" class="btn light freset" type="button">Reset</button>
       </div>
@@ -324,7 +357,7 @@ body.noscroll{overflow:hidden}
       <div id="status"></div>
       <div class="table-wrap">
         <table><thead><tr>
-          <th class="select-cell"><input id="selectAll" class="select-all" type="checkbox" title="Select all visible"></th><th>Date</th><th>Name</th><th>Mobile</th><th>Interested in / Requirement</th><th>Location</th><th>Budget</th><th>Status &amp; follow-up</th><th>Action</th>
+          <th class="select-cell"><input id="selectAll" class="select-all" type="checkbox" title="Select all visible"></th><th>Customer</th><th>Interested in / Requirement</th><th>Status</th><th>Next action</th><th style="text-align:right">Actions</th>
         </tr></thead><tbody id="rows"></tbody></table>
         <div id="empty" class="empty hidden">No records found.</div>
       </div>
@@ -705,7 +738,7 @@ function recordMatchesFilters(r){
   const status=normalizeText($("filterStatus").value);
   const bud=$("filterBudget").value;
   const hay=[r.name,r.mobile,r.whatsapp,r.area,r.city,r.details,r.notes,r.company,r.propertyType,r.exactAddress,r.propertyLocation,r.code,...interestsOf(r).map(i=>i.code+" "+i.label)].join(" ").toLowerCase();
-  const intId=$("filterInterest").value;
+  const intId=$("filterInterest").value, fuF=$("filterFollow").value;
   const typeOk=currentFilter==="all" || r.type===currentFilter;
   const termOk=!term || hay.includes(term) || last10(term).length>=4&&last10(r.mobile).includes(term.replace(/\D/g,""));
   const areaOk=!area || areaKey(r)===area;
@@ -718,7 +751,10 @@ function recordMatchesFilters(r){
     else{ const [a,b]=bud.split("-"); const A=Number(a||0), B=b===""?Infinity:Number(b); budOk=(lo||hi)&&Math.max(lo,A)<=Math.min(hi||lo,B); }
   }
   const intOk=!intId || r.id===intId || interestsOf(r).some(i=>i.id===intId);
-  return typeOk && termOk && areaOk && propOk && statusOk && budOk && intOk;
+  let fuOk=true;
+  if(fuF){ const f=r.followUpDate||"", t=localISO(), w=new Date(); w.setDate(w.getDate()+7); const wk=localISO(w);
+    fuOk=fuF==="none"?!f:fuF==="overdue"?(f&&f<t):fuF==="today"?f===t:(f&&f>=t&&f<=wk); }
+  return typeOk && termOk && areaOk && propOk && statusOk && budOk && intOk && fuOk;
 }
 function normalizeText(v){ return String(v ?? "").trim().toLowerCase(); }
 function refreshFilterOptions(){
@@ -747,12 +783,13 @@ function activeFilters(){
   sel("filterProperty",e=>e.value);
   sel("filterStatus",e=>e.value);
   sel("filterBudget",e=>BUDGETS[e.value]||e.value);
+  sel("filterFollow",e=>"Follow-up: "+e.selectedOptions[0].textContent);
   sel("filterInterest",e=>{const p=propById(e.value);return p?(p.code||"Property")+" interested":"Property";});
   return list;
 }
 function renderFilterUI(){
   const act=activeFilters();
-  ["filterArea","filterProperty","filterStatus","filterBudget","filterInterest"].forEach(id=>$(id).classList.toggle("on",!!$(id).value));
+  ["filterArea","filterProperty","filterStatus","filterBudget","filterInterest","filterFollow"].forEach(id=>$(id).classList.toggle("on",!!$(id).value));
   $("fchips").innerHTML=act.map(a=>`<span class="fchip">${escapeHtml(a.label)}<button type="button" data-clear="${a.id}" aria-label="Remove filter">×</button></span>`).join("");
   const n=act.filter(a=>a.id!=="search").length;
   $("filterBadge").textContent=n?String(n):"";
@@ -981,7 +1018,7 @@ function render(){
       const it=interestsOf(r);
       const chips=it.map(i=>{const p=propById(i.id);return `<div class="int-row">${codeChip(p?.code||i.code,i.id)}<span class="lbl">${escapeHtml(p?cleanLbl(p):i.label||"")}</span></div>`;}).join("");
       const req=`${escapeHtml(r.propertyType||"—")}${r.size?" • "+escapeHtml(r.size):""}`;
-      return it.length?`<div class="ints">${chips}</div>`:`<span class="muted">${req}</span>`;
+      return it.length?`<div class="ints">${chips}</div>`:`<span>${req}</span>`;
     }
     if(r.type==="seller"){
       const n=intersOf(r).length;
@@ -991,26 +1028,30 @@ function render(){
   };
   const mobHTML=r=>{const n=last10(r.mobile);return n.length===10?`<a class="mob" href="tel:+91${n}">${escapeHtml(n)}</a>`:`<span class="mob off">${escapeHtml(r.mobile||"—")}</span>`;};
   const dateHTML=r=>{const ms=msOf(r.createdAt)||msOf(r.updatedAt);return `<div class="dcell">${ms?escapeHtml(fmtDate(r.createdAt||r.updatedAt)):"—"}<small>${escapeHtml(agoText(ms))}</small></div>`;};
-  $("rows").innerHTML=filtered.map(r=>`
+  const AVC=[["#e6ecff","#3858c8"],["#e7f6ee","#0b6a3b"],["#fff1d8","#8a5d00"],["#fde8ee","#b4234f"],["#efe8fd","#6038b8"],["#e3f4f8","#126a80"]];
+  const initials=n=>{const w=String(n||"?").replace(/\(.*?\)/g," ").trim().split(/\s+/).filter(Boolean);return ((w[0]?.[0]||"?")+(w[1]?.[0]||"")).toUpperCase();};
+  const avStyle=r=>{let h=0;for(const ch of String(r.name||r.id))h=(h*31+ch.charCodeAt(0))>>>0;const c=AVC[h%AVC.length];return `background:${c[0]};color:${c[1]}`;};
+  const dayText=f=>{try{return new Date(f+"T00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short"});}catch(_){return f;}};
+  const nextCell=r=>{const f=r.followUpDate; if(!f) return `<button type="button" class="setfu" data-open="${escapeHtml(r.id)}">+ Set follow-up</button>`;
+    const cls=f<iso?"nbad":f===iso?"nnow":""; return `<div class="na ${cls}" data-open="${escapeHtml(r.id)}" style="cursor:pointer"><b>${f<iso?"⚠ ":f===iso?"● ":""}${f===iso?"Aaj":dayText(f)}</b><small>${escapeHtml(r.followUpNote||(f<iso?"Overdue":"Follow-up"))}</small></div>`;};
+  const reqCell=r=>`<div class="rq">${interestCell(r)}<b>${escapeHtml(budgetText(r))}</b></div>`;
+  $("rows").innerHTML=filtered.map(r=>{const ms=msOf(r.createdAt)||msOf(r.updatedAt);return `
     <tr>
       <td class="select-cell"><input class="row-check" type="checkbox" data-select-id="${escapeHtml(r.id)}" ${selectedIds.has(r.id)?"checked":""}></td>
-      <td>${dateHTML(r)}</td>
-      <td><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}<div style="margin-top:3px"><span class="badge ${escapeHtml(r.type)}">${typeLabel(r.type)}</span> ${r.type==="seller"?codeChip(r.code):""}</div>${r.company?`<div class="muted">${escapeHtml(r.company)}</div>`:""}</td>
-      <td>${mobHTML(r)}</td>
-      <td>${interestCell(r)}</td>
-      <td>${escapeHtml(niceArea(r.area)||"—")}<div class="muted">${escapeHtml(r.city||"")}</div></td>
-      <td><b>${escapeHtml(budgetText(r))}</b></td>
-      <td>${statusSelect(r)}${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}${fuHTML(r)}</td>
-      <td>${actionBtns(r)}</td>
-    </tr>`).join("");
+      <td><div class="who2"><span class="av" style="${avStyle(r)}">${escapeHtml(initials(r.name))}</span><div><div class="nm"><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong><span class="tchip ${escapeHtml(r.type)}">${typeLabel(r.type)}</span>${r.type==="seller"?codeChip(r.code):""}${flags(r)}</div><div class="sub2">${mobHTML(r)}<span>${escapeHtml(niceArea(r.area)||"—")}</span>${r.company?`<span>• ${escapeHtml(r.company)}</span>`:""}</div></div></div></td>
+      <td>${reqCell(r)}</td>
+      <td>${statusSelect(r)}${r.publicVisible?` <span class="badge" style="background:#eaf8f0;color:#0e7b42">Public</span>`:""}<div class="stamp">${ms?escapeHtml(fmtDT(ms)):""}</div></td>
+      <td>${nextCell(r)}</td>
+      <td><div class="abtns"><button type="button" class="abtn wa" data-wa-one="${escapeHtml(r.id)}">WhatsApp</button><button type="button" class="abtn dark" data-open="${escapeHtml(r.id)}">View</button><button type="button" class="abtn ghost" data-trash="${escapeHtml(r.id)}" aria-label="Move to Trash" title="Move to Trash">${ic("trash")}</button></div></td>
+    </tr>`;}).join("");
   $("cards").innerHTML=filtered.map(r=>{const ms=msOf(r.createdAt)||msOf(r.updatedAt);return `<div class="rcard2"><div class="top2"><div><strong class="namelink" data-open="${escapeHtml(r.id)}">${escapeHtml(r.name||"—")}</strong>${flags(r)}<div class="sub">${typeLabel(r.type)}${r.type==="seller"&&r.code?" • "+escapeHtml(r.code):""} • ${escapeHtml(niceArea(r.area)||"—")} • ${ms?escapeHtml(fmtDate(r.createdAt||r.updatedAt)):""}</div></div>${statusSelect(r)}</div><div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">${mobHTML(r)}<span class="bud">${escapeHtml(budgetText(r))}</span></div><div style="margin-top:8px">${interestCell(r)}</div>${fuHTML(r)}${actionBtns(r)}</div>`;}).join("");
   $("empty").classList.toggle("hidden",filtered.length!==0);
   renderToday();
   updateWaToolbar();
 }
 $("search").addEventListener("input",render);
-["filterArea","filterProperty","filterStatus","filterBudget","filterInterest","sortBy"].forEach(id=>$(id).addEventListener("change",render));
-function resetFilters(){["search","filterArea","filterProperty","filterStatus","filterBudget","filterInterest"].forEach(id=>{$(id).value="";});render();}
+["filterArea","filterProperty","filterStatus","filterBudget","filterInterest","filterFollow","sortBy"].forEach(id=>$(id).addEventListener("change",render));
+function resetFilters(){["search","filterArea","filterProperty","filterStatus","filterBudget","filterInterest","filterFollow"].forEach(id=>{$(id).value="";});render();}
 $("resetFilters").onclick=resetFilters;
 $("fchips").onclick=e=>{const b=e.target.closest("[data-clear]");if(!b)return;$(b.dataset.clear).value="";render();};
 $("filterToggle").onclick=()=>{const o=$("fbar").classList.toggle("open");$("filterToggle").setAttribute("aria-expanded",String(o));};
@@ -1096,6 +1137,8 @@ $("emptyTrashBtn").onclick=async()=>{
 };
 
 async function listClick(e){
+  const trash=e.target.closest("[data-trash]");
+  if(trash){ trashRecord(trash.dataset.trash).catch(err=>toast(err.message)); return; }
   const check=e.target.closest("[data-select-id]"), wa=e.target.closest("[data-wa-one]"), edit=e.target.closest("[data-edit]"), more=e.target.closest("[data-more]"), opn=e.target.closest("[data-open]");
   if(opn){ openDrawer(opn.dataset.open); return; }
   if(check){ if(check.checked) selectedIds.add(check.dataset.selectId); else selectedIds.delete(check.dataset.selectId); updateWaToolbar(); return; }

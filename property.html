@@ -192,6 +192,10 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 .emi{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;font-size:13.5px}.emi b{display:block;color:var(--navy);margin-bottom:8px}.emi .r3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.emi label{display:grid;gap:3px;font-size:11.5px;color:var(--muted);font-weight:600}.emi input,.emi select{padding:8px;border:1px solid var(--line);border-radius:9px;font:inherit;width:100%}.emi .v{margin-top:10px;font:800 20px var(--font-head);color:var(--green-dark)}
 @media(max-width:700px){.legal,.near{grid-template-columns:1fr}}
 @media print{header,footer,.topbar,.nav-wrap,.mobile-bar,#qaForm,#commentForm,.share-row,#simPanel,.cb,.emi,#printBtn,#visitBtn,#saveBtn,#enqBtn,.g-btn,.thumbs,#admPill{display:none!important}.layout{display:block!important}.panel,.side-card{box-shadow:none!important;break-inside:avoid}}
+.cm{display:flex;gap:10px;margin-top:14px}.cm .av{flex:none;width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--gold2);display:grid;place-items:center;font:800 15px var(--font-head)}.cm .av.own{background:var(--gold);color:#fff;font-size:11px}
+.cm .bd{flex:1;min-width:0}.cm .bub{background:#f0f2f5;border-radius:16px;padding:9px 14px;display:inline-block;max-width:100%}.cm .bub.own{background:#fff7e0;border:1px solid #f1dfaa}.cm .bub b{font-size:14px;color:var(--navy)}.cm .bub p{margin:2px 0 0;color:#2a3850;white-space:pre-line;overflow-wrap:anywhere}
+.cm .stars{margin-left:8px;color:#e0a800;font-size:13px}.cm .mt{font-size:12px;color:var(--muted);margin:3px 0 0 12px}.cm.rp{margin-top:8px}.cm.rp .av{width:30px;height:30px}.ow{background:var(--gold);color:#fff;border-radius:99px;font-size:10.5px;padding:1px 7px;margin-left:5px;font-weight:700}
+.qa .cmwrap{margin-bottom:6px}
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
@@ -273,6 +277,10 @@ function sizeInfo(p){const s=String(p.size||"").replace(/[×*]/g,"x"),ag=Number(
   else{const m=s.match(/(\d+(?:\.\d+)?)/);if(m){const n=+m[1];if(/gaj|गज|yard|sq\s*\.?\s*y/i.test(s))gaj=n;else if(/sq|ft|feet|फ(ी|ु)ट/i.test(s))gaj=n/9}}
   if(ag>0)gaj=ag;
   return{dims,gaj:gaj?Math.round(gaj*10)/10:0,sqft:gaj?Math.round(gaj*9):0}}
+const ago=s=>{if(!s)return"just now";const d=Math.max(0,Date.now()/1000-s);if(d<3600)return Math.max(1,Math.round(d/60))+" min ago";if(d<86400)return Math.round(d/3600)+" hr ago";if(d<2592000)return Math.round(d/86400)+" days ago";return new Date(s*1000).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})};
+function thread(r,txt,stars){const nm=String(r.name||"Customer").trim()||"Customer",reps=Array.isArray(r.replies)&&r.replies.length?r.replies:(r.answer?[{text:r.answer,at:(r.answeredAt?.seconds||0)*1000}]:[]);
+  return`<div class="cm"><div class="av">${esc(nm[0].toUpperCase())}</div><div class="bd"><div class="bub"><b>${esc(nm)}</b>${stars?`<span class="stars">${"★".repeat(stars)}${"☆".repeat(5-stars)}</span>`:""}<p>${esc(txt)}</p></div><div class="mt">${ago((r.askedAt||r.submittedAt)?.seconds)}</div>${reps.map(x=>`<div class="cm rp"><div class="av own">JPC</div><div class="bd"><div class="bub own"><b>Jaipur Property Consultant<span class="ow">✓ Owner</span></b><p>${esc(x.text)}</p></div><div class="mt">${ago((x.at||0)/1000)}</div></div></div>`).join("")}</div></div>`}
+const isAdm=(()=>{try{return localStorage.getItem("jpc_admin")==="1"}catch(e){return false}})();
 const WA="916350566010";
 const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
 
@@ -453,12 +461,13 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   /* questions & answers (approved only) */
   if(isSeller){
     const own=[];
+    let qErr="";
     const renderQA=()=>{
-      const mine=own.map(r=>`<details class="own" open><summary>${esc(r.question)}</summary><div class="ans">${esc(r.answer||"")}</div><div class="by">Asked by ${esc(String(r.name||"Customer").split(" ")[0])} • answered by Jaipur Property Consultant</div></details>`).join("");
-      $("qaList").innerHTML=(mine?`<h3>Questions from buyers</h3>${mine}`:"")+`<h3>Common questions</h3>`+faqs.map(([q,a])=>`<details><summary>${esc(q)}</summary><div class="ans">${esc(a)}</div></details>`).join("")};
+      const mine=own.map(r=>thread(r,r.question||"",0)).join("");
+      $("qaList").innerHTML=(qErr?`<div class="notice">${esc(qErr)}</div>`:"")+(mine?`<h3>Questions from buyers</h3>${mine}`:"")+`<h3>Common questions</h3>`+faqs.map(([q,a])=>`<details><summary>${esc(q)}</summary><div class="ans">${esc(a)}</div></details>`).join("")};
     renderQA();
     onSnapshot(query(collection(db,"publicQuestions"),where("propertyId","==",p.id),where("status","==","approved")),snap=>{
-      own.length=0;snap.docs.map(d=>d.data()).filter(r=>r.answer).sort((a,b)=>(b.answeredAt?.seconds||0)-(a.answeredAt?.seconds||0)).forEach(r=>own.push(r));renderQA()},()=>{});
+      qErr="";own.length=0;snap.docs.map(d=>d.data()).sort((a,b)=>(b.askedAt?.seconds||0)-(a.askedAt?.seconds||0)).forEach(r=>own.push(r));renderQA()},err=>{console.warn("questions",err);qErr=isAdm?"Admin note: questions load nahi ho rahe ("+(err.code||err.message)+"). firestore.rules dobara publish karo.":"";renderQA()});
     document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{$("qText").value=b.dataset.q;$("qText").focus()});
     $("qaForm").onsubmit=async e=>{
       e.preventDefault();const b=e.target.querySelector("button[type=submit]"),m=$("qMsg"),mob=$("qMob").value.replace(/\D/g,"").slice(-10),nm=$("qName").value.trim(),q=$("qText").value.trim();
@@ -476,7 +485,8 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   if(isSeller){
     onSnapshot(query(collection(db,"publicReviews"),where("propertyId","==",p.id),where("status","==","approved")),snap=>{
       const rows=snap.docs.map(d=>d.data());
-      $("commentsList").innerHTML=(rows.length?`<div class="rsm"><b>${(rows.reduce((a,r)=>a+Math.max(1,Math.min(5,Number(r.rating)||5)),0)/rows.length).toFixed(1)}</b><span>average from ${rows.length} ${rows.length===1?"comment":"comments"}</span></div>`:"")+(rows.length?rows.map(r=>{const n=Math.max(1,Math.min(5,Number(r.rating)||5));return`<article class="comment"><div class="stars">${"★".repeat(n)}${"☆".repeat(5-n)}</div><strong>${esc(r.name||"Customer")}</strong><div style="margin-top:5px;color:#435166">${esc(r.comment||"")}</div></article>`}).join(""):'<div class="notice">No approved comments yet. You can be the first to comment.</div>');
+      rows.sort((a,b)=>(b.submittedAt?.seconds||0)-(a.submittedAt?.seconds||0));
+      $("commentsList").innerHTML=(rows.length?`<div class="rsm"><b>${(rows.reduce((a,r)=>a+Math.max(1,Math.min(5,Number(r.rating)||5)),0)/rows.length).toFixed(1)}</b><span>average from ${rows.length} ${rows.length===1?"comment":"comments"}</span></div>`:"")+(rows.length?rows.map(r=>thread(r,r.comment||"",Math.max(1,Math.min(5,Number(r.rating)||5)))).join(""):'<div class="notice">No approved comments yet. You can be the first to comment.</div>');
     },()=>{$("commentsList").innerHTML='<div class="notice">Comments could not be loaded right now.</div>'});
     $("commentForm").onsubmit=async e=>{
       e.preventDefault();const b=e.target.querySelector("button"),m=$("cMsg");b.disabled=true;b.textContent="Submitting…";m.style.display="block";

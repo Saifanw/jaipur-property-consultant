@@ -906,6 +906,9 @@ $("mPick").onchange=drawMatchRes;
 /* ---------- INBOX (website submissions + reviews) ---------- */
 const subImgs=s=>[...new Set([...(Array.isArray(s.imageDataUrls)?s.imageDataUrls:[]),...(s.imageDataUrl?[s.imageDataUrl]:[])].filter(Boolean))].slice(0,3);
 const tsOf=s=>msOf(s.submittedAt)||msOf(s.createdAt)||msOf(s.askedAt);
+
+const rpList=r=>Array.isArray(r.replies)&&r.replies.length?r.replies:(r.answer?[{text:r.answer,at:0}]:[]);
+const rpBox=(r,c)=>`<div class="m" style="margin-top:8px">${rpList(r).map((x,i)=>`<div style="background:#eef3ff;border-radius:8px;padding:6px 9px;margin-top:4px;display:flex;gap:8px;justify-content:space-between;align-items:flex-start"><span>↳ ${esc(x.text)}</span><button class="btn sm" data-act="rpDel" data-c="${c}" data-i="${i}" data-id="${esc(r.id)}" title="Reply delete">✕</button></div>`).join("")}</div><textarea id="rp_${esc(r.id)}" rows="2" placeholder="Reply likho — public page par comment ke neeche dikhega…" style="width:100%;margin-top:8px"></textarea>`;
 function renderInbox(){
   const f=$("ibFilter").value||"pending",stt=x=>String(x.status||"pending");
   $("ibSub").textContent=subs.filter(s=>stt(s)==="pending").length;$("ibRev").textContent=revs.filter(s=>stt(s)==="pending").length;$("ibQa").textContent=qs.filter(s=>stt(s)==="pending").length;
@@ -913,10 +916,9 @@ function renderInbox(){
   const box=$("ibCards");
   if(ibMode==="qa"){const L=qs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
     box.innerHTML=L.length?L.map(r=>{const st=stt(r);
-      return`<article class="card subc"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(r.name||"Visitor")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st.toUpperCase()}</span></div>
-       <div class="m" style="color:var(--mut)">${esc(r.propertyCode||"")} ${esc(r.propertyTitle||"")}</div><div class="m"><b>Q:</b> ${esc(r.question||"")}</div>
-       ${st==="rejected"?"":`<textarea id="qa_${esc(r.id)}" rows="3" placeholder="Jawab likho — website par sabko dikhega" style="width:100%;margin-top:8px">${esc(r.answer||"")}</textarea>`}
-       <div class="ac">${st==="rejected"?"":`<button class="btn p sm" data-act="qaOk" data-id="${esc(r.id)}">${st==="approved"?"Update answer":"✓ Answer & Publish"}</button>`}${st==="pending"?`<button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">✕ Hide</button>`:`<button class="btn sm" data-act="qaDel" data-id="${esc(r.id)}">Delete</button>`}${r.propertyId?`<a class="btn sm" target="_blank" href="property.html?id=${encodeURIComponent(r.propertyId)}">Open page</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">❓</div><b>Koi sawaal nahi</b>Property page par customer ke sawaal yahan aayenge.</div>`;return}
+      return`<article class="card subc"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(r.name||"Visitor")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st==="approved"?"LIVE":st.toUpperCase()}</span></div>
+       <div class="m" style="color:var(--mut)">${esc(r.propertyCode||"")} ${esc(r.propertyTitle||"")}</div><div class="m"><b>Q:</b> ${esc(r.question||"")}</div>${rpBox(r,"publicQuestions")}
+       <div class="ac">${st==="approved"?`<button class="btn p sm" data-act="rpAdd" data-c="publicQuestions" data-id="${esc(r.id)}">💬 Add reply</button><button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">Unpublish</button>`:`<button class="btn p sm" data-act="rpPub" data-c="publicQuestions" data-id="${esc(r.id)}">✓ Publish${""} (reply ke saath)</button>${st==="pending"?`<button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">✕ Hide</button>`:""}`}<button class="btn sm" data-act="qaDel" data-id="${esc(r.id)}">Delete</button>${r.propertyId?`<a class="btn sm" target="_blank" href="property.html?id=${encodeURIComponent(r.propertyId)}">Open page</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">❓</div><b>Koi sawaal nahi</b>Property page par customer ke sawaal yahan aayenge.</div>`;return}
   if(ibMode==="sub"){const L=subs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
     box.innerHTML=L.length?L.map(s=>{const st=stt(s),seller=s.type==="seller",ph=subImgs(s).map(u=>`<img src="${esc(u)}" alt="" loading="lazy">`).join("");
       return`<article class="card subc">${ph}${s.kind==="partner"?`<div class="k">Sell & earn form — ${esc(s.role||"")}</div>`:""}${s.kind==="enquiry"?`<div class="k">Property enquiry${s.interestCode?" — "+esc(s.interestCode):""} ${esc(s.interestLabel||"")}</div>`:""}
@@ -926,7 +928,7 @@ function renderInbox(){
   else{const L=revs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
     box.innerHTML=L.length?L.map(r=>{const st=stt(r),n=Math.max(1,Math.min(5,Number(r.rating)||5));
       return`<article class="card subc"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(r.name||"Visitor")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st.toUpperCase()}</span></div><div class="stars">${"★".repeat(n)}${"☆".repeat(5-n)}</div><div class="m">${esc(r.comment||"")}</div><div class="m" style="color:var(--mut)">${esc(r.area||"")}${r.propertyType?" • "+esc(r.propertyType):""}</div>
-       <div class="ac">${st==="pending"?`<button class="btn p sm" data-act="revOk" data-id="${esc(r.id)}">✓ Approve</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">✕ Reject</button>`:`<button class="btn sm" data-act="revDel" data-id="${esc(r.id)}">Delete</button>`}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">⭐</div><b>Koi review nahi</b></div>`}
+       ${rpBox(r,"publicReviews")}<div class="ac">${st==="pending"?`<button class="btn p sm" data-act="rpPub" data-c="publicReviews" data-id="${esc(r.id)}">✓ Approve</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">✕ Reject</button>`:`<button class="btn p sm" data-act="rpAdd" data-c="publicReviews" data-id="${esc(r.id)}">💬 Add reply</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">Unpublish</button><button class="btn sm" data-act="revDel" data-id="${esc(r.id)}">Delete</button>`}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">⭐</div><b>Koi review nahi</b></div>`}
 }
 $("ibFilter").onchange=renderInbox;
 const ibMsg=(m,bad)=>{$("ibNote").innerHTML=m?`<div class="${bad?"err":"err"}" style="${bad?"":"background:#e9f9f1;border-color:#c5ecd9;color:#0a7a50"}">${esc(m)}</div>`:"";if(m)setTimeout(()=>$("ibNote").innerHTML="",5000)};
@@ -1025,6 +1027,13 @@ document.addEventListener("click",async e=>{
     else if(act==="fDone"){await updateDoc(doc(db,COL,id),{followUpDate:"",followUpNote:"",timeline:arrayUnion(tlEntry("Follow-up done","note")),updatedAt:serverTimestamp()});toast("Follow-up done ✓")}
     else if(act==="subOk")subApprove(id);else if(act==="subNo")subReject(id);
     else if(act==="subDel"){if(confirm("Is submission ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicSubmissions",id))}
+    else if(act==="rpAdd"||act==="rpPub"){const c=a.dataset.c,t=($("rp_"+id)?.value||"").trim();if(act==="rpAdd"&&!t)return toast("Pehle reply likho",true);
+      const src=(c==="publicQuestions"?qs:revs).find(x=>x.id===id)||{},u={updatedAt:serverTimestamp()};
+      if(act==="rpPub"){u.status="approved";u.approvedAt=serverTimestamp()}
+      if(t){u.replies=[...rpList(src),{text:t,at:Date.now()}];if(src.answer)u.answer=deleteField()}
+      await updateDoc(doc(db,c,id),u);toast(act==="rpPub"?"Website par publish ho gaya ✓":"Reply public page par dikh rahi hai ✓")}
+    else if(act==="rpDel"){const c=a.dataset.c,i=Number(a.dataset.i),src=(c==="publicQuestions"?qs:revs).find(x=>x.id===id);if(!src||!confirm("Ye reply delete karni hai?"))return;
+      await updateDoc(doc(db,c,id),{replies:rpList(src).filter((_,k)=>k!==i),answer:deleteField()});toast("Reply delete ho gayi")}
     else if(act==="qaOk"){const t=($("qa_"+id)?.value||"").trim();if(!t)return toast("Pehle jawab likho",true);await updateDoc(doc(db,"publicQuestions",id),{answer:t,status:"approved",answeredAt:serverTimestamp()});toast("Jawab website par publish ho gaya ✓")}
     else if(act==="qaNo")await updateDoc(doc(db,"publicQuestions",id),{status:"rejected",rejectedAt:serverTimestamp()});
     else if(act==="qaDel"){if(confirm("Is sawaal ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicQuestions",id))}

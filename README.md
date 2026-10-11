@@ -36,3 +36,5 @@ Google Analytics 4 is included on the public pages using measurement ID `G-0DW0N
 - **Deploy `firestore.rules` again** (new `publicQuestions` collection) or questions will not save.
 
 - **Ad post** (Admin > property form): auto-generates a ready post (WhatsApp short or OLX/99acres full, Hindi/English) from the property details + public link + your phone. Edit, Copy, send on WhatsApp; the text is saved privately with the property (`adPost`).
+
+- **Comments & questions are Facebook-style threads**: visitor comment/question -> Admin > Inbox -> Publish (optionally with your reply) -> shown on the property page with your replies under it (gold "Owner" badge). You can add more replies later, delete a reply, or unpublish. Re-deploy `firestore.rules`.

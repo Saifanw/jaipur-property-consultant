@@ -47,7 +47,8 @@ service cloud.firestore {
         && request.resource.data.question is string
         && request.resource.data.question.size() >= 5
         && request.resource.data.question.size() <= 400
-        && !("answer" in request.resource.data);
+        && !("answer" in request.resource.data)
+        && !("replies" in request.resource.data);
       allow read, update, delete: if isAdmin();
     }
 

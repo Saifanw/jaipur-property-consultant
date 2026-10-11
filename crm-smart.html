@@ -56,6 +56,8 @@ const S={recs:[],ints:[],tab:"customers",f:{broker:"",area:"",type:"",max:"",sta
 const money=n=>{n=+n;if(!n)return"";return n>=1e7?"₹"+(n/1e7).toFixed(2).replace(/\.?0+$/,"")+" Cr":n>=1e5?"₹"+(n/1e5).toFixed(1).replace(/\.0$/,"")+" L":"₹"+n};
 const budget=r=>[money(r.budgetMin),money(r.budgetMax)].filter(Boolean).join(" – ");
 const toast=m=>{const t=document.createElement("div");t.id="toast";t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2500)};
+const na=x=>String(x||"").trim().toLowerCase();
+const emp=t=>`<p class="mu">Koi ${t} nahi mila. ${Object.values(S.f).some(v=>v&&v!=="new")?`<button class="btn s" id="rst">Filter hatao</button>`:""}</p>`;
 const live=()=>S.recs.filter(r=>!r.deletedAt);
 function ts(r){return Math.max(r.createdAtMs||0,r.updatedAt?.toMillis?.()||0,...S.ints.filter(i=>i.customerId===r.id||i.propertyId===r.id).map(i=>i.at||0))}
 const by=t=>live().filter(r=>r.type===t).sort((a,b)=>ts(b)-ts(a));
@@ -90,8 +92,8 @@ function render(){
  const pr=by("seller"),cu=by("customer"),br=by("broker");
 
  const opt=(a,sel,ph)=>`<option value="">${ph}</option>`+a.map(x=>`<option value="${esc(x[0])}" ${x[0]===sel?"selected":""}>${esc(x[1])}</option>`).join("");
- const areas=[...new Set(live().map(r=>(r.area||"").trim()).filter(Boolean))].sort().map(a=>[a,a]);
- const types=[...new Set(live().map(r=>(r.propertyType||"").trim()).filter(Boolean))].sort().map(a=>[a,a]);
+ const dd=k=>{const m={};live().forEach(r=>{const v=na(r[k]);if(v&&!m[v])m[v]=String(r[k]).trim()});return Object.keys(m).sort().map(v=>[v,m[v]])};const areas=dd("area");
+ const types=dd("propertyType");
  const brs=br.map(b=>[b.id,bname(b.id)]);
  const F=S.f;const sortSel=`<select data-f="sort">${opt([["new","🕒 Latest pehle"],["rank","🔥 Hot pehle"],["price","₹ Sasta pehle"]],F.sort,"").replace('<option value="">Sort</option>',"").replace('<option value=""></option>',"")}</select>`;
  let bar=`<select data-f="broker">${opt(brs,F.broker,"🤝 Sab Brokers")}</select><select data-f="area">${opt(areas,F.area,"📍 Sab Areas")}</select>`;
@@ -102,29 +104,29 @@ function render(){
  $("list").innerHTML=({properties:vProps,customers:vCust,brokers:vBrok,pipeline:vPipe})[S.tab]();
  if(S.open)drawer(S.open.id,true);
 }
-const okRec=r=>(!S.f.area||(r.area||"").trim()===S.f.area)&&(!S.f.type||(r.propertyType||"").trim()===S.f.type);
+const okRec=r=>(!S.f.area||na(r.area)===S.f.area)&&(!S.f.type||na(r.propertyType)===S.f.type);
 const okBrk=r=>!S.f.broker||r.brokerId===S.f.broker||r.id===S.f.broker;
 function vProps(){
  const rk=ranks();let l=by("seller").filter(okRec).filter(okBrk).filter(p=>!S.f.max||!p.budgetMin&&!p.budgetMax||+(p.budgetMin||p.budgetMax)<=+S.f.max);
  const price=p=>+(p.budgetMin||p.budgetMax||0);
  l.sort((a,b)=>S.f.sort==="price"?price(a)-price(b):S.f.sort==="new"?ts(b)-ts(a):(rk[a.id]||999)-(rk[b.id]||999));
- if(!l.length)return`<p class="mu">Koi property nahi mili.</p>`;
+ if(!l.length)return`${emp("property")}`;
  return`<div class="grid">`+l.map(p=>{const ii=propInts(p.id).filter(i=>W[i.stage]>0),img=(p.publicImageUrls||p.images||[])[0];
   return`<div class="card" data-o="${p.id}">${rk[p.id]?`<span class="rank">#${rk[p.id]}</span>`:""}<span class="heat">${heatTag(heat(p.id))} ${heat(p.id)||""}</span>
   <div class="ph">${img?`<img src="${esc(img)}" loading="lazy">`:"🏠"}</div><div class="cb"><span class="tag">${esc(p.propertyType||"Property")}</span><span class="tag">${esc(p.status||"New")}</span>
   <h3>${esc(p.name||"Property")}</h3><div class="mu">📍 ${esc(p.area||"-")} ${p.size?"• "+esc(p.size):""}</div><div class="price">${budget(p)||"Price on request"}</div>
   <div>${p.brokerId?`<span class="tag b">🤝 ${esc(bname(p.brokerId))}</span>`:`<span class="tag b">Direct Owner</span>`}</div>
   <div class="mu" style="margin-top:6px">❤ ${ii.length} interested:</div><div>${ii.slice(0,3).map(i=>`<span class="tag c">${esc(get(i.customerId)?.name||"?")}${get(i.customerId)?.brokerId?" · via "+esc(get(get(i.customerId).brokerId)?.name||""):""}</span>`).join("")||`<span class="mu">Abhi koi nahi</span>`}${ii.length>3?`<span class="tag">+${ii.length-3}</span>`:""}</div><div style="margin-top:8px"><button class="btn s g" data-ai="p:${p.id}">❤ Interest jodo</button></div></div></div>`}).join("")+`</div>`}
-function vCust(){const l=by("customer").filter(okRec).filter(okBrk);if(!l.length)return`<p class="mu">Koi customer nahi.</p>`;
+function vCust(){const l=by("customer").filter(okRec).filter(okBrk);if(!l.length)return`${emp("customer")}`;
  return`<div class="grid">`+l.map(c=>{const ci=custInts(c.id).filter(i=>W[i.stage]>0),top=ci[0];
   return`<div class="card" data-o="${c.id}"><div class="cb"><h3>👤 ${esc(c.name)} ${isNew(c)?`<span class="tag r">NEW</span>`:""}</h3><div class="mu">📞 ${esc(c.mobile||"-")} • 📍 ${esc(c.area||"-")}</div><div class="price">${budget(c)||""}</div>
   <span class="tag">${esc(c.propertyType||"Any")}</span><span class="tag">${esc(c.status||"New")}</span>${c.brokerId?`<span class="tag b">🤝 via ${esc(bname(c.brokerId))}</span>`:`<span class="tag b">Direct</span>`}
   <div style="margin:8px 0">${c.mobile?`<a class="btn s w" data-x href="${wa(c,waMsg(c))}" target="_blank">💬 WhatsApp</a> <a class="btn s" data-x href="tel:${esc(c.mobile)}">📞 Call</a> `:""}<button class="btn s g" data-ai="c:${c.id}">❤ Interest</button></div><div class="mu">${top?`Latest interest: <b>${esc(get(top.propertyId)?.name||"?")}</b> (${esc(top.stage)})`:"Kisi property me interest add nahi"}</div></div></div>`}).join("")+`</div>`}
-function vBrok(){const l=by("broker").filter(r=>!S.f.area||(r.areasServed||r.area||"").includes(S.f.area));if(!l.length)return`<p class="mu">Koi broker nahi.</p>`;
+function vBrok(){const l=by("broker").filter(r=>!S.f.area||na(r.areasServed||r.area).includes(S.f.area));if(!l.length)return`${emp("broker")}`;
  return`<div class="grid">`+l.map(b=>{const np=by("seller").filter(p=>p.brokerId===b.id).length,nc=by("customer").filter(c=>c.brokerId===b.id).length;
   return`<div class="card" data-o="${b.id}"><div class="cb"><h3>🤝 ${esc(b.name)}</h3><div class="mu">${esc(b.company||"")} • 📞 ${esc(b.mobile||"-")}</div><div class="mu">📍 ${esc(b.areasServed||b.area||"-")}</div>
-  <div style="margin-top:8px"><span class="tag">🏠 ${np} properties</span><span class="tag c">👤 ${nc} customers</span></div></div></div>`}).join("")+`</div>`}
-function vPipe(){let l=S.ints.filter(i=>!S.f.stage||i.stage===S.f.stage).filter(i=>{const c=get(i.customerId),p=get(i.propertyId);return(!S.f.broker||c?.brokerId===S.f.broker||p?.brokerId===S.f.broker)&&(!S.f.area||p?.area===S.f.area)}).sort((a,b)=>iw(b)-iw(a)||b.at-a.at);
+  <div style="margin-top:8px"><span class="tag">🏠 ${np} properties</span><span class="tag c">👤 ${nc} customers</span></div>${np+nc?"":`<div class="mu" style="margin-top:6px">Property/customer kholke "Broker" chuno</div>`}</div></div>`}).join("")+`</div>`}
+function vPipe(){let l=S.ints.filter(i=>!S.f.stage||i.stage===S.f.stage).filter(i=>{const c=get(i.customerId),p=get(i.propertyId);return(!S.f.broker||c?.brokerId===S.f.broker||p?.brokerId===S.f.broker)&&(!S.f.area||na(p?.area)===S.f.area)}).sort((a,b)=>iw(b)-iw(a)||b.at-a.at);
  if(!l.length)return`<p class="mu">Koi interest record nahi. "❤ Interest" se add karo.</p>`;
  return`<div class="card" style="padding:6px 14px;cursor:default">`+l.map(i=>{const c=get(i.customerId),p=get(i.propertyId);return`<div class="row"><div><b data-o="${i.customerId}" style="cursor:pointer">${esc(c?.name||"?")}</b> ${c?.brokerId?`<span class="tag b">via ${esc(get(c.brokerId)?.name||"")}</span>`:""}<br><span class="mu">→ <a data-o="${i.propertyId}" style="cursor:pointer;text-decoration:underline">${esc(p?.name||"?")}</a> ${p?.brokerId?"· 🤝 "+esc(get(p.brokerId)?.name||""):""} • ${Math.round(days(i.at))} din pehle</span></div><span class="tag ${i.stage==="Dropped"?"r":"c"}">${esc(i.stage)}</span></div>`}).join("")+`</div>`}
 /* ---- DRAWER ---- */
@@ -138,7 +140,7 @@ function drawer(id,keep){const r=get(id);if(!r){$("dr").classList.add("hide");re
   <div class="row"><b>❤ Interested properties (ranked)</b><button class="btn s g" data-ai="c:${id}">+ Add</button></div>${ci.map(i=>irow(i,false)).join("")||'<p class="mu">Koi nahi</p>'}`}
  else{const ps=by("seller").filter(p=>p.brokerId===id),cs=by("customer").filter(c=>c.brokerId===id);
   b=`<p><b>🏠 Is broker ki properties (${ps.length})</b></p>${ps.map(p=>`<div class="row"><span data-o="${p.id}" style="cursor:pointer">${esc(p.name)} <span class="mu">${esc(p.area||"")}</span></span><span class="tag">${heat(p.id)}</span></div>`).join("")||'<p class="mu">-</p>'}<p><b>👤 Is broker ke customers (${cs.length})</b></p>${cs.map(c=>`<div class="row"><span data-o="${c.id}" style="cursor:pointer">${esc(c.name)} <span class="mu">${esc(c.area||"")}</span></span></div>`).join("")||'<p class="mu">-</p>'}`}
- d.innerHTML=head+b}
+ d.innerHTML=head+(r.type==="broker"?"":`<p><label class="mu">🤝 Broker (yahan se turant set hota hai)</label><select data-br="${id}" style="padding:9px;border:1px solid var(--ln);border-radius:9px;width:100%"><option value="">Direct (koi broker nahi)</option>${by("broker").map(b=>`<option value="${b.id}" ${b.id===r.brokerId?"selected":""}>${esc(bname(b.id))}</option>`).join("")}</select></p>`)+b}
 /* ---- MODALS ---- */
 const mo=h=>{$("md").innerHTML=`<div>${h}</div>`;$("md").classList.remove("hide")};const mc=()=>$("md").classList.add("hide");
 function recForm(id,type){const r=get(id)||{type:type||"customer"};const v=k=>esc(r[k]??"");
@@ -162,7 +164,7 @@ function gsearch(q){q=q.toLowerCase().trim();const g=$("gres");if(!q){g.classLis
 /* ---- EVENTS ---- */
 document.addEventListener("click",async e=>{const t=e.target,q=s=>t.closest(s);
  if(q("[data-x]"))return;if(q("[data-ai]")){intForm(q("[data-ai]").dataset.ai);return}
- if(q("[data-t]")){S.tab=q("[data-t]").dataset.t;render();return}
+ if(q("[data-t]")){S.tab=q("[data-t]").dataset.t;S.f={broker:"",area:"",type:"",max:"",stage:"",sort:"new"};render();return}
  if(q("#mr")){S.more=!S.more;render();return}if(q("#rst")){S.f={broker:"",area:"",type:"",max:"",stage:"",sort:"new"};render();return}
  if(q("[data-o]")){$("gres").classList.add("hide");drawer(q("[data-o]").dataset.o);return}
  if(q("#cl")){S.open=null;$("dr").classList.add("hide");return}
@@ -184,7 +186,7 @@ document.addEventListener("click",async e=>{const t=e.target,q=s=>t.closest(s);
   try{if(dup)await setDoc(doc(db,"crmInterests",dup.id),d,{merge:true});else await addDoc(collection(db,"crmInterests"),d);mc();toast("Interest saved ✓")}catch(er){toast(er.message)}return}
  if(!q("#gres")&&!q("#gq"))$("gres").classList.add("hide")});
 document.addEventListener("change",async e=>{const t=e.target;
- if(t.id==="f_type")tog();if(t.dataset.f){S.f[t.dataset.f]=t.value;render()}
+ if(t.id==="f_type")tog();if(t.dataset.br){await updateDoc(doc(db,"crmContacts",t.dataset.br),{brokerId:t.value,updatedAt:serverTimestamp()});toast("Broker set ✓");return}if(t.dataset.f){S.f[t.dataset.f]=t.value;render()}
  if(t.dataset.st){await updateDoc(doc(db,"crmInterests",t.dataset.st),{stage:t.value,at:Date.now()});toast("Stage → "+t.value)}});
 document.addEventListener("input",e=>{if(e.target.id==="gq")gsearch(e.target.value);
  if(e.target.id==="wam"){const r=get(S.open.id);$("wal").href=wa(r,e.target.value)}});

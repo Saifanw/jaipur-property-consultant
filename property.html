@@ -196,7 +196,8 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 .cm .bd{flex:1;min-width:0}.cm .bub{background:#f0f2f5;border-radius:16px;padding:9px 14px;display:inline-block;max-width:100%}.cm .bub.own{background:#fff7e0;border:1px solid #f1dfaa}.cm .bub b{font-size:14px;color:var(--navy)}.cm .bub p{margin:2px 0 0;color:#2a3850;white-space:pre-line;overflow-wrap:anywhere}
 .cm .stars{margin-left:8px;color:#e0a800;font-size:13px}.cm .mt{font-size:12px;color:var(--muted);margin:3px 0 0 12px}.cm.rp{margin-top:8px}.cm.rp .av{width:30px;height:30px}.ow{background:var(--gold);color:#fff;border-radius:99px;font-size:10.5px;padding:1px 7px;margin-left:5px;font-weight:700}
 .qa .cmwrap{margin-bottom:6px}
-.shr-top{margin-top:12px}.shr-top .btn{padding:10px 16px;font-size:14.5px;gap:8px}
+.shg{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:10px}.shg a,.shg button{display:grid;gap:6px;justify-items:center;padding:14px 6px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--navy);font:600 13.5px var(--font);cursor:pointer;text-decoration:none}.shg a:hover,.shg button:hover{border-color:var(--gold);background:var(--gold-soft)}.shg i{font-style:normal;font-size:24px}
+#shPanel .pv{margin-top:14px;background:#f6f8fb;border-radius:12px;padding:12px 14px;font-size:13px;color:#435166;white-space:pre-line}
 .shs{position:fixed;inset:0;background:rgba(15,27,45,.55);z-index:3000;display:none;align-items:flex-end;justify-content:center}.shs.open{display:flex}
 .shs .bx{background:#fff;width:100%;max-width:460px;border-radius:20px 20px 0 0;padding:20px 20px 26px;box-shadow:var(--shadow-lg)}
 .shs .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.shs .hd b{font:800 18px var(--font-head);color:var(--navy)}.shs .hd button{border:0;background:#f1f4f8;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer}
@@ -205,7 +206,7 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 .shs .pv{margin-top:14px;background:#f6f8fb;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#435166;white-space:pre-line;max-height:110px;overflow:auto}
 @media(min-width:641px){.shs{align-items:center}.shs .bx{border-radius:20px}}
 .mobile-bar button.s{flex:none;width:54px;border:0;border-radius:10px;background:var(--gold);color:#fff;display:grid;place-items:center;cursor:pointer}
-@media print{.shr-top,.shs{display:none!important}}
+@media print{#shPanel{display:none!important}}
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
@@ -384,7 +385,6 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
         <div class="badges"><span class="badge">${esc(type)}</span>${isSeller?`<span class="badge avail ${availCls(avail)}">${esc(avail)}</span>`:`<span class="badge avail">Buyer requirement</span>`}</div>
         <h1>${esc(title)}${p.code?`<span class="refcode">Ref ${esc(p.code)}</span>`:""}</h1>
         <div class="loc">${ico("pin")}${esc(area)}, ${esc(city)}</div>
-        <div class="shr-top"><button class="btn btn-light" type="button" id="shTop">${ico("share")}Share with family &amp; friends</button></div>
       </div>
       <div class="tb-price"><div class="lab">${isSeller?"Price":"Budget"}</div><div class="val">${esc(price)}</div>${pgaj?`<div class="pg">${esc(pgaj)}</div>`:""}</div>
     </div>
@@ -398,6 +398,9 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
         ${p.videoUrl&&isSeller?`<section class="panel"><h2>Property video</h2><div class="video-wrap"><video controls playsinline preload="metadata" src="${esc(p.videoUrl)}"></video></div></section>`:""}
         ${isSeller?qaHtml:""}
         <section class="panel" id="simPanel" style="display:none"><h2>Similar properties</h2><div class="sim" id="simGrid"></div></section>
+        <section class="panel" id="shPanel"><h2>Share this property</h2><p class="fine" style="margin:-6px 0 14px">Family ya relatives ko bhejo — link kholte hi photos, price aur poori detail dikhegi.</p>
+          <div class="shg"><a id="shW" target="_blank" rel="noopener"><i>💬</i>WhatsApp</a><a id="shF" target="_blank" rel="noopener"><i>📘</i>Facebook</a><a id="shT" target="_blank" rel="noopener"><i>✈️</i>Telegram</a><a id="shS"><i>✉️</i>SMS</a><a id="shE"><i>📧</i>Email</a><button type="button" id="shC"><i>🔗</i>Copy link</button>${navigator.share?'<button type="button" id="shN"><i>📤</i>More apps</button>':""}</div>
+          <div class="pv" id="shP"></div></section>
         ${isSeller?`<section class="panel"><h2>Customer comments</h2>
           <div id="commentsList" class="comments"><div class="notice">Loading comments…</div></div>
           <form id="commentForm" class="cform">
@@ -443,19 +446,14 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     if(szTxt)L.push("📐 "+szTxt);const fc=p.facing||tidy1(p.roadFacing);if(fc)L.push("🧭 "+fc+(p.roadWidth?" | Road "+tidy1(p.roadWidth):""));
     const lg=[p.pattaType,p.registry].filter(Boolean).join(" | ");if(lg)L.push("📄 "+lg);
     L.push("","👉 Photos & full details:",location.href,"",`📞 Jaipur Property Consultant: ${(window.SITE&&SITE.phone)||"6350566010"}`);return L.join("\n")}
-  function openShare(){
-    let sh=$("shSheet");const url=location.href,msg=shareMsg(),enc=encodeURIComponent;
-    if(!sh){sh=document.createElement("div");sh.id="shSheet";sh.className="shs";sh.innerHTML=`<div class="bx" role="dialog" aria-modal="true" aria-label="Share property"><div class="hd"><b>Share this property</b><button type="button" data-x aria-label="Close">✕</button></div><div class="sub">Family ya relatives ko bhejo — link kholte hi photos, price aur poori detail dikhegi.</div><div class="gr"><a id="shW" target="_blank" rel="noopener"><i>💬</i>WhatsApp</a><a id="shF" target="_blank" rel="noopener"><i>📘</i>Facebook</a><a id="shT" target="_blank" rel="noopener"><i>✈️</i>Telegram</a><a id="shS"><i>✉️</i>SMS</a><a id="shE"><i>📧</i>Email</a><button type="button" id="shC"><i>🔗</i>Copy link</button>${navigator.share?'<button type="button" id="shN" style="grid-column:1/-1"><i>📤</i>More apps…</button>':""}</div><div class="pv" id="shP"></div></div>`;
-      document.body.appendChild(sh);sh.addEventListener("click",e=>{if(e.target===sh||e.target.closest("[data-x]"))sh.classList.remove("open")});
-      document.addEventListener("keydown",e=>{if(e.key==="Escape")sh.classList.remove("open")});
-      sh.querySelectorAll("a,button").forEach(b=>b.addEventListener("click",()=>{if(typeof gtag==="function")gtag("event","share",{method:b.id,item_id:p.code||p.id})}))}
+  function openShare(){const el=$("shPanel");if(!el)return;el.scrollIntoView({behavior:"smooth",block:"center"});el.style.outline="3px solid var(--gold2)";setTimeout(()=>el.style.outline="",1400)}
+  {const url=location.href,msg=shareMsg(),enc=encodeURIComponent;
     $("shW").href="https://wa.me/?text="+enc(msg);$("shF").href="https://www.facebook.com/sharer/sharer.php?u="+enc(url)+"&quote="+enc(title+" — "+price);
     $("shT").href="https://t.me/share/url?url="+enc(url)+"&text="+enc(msg.replace(url,"").trim());$("shS").href="sms:?&body="+enc(msg);$("shE").href="mailto:?subject="+enc(title+" | Jaipur Property Consultant")+"&body="+enc(msg);
     $("shP").textContent=msg.replace(/\*/g,"");
-    $("shC").onclick=async()=>{try{await navigator.clipboard.writeText(url);say("Link copied")}catch(_){window.prompt("Copy this link",url)}sh.classList.remove("open")};
+    $("shC").onclick=async()=>{try{await navigator.clipboard.writeText(url);say("Link copied")}catch(_){window.prompt("Copy this link",url)}};
     if($("shN"))$("shN").onclick=()=>navigator.share({title,text:msg,url}).catch(()=>{});
-    sh.classList.add("open")}
-  $("shTop").onclick=openShare;
+    $("shPanel").querySelectorAll("a,button").forEach(b=>b.addEventListener("click",()=>{if(typeof gtag==="function")gtag("event","share",{method:b.id,item_id:p.code||p.id})}))}
   {const mb=$("mobileBar");if(mb){const b=document.createElement("button");b.type="button";b.className="s";b.setAttribute("aria-label","Share");b.innerHTML=ico("share");b.onclick=openShare;mb.appendChild(b)}}
 
   const SK="jpc_saved",getS=()=>{try{const v=JSON.parse(localStorage.getItem(SK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};

@@ -48,7 +48,7 @@ select,input[type=text],input[type=date],input[type=tel],textarea{width:100%;bor
 .list{overflow:clip}
 .row{display:grid;gap:12px;align-items:center;padding:13px 18px;border-top:1px solid var(--line)}
 .row.head{border-top:0;background:#f8faff;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--mut);text-transform:uppercase;position:sticky;top:64px;z-index:5;padding:11px 18px}
-.rp{grid-template-columns:96px minmax(0,2.2fr) minmax(0,1fr) 110px 120px 150px}
+.rp{grid-template-columns:96px minmax(0,2.2fr) minmax(0,1fr) 100px 100px 220px}.ra .mini{white-space:nowrap}
 .rc{grid-template-columns:minmax(0,2fr) minmax(0,2fr) 140px minmax(0,1.2fr) 170px}
 .row.hv{cursor:pointer}.row.hv:hover{background:#fafcff}
 .code{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.02em;background:#eaf0ff;color:var(--blue);border:1px solid #d5defa;border-radius:8px;padding:4px 9px;white-space:nowrap}
@@ -107,6 +107,13 @@ button.code{cursor:pointer}button.code:hover{background:#dce6ff}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:11px;font-weight:600;z-index:90}.toast.bad{background:var(--red)}
 .auth{min-height:70vh;display:grid;place-items:center}.auth .card{max-width:380px;text-align:center;padding:34px}.auth h2{font-size:22px;margin:10px 0 6px}.auth p{color:var(--mut);margin-bottom:18px}
 .sk{height:16px;border-radius:8px;background:linear-gradient(90deg,#eef2f8,#f8faff,#eef2f8);background-size:200% 100%;animation:sk 1.2s infinite}@keyframes sk{to{background-position:-200% 0}}
+.mini.ed{background:var(--blue);border-color:var(--blue);color:#fff;font-size:13px;padding:8px 14px;box-shadow:0 4px 12px #2f5bff40}.mini.ed:hover{background:var(--blue2)}
+.ptools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;padding:12px;border:1px solid #d5defa;background:#f3f6ff;border-radius:12px}
+.ptools .btn.p{padding:10px 18px;font-size:14px}.ptools .avs{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-left:auto;font-size:12px;font-weight:700;color:var(--mut)}
+.ptools .avs button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:12px;font-weight:700}.ptools .avs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.gc{background:var(--green);border-color:var(--green);color:#fff;font-size:14px;padding:10px 20px;box-shadow:0 6px 16px #0f9d6a55}.btn.gc:hover{background:#0b8a5c;border-color:#0b8a5c}
+.fabm{display:none}
+@media(max-width:700px){.fabm{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:8px;padding:8px;background:#fff;box-shadow:0 -4px 18px #0f172a24}.fabm button{flex:1;border:0;border-radius:11px;padding:13px 8px;font-weight:700;font-size:14px;background:var(--ink);color:#fff}.fabm button.b{background:var(--blue)}.fabm button.g{background:var(--green);flex:1.6}main{padding-bottom:84px}}
 @media(max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){.row.head{display:none}.rp,.rc,.sub,.fl{grid-template-columns:minmax(0,1fr);gap:6px;padding:15px 14px}.ra{justify-content:flex-start;margin-top:4px}.sc-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.top-in{padding:10px 14px 0;gap:10px;flex-wrap:wrap;height:auto}.nav{order:3;flex-basis:100%;padding-bottom:8px}.acts .btn:not(.p){display:none}main{padding:18px 14px 50px}.hero h1{font-size:23px}.fg{grid-template-columns:1fr}.noteadd{grid-template-columns:1fr}.mh,.mtabs,.mbody,.mf{padding-left:16px;padding-right:16px}}
@@ -168,7 +175,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
   <div class="acts">
     <button class="btn" id="kBtn" title="Search everything">🔍 <kbd>Ctrl K</kbd></button>
     <button class="btn" id="sBtn">⚡ Quick add</button>
-    <button class="btn" id="addC">＋ Contact</button>
+    <button class="btn gc" id="addC">＋ Add Contact</button>
     <button class="btn p" id="addP">＋ Property</button>
     <div class="menu"><button class="avatar" id="avBtn" aria-label="Account">?</button>
       <div class="dd hidden" id="dd"><div class="em" id="ddEm"></div><a href="index.html" target="_blank" rel="noopener">🌐 Public website</a><a href="https://analytics.google.com/" target="_blank" rel="noopener">📈 Website Analytics (GA4)</a><button id="out">Sign out</button></div></div>
@@ -268,6 +275,8 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 </main>
 
 <!-- CONTACT MODAL -->
+<div class="fabm"><button class="g" id="fabC">＋ Add Contact</button><button id="fabQ">⚡ Quick add</button><button class="b" id="fabP">＋ Property</button></div>
+
 <div id="mo" class="ov hidden"><div class="modal" role="dialog" aria-modal="true">
   <div class="mh"><div><h2 id="mt">Add contact</h2><p id="ms">Saved to your private CRM.</p></div><span class="st" id="mBadge">New</span></div>
   <div class="mtabs" id="mtabs"><button data-t="status" class="on">Status &amp; follow-up</button><button data-t="details">Details</button><button data-t="matches" id="matchTab">Matches</button><button data-t="conv" id="convTab">Conversation</button></div>
@@ -463,11 +472,15 @@ async function backfillCodes(){
 }
 
 /* ---------- listeners / auth ---------- */
+let urlDone=false;
+function openFromUrl(){if(urlDone)return;const id=new URLSearchParams(location.search).get("edit");if(!id){urlDone=true;return}
+  urlDone=true;history.replaceState(null,"",location.pathname);
+  if(propById(id)){setView("props");openProp=id;renderProps();openP(id)}else toast("Ye property admin me nahi mili",true)}
 function listen(){
   unsubs.forEach(u=>u());unsubs=[];
   unsubs.push(onSnapshot(collection(db,COL),s=>{
     all=s.docs.map(d=>({id:d.id,...d.data({serverTimestamps:"estimate"})}));recs=all.filter(r=>!r.deletedAt);loaded=true;
-    $("err").classList.add("hidden");refreshAll();backfillCodes();
+    $("err").classList.add("hidden");refreshAll();backfillCodes();openFromUrl();
   },e=>{loaded=true;$("err").textContent="Data load nahi hua: "+(e.code||e.message);$("err").classList.remove("hidden");refreshAll()}));
   unsubs.push(onSnapshot(collection(db,"publicSubmissions"),s=>{subs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("subs",e)));
   unsubs.push(onSnapshot(collection(db,"publicReviews"),s=>{revs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("revs",e)));
@@ -475,10 +488,10 @@ function listen(){
 onAuthStateChanged(auth,u=>{user=u;
   if(!u){$("app").classList.add("hidden");$("auth").classList.remove("hidden");unsubs.forEach(x=>x());unsubs=[];return}
   if(!isAdmin(u)){$("aerr").textContent="Access denied: "+u.email;$("app").classList.add("hidden");$("auth").classList.remove("hidden");signOut(auth);return}
-  $("aerr").textContent="";$("auth").classList.add("hidden");$("app").classList.remove("hidden");
+  $("aerr").textContent="";try{localStorage.setItem("jpc_admin","1")}catch(_){}$("auth").classList.add("hidden");$("app").classList.remove("hidden");
   $("avBtn").textContent=ini(u.displayName||u.email);$("ddEm").textContent=u.email;refreshAll();listen()});
 $("gbtn").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("aerr").textContent=e.message}};
-$("out").onclick=()=>signOut(auth);
+$("out").onclick=()=>{try{localStorage.removeItem("jpc_admin")}catch(_){}signOut(auth)};
 $("avBtn").onclick=e=>{e.stopPropagation();$("dd").classList.toggle("hidden")};document.addEventListener("click",()=>$("dd").classList.add("hidden"));
 
 /* ---------- shared render helpers ---------- */
@@ -541,7 +554,7 @@ function renderProps(){
       <div class="cell"><b>${esc(budgetText(p))}</b><span><span class="st ${cls(av)}" style="padding:1px 8px;font-size:11px">${esc(av)}</span></span></div>
       <div>${c.length?`<span class="intp">👥 ${c.length}</span>`:`<span style="color:var(--mut)">—</span>`}</div>
       <div>${d?`<span class="due">${d} due</span>`:`<span style="color:var(--mut)">—</span>`}</div>
-      <div class="ra"><button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini v" data-act="pEdit" data-id="${esc(p.id)}">Edit</button></div></div>
+      <div class="ra"><button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>
       ${open?`<div class="detail">${propDetail(p,c)}</div>`:""}`}).join("");
 }
 function propDetail(p,c){
@@ -550,7 +563,9 @@ function propDetail(p,c){
   const linked=new Set(c.map(x=>x.id)),sug=matchesForProp(p).filter(x=>!linked.has(x.c.id)).slice(0,4);
   const imgs=(p.images||[]).slice(0,6).map(u=>`<img class="thumb" style="width:64px;height:64px" src="${esc(u)}" alt="" loading="lazy">`).join("");
   const lk=propLink(p);
-  return`${imgs?`<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">${imgs}</div>`:""}
+  const avNow=p.availability||"Available";
+  const tools=`<div class="ptools"><button class="btn p" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit property</button><div class="avs">Status: ${["Available","Under Offer","Sold","Hold"].map(v=>`<button type="button" class="${avNow===v?"on":""}" data-act="pAv" data-id="${esc(p.id)}" data-v="${v}">${v}</button>`).join("")}</div></div>`;
+  return`${tools}${imgs?`<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">${imgs}</div>`:""}
    <div class="pinfo" style="margin-top:12px">${info||"<span>Aur details nahi bhari.</span>"}</div>
    ${p.followUpDate?`<div class="pinfo"><span>Owner follow-up: <b>${fmtFu(p.followUpDate)}</b> ${esc(p.followUpNote||"")}</span></div>`:""}
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px">${waBtn(p)}${lk?`<button class="mini" data-act="copyLink" data-id="${esc(p.id)}">🔗 Copy website link</button>`:""}</div>
@@ -912,7 +927,7 @@ $("kBtn").onclick=openK;
 function setView(v){view=v;document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));["dash","props","contacts","follow","inbox","match","tools"].forEach(k=>$("v_"+k).classList.toggle("hidden",k!==v));window.scrollTo({top:0})}
 function goProp(id){setView("props");openProp=id;["pq"].forEach(i=>$(i).value="");["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps();setTimeout(()=>document.querySelector(`[data-pid="${CSS.escape(id)}"]`)?.scrollIntoView({block:"center",behavior:"smooth"}),60)}
 $("nav").onclick=e=>{const b=e.target.closest("[data-v]");if(b)setView(b.dataset.v)};
-$("addC").onclick=()=>openC();$("addP").onclick=()=>openP();
+$("addC").onclick=()=>openC();$("addP").onclick=()=>openP();$("fabQ").onclick=()=>$("sBtn").click();$("fabC").onclick=()=>openC();$("fabP").onclick=()=>openP();
 let st;[["pq",renderProps],["cq",()=>{cShown=60;renderContacts()}]].forEach(([i,f])=>$(i).addEventListener("input",()=>{clearTimeout(st);st=setTimeout(f,150)}));
 ["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).addEventListener("change",renderProps));
 ["cf_area","cf_status","cf_src","cf_sort"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
@@ -927,7 +942,7 @@ document.addEventListener("click",async e=>{
   if(a){const id=a.dataset.id,act=a.dataset.act;
     try{
     if(act==="addP")openP();else if(act==="addC")openC();else if(act==="more"){cShown+=60;renderContacts()}
-    else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
+    else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="pAv"){const p=propById(id),v=a.dataset.v;if(p&&v&&v!==(p.availability||"Available")){await updateDoc(doc(db,COL,id),{availability:v,updatedAt:serverTimestamp()});await publishSync(id,{...p,availability:v});toast(p.code+" → "+v)}}else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
     else if(act==="wa")openW(id,a.dataset.pid);
     else if(act==="go"){const to=a.dataset.to;if(to==="nofu"){setView("contacts");cChip="nofu";cShown=60;renderContacts()}else if(to==="noenq"){setView("props");$("pf_show").value="none";renderProps()}else setView(to)}
     else if(act==="copyLink"){const p=propById(id);if(p){await navigator.clipboard.writeText(propLink(p));toast("Website link copy ho gaya")}}

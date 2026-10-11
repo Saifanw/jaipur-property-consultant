@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Smart CRM | Jaipur Property Consultant</title>
+<style>
+:root{--navy:#111c2d;--gold:#c79a25;--green:#128a4d;--bg:#f4f7fa;--tx:#182437;--mu:#66758a;--ln:#dfe5ec;--red:#d33}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--tx);font-size:14px}
+button,input,select,textarea{font:inherit}.hide{display:none!important}
+header{background:var(--navy);color:#fff;padding:10px 16px;display:flex;gap:12px;align-items:center;position:sticky;top:0;z-index:20;flex-wrap:wrap}
+.brand{font-weight:900;font-size:17px}.brand small{display:block;color:var(--gold);font-size:9px;letter-spacing:1.4px}
+.gs{flex:1;min-width:220px;position:relative}.gs input{width:100%;padding:10px 14px;border-radius:10px;border:0}
+#gres{position:absolute;top:44px;left:0;right:0;background:#fff;color:var(--tx);border-radius:12px;box-shadow:0 14px 40px #0004;max-height:70vh;overflow:auto}
+#gres h4{margin:0;padding:8px 12px;background:#f2f5f8;font-size:11px;color:var(--mu)}#gres div.r{padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--ln)}#gres div.r:hover{background:#fff8e6}
+.btn{border:0;border-radius:9px;padding:9px 13px;font-weight:800;cursor:pointer;background:#fff;border:1px solid var(--ln);color:var(--tx)}.btn.g{background:var(--gold);color:#fff;border:0}.btn.w{background:var(--green);color:#fff;border:0}.btn.d{color:var(--red)}.btn.s{padding:5px 9px;font-size:12px}
+nav{display:flex;gap:6px;padding:12px 16px 0;flex-wrap:wrap}nav button{padding:9px 15px;border-radius:999px;border:1px solid var(--ln);background:#fff;font-weight:800;cursor:pointer}nav button.on{background:var(--navy);color:#fff}
+main{padding:12px 16px 60px;max-width:1300px;margin:auto}
+.bar{display:flex;gap:8px;flex-wrap:wrap;background:#fff;padding:10px;border:1px solid var(--ln);border-radius:14px;margin-bottom:14px}.bar select,.bar input{padding:9px;border:1px solid var(--ln);border-radius:9px;background:#fff}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.stat{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:10px 16px}.stat b{font-size:20px;display:block}.stat span{font-size:11px;color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--ln);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px #111c2d0f;position:relative;cursor:pointer}
+.ph{height:150px;background:linear-gradient(135deg,#dfe8ef,#f8fafc);display:grid;place-items:center;font-size:40px}.ph img{width:100%;height:100%;object-fit:cover}
+.cb{padding:12px}.cb h3{margin:4px 0;font-size:16px}.mu{color:var(--mu);font-size:12px}.price{font-weight:900;color:#8a6500;margin:6px 0}
+.rank{position:absolute;top:8px;left:8px;background:var(--navy);color:#fff;border-radius:999px;padding:4px 10px;font-weight:900;font-size:12px}
+.heat{position:absolute;top:8px;right:8px;background:#fff;border-radius:999px;padding:4px 10px;font-weight:900;font-size:12px}
+.tag{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:800;margin:2px 3px 2px 0;background:#eef4ff;color:#275da8}.tag.b{background:#fff3d6;color:#8a6500}.tag.c{background:#e6f6ec;color:#0e7441}.tag.r{background:#fde8e8;color:#b22}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--ln);flex-wrap:wrap}
+#dr{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:#fff;z-index:40;box-shadow:-10px 0 40px #0004;overflow:auto;padding:16px}
+#md{position:fixed;inset:0;background:#0007;z-index:50;display:grid;place-items:center;padding:12px}#md>div{background:#fff;border-radius:16px;padding:18px;width:min(520px,100%);max-height:92vh;overflow:auto}
+.f{display:grid;gap:8px;grid-template-columns:1fr 1fr}.f label{font-size:11px;font-weight:800;color:var(--mu)}.f input,.f select,.f textarea{width:100%;padding:9px;border:1px solid var(--ln);border-radius:9px}.f .full{grid-column:1/-1}
+#login{min-height:80vh;display:grid;place-items:center;text-align:center}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;z-index:99}
+</style></head><body>
+<div id="login"><div><h2>🏠 Smart CRM</h2><p class="mu">Sirf admin Gmail se login hoga</p><button class="btn g" id="inBtn">Google se Login</button><p id="lm" class="mu"></p></div></div>
+<div id="app" class="hide">
+<header><div class="brand">Smart CRM<small>JAIPUR PROPERTY CONSULTANT</small></div>
+<div class="gs"><input id="gq" placeholder="🔎 Global search: naam, mobile, area, broker, property, notes..." autocomplete="off"><div id="gres" class="hide"></div></div>
+<button class="btn g" id="addRec">+ Record</button><button class="btn w" id="addInt">❤ Interest</button><button class="btn" id="out">Logout</button></header>
+<nav id="tabs"></nav><main><div class="stats" id="stats"></div><div class="bar" id="bar"></div><div id="list"></div></main></div>
+<div id="dr" class="hide"></div><div id="md" class="hide"></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import{getFirestore,collection,addDoc,doc,setDoc,updateDoc,deleteDoc,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+const cfg={
+  apiKey: "AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",
+  authDomain: "jaipur-property-consultant.firebaseapp.com",
+  projectId: "jaipur-property-consultant",
+  storageBucket: "jaipur-property-consultant.firebasestorage.app",
+  messagingSenderId: "502971407075",
+  appId: "1:502971407075:web:ee4dabc90db9f592ebc3d6",
+  measurementId: "G-0DW0NBETML"
+};
+const ADMINS=["saif.anwar1618@gmail.com"];
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
+const $=i=>document.getElementById(i);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const STAGES=["Interested","Site Visit","Negotiation","Closed","Dropped"];
+const W={Interested:10,"Site Visit":25,Negotiation:40,Closed:0,Dropped:0};
+const S={recs:[],ints:[],tab:"properties",f:{broker:"",area:"",type:"",max:"",stage:"",sort:"rank"},open:null};
+const money=n=>{n=+n;if(!n)return"";return n>=1e7?"₹"+(n/1e7).toFixed(2).replace(/\.?0+$/,"")+" Cr":n>=1e5?"₹"+(n/1e5).toFixed(1).replace(/\.0$/,"")+" L":"₹"+n};
+const budget=r=>[money(r.budgetMin),money(r.budgetMax)].filter(Boolean).join(" – ");
+const toast=m=>{const t=document.createElement("div");t.id="toast";t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2500)};
+const live=()=>S.recs.filter(r=>!r.deletedAt);
+const by=t=>live().filter(r=>r.type===t);
+const get=id=>S.recs.find(r=>r.id===id);
+const bname=id=>{const b=get(id);return b?(b.name+(b.company?" ("+b.company+")":"")):""};
+const days=at=>(Date.now()-(at||0))/864e5;
+const iw=i=>(W[i.stage]||0)*(0.5+0.5*Math.max(0,1-days(i.at)/30));
+/* ---- RANKING: property hotness = sum of interest weights, decays over 30 days ---- */
+function heat(pid){return Math.round(S.ints.filter(i=>i.propertyId===pid).reduce((a,i)=>a+iw(i),0))}
+function ranks(){const l=by("seller").map(p=>({id:p.id,h:heat(p.id)})).sort((a,b)=>b.h-a.h);const m={};l.forEach((x,i)=>m[x.id]=x.h>0?i+1:0);return m}
+const custInts=cid=>S.ints.filter(i=>i.customerId===cid).sort((a,b)=>iw(b)-iw(a)||b.at-a.at);
+const propInts=pid=>S.ints.filter(i=>i.propertyId===pid).sort((a,b)=>iw(b)-iw(a)||b.at-a.at);
+const wa=(r,msg)=>"https://wa.me/"+(String(r.whatsapp||r.mobile||"").replace(/\D/g,"").replace(/^(\d{10})$/,"91$1"))+"?text="+encodeURIComponent(msg);
+const heatTag=h=>h>=60?"🔥 Hot":h>=25?"⚡ Warm":h>0?"🌱 Cool":"—";
+/* ---- AUTH + DATA ---- */
+$("inBtn").onclick=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>$("lm").textContent=e.message);
+$("out").onclick=()=>signOut(auth);
+onAuthStateChanged(auth,u=>{
+ const ok=u&&ADMINS.map(x=>x.toLowerCase()).includes((u.email||"").toLowerCase());
+ $("login").classList.toggle("hide",!!ok);$("app").classList.toggle("hide",!ok);
+ if(u&&!ok){$("lm").textContent="Access denied: "+u.email;signOut(auth);return}
+ if(ok){
+  onSnapshot(collection(db,"crmContacts"),s=>{S.recs=s.docs.map(d=>({id:d.id,...d.data()}));render()},e=>toast(e.message));
+  onSnapshot(collection(db,"crmInterests"),s=>{S.ints=s.docs.map(d=>({id:d.id,...d.data()}));render()},e=>toast("crmInterests rule add karo: "+e.message));
+ }});
+/* ---- RENDER ---- */
+const TABS=[["properties","🏠 Properties"],["customers","👤 Customers"],["brokers","🤝 Brokers"],["pipeline","❤ Interests"]];
+function render(){
+ $("tabs").innerHTML=TABS.map(([k,l])=>`<button data-t="${k}" class="${S.tab===k?"on":""}">${l}</button>`).join("");
+ const pr=by("seller"),cu=by("customer"),br=by("broker");
+ $("stats").innerHTML=[["Properties",pr.length],["Customers",cu.length],["Brokers",br.length],["Active Interests",S.ints.filter(i=>W[i.stage]>0).length]].map(([l,n])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+ const opt=(a,sel,ph)=>`<option value="">${ph}</option>`+a.map(x=>`<option value="${esc(x[0])}" ${x[0]===sel?"selected":""}>${esc(x[1])}</option>`).join("");
+ const areas=[...new Set(live().map(r=>(r.area||"").trim()).filter(Boolean))].sort().map(a=>[a,a]);
+ const types=[...new Set(live().map(r=>(r.propertyType||"").trim()).filter(Boolean))].sort().map(a=>[a,a]);
+ const brs=br.map(b=>[b.id,bname(b.id)]);
+ const F=S.f;let bar=`<select data-f="broker">${opt(brs,F.broker,"Sab Brokers")}</select><select data-f="area">${opt(areas,F.area,"Sab Areas")}</select><select data-f="type">${opt(types,F.type,"Sab Types")}</select>`;
+ if(S.tab==="properties")bar+=`<select data-f="max">${opt([[5e6,"Up to ₹50 L"],[1e7,"Up to ₹1 Cr"],[2e7,"Up to ₹2 Cr"],[5e7,"Up to ₹5 Cr"]],F.max,"Any Budget")}</select><select data-f="sort">${opt([["rank","Rank (Hot pehle)"],["new","Newest"],["price","Price low→high"]],F.sort,"Sort").replace('<option value="">Sort</option>',"")}</select>`;
+ if(S.tab==="pipeline")bar+=`<select data-f="stage">${opt(STAGES.map(s=>[s,s]),F.stage,"Sab Stages")}</select>`;
+ bar+=`<button class="btn" id="rst">Reset</button>`;$("bar").innerHTML=bar;
+ $("list").innerHTML=({properties:vProps,customers:vCust,brokers:vBrok,pipeline:vPipe})[S.tab]();
+ if(S.open)drawer(S.open.id,true);
+}
+const okRec=r=>(!S.f.area||(r.area||"").trim()===S.f.area)&&(!S.f.type||(r.propertyType||"").trim()===S.f.type);
+const okBrk=r=>!S.f.broker||r.brokerId===S.f.broker||r.id===S.f.broker;
+function vProps(){
+ const rk=ranks();let l=by("seller").filter(okRec).filter(okBrk).filter(p=>!S.f.max||!p.budgetMin&&!p.budgetMax||+(p.budgetMin||p.budgetMax)<=+S.f.max);
+ const price=p=>+(p.budgetMin||p.budgetMax||0);
+ l.sort((a,b)=>S.f.sort==="price"?price(a)-price(b):S.f.sort==="new"?(b.createdAtMs||0)-(a.createdAtMs||0):(rk[a.id]||999)-(rk[b.id]||999));
+ if(!l.length)return`<p class="mu">Koi property nahi mili.</p>`;
+ return`<div class="grid">`+l.map(p=>{const ii=propInts(p.id).filter(i=>W[i.stage]>0),img=(p.publicImageUrls||p.images||[])[0];
+  return`<div class="card" data-o="${p.id}">${rk[p.id]?`<span class="rank">#${rk[p.id]}</span>`:""}<span class="heat">${heatTag(heat(p.id))} ${heat(p.id)||""}</span>
+  <div class="ph">${img?`<img src="${esc(img)}" loading="lazy">`:"🏠"}</div><div class="cb"><span class="tag">${esc(p.propertyType||"Property")}</span><span class="tag">${esc(p.status||"New")}</span>
+  <h3>${esc(p.name||"Property")}</h3><div class="mu">📍 ${esc(p.area||"-")} ${p.size?"• "+esc(p.size):""}</div><div class="price">${budget(p)||"Price on request"}</div>
+  <div>${p.brokerId?`<span class="tag b">🤝 ${esc(bname(p.brokerId))}</span>`:`<span class="tag b">Direct Owner</span>`}</div>
+  <div class="mu" style="margin-top:6px">❤ ${ii.length} interested:</div><div>${ii.slice(0,3).map(i=>`<span class="tag c">${esc(get(i.customerId)?.name||"?")}${get(i.customerId)?.brokerId?" · via "+esc(get(get(i.customerId).brokerId)?.name||""):""}</span>`).join("")||`<span class="mu">Abhi koi nahi</span>`}${ii.length>3?`<span class="tag">+${ii.length-3}</span>`:""}</div></div></div>`}).join("")+`</div>`}
+function vCust(){const l=by("customer").filter(okRec).filter(okBrk);if(!l.length)return`<p class="mu">Koi customer nahi.</p>`;
+ return`<div class="grid">`+l.map(c=>{const ci=custInts(c.id).filter(i=>W[i.stage]>0),top=ci[0];
+  return`<div class="card" data-o="${c.id}"><div class="cb"><h3>👤 ${esc(c.name)}</h3><div class="mu">📞 ${esc(c.mobile||"-")} • 📍 ${esc(c.area||"-")}</div><div class="price">${budget(c)||""}</div>
+  <span class="tag">${esc(c.propertyType||"Any")}</span><span class="tag">${esc(c.status||"New")}</span>${c.brokerId?`<span class="tag b">🤝 via ${esc(bname(c.brokerId))}</span>`:`<span class="tag b">Direct</span>`}
+  <div class="mu" style="margin-top:8px">${top?`Latest interest: <b>${esc(get(top.propertyId)?.name||"?")}</b> (${esc(top.stage)})`:"Kisi property me interest add nahi"}</div></div></div>`}).join("")+`</div>`}
+function vBrok(){const l=by("broker").filter(r=>!S.f.area||(r.areasServed||r.area||"").includes(S.f.area));if(!l.length)return`<p class="mu">Koi broker nahi.</p>`;
+ return`<div class="grid">`+l.map(b=>{const np=by("seller").filter(p=>p.brokerId===b.id).length,nc=by("customer").filter(c=>c.brokerId===b.id).length;
+  return`<div class="card" data-o="${b.id}"><div class="cb"><h3>🤝 ${esc(b.name)}</h3><div class="mu">${esc(b.company||"")} • 📞 ${esc(b.mobile||"-")}</div><div class="mu">📍 ${esc(b.areasServed||b.area||"-")}</div>
+  <div style="margin-top:8px"><span class="tag">🏠 ${np} properties</span><span class="tag c">👤 ${nc} customers</span></div></div></div>`}).join("")+`</div>`}
+function vPipe(){let l=S.ints.filter(i=>!S.f.stage||i.stage===S.f.stage).filter(i=>{const c=get(i.customerId),p=get(i.propertyId);return(!S.f.broker||c?.brokerId===S.f.broker||p?.brokerId===S.f.broker)&&(!S.f.area||p?.area===S.f.area)}).sort((a,b)=>iw(b)-iw(a)||b.at-a.at);
+ if(!l.length)return`<p class="mu">Koi interest record nahi. "❤ Interest" se add karo.</p>`;
+ return`<div class="card" style="padding:6px 14px;cursor:default">`+l.map(i=>{const c=get(i.customerId),p=get(i.propertyId);return`<div class="row"><div><b data-o="${i.customerId}" style="cursor:pointer">${esc(c?.name||"?")}</b> ${c?.brokerId?`<span class="tag b">via ${esc(get(c.brokerId)?.name||"")}</span>`:""}<br><span class="mu">→ <a data-o="${i.propertyId}" style="cursor:pointer;text-decoration:underline">${esc(p?.name||"?")}</a> ${p?.brokerId?"· 🤝 "+esc(get(p.brokerId)?.name||""):""} • ${Math.round(days(i.at))} din pehle</span></div><span class="tag ${i.stage==="Dropped"?"r":"c"}">${esc(i.stage)}</span></div>`}).join("")+`</div>`}
+/* ---- DRAWER ---- */
+function drawer(id,keep){const r=get(id);if(!r){$("dr").classList.add("hide");return}S.open={id};const d=$("dr");d.classList.remove("hide");
+ const head=`<div class="row"><b style="font-size:17px">${esc(r.name)}</b><span><button class="btn s" data-edit="${id}">Edit</button> <button class="btn s d" data-del="${id}">Delete</button> <button class="btn s" id="cl">✕</button></span></div><div class="mu">${esc(r.type)} • 📞 ${esc(r.mobile||"-")} • 📍 ${esc(r.area||"-")} ${r.size?"• "+esc(r.size):""}</div><div class="price">${budget(r)}</div>${r.details?`<p>${esc(r.details)}</p>`:""}${r.notes?`<p class="mu">📝 ${esc(r.notes)}</p>`:""}`;
+ let b="";
+ const irow=(i,showC)=>{const c=get(i.customerId),p=get(i.propertyId);return`<div class="row"><div><b>${esc(showC?c?.name:p?.name)}</b> ${showC&&c?.brokerId?`<span class="tag b">via ${esc(get(c.brokerId)?.name||"")}</span>`:""}${!showC&&p?.brokerId?`<span class="tag b">🤝 ${esc(get(p.brokerId)?.name||"")}</span>`:""}<br><span class="mu">${i.note?esc(i.note)+" • ":""}${Math.round(days(i.at))} din pehle</span></div><span><select data-st="${i.id}">${STAGES.map(s=>`<option ${s===i.stage?"selected":""}>${s}</option>`).join("")}</select> <button class="btn s d" data-di="${i.id}">✕</button></span></div>`};
+ if(r.type==="seller"){const ii=propInts(id);b=`<p><span class="tag b">${r.brokerId?"🤝 Listed by "+esc(bname(r.brokerId)):"Direct Owner"}</span><span class="tag">Hotness ${heat(id)} ${heatTag(heat(id))}</span></p><div class="row"><b>❤ Interested customers (${ii.length})</b><button class="btn s g" data-ai="p:${id}">+ Add</button></div>${ii.map(i=>irow(i,true)).join("")||'<p class="mu">Koi nahi</p>'}`}
+ else if(r.type==="customer"){const ci=custInts(id),top=ci.find(i=>W[i.stage]>0),msg=top?`Namaste ${r.name} ji, aap ${get(top.propertyId)?.name||"property"} (${get(top.propertyId)?.area||""}) me interested the. Abhi ye property available hai, kya aap site visit karna chahenge?`:`Namaste ${r.name} ji, Jaipur Property Consultant se. Aapki ${r.propertyType||"property"} requirement ke liye naye options available hain.`;
+  b=`<p><span class="tag b">${r.brokerId?"🤝 via "+esc(bname(r.brokerId)):"Direct customer"}</span></p><textarea id="wam" rows="3" style="width:100%;padding:8px;border:1px solid var(--ln);border-radius:9px">${esc(msg)}</textarea><p><a class="btn w" id="wal" href="${wa(r,msg)}" target="_blank">💬 WhatsApp bhejo</a></p>
+  <div class="row"><b>❤ Interested properties (ranked)</b><button class="btn s g" data-ai="c:${id}">+ Add</button></div>${ci.map(i=>irow(i,false)).join("")||'<p class="mu">Koi nahi</p>'}`}
+ else{const ps=by("seller").filter(p=>p.brokerId===id),cs=by("customer").filter(c=>c.brokerId===id);
+  b=`<p><b>🏠 Is broker ki properties (${ps.length})</b></p>${ps.map(p=>`<div class="row"><span data-o="${p.id}" style="cursor:pointer">${esc(p.name)} <span class="mu">${esc(p.area||"")}</span></span><span class="tag">${heat(p.id)}</span></div>`).join("")||'<p class="mu">-</p>'}<p><b>👤 Is broker ke customers (${cs.length})</b></p>${cs.map(c=>`<div class="row"><span data-o="${c.id}" style="cursor:pointer">${esc(c.name)} <span class="mu">${esc(c.area||"")}</span></span></div>`).join("")||'<p class="mu">-</p>'}`}
+ d.innerHTML=head+b}
+/* ---- MODALS ---- */
+const mo=h=>{$("md").innerHTML=`<div>${h}</div>`;$("md").classList.remove("hide")};const mc=()=>$("md").classList.add("hide");
+function recForm(id,type){const r=get(id)||{type:type||"customer"};const v=k=>esc(r[k]??"");
+ mo(`<h3>${id?"Edit":"Naya"} Record</h3><div class="f"><div><label>Type</label><select id="f_type">${["customer","seller","broker"].map(t=>`<option ${t===r.type?"selected":""}>${t}</option>`).join("")}</select></div>
+ <div><label>Naam / Property title</label><input id="f_name" value="${v("name")}"></div><div><label>Mobile</label><input id="f_mobile" value="${v("mobile")}"></div><div><label>Area</label><input id="f_area" value="${v("area")}"></div>
+ <div><label>Property Type</label><input id="f_propertyType" value="${v("propertyType")}" placeholder="Plot / Flat / Villa"></div><div><label>Size</label><input id="f_size" value="${v("size")}"></div>
+ <div><label>Budget Min (₹)</label><input id="f_budgetMin" type="number" value="${v("budgetMin")}"></div><div><label>Budget Max (₹)</label><input id="f_budgetMax" type="number" value="${v("budgetMax")}"></div>
+ <div class="full"><label>🤝 Broker (property kiski / customer kiske through)</label><select id="f_brokerId"><option value="">Direct (koi broker nahi)</option>${by("broker").map(b=>`<option value="${b.id}" ${b.id===r.brokerId?"selected":""}>${esc(bname(b.id))}</option>`).join("")}</select></div>
+ <div><label>Company (broker)</label><input id="f_company" value="${v("company")}"></div><div><label>Follow-up date</label><input id="f_followUpDate" type="date" value="${v("followUpDate")}"></div>
+ <div class="full"><label>Notes</label><textarea id="f_notes" rows="2">${v("notes")}</textarea></div></div><p><button class="btn g" id="svRec" data-id="${id||""}">Save</button> <button class="btn" id="mcl">Cancel</button></p>`)}
+function intForm(pre){const[k,id]=(pre||"").split(":");
+ mo(`<h3>❤ Customer ka interest</h3><div class="f"><div class="full"><label>Customer</label><select id="i_c">${by("customer").map(c=>`<option value="${c.id}" ${k==="c"&&c.id===id?"selected":""}>${esc(c.name)} ${c.brokerId?"(via "+esc(get(c.brokerId)?.name||"")+")":""}</option>`).join("")}</select></div>
+ <div class="full"><label>Property</label><select id="i_p">${by("seller").map(p=>`<option value="${p.id}" ${k==="p"&&p.id===id?"selected":""}>${esc(p.name)} • ${esc(p.area||"")} ${p.brokerId?"· "+esc(get(p.brokerId)?.name||""):""}</option>`).join("")}</select></div>
+ <div><label>Stage</label><select id="i_s">${STAGES.map(s=>`<option>${s}</option>`).join("")}</select></div><div><label>Note</label><input id="i_n" placeholder="Jaise: 2 din me visit"></div></div><p><button class="btn g" id="svInt">Save</button> <button class="btn" id="mcl">Cancel</button></p>`)}
+/* ---- GLOBAL SEARCH ---- */
+function gsearch(q){q=q.toLowerCase().trim();const g=$("gres");if(!q){g.classList.add("hide");return}
+ const hay=r=>[r.name,r.mobile,r.whatsapp,r.area,r.propertyType,r.company,r.areasServed,r.details,r.notes,r.status,r.size,bname(r.brokerId)].join(" ").toLowerCase();
+ const groups=[["🏠 Properties","seller"],["👤 Customers","customer"],["🤝 Brokers","broker"]].map(([l,t])=>[l,by(t).filter(r=>hay(r).includes(q)).slice(0,6)]).filter(x=>x[1].length);
+ g.innerHTML=groups.map(([l,a])=>`<h4>${l}</h4>`+a.map(r=>`<div class="r" data-o="${r.id}"><b>${esc(r.name)}</b> <span class="mu">${esc(r.area||r.company||"")} ${r.mobile?"• "+esc(r.mobile):""} ${r.brokerId?"• 🤝 "+esc(get(r.brokerId)?.name||""):""}</span></div>`).join("")).join("")||`<div class="r mu">Kuch nahi mila</div>`;g.classList.remove("hide")}
+/* ---- EVENTS ---- */
+document.addEventListener("click",async e=>{const t=e.target,q=s=>t.closest(s);
+ if(q("[data-t]")){S.tab=q("[data-t]").dataset.t;render();return}
+ if(q("#rst")){S.f={broker:"",area:"",type:"",max:"",stage:"",sort:"rank"};render();return}
+ if(q("[data-o]")){$("gres").classList.add("hide");drawer(q("[data-o]").dataset.o);return}
+ if(q("#cl")){S.open=null;$("dr").classList.add("hide");return}
+ if(q("#mcl")){mc();return}
+ if(q("#addRec")){recForm();return}if(q("#addInt")){intForm();return}
+ if(q("[data-edit]")){recForm(q("[data-edit]").dataset.edit);return}
+ if(q("[data-ai]")){intForm(q("[data-ai]").dataset.ai);return}
+ if(q("[data-del]")&&confirm("Is record ko delete karein?")){await updateDoc(doc(db,"crmContacts",q("[data-del]").dataset.del),{deletedAt:Date.now(),updatedAt:serverTimestamp()});S.open=null;$("dr").classList.add("hide");toast("Trash me gaya");return}
+ if(q("[data-di]")&&confirm("Interest hatayein?")){await deleteDoc(doc(db,"crmInterests",q("[data-di]").dataset.di));return}
+ if(q("#svRec")){const id=q("#svRec").dataset.id,d={updatedAt:serverTimestamp()};
+  ["type","name","mobile","area","propertyType","size","company","followUpDate","notes","brokerId"].forEach(k=>d[k]=$("f_"+k).value.trim());
+  ["budgetMin","budgetMax"].forEach(k=>d[k]=+$("f_"+k).value||0);
+  if(!d.name){toast("Naam zaroori hai");return}
+  if(d.type==="seller")d.publicVisible=get(id)?.publicVisible??false;
+  try{if(id)await setDoc(doc(db,"crmContacts",id),d,{merge:true});else{d.createdAtMs=Date.now();d.status="New";await addDoc(collection(db,"crmContacts"),d)}mc();toast("Saved ✓")}catch(er){toast(er.message)}return}
+ if(q("#svInt")){const c=get($("i_c").value),p=get($("i_p").value);if(!c||!p){toast("Customer aur property chuno");return}
+  const dup=S.ints.find(i=>i.customerId===c.id&&i.propertyId===p.id);
+  const d={customerId:c.id,propertyId:p.id,brokerId:c.brokerId||p.brokerId||"",stage:$("i_s").value,note:$("i_n").value.trim(),at:Date.now()};
+  try{if(dup)await setDoc(doc(db,"crmInterests",dup.id),d,{merge:true});else await addDoc(collection(db,"crmInterests"),d);mc();toast("Interest saved ✓")}catch(er){toast(er.message)}return}
+ if(!q("#gres")&&!q("#gq"))$("gres").classList.add("hide")});
+document.addEventListener("change",async e=>{const t=e.target;
+ if(t.dataset.f){S.f[t.dataset.f]=t.value;render()}
+ if(t.dataset.st){await updateDoc(doc(db,"crmInterests",t.dataset.st),{stage:t.value,at:Date.now()});toast("Stage → "+t.value)}});
+document.addEventListener("input",e=>{if(e.target.id==="gq")gsearch(e.target.value);
+ if(e.target.id==="wam"){const r=get(S.open.id);$("wal").href=wa(r,e.target.value)}});
+</script></body></html>

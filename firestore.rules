@@ -37,6 +37,20 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    match /publicQuestions/{docId} {
+      allow read: if resource.data.status == "approved";
+      allow create: if request.resource.data.status == "pending"
+        && request.resource.data.source == "Public Website"
+        && request.resource.data.propertyId is string
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.question is string
+        && request.resource.data.question.size() >= 5
+        && request.resource.data.question.size() <= 400
+        && !("answer" in request.resource.data);
+      allow read, update, delete: if isAdmin();
+    }
+
     match /crmMatches/{docId} {
       allow read, write: if isAdmin();
     }

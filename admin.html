@@ -243,7 +243,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
     <!-- INBOX -->
     <section id="v_inbox" class="hidden">
       <div class="hero"><div><h1>Inbox</h1><p>Website se aayi enquiries, forms aur reviews.</p></div>
-        <div class="chips" style="margin:0"><button class="chip on" data-ib="sub">📨 Submissions <b id="ibSub">0</b></button><button class="chip" data-ib="rev">⭐ Reviews <b id="ibRev">0</b></button></div></div>
+        <div class="chips" style="margin:0"><button class="chip on" data-ib="sub">📨 Submissions <b id="ibSub">0</b></button><button class="chip" data-ib="rev">⭐ Reviews <b id="ibRev">0</b></button><button class="chip" data-ib="qa">❓ Questions <b id="ibQa">0</b></button></div></div>
       <section class="card tool" style="padding:12px 16px"><label style="display:flex;gap:10px;align-items:center;font-size:12px;font-weight:700;color:var(--mut)">Show <select id="ibFilter" style="max-width:180px"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select></label></section>
       <div id="ibNote"></div>
       <div class="cards" id="ibCards"></div>
@@ -336,6 +336,20 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <label>Owner / Seller name *<input id="p_owner" type="text"></label>
       <label>Owner mobile<input id="p_mobile" type="tel" inputmode="tel"></label>
       <label class="full">Road / Facing<input id="p_road" type="text" placeholder="e.g. 30 ft road, East facing"></label>
+      <div class="full" style="font-weight:800;color:var(--navy);margin-top:8px">🌐 Website par dikhne wali details (jitni zyada, utna trust)</div>
+      <label>Facing<select id="p_facing"><option value="">—</option><option>East facing</option><option>West facing</option><option>North facing</option><option>South facing</option><option>North-East facing</option><option>North-West facing</option><option>South-East facing</option><option>South-West facing</option></select></label>
+      <label>Road width<input id="p_roadw" type="text" placeholder="e.g. 30 ft"></label>
+      <label>Area in Gaj (optional)<input id="p_gaj" type="number" step="0.1" min="0" placeholder="e.g. 72"></label>
+      <label>Corner plot<select id="p_corner"><option value="">—</option><option>Yes</option><option>No</option></select></label>
+      <label>Patta / land type<select id="p_patta"><option value="">—</option><option>JDA approved</option><option>Society patta</option><option>Gram panchayat patta</option><option>90-A / converted land</option><option>Documents on enquiry</option></select></label>
+      <label>Registry<select id="p_reg"><option value="">—</option><option>Registry available</option><option>Registry under process</option><option>Agreement / POA only</option><option>On enquiry</option></select></label>
+      <label>Home loan<select id="p_loan"><option value="">—</option><option>Available</option><option>Not available</option><option>On enquiry</option></select></label>
+      <label>Society / colony<input id="p_soc" type="text" placeholder="e.g. Hanuman Vatika II"></label>
+      <label>Landmark<input id="p_land" type="text" placeholder="e.g. Kedia's The Kothi ke paas"></label>
+      <label class="full">Google Maps link<input id="p_map" type="url" placeholder="https://maps.app.goo.gl/…"></label>
+      <label class="full">Khaas baatein / highlights (ek line mein ek)<textarea id="p_high" rows="3" placeholder="Corner ka plot&#10;Pakki sadak, light-paani ready&#10;School 500 m door"></textarea></label>
+      <label class="full">Aas-paas (ek line mein ek)<textarea id="p_near" rows="3" placeholder="School — 500 m&#10;Highway — 2 km&#10;Market — 1 km"></textarea></label>
+      <div class="full" id="p_score" style="font-size:12.5px;background:#f6edd5;border-radius:10px;padding:9px 12px"></div>
       <label>Owner follow-up date<input id="p_fdate" type="date"></label>
       <label>Follow-up note<input id="p_fnote" type="text" placeholder="e.g. Rate confirm karna hai"></label>
       <label class="full">Property details<textarea id="p_details" rows="2" placeholder="Documents, patta/registry, condition…"></textarea></label>
@@ -433,7 +447,7 @@ function budgetText(r){const a=inr(r.budgetMin),b=inr(r.budgetMax);if(a&&b)retur
 function toast(m,bad){const t=$("toast");t.textContent=m;t.className="toast"+(bad?" bad":"");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add("hidden"),3000)}
 
 /* ---------- state ---------- */
-let user,unsubs=[],all=[],recs=[],subs=[],revs=[],loaded=false,view="dash",cChip="",openProp="",cShown=60,editId="",pEditId="",qProp=null,ibMode="sub",mMode="c2p",mStatus="New",mLinks=[],photos=[],wState={},pOrigVideo="";
+let user,unsubs=[],all=[],recs=[],subs=[],revs=[],qs=[],loaded=false,view="dash",cChip="",openProp="",cShown=60,editId="",pEditId="",qProp=null,ibMode="sub",mMode="c2p",mStatus="New",mLinks=[],photos=[],wState={},pOrigVideo="";
 const isAdmin=u=>u?.email&&ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(u.email.toLowerCase());
 const codeNum=c=>{const m=String(c||"").match(/(\d+)$/);return m?Number(m[1]):0};
 const fmtCode=n=>"JPC-"+String(n).padStart(3,"0");
@@ -490,6 +504,7 @@ function listen(){
     $("err").classList.add("hidden");refreshAll();backfillCodes();openFromUrl();
   },e=>{loaded=true;$("err").textContent="Data load nahi hua: "+(e.code||e.message);$("err").classList.remove("hidden");refreshAll()}));
   unsubs.push(onSnapshot(collection(db,"publicSubmissions"),s=>{subs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("subs",e)));
+  unsubs.push(onSnapshot(collection(db,"publicQuestions"),s=>{qs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("qs",e)));
   unsubs.push(onSnapshot(collection(db,"publicReviews"),s=>{revs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("revs",e)));
 }
 onAuthStateChanged(auth,u=>{user=u;
@@ -505,7 +520,7 @@ $("avBtn").onclick=e=>{e.stopPropagation();$("dd").classList.toggle("hidden")};d
 function fillSel(id,label,vals){const s=$(id),cur=s.value;s.innerHTML=`<option value="">${label}</option>`+[...new Set(vals.map(clean).filter(Boolean))].sort().map(v=>`<option>${esc(v)}</option>`).join("");s.value=[...s.options].some(o=>o.value===cur)?cur:""}
 function refreshAll(){navBadges();dash();opts();renderProps();renderContacts();renderFollow();renderInbox();renderMatch();renderTools();datalists()}
 function navBadges(){const n=recs.filter(r=>["td","od"].includes(fuState(r))).length;$("navFu").textContent=n;$("navFu").classList.toggle("hidden",!n);
-  const i=subs.filter(s=>(s.status||"pending")==="pending").length+revs.filter(r=>(r.status||"pending")==="pending").length;$("navIn").textContent=i;$("navIn").classList.toggle("hidden",!i)}
+  const i=subs.filter(s=>(s.status||"pending")==="pending").length+revs.filter(r=>(r.status||"pending")==="pending").length+qs.filter(r=>(r.status||"pending")==="pending").length;$("navIn").textContent=i;$("navIn").classList.toggle("hidden",!i)}
 function opts(){fillSel("pf_area","All areas",props().map(areaOf));fillSel("pf_type","All types",props().map(p=>p.propertyType));fillSel("pf_av","Any availability",props().map(p=>p.availability||"Available"));
   fillSel("cf_area","All areas",recs.map(areaOf));fillSel("cf_status","All statuses",[...STATUSES,...recs.map(r=>r.status)]);fillSel("cf_src","All sources",recs.map(r=>r.source))}
 function datalists(){$("codeList").innerHTML=props().sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.code||"")}">${esc(lbl(p))}</option>`).join("");
@@ -675,7 +690,7 @@ async function publishSync(id,d){
   const pref=doc(db,"publicRequirements",id);
   if(d.publicVisible&&(d.type==="seller"||d.type==="customer")){const s=d.type==="seller";
     await setDoc(pref,{id,type:d.type,displayName:d.publicDisplayName||(s?"Property Available":"Buyer Requirement"),code:d.code||"",area:d.area||"",city:d.city||"Jaipur",propertyType:d.propertyType||"",size:d.size||"",availability:d.availability||"Available",
-      budgetMin:d.budgetMin??null,budgetMax:d.budgetMax??null,details:d.details||"",roadFacing:s?d.roadFacing||"":"",propertyLocation:s?d.propertyLocation||"":"",
+      budgetMin:d.budgetMin??null,budgetMax:d.budgetMax??null,details:d.details||"",roadFacing:s?d.roadFacing||"":"",propertyLocation:s?d.propertyLocation||"":"",facing:s?d.facing||"":"",roadWidth:s?d.roadWidth||"":"",areaGaj:s?d.areaGaj??null:null,cornerPlot:s?d.cornerPlot||"":"",pattaType:s?d.pattaType||"":"",registry:s?d.registry||"":"",loan:s?d.loan||"":"",society:s?d.society||"":"",mapUrl:s?d.mapUrl||"":"",highlights:s?d.highlights||"":"",nearby:s?d.nearby||"":"",
       imageDataUrl:s&&(d.publicImageUrls||[])[0]||"",imageUrls:s?(d.publicImageUrls||[]):[],videoUrl:s?(d.publicVideoUrl||""):"",status:"Approved",crmStatus:d.status||"New",updatedAt:serverTimestamp()})
   }else await deleteDoc(pref).catch(()=>{})}
 async function saveC(){
@@ -725,9 +740,16 @@ function openP(id,o={}){
   $("p_type").value=p.propertyType||pf.ptype||"Plot";$("p_size").value=p.size||pf.size||"";$("p_area").value=p.area||pf.area||"";$("p_city").value=p.city||"Jaipur";
   setMoney("p_price",p.budgetMax||p.budgetMin||pf.bmax);$("h_price").textContent="";$("p_av").value=p.availability||"Available";
   $("p_owner").value=p.name||pf.name||"";$("p_mobile").value=p.mobile||pf.mobile||"";$("p_road").value=p.roadFacing||"";$("p_details").value=p.details||pf.details||"";$("p_addr").value=p.exactAddress||"";$("p_notes").value=p.notes||"";
+  $("p_facing").value=p.facing||"";$("p_roadw").value=p.roadWidth||"";$("p_gaj").value=p.areaGaj||"";$("p_corner").value=p.cornerPlot||"";$("p_patta").value=p.pattaType||"";$("p_reg").value=p.registry||"";$("p_loan").value=p.loan||"";
+  $("p_soc").value=p.society||"";$("p_land").value=/^https?:/i.test(p.propertyLocation||"")?"":(p.propertyLocation||"");$("p_map").value=p.mapUrl||(/^https?:/i.test(p.propertyLocation||"")?p.propertyLocation:"");$("p_high").value=p.highlights||"";$("p_near").value=p.nearby||"";
   $("p_fdate").value=p.followUpDate||"";$("p_fnote").value=p.followUpNote||"";$("p_pub").checked=!!p.publicVisible;
   photos=(p.images||[]).map(u=>({url:u}));drawPhotos();$("p_video").value="";$("p_vidNote").textContent=p.videoUrl?"✓ Video pehle se upload hai (nayi chunoge to replace hogi)":"";
-  $("p_del").classList.toggle("hidden",!id);$("po").classList.remove("hidden");$("p_area").focus()}
+  $("p_del").classList.toggle("hidden",!id);$("po").classList.remove("hidden");scoreP();$("p_area").focus()}
+
+function scoreP(){const v=i=>($(i).value||"").trim(),it=[["3+ photos",photos.length>=3,20],["Price",!!v("p_price"),10],["Size",!!v("p_size")||!!v("p_gaj"),10],["Facing",!!v("p_facing")||!!v("p_road"),5],["Patta",!!v("p_patta"),10],["Registry",!!v("p_reg"),10],["Society/landmark",!!v("p_soc")||!!v("p_land"),5],["Map link",!!v("p_map"),5],["Aas-paas",!!v("p_near"),5],["Highlights",!!v("p_high"),5],["Details (40+ akshar)",v("p_details").length>=40,10],["Road width",!!v("p_roadw"),5]];
+  const sc=it.reduce((n,x)=>n+(x[1]?x[2]:0),0),miss=it.filter(x=>!x[1]).map(x=>x[0]);
+  $("p_score").innerHTML=`<b>Listing quality: ${Math.min(100,sc)}%</b>${miss.length?" — baaki: "+miss.join(", "):" ✓ Poori detail, website par best dikhegi"}`}
+$("po").addEventListener("input",scoreP);
 const closeP=()=>$("po").classList.add("hidden");
 async function saveP(){
   const area=clean($("p_area").value),owner=clean($("p_owner").value);
@@ -735,7 +757,7 @@ async function saveP(){
   const old=pEditId?propById(pEditId)||{}:{},pub=$("p_pub").checked,mobile=clean($("p_mobile").value),btn=$("p_save");
   let price=getMoney("p_price"),pmin=price,pmax=price;if(pEditId&&$("p_price").value===$("p_price").dataset.txt){pmin=old.budgetMin??price;pmax=old.budgetMax??price}
   const d={type:"seller",name:owner,mobile,whatsapp:mobile,propertyType:$("p_type").value,size:clean($("p_size").value),area,city:clean($("p_city").value)||"Jaipur",
-    budgetMin:pmin??null,budgetMax:pmax??null,availability:$("p_av").value,roadFacing:clean($("p_road").value),details:clean($("p_details").value),exactAddress:clean($("p_addr").value),notes:$("p_notes").value.trim(),
+    budgetMin:pmin??null,budgetMax:pmax??null,availability:$("p_av").value,roadFacing:clean($("p_road").value),facing:$("p_facing").value,roadWidth:clean($("p_roadw").value),areaGaj:Number($("p_gaj").value)||null,cornerPlot:$("p_corner").value,pattaType:$("p_patta").value,registry:$("p_reg").value,loan:$("p_loan").value,society:clean($("p_soc").value),propertyLocation:clean($("p_land").value),mapUrl:clean($("p_map").value),highlights:$("p_high").value.trim(),nearby:$("p_near").value.trim(),details:clean($("p_details").value),exactAddress:clean($("p_addr").value),notes:$("p_notes").value.trim(),
     followUpDate:$("p_fdate").value||"",followUpNote:clean($("p_fnote").value),publicVisible:pub,publicDisplayName:old.publicDisplayName&&old.publicDisplayName!==old.name?old.publicDisplayName:"Property Available",updatedAt:serverTimestamp()};
   btn.disabled=true;btn.textContent="Saving…";
   try{
@@ -845,9 +867,15 @@ const subImgs=s=>[...new Set([...(Array.isArray(s.imageDataUrls)?s.imageDataUrls
 const tsOf=s=>msOf(s.submittedAt)||msOf(s.createdAt);
 function renderInbox(){
   const f=$("ibFilter").value||"pending",stt=x=>String(x.status||"pending");
-  $("ibSub").textContent=subs.filter(s=>stt(s)==="pending").length;$("ibRev").textContent=revs.filter(s=>stt(s)==="pending").length;
+  $("ibSub").textContent=subs.filter(s=>stt(s)==="pending").length;$("ibRev").textContent=revs.filter(s=>stt(s)==="pending").length;$("ibQa").textContent=qs.filter(s=>stt(s)==="pending").length;
   document.querySelectorAll("[data-ib]").forEach(b=>b.classList.toggle("on",b.dataset.ib===ibMode));
   const box=$("ibCards");
+  if(ibMode==="qa"){const L=qs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
+    box.innerHTML=L.length?L.map(r=>{const st=stt(r);
+      return`<article class="card subc"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(r.name||"Visitor")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st.toUpperCase()}</span></div>
+       <div class="m" style="color:var(--mut)">${esc(r.propertyCode||"")} ${esc(r.propertyTitle||"")}</div><div class="m"><b>Q:</b> ${esc(r.question||"")}</div>
+       ${st==="rejected"?"":`<textarea id="qa_${esc(r.id)}" rows="3" placeholder="Jawab likho — website par sabko dikhega" style="width:100%;margin-top:8px">${esc(r.answer||"")}</textarea>`}
+       <div class="ac">${st==="rejected"?"":`<button class="btn p sm" data-act="qaOk" data-id="${esc(r.id)}">${st==="approved"?"Update answer":"✓ Answer & Publish"}</button>`}${st==="pending"?`<button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">✕ Hide</button>`:`<button class="btn sm" data-act="qaDel" data-id="${esc(r.id)}">Delete</button>`}${r.propertyId?`<a class="btn sm" target="_blank" href="property.html?id=${encodeURIComponent(r.propertyId)}">Open page</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">❓</div><b>Koi sawaal nahi</b>Property page par customer ke sawaal yahan aayenge.</div>`;return}
   if(ibMode==="sub"){const L=subs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
     box.innerHTML=L.length?L.map(s=>{const st=stt(s),seller=s.type==="seller",ph=subImgs(s).map(u=>`<img src="${esc(u)}" alt="" loading="lazy">`).join("");
       return`<article class="card subc">${ph}${s.kind==="partner"?`<div class="k">Sell & earn form — ${esc(s.role||"")}</div>`:""}${s.kind==="enquiry"?`<div class="k">Property enquiry${s.interestCode?" — "+esc(s.interestCode):""} ${esc(s.interestLabel||"")}</div>`:""}
@@ -956,6 +984,9 @@ document.addEventListener("click",async e=>{
     else if(act==="fDone"){await updateDoc(doc(db,COL,id),{followUpDate:"",followUpNote:"",timeline:arrayUnion(tlEntry("Follow-up done","note")),updatedAt:serverTimestamp()});toast("Follow-up done ✓")}
     else if(act==="subOk")subApprove(id);else if(act==="subNo")subReject(id);
     else if(act==="subDel"){if(confirm("Is submission ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicSubmissions",id))}
+    else if(act==="qaOk"){const t=($("qa_"+id)?.value||"").trim();if(!t)return toast("Pehle jawab likho",true);await updateDoc(doc(db,"publicQuestions",id),{answer:t,status:"approved",answeredAt:serverTimestamp()});toast("Jawab website par publish ho gaya ✓")}
+    else if(act==="qaNo")await updateDoc(doc(db,"publicQuestions",id),{status:"rejected",rejectedAt:serverTimestamp()});
+    else if(act==="qaDel"){if(confirm("Is sawaal ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicQuestions",id))}
     else if(act==="revOk")await updateDoc(doc(db,"publicReviews",id),{status:"approved",approvedAt:serverTimestamp()});
     else if(act==="revNo")await updateDoc(doc(db,"publicReviews",id),{status:"rejected",rejectedAt:serverTimestamp()});
     else if(act==="revDel"){if(confirm("Is review ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicReviews",id))}

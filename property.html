@@ -178,6 +178,20 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 .rsm{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:14px;color:var(--muted)}
 .rsm b{font-size:30px;color:var(--navy);font-family:inherit}
 .toastp{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#0f1b2d;color:#fff;padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:5000;display:none}
+
+.hls{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.hls span{background:#eaf7f0;color:#0c6f3d;border:1px solid #cfeadb;border-radius:999px;padding:7px 13px;font-size:14px;font-weight:600}
+.legal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.lg{display:flex;gap:11px;align-items:flex-start;border:1px solid #e8eef4;border-radius:13px;padding:14px;background:#f8fafc}
+.lg i{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:800 14px/1 var(--font);font-style:normal;color:#fff}.lg.ok i{background:var(--green)}.lg.nt i{background:#8896aa}
+.lg b{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}.lg span{display:block;font-weight:700;color:var(--navy);margin-top:2px}
+.fine{font-size:13px;color:var(--muted);margin-top:12px}
+.near{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin:0 0 16px;padding:0}.near li{padding-left:22px;position:relative;color:#33445d}.near li:before{content:"📍";position:absolute;left:0;font-size:13px}
+.qa details{border:1px solid #e6ecf2;border-radius:13px;padding:13px 16px;background:#fff;margin-bottom:9px}.qa summary{cursor:pointer;font-weight:700;color:var(--navy);list-style:none}.qa summary::-webkit-details-marker{display:none}.qa summary:before{content:"＋";color:var(--gold);margin-right:9px;font-weight:800}.qa details[open] summary:before{content:"－"}
+.qa .ans{margin-top:9px;color:#33445d;white-space:pre-line}.qa .by{font-size:12.5px;color:var(--muted);margin-top:6px}.qa h3{font-size:13px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin:16px 0 9px}
+.qa .own{border-color:#cfeadb;background:#f6fcf9}.qchips{display:flex;flex-wrap:wrap;gap:7px}.qchips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--navy)}.qchips button:hover{border-color:var(--gold);background:var(--gold-soft)}
+.trust{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:4px;font-size:13.5px;color:#33445d}.trust b{color:var(--navy);font-size:14.5px}
+.emi{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;font-size:13.5px}.emi b{display:block;color:var(--navy);margin-bottom:8px}.emi .r3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.emi label{display:grid;gap:3px;font-size:11.5px;color:var(--muted);font-weight:600}.emi input,.emi select{padding:8px;border:1px solid var(--line);border-radius:9px;font:inherit;width:100%}.emi .v{margin-top:10px;font:800 20px var(--font-head);color:var(--green-dark)}
+@media(max-width:700px){.legal,.near{grid-template-columns:1fr}}
+@media print{header,footer,.topbar,.nav-wrap,.mobile-bar,#qaForm,#commentForm,.share-row,#simPanel,.cb,.emi,#printBtn,#visitBtn,#saveBtn,#enqBtn,.g-btn,.thumbs,#admPill{display:none!important}.layout{display:block!important}.panel,.side-card{box-shadow:none!important;break-inside:avoid}}
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0DW0NBETML"></script>
@@ -185,6 +199,7 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <meta name="theme-color" content="#0f1b2d">
+<script src="assets/config.js"></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -241,7 +256,7 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const ico=(n,c="")=>`<svg class="icon ${c}"><use href="#i-${n}"/></svg>`;
 const hidden=s=>["rejected","hidden","draft","deleted"].includes(String(s||"").toLowerCase());
-const EMOJI=/[^\p{L}\p{M}\p{N}\s.,:;!?()\-\/₹%&'"+\n]/gu;
+const EMOJI=/[^\p{L}\p{M}\p{N}\s.,:;!?()\-\/₹%&'"+×–—•²·’‘“”=@#*\n]/gu;
 const tidy=t=>String(t??"").replace(EMOJI," ").replace(/[ \t]+/g," ").replace(/\n\s*\n\s*\n+/g,"\n\n").trim();
 const tidy1=t=>tidy(t).replace(/\s+/g," ");
 function cleanArea(a){let x=tidy1(String(a||"").split(/[|\n]/)[0]).split(",")[0].trim();if(x.length>2&&x===x.toUpperCase())x=x.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());return x.length>48?x.slice(0,46).trim()+"…":(x||"Jaipur")}
@@ -250,6 +265,14 @@ function inr(n){n=Number(n);if(!isFinite(n))return"";if(n>=1e7)return"₹"+Math.
 function priceText(a,b,fb){a=a==null||a===""?null:Number(a);b=b==null||b===""?null:Number(b);if(a!=null&&b!=null)return a===b?inr(a):`${inr(a)} – ${inr(b)}`;if(b!=null)return`Up to ${inr(b)}`;if(a!=null)return`From ${inr(a)}`;return fb}
 function photosOf(p){const l=[...(Array.isArray(p.imageUrls)?p.imageUrls:[]),...(Array.isArray(p.imageDataUrls)?p.imageDataUrls:[])];if(p.imageDataUrl)l.push(p.imageDataUrl);return[...new Set(l.filter(Boolean))]}
 const availCls=a=>a==="Available"?"":a==="Under Offer"?"offer":a==="Sold"?"sold":"off";
+
+const S=window.SITE||{};
+function sizeInfo(p){const s=String(p.size||"").replace(/[×*]/g,"x"),ag=Number(p.areaGaj);let gaj=0,dims="";
+  const dm=s.match(/(\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)/i);
+  if(dm){const a=+dm[1],b=+dm[2];dims=a+"×"+b+" ft";gaj=a*b/9}
+  else{const m=s.match(/(\d+(?:\.\d+)?)/);if(m){const n=+m[1];if(/gaj|गज|yard|sq\s*\.?\s*y/i.test(s))gaj=n;else if(/sq|ft|feet|फ(ी|ु)ट/i.test(s))gaj=n/9}}
+  if(ag>0)gaj=ag;
+  return{dims,gaj:gaj?Math.round(gaj*10)/10:0,sqft:gaj?Math.round(gaj*9):0}}
 const WA="916350566010";
 const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
 
@@ -296,14 +319,34 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   const avail=String(p.availability||"Available");
   const price=priceText(p.budgetMin,p.budgetMax,isSeller?"Price on enquiry":"Budget on discussion");
   document.title=`${title} | Jaipur Property Consultant`;
+  try{const ld=document.createElement("script");ld.type="application/ld+json";ld.textContent=JSON.stringify({"@context":"https://schema.org","@type":"Product",name:title,description:tidy1(p.details).slice(0,300),image:imgs.slice(0,3),sku:p.code||p.id,offers:{"@type":"Offer",priceCurrency:"INR",price:p.budgetMax??p.budgetMin??undefined,availability:avail==="Available"?"https://schema.org/InStock":"https://schema.org/SoldOut"}});document.head.appendChild(ld)}catch(e){}
   const msg=`Hello, I am interested in the ${type} in ${area} (${price})${p.code?" — Ref "+p.code:""} that I saw on your website. Please share full details.`;
-  const pgaj=(()=>{const m=String(p.size||"").match(/(\d+(?:\.\d+)?)/),g=m?Number(m[1]):0,pr=p.budgetMax??p.budgetMin;if(!isSeller||!g||!pr||g<10||g>5000)return"";const v=Math.round(pr/g);return v>500?`≈ ${inr(v)} per Gaj`:""})();
+  const SZ=sizeInfo(p),szTxt=SZ.gaj?((SZ.dims?SZ.dims+" • ":"")+SZ.gaj+" Gaj ("+SZ.sqft+" sq ft)"):tidy1(p.size);
+  const pgaj=(()=>{const pr=p.budgetMax??p.budgetMin;if(!isSeller||!SZ.gaj||!pr)return"";const v=Math.round(pr/SZ.gaj);return v>500?`≈ ${inr(v)} per Gaj`:""})();
 
-  const facts=[
-    ["Property type",p.propertyType],["Size / area",tidy1(p.size)],["Locality",area+", "+city],
-    ["Road / facing",tidy1(p.roadFacing)],["Landmark",tidy1(p.propertyLocation)&&!/^https?:/i.test(p.propertyLocation)?tidy1(p.propertyLocation):""],
-    [isSeller?"Price":"Budget",price],["Availability",isSeller?avail:""]
-  ].filter(f=>f[1]).map(f=>`<div class="fact"><b>${esc(f[0])}</b><span>${esc(f[1])}</span></div>`).join("");
+  const fact=(l,v)=>v?`<div class="fact"><b>${esc(l)}</b><span>${esc(v)}</span></div>`:"";
+  const landmark=(()=>{const l=tidy1(p.propertyLocation);return l&&!/^https?:/i.test(l)?l:""})();
+  const mapUrl=/^https?:\/\//i.test(p.mapUrl||"")?p.mapUrl:(/^https?:\/\//i.test(p.propertyLocation||"")?p.propertyLocation:"");
+  const facts=[["Property type",p.propertyType],["Size",szTxt],["Facing",p.facing||tidy1(p.roadFacing)],["Road width",tidy1(p.roadWidth)],["Corner plot",p.cornerPlot],["Locality",area+", "+city],["Society / colony",tidy1(p.society)],["Landmark",landmark],[isSeller?"Price":"Budget",price],["Approx. rate",pgaj.replace("≈ ","")],["Availability",isSeller?avail:""]].map(f=>fact(f[0],f[1])).join("");
+  const hl=String(p.highlights||"").split(/\n|;/).map(tidy1).filter(Boolean).slice(0,8);
+  const hlHtml=hl.length?`<div class="hls">${hl.map(x=>`<span>✓ ${esc(x)}</span>`).join("")}</div>`:"";
+  const legal=[["Patta / land type",p.pattaType],["Registry",p.registry],["Home loan",p.loan]].filter(x=>x[1]);
+  const legalHtml=legal.length?`<section class="panel"><h2>Legal &amp; documents</h2><div class="legal">${legal.map(([l,v])=>{const ok=!/not|no\b|enquiry|process/i.test(v);return`<div class="lg ${ok?"ok":"nt"}"><i>${ok?"✓":"i"}</i><div><b>${esc(l)}</b><span>${esc(v)}</span></div></div>`}).join("")}</div><p class="fine">Please verify original documents, ownership and registry status before buying. We help you with the verification.</p></section>`:"";
+  const nearby=String(p.nearby||"").split(/\n|;/).map(tidy1).filter(Boolean).slice(0,10);
+  const locHtml=(nearby.length||mapUrl)?`<section class="panel"><h2>Location &amp; nearby</h2>${nearby.length?`<ul class="near">${nearby.map(n=>`<li>${esc(n)}</li>`).join("")}</ul>`:""}${mapUrl?`<a class="btn btn-light" target="_blank" rel="noopener" href="${esc(mapUrl)}">${ico("pin")}Open location in Google Maps</a>`:""}</section>`:"";
+  const PHN=S.phone||"6350566010",visitMsg=`Hello, I want to book a site visit for the ${type} in ${area}${p.code?" (Ref "+p.code+")":""}. Please tell me a suitable time.`;
+  const pr0=Number(p.budgetMax??p.budgetMin)||0;
+  const faqs=[["What is the final price?",`The listed price is ${price}${pgaj?" ("+pgaj.replace("≈ ","approx. ")+")":""}. The final price is discussed after a site visit, so call or WhatsApp us for the best deal.`],
+    SZ.gaj?["What is the exact size?",`${szTxt}.`]:null,
+    (p.pattaType||p.registry)?["Which documents does it have?",[p.pattaType?"Patta / land type: "+p.pattaType+".":"",p.registry?"Registry: "+p.registry+".":""].join(" ")]:null,
+    p.loan?["Can I get a home loan?","Home loan: "+p.loan+"."]:null,
+    ["How can I visit the property?",`Book a free site visit on WhatsApp or call ${PHN}. We will arrange a time and take you to the site.`]].filter(Boolean);
+  const qaHtml=`<section class="panel" id="qaPanel"><h2>Questions &amp; answers</h2><div id="qaList" class="qa"></div>
+    <form id="qaForm" class="cform"><b>Have a question about this property?</b><div class="qchips">${["Final rate kitna hoga?","Registry / patta kaisa hai?","Site visit kab ho sakta hai?","Home loan mil sakta hai?","Road aur approach kaisa hai?","Kaun se documents hain?"].map(q=>`<button type="button" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div>
+      <textarea id="qText" required minlength="5" maxlength="400" placeholder="Type your question here…"></textarea>
+      <div class="row"><div><label for="qName">Your name *</label><input id="qName" required maxlength="60" placeholder="Name"></div><div><label for="qMob">Mobile (optional, private)</label><input id="qMob" type="tel" inputmode="numeric" maxlength="10" placeholder="For a call / WhatsApp reply"></div></div>
+      <div id="qMsg" class="notice" style="display:none"></div><button class="btn btn-dark" type="submit">Submit question</button>
+      <p class="fine" style="margin:0">Answered questions are shown publicly (with first name) so other buyers get the answer too. Your mobile number is never shown.</p></form></section>`;
 
   const gallery=imgs.length?`<div class="gallery">
       <div class="stage" id="stage" title="Click to enlarge">
@@ -329,9 +372,12 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     <div class="layout">
       <div>
         ${isSeller?gallery:""}
+        ${isSeller?hlHtml:""}
         <section class="panel"><h2>Key details</h2><div class="facts">${facts}</div></section>
         ${details?`<section class="panel"><h2>About this ${isSeller?"property":"requirement"}</h2><div class="desc">${esc(details)}</div></section>`:""}
+        ${isSeller?legalHtml+locHtml:""}
         ${p.videoUrl&&isSeller?`<section class="panel"><h2>Property video</h2><div class="video-wrap"><video controls playsinline preload="metadata" src="${esc(p.videoUrl)}"></video></div></section>`:""}
+        ${isSeller?qaHtml:""}
         <section class="panel" id="simPanel" style="display:none"><h2>Similar properties</h2><div class="sim" id="simGrid"></div></section>
         ${isSeller?`<section class="panel"><h2>Customer comments</h2>
           <div id="commentsList" class="comments"><div class="notice">Loading comments…</div></div>
@@ -349,6 +395,9 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
         <a class="btn btn-gold btn-block" href="tel:+916350566010">${ico("phone")}Call 6350566010</a>
         <div class="share-row"><a class="btn btn-light" id="shareWa" target="_blank" rel="noopener">${ico("share")}Share</a><button class="btn btn-light" type="button" id="copyBtn">${ico("link")}Copy link</button></div>
         <button class="btn btn-light btn-block" type="button" id="saveBtn" style="margin-top:8px">${ico("heart")}<span>Save property</span></button>
+        ${isSeller?`<a class="btn btn-gold btn-block" id="visitBtn" target="_blank" rel="noopener" style="margin-top:8px" href="${wa(visitMsg)}">📅 Book a free site visit</a><button class="btn btn-light btn-block" type="button" id="printBtn" style="margin-top:8px" onclick="window.print()">🖨 Print / save as PDF</button>
+        <div class="trust"><b>Listed by Jaipur Property Consultant</b><span>✓ Direct office support, site visit &amp; document help</span>${S.reraNo?`<span>RERA: ${esc(S.reraNo)}</span>`:""}<span>📍 ${esc(S.address||"Jhotwara, Jaipur")}</span>${S.officeHours?`<span>🕒 ${esc(S.officeHours)}</span>`:""}</div>
+        ${pr0>=100000?`<div class="emi"><b>Home loan EMI (indicative)</b><div class="r3"><label>Loan %<select id="emP"><option>50</option><option>60</option><option>70</option><option selected>80</option></select></label><label>Rate %<input id="emR" type="number" value="9" step="0.25" min="5" max="20"></label><label>Years<input id="emY" type="number" value="15" min="1" max="30"></label></div><div class="v" id="emV"></div><p class="fine" style="margin-top:4px">Estimate only. Actual loan depends on bank &amp; documents.</p></div>`:""}`:""}
         ${isSeller?`<form class="cb" id="cbForm" novalidate><b>Prefer a call back?</b><input id="cbName" placeholder="Your name" autocomplete="name"><input id="cbMobile" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" autocomplete="tel"><button class="btn btn-dark btn-block" type="submit">Request call back</button><div class="m" id="cbMsg"></div></form>`:""}
         <div class="side-note">${ico("lock")}<span>Owner contact and exact address are kept private. All enquiries are handled by Jaipur Property Consultant.</span></div>
         <div class="office"><strong>Jaipur Property Consultant</strong>58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur 302012</div>
@@ -393,12 +442,34 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   if(isSeller){
     onSnapshot(query(collection(db,"publicRequirements"),where("type","==","seller")),snap=>{
       let rows=snap.docs.map(d=>({id:d.id,...d.data()})).filter(r=>r.id!==p.id&&!hidden(r.status)&&String(r.availability||"Available")!=="Not Available");
-      rows.sort((a,b)=>((b.propertyType===p.propertyType)-(a.propertyType===p.propertyType))||((cleanArea(b.area)===area)-(cleanArea(a.area)===area)));
+      rows=rows.filter(r=>r.propertyType===p.propertyType);rows.sort((a,b)=>((b.propertyType===p.propertyType)-(a.propertyType===p.propertyType))||((cleanArea(b.area)===area)-(cleanArea(a.area)===area)));
       rows=rows.slice(0,3);
       if(!rows.length)return;
       $("simPanel").style.display="";
       $("simGrid").innerHTML=rows.map(r=>{const im=photosOf(r)[0];return`<a href="property.html?id=${encodeURIComponent(r.id)}"><div class="ph">${im?`<img class="bg" src="${esc(im)}" alt="" loading="lazy"><img class="fg" src="${esc(im)}" alt="" loading="lazy">`:ico("camera")}</div><div class="tx"><b>${esc(`${unitSize(r.size)?tidy1(r.size)+" ":""}${r.propertyType||"Property"}`)}</b><span>${esc(cleanArea(r.area))}, Jaipur</span><em>${esc(priceText(r.budgetMin,r.budgetMax,"Price on enquiry"))}</em></div></a>`}).join("");
     },()=>{});
+  }
+
+  /* questions & answers (approved only) */
+  if(isSeller){
+    const own=[];
+    const renderQA=()=>{
+      const mine=own.map(r=>`<details class="own" open><summary>${esc(r.question)}</summary><div class="ans">${esc(r.answer||"")}</div><div class="by">Asked by ${esc(String(r.name||"Customer").split(" ")[0])} • answered by Jaipur Property Consultant</div></details>`).join("");
+      $("qaList").innerHTML=(mine?`<h3>Questions from buyers</h3>${mine}`:"")+`<h3>Common questions</h3>`+faqs.map(([q,a])=>`<details><summary>${esc(q)}</summary><div class="ans">${esc(a)}</div></details>`).join("")};
+    renderQA();
+    onSnapshot(query(collection(db,"publicQuestions"),where("propertyId","==",p.id),where("status","==","approved")),snap=>{
+      own.length=0;snap.docs.map(d=>d.data()).filter(r=>r.answer).sort((a,b)=>(b.answeredAt?.seconds||0)-(a.answeredAt?.seconds||0)).forEach(r=>own.push(r));renderQA()},()=>{});
+    document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{$("qText").value=b.dataset.q;$("qText").focus()});
+    $("qaForm").onsubmit=async e=>{
+      e.preventDefault();const b=e.target.querySelector("button[type=submit]"),m=$("qMsg"),mob=$("qMob").value.replace(/\D/g,"").slice(-10),nm=$("qName").value.trim(),q=$("qText").value.trim();
+      m.style.display="block";if(mob&&mob.length!==10){m.textContent="Please enter a valid 10-digit mobile number or leave it blank.";return}
+      b.disabled=true;b.textContent="Submitting…";
+      try{await addDoc(collection(db,"publicQuestions"),{propertyId:p.id,propertyCode:p.code||"",propertyTitle:title,name:nm,question:q,status:"pending",source:"Public Website",askedAt:serverTimestamp()});
+        if(mob)addDoc(collection(db,"publicSubmissions"),{kind:"enquiry",type:"customer",name:nm,mobile:mob,area:p.area||"",city:p.city||"Jaipur",propertyType:p.propertyType||"",size:p.size||"",budgetMin:null,budgetMax:p.budgetMax??p.budgetMin??null,details:`Question on ${p.code||p.id}: ${q}`,interestPropertyId:p.id,interestCode:p.code||"",interestLabel:title,status:"pending",source:"Public Website",submittedAt:serverTimestamp()}).catch(()=>{});
+        m.textContent="✅ Question received. It will appear here with our answer soon"+(mob?", and we will also contact you.":".");e.target.reset();if(typeof gtag==="function")gtag("event","generate_lead",{method:"property_question"})}
+      catch(err){m.textContent="Could not submit. Please try again.";console.warn(err)}
+      finally{b.disabled=false;b.textContent="Submit question"}};
+    const emV=$("emV");if(emV){const calc=()=>{const P=pr0*Number($("emP").value)/100,r=Number($("emR").value)/1200,n=Number($("emY").value)*12;if(!(P>0&&r>0&&n>0)){emV.textContent="";return}const k=Math.pow(1+r,n),emi=P*r*k/(k-1);emV.textContent="≈ ₹"+Math.round(emi).toLocaleString("en-IN")+" / month"};["emP","emR","emY"].forEach(i=>$(i).oninput=calc);calc()}
   }
 
   /* comments (approved only) */

@@ -27,3 +27,10 @@ Google Analytics 4 is included on the public pages using measurement ID `G-0DW0N
 - Admin: every property (seller) gets a code like JPC-001 (auto-assigned); customers link to the property they want; table shows date, highlighted mobile, interested property, location, budget, follow-up; "interested customers" list inside each property; multi-photo manager.
 - Website enquiries / partner form arrive in Public Submissions as "Add to CRM" (private, never published).
 - Rules unchanged: deploy `firestore.rules` and `storage.rules` as before.
+
+
+## v4 — Property page & Q&A
+- New optional property fields (admin form): facing, road width, area in Gaj, corner, patta, registry, home loan, society, landmark, map link, highlights, nearby. All appear on the public property page in clean cards; a listing-quality score helps you fill them.
+- Property page: size auto-converts (feet x feet -> Gaj / sq ft), rate per Gaj, legal badges, map, FAQs, EMI estimate, site-visit button, print/PDF, schema.org data. Similar properties now show only the same type.
+- Public Q&A: visitors ask on the property page -> Admin > Inbox > Questions -> you answer -> it is shown publicly. If they leave a mobile it also arrives as a private enquiry.
+- **Deploy `firestore.rules` again** (new `publicQuestions` collection) or questions will not save.

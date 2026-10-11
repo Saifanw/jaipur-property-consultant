@@ -231,8 +231,44 @@ body.noscroll{overflow:hidden}
 .dw-add .btn{min-height:44px;padding:0 16px}
 @media(max-width:620px){.drawer{width:100%}.dw-facts{grid-template-columns:1fr 1fr}.dw-btns .btn,.dw-btns a.btn{font-size:13px}}
 </style>
+
+<style id="enterprise">
+:root{--ink:#0f1b2d;--bg:#f2f4f8;--line:#e3e8ef;--shadow:0 1px 2px rgba(15,27,45,.06),0 6px 18px rgba(15,27,45,.04);--shadow2:var(--shadow);--pri:#1d4ed8;--side:#0b1626;--gold2:#d6a73f}
+body{font-family:Inter,"Segoe UI",system-ui,sans-serif;background:var(--bg);font-size:14px}
+body[data-view]:not([data-view="crm"]) .today,body[data-view]:not([data-view="crm"]) .stats,body[data-view]:not([data-view="crm"]) .focus-grid{display:none}
+#appView{padding-left:252px}
+#appView .wrap{width:auto;margin:0 28px}
+#appView .top{position:sticky;top:0;z-index:30;background:#fff;color:var(--ink);border-bottom:1px solid var(--line)}
+#appView .top .brand{display:none}#appView .top-in{justify-content:flex-end;padding:8px 0}
+#appView header.app{position:static;background:transparent;border:0;backdrop-filter:none}
+#appView .tabs{position:fixed;left:0;top:0;bottom:0;width:252px;margin:0;padding:80px 12px 16px;flex-direction:column;gap:2px;background:var(--side);overflow-y:auto;z-index:35}
+#appView .tabs::before{content:"Jaipur Property Consultant";position:absolute;top:0;left:0;right:0;height:64px;display:flex;align-items:center;padding:0 22px;color:#fff;font-weight:800;border-bottom:1px solid rgba(255,255,255,.08)}
+#appView .tab{border:0;background:transparent;border-radius:8px;padding:10px 12px;color:#a9b6c9;box-shadow:none;display:flex;align-items:center;gap:10px;font-weight:600;text-align:left}
+#appView .tab:hover{background:rgba(255,255,255,.06);color:#fff}
+#appView .tab.active{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 3px 0 var(--gold2)}
+#appView .tab .tbadge{margin-left:auto}
+.panel,.stat,.focus-panel,.module-card,.quick-card,.welcome-card{border-radius:12px;box-shadow:var(--shadow)}
+.stat:after,.welcome-card:after{display:none}
+.today{border-radius:12px;background:var(--side)}
+.btn{border-radius:8px;font-weight:700}.btn.gold{background:var(--pri);box-shadow:none;color:#fff}
+th{background:#f7f9fc;color:#5b6b82;font-size:12px;font-weight:700;text-transform:none;letter-spacing:.02em}
+.login{background:linear-gradient(135deg,#0b1626,#17315a)}.login-card{border-radius:16px}
+.pd-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.pd-kpi{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fbfcfe}.pd-kpi b{font-size:24px;display:block}.pd-kpi span{font-size:12px;color:#6d7b8f}
+table.pd{width:100%;border-collapse:collapse}table.pd td,table.pd th{padding:12px;text-align:left;border-bottom:1px solid var(--line)}
+tr.pd-row{cursor:pointer}tr.pd-row:hover{background:#f7f9fc}tr.pd-row.open{background:#eef3ff}
+.pd-code{font-weight:800;color:#7a5a10;background:#fff6dc;border:1px solid #ecd48f;border-radius:6px;padding:4px 8px;white-space:nowrap}
+.pd-due{color:#c62d2d;font-weight:700}.pd-pill{background:#eaf0ff;color:var(--pri);border-radius:99px;padding:3px 10px;font-weight:700;font-size:12px}
+.pd-detail>td{background:#f7f9fc;padding:16px}
+.pd-c{display:grid;grid-template-columns:1.3fr 1fr 1.1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.pd-c.bad{border-left:3px solid #c62d2d}.pd-c.now{border-left:3px solid #d99218}
+.pd-c small{display:block;color:#6d7b8f;margin-top:2px}.pd-acts{display:flex;gap:6px;flex-wrap:wrap}
+.pd-add{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;margin-top:12px}
+.pd-add input,.pd-c select,.pd-c input{border:1px solid var(--line);border-radius:8px;padding:9px;width:100%;background:#fff}
+@media(max-width:960px){#appView{padding-left:0}#appView .wrap{margin:0 14px}#appView .tabs{position:static;width:auto;flex-direction:row;padding:12px 14px 4px;background:transparent}#appView .tabs::before{display:none}#appView .tab{background:#fff;border:1px solid var(--line);color:#34445a;border-radius:99px}#appView .tab.active{background:var(--ink);color:#fff;box-shadow:none}.pd-kpis{grid-template-columns:1fr 1fr}.pd-c,.pd-add{grid-template-columns:1fr}}
+</style>
 </head>
-<body>
+<body data-view="crm">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 <symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
@@ -291,11 +327,11 @@ body.noscroll{overflow:hidden}
       <div class="tchips" id="todayChips"></div>
     </section>
     <div class="tabs">
-      <button class="tab active" data-type="all">All</button>
+      <button class="tab active" data-type="all">Dashboard &amp; All Records</button>
+      <button class="tab" data-view="properties"><svg class="ic"><use href="#ic-home"/></svg>Properties</button>
       <button class="tab" data-type="customer"><svg class="ic"><use href="#ic-user"/></svg>Customers</button>
       <button class="tab" data-type="seller"><svg class="ic"><use href="#ic-home"/></svg>Sellers</button>
       <button class="tab" data-type="broker"><svg class="ic"><use href="#ic-users"/></svg>Brokers</button>
-      <a class="tab" href="properties-crm.html" style="text-decoration:none;color:inherit;border-color:#c9962e">🏠 Property Desk</a>
       <button class="tab" id="submissionsTab" data-view="submissions"><svg class="ic"><use href="#ic-inbox"/></svg>Submissions<span class="tbadge" id="subBadge"></span></button>
       <button class="tab" data-view="matching"><svg class="ic"><use href="#ic-target"/></svg>Matching</button>
       <button class="tab" data-view="followups"><svg class="ic"><use href="#ic-cal"/></svg>Follow-ups<span class="tbadge" id="fuBadge"></span></button>
@@ -363,6 +399,13 @@ body.noscroll{overflow:hidden}
         <div id="empty" class="empty hidden">No records found.</div>
       </div>
       <div id="cards" class="cards-list"></div>
+    </section>
+
+    <section id="propertiesPanel" class="panel module-panel">
+      <div class="panel-head"><div><h2>Property Inventory</h2><div class="muted">Every property carries a unique code. Open a property to see and follow up the customers interested in it.</div></div><div class="tools"><button id="pdAdd" class="btn gold">+ Add property</button></div></div>
+      <div class="pd-kpis" id="pdKpis"></div>
+      <div class="fbar"><label class="fsearch"><svg class="ic"><use href="#ic-search"/></svg><input id="pdSearch" type="search" placeholder="Search by code, area, owner or customer (e.g. JPC-012)" autocomplete="off"></label></div>
+      <div class="table-wrap"><table class="pd"><thead><tr><th>Code</th><th>Property</th><th>Price</th><th>Owner</th><th>Interested</th><th>Follow-ups due</th></tr></thead><tbody id="pdRows"></tbody></table><div id="pdEmpty" class="empty hidden">No properties yet. Use Add property to create the first one.</div></div>
     </section>
 
     <section id="submissionsPanel" class="panel submission-panel">
@@ -991,6 +1034,7 @@ function renderToday(){
   setB("subBadge",pend,true);setB("fuBadge",overdue+due,true);setB("revBadge",rev,true);setB("trashBadge",trash.length,false);
 }
 function render(){
+  if(currentAdminView==="properties") renderProps();
   const filtered=sortList(records.filter(recordMatchesFilters));
   $("allCount").textContent=records.length;
   $("customerCount").textContent=records.filter(r=>r.type==="customer").length;
@@ -1063,10 +1107,11 @@ document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
   else { currentFilter=b.dataset.type||"all"; showAdminView("crm"); window.scrollTo({top:document.querySelector(".tabs").offsetTop-12,behavior:"smooth"}); }
 }));
 function showAdminView(view){
-  currentAdminView=view;
+  currentAdminView=view; document.body.dataset.view=view;
   const crmPanel=$("crmPanel");
-  ["submissionsPanel","matchingPanel","followupsPanel","reviewsPanel","analyticsPanel","trashPanel"].forEach(id=>$(id).style.display="none");
+  ["propertiesPanel","submissionsPanel","matchingPanel","followupsPanel","reviewsPanel","analyticsPanel","trashPanel"].forEach(id=>$(id).style.display="none");
   if(view==="crm"){crmPanel.style.display="block";render();}
+  if(view==="properties"){ $("propertiesPanel").style.display="block"; renderProps(); }
   if(view==="submissions"){ $("submissionsPanel").style.display="block"; renderSubmissions(); }
   if(view==="matching"){ $("matchingPanel").style.display="block"; populateMatchCustomers(); renderSavedMatches(); }
   if(view==="followups"){ $("followupsPanel").style.display="block"; renderFollowups(); }
@@ -1724,6 +1769,75 @@ $("dwBody").addEventListener("click",async e=>{
 
 initPicker("fPick"); initPicker("qPick",(p)=>{ if(!$("qArea").value.trim()) $("qArea").value=niceArea(p.area); const pt=p.propertyType; if(pt&&[...$("qProp").options].some(o=>o.value===pt||o.text===pt)) $("qProp").value=pt; });
 $("type").addEventListener("change",syncInterestField);
+
+/* ===== Property inventory (unique code -> interested customers) ===== */
+let pdOpen=null, pdPend=false;
+const pdDue=c=>c.followUpDate&&c.followUpDate<=localISO();
+function renderProps(){
+  if(document.activeElement&&document.activeElement.closest&&document.activeElement.closest("#pdRows")){pdPend=true;return;}
+  pdPend=false;
+  const P=sellersList(), t=$("pdSearch").value.trim().toLowerCase(), iso=localISO();
+  const all=P.map(p=>({p,c:intersOf(p)}));
+  const linked=new Set(); all.forEach(x=>x.c.forEach(c=>linked.add(c.id)));
+  const due=[...linked].filter(id=>pdDue(records.find(r=>r.id===id))).length;
+  const hot=[...linked].filter(id=>HOT.includes(records.find(r=>r.id===id).status)).length;
+  $("pdKpis").innerHTML=[[P.length,"Properties"],[linked.size,"Interested customers"],[due,"Follow-ups due"],[hot,"Site visit / negotiation"]].map(k=>`<div class="pd-kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join("");
+  const list=all.filter(({p,c})=>!t||[p.code,p.area,p.propertyType,p.size,p.name,...c.map(x=>x.name+" "+x.mobile)].join(" ").toLowerCase().includes(t))
+    .sort((a,b)=>b.c.filter(pdDue).length-a.c.filter(pdDue).length||codeNum(b.p.code)-codeNum(a.p.code));
+  $("pdEmpty").classList.toggle("hidden",list.length>0);
+  $("pdRows").innerHTML=list.map(({p,c})=>{
+    const d=c.filter(pdDue).length, open=pdOpen===p.id;
+    return `<tr class="pd-row ${open?"open":""}" data-pd="${escapeHtml(p.id)}"><td><span class="pd-code">${escapeHtml(p.code||"—")}</span></td><td><b>${escapeHtml(cleanLbl(p))}</b></td><td>${escapeHtml(budgetText(p))}</td><td>${escapeHtml(p.name||"—")}</td><td><span class="pd-pill">${c.length}</span></td><td>${d?`<span class="pd-due">${d} due</span>`:"—"}</td></tr>${open?`<tr class="pd-detail"><td colspan="6">${pdDetail(p,c)}</td></tr>`:""}`;
+  }).join("");
+}
+function pdDetail(p,c){
+  const iso=localISO();
+  c=[...c].sort((a,b)=>String(a.followUpDate||"9999").localeCompare(String(b.followUpDate||"9999")));
+  const rows=c.map(x=>{const n=last10(x.mobile),f=x.followUpDate||"",cls=f&&f<iso?"bad":f===iso?"now":"",l=(x.timeline||[]).slice(-1)[0];
+    const msg=`Namaste ${firstName(x)} ji, ${p.code} (${cleanLbl(p)}) ke baare mein follow-up kar raha hoon. Kya aap abhi baat kar sakte hain? – Jaipur Property Consultant`;
+    return `<div class="pd-c ${cls}" data-cid="${escapeHtml(x.id)}"><div><b>${escapeHtml(x.name||"—")}</b><small>${escapeHtml(x.mobile||"")}</small>${l?`<small>Last: ${escapeHtml(l.text)} (${agoText(l.at)})</small>`:""}</div>
+    <div><select data-pst>${STATUSES.map(s=>`<option ${s===(x.status||"New")?"selected":""}>${s}</option>`).join("")}</select></div>
+    <div><small style="margin:0 0 4px;font-weight:700">${!f?"No follow-up set":f<iso?"Overdue: "+f:f===iso?"Due today":"Next: "+f}</small><input type="date" data-pfu value="${escapeHtml(f)}"></div>
+    <div class="pd-acts"><a class="btn light" href="tel:+91${n}">Call</a><a class="btn light" target="_blank" rel="noopener" href="https://wa.me/91${n}?text=${encodeURIComponent(msg)}">WhatsApp</a><button class="btn light" data-pa="open">Profile</button><button class="btn light" data-pa="done">Done</button><button class="btn light" data-pa="snz">+3 days</button><button class="btn light" data-pa="rm" title="Unlink">×</button></div></div>`}).join("");
+  const tm=new Date();tm.setDate(tm.getDate()+1);
+  return `<h4 style="margin:0 0 10px">Customers interested in ${escapeHtml(p.code)} (${c.length})</h4>${rows||'<div class="empty">No customers linked yet. Add one below.</div>'}
+  <div class="pd-add" data-pid="${escapeHtml(p.id)}"><input id="pdN" list="pdCl" placeholder="Customer name"><datalist id="pdCl">${records.filter(r=>r.type==="customer").map(r=>`<option value="${escapeHtml(r.name)}">${escapeHtml(r.mobile||"")}</option>`).join("")}</datalist><input id="pdM" inputmode="numeric" placeholder="Mobile (10 digits)"><input id="pdD" type="date" value="${localISO(tm)}"><button class="btn gold" data-pa="link">Link to ${escapeHtml(p.code)}</button></div>`;
+}
+async function pdLink(p,name,mob,fd){
+  const n=last10(mob), ex=records.find(r=>r.type==="customer"&&n.length===10&&last10(r.mobile)===n);
+  if(ex){
+    if(interestsOf(ex).some(i=>i.id===p.id)) return toast("Already linked to "+p.code);
+    const nx=[...interestsOf(ex),mkInterest(p)], extra={interests:nx,interestCode:nx[0].code};
+    if(!ex.status||ex.status==="New") extra.status="Interested"; if(fd) extra.followUpDate=fd;
+    await addTL(ex.id,"Interested in "+p.code+" "+cleanLbl(p),"note",extra); return toast(ex.name+" linked to "+p.code);
+  }
+  if(!name||n.length!==10) return toast("Enter customer name and a 10-digit mobile number");
+  await addDoc(collection(db,"crmContacts"),{type:"customer",name,mobile:n,whatsapp:n,source:"Property Inventory",status:"Interested",area:p.area||"",city:"Jaipur",propertyType:p.propertyType||"",budgetMin:null,budgetMax:null,details:"",notes:"",followUpDate:fd||"",followUpNote:"",interests:[mkInterest(p)],interestCode:p.code||"",timeline:[tlEntry("Interested in "+p.code+" "+cleanLbl(p))],publicVisible:false,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+  toast("New customer added under "+p.code);
+}
+$("pdSearch").addEventListener("input",renderProps);
+$("pdAdd").onclick=()=>openQuick("seller");
+$("pdRows").addEventListener("focusout",()=>setTimeout(()=>{if(pdPend)renderProps();},150));
+$("pdRows").addEventListener("input",e=>{if(e.target.id==="pdN"){const c=records.find(r=>r.type==="customer"&&r.name===e.target.value);if(c)$("pdM").value=last10(c.mobile);}});
+$("pdRows").addEventListener("change",async e=>{
+  const row=e.target.closest("[data-cid]"); if(!row) return;
+  try{
+    if(e.target.matches("[data-pst]")){await addTL(row.dataset.cid,"Stage: "+e.target.value,"status",{status:e.target.value});toast("Stage updated");}
+    if(e.target.matches("[data-pfu]")){await updateDoc(doc(db,"crmContacts",row.dataset.cid),{followUpDate:e.target.value,updatedAt:serverTimestamp()});toast("Follow-up saved");}
+  }catch(err){toast(err.message);}
+});
+$("pdRows").addEventListener("click",async e=>{
+  const pr=e.target.closest("[data-pd]"); if(pr&&!e.target.closest(".pd-detail")){pdOpen=pdOpen===pr.dataset.pd?null:pr.dataset.pd;renderProps();return;}
+  const b=e.target.closest("[data-pa]"); if(!b) return; const a=b.dataset.pa;
+  try{
+    if(a==="link"){const p=propById(b.closest("[data-pid]").dataset.pid);await pdLink(p,$("pdN").value.trim(),$("pdM").value,$("pdD").value);return;}
+    const row=b.closest("[data-cid]"), c=records.find(r=>r.id===row.dataset.cid), p=propById(pdOpen);
+    if(a==="open") openDrawer(c.id);
+    if(a==="done"){const x={followUpDate:"",followUpNote:""};if(!c.status||c.status==="New")x.status="Contacted";await addTL(c.id,"Follow-up done","call",x);toast("Follow-up completed");}
+    if(a==="snz"){const d=new Date();d.setDate(d.getDate()+3);await updateDoc(doc(db,"crmContacts",c.id),{followUpDate:localISO(d),updatedAt:serverTimestamp()});toast("Moved by 3 days");}
+    if(a==="rm"&&confirm("Unlink "+c.name+" from "+p.code+"?")){const nx=interestsOf(c).filter(i=>i.id!==p.id);await addTL(c.id,p.code+" link removed","note",{interests:nx,interestCode:nx[0]?.code||""});}
+  }catch(err){toast(err.message);}
+});
 $("exportBtn").onclick=()=>{
   const rows=records.map(r=>({Type:r.type,House_Code:r.code||"",Interested_In:interestsOf(r).map(i=>i.code).join(", "),Added:r.createdAt?fmtDate(r.createdAt):"",Follow_Up:r.followUpDate||"",Name:r.name,Mobile:r.mobile,WhatsApp:r.whatsapp||"",Email:r.email||"",Area:r.area||"",City:r.city||"",
     Property_Type:r.propertyType||"",Size:r.size||"",Budget_Min:r.budgetMin||"",Budget_Max:r.budgetMax||"",Status:r.status||"",Source:r.source||"",

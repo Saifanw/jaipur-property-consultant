@@ -344,7 +344,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
     </div>
     <div class="lbl" style="margin-top:16px">Photos <span id="phCount" style="font-weight:500"></span></div>
     <div class="photos" id="photos"></div><input id="phFile" type="file" accept="image/*" multiple class="hidden">
-    <label class="lbl">Video (optional, max 50 MB)<input id="p_video" type="file" accept="video/*"><span class="hint" id="p_vidNote"></span></label>
+    <label class="lbl">Video (optional, max 50 MB; Cloudinary par upload hogi)<input id="p_video" type="file" accept="video/*"><span class="hint" id="p_vidNote"></span></label>
     <label class="sw"><input type="checkbox" id="p_pub"><span><b>🌐 Website par dikhao</b>Area, type, size, price, photos aur details public honge. Owner ka naam, mobile, exact address aur notes kabhi nahi. <b style="color:var(--amber);margin-top:4px">Tip: photos public karne ke liye pehle ye ON karo, phir photos upload karo.</b></span></label>
   </div>
   <div class="mf"><div><button class="btn d hidden" id="p_del">Delete</button></div><div style="display:flex;gap:8px"><button class="btn" id="p_cancel">Cancel</button><button class="btn p" id="p_save">Save property</button></div></div>
@@ -392,12 +392,19 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 import{getFirestore,collection,addDoc,doc,setDoc,updateDoc,deleteDoc,onSnapshot,serverTimestamp,deleteField,arrayUnion,writeBatch}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-import{getStorage,ref,uploadBytes,getDownloadURL}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-storage.js";
 
 /* Same Firebase project + same collections as the old admin — all existing data keeps working */
 const app=initializeApp({apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"});
 const ADMIN_EMAILS=["saif.anwar1618@gmail.com"];
-const auth=getAuth(app),db=getFirestore(app),storage=getStorage(app),COL="crmContacts";
+const auth=getAuth(app),db=getFirestore(app),COL="crmContacts";
+const CLOUDINARY_CLOUD_NAME="ebknzymz",CLOUDINARY_UPLOAD_PRESET="property_upload";
+async function uploadToCloudinary(file,resourceType="image",onProgress){
+  const endpoint=`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`;
+  const form=new FormData();form.append("file",file);form.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);form.append("folder",resourceType==="video"?"property-videos":"property-images");
+  const response=await fetch(endpoint,{method:"POST",body:form});let data={};try{data=await response.json()}catch{}
+  if(!response.ok||!data.secure_url)throw new Error(data?.error?.message||`Cloudinary upload fail (${response.status}). Upload preset aur allowed formats check karo.`);
+  return data.secure_url;
+}
 const BRAND="Jaipur Property Consultant";
 const SITE_AREAS=["Jhotwara","Jagatpura","Sanganer","Mansarovar","Vaishali Nagar","Ajmer Road","Tonk Road","Kalwar Road","Mahapura","Bhankrota","Khatipura","Bindayaka","Vatika","Chaksu"];
 const $=id=>document.getElementById(id);
@@ -710,9 +717,7 @@ $("photos").onclick=e=>{const b=e.target.closest("[data-ph]");if(!b)return;const
 $("phFile").onchange=e=>{[...e.target.files].forEach(f=>{if(photos.length<8&&f.type.startsWith("image/"))photos.push({file:f,preview:URL.createObjectURL(f)})});e.target.value="";drawPhotos()};
 function compressImage(blob,max=1600,q=.82){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(blob);img.onload=()=>{let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);c.toBlob(b=>{URL.revokeObjectURL(u);b?res(b):rej(new Error("Photo compress nahi hui"))},"image/jpeg",q)};img.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("Photo load nahi hui"))};img.src=u})}
 async function uploadPhotos(items,{id,pub},prog){const out=[];let n=0;const total=items.filter(i=>i.file).length;
-  for(const it of items){if(it.file){const blob=await compressImage(it.file),stamp=Date.now()+"-"+(n+1);
-      const path=pub?`publicProperties/${id||"new"}-${stamp}.jpg`:`crmContacts/${auth.currentUser.uid}/${id||"new"}-${stamp}.jpg`;
-      const r0=ref(storage,path);await uploadBytes(r0,blob,{contentType:"image/jpeg"});out.push(await getDownloadURL(r0));n++;prog&&prog(n,total)}else out.push(it.url)}
+  for(const it of items){if(it.file){const blob=await compressImage(it.file);const url=await uploadToCloudinary(new File([blob],`property-${id||"new"}-${Date.now()}-${n+1}.jpg`,{type:"image/jpeg"}),"image");out.push(url);n++;prog&&prog(n,total)}else out.push(it.url)}
   return out}
 function openP(id,o={}){
   pEditId=id||"";const p=id?propById(id)||{}:{},pf=o.prefill||{};
@@ -738,8 +743,7 @@ async function saveP(){
     d.images=urls;d.publicImageUrls=urls;d.publicVideoUrl=old.publicVideoUrl||"";
     const vf=$("p_video").files?.[0];
     if(vf){if(!vf.type.startsWith("video/"))throw new Error("Sahi video file chuno.");if(vf.size>50*1024*1024)throw new Error("Video 50 MB se chhoti honi chahiye.");
-      btn.textContent="Video upload…";const vr=ref(storage,(pub?`publicProperties/${pEditId||"new"}-`:`crmContacts/${auth.currentUser.uid}/${pEditId||"new"}-`)+Date.now()+"-"+vf.name.replace(/[^a-zA-Z0-9._-]/g,"_"));
-      await uploadBytes(vr,vf);const vu=await getDownloadURL(vr);d.videoUrl=vu;if(pub)d.publicVideoUrl=vu}
+      btn.textContent="Video Cloudinary par upload…";const vu=await uploadToCloudinary(vf,"video");d.videoUrl=vu;if(pub)d.publicVideoUrl=vu}
     let id=pEditId;
     if(pEditId)await updateDoc(doc(db,COL,pEditId),d);
     else{d.code=nextCode();d.status="New";d.source="Property Desk";d.createdAt=serverTimestamp();d.timeline=[tlEntry("Property listed as "+d.code,"note")];id=(await addDoc(collection(db,COL),d)).id;openProp=id}

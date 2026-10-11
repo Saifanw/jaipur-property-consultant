@@ -174,8 +174,6 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
     <button data-v="tools">🧰 Tools</button>
   </nav>
   <div class="acts">
-    <button class="btn" id="kBtn" title="Search everything">🔍 <kbd>Ctrl K</kbd></button>
-    <button class="btn" id="sBtn">⚡ Quick add</button>
     <button class="btn gc" id="addC">＋ Add Contact</button>
     <button class="btn p" id="addP">＋ Property</button>
     <div class="menu"><button class="avatar" id="avBtn" aria-label="Account">?</button>
@@ -276,7 +274,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 </main>
 
 <!-- CONTACT MODAL -->
-<div class="fabm"><button class="g" id="fabC">＋ Add Contact</button><button id="fabQ">⚡ Quick add</button><button class="b" id="fabP">＋ Property</button></div>
+<div class="fabm"><button class="g" id="fabC">＋ Add Contact</button><button class="b" id="fabP">＋ Property</button></div>
 
 <div id="mo" class="ov hidden"><div class="modal" role="dialog" aria-modal="true">
   <div class="mh"><div><h2 id="mt">Add contact</h2><p id="ms">Saved to your private CRM.</p></div><span class="st" id="mBadge">New</span></div>
@@ -858,7 +856,7 @@ function prevParse(){const o=smartParse($("s_text").value);if(!clean($("s_text")
 $("s_text").addEventListener("input",prevParse);
 $("s_go").onclick=()=>{const o=prevParse();if(!clean($("s_text").value))return toast("Pehle message paste karo",true);$("so").classList.add("hidden");if(o.type==="seller")openP(null,{prefill:o});else openC(null,{prefill:o})};
 $("s_cancel").onclick=()=>$("so").classList.add("hidden");
-$("sBtn").onclick=()=>{$("s_text").value="";$("s_prev").innerHTML="";$("so").classList.remove("hidden");$("s_text").focus()};
+
 
 /* ---------- WHATSAPP ---------- */
 const TPL=[
@@ -996,13 +994,13 @@ $("k_in").addEventListener("keydown",e=>{const rows=[...$("k_res").querySelector
   if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();kIdx=(kIdx+(e.key==="ArrowDown"?1:-1)+rows.length)%Math.max(rows.length,1);rows.forEach((x,i)=>x.classList.toggle("on",i===kIdx))}
   else if(e.key==="Enter"&&kList[kIdx]){e.preventDefault();pickK(kList[kIdx].id)}});
 $("k_res").onclick=e=>{const b=e.target.closest("[data-k]");if(b)pickK(b.dataset.k)};
-$("kBtn").onclick=openK;
+
 
 /* ---------- navigation + global events ---------- */
 function setView(v){view=v;document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));["dash","props","contacts","follow","inbox","match","tools"].forEach(k=>$("v_"+k).classList.toggle("hidden",k!==v));window.scrollTo({top:0})}
 function goProp(id){setView("props");openProp=id;["pq"].forEach(i=>$(i).value="");["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps();setTimeout(()=>document.querySelector(`[data-pid="${CSS.escape(id)}"]`)?.scrollIntoView({block:"center",behavior:"smooth"}),60)}
 $("nav").onclick=e=>{const b=e.target.closest("[data-v]");if(b)setView(b.dataset.v)};
-$("addC").onclick=()=>openC();$("addP").onclick=()=>openP();$("fabQ").onclick=()=>$("sBtn").click();$("fabC").onclick=()=>openC();$("fabP").onclick=()=>openP();
+$("addC").onclick=()=>openC();$("addP").onclick=()=>openP();$("fabC").onclick=()=>openC();$("fabP").onclick=()=>openP();
 let st;[["pq",renderProps],["cq",()=>{cShown=60;renderContacts()}]].forEach(([i,f])=>$(i).addEventListener("input",()=>{clearTimeout(st);st=setTimeout(f,150)}));
 ["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).addEventListener("change",renderProps));
 ["cf_area","cf_status","cf_src","cf_sort"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
@@ -1050,9 +1048,7 @@ document.addEventListener("click",async e=>{
 ["mo","po","qo","so","wo","ko"].forEach(i=>$(i).addEventListener("click",e=>{if(e.target.id===i)$(i).classList.add("hidden")}));
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"){["mo","po","qo","so","wo","ko"].forEach(i=>$(i).classList.add("hidden"));return}
-  const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||"");
-  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openK()}
-  else if(e.key==="/"&&!typing&&$("app")&&!$("app").classList.contains("hidden")){e.preventDefault();openK()}});
+});
 dash();renderProps();renderContacts();
 
 </script>

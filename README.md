@@ -34,3 +34,5 @@ Google Analytics 4 is included on the public pages using measurement ID `G-0DW0N
 - Property page: size auto-converts (feet x feet -> Gaj / sq ft), rate per Gaj, legal badges, map, FAQs, EMI estimate, site-visit button, print/PDF, schema.org data. Similar properties now show only the same type.
 - Public Q&A: visitors ask on the property page -> Admin > Inbox > Questions -> you answer -> it is shown publicly. If they leave a mobile it also arrives as a private enquiry.
 - **Deploy `firestore.rules` again** (new `publicQuestions` collection) or questions will not save.
+
+- **Ad post** (Admin > property form): auto-generates a ready post (WhatsApp short or OLX/99acres full, Hindi/English) from the property details + public link + your phone. Edit, Copy, send on WhatsApp; the text is saved privately with the property (`adPost`).

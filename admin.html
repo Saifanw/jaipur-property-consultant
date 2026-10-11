@@ -156,6 +156,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 .tr{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.4fr) 120px 190px;gap:12px;align-items:center;padding:12px 18px;border-top:1px solid var(--line)}
 .btn.sm{padding:6px 12px;font-size:12px}
 .nav .pill{margin-left:2px}
+@media(max-width:700px){.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;overflow:visible}.nav button{justify-content:center;padding:8px 4px;font-size:12px}#nav button[data-v="inbox"]{order:-1}}
 @media(max-width:1100px){.dash,.two{grid-template-columns:1fr}.mrow{grid-template-columns:80px minmax(0,1fr) 70px}.mrow>:nth-child(3),.mrow>:nth-child(5){grid-column:2/-1}}
 @media(max-width:900px){.tr,.todo{grid-template-columns:minmax(0,1fr)}}
 </style>
@@ -350,6 +351,11 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <label class="full">Khaas baatein / highlights (ek line mein ek)<textarea id="p_high" rows="3" placeholder="Corner ka plot&#10;Pakki sadak, light-paani ready&#10;School 500 m door"></textarea></label>
       <label class="full">Aas-paas (ek line mein ek)<textarea id="p_near" rows="3" placeholder="School — 500 m&#10;Highway — 2 km&#10;Market — 1 km"></textarea></label>
       <div class="full" id="p_score" style="font-size:12.5px;background:#f6edd5;border-radius:10px;padding:9px 12px"></div>
+      <div class="full" style="font-weight:800;color:var(--navy);margin-top:8px">📣 Ad post — ek baar banao, har jagah paste karo</div>
+      <label>Type<select id="p_adk"><option value="wa">WhatsApp / Facebook (chhota)</option><option value="portal">OLX / 99acres / Magicbricks (poora)</option></select></label>
+      <label>Bhasha<select id="p_adl"><option value="hi">हिंदी</option><option value="en">English</option></select></label>
+      <label class="full">Post (edit kar sakte ho, Save par property ke saath save hoga)<textarea id="p_ad" rows="9" placeholder="‘✨ Auto-banao’ dabao — upar bhari details se post ban jayegi"></textarea></label>
+      <div class="full" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn p sm" id="p_adgen">✨ Auto-banao</button><button type="button" class="btn sm" id="p_adcopy">📋 Copy</button><button type="button" class="btn sm" id="p_adwa">WhatsApp par bhejo</button></div>
       <label>Owner follow-up date<input id="p_fdate" type="date"></label>
       <label>Follow-up note<input id="p_fnote" type="text" placeholder="e.g. Rate confirm karna hai"></label>
       <label class="full">Property details<textarea id="p_details" rows="2" placeholder="Documents, patta/registry, condition…"></textarea></label>
@@ -741,7 +747,7 @@ function openP(id,o={}){
   setMoney("p_price",p.budgetMax||p.budgetMin||pf.bmax);$("h_price").textContent="";$("p_av").value=p.availability||"Available";
   $("p_owner").value=p.name||pf.name||"";$("p_mobile").value=p.mobile||pf.mobile||"";$("p_road").value=p.roadFacing||"";$("p_details").value=p.details||pf.details||"";$("p_addr").value=p.exactAddress||"";$("p_notes").value=p.notes||"";
   $("p_facing").value=p.facing||"";$("p_roadw").value=p.roadWidth||"";$("p_gaj").value=p.areaGaj||"";$("p_corner").value=p.cornerPlot||"";$("p_patta").value=p.pattaType||"";$("p_reg").value=p.registry||"";$("p_loan").value=p.loan||"";
-  $("p_soc").value=p.society||"";$("p_land").value=/^https?:/i.test(p.propertyLocation||"")?"":(p.propertyLocation||"");$("p_map").value=p.mapUrl||(/^https?:/i.test(p.propertyLocation||"")?p.propertyLocation:"");$("p_high").value=p.highlights||"";$("p_near").value=p.nearby||"";
+  $("p_soc").value=p.society||"";$("p_land").value=/^https?:/i.test(p.propertyLocation||"")?"":(p.propertyLocation||"");$("p_map").value=p.mapUrl||(/^https?:/i.test(p.propertyLocation||"")?p.propertyLocation:"");$("p_high").value=p.highlights||"";$("p_ad").value=p.adPost||"";$("p_near").value=p.nearby||"";
   $("p_fdate").value=p.followUpDate||"";$("p_fnote").value=p.followUpNote||"";$("p_pub").checked=!!p.publicVisible;
   photos=(p.images||[]).map(u=>({url:u}));drawPhotos();$("p_video").value="";$("p_vidNote").textContent=p.videoUrl?"✓ Video pehle se upload hai (nayi chunoge to replace hogi)":"";
   $("p_del").classList.toggle("hidden",!id);$("po").classList.remove("hidden");scoreP();$("p_area").focus()}
@@ -750,6 +756,41 @@ function scoreP(){const v=i=>($(i).value||"").trim(),it=[["3+ photos",photos.len
   const sc=it.reduce((n,x)=>n+(x[1]?x[2]:0),0),miss=it.filter(x=>!x[1]).map(x=>x[0]);
   $("p_score").innerHTML=`<b>Listing quality: ${Math.min(100,sc)}%</b>${miss.length?" — baaki: "+miss.join(", "):" ✓ Poori detail, website par best dikhegi"}`}
 $("po").addEventListener("input",scoreP);
+function genAd(kind,lang){
+  const v=i=>($(i).value||"").trim(),hi=lang==="hi",wa=kind==="wa",B=s=>wa?`*${s}*`:s;
+  const L=hi?{sale:"बिक्री हेतु",size:"साइज़",price:"कीमत",rate:"रेट",road:"रोड",corner:"कॉर्नर प्लॉट",patta:"पट्टा",reg:"रजिस्ट्री",loan:"होम लोन",near:"आस-पास",more:"पूरी जानकारी व फोटो",call:"संपर्क",visit:"साइट विज़िट फ्री — कॉल/WhatsApp करें",ref:"रेफ",gaj:"गज",why:"खास बातें"}:{sale:"for Sale",size:"Size",price:"Price",rate:"Rate",road:"Road",corner:"Corner plot",patta:"Patta",reg:"Registry",loan:"Home loan",near:"Nearby",more:"Full details & photos",call:"Contact",visit:"Free site visit — call/WhatsApp us",ref:"Ref",gaj:"Gaj",why:"Highlights"};
+  const inr=n=>n>=1e7?"₹"+(+(n/1e7).toFixed(2))+" Cr":n>=1e5?"₹"+(+(n/1e5).toFixed(2))+" Lakh":"₹"+Number(n).toLocaleString("en-IN");
+  const type=v("p_type")||"Property",area=v("p_area"),city=v("p_city")||"Jaipur",price=getMoney("p_price")||0,sz=v("p_size");
+  const dm=sz.replace(/[×*]/g,"x").match(/(\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)/i);
+  const gaj=Number(v("p_gaj"))||(dm?+(dm[1]*dm[2]/9).toFixed(1):0);
+  const sizeTxt=[sz.replace(/x/gi,"×"),gaj?`${gaj} ${L.gaj}`:""].filter(Boolean).join(" • ");
+  const rate=price&&gaj&&price/gaj>500?inr(Math.round(price/gaj))+"/"+L.gaj:"";
+  const lines=s=>v(s).split(/\n|;/).map(x=>x.trim()).filter(Boolean);
+  const link=pEditId&&$("p_pub").checked?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(pEditId):"";
+  const code=pEditId?(propById(pEditId)?.code||""):"";
+  const phone=(window.SITE&&SITE.phone)||"6350566010";
+  const roadLine=[v("p_facing")||v("p_road"),v("p_roadw")?L.road+" "+v("p_roadw"):"",v("p_corner")==="Yes"?L.corner:""].filter(Boolean).join(" | ");
+  const out=[];
+  out.push((wa?"🏡 ":"")+B(`${type} ${L.sale} — ${area}, ${city}`));
+  if(!wa)out.push("");
+  if(sizeTxt)out.push((wa?"📐 ":"• ")+L.size+": "+sizeTxt);
+  if(price)out.push((wa?"💰 ":"• ")+L.price+": "+inr(price)+(rate?` (${rate})`:""));
+  if(roadLine)out.push((wa?"🧭 ":"• ")+roadLine);
+  const legal=[v("p_patta")?L.patta+": "+v("p_patta"):"",v("p_reg")?L.reg+": "+v("p_reg"):"",v("p_loan")?L.loan+": "+v("p_loan"):""].filter(Boolean);
+  if(legal.length)out.push((wa?"📄 ":"• ")+legal.join(" | "));
+  if(v("p_soc")||v("p_land"))out.push((wa?"🏘 ":"• ")+[v("p_soc"),v("p_land")].filter(Boolean).join(", "));
+  const hl=lines("p_high");if(hl.length){out.push("");if(!wa)out.push(B(L.why+":"));hl.forEach(x=>out.push((wa?"✅ ":"• ")+x))}
+  const nr=lines("p_near");if(nr.length){out.push("");out.push((wa?"📍 ":"")+L.near+": "+nr.join(", "))}
+  out.push("");
+  if(link)out.push((wa?"🔗 ":"")+L.more+": "+link);
+  out.push((wa?"📞 ":"")+B(L.call+": "+phone));
+  out.push(L.visit);
+  out.push("— Jaipur Property Consultant"+(code?` | ${L.ref}: ${code}`:""));
+  return out.join("\n")}
+$("p_adgen").onclick=()=>{if($("p_ad").value.trim()&&!confirm("Purana post replace karna hai?"))return;if(!$("p_area").value.trim())return toast("Pehle area likho",true);$("p_ad").value=genAd($("p_adk").value,$("p_adl").value);if(pEditId&&!$("p_pub").checked)toast("Tip: link jodne ke liye ‘website par dikhao’ on karo",true)};
+$("p_adcopy").onclick=async()=>{const t=$("p_ad").value.trim();if(!t)return toast("Pehle post banao",true);try{await navigator.clipboard.writeText(t);toast("Post copy ho gayi ✓")}catch(e){$("p_ad").select();toast("Select ho gayi — Ctrl+C dabao",true)}};
+$("p_adwa").onclick=()=>{const t=$("p_ad").value.trim();if(!t)return toast("Pehle post banao",true);window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")};
+
 const closeP=()=>$("po").classList.add("hidden");
 async function saveP(){
   const area=clean($("p_area").value),owner=clean($("p_owner").value);
@@ -757,7 +798,7 @@ async function saveP(){
   const old=pEditId?propById(pEditId)||{}:{},pub=$("p_pub").checked,mobile=clean($("p_mobile").value),btn=$("p_save");
   let price=getMoney("p_price"),pmin=price,pmax=price;if(pEditId&&$("p_price").value===$("p_price").dataset.txt){pmin=old.budgetMin??price;pmax=old.budgetMax??price}
   const d={type:"seller",name:owner,mobile,whatsapp:mobile,propertyType:$("p_type").value,size:clean($("p_size").value),area,city:clean($("p_city").value)||"Jaipur",
-    budgetMin:pmin??null,budgetMax:pmax??null,availability:$("p_av").value,roadFacing:clean($("p_road").value),facing:$("p_facing").value,roadWidth:clean($("p_roadw").value),areaGaj:Number($("p_gaj").value)||null,cornerPlot:$("p_corner").value,pattaType:$("p_patta").value,registry:$("p_reg").value,loan:$("p_loan").value,society:clean($("p_soc").value),propertyLocation:clean($("p_land").value),mapUrl:clean($("p_map").value),highlights:$("p_high").value.trim(),nearby:$("p_near").value.trim(),details:clean($("p_details").value),exactAddress:clean($("p_addr").value),notes:$("p_notes").value.trim(),
+    budgetMin:pmin??null,budgetMax:pmax??null,availability:$("p_av").value,roadFacing:clean($("p_road").value),facing:$("p_facing").value,roadWidth:clean($("p_roadw").value),areaGaj:Number($("p_gaj").value)||null,cornerPlot:$("p_corner").value,pattaType:$("p_patta").value,registry:$("p_reg").value,loan:$("p_loan").value,society:clean($("p_soc").value),propertyLocation:clean($("p_land").value),mapUrl:clean($("p_map").value),highlights:$("p_high").value.trim(),adPost:$("p_ad").value.trim(),nearby:$("p_near").value.trim(),details:clean($("p_details").value),exactAddress:clean($("p_addr").value),notes:$("p_notes").value.trim(),
     followUpDate:$("p_fdate").value||"",followUpNote:clean($("p_fnote").value),publicVisible:pub,publicDisplayName:old.publicDisplayName&&old.publicDisplayName!==old.name?old.publicDisplayName:"Property Available",updatedAt:serverTimestamp()};
   btn.disabled=true;btn.textContent="Saving…";
   try{
@@ -864,7 +905,7 @@ $("mPick").onchange=drawMatchRes;
 
 /* ---------- INBOX (website submissions + reviews) ---------- */
 const subImgs=s=>[...new Set([...(Array.isArray(s.imageDataUrls)?s.imageDataUrls:[]),...(s.imageDataUrl?[s.imageDataUrl]:[])].filter(Boolean))].slice(0,3);
-const tsOf=s=>msOf(s.submittedAt)||msOf(s.createdAt);
+const tsOf=s=>msOf(s.submittedAt)||msOf(s.createdAt)||msOf(s.askedAt);
 function renderInbox(){
   const f=$("ibFilter").value||"pending",stt=x=>String(x.status||"pending");
   $("ibSub").textContent=subs.filter(s=>stt(s)==="pending").length;$("ibRev").textContent=revs.filter(s=>stt(s)==="pending").length;$("ibQa").textContent=qs.filter(s=>stt(s)==="pending").length;

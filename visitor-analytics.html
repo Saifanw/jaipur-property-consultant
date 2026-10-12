@@ -105,7 +105,7 @@ import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app
 import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 import{getFirestore,collection,getDocs,query,where,orderBy,limit,Timestamp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 const cfg={apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"};
-const ADMIN=["saif.anwar1618@gmail.com"],CAP=20000;
+const ADMIN=["saif.anwar1618@gmail.com"],CAP=10000;
 const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));

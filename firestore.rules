@@ -56,26 +56,94 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
-    // Website analytics: anonymous visitors can create bounded page-view events.
-    // Only the configured admin can read or manage analytics records.
+    // ---- Website analytics (v2) ----
+    // Anonymous visitors may create bounded page-view / action records and may only update
+    // their OWN page-view document's engagement counters (time, scroll, clicks, approx. location).
+    // Only the admin can read, edit or delete analytics.
+    function okStr(d, f, n) {
+      return d.get(f, "") is string && d.get(f, "").size() <= n;
+    }
+    function okNum(d, f, lo, hi) {
+      return d.get(f, 0) is number && d.get(f, 0) >= lo && d.get(f, 0) <= hi;
+    }
+    function isAnon() {
+      return request.auth != null
+        && request.auth.token.firebase.sign_in_provider == "anonymous";
+    }
+
     match /websiteAnalytics/{eventId} {
-      allow create: if request.auth != null
-        && request.auth.token.firebase.sign_in_provider == "anonymous"
+      allow create: if isAnon()
         && request.resource.data.keys().hasOnly([
-          "visitorId", "page", "title", "referrer", "source", "device",
-          "userAgentFamily", "createdAt", "uid"
+          "visitorId", "sessionId", "page", "title", "propertyId", "referrer", "source", "channel",
+          "medium", "campaign", "device", "os", "browser", "userAgentFamily", "screen", "viewport",
+          "language", "tz", "net", "landing", "pageIndex", "entry", "visitCount", "isNew",
+          "country", "countryCode", "region", "city", "durationSec", "maxScroll", "interactions",
+          "createdAt", "uid"
         ])
-        && request.resource.data.visitorId is string
-        && request.resource.data.visitorId.size() <= 80
-        && request.resource.data.page is string
-        && request.resource.data.page.size() <= 160
-        && request.resource.data.title is string
-        && request.resource.data.title.size() <= 160
-        && request.resource.data.referrer is string
-        && request.resource.data.referrer.size() <= 120
-        && request.resource.data.source in ["Direct", "Google", "Social", "Referral"]
-        && request.resource.data.device in ["Mobile", "Desktop", "Tablet"]
-        && request.resource.data.userAgentFamily in ["Edge", "Chrome", "Firefox", "Safari", "Other"]
+        && okStr(request.resource.data, "visitorId", 80)
+        && okStr(request.resource.data, "sessionId", 80)
+        && okStr(request.resource.data, "page", 160)
+        && okStr(request.resource.data, "title", 160)
+        && okStr(request.resource.data, "propertyId", 80)
+        && okStr(request.resource.data, "referrer", 120)
+        && okStr(request.resource.data, "source", 60)
+        && okStr(request.resource.data, "channel", 40)
+        && okStr(request.resource.data, "medium", 40)
+        && okStr(request.resource.data, "campaign", 80)
+        && okStr(request.resource.data, "device", 20)
+        && okStr(request.resource.data, "os", 20)
+        && okStr(request.resource.data, "browser", 30)
+        && okStr(request.resource.data, "userAgentFamily", 20)
+        && okStr(request.resource.data, "screen", 20)
+        && okStr(request.resource.data, "viewport", 20)
+        && okStr(request.resource.data, "language", 20)
+        && okStr(request.resource.data, "tz", 60)
+        && okStr(request.resource.data, "net", 10)
+        && okStr(request.resource.data, "entry", 160)
+        && okStr(request.resource.data, "country", 60)
+        && okStr(request.resource.data, "countryCode", 4)
+        && okStr(request.resource.data, "region", 60)
+        && okStr(request.resource.data, "city", 60)
+        && okNum(request.resource.data, "pageIndex", 0, 10000)
+        && okNum(request.resource.data, "visitCount", 0, 100000)
+        && okNum(request.resource.data, "durationSec", 0, 0)
+        && okNum(request.resource.data, "maxScroll", 0, 0)
+        && okNum(request.resource.data, "interactions", 0, 0)
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time;
+
+      // visitor may only top up engagement counters on the document they created
+      allow update: if isAnon()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "durationSec", "maxScroll", "interactions", "country", "countryCode", "region", "city", "updatedAt"
+        ])
+        && okNum(request.resource.data, "durationSec", 0, 14400)
+        && okNum(request.resource.data, "maxScroll", 0, 100)
+        && okNum(request.resource.data, "interactions", 0, 100000)
+        && okStr(request.resource.data, "country", 60)
+        && okStr(request.resource.data, "countryCode", 4)
+        && okStr(request.resource.data, "region", 60)
+        && okStr(request.resource.data, "city", 60);
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /websiteEvents/{eventId} {
+      allow create: if isAnon()
+        && request.resource.data.keys().hasOnly([
+          "type", "label", "target", "page", "propertyId", "visitorId", "sessionId", "uid", "createdAt"
+        ])
+        && request.resource.data.type in [
+          "call_click", "whatsapp_click", "email_click", "map_click", "property_open",
+          "outbound_click", "form_start", "form_submit", "custom"
+        ]
+        && okStr(request.resource.data, "label", 80)
+        && okStr(request.resource.data, "target", 80)
+        && okStr(request.resource.data, "page", 160)
+        && okStr(request.resource.data, "propertyId", 80)
+        && okStr(request.resource.data, "visitorId", 80)
+        && okStr(request.resource.data, "sessionId", 80)
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.createdAt == request.time;
       allow read, update, delete: if isAdmin();

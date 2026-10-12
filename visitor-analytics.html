@@ -1,44 +1,352 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Website Analytics — Jaipur Property Consultant</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="light dark"><title>Website Analytics — Jaipur Property Consultant</title>
 <style>
-:root{--ink:#142033;--mut:#64748b;--line:#e4e9f1;--bg:#f4f7fb;--blue:#315bdb;--green:#087f5b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px Inter,system-ui,Arial,sans-serif}header{background:#fff;border-bottom:1px solid var(--line);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header strong{font-size:17px}a{color:var(--blue);text-decoration:none}main{max-width:1200px;margin:24px auto;padding:0 18px 48px}.muted{color:var(--mut)}button,input{font:inherit}button{border:1px solid var(--line);border-radius:9px;background:#fff;padding:9px 13px;font-weight:650;cursor:pointer}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}.bar{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:16px 0}.bar label{display:grid;gap:5px;font-size:12px;color:var(--mut);font-weight:700}.bar input{padding:9px;border:1px solid var(--line);border-radius:8px;background:#fff}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}.metric{font-size:29px;font-weight:800;margin:8px 0 2px}.card h2{font-size:14px;margin:0 0 14px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.lineitem{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #f0f2f6}.lineitem:first-of-type{border-top:0}.lineitem span{overflow-wrap:anywhere}.track{height:7px;background:#edf1f7;border-radius:9px;overflow:hidden;margin-top:5px}.track i{display:block;height:100%;background:var(--blue)}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #edf0f5;overflow-wrap:anywhere}th{color:var(--mut)}.tablewrap{overflow:auto}.hidden{display:none!important}.status{padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:16px}.pill{background:#e5f7ef;color:var(--green);border-radius:99px;padding:4px 9px;font-size:11px;font-weight:800}@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol{grid-template-columns:1fr}}@media(max-width:450px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:24px}}
+:root{--bg:#f5f7fa;--sf:#fff;--sf2:#f8fafc;--ink:#121a2b;--mut:#5b6577;--line:#e3e8ef;--grid:#eef1f6;--blue:#2a78d6;--blue2:#184f95;--soft:#e8f1fc;--aqua:#1baf7a;--orange:#eb6834;--good:#0a7a3d;--bad:#c02f2f;--warn:#9a6700;--shadow:0 1px 2px rgba(18,26,43,.05)}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1218;--sf:#181c24;--sf2:#1d222b;--ink:#eceef2;--mut:#a3acbb;--line:#2a303b;--grid:#232933;--blue:#3987e5;--blue2:#86b6ef;--soft:#1b2a3f;--aqua:#199e70;--orange:#d95926;--good:#4cc27a;--bad:#ef7b7b;--warn:#e0b04a;--shadow:none}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:150px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-variant-numeric:tabular-nums}
+a{color:var(--blue);text-decoration:none}button,input,select{font:inherit;color:inherit}.hidden{display:none!important}.mut{color:var(--mut)}
+button{border:1px solid var(--line);border-radius:9px;background:var(--sf);padding:8px 12px;font-weight:600;cursor:pointer;line-height:1.2}button:hover{border-color:var(--blue)}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}button.primary{background:var(--blue);border-color:var(--blue);color:#fff}button.on{background:var(--soft);border-color:var(--blue);color:var(--blue)}button:disabled{opacity:.55;cursor:default}
+header.top{background:var(--sf);border-bottom:1px solid var(--line);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.top h1{font-size:17px;margin:0}header.top small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:99px;padding:6px 11px;font-weight:700;font-size:12px;background:var(--sf2)}.dot{width:8px;height:8px;border-radius:50%;background:var(--good)}.dot.off{background:var(--mut)}.dot.pulse{animation:p 1.8s infinite}@keyframes p{0%{box-shadow:0 0 0 0 rgba(10,122,61,.45)}100%{box-shadow:0 0 0 8px rgba(10,122,61,0)}}@media(prefers-reduced-motion:reduce){.dot.pulse{animation:none}html{scroll-behavior:auto}}
+details.menu{position:relative}details.menu summary{list-style:none;border:1px solid var(--line);border-radius:9px;background:var(--sf);padding:8px 12px;font-weight:600;cursor:pointer}details.menu summary::-webkit-details-marker{display:none}details.menu .pop{position:absolute;right:0;top:calc(100% + 6px);z-index:30;background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:6px;min-width:190px;box-shadow:0 10px 30px rgba(0,0,0,.14)}details.menu .pop button{display:block;width:100%;text-align:left;border:0;background:none;padding:8px 10px}details.menu .pop button:hover{background:var(--soft)}
+.filters{position:relative;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 22px}
+.frow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:1320px;margin:0 auto}.frow+.frow{margin-top:8px}
+.seg{display:inline-flex;gap:4px;background:var(--sf);border:1px solid var(--line);border-radius:11px;padding:3px}.seg button{border:0;background:none;padding:6px 10px;border-radius:8px}.seg button.on{background:var(--soft);color:var(--blue)}
+.frow input[type=date],.frow select,.frow input[type=search]{border:1px solid var(--line);background:var(--sf);border-radius:9px;padding:7px 9px;max-width:100%}.frow select{max-width:150px}.frow input[type=search]{min-width:280px}code{word-break:break-all;font-size:11.5px}
+.chk{display:inline-flex;gap:6px;align-items:center;color:var(--mut);font-weight:600;cursor:pointer}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{background:var(--soft);color:var(--blue);border:1px solid var(--blue);border-radius:99px;padding:3px 6px 3px 10px;font-size:12px;font-weight:700;display:inline-flex;gap:6px;align-items:center}.chip button{border:0;background:none;padding:0 4px;color:inherit;font-size:15px;line-height:1}
+nav.jump{max-width:1320px;margin:0 auto;padding:12px 22px 0;display:flex;gap:6px;flex-wrap:wrap}nav.jump a{padding:5px 11px;border-radius:99px;border:1px solid var(--line);background:var(--sf);color:var(--mut);font-weight:600;font-size:12.5px}nav.jump a:hover{color:var(--blue);border-color:var(--blue)}
+main{max-width:1320px;margin:0 auto;padding:14px 22px 60px}
+h2.sec{font-size:15px;margin:30px 0 4px}h2.sec+p{margin:0 0 10px;color:var(--mut);font-size:12.5px}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;box-shadow:var(--shadow)}.card h3{font-size:13.5px;margin:0 0 12px;display:flex;justify-content:space-between;gap:8px;align-items:center}.card h3 small{font-weight:500;color:var(--mut)}
+.g2{display:grid;grid-template-columns:2fr 1fr;gap:12px}.g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}.g1{display:grid;gap:12px}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:6px 0 4px}.insights div{background:var(--sf);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:10px 12px;font-size:13px}
+.kg{font-size:12px;font-weight:700;color:var(--mut);margin:16px 0 8px}.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}
+.kpi{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:var(--shadow);min-width:0}.kpi .l{color:var(--mut);font-size:12.5px;font-weight:600}.kpi .v{font-size:28px;font-weight:800;line-height:1.15;margin:4px 0 2px;letter-spacing:-.01em}.kpi .s{color:var(--mut);font-size:11.5px}.kpi .row{display:flex;justify-content:space-between;align-items:flex-end;gap:6px}.kpi svg{flex:none}
+.d{font-size:12px;font-weight:700;white-space:nowrap}.d.up{color:var(--good)}.d.dn{color:var(--bad)}.d.fl{color:var(--mut)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}.tabs button{padding:5px 10px;font-size:12.5px}
+.cwrap{position:relative}.cwrap svg{display:block;width:100%}.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);border-radius:8px;padding:7px 10px;font-size:12px;z-index:5;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-top:6px;flex-wrap:wrap}.legend i{display:inline-block;width:12px;height:3px;border-radius:2px;background:var(--blue);vertical-align:middle;margin-right:5px}.legend i.pv{background:none;border-top:2px dashed var(--mut);height:0}
+.li{display:block;position:relative;width:100%;text-align:left;border:0;background:none;padding:6px 0 9px;border-radius:0;font-weight:500}.li:hover:not(:disabled){background:var(--sf2)}.li:disabled{cursor:default;opacity:1}
+.li .lt{display:inline-block;max-width:72%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}.li .lv{float:right;font-weight:700}.li .lv em{font-style:normal;color:var(--mut);font-weight:500;margin-left:4px;font-size:12px}.li i{position:absolute;left:0;bottom:3px;height:4px;width:var(--w);background:var(--blue);border-radius:3px;opacity:.9}
+.empty{color:var(--mut);margin:6px 0;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--grid);vertical-align:top}th{color:var(--mut);font-weight:700;font-size:12px;white-space:nowrap;position:sticky;top:0;background:var(--sf)}td.n,th.n{text-align:right}.tw{overflow:auto;max-height:560px}tr.clk{cursor:pointer}tr.clk:hover td{background:var(--sf2)}tr.jr td{background:var(--sf2)}
+.pill{display:inline-block;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700;background:var(--soft);color:var(--blue);white-space:nowrap}.pill.g{background:rgba(12,163,12,.14);color:var(--good)}.pill.o{background:rgba(235,104,52,.15);color:var(--orange)}.pill.m{background:var(--grid);color:var(--mut)}
+.tl{margin:0;padding:0;list-style:none}.tl li{display:flex;gap:10px;padding:5px 0;border-left:2px solid var(--line);padding-left:12px;margin-left:6px}.tl time{color:var(--mut);min-width:78px;font-size:12px}
+.funnel .st{margin:0 0 10px}.funnel .bar{height:30px;border-radius:8px;background:var(--blue);display:flex;align-items:center;padding:0 10px;color:#fff;font-weight:700;min-width:44px}.funnel .meta{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px}
+.heat{display:grid;grid-template-columns:34px repeat(24,minmax(0,1fr));gap:2px;font-size:10.5px;color:var(--mut)}.heat b{font-weight:500;align-self:center}.heat .c{aspect-ratio:1.25;border-radius:3px;background:var(--grid)}.heat .h{text-align:center}
+.liveg{display:grid;grid-template-columns:1fr 1fr;gap:16px}.big{font-size:40px;font-weight:800;line-height:1}.feed{max-height:300px;overflow:auto;margin:0;padding:0;list-style:none}.feed li{padding:6px 0;border-bottom:1px solid var(--grid);font-size:12.5px}.feed time{color:var(--mut);margin-right:6px}
+.status{padding:20px;background:var(--sf);border:1px solid var(--line);border-radius:14px;max-width:560px;margin:40px auto}.warn{background:rgba(250,178,25,.13);border:1px solid rgba(250,178,25,.55);color:var(--ink);padding:10px 14px;border-radius:10px;margin:10px 0;font-size:13px}.err{color:var(--bad)}
+.more{margin-top:10px;text-align:center}
+@media(min-width:901px){.filters{position:sticky}}
+@media(max-width:900px){.g2,.liveg{grid-template-columns:1fr}.filters{padding:8px 12px}header.top,main,nav.jump{padding-left:12px;padding-right:12px}.kpi .v{font-size:24px}.frow select{max-width:46%;flex:1 1 40%}.frow input[type=search]{flex:1 1 100%}}
 </style></head><body>
-<header><div><strong>📊 Website Analytics</strong><div class="muted" style="font-size:12px;margin-top:3px">Jaipur Property Consultant · Private admin dashboard</div></div><div><a href="admin.html">← Property Desk</a> <button id="refresh" class="primary">Refresh</button> <button id="export">Export CSV</button> <button id="logout" class="hidden">Sign out</button></div></header>
-<main>
-<div id="login" class="status"><h2 style="margin-top:0">Admin login required</h2><p class="muted">Sign in with the authorized Google admin account to view website traffic.</p><button class="primary" id="signin">Continue with Google</button><p id="error" style="color:#b42318"></p></div>
+<header class="top"><div><h1>Website Analytics</h1><small>Jaipur Property Consultant · private admin dashboard</small></div>
+<div class="acts"><span class="live" id="livePill" title="Visitors active in the last 5 minutes"><span class="dot off" id="liveDot"></span><span id="liveTxt">Live —</span></span><a href="admin.html">← Property Desk</a><label class="chk"><input type="checkbox" id="auto"> Auto-refresh</label><button id="refresh" class="primary">Refresh</button>
+<details class="menu"><summary>Export CSV ▾</summary><div class="pop"><button data-exp="sessions">Sessions</button><button data-exp="visitors">Visitors</button><button data-exp="pageviews">Page views</button><button data-exp="actions">Actions (clicks &amp; forms)</button></div></details><button id="logout" class="hidden">Sign out</button></div></header>
+
+<div id="login" class="status"><h2 style="margin-top:0">Admin login required</h2><p class="mut">Sign in with the authorized Google admin account to view website traffic.</p><button class="primary" id="signin">Continue with Google</button><p id="error" class="err"></p></div>
+
 <div id="app" class="hidden">
-<div class="bar"><label>From date<input id="from" type="date"></label><label>To date<input id="to" type="date"></label><button id="apply">Apply filter</button><span class="muted" id="rangeNote"></span></div>
-<div class="grid">
-<div class="card"><div class="muted">Page views</div><div class="metric" id="views">—</div><div class="muted">Within selected dates</div></div>
-<div class="card"><div class="muted">Unique visitors</div><div class="metric" id="unique">—</div><div class="muted">Browser visitor IDs</div></div>
-<div class="card"><div class="muted">Active · last 5 min</div><div class="metric" id="active">—</div><div class="muted">Across all recorded traffic</div></div>
-<div class="card"><div class="muted">Pages viewed</div><div class="metric" id="pagesCount">—</div><div class="muted">Distinct page paths</div></div>
+<div class="filters">
+ <div class="frow">
+  <div class="seg" id="presets"><button data-p="0">Today</button><button data-p="1">Yesterday</button><button data-p="7">7 days</button><button data-p="30" class="on">30 days</button><button data-p="90">90 days</button></div>
+  <input type="date" id="from" aria-label="From date"><input type="date" id="to" aria-label="To date"><button id="apply">Apply</button>
+  <label class="chk"><input type="checkbox" id="cmp" checked> Compare with previous period</label><span class="mut" id="rangeNote"></span>
+ </div>
+ <div class="frow" id="selects"></div>
+ <div class="frow"><input type="search" id="q" placeholder="Search visitor ID, city, page or source" aria-label="Search"><div class="chips" id="chips"></div></div>
 </div>
-<div class="twocol">
-<section class="card"><h2>Top pages</h2><div id="topPages" class="muted">No data yet</div></section>
-<section class="card"><h2>Traffic sources</h2><div id="sources" class="muted">No data yet</div></section>
-<section class="card"><h2>Devices</h2><div id="devices" class="muted">No data yet</div></section>
-<section class="card"><h2>Referring websites</h2><div id="referrers" class="muted">No data yet</div></section>
+<nav class="jump"><a href="#overview">Overview</a><a href="#live">Live</a><a href="#acq">Where from</a><a href="#aud">Who &amp; where</a><a href="#beh">Behaviour</a><a href="#act">Actions</a><a href="#when">When</a><a href="#journeys">Visitor log</a><a href="#health">Data health</a></nav>
+<main>
+<div id="banner"></div>
+<h2 class="sec" id="overview">Overview</h2><p>Everything below follows the date range and filters above. Click any bar in a list to filter by it.</p>
+<div class="insights" id="insights"></div>
+<div id="kpis"></div>
+
+<div class="g2" style="margin-top:14px">
+ <section class="card"><h3>Traffic over time <small id="granNote"></small></h3><div class="tabs" id="ctabs"></div><div class="cwrap" id="chart"></div><div class="legend"><span><i></i><b id="lgNow">This period</b></span><span id="lgPrev"><i class="pv"></i>Previous period</span></div></section>
+ <section class="card funnel"><h3>What visitors do <small>% of sessions</small></h3><div id="funnel"></div></section>
 </div>
-<section class="card" style="margin-top:12px"><h2>Recent visitor activity</h2><div class="tablewrap"><table><thead><tr><th>Time</th><th>Page</th><th>Source</th><th>Referrer</th><th>Device</th></tr></thead><tbody id="recent"></tbody></table></div><p class="muted" id="empty" style="display:none">No analytics records found. Enable Anonymous Authentication and publish the provided Firestore rules, then visit the public website to create test traffic.</p></section>
-<div class="status muted" id="note">Privacy note: this dashboard records page views, browser visitor IDs, source/referrer hostname and device type. It does not collect exact GPS location, IP address, names, or phone numbers.</div>
-</div></main>
+
+<h2 class="sec" id="live">Live now</h2><p>Visitors active in the last 5 minutes and the latest things they did (not affected by filters).</p>
+<section class="card"><div class="liveg"><div><div class="big" id="liveBig">0</div><div class="mut" style="margin:4px 0 10px">active visitors</div><div class="tw" style="max-height:300px"><table><thead><tr><th>Visitor</th><th>Where</th><th>Device</th><th>Viewing</th><th>From</th></tr></thead><tbody id="liveRows"></tbody></table></div></div><div><h3>Latest activity</h3><ul class="feed" id="feed"></ul></div></div></section>
+
+<h2 class="sec" id="acq">Where visitors come from</h2><p>Channels, sources, referring websites and campaigns (UTM).</p>
+<div class="g3" id="acqCards"></div>
+
+<h2 class="sec" id="aud">Who they are and where they are</h2><p>Location is approximate (city level) and device details come from the visitor's browser.</p>
+<div class="g3" id="audCards"></div>
+
+<h2 class="sec" id="beh">What they look at</h2><p>Pages, properties, time spent and how far people read.</p>
+<div class="g1">
+<section class="card"><h3>Top pages</h3><div class="tw"><table><thead><tr><th>Page</th><th class="n">Views</th><th class="n">Visitors</th><th class="n">Avg. time</th><th class="n">Avg. scroll</th><th class="n">Entries</th><th class="n">Exit rate</th></tr></thead><tbody id="pagesT"></tbody></table></div></section>
+<section class="card"><h3>Properties viewed <small>click a row to filter</small></h3><div class="tw"><table><thead><tr><th>Property</th><th class="n">Views</th><th class="n">Visitors</th><th class="n">Avg. time</th><th class="n">Avg. scroll</th><th class="n">WhatsApp</th><th class="n">Calls</th><th class="n">Forms</th></tr></thead><tbody id="propsT"></tbody></table></div></section>
+</div>
+<div class="g3" id="behCards" style="margin-top:12px"></div>
+
+<h2 class="sec" id="act">What they did</h2><p>Calls, WhatsApp chats, form activity and outbound clicks. Form "submits" count attempts; real enquiries are shown as Leads received.</p>
+<div class="g3" id="actCards"></div>
+
+<h2 class="sec" id="when">When they visit</h2><p>Sessions by weekday and hour (your local time) — use it to plan when to be available on call and WhatsApp.</p>
+<section class="card"><div class="heat" id="heat"></div><div class="mut" style="margin-top:8px;font-size:12px" id="heatNote"></div></section>
+
+<h2 class="sec" id="journeys">Visitor log</h2><p>Every visit in detail: who, from where, on what device, what they opened and what they did.</p>
+<section class="card"><div class="tabs" id="ltabs"><button data-t="sessions" class="on">Sessions</button><button data-t="visitors">Visitors</button><button data-t="actions">Action log</button></div><div class="tw" style="max-height:640px"><table><thead id="logHead"></thead><tbody id="logBody"></tbody></table></div><div class="more"><button id="moreBtn">Show more</button></div></section>
+
+<h2 class="sec" id="health">Data health &amp; privacy</h2>
+<section class="card"><div id="healthBody"></div></section>
+</main></div>
+
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import{getFirestore,collection,getDocs}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import{getFirestore,collection,getDocs,query,where,orderBy,limit,Timestamp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 const cfg={apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"};
-const ADMIN=["saif.anwar1618@gmail.com"];const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);let rows=[];
-const $=id=>document.getElementById(id);const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const dateVal=d=>d.toISOString().slice(0,10);const start=new Date();start.setDate(start.getDate()-29);$("from").value=dateVal(start);$("to").value=dateVal(new Date());
-function timeOf(v){if(v?.toDate)return v.toDate();if(v?.seconds)return new Date(v.seconds*1000);return null}
-function selected(){const a=$("from").value?new Date($("from").value+"T00:00:00"):new Date(0),b=$("to").value?new Date($("to").value+"T23:59:59.999"):new Date();return rows.filter(r=>{const d=timeOf(r.createdAt);return d&&d>=a&&d<=b})}
-function countBy(arr,key){const m={};arr.forEach(r=>{const k=r[key]||"Unknown";m[k]=(m[k]||0)+1});return Object.entries(m).sort((a,b)=>b[1]-a[1])}
-function list(elId,entries,total){$(elId).innerHTML=entries.length?entries.slice(0,8).map(([k,n])=>`<div class="lineitem"><div style="min-width:0;flex:1"><span>${esc(k)}</span><div class="track"><i style="width:${Math.max(3,100*n/(total||1))}%"></i></div></div><b>${n}</b></div>`).join(""):'<span class="muted">No data yet</span>'}
-function render(){const filtered=selected(),unique=new Set(filtered.map(r=>r.visitorId).filter(Boolean));$("views").textContent=filtered.length.toLocaleString("en-IN");$("unique").textContent=unique.size.toLocaleString("en-IN");const cutoff=Date.now()-5*60*1000;$("active").textContent=new Set(rows.filter(r=>{const d=timeOf(r.createdAt);return d&&d.getTime()>=cutoff}).map(r=>r.visitorId).filter(Boolean)).size.toLocaleString("en-IN");$("pagesCount").textContent=new Set(filtered.map(r=>r.page)).size.toLocaleString("en-IN");$("rangeNote").textContent=`${filtered.length} events`;list("topPages",countBy(filtered,"page"),filtered.length);list("sources",countBy(filtered,"source"),filtered.length);list("devices",countBy(filtered,"device"),filtered.length);const refs=countBy(filtered.filter(r=>r.referrer),"referrer");list("referrers",refs,filtered.length);const recent=[...filtered].sort((a,b)=>(timeOf(b.createdAt)?.getTime()||0)-(timeOf(a.createdAt)?.getTime()||0)).slice(0,50);$("recent").innerHTML=recent.map(r=>`<tr><td>${esc(timeOf(r.createdAt)?.toLocaleString("en-IN")||"—")}</td><td>${esc(r.page)}</td><td>${esc(r.source)}</td><td>${esc(r.referrer||"—")}</td><td>${esc(r.device)}</td></tr>`).join("");$("empty").style.display=filtered.length?"none":"block"}
-async function load(){ $("refresh").disabled=true;$("rangeNote").textContent="Loading…";try{const snap=await getDocs(collection(db,"websiteAnalytics"));rows=snap.docs.map(d=>({id:d.id,...d.data()}));render()}catch(e){$("error").textContent="Could not load analytics: "+(e.code||e.message)+" — check Firestore rules and admin account.";console.error(e)}finally{$("refresh").disabled=false}}
-$("signin").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("error").textContent=e.message}};
-$("logout").onclick=()=>signOut(auth);$("refresh").onclick=load;$("apply").onclick=render;
-$("export").onclick=()=>{const data=selected();const cols=["createdAt","page","title","source","referrer","device","userAgentFamily","visitorId"];const csv=[cols.join(","),...data.map(r=>cols.map(k=>{let v=k==="createdAt"?(timeOf(r[k])?.toISOString()||""):r[k]??"";return '"'+String(v).replace(/"/g,'""')+'"'}).join(","))].join("\r\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="jpc-website-analytics.csv";a.click();URL.revokeObjectURL(a.href)};
-onAuthStateChanged(auth,u=>{if(!u){$("login").classList.remove("hidden");$("app").classList.add("hidden");$("logout").classList.add("hidden");return}if(!ADMIN.includes((u.email||"").toLowerCase())){ $("error").textContent="This Google account is not authorized for analytics.";signOut(auth);return}$("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");load()});
+const ADMIN=["saif.anwar1618@gmail.com"],CAP=20000;
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const N=n=>isFinite(n)?Math.round(n).toLocaleString("en-IN"):"—";
+const P=x=>isFinite(x)?(Math.round(x*10)/10)+"%":"—";
+const D=s=>{if(!isFinite(s))return"—";s=Math.round(s);if(s<=0)return"0s";const m=Math.floor(s/60),h=Math.floor(m/60);return h?`${h}h ${m%60}m`:m?`${m}m ${s%60}s`:`${s}s`};
+const ts=v=>v?.toDate?v.toDate():v?.seconds?new Date(v.seconds*1000):null;
+const OWN=location.hostname.replace(/^www\./,"");
+const DAY=864e5,sod=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x},eod=d=>{const x=new Date(d);x.setHours(23,59,59,999);return x};
+const ymd=d=>{const x=new Date(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")};
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:NaN;
+const CONTACT=new Set(["call_click","whatsapp_click","email_click","form_submit"]);
+const ETYPE={call_click:"Call click",whatsapp_click:"WhatsApp click",email_click:"Email click",map_click:"Map click",property_open:"Property opened",outbound_click:"Outbound link",form_start:"Form started",form_submit:"Form submitted",custom:"Custom"};
+const PAGES={"index.html":"Home","":"Home","properties.html":"All properties","property.html":"Property detail","partner.html":"Partner programme","reviews.html":"Reviews"};
+const FORMS={enqForm:"Home enquiry",submitForm:"Sell / post property",joinForm:"Partner join",rForm:"Review form",cbForm:"Call-back request",qaForm:"Property question",commentForm:"Property comment",homeSearchForm:"Home search"};
+const pageName=p=>PAGES[p]||p;
+const wd=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+let PV=[],EV=[],LEADS=[],PROPS={},LIVE={pv:[],ev:[]},meta={cap:false,evOk:true,leadOk:true},W=null;
+const F={};let sessCur=[],sessPrev=[],evCur=[],metric="sessions",tab="sessions",shown=25,expanded=new Set();
+
+/* ---------- normalise ---------- */
+function normPV(id,d){const t=ts(d.createdAt);if(!t)return null;const v2=d.sessionId!==undefined;let ref=d.referrer||"",channel=d.channel,source=d.source||"Direct";
+ if(!channel)channel={Direct:"Direct",Google:"Organic Search",Social:"Social",Referral:"Referral"}[source]||"Direct";
+ if(ref.replace(/^www\./,"")===OWN){ref="";if(!v2){channel="Direct";source="Direct"}}
+ return{id,t,ms:t.getTime(),upd:(ts(d.updatedAt)||t).getTime(),v2,vid:d.visitorId||"unknown",sid:d.sessionId||("pv-"+id),page:d.page||"—",title:d.title||"",pid:d.propertyId||"",channel,source,ref,medium:d.medium||"",campaign:d.campaign||"",device:d.device||"Unknown",os:d.os||"Unknown",browser:d.browser||d.userAgentFamily||"Unknown",screen:d.screen||"",lang:d.language||"",tz:d.tz||"",net:d.net||"",landing:d.landing??true,visits:d.visitCount||0,isNew:d.isNew,entry:d.entry||d.page||"—",country:d.country||"",region:d.region||"",city:d.city||"",dur:d.durationSec||0,scroll:d.maxScroll||0,clicks:d.interactions||0}}
+function normEV(id,d){const t=ts(d.createdAt);if(!t)return null;return{id,t,ms:t.getTime(),type:d.type||"custom",label:d.label||"",target:d.target||"",page:d.page||"",pid:d.propertyId||"",vid:d.visitorId||"",sid:d.sessionId||""}}
+const propLabel=id=>{if(!id)return"";const p=PROPS[id];if(!p)return id.slice(0,8)+"…";const s=x=>typeof x==="string"?x:"";return[s(p.code)||id.slice(0,6),[s(p.propertyType),s(p.size)].filter(Boolean).join(" "),s(p.area)].filter(Boolean).join(" · ").slice(0,70)};
+const where_=s=>{const f=s.first;return[f.city,f.region].filter(Boolean).join(", ")||f.country||"Unknown"};
+const vtype=s=>s.first.isNew===true?"New":s.first.isNew===false?"Returning":"Unknown";
+
+function build(pvs,evs){const map=new Map();
+ for(const p of [...pvs].sort((a,b)=>a.ms-b.ms)){let s=map.get(p.sid);if(!s){s={sid:p.sid,vid:p.vid,start:p.ms,v2:p.v2,first:p,pvs:[],ev:[],dur:0};map.set(p.sid,s)}s.pvs.push(p);s.dur+=p.dur;s.last=p;if(!s.first.city&&p.city)s.first={...s.first,city:p.city,region:p.region,country:p.country}}
+ for(const e of evs){const s=map.get(e.sid);if(s)s.ev.push(e)}
+ for(const s of map.values()){s.n=s.pvs.length;s.contact=s.ev.some(e=>CONTACT.has(e.type));s.engaged=s.dur>=10||s.n>=2||s.contact;s.end=s.last.ms+s.last.dur*1000}
+ return[...map.values()]}
+
+const SKEY={channel:s=>s.first.channel,source:s=>s.first.source,device:s=>s.first.device,os:s=>s.first.os,browser:s=>s.first.browser,country:s=>s.first.country||"Unknown",region:s=>s.first.region||"Unknown",city:s=>s.first.city||"Unknown",campaign:s=>s.first.campaign,vtype};
+function pass(s){for(const k in SKEY)if(F[k]&&SKEY[k](s)!==F[k])return false;
+ if(F.page&&!s.pvs.some(p=>p.page===F.page))return false;if(F.property&&!s.pvs.some(p=>p.pid===F.property))return false;
+ if(F.q){const q=F.q.toLowerCase();const hay=[s.vid,s.first.city,s.first.region,s.first.country,s.first.source,s.first.campaign,...s.pvs.map(p=>p.page+" "+p.title+" "+propLabel(p.pid))].join(" ").toLowerCase();if(!hay.includes(q))return false}return true}
+
+/* ---------- date window ---------- */
+function getWin(){const f=$("from").value?new Date($("from").value+"T00:00:00"):sod(new Date(Date.now()-29*DAY)),t=$("to").value?new Date($("to").value+"T00:00:00"):sod(new Date());
+ const s=sod(f),e=eod(t);const days=Math.max(1,Math.round((sod(t)-s)/DAY)+1);const gran=days<=2?"h":"d";
+ return{s:s.getTime(),e:e.getTime(),days,gran,n:gran==="h"?days*24:days,ps:s.getTime()-days*DAY,pe:s.getTime()-1}}
+const bidx=(ms,start)=>W.gran==="h"?Math.floor((ms-start)/36e5):Math.floor((ms-start)/DAY);
+
+/* ---------- loading ---------- */
+async function qrange(col,field,a,b,max){const q=query(collection(db,col),where(field,">=",Timestamp.fromMillis(a)),where(field,"<=",Timestamp.fromMillis(b)),orderBy(field,"desc"),limit(max));return(await getDocs(q)).docs}
+async function load(){$("refresh").disabled=true;$("rangeNote").textContent="Loading…";$("error").textContent="";W=getWin();
+ const from=$("cmp").checked?W.ps:W.s;
+ try{
+  meta={cap:false,evOk:true,leadOk:true};
+  const pvd=await qrange("websiteAnalytics","createdAt",from,W.e,CAP);meta.cap=pvd.length>=CAP;
+  PV=pvd.map(d=>normPV(d.id,d.data())).filter(Boolean);
+  try{EV=(await qrange("websiteEvents","createdAt",from,W.e,CAP)).map(d=>normEV(d.id,d.data())).filter(Boolean)}catch(e){EV=[];meta.evOk=false;console.warn(e)}
+  try{LEADS=(await qrange("publicSubmissions","submittedAt",from,W.e,5000)).map(d=>{const x=d.data();return{ms:ts(x.submittedAt)?.getTime()||0,pid:x.interestPropertyId||"",kind:x.kind||"",type:x.type||""}}).filter(x=>x.ms)}catch(e){LEADS=[];meta.leadOk=false;console.warn(e)}
+  if(!Object.keys(PROPS).length){try{(await getDocs(collection(db,"publicRequirements"))).forEach(d=>PROPS[d.id]=d.data())}catch(e){console.warn(e)}}
+  await loadLive(true);populate();render();
+ }catch(e){console.error(e);$("error").textContent="Could not load analytics: "+(e.code||e.message);$("banner").innerHTML='<div class="warn">Could not read analytics ('+esc(e.code||e.message)+'). Check that the new <b>firestore.rules</b> are published and you are signed in with the admin Google account.</div>'}
+ finally{$("refresh").disabled=false}}
+async function loadLive(skipRender){try{const a=Date.now()-30*60*1000;
+ LIVE.pv=(await qrange("websiteAnalytics","createdAt",a,Date.now()+6e4,500)).map(d=>normPV(d.id,d.data())).filter(Boolean);
+ if(meta.evOk)LIVE.ev=(await qrange("websiteEvents","createdAt",a,Date.now()+6e4,500)).map(d=>normEV(d.id,d.data())).filter(Boolean);
+ renderLive()}catch(e){console.warn("live",e)}}
+
+/* ---------- metrics ---------- */
+function metrics(S,L){const E=S.flatMap(s=>s.ev),pvs=S.flatMap(s=>s.pvs),s2=S.filter(s=>s.v2),p2=pvs.filter(p=>p.v2),vis=new Set(S.map(s=>s.vid));
+ const newV=new Set(S.filter(s=>s.pvs.some(p=>p.isNew===true)).map(s=>s.vid)),cnt=t=>E.filter(e=>e.type===t).length;
+ return{visitors:vis.size,sessions:S.length,views:pvs.length,avgDur:avg(s2.map(s=>s.dur)),pps:S.length?pvs.length/S.length:NaN,eng:s2.length?100*s2.filter(s=>s.engaged).length/s2.length:NaN,bounce:s2.length?100*s2.filter(s=>!s.engaged).length/s2.length:NaN,scroll:avg(p2.map(p=>p.scroll)),newV:newV.size,retV:vis.size-newV.size,mobile:S.length?100*S.filter(s=>s.first.device==="Mobile").length/S.length:NaN,propViews:pvs.filter(p=>p.page==="property.html"&&p.pid).length,wa:cnt("whatsapp_click"),call:cnt("call_click"),leads:L.length,conv:S.length?100*S.filter(s=>s.contact).length/S.length:NaN}}
+function buckets(S,L,start){const z=()=>Array(W.n).fill(0),b={sessions:z(),views:z(),wa:z(),call:z(),leads:z(),propViews:z(),vs:Array.from({length:W.n},()=>new Set())};
+ for(const s of S){const i=bidx(s.start,start);if(i>=0&&i<W.n){b.sessions[i]++;b.vs[i].add(s.vid)}
+  for(const p of s.pvs){const j=bidx(p.ms,start);if(j>=0&&j<W.n){b.views[j]++;if(p.page==="property.html"&&p.pid)b.propViews[j]++}}
+  for(const e of s.ev){const j=bidx(e.ms,start);if(j>=0&&j<W.n){if(e.type==="whatsapp_click")b.wa[j]++;if(e.type==="call_click")b.call[j]++}}}
+ for(const l of L){const j=bidx(l.ms,start);if(j>=0&&j<W.n)b.leads[j]++}
+ b.visitors=b.vs.map(x=>x.size);return b}
+const lbl=i=>{const d=new Date(W.s+i*(W.gran==="h"?36e5:DAY));return W.gran==="h"?d.toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",hour12:true}):d.toLocaleDateString("en-IN",{day:"numeric",month:"short"})};
+const lblShort=i=>{const d=new Date(W.s+i*(W.gran==="h"?36e5:DAY));return W.gran==="h"?(d.getHours()===0?d.toLocaleDateString("en-IN",{day:"numeric",month:"short"}):d.toLocaleString("en-IN",{hour:"numeric",hour12:true})):d.toLocaleDateString("en-IN",{day:"numeric",month:"short"})};
+
+/* ---------- small renderers ---------- */
+function delta(c,p,o={}){if(!isFinite(c)||!isFinite(p)||!$("cmp").checked)return"";if(c===0&&p===0)return'<span class="d fl">■ no change</span>';
+ let diff,txt;if(o.abs){diff=c-p;txt=Math.abs(Math.round(diff*10)/10)+" pts"}else{if(p===0)return'<span class="d up">▲ new</span>';diff=(c-p)/p*100;txt=Math.abs(Math.round(diff))+"%"}
+ if(Math.abs(diff)<(o.abs?.1:.5))return'<span class="d fl">■ 0%</span>';const good=o.inv?diff<0:diff>0;return`<span class="d ${good?"up":"dn"}">${diff>0?"▲":"▼"} ${txt}</span>`}
+function spark(v){if(!v||v.length<2||Math.max(...v)===0)return"";const w=84,h=28,m=Math.max(...v),pts=v.map((x,i)=>`${(i/(v.length-1)*w).toFixed(1)},${(h-2-(x/m)*(h-6)).toFixed(1)}`).join(" ");return`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>`}
+function tally(arr,fn){const m=new Map();for(const x of arr){const k=fn(x);if(k===null||k===undefined||k==="")continue;m.set(k,(m.get(k)||0)+1)}return[...m.entries()].sort((a,b)=>b[1]-a[1])}
+function bars(entries,o={}){const tot=o.total||entries.reduce((a,b)=>a+b[1],0)||1,top=Math.max(1,...entries.map(e=>e[1]));if(!entries.length)return'<p class="empty">No data yet</p>';
+ return entries.slice(0,o.max||10).map(([k,n])=>`<button class="li" ${o.f?`data-f="${o.f}" data-v="${esc(k)}"`:"disabled"} title="${esc(o.fmt?o.fmt(k):k)}"><span class="lt">${esc(o.fmt?o.fmt(k):k)}</span><span class="lv">${N(n)}<em>${P(100*n/tot)}</em></span><i style="--w:${Math.max(2,100*n/top)}%"></i></button>`).join("")}
+const card=(t,body,sub)=>`<section class="card"><h3>${t}${sub?`<small>${sub}</small>`:""}</h3>${body}</section>`;
+
+/* ---------- chart ---------- */
+function niceMax(m){if(m<=4)return 4;const q=m/4,p=10**Math.floor(Math.log10(q)),f=q/p;return(f<=1?1:f<=2?2:f<=5?5:10)*p*4}
+function chart(vals,prev){const el=$("chart"),w=Math.max(280,el.clientWidth||600),h=250,m={l:38,r:8,t:10,b:26},n=vals.length,max=niceMax(Math.max(1,...vals,...(prev||[0]))),iw=w-m.l-m.r,ih=h-m.t-m.b,bw=iw/n,y=v=>m.t+ih-(v/max)*ih;
+ let s=`<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="Traffic over time">`;
+ for(let i=0;i<=4;i++){const v=max/4*i;s+=`<line x1="${m.l}" x2="${w-m.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${m.l-6}" y="${y(v)+4}" text-anchor="end" font-size="10.5" fill="var(--mut)">${N(v)}</text>`}
+ const g=Math.max(1,Math.round(bw>14?2:bw>6?1:0.5)),bwi=Math.max(1,bw-g*2);
+ vals.forEach((v,i)=>{const x=m.l+i*bw+g,hh=Math.max(v?2:0,(v/max)*ih);s+=`<rect x="${x.toFixed(1)}" y="${(m.t+ih-hh).toFixed(1)}" width="${bwi.toFixed(1)}" height="${hh.toFixed(1)}" rx="${Math.min(3,bwi/2)}" fill="var(--blue)" opacity=".92"/>`});
+ if(prev){const pts=prev.map((v,i)=>`${(m.l+i*bw+bw/2).toFixed(1)},${y(v).toFixed(1)}`).join(" ");s+=`<polyline points="${pts}" fill="none" stroke="var(--mut)" stroke-width="1.8" stroke-dasharray="5 4"/>`}
+ const step=Math.max(1,Math.ceil(n/(w<500?5:9)));for(let i=0;i<n;i+=step)s+=`<text x="${(m.l+i*bw+bw/2).toFixed(1)}" y="${h-7}" text-anchor="middle" font-size="10.5" fill="var(--mut)">${esc(lblShort(i))}</text>`;
+ s+=`<g id="hov"></g>`;vals.forEach((v,i)=>{s+=`<rect data-i="${i}" x="${(m.l+i*bw).toFixed(1)}" y="${m.t}" width="${bw.toFixed(1)}" height="${ih}" fill="transparent"/>`});s+="</svg><div class='tip hidden' id='tip'></div>";el.innerHTML=s;
+ const tip=$("tip");el.querySelectorAll("rect[data-i]").forEach(r=>{const show=ev=>{const i=+r.dataset.i;tip.innerHTML=`<b>${esc(lbl(i))}</b><br>${N(vals[i])} ${esc(MET[metric].n)}${prev?`<br><span style="opacity:.75">Previous: ${N(prev[i])}</span>`:""}`;tip.classList.remove("hidden");const box=el.getBoundingClientRect(),x=Math.min(Math.max(0,m.l+i*bw+bw/2-tip.offsetWidth/2),w-tip.offsetWidth);tip.style.left=x+"px";tip.style.top=Math.max(0,y(Math.max(vals[i],prev?prev[i]:0))-tip.offsetHeight-8)+"px";$("hov").innerHTML=`<rect x="${(m.l+i*bw).toFixed(1)}" y="${m.t}" width="${bw.toFixed(1)}" height="${ih}" fill="var(--blue)" opacity=".1"/>`};r.addEventListener("mouseenter",show);r.addEventListener("focus",show);r.addEventListener("touchstart",show,{passive:true})});
+ el.onmouseleave=()=>{tip.classList.add("hidden");$("hov").innerHTML=""}}
+const MET={sessions:{n:"sessions",l:"Sessions"},visitors:{n:"visitors",l:"Visitors"},views:{n:"page views",l:"Page views"},propViews:{n:"property views",l:"Property views"},wa:{n:"WhatsApp clicks",l:"WhatsApp"},call:{n:"call clicks",l:"Calls"},leads:{n:"leads",l:"Leads"}};
+
+/* ---------- populate filter selects ---------- */
+const SEL=[["channel","Channel"],["source","Source"],["device","Device"],["country","Country"],["region","State"],["city","City"],["browser","Browser"],["os","OS"],["vtype","Visitor type"],["campaign","Campaign"],["page","Page"],["property","Property"]];
+function populate(){const base=build(PV.filter(p=>p.ms>=W.s&&p.ms<=W.e),[]);const opts={};
+ for(const[k]of SEL){let e;if(k==="page")e=tally(base.flatMap(s=>[...new Set(s.pvs.map(p=>p.page))]),x=>x);else if(k==="property")e=tally(base.flatMap(s=>[...new Set(s.pvs.map(p=>p.pid).filter(Boolean))]),x=>x);else e=tally(base,SKEY[k]);opts[k]=e}
+ $("selects").innerHTML=SEL.map(([k,l])=>{const e=opts[k];const label=x=>k==="page"?pageName(x):k==="property"?propLabel(x):x;return`<select data-k="${k}" aria-label="${l}"><option value="">${l}: all</option>${e.map(([v,n])=>`<option value="${esc(v)}" ${F[k]===v?"selected":""}>${esc(label(v))} (${n})</option>`).join("")}${F[k]&&!e.some(x=>x[0]===F[k])?`<option selected value="${esc(F[k])}">${esc(label(F[k]))}</option>`:""}</select>`}).join("")}
+function chips(){const c=Object.entries(F).filter(([k,v])=>v&&k!=="q").map(([k,v])=>{const l=SEL.find(x=>x[0]===k)?.[1]||k;const val=k==="page"?pageName(v):k==="property"?propLabel(v):v;return`<span class="chip">${esc(l)}: ${esc(val)}<button data-x="${k}" aria-label="Remove filter">×</button></span>`});$("chips").innerHTML=c.join("")+(c.length>1?'<button data-x="*" style="padding:3px 9px;font-size:12px">Clear all</button>':"")}
+
+/* ---------- main render ---------- */
+function render(){chips();
+ const inCur=ms=>ms>=W.s&&ms<=W.e,inPrev=ms=>ms>=W.ps&&ms<=W.pe;
+ const all=build(PV,EV).filter(pass);
+ sessCur=all.filter(s=>inCur(s.start));sessPrev=$("cmp").checked?all.filter(s=>inPrev(s.start)):[];
+ const LC=LEADS.filter(l=>inCur(l.ms)),LP=$("cmp").checked?LEADS.filter(l=>inPrev(l.ms)):[];
+ evCur=sessCur.flatMap(s=>s.ev);const cur=metrics(sessCur,LC),prv=metrics(sessPrev,LP);
+ const live=activeNow().length;cur.live=live;
+ $("rangeNote").textContent=`${N(cur.sessions)} sessions · ${N(cur.views)} page views`;$("granNote").textContent=W.gran==="h"?"by hour":"by day";
+ $("banner").innerHTML=(meta.cap?`<div class="warn">Showing the newest ${N(CAP)} records only — narrow the date range for exact numbers.</div>`:"")+(!meta.evOk?'<div class="warn"><b>Actions not available.</b> Publish the new <code>firestore.rules</code> (adds <code>websiteEvents</code>) so call / WhatsApp / form tracking can be saved and read.</div>':"")+(!meta.leadOk?'<div class="warn">Leads received could not be read from <code>publicSubmissions</code>.</div>':"");
+ /* KPIs */
+ const bc=buckets(sessCur,LC,W.s),bp=buckets(sessPrev,LP,W.ps);window._b={bc,bp};
+ const G=[["Traffic",[["visitors","Unique visitors","People (browsers) who visited",N,"visitors"],["sessions","Sessions","Separate visits",N,"sessions"],["views","Page views","Pages opened",N,"views"],["live","Live now","Active in last 5 minutes",N]]],
+  ["Engagement",[["avgDur","Avg. time on site","Per session",D],["pps","Pages per session","How many pages each visit opens",x=>isFinite(x)?x.toFixed(1):"—"],["eng","Engagement rate","10s+ on site, 2+ pages or contacted",P,null,{abs:1}],["bounce","Bounce rate","Left without engaging",P,null,{abs:1,inv:1}],["scroll","Avg. scroll depth","How far down pages are read",P,null,{abs:1}]]],
+  ["Audience",[["newV","New visitors","First time on the site",N],["retV","Returning visitors","Came back again",N],["mobile","Mobile share","Sessions from phones",P,null,{abs:1}],["propViews","Property views","Property detail pages opened",N,"propViews"]]],
+  ["Conversions",[["wa","WhatsApp clicks","Taps on WhatsApp buttons",N,"wa"],["call","Call clicks","Taps on call buttons",N,"call"],["leads","Leads received","Enquiries saved (all traffic, ignores filters)",N,"leads"],["conv","Conversion rate","Sessions with a call, WhatsApp, email or form",P,null,{abs:1}]]]];
+ $("kpis").innerHTML=G.map(([g,items])=>`<div class="kg">${g}</div><div class="kpis">${items.map(([k,l,s,f,sp,o])=>`<div class="kpi"><div class="l">${l}</div><div class="row"><div><div class="v">${f(cur[k])}</div>${k==="live"?"":delta(cur[k],prv[k],o||{})}</div>${sp?spark(bc[sp]):""}</div><div class="s">${s}</div></div>`).join("")}</div>`).join("");
+ /* tabs + chart */
+ $("ctabs").innerHTML=Object.entries(MET).map(([k,m])=>`<button data-m="${k}" class="${k===metric?"on":""}">${m.l}</button>`).join("");$("lgPrev").style.display=$("cmp").checked?"":"none";
+ chart(bc[metric],$("cmp").checked?bp[metric]:null);
+ /* funnel */
+ const fs=[["All sessions",sessCur.length],["Stayed 30 seconds or more",sessCur.filter(s=>s.dur>=30).length],["Viewed a property",sessCur.filter(s=>s.pvs.some(p=>p.page==="property.html"&&p.pid)||s.ev.some(e=>e.type==="property_open")).length],["Started a form",sessCur.filter(s=>s.ev.some(e=>e.type==="form_start")).length],["Contacted you",sessCur.filter(s=>s.contact).length]];
+ $("funnel").innerHTML=fs.map(([l,n],i)=>{const t=fs[0][1]||1;return`<div class="st"><div class="meta"><span>${l}</span><span class="mut">${P(100*n/t)}</span></div><div class="bar" style="width:${Math.max(8,100*n/t)}%;opacity:${1-i*.13}">${N(n)}</div></div>`}).join("")+'<p class="mut" style="font-size:12px;margin:6px 0 0">Share of all sessions. "Contacted you" = call, WhatsApp, email or a form submit.</p>';
+ /* insights */
+ insights(cur,prv);
+ /* acquisition */
+ const S=sessCur;
+ $("acqCards").innerHTML=[card("Channels",bars(tally(S,s=>s.first.channel),{f:"channel"}),"sessions"),card("Sources",bars(tally(S,s=>s.first.source),{f:"source"}),"sessions"),card("Referring websites",bars(tally(S,s=>s.first.ref),{}),"sessions"),card("Campaigns (UTM)",bars(tally(S,s=>s.first.campaign),{f:"campaign"})+'<p class="mut" style="font-size:12px;margin:8px 0 0">Add <code>?utm_source=facebook&amp;utm_medium=social&amp;utm_campaign=diwali</code> to links you share to see them here.</p>',"sessions"),card("Landing pages",bars(tally(S,s=>s.first.entry),{f:"page",fmt:pageName}),"first page of visit")].join("");
+ /* audience */
+ const unk=S.filter(s=>!s.first.country&&!s.first.city).length;
+ $("audCards").innerHTML=[card("Countries",bars(tally(S,s=>s.first.country||"Unknown"),{f:"country"}),"sessions"),card("States",bars(tally(S,s=>s.first.region||"Unknown"),{f:"region"}),"sessions"),card("Cities",bars(tally(S,s=>s.first.city||"Unknown"),{f:"city"})+(unk?`<p class="mut" style="font-size:12px;margin:8px 0 0">${N(unk)} sessions have no location (blocked, or recorded before location tracking).</p>`:""),"sessions"),
+  card("Devices",bars(tally(S,s=>s.first.device),{f:"device"}),"sessions"),card("Operating systems",bars(tally(S,s=>s.first.os),{f:"os"}),"sessions"),card("Browsers",bars(tally(S,s=>s.first.browser),{f:"browser"}),"sessions"),
+  card("New vs returning",bars(tally(S,vtype),{f:"vtype"}),"sessions"),card("Screen sizes",bars(tally(S,s=>s.first.screen),{}),"sessions"),card("Languages",bars(tally(S,s=>s.first.lang),{}),"sessions"),card("Connection speed",bars(tally(S,s=>s.first.net?s.first.net.toUpperCase():null),{}),"sessions")].join("");
+ /* behaviour tables */
+ const pv=S.flatMap(s=>s.pvs);
+ const grp=(rows,keyf)=>{const m=new Map();for(const p of rows){const k=keyf(p);let g=m.get(k);if(!g){g={k,v:0,vis:new Set(),dur:[],sc:[],ent:0,exit:0,wa:0,call:0,form:0};m.set(k,g)}g.v++;g.vis.add(p.vid);if(p.v2){g.dur.push(p.dur);g.sc.push(p.scroll)}if(p.landing&&p.v2)g.ent++}return m};
+ const pg=grp(pv,p=>p.page);S.forEach(s=>{const g=pg.get(s.last.page);if(g)g.exit++});
+ $("pagesT").innerHTML=[...pg.values()].sort((a,b)=>b.v-a.v).slice(0,15).map(g=>`<tr class="clk" data-f="page" data-v="${esc(g.k)}"><td>${esc(pageName(g.k))} <span class="mut">${esc(g.k)}</span></td><td class="n">${N(g.v)}</td><td class="n">${N(g.vis.size)}</td><td class="n">${D(avg(g.dur))}</td><td class="n">${P(avg(g.sc))}</td><td class="n">${N(g.ent)}</td><td class="n">${P(100*g.exit/g.v)}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">No data yet</td></tr>';
+ const pp=grp(pv.filter(p=>p.page==="property.html"&&p.pid),p=>p.pid);evCur.forEach(e=>{if(!e.pid)return;const g=pp.get(e.pid);if(!g)return;if(e.type==="whatsapp_click")g.wa++;if(e.type==="call_click")g.call++;if(e.type==="form_submit")g.form++});
+ $("propsT").innerHTML=[...pp.values()].sort((a,b)=>b.v-a.v).slice(0,20).map(g=>`<tr class="clk" data-f="property" data-v="${esc(g.k)}"><td>${esc(propLabel(g.k))}</td><td class="n">${N(g.v)}</td><td class="n">${N(g.vis.size)}</td><td class="n">${D(avg(g.dur))}</td><td class="n">${P(avg(g.sc))}</td><td class="n">${N(g.wa)}</td><td class="n">${N(g.call)}</td><td class="n">${N(g.form)}</td></tr>`).join("")||'<tr><td colspan="8" class="empty">No property views yet</td></tr>';
+ const s2=S.filter(s=>s.v2),p2=pv.filter(p=>p.v2);
+ const bk=(arr,defs,f)=>defs.map(([l,t])=>[l,arr.filter(x=>t(f(x))).length]).filter(x=>x[1]>=0);
+ $("behCards").innerHTML=[card("Time on site per session",bars(bk(s2,[["Under 10s",d=>d<10],["10–30s",d=>d>=10&&d<30],["30–60s",d=>d>=30&&d<60],["1–3 min",d=>d>=60&&d<180],["3–10 min",d=>d>=180&&d<600],["10 min+",d=>d>=600]],s=>s.dur),{total:s2.length}),"sessions"),
+  card("Scroll depth per page view",bars(bk(p2,[["Under 25%",d=>d<25],["25–50%",d=>d>=25&&d<50],["50–75%",d=>d>=50&&d<75],["75–99%",d=>d>=75&&d<100],["Reached bottom",d=>d>=100]],p=>p.scroll),{total:p2.length}),"page views"),
+  card("Pages per session",bars(bk(S,[["1 page",n=>n===1],["2 pages",n=>n===2],["3 pages",n=>n===3],["4 pages",n=>n===4],["5+ pages",n=>n>=5]],s=>s.n),{total:S.length}),"sessions"),
+  card("Exit pages",bars(tally(S,s=>s.last.page),{fmt:pageName}),"last page of visit")].join("");
+ /* actions */
+ const forms=new Map();evCur.forEach(e=>{if(e.type!=="form_start"&&e.type!=="form_submit")return;let f=forms.get(e.label);if(!f){f={s:0,u:0};forms.set(e.label,f)}e.type==="form_start"?f.s++:f.u++});
+ const formHtml=forms.size?`<table><thead><tr><th>Form</th><th class="n">Started</th><th class="n">Submitted</th><th class="n">Rate</th></tr></thead><tbody>${[...forms.entries()].sort((a,b)=>b[1].s-a[1].s).map(([k,f])=>`<tr><td>${esc(FORMS[k]||k)}</td><td class="n">${N(f.s)}</td><td class="n">${N(f.u)}</td><td class="n">${f.s?P(100*f.u/f.s):"—"}</td></tr>`).join("")}</tbody></table>`:'<p class="empty">No form activity yet</p>';
+ const ctaE=evCur.filter(e=>["call_click","whatsapp_click","email_click","map_click"].includes(e.type));
+ $("actCards").innerHTML=[card("Actions by type",bars(tally(evCur,e=>e.type),{fmt:k=>ETYPE[k]||k}),"events"),card("Top buttons clicked",bars(tally(ctaE,e=>(ETYPE[e.type]||e.type)+": "+(e.label||"—")),{}),"calls / WhatsApp / email / map"),card("Where contacts happen",bars(tally(evCur.filter(e=>CONTACT.has(e.type)),e=>pageName(e.page)),{}),"page"),card("Forms",formHtml),card("Outbound links",bars(tally(evCur.filter(e=>e.type==="outbound_click"),e=>e.label),{}),"clicks"),card("Leads received by month",bars(tally(LEADS.filter(l=>l.ms>=W.s&&l.ms<=W.e),l=>new Date(l.ms).toLocaleDateString("en-IN",{month:"short",year:"numeric"})),{}),"from publicSubmissions")].join("");
+ /* heatmap */
+ const mx=Array.from({length:7},()=>Array(24).fill(0));S.forEach(s=>{const d=new Date(s.start);mx[(d.getDay()+6)%7][d.getHours()]++});const hm=Math.max(1,...mx.flat());
+ let h='<b></b>'+Array.from({length:24},(_,i)=>`<span class="h">${i%3===0?(i%12||12)+(i<12?"a":"p"):""}</span>`).join("");
+ mx.forEach((r,i)=>{h+=`<b>${wd[i]}</b>`+r.map((v,j)=>`<div class="c" title="${wd[i]} ${j%12||12}${j<12?" AM":" PM"} — ${v} sessions" style="${v?`background:var(--blue);opacity:${(.15+.85*v/hm).toFixed(2)}`:""}"></div>`).join("")});$("heat").innerHTML=h;
+ const hr=Array(24).fill(0),dy=Array(7).fill(0);mx.forEach((r,i)=>r.forEach((v,j)=>{hr[j]+=v;dy[i]+=v}));
+ $("heatNote").textContent=S.length?`Busiest hour: ${hr.indexOf(Math.max(...hr))%12||12}${hr.indexOf(Math.max(...hr))<12?" AM":" PM"} · Busiest day: ${wd[dy.indexOf(Math.max(...dy))]}`:"";
+ renderLive();renderLog();renderHealth();
+}
+function insights(c,p){const I=[],S=sessCur;if(!S.length){$("insights").innerHTML='<div>No visits in this range yet. Share your website link — new visits appear here within seconds.</div>';return}
+ const chg=(a,b)=>b>0?` (${a>=b?"up":"down"} ${Math.abs(Math.round((a-b)/b*100))}% vs previous period)`:"";
+ I.push(`<b>${N(c.visitors)}</b> visitors made <b>${N(c.sessions)}</b> visits${$("cmp").checked?chg(c.sessions,p.sessions):""}.`);
+ const ch=tally(S,s=>s.first.channel)[0],src=tally(S,s=>s.first.source)[0];if(ch)I.push(`Most visits come from <b>${esc(ch[0])}</b> (${P(100*ch[1]/S.length)})${src&&src[0]!==ch[0]?`, mainly <b>${esc(src[0])}</b>`:""}.`);
+ const city=tally(S,s=>s.first.city)[0];if(city)I.push(`Top city: <b>${esc(city[0])}</b> (${P(100*city[1]/S.length)} of visits).`);
+ I.push(`<b>${P(c.mobile)}</b> of visits are on mobile.`);
+ const tp=tally(S.flatMap(s=>s.pvs).filter(x=>x.pid),x=>x.pid)[0];if(tp)I.push(`Most viewed property: <b>${esc(propLabel(tp[0]))}</b> (${N(tp[1])} views).`);
+ if(isFinite(c.eng))I.push(`<b>${P(c.eng)}</b> of visits are engaged; average visit lasts <b>${D(c.avgDur)}</b>.`);
+ if(c.wa+c.call)I.push(`<b>${N(c.wa)}</b> WhatsApp and <b>${N(c.call)}</b> call clicks${$("cmp").checked&&p.wa+p.call?chg(c.wa+c.call,p.wa+p.call):""}.`);else if(meta.evOk)I.push("No call or WhatsApp clicks yet in this range.");
+ $("insights").innerHTML=I.slice(0,6).map(x=>`<div>${x}</div>`).join("")}
+
+/* ---------- live ---------- */
+function activeNow(){const cut=Date.now()-5*60*1000,m=new Map();for(const p of LIVE.pv){const t=Math.max(p.ms,p.upd);if(t>=cut){const o=m.get(p.vid);if(!o||t>o.t)m.set(p.vid,{p,t})}}return[...m.values()].sort((a,b)=>b.t-a.t)}
+const ago=ms=>{const s=Math.max(0,Math.round((Date.now()-ms)/1000));return s<60?s+"s ago":s<3600?Math.floor(s/60)+"m ago":Math.floor(s/3600)+"h ago"};
+function renderLive(){const a=activeNow();$("liveBig").textContent=a.length;$("liveTxt").textContent="Live "+a.length;$("liveDot").className="dot "+(a.length?"pulse":"off");
+ $("liveRows").innerHTML=a.map(({p,t})=>`<tr><td>#${esc(p.vid.slice(0,6).toUpperCase())} ${p.isNew===false?'<span class="pill m">returning</span>':p.isNew?'<span class="pill g">new</span>':""}</td><td>${esc([p.city,p.region].filter(Boolean).join(", ")||p.country||"Unknown")}</td><td>${esc(p.device)} · ${esc(p.browser)}</td><td>${esc(pageName(p.page))}${p.pid?`<br><span class="mut">${esc(propLabel(p.pid))}</span>`:""}</td><td>${esc(p.source)}</td></tr>`).join("")||'<tr><td colspan="5" class="empty">Nobody on the site right now</td></tr>';
+ const vp=new Map(LIVE.pv.map(p=>[p.sid,p]));
+ const items=[...LIVE.pv.map(p=>({ms:p.ms,t:`<b>#${esc(p.vid.slice(0,6).toUpperCase())}</b> from ${esc([p.city,p.region].filter(Boolean).join(", ")||p.country||"unknown location")} (${esc(p.device)}) opened <b>${esc(pageName(p.page))}</b>${p.pid?" — "+esc(propLabel(p.pid)):""} via ${esc(p.source)}`})),
+  ...LIVE.ev.filter(e=>e.type!=="form_start"&&e.type!=="property_open").map(e=>{const p=vp.get(e.sid);return{ms:e.ms,t:`<b>#${esc(e.vid.slice(0,6).toUpperCase())}</b>${p?" from "+esc(p.city||p.country||"unknown"):""} — <b>${esc(ETYPE[e.type]||e.type)}</b>${e.label?": "+esc(e.label):""} on ${esc(pageName(e.page))}`}})].sort((a,b)=>b.ms-a.ms).slice(0,20);
+ $("feed").innerHTML=items.map(i=>`<li><time>${ago(i.ms)}</time>${i.t}</li>`).join("")||'<li class="empty">No activity in the last 30 minutes</li>'}
+
+/* ---------- visitor log ---------- */
+const hm=ms=>new Date(ms).toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+function journey(s){const it=[...s.pvs.map(p=>({ms:p.ms,t:`Opened <b>${esc(pageName(p.page))}</b>${p.pid?" — "+esc(propLabel(p.pid)):""}${p.v2?` <span class="mut">· ${D(p.dur)} on page · scrolled ${p.scroll}%</span>`:""}`})),...s.ev.map(e=>({ms:e.ms,t:`<span class="pill ${CONTACT.has(e.type)?"g":"m"}">${esc(ETYPE[e.type]||e.type)}</span> ${esc(e.label)}${e.target?` <span class="mut">(${esc(e.target)})</span>`:""}`}))].sort((a,b)=>a.ms-b.ms);
+ return`<ul class="tl">${it.map(i=>`<li><time>+${D((i.ms-s.start)/1000)}</time><span>${i.t}</span></li>`).join("")}</ul><p class="mut" style="margin:8px 0 0;font-size:12px">${esc(s.first.os)} · ${esc(s.first.browser)} · screen ${esc(s.first.screen||"?")} · ${esc(s.first.lang||"")} ${esc(s.first.tz||"")}</p>`}
+function visitorsList(){const m=new Map();for(const s of sessCur){let v=m.get(s.vid);if(!v){v={vid:s.vid,s:0,pv:0,dur:0,ev:0,first:s.start,last:s.start,ls:s,maxVisits:0};m.set(s.vid,v)}v.s++;v.pv+=s.n;v.dur+=s.dur;v.ev+=s.ev.filter(e=>CONTACT.has(e.type)).length;v.first=Math.min(v.first,s.start);if(s.start>=v.last){v.last=s.start;v.ls=s}v.maxVisits=Math.max(v.maxVisits,...s.pvs.map(p=>p.visits))}return[...m.values()].sort((a,b)=>b.last-a.last)}
+function renderLog(){const head=$("logHead"),body=$("logBody");document.querySelectorAll("#ltabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===tab));let rows=[],total=0;
+ if(tab==="sessions"){const L=[...sessCur].sort((a,b)=>b.start-a.start);total=L.length;head.innerHTML="<tr><th>Time</th><th>Visitor</th><th>Location</th><th>Device</th><th>Source</th><th>Landing</th><th class='n'>Pages</th><th class='n'>Time</th><th>Actions</th></tr>";
+  rows=L.slice(0,shown).map(s=>{const acts=s.ev.filter(e=>e.type!=="form_start"&&e.type!=="property_open");const open=expanded.has(s.sid);
+   return`<tr class="clk" data-s="${esc(s.sid)}"><td>${new Date(s.start).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit",hour12:true})}</td><td>#${esc(s.vid.slice(0,6).toUpperCase())} ${vtype(s)==="New"?'<span class="pill g">new</span>':vtype(s)==="Returning"?'<span class="pill m">returning'+(s.first.visits>1?" #"+s.first.visits:"")+"</span>":""}</td><td>${esc(where_(s))}</td><td>${esc(s.first.device)}<br><span class="mut">${esc(s.first.browser)} · ${esc(s.first.os)}</span></td><td>${esc(s.first.source)}<br><span class="mut">${esc(s.first.channel)}</span></td><td>${esc(pageName(s.first.entry))}${s.first.pid&&s.pvs[0].pid?`<br><span class="mut">${esc(propLabel(s.pvs[0].pid))}</span>`:""}</td><td class="n">${s.n}</td><td class="n">${s.v2?D(s.dur):"—"}</td><td>${acts.length?acts.map(e=>`<span class="pill ${CONTACT.has(e.type)?"g":"m"}">${esc(ETYPE[e.type]||e.type)}</span>`).slice(0,4).join(" "):'<span class="mut">—</span>'}</td></tr>${open?`<tr class="jr"><td colspan="9">${journey(s)}</td></tr>`:""}`}).join("")}
+ else if(tab==="visitors"){const L=visitorsList();total=L.length;head.innerHTML="<tr><th>Visitor</th><th>Last seen</th><th>Location</th><th>Device</th><th class='n'>Visits</th><th class='n'>Page views</th><th class='n'>Total time</th><th class='n'>Contacts</th><th>First seen</th></tr>";
+  rows=L.slice(0,shown).map(v=>`<tr><td>#${esc(v.vid.slice(0,6).toUpperCase())} ${v.maxVisits>1||v.s>1?'<span class="pill m">returning</span>':'<span class="pill g">new</span>'}</td><td>${new Date(v.last).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit",hour12:true})}</td><td>${esc(where_(v.ls))}</td><td>${esc(v.ls.first.device)} · ${esc(v.ls.first.browser)}</td><td class="n">${N(Math.max(v.s,v.maxVisits))}</td><td class="n">${N(v.pv)}</td><td class="n">${v.dur?D(v.dur):"—"}</td><td class="n">${N(v.ev)}</td><td>${new Date(v.first).toLocaleDateString("en-IN",{day:"numeric",month:"short"})}</td></tr>`).join("")}
+ else{const sm=new Map(sessCur.map(s=>[s.sid,s])),L=[...evCur].sort((a,b)=>b.ms-a.ms);total=L.length;head.innerHTML="<tr><th>Time</th><th>Action</th><th>Detail</th><th>Page</th><th>Property</th><th>Visitor</th><th>Location</th></tr>";
+  rows=L.slice(0,shown).map(e=>{const s=sm.get(e.sid);return`<tr><td>${new Date(e.ms).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true})}</td><td><span class="pill ${CONTACT.has(e.type)?"g":"m"}">${esc(ETYPE[e.type]||e.type)}</span></td><td>${esc(FORMS[e.label]||e.label)}</td><td>${esc(pageName(e.page))}</td><td>${esc(propLabel(e.pid))}</td><td>#${esc(e.vid.slice(0,6).toUpperCase())}</td><td>${s?esc(where_(s)):""}</td></tr>`}).join("")}
+ body.innerHTML=rows||`<tr><td colspan="9" class="empty">No records for this range and filters yet.</td></tr>`;$("moreBtn").classList.toggle("hidden",total<=shown);$("moreBtn").textContent=`Show more (${N(total-shown)} left)`}
+
+/* ---------- health ---------- */
+function renderHealth(){const pv=PV.filter(p=>p.ms>=W.s&&p.ms<=W.e),v2=pv.filter(p=>p.v2).length,geo=pv.filter(p=>p.country||p.city).length,last=Math.max(0,...PV.map(p=>p.ms),...EV.map(e=>e.ms)),first=PV.length?Math.min(...PV.map(p=>p.ms)):0;
+ const off=(()=>{try{return localStorage.getItem("jpc_no_track")==="1"}catch(_){return false}})();
+ $("healthBody").innerHTML=`<table><tbody><tr><td>Last record received</td><td>${last?`${ago(last)} <span class="mut">(${new Date(last).toLocaleString("en-IN")})</span>`:"Nothing received yet"}</td></tr><tr><td>Records loaded</td><td>${N(PV.length)} page views · ${N(EV.length)} actions · ${N(LEADS.length)} leads</td></tr><tr><td>Rich tracking (v2) coverage</td><td>${pv.length?P(100*v2/pv.length):"—"} of page views in range have session, time and scroll data${pv.length&&v2<pv.length?" — older records were saved before the upgrade":""}</td></tr><tr><td>Location coverage</td><td>${pv.length?P(100*geo/pv.length):"—"}</td></tr><tr><td>Earliest record in range</td><td>${first?new Date(first).toLocaleDateString("en-IN"):"—"}</td></tr><tr><td>This browser</td><td>${off?"Excluded from tracking":"Tracked like any visitor"} <button id="nt" style="margin-left:8px">${off?"Track this browser again":"Don't track this browser"}</button></td></tr></tbody></table>
+ <p class="mut" style="margin:12px 0 0;font-size:12.5px">Privacy: the tracker stores a random browser ID, page, source, device/browser, screen size, language, time spent, scroll depth, clicks on call / WhatsApp / email / map buttons, and an approximate city/state/country (looked up from the connection, IP address itself is never stored). Names, phone numbers and form contents are never recorded here. Your own signed-in admin visits and bots are skipped. Visitor IDs are per browser — clearing data or switching phone makes a new visitor.</p>`}
+
+/* ---------- export ---------- */
+function csv(name,cols,rows){const cell=v=>{let s=String(v??"");if(/^[=+\-@\t\r]/.test(s))s="'"+s;return'"'+s.replace(/"/g,'""')+'"'};const t="﻿"+[cols.join(","),...rows.map(r=>r.map(cell).join(","))].join("\r\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv;charset=utf-8"}));a.download=`jpc-${name}-${ymd(W.s)}_to_${ymd(W.e)}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+const iso=ms=>new Date(ms).toISOString();
+function exportData(k){if(k==="sessions")csv(k,["start","visitor","visitor_type","visit_no","country","state","city","channel","source","medium","campaign","referrer","device","os","browser","screen","language","landing_page","pages","duration_sec","contact_actions","engaged"],sessCur.map(s=>[iso(s.start),s.vid,vtype(s),s.first.visits,s.first.country,s.first.region,s.first.city,s.first.channel,s.first.source,s.first.medium,s.first.campaign,s.first.ref,s.first.device,s.first.os,s.first.browser,s.first.screen,s.first.lang,s.first.entry,s.n,s.dur,s.ev.filter(e=>CONTACT.has(e.type)).length,s.engaged]));
+ else if(k==="visitors")csv(k,["visitor","first_seen","last_seen","sessions","page_views","total_time_sec","contact_actions","last_city","device"],visitorsList().map(v=>[v.vid,iso(v.first),iso(v.last),v.s,v.pv,v.dur,v.ev,v.ls.first.city,v.ls.first.device]));
+ else if(k==="pageviews")csv(k,["time","visitor","session","page","title","property_id","property","source","channel","device","browser","os","city","state","country","time_on_page_sec","scroll_pct"],sessCur.flatMap(s=>s.pvs).map(p=>[iso(p.ms),p.vid,p.sid,p.page,p.title,p.pid,propLabel(p.pid),p.source,p.channel,p.device,p.browser,p.os,p.city,p.region,p.country,p.dur,p.scroll]));
+ else csv(k,["time","type","detail","page","property_id","visitor","session"],evCur.map(e=>[iso(e.ms),e.type,e.label,e.page,e.pid,e.vid,e.sid]))}
+
+/* ---------- events ---------- */
+function setPreset(d){const t=sod(new Date());let f=t,to=t;if(d===1){f=new Date(t-DAY);to=f}else if(d>1)f=new Date(t-(d-1)*DAY);$("from").value=ymd(f);$("to").value=ymd(to);document.querySelectorAll("#presets button").forEach(b=>b.classList.toggle("on",+b.dataset.p===d))}
+document.addEventListener("click",e=>{const t=e.target;
+ const pb=t.closest("#presets button");if(pb){setPreset(+pb.dataset.p);load();return}
+ const mb=t.closest("#ctabs button");if(mb){metric=mb.dataset.m;render();return}
+ const lt=t.closest("#ltabs button");if(lt){tab=lt.dataset.t;shown=25;renderLog();return}
+ const ex=t.closest("[data-exp]");if(ex){exportData(ex.dataset.exp);ex.closest("details").open=false;return}
+ const x=t.closest("[data-x]");if(x){if(x.dataset.x==="*")Object.keys(F).forEach(k=>k!=="q"&&delete F[k]);else delete F[x.dataset.x];populate();render();return}
+ const f=t.closest("[data-f]");if(f&&f.dataset.v){F[f.dataset.f]=f.dataset.v;populate();render();document.querySelector(".filters").scrollIntoView({block:"nearest"});return}
+ const sr=t.closest("tr[data-s]");if(sr){const id=sr.dataset.s;expanded.has(id)?expanded.delete(id):expanded.add(id);renderLog();return}
+ if(t.id==="nt"){try{localStorage.setItem("jpc_no_track",localStorage.getItem("jpc_no_track")==="1"?"0":"1")}catch(_){}renderHealth()}
+ if(t.id==="moreBtn"){shown+=50;renderLog()}
+ if(!t.closest("details.menu"))document.querySelectorAll("details.menu").forEach(d=>d.open=false)});
+document.addEventListener("change",e=>{const s=e.target.closest("select[data-k]");if(s){F[s.dataset.k]=s.value;if(!s.value)delete F[s.dataset.k];render()}});
+let qt;$("q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{F.q=e.target.value.trim();if(!F.q)delete F.q;shown=25;render()},250)});
+$("apply").onclick=()=>{document.querySelectorAll("#presets button").forEach(b=>b.classList.remove("on"));load()};$("cmp").onchange=load;$("refresh").onclick=load;
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>W&&render(),200)});
+let autoT,liveT;$("auto").onchange=e=>{clearInterval(autoT);if(e.target.checked)autoT=setInterval(()=>document.visibilityState==="visible"&&load(),60000)};
+$("signin").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("error").textContent=e.message}};$("logout").onclick=()=>signOut(auth);
+setPreset(30);
+onAuthStateChanged(auth,u=>{if(!u||u.isAnonymous){$("login").classList.remove("hidden");$("app").classList.add("hidden");$("logout").classList.add("hidden");return}
+ if(!ADMIN.includes((u.email||"").toLowerCase())){$("error").textContent="This Google account is not authorized for analytics.";signOut(auth);return}
+ $("login").classList.add("hidden");$("app").classList.remove("hidden");$("logout").classList.remove("hidden");load();clearInterval(liveT);liveT=setInterval(()=>document.visibilityState==="visible"&&W&&loadLive(),15000)});
 </script></body></html>

@@ -1,9 +1,0 @@
-src
-functions
-wrangler.jsonc
-.assetsignore
-*.md
-firestore.rules
-storage.rules
-node_modules
-.git

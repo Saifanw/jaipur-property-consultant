@@ -56,6 +56,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.2}
 h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:var(--navy)}
 .loc{display:flex;gap:6px;align-items:center;color:var(--muted);margin-top:6px;font-size:15.5px}
 .loc .icon{color:var(--gold);width:18px;height:18px}
+.loc{flex-wrap:wrap}.loc-map{margin-left:6px;font-size:13px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px;opacity:.85}.loc-map:hover{color:var(--gold)}
 .tb-price{text-align:right}
 .tb-price .lab{font-size:12.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px}
 .tb-price .val{font:800 clamp(26px,3vw,34px) var(--font-head);color:var(--navy)}
@@ -397,7 +398,7 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   const legal=[["Patta / land type",p.pattaType],["Registry",p.registry],["Home loan",p.loan]].filter(x=>x[1]);
   const legalHtml=legal.length?`<section class="panel"><h2>Legal &amp; documents</h2><div class="legal">${legal.map(([l,v])=>{const ok=!/not|no\b|enquiry|process/i.test(v);return`<div class="lg ${ok?"ok":"nt"}"><i>${ok?"✓":"i"}</i><div><b>${esc(l)}</b><span>${esc(v)}</span></div></div>`}).join("")}</div><p class="fine">Please verify original documents, ownership and registry status before buying. We help you with the verification.</p></section>`:"";
   const nearby=String(p.nearby||"").split(/\n|;/).map(tidy1).filter(Boolean).slice(0,10);
-  const locHtml=(nearby.length||mapUrl)?`<section class="panel"><h2>Location &amp; nearby</h2>${nearby.length?`<ul class="near">${nearby.map(n=>`<li>${esc(n)}</li>`).join("")}</ul>`:""}${mapUrl?`<a class="btn btn-light" target="_blank" rel="noopener" href="${esc(mapUrl)}">${ico("pin")}Open location in Google Maps</a>`:""}</section>`:"";
+  const locHtml=nearby.length?`<section class="panel"><h2>Location &amp; nearby</h2>${nearby.length?`<ul class="near">${nearby.map(n=>`<li>${esc(n)}</li>`).join("")}</ul>`:""}</section>`:"";
   const PHN=S.phone||"6350566010",visitMsg=`Hello, I want to book a site visit for the ${type} in ${area}${p.code?" (Ref "+p.code+")":""}. Please tell me a suitable time.`;
   const pr0=Number(p.budgetMax??p.budgetMin)||0;
   const faqs=[["What is the final price?",`The listed price is ${price}${pgaj?" ("+pgaj.replace("≈ ","approx. ")+")":""}. The final price is discussed after a site visit, so call or WhatsApp us for the best deal.`],
@@ -428,8 +429,8 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     <div class="title-block">
       <div class="tb-left">
         <div class="badges"><span class="badge">${esc(type)}</span>${isSeller?`<span class="badge avail ${availCls(avail)}">${esc(avail)}</span>`:`<span class="badge avail">Buyer requirement</span>`}</div>
-        <h1>${esc(title)}${p.code?`<span class="refcode">Ref ${esc(p.code)}</span>`:""}</h1>
-        <div class="loc">${ico("pin")}${esc(area)}, ${esc(city)}</div>
+        <h1>${esc(title)}</h1>
+        <div class="loc">${ico("pin")}${esc(area)}, ${esc(city)}${isSeller&&mapUrl?`<a class="loc-map" target="_blank" rel="noopener" href="${esc(mapUrl)}">View on map ↗</a>`:""}</div>
       </div>
       <div class="tb-price"><div class="lab">${isSeller?"Price":"Budget"}</div><div class="val">${esc(price)}</div>${pgaj?`<div class="pg">${esc(pgaj)}</div>`:""}</div>
     </div>
@@ -482,7 +483,7 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     document.querySelectorAll(".thumb").forEach(t=>t.addEventListener("click",()=>showImg(Number(t.dataset.i))));
     swipe($("stage"));
   }
-  const shareText=`${title} — ${price}${p.code?" (Ref "+p.code+")":""}\nJaipur Property Consultant`;
+  const shareText=`${title} — ${price}\nJaipur Property Consultant`;
   $("shareWa").href="https://wa.me/?text="+encodeURIComponent(shareText+"\n"+location.href);
   $("shareWa").addEventListener("click",e=>{e.preventDefault();openShare()});
   const say=t=>{let el=$("toastp");if(!el){el=document.createElement("div");el.id="toastp";el.className="toastp";document.body.appendChild(el)}el.textContent=t;el.style.display="block";clearTimeout(say.t);say.t=setTimeout(()=>el.style.display="none",2000)};

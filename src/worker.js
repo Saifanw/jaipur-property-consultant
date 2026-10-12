@@ -14,6 +14,8 @@ const cleanArea = a => {
   if (x.length > 2 && x === x.toUpperCase()) x = x.toLowerCase().replace(/\b\p{L}/gu, c => c.toUpperCase());
   return x.length > 48 ? x.slice(0, 46).trim() + "…" : (x || "Jaipur");
 };
+// remove WhatsApp-style formatting (*bold*, _italic_) and emojis so the preview text is clean
+const plain = t => tidy(String(t || "").replace(/[*_#`~>]/g, " ").replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, " "));
 const inr = n => {
   n = Number(n); if (!n) return "";
   if (n >= 1e7) return "₹" + +(n / 1e7).toFixed(2) + " Crore";
@@ -41,7 +43,7 @@ async function propertyPage(request, env) {
     const size = tidy(p.size);
     const title = seller ? `${size ? size + " " : ""}${type} in ${area}` : `Looking for ${size ? size + " " : ""}${type} in ${area}`;
     const price = inr(p.budgetMax ?? p.budgetMin);
-    const desc = [price, `${area}, ${tidy(p.city) || "Jaipur"}`, tidy(p.details).slice(0, 110)].filter(Boolean).join(" • ");
+    const desc = [price, `${area}, ${tidy(p.city) || "Jaipur"}`, plain(p.details).slice(0, 110)].filter(Boolean).join(" • ");
     const img = (Array.isArray(p.imageUrls) ? p.imageUrls : []).find(u => /^https:\/\//.test(u || ""));
     const pageTitle = `${title}${price ? " – " + price : ""}`;
 

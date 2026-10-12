@@ -391,7 +391,7 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   const fact=(l,v)=>v?`<div class="fact"><b>${esc(l)}</b><span>${esc(v)}</span></div>`:"";
   const landmark=(()=>{const l=tidy1(p.propertyLocation);return l&&!/^https?:/i.test(l)?l:""})();
   const mapUrl=/^https?:\/\//i.test(p.mapUrl||"")?p.mapUrl:(/^https?:\/\//i.test(p.propertyLocation||"")?p.propertyLocation:"");
-  const facts=[["Property type",p.propertyType],["Size",szTxt],["Facing",p.facing||tidy1(p.roadFacing)],["Road width",tidy1(p.roadWidth)],["Corner plot",p.cornerPlot],["Locality",area+", "+city],["Society / colony",tidy1(p.society)],["Landmark",landmark],[isSeller?"Price":"Budget",price],["Approx. rate",pgaj.replace("≈ ","")],["Availability",isSeller?avail:""]].map(f=>fact(f[0],f[1])).join("");
+  const facts=[["Property type",p.propertyType],["Size",szTxt],["Facing",p.facing||tidy1(p.roadFacing)],["Bedrooms / rooms",tidy1(p.bedrooms)],["Bathrooms",tidy1(p.bathrooms)],["Floors",tidy1(p.floors)],["Road width",tidy1(p.roadWidth)],["Corner plot",p.cornerPlot],["Locality",area+", "+city],["Society / colony",tidy1(p.society)],["Landmark",landmark],[isSeller?"Price":"Budget",price],["Approx. rate",pgaj.replace("≈ ","")],["Availability",isSeller?avail:""]].map(f=>fact(f[0],f[1])).join("");
   const hl=String(p.highlights||"").split(/\n|;/).map(tidy1).filter(Boolean).slice(0,8);
   const hlHtml=hl.length?`<div class="hls">${hl.map(x=>`<span>✓ ${esc(x)}</span>`).join("")}</div>`:"";
   const legal=[["Patta / land type",p.pattaType],["Registry",p.registry],["Home loan",p.loan]].filter(x=>x[1]);

@@ -57,7 +57,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.2}
 h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:var(--navy)}
 .loc{display:flex;gap:6px;align-items:center;color:var(--muted);margin-top:6px;font-size:15.5px}
 .loc .icon{color:var(--gold);width:18px;height:18px}
-.loc{flex-wrap:wrap}.loc-map{margin-left:6px;font-size:13px;font-weight:600;color:var(--navy);text-decoration:underline;text-underline-offset:3px;opacity:.85}.loc-map:hover{color:var(--gold)}
+.loc{flex-wrap:wrap;gap:8px 10px}.loc-map{display:inline-flex;align-items:center;gap:6px;background:var(--gold-soft);color:#7a5600;border:1.5px solid var(--gold);border-radius:999px;padding:7px 14px 7px 11px;font-size:14px;font-weight:700;line-height:1;text-decoration:none;box-shadow:0 2px 8px rgba(185,138,30,.18);transition:.15s}.loc-map .icon{width:18px;height:18px;color:var(--gold)}.loc-map:hover{background:var(--gold);color:#fff}.loc-map:hover .icon{color:#fff}
 .tb-price{text-align:right}
 .tb-price .lab{font-size:12.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px}
 .tb-price .val{font:800 clamp(26px,3vw,34px) var(--font-head);color:var(--navy)}
@@ -431,7 +431,7 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
       <div class="tb-left">
         <div class="badges"><span class="badge">${esc(type)}</span>${isSeller?`<span class="badge avail ${availCls(avail)}">${esc(avail)}</span>`:`<span class="badge avail">Buyer requirement</span>`}</div>
         <h1>${esc(title)}</h1>
-        <div class="loc">${ico("pin")}${esc(area)}, ${esc(city)}${isSeller&&mapUrl?`<a class="loc-map" target="_blank" rel="noopener" href="${esc(mapUrl)}">View on map ↗</a>`:""}</div>
+        <div class="loc">${ico("pin")}${esc(area)}, ${esc(city)}${isSeller&&mapUrl?`<a class="loc-map" target="_blank" rel="noopener" href="${esc(mapUrl)}" aria-label="View this property on Google Maps">${ico("pin")}<span>Map par dekhein · View on map</span></a>`:""}</div>
       </div>
       <div class="tb-price"><div class="lab">${isSeller?"Price":"Budget"}</div><div class="val">${esc(price)}</div>${pgaj?`<div class="pg">${esc(pgaj)}</div>`:""}</div>
     </div>

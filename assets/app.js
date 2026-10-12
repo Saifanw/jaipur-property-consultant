@@ -106,7 +106,6 @@ function propertyCard(p){
   const msg = `Hello, I am interested in the ${p.propertyType || "property"} in ${area}${p.code ? " (Ref " + p.code + ")" : ""} listed on your website. Please share details.`;
   const n = photosOf(p).length, pg = perGaj(p);
   const chips = [
-    p.code ? `<span class="chip refc">Ref ${esc(p.code)}</span>` : "",
     p.size ? `<span class="chip">${ico("ruler")}${esc(tidy(p.size))}</span>` : "",
     p.roadFacing ? `<span class="chip">${esc(tidy(p.roadFacing))}</span>` : "",
     n > 1 ? `<span class="chip">${ico("camera")}${n} photos</span>` : "",

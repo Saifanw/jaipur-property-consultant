@@ -56,6 +56,31 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
+    // Website analytics: anonymous visitors can create bounded page-view events.
+    // Only the configured admin can read or manage analytics records.
+    match /websiteAnalytics/{eventId} {
+      allow create: if request.auth != null
+        && request.auth.token.firebase.sign_in_provider == "anonymous"
+        && request.resource.data.keys().hasOnly([
+          "visitorId", "page", "title", "referrer", "source", "device",
+          "userAgentFamily", "createdAt", "uid"
+        ])
+        && request.resource.data.visitorId is string
+        && request.resource.data.visitorId.size() <= 80
+        && request.resource.data.page is string
+        && request.resource.data.page.size() <= 160
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 160
+        && request.resource.data.referrer is string
+        && request.resource.data.referrer.size() <= 120
+        && request.resource.data.source in ["Direct", "Google", "Social", "Referral"]
+        && request.resource.data.device in ["Mobile", "Desktop", "Tablet"]
+        && request.resource.data.userAgentFamily in ["Edge", "Chrome", "Firefox", "Safari", "Other"]
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

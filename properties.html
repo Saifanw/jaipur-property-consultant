@@ -132,5 +132,6 @@ onSnapshot(query(collection(db, "publicRequirements"), where("type", "==", "sell
   render();
 }, () => { $("count").textContent = "Could not load"; $("grid").innerHTML = '<div class="empty-box"><strong>Properties could not be loaded right now</strong>Please check your internet connection or message us on WhatsApp.</div>'; });
 </script>
+<script type="module" src="assets/jpc-analytics-tracker.js"></script>
 </body>
 </html>

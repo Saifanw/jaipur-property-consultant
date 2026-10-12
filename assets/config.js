@@ -13,6 +13,7 @@ window.SITE = {
   phone: "6350566010",
   adminEmails: ["saif.anwar1618@gmail.com"],   // only used to show "Edit" buttons to you on the public site (real security = firestore.rules)
   firebase: {apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"},
+  analytics: { geo: true },        // approx. city/state/country for visitors (no IP stored). Set false to switch off.
   whatsapp: "916350566010",
   address: "58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur 302012",
   mapUrl: "",                      // optional Google Maps link

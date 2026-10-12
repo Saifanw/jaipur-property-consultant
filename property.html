@@ -90,7 +90,17 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 .fact{background:#f5f8fb;border:1px solid #e8eef4;border-radius:13px;padding:14px 16px}
 .fact b{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
 .fact span{display:block;margin-top:3px;font-weight:700;font-size:16px;color:var(--navy);overflow-wrap:anywhere}
-.desc{white-space:pre-line;color:#33445d;font-size:16px;line-height:1.75;overflow-wrap:anywhere}
+.desc{color:#33445d;font-size:16px;line-height:1.75;overflow-wrap:anywhere}
+.desc p{margin:0 0 12px}.desc p:last-child{margin-bottom:0}
+.desc .dh{font-size:15px;color:var(--navy);margin:20px 0 10px;padding-left:10px;border-left:3px solid var(--gold);text-transform:none}.desc .dh:first-child{margin-top:0}
+.desc .dkv{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 12px;margin:0 0 14px}
+.desc .dkv div{display:flex;justify-content:space-between;gap:12px;background:#f5f8fb;border:1px solid #e8eef4;border-radius:11px;padding:10px 14px}
+.desc .dkv b{font-weight:600;color:var(--muted);font-size:14px;flex:none}
+.desc .dkv .long{display:block}.desc .dkv .long b{display:block;margin-bottom:2px}.desc .dkv .long span{display:block;text-align:left;font-weight:500;line-height:1.55}.desc .dkv span{font-weight:700;color:var(--navy);text-align:right}
+.desc .dkv .hi{grid-column:1/-1;background:var(--gold-soft);border-color:#ecd89a}.desc .dkv .hi span{font-size:18px}
+.desc .dul{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}.desc .dul li{position:relative;padding-left:26px}.desc .dul li:before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:800}
+.desc .dnote{font-size:13.5px;color:var(--muted);background:#f8fafc;border:1px dashed var(--line);border-radius:10px;padding:10px 12px}
+@media(max-width:640px){.desc .dkv{grid-template-columns:1fr}}
 .video-wrap{background:#0b141f;border-radius:14px;overflow:hidden}
 .video-wrap video{display:block;width:100%;max-height:540px}
 
@@ -274,6 +284,41 @@ const hidden=s=>["rejected","hidden","draft","deleted"].includes(String(s||"").t
 const EMOJI=/[^\p{L}\p{M}\p{N}\s.,:;!?()\-\/₹%&'"+×–—•²·’‘“”=@#*\n]/gu;
 const tidy=t=>String(t??"").replace(EMOJI," ").replace(/[ \t]+/g," ").replace(/\n\s*\n\s*\n+/g,"\n\n").trim();
 const tidy1=t=>tidy(t).replace(/\s+/g," ");
+/* Description -> clean point-wise HTML. Understands **bold** headings, "Label: value" rows, bullets, notes, and
+   (best effort) flat text pasted from AI tools where every line was joined into one paragraph. */
+const KNOWN_LABELS=["वर्तमान कीमत","प्रॉपर्टी टाइप","प्लॉट एरिया","कारपेट एरिया","बिल्ट-अप एरिया","बिल्टअप एरिया","बेडरूम","टॉयलेट","बाथरूम","किचन","फेसिंग","कीमत","लोकेशन","पार्किंग","Property Type","Plot Area","Carpet Area","Built-up Area","Bedrooms","Bathrooms","Toilets","Kitchen","Facing","Price","Location","Parking"].sort((a,b)=>b.length-a.length);
+const LABEL_RE=new RegExp("(?:"+KNOWN_LABELS.join("|")+")\\s*[:：]","g");
+const NUM_UNIT=/^(\d[\d,.]*\s*(?:वर्ग\s*गज|वर्ग\s*फीट|वर्ग\s*फुट|sq\.?\s*ft|sq\.?\s*yd|gaj|गज|फीट|ft|%)?)\s+(\S.{11,})$/i;
+function fmtDetails(raw){
+  let s=String(raw||"").replace(/\r/g,"");
+  s=s.replace(/\*\*([^*\n]+?)\*\*/g,"\u0001$1\u0002").replace(/\*([^*\n]+?)\*/g,"$1").replace(/\*/g,"");
+  s=s.replace(/\u0001/g,"\n\u0001").replace(LABEL_RE,(m,o,t)=>t[o-1]==="\u0001"?m:"\n"+m).replace(/\s+([•▪●✔✓])\s+/g,"\n$1 ");
+  const out=[];let kv=[],ul=[];
+  const flush=()=>{if(kv.length){out.push(`<div class="dkv">${kv.join("")}</div>`);kv=[]}if(ul.length){out.push(`<ul class="dul">${ul.join("")}</ul>`);ul=[]}};
+  const row=(k,v,hi)=>{ul.length&&flush();k=k.replace(/[:：\s]+$/,"").trim();v=(v||"").replace(/\u0001|\u0002/g,"").trim();
+    const m=NUM_UNIT.exec(v);let rest="";if(m){v=m[1].trim();rest=m[2].trim()}
+    kv.push(`<div class="${hi?"hi ":""}${v.length>34?"long":""}"><b>${esc(k)}</b><span>${esc(v)}</span></div>`);if(rest){flush();out.push(`<p>${esc(rest)}</p>`)}};
+  const li=x=>{kv.length&&flush();ul.push(`<li>${x}</li>`)};
+  const L=s.split("\n").map(x=>x.trim());
+  const structured=x=>!!x&&(/^\u0001/.test(x)||/^([•·▪●✔✓\-–—]|\d{1,2}[.)])\s+/.test(x)||/^[^:：]{2,38}[:：]\s*\S/.test(x));
+  for(let i=0;i<L.length;i++){let line=L[i];
+    if(!line){flush();continue}
+    if(line.length<=40&&!/[.:：!?।,]$/.test(line)&&!/^\u0001|^([•·▪●✔✓\-–—])\s/.test(line)&&(i===0||!L[i-1])&&structured(L[i+1])&&!/[:：]/.test(line)){flush();out.push(`<h3 class="dh">${esc(line)}</h3>`);continue}
+    const b=/^\u0001([^\u0002]+)\u0002\s*(.*)$/.exec(line);
+    if(b){const B=b[1].trim(),R=b[2].trim();
+      if(/[:：]$/.test(B)&&R){row(B,R)}
+      else if(/[:：]/.test(B)){const i=B.search(/[:：]/);row(B.slice(0,i),B.slice(i+1),/कीमत|price|rate|भाव/i.test(B));if(R){flush();out.push(`<p>${esc(R)}</p>`)}}
+      else if(/^[—–-]\s*/.test(R)){li(`<b>${esc(B)}</b> — ${esc(R.replace(/^[—–-]\s*/,""))}`)}
+      else{flush();out.push(`<h3 class="dh">${esc(B)}</h3>`);if(R)out.push(`<p>${esc(R)}</p>`)}
+      continue}
+    line=line.replace(/\u0001|\u0002/g,"");
+    const bl=/^([•·▪●✔✓\-–—]|\d{1,2}[.)])\s+(.+)$/.exec(line);
+    if(bl){li(esc(bl[2]));continue}
+    if(/^(नोट|Note|नोट्स)\s*[:：]/i.test(line)){flush();out.push(`<p class="dnote">${esc(line)}</p>`);continue}
+    const kvm=/^([^:：]{2,38})[:：]\s*(\S.*)$/.exec(line);
+    if(kvm&&!/https?$/i.test(kvm[1])){row(kvm[1],kvm[2]);continue}
+    flush();out.push(`<p>${esc(line)}</p>`)}
+  flush();return out.join("")}
 function cleanArea(a){let x=tidy1(String(a||"").split(/[|\n]/)[0]).split(",")[0].trim();if(x.length>2&&x===x.toUpperCase())x=x.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());return x.length>48?x.slice(0,46).trim()+"…":(x||"Jaipur")}
 const unitSize=z=>/[a-zऀ-ॿ]/i.test(String(z||""));
 function inr(n){n=Number(n);if(!isFinite(n))return"";if(n>=1e7)return"₹"+Math.round(n/1e7*100)/100+" Cr";if(n>=1e5)return"₹"+Math.round(n/1e5*100)/100+" Lakh";return"₹"+n.toLocaleString("en-IN")}
@@ -393,7 +438,7 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
         ${isSeller?gallery:""}
         ${isSeller?hlHtml:""}
         <section class="panel"><h2>Key details</h2><div class="facts">${facts}</div></section>
-        ${details?`<section class="panel"><h2>About this ${isSeller?"property":"requirement"}</h2><div class="desc">${esc(details)}</div></section>`:""}
+        ${details?`<section class="panel"><h2>About this ${isSeller?"property":"requirement"}</h2><div class="desc">${fmtDetails(details)}</div></section>`:""}
         ${isSeller?legalHtml+locHtml:""}
         ${p.videoUrl&&isSeller?`<section class="panel"><h2>Property video</h2><div class="video-wrap"><video controls playsinline preload="metadata" src="${esc(p.videoUrl)}"></video></div></section>`:""}
         ${isSeller?qaHtml:""}

@@ -159,6 +159,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 @media(max-width:700px){.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;overflow:visible}.nav button{justify-content:center;padding:8px 4px;font-size:12px}#nav button[data-v="inbox"]{order:-1}}
 @media(max-width:1100px){.dash,.two{grid-template-columns:1fr}.mrow{grid-template-columns:80px minmax(0,1fr) 70px}.mrow>:nth-child(3),.mrow>:nth-child(5){grid-column:2/-1}}
 @media(max-width:900px){.tr,.todo{grid-template-columns:minmax(0,1fr)}}
+.bqr{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid var(--line)}.bqr .w{flex:1;min-width:0}.bqr .w b{display:block;font-size:13.5px}.bqr .w span{font-size:12px;color:var(--mut)}.bqr.done{opacity:.5}.bqp{height:6px;border-radius:9px;background:#eef2f8;overflow:hidden;margin:8px 0 4px}.bqp i{display:block;height:100%;background:#0f9d6a;width:0;transition:.25s}
 </style>
 </head>
 <body>
@@ -404,6 +405,14 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
   <div class="mf"><span></span><div style="display:flex;gap:8px"><button class="btn" id="w_cancel">Cancel</button><button class="btn p" id="w_go" style="background:#0f9d6a;border-color:#0f9d6a">Open WhatsApp</button></div></div>
 </div></div>
 
+<div id="bq" class="ov hidden"><div class="modal" style="width:min(600px,100%)" role="dialog" aria-modal="true">
+  <div class="mh"><div><h2>📲 Matching buyers ko WhatsApp</h2><p id="bq_sub"></p></div></div>
+  <div class="mbody" style="min-height:0"><label style="font-size:12px;font-weight:700;color:var(--mut)">Message (har buyer ke liye {name} aur property details apne aap bhar jayengi)</label><textarea id="bq_text" rows="4"></textarea>
+   <div class="bqp"><i id="bq_bar"></i></div><div id="bq_prog" style="font-size:12px;font-weight:700;color:var(--mut);margin-bottom:6px"></div><div id="bq_list" style="max-height:38vh;overflow:auto"></div>
+   <div style="font-size:11.5px;color:var(--mut);margin-top:8px">WhatsApp Web mein Send aapko khud dabana hota hai. Jisko bhej diya wo ✓ ho jata hai aur timeline mein likh jata hai, to dobara nahi jayega.</div></div>
+  <div class="mf"><span></span><div style="display:flex;gap:8px"><button class="btn" id="bq_close">Close</button><button class="btn p" id="bq_next" style="background:#0f9d6a;border-color:#0f9d6a">Next</button></div></div>
+</div></div>
+
 <!-- COMMAND SEARCH -->
 <div id="ko" class="ov ko hidden"><div class="kb"><input id="k_in" type="text" placeholder="Name, mobile, code (JPC-012), area…" autocomplete="off"><div id="k_res"></div></div></div>
 
@@ -601,7 +610,7 @@ function renderProps(){
       <div class="cell"><b>${esc(budgetText(p))}</b><span><span class="st ${cls(av)}" style="padding:1px 8px;font-size:11px">${esc(av)}</span></span></div>
       <div>${c.length?`<span class="intp">👥 ${c.length}</span>`:`<span style="color:var(--mut)">—</span>`}</div>
       <div>${d?`<span class="due">${d} due</span>`:`<span style="color:var(--mut)">—</span>`}</div>
-      <div class="ra"><button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>
+      <div class="ra">${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Buyers</button>`:""}<button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>
       ${open?`<div class="detail">${propDetail(p,c)}</div>`:""}`}).join("");
 }
 function propDetail(p,c){
@@ -615,7 +624,7 @@ function propDetail(p,c){
   return`${tools}${imgs?`<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">${imgs}</div>`:""}
    <div class="pinfo" style="margin-top:12px">${info||"<span>Aur details nahi bhari.</span>"}</div>
    ${p.followUpDate?`<div class="pinfo"><span>Owner follow-up: <b>${fmtFu(p.followUpDate)}</b> ${esc(p.followUpNote||"")}</span></div>`:""}
-   <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px">${waBtn(p)}${lk?`<button class="mini" data-act="copyLink" data-id="${esc(p.id)}">🔗 Copy website link</button>`:""}</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px">${waBtn(p)}${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Matching buyers ko bhejo</button>`:""}${lk?`<button class="mini" data-act="copyLink" data-id="${esc(p.id)}">🔗 Copy website link</button>`:""}</div>
    <h4><span>Is property ke interested customers (${c.length})</span><button class="btn p sm" data-act="pLink" data-id="${esc(p.id)}">＋ Add customer</button></h4>
    ${c.length?c.map(x=>subRow(x,p)).join(""):`<div class="empty" style="padding:22px">Abhi koi customer is property ke liye link nahi hua.</div>`}
    ${sug.length?`<h4><span>🎯 Matching buyers (abhi link nahi)</span></h4>${sug.map(x=>`<div class="sub" style="grid-template-columns:minmax(0,1.8fr) 90px minmax(0,1.6fr) auto"><div class="who"><div class="av">${esc(ini(x.c.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(budgetText(x.c))}</span></div></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="why">${esc(x.why.join(" • "))}</div><div class="ra">${waBtn(x.c,p.id)}<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button></div></div>`).join("")}`:""}`;
@@ -830,7 +839,7 @@ async function saveP(){
     if(pEditId)await updateDoc(doc(db,COL,pEditId),d);
     else{d.code=nextCode();d.status="New";d.source="Property Desk";d.createdAt=serverTimestamp();d.timeline=[tlEntry("Property listed as "+d.code,"note")];id=(await addDoc(collection(db,COL),d)).id;openProp=id}
     await publishSync(id,{...old,...d});
-    closeP();toast(pEditId?"Property save ho gayi":"Property add hui — code "+d.code);
+    const isNew=!pEditId;closeP();toast(isNew?"Property add hui — code "+d.code:"Property save ho gayi");if(isNew&&availableP(d))setTimeout(()=>openBQ(id,{...d,id},true),600);
     if(pub&&photos.length&&photos.some(x=>x.url&&x.url.includes("crmContacts%2F")))toast("Dhyan: kuch purani photos private hain — website par dikhane ke liye dobara upload karo",true)
   }catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}finally{btn.disabled=false;btn.textContent="Save property"}}
 $("p_save").onclick=saveP;$("p_cancel").onclick=closeP;$("p_del").onclick=()=>softDelete(pEditId,closeP);
@@ -906,6 +915,27 @@ $("w_go").onclick=async()=>{const r=recs.find(x=>x.id===wState.id);if(!r)return;
   $("wo").classList.add("hidden")};
 $("w_cancel").onclick=()=>$("wo").classList.add("hidden");
 
+/* ---------- NEW PROPERTY → MATCHING BUYERS WHATSAPP QUEUE ---------- */
+let bq={p:null,sent:new Set()};
+const bqSentBefore=(c,p)=>!!p.code&&(c.timeline||[]).some(t=>t.kind==="wa"&&String(t.text).includes(p.code));
+const bqList=p=>recs.filter(r=>r.type==="customer"&&!TERM.includes(r.status)&&waNum(r)).map(c=>({c,...matchScore(c,p)})).filter(x=>x.score>=30).sort((a,b)=>b.score-a.score);
+const bqDone=x=>bq.sent.has(x.c.id)||bqSentBefore(x.c,bq.p);
+function openBQ(pid,pObj,quiet){const p=propById(pid)||pObj;if(!p)return;p.id=p.id||pid;
+  if(!bqList(p).length){if(!quiet)toast("Is property ke liye abhi koi matching buyer (WhatsApp number ke saath) nahi hai",true);return}
+  bq={p,sent:new Set()};$("bq_text").value=TPL.find(x=>x.k==="prop").t;drawBQ();$("bq").classList.remove("hidden")}
+function drawBQ(){const p=bq.p;if(!p)return;const L=bqList(p),pend=L.filter(x=>!bqDone(x)),n=L.length-pend.length;
+  $("bq_sub").textContent=`${p.code||""} · ${lbl(p)} · ${budgetText(p)} — ${L.length} matching buyers`;
+  $("bq_prog").textContent=`${n} / ${L.length} bhej diye`;$("bq_bar").style.width=(L.length?n/L.length*100:0)+"%";
+  $("bq_list").innerHTML=L.map(x=>`<div class="bqr${bqDone(x)?" done":""}"><span class="sc2${scCls(x.score)}">${x.score}%</span><div class="w"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.why.join(" • "))}${x.c.status?" · "+esc(x.c.status):""}</span></div>${bqDone(x)?'<span class="tag">✓ Bheja</span>':`<button class="mini wa" data-bqs="${esc(x.c.id)}">Send</button>`}</div>`).join("");
+  $("bq_next").disabled=!pend.length;$("bq_next").textContent=pend.length?`▶ Next: ${firstName(pend[0].c)||"buyer"} ko bhejo (${pend.length} baaki)`:"✓ Sab ho gaya"}
+async function bqSend(cid){const c=recs.find(r=>r.id===cid),p=bq.p;if(!c||!p)return;const num=waNum(c);if(!num)return;
+  const txt=tplFill(c,$("bq_text").value,p).trim();if(!txt)return toast("Message khaali hai",true);
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(txt)}`,"_blank","noopener");bq.sent.add(cid);drawBQ();
+  try{await updateDoc(doc(db,COL,cid),{timeline:arrayUnion(tlEntry(`WhatsApp bheja (${p.code||"property"}): `+txt.slice(0,60)+(txt.length>60?"…":""),"wa")),updatedAt:serverTimestamp()})}catch(_){}}
+$("bq_list").onclick=e=>{const b=e.target.closest("[data-bqs]");if(b)bqSend(b.dataset.bqs)};
+$("bq_next").onclick=()=>{const x=bqList(bq.p).find(y=>!bqDone(y));if(x)bqSend(x.c.id)};
+$("bq_close").onclick=()=>$("bq").classList.add("hidden");
+
 /* ---------- SMART MATCH view ---------- */
 function renderMatch(){
   const sel=$("mPick"),cur=sel.value;
@@ -919,7 +949,7 @@ function drawMatchRes(){
     res.innerHTML=L.length?L.map(x=>`<div class="mrow"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(x.p.name||"")} · ${esc(budgetText(x.p))}</span></div><div class="why">${esc(x.why.join(" • "))}</div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="ra">${waNum(c)?`<button class="mini wa" data-act="wa" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.p.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>Koi property match nahi hui</b>Customer ki area, type ya budget update karke dekho.</div>`}
   else{const p=propById(id);if(!p)return;$("mInfo").textContent=`${p.code||""} • ${lbl(p)} • ${budgetText(p)}`;
     const L=matchesForProp(p),linked=new Set(buyersOf(p).map(c=>c.id));
-    res.innerHTML=L.length?L.map(x=>`<div class="mrow"><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="cell"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(x.c.status||"New")}</span></div><div class="cell"><b>${esc([x.c.propertyType,areaOf(x.c)].filter(Boolean).join(" • ")||"—")}</b><span class="why">${esc(x.why.join(" • "))}</span></div><div>${esc(budgetText(x.c))}</div><div class="ra">${waNum(x.c)?`<button class="mini wa" data-act="wa" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.c.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>Koi customer match nahi hua</b>Customers ki requirement mein area, type aur budget bharo.</div>`}}
+    res.innerHTML=L.length?`<div style="padding:4px 0 10px"><button class="btn p sm" data-act="bq" data-id="${esc(p.id)}" style="background:#0f9d6a;border-color:#0f9d6a">📲 Sab matching buyers ko WhatsApp queue</button></div>`+L.map(x=>`<div class="mrow"><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="cell"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(x.c.status||"New")}</span></div><div class="cell"><b>${esc([x.c.propertyType,areaOf(x.c)].filter(Boolean).join(" • ")||"—")}</b><span class="why">${esc(x.why.join(" • "))}</span></div><div>${esc(budgetText(x.c))}</div><div class="ra">${waNum(x.c)?`<button class="mini wa" data-act="wa" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.c.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>Koi customer match nahi hua</b>Customers ki requirement mein area, type aur budget bharo.</div>`}}
 $("mPick").onchange=drawMatchRes;
 
 /* ---------- INBOX (website submissions + reviews) ---------- */
@@ -1037,7 +1067,7 @@ document.addEventListener("click",async e=>{
     try{
     if(act==="addP")openP();else if(act==="addC")openC();else if(act==="more"){cShown+=60;renderContacts()}
     else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="pAv"){const p=propById(id),v=a.dataset.v;if(p&&v&&v!==(p.availability||"Available")){await updateDoc(doc(db,COL,id),{availability:v,updatedAt:serverTimestamp()});await publishSync(id,{...p,availability:v});toast(p.code+" → "+v)}}else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
-    else if(act==="wa")openW(id,a.dataset.pid);
+    else if(act==="wa")openW(id,a.dataset.pid);else if(act==="bq")openBQ(id);
     else if(act==="go"){const to=a.dataset.to;if(to==="nofu"){setView("contacts");cChip="nofu";cShown=60;renderContacts()}else if(to==="noenq"){setView("props");$("pf_show").value="none";renderProps()}else setView(to)}
     else if(act==="copyLink"){const p=propById(id);if(p){await navigator.clipboard.writeText(propLink(p));toast("Website link copy ho gaya")}}
     else if(act==="mLink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(c&&p){const ok=await linkBuyer(c,p);toast(ok?c.name+" → "+p.code+" link ho gaya":"Pehle se linked hai")}}

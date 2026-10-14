@@ -460,3 +460,12 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
 @media(max-width:1180px){.nav-links a{padding:9px 9px;font-size:14px}}
 .top-right a[href^="tel"]{color:var(--gold2);font-size:15px;font-weight:800}
 @media(max-width:900px){.nav-links a.nav-call{margin:6px 0 0;justify-content:center}}
+
+/* premium price tag on property photos */
+.ptag{position:absolute;left:0;bottom:14px;z-index:2;display:flex;align-items:baseline;gap:5px;padding:8px 16px 8px 14px;color:#fff;background:linear-gradient(100deg,rgba(15,27,45,.94),rgba(26,43,68,.88));border:1px solid rgba(232,196,92,.55);border-left:0;border-radius:0 12px 12px 0;box-shadow:0 8px 22px rgba(10,18,32,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:none}
+.ptag:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+.ptag-rs{font:600 15px var(--font-head);color:var(--gold2)}
+.ptag-num{font:800 23px/1 var(--font-head);letter-spacing:-.3px}
+.ptag-unit{font:600 12.5px var(--font);color:#f3dfa0;letter-spacing:.2px}
+.slider .s-count{bottom:14px}.slider .dots{bottom:auto;top:14px;justify-content:flex-end;padding-right:12px}
+@media(max-width:480px){.ptag-num{font-size:20px}.ptag{padding:7px 13px 7px 12px}}

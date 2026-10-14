@@ -71,7 +71,14 @@ function toast(msg){
 
 /* ---------------- share ---------------- */
 const META = {};
-function pageUrl(id){ return new URL("property.html?id=" + encodeURIComponent(id), location.href).href; }
+/* version of what a link preview shows (price + first photo + availability). WhatsApp/Facebook cache previews per URL,
+   so when price or photo changes the shared link changes too and the preview refreshes. */
+function verOf(p){
+  const k = [p.budgetMin, p.budgetMax, p.availability, (photosOf(p)[0] || "")].join("|"); let h = 5381;
+  for(let i = 0; i < k.length; i++) h = ((h << 5) + h + k.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+function pageUrl(id){ const v = META[id] && META[id].v; return new URL("property.html?id=" + encodeURIComponent(id) + (v ? "&v=" + v : ""), location.href).href; }
 async function share(id){
   const m = META[id] || {}, url = pageUrl(id);
   const text = `${m.title || "Property in Jaipur"}${m.price ? " — " + m.price : ""}\nJaipur Property Consultant`;
@@ -88,18 +95,32 @@ async function share(id){
   $("shCopy").dataset.url = url; s.classList.add("open");
 }
 
+/* ---------------- premium price tag shown on the photo ---------------- */
+function priceParts(p){
+  const a = p.budgetMin == null || p.budgetMin === "" ? null : Number(p.budgetMin), b = p.budgetMax == null || p.budgetMax === "" ? null : Number(p.budgetMax);
+  const n = b != null ? b : a; if(!n || !isFinite(n) || n <= 0) return null;
+  const r = v => String(Math.round(v * 100) / 100);
+  const [num, unit] = n >= 1e7 ? [r(n/1e7), "Crore"] : n >= 1e5 ? [r(n/1e5), "Lakh"] : [n.toLocaleString("en-IN"), ""];
+  return { num, unit, range: a != null && b != null && a !== b };
+}
+function priceTag(p){
+  const t = priceParts(p); if(!t) return "";
+  return `<div class="ptag" aria-label="Price ${esc(t.num + " " + t.unit)}"><span class="ptag-rs">₹</span><span class="ptag-num">${esc(t.num)}</span>${t.unit ? `<span class="ptag-unit">${t.unit}</span>` : ""}${t.range ? `<span class="ptag-unit">onwards</span>` : ""}</div>`;
+}
+
 /* ---------------- gallery slider + cards ---------------- */
 const GALLERY = {};
 function sliderHTML(p, opts = {}){
   const imgs = photosOf(p); GALLERY[p.id] = imgs;
-  META[p.id] = { title: titleOf(p), price: priceText(p.budgetMin, p.budgetMax, "") };
+  META[p.id] = { title: titleOf(p), price: priceText(p.budgetMin, p.budgetMax, ""), v: verOf(p) };
   const a = String(p.availability || "Available");
   const badge = `<span class="avail ${availClass(a)}">${esc(a)}</span>`;
+  const pt = priceTag(p);
   const fab = opts.noFab ? "" : `<div class="fabs"><button type="button" class="fab" data-save="${esc(p.id)}" aria-pressed="false" aria-label="Save property">${ico("heart")}</button><button type="button" class="fab" data-share="${esc(p.id)}" aria-label="Share property">${ico("share")}</button></div>`;
-  if(!imgs.length) return `<div class="slider">${badge}${fab}<div class="no-photo">${ico("camera")}<span>Photos on request</span></div></div>`;
+  if(!imgs.length) return `<div class="slider">${badge}${fab}${pt}<div class="no-photo">${ico("camera")}<span>Photos on request</span></div></div>`;
   const slides = imgs.map((u,i) => `<div class="slide" data-zoom="${esc(p.id)}" data-i="${i}"><img class="bg" src="${esc(u)}" alt="" aria-hidden="true" loading="lazy"><img class="fg" src="${esc(u)}" alt="${esc(titleOf(p))} — photo ${i+1}" loading="${i?"lazy":"lazy"}"></div>`).join("");
   const multi = imgs.length > 1;
-  return `<div class="slider" data-n="${imgs.length}">${badge}${fab}<div class="slides">${slides}</div>${multi ? `<button class="s-btn prev" type="button" data-slide="-1" aria-label="Previous photo">${ico("left")}</button><button class="s-btn next" type="button" data-slide="1" aria-label="Next photo">${ico("right")}</button><div class="dots">${imgs.map((_,i)=>`<span class="dot${i===0?" on":""}"></span>`).join("")}</div><span class="s-count">${ico("camera")}<span><b>1</b> / ${imgs.length}</span></span>` : ""}</div>`;
+  return `<div class="slider" data-n="${imgs.length}">${badge}${fab}${pt}<div class="slides">${slides}</div>${multi ? `<button class="s-btn prev" type="button" data-slide="-1" aria-label="Previous photo">${ico("left")}</button><button class="s-btn next" type="button" data-slide="1" aria-label="Next photo">${ico("right")}</button><div class="dots">${imgs.map((_,i)=>`<span class="dot${i===0?" on":""}"></span>`).join("")}</div><span class="s-count">${ico("camera")}<span><b>1</b> / ${imgs.length}</span></span>` : ""}</div>`;
 }
 function propertyCard(p){
   const area = cleanArea(p.area), title = titleOf(p);
@@ -226,5 +247,5 @@ function init(){
 if("serviceWorker" in navigator && location.protocol !== "file:") addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 
-window.JPC = { SITE, $, esc, ico, wa, hidden, millis, tidy, cleanArea, unitSize, inr, priceText, photosOf, availClass, perGaj, titleOf, GALLERY, META, sliderHTML, propertyCard, openLightbox, closeLightbox, savedList, isSaved, toggleSaved, paintSaved, toast, share, pageUrl };
+window.JPC = { verOf, priceTag, SITE, $, esc, ico, wa, hidden, millis, tidy, cleanArea, unitSize, inr, priceText, photosOf, availClass, perGaj, titleOf, GALLERY, META, sliderHTML, propertyCard, openLightbox, closeLightbox, savedList, isSaved, toggleSaved, paintSaved, toast, share, pageUrl };
 })();

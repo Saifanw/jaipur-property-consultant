@@ -81,6 +81,45 @@ h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.7px;color:v
 .g-count{position:absolute;right:14px;bottom:14px;background:rgba(15,27,45,.78);color:#fff;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;z-index:2;display:flex;gap:6px;align-items:center}
 .g-count .icon{width:15px;height:15px}
 .g-zoom{position:absolute;left:14px;bottom:14px;background:rgba(15,27,45,.78);color:#fff;font-size:12.5px;padding:5px 12px;border-radius:999px;z-index:2}
+.ptag{position:absolute;left:0;top:18px;z-index:2;display:flex;align-items:baseline;gap:6px;padding:10px 20px 10px 18px;color:#fff;background:linear-gradient(100deg,rgba(15,27,45,.94),rgba(26,43,68,.88));border:1px solid rgba(232,196,92,.55);border-left:0;border-radius:0 14px 14px 0;box-shadow:0 10px 26px rgba(10,18,32,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:none}
+.ptag:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+.ptag-rs{font:600 18px var(--font-head);color:var(--gold2)}.ptag-num{font:800 clamp(26px,3.4vw,34px)/1 var(--font-head);letter-spacing:-.4px}.ptag-unit{font:600 14px var(--font);color:#f3dfa0}
+@media(max-width:480px){.ptag{top:12px;padding:8px 14px 8px 13px}.ptag-num{font-size:23px}}
+/* premium slides */
+.sl{position:fixed;inset:0;z-index:300;background:#070d18;color:#fff;font-family:var(--font)}
+.sl-track{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sl-track::-webkit-scrollbar{display:none}
+.sl-s{position:relative;flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;display:grid;place-items:center}
+.sl-cover>img,.sl-photo .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sl-photo .bg{inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);filter:blur(26px) brightness(.55)}
+.sl-photo .fg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.sl-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,13,24,.55) 0%,rgba(7,13,24,.05) 35%,rgba(7,13,24,.92) 100%)}
+.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:0 clamp(22px,6vw,72px) clamp(36px,8vh,80px);max-width:900px}
+.sl-kick{font-size:13.5px;font-weight:600;color:var(--gold2);letter-spacing:.3px;margin-bottom:10px}
+.sl-cap h2{font:800 clamp(30px,6vw,60px)/1.05 var(--font-head);letter-spacing:-.8px;text-wrap:balance}
+.sl-loc{margin-top:12px;font-size:clamp(15px,2vw,19px);color:#d5deea}
+.sl-hint{margin-top:22px;font-size:13px;color:#9fb0c6}
+.sl-ptag{top:calc(72px + env(safe-area-inset-top,0px))!important;bottom:auto!important}
+.sl-count{position:absolute;right:18px;bottom:calc(22px + env(safe-area-inset-bottom,0px));background:rgba(7,13,24,.7);padding:5px 13px;border-radius:999px;font-size:13px;font-weight:600}
+.sl-bar{position:absolute;z-index:5;left:14px;right:14px;top:calc(12px + env(safe-area-inset-top,0px));display:flex;gap:4px}
+.sl-bar i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.28);transition:background .25s}.sl-bar i.on{background:var(--gold2)}
+.sl-top{position:absolute;z-index:6;right:12px;top:calc(24px + env(safe-area-inset-top,0px));display:flex;gap:8px}
+.sl-b{min-width:42px;height:42px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(7,13,24,.62);color:#fff;font-size:14px;font-weight:700;display:inline-grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.sl-b:hover{background:rgba(255,255,255,.18)}
+.sl-nav{position:absolute;z-index:5;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(7,13,24,.55);color:#fff;font-size:30px;line-height:1;cursor:pointer;display:none}
+.sl-prev{left:16px}.sl-next{right:16px}
+@media(hover:hover) and (min-width:760px){.sl-nav{display:grid;place-items:center}}
+.sl-info,.sl-end{background:radial-gradient(120% 90% at 20% 0%,#1d3354 0%,#0b1424 60%,#070d18 100%)}
+.sl-box{width:min(680px,88%);padding:20px 0}
+.sl-box h3{font:800 clamp(24px,4.4vw,38px)/1.12 var(--font-head);letter-spacing:-.4px;margin-bottom:10px}
+.sl-price{font:800 clamp(30px,6vw,52px)/1 var(--font-head);color:var(--gold2);margin:6px 0 24px}
+.sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+.sl-grid div{border-top:1px solid rgba(255,255,255,.16);padding-top:9px}
+.sl-grid span{display:block;font-size:12.5px;color:#9fb0c6}.sl-grid b{font-size:16px;font-weight:600}
+.sl-hl{list-style:none;margin-top:22px;display:grid;gap:7px;color:#d5deea;font-size:15px}.sl-hl li:before{content:"✓ ";color:var(--gold2);font-weight:800}
+.sl-acts{display:grid;gap:11px;max-width:380px;margin-top:6px}
+.sl-end .btn{width:100%}
+@media(max-width:520px){.sl-grid{grid-template-columns:1fr 1fr;gap:12px 18px}}
 .thumbs{display:flex;gap:10px;padding:12px;overflow-x:auto;scrollbar-width:thin}
 .thumb{flex:0 0 112px;height:78px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:#e9eef4;opacity:.75;transition:.15s}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -393,6 +432,9 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
   const fact=(l,v)=>v?`<div class="fact"><b>${esc(l)}</b><span>${esc(v)}</span></div>`:"";
   const landmark=(()=>{const l=tidy1(p.propertyLocation);return l&&!/^https?:/i.test(l)?l:""})();
   const mapUrl=/^https?:\/\//i.test(p.mapUrl||"")?p.mapUrl:(/^https?:\/\//i.test(p.propertyLocation||"")?p.propertyLocation:"");
+  const ptag=(()=>{const a=p.budgetMin==null||p.budgetMin===""?null:Number(p.budgetMin),b=p.budgetMax==null||p.budgetMax===""?null:Number(p.budgetMax),n=b!=null?b:a;if(!n||!isFinite(n)||n<=0)return"";const r=v=>String(Math.round(v*100)/100),big=n>=1e7,lk=n>=1e5&&!big,num=big?r(n/1e7):lk?r(n/1e5):n.toLocaleString("en-IN"),unit=big?"Crore":lk?"Lakh":"";return`<div class="ptag"><span class="ptag-rs">₹</span><span class="ptag-num">${esc(num)}</span>${unit?`<span class="ptag-unit">${unit}</span>`:""}${a!=null&&b!=null&&a!==b?'<span class="ptag-unit">onwards</span>':""}</div>`})();
+  /* link that changes whenever price/photo/availability changes -> WhatsApp & Facebook refresh the preview */
+  const shareUrl=(()=>{const k=[p.budgetMin,p.budgetMax,p.availability,imgs[0]||""].join("|");let h=5381;for(let i=0;i<k.length;i++)h=((h<<5)+h+k.charCodeAt(i))>>>0;const u=new URL(location.href);u.searchParams.set("v",h.toString(36));return u.href})();
   const facts=[["Property type",p.propertyType],["Size",szTxt],["Facing",p.facing||tidy1(p.roadFacing)],["Bedrooms / rooms",tidy1(p.bedrooms)],["Bathrooms",tidy1(p.bathrooms)],["Floors",tidy1(p.floors)],["Road width",tidy1(p.roadWidth)],["Corner plot",p.cornerPlot],["Locality",area+", "+city],["Society / colony",tidy1(p.society)],["Landmark",landmark],[isSeller?"Price":"Budget",price],["Approx. rate",pgaj.replace("≈ ","")],["Availability",isSeller?avail:""]].map(f=>fact(f[0],f[1])).join("");
   const hl=String(p.highlights||"").split(/\n|;/).map(tidy1).filter(Boolean).slice(0,8);
   const hlHtml=hl.length?`<div class="hls">${hl.map(x=>`<span>✓ ${esc(x)}</span>`).join("")}</div>`:"";
@@ -419,7 +461,7 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
         <img class="bg" id="stBg" alt="" aria-hidden="true"><img class="fg" id="stFg" alt="${esc(title)}">
         ${imgs.length>1?`<button class="g-btn g-prev" id="gPrev" type="button" aria-label="Previous photo">${ico("left")}</button><button class="g-btn g-next" id="gNext" type="button" aria-label="Next photo">${ico("right")}</button>`:""}
         <span class="g-count" id="gCount">${ico("camera")}<span><b>1</b> / ${imgs.length}</span></span>
-        <span class="g-zoom">Tap to enlarge</span>
+        <span class="g-zoom">Tap to enlarge</span>${ptag}
       </div>
       ${imgs.length>1?`<div class="thumbs">${imgs.map((u,i)=>`<button class="thumb${i===0?" on":""}" type="button" data-i="${i}" aria-label="Photo ${i+1}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}
     </div>`:`<div class="gallery"><div class="stage"><div class="none">${ico("camera")}<span>Photos available on request — WhatsApp us</span></div></div></div>`;
@@ -485,16 +527,51 @@ else getDoc(doc(db,"publicRequirements",id)).then(s=>{
     swipe($("stage"));
   }
   const shareText=`${title} — ${price}\nJaipur Property Consultant`;
-  $("shareWa").href="https://wa.me/?text="+encodeURIComponent(shareText+"\n"+location.href);
+  $("shareWa").href="https://wa.me/?text="+encodeURIComponent(shareText+"\n"+shareUrl);
   $("shareWa").addEventListener("click",e=>{e.preventDefault();openShare()});
   const say=t=>{let el=$("toastp");if(!el){el=document.createElement("div");el.id="toastp";el.className="toastp";document.body.appendChild(el)}el.textContent=t;el.style.display="block";clearTimeout(say.t);say.t=setTimeout(()=>el.style.display="none",2000)};
-  $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText(location.href);say("Link copied")}catch(_){window.prompt("Copy this link",location.href)}};
+  $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText(shareUrl);say("Link copied")}catch(_){window.prompt("Copy this link",shareUrl)}};
   function shareMsg(){const L=[`🏡 *${title}*`,`💰 ${price}${pgaj?" ("+pgaj.replace("≈ ","")+")":""}`];
     if(szTxt)L.push("📐 "+szTxt);const fc=p.facing||tidy1(p.roadFacing);if(fc)L.push("🧭 "+fc+(p.roadWidth?" | Road "+tidy1(p.roadWidth):""));
     const lg=[p.pattaType,p.registry].filter(Boolean).join(" | ");if(lg)L.push("📄 "+lg);
-    L.push("","👉 Photos & full details:",location.href,"",`📞 Jaipur Property Consultant: ${(window.SITE&&SITE.phone)||"6350566010"}`);return L.join("\n")}
+    L.push("","👉 Photos & full details:",shareUrl,"",`📞 Jaipur Property Consultant: ${(window.SITE&&SITE.phone)||"6350566010"}`);return L.join("\n")}
   function openShare(){const el=$("shPanel");if(!el)return;el.scrollIntoView({behavior:"smooth",block:"center"});el.style.outline="3px solid var(--gold2)";setTimeout(()=>el.style.outline="",1400)}
-  {const url=location.href,msg=shareMsg(),enc=encodeURIComponent;
+  /* ---------- PREMIUM SLIDES: fullscreen presentation of this property (cover, photos, details, contact) ---------- */
+  const slidesUrl=(()=>{const u=new URL(shareUrl);u.searchParams.set("slides","1");return u.href})();
+  const SL={el:null,timer:null,playing:false};
+  function openSlides(){
+    if(SL.el)return;
+    const pairs=[["Type",p.propertyType],["Size",szTxt],["Facing",p.facing||tidy1(p.roadFacing)],["Rooms",tidy1(p.bedrooms)],["Floors",tidy1(p.floors)],["Road",tidy1(p.roadWidth)],["Rate",pgaj.replace("≈ ","")],["Patta",p.pattaType],["Registry",p.registry],["Status",isSeller?avail:""]].filter(x=>x[1]).slice(0,8);
+    const hs=hl.slice(0,4);
+    const pt=ptag?ptag.replace('class="ptag"','class="ptag sl-ptag"'):"";
+    const cover=`<section class="sl-s sl-cover">${imgs[0]?`<img src="${esc(imgs[0])}" alt="">`:""}<div class="sl-shade"></div>${pt}<div class="sl-cap"><div class="sl-kick">${esc(type)} · ${esc(city)}</div><h2>${esc(title)}</h2><div class="sl-loc">${esc(area)}, ${esc(city)}</div><div class="sl-hint">Swipe ›</div></div></section>`;
+    const photos=imgs.slice(isSeller&&imgs.length>1?1:0).map((u,i,a)=>`<section class="sl-s sl-photo"><img class="bg" src="${esc(u)}" alt="" aria-hidden="true"><img class="fg" src="${esc(u)}" alt="${esc(title)} photo ${i+1}">${pt}<span class="sl-count">${i+1} / ${a.length}</span></section>`).join("");
+    const details=pairs.length||hs.length?`<section class="sl-s sl-info"><div class="sl-box"><h3>${esc(title)}</h3><div class="sl-price">${esc(price)}</div><div class="sl-grid">${pairs.map(([l,v])=>`<div><span>${esc(l)}</span><b>${esc(v)}</b></div>`).join("")}</div>${hs.length?`<ul class="sl-hl">${hs.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}</div></section>`:"";
+    const contact=`<section class="sl-s sl-end"><div class="sl-box"><div class="sl-kick">Jaipur Property Consultant</div><h3>Interested in this ${esc(String(type).toLowerCase())}?</h3><div class="sl-price">${esc(price)}</div><div class="sl-acts"><a class="btn btn-green" target="_blank" rel="noopener" href="${wa(msg)}">WhatsApp us</a><a class="btn btn-gold" href="tel:+91${PHN.replace(/\D/g,"").slice(-10)}">Call ${esc(PHN)}</a><a class="btn btn-ghost" target="_blank" rel="noopener" href="${wa(visitMsg)}">Book a site visit</a></div></div></section>`;
+    const all=[cover,photos,details,contact].join("");
+    const n=(all.match(/class="sl-s /g)||[]).length;
+    const el=SL.el=document.createElement("div");el.className="sl";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","Property slides");
+    el.innerHTML=`<div class="sl-bar">${Array.from({length:n},(_,i)=>`<i data-i="${i}"></i>`).join("")}</div><div class="sl-top"><button type="button" class="sl-b" id="slPlay" aria-label="Play slideshow">▶</button><a class="sl-b sl-share" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent("🏡 "+title+"\n💰 "+price+"\n\n👉 Slides dekhne ke liye:\n"+slidesUrl)}">Share</a><button type="button" class="sl-b" id="slX" aria-label="Close slides">✕</button></div><div class="sl-track" id="slTrack">${all}</div>${n>1?`<button type="button" class="sl-nav sl-prev" aria-label="Previous slide">‹</button><button type="button" class="sl-nav sl-next" aria-label="Next slide">›</button>`:""}`;
+    document.body.appendChild(el);document.documentElement.style.overflow="hidden";
+    const tr=el.querySelector("#slTrack"),segs=[...el.querySelectorAll(".sl-bar i")];
+    const idx=()=>Math.round(tr.scrollLeft/tr.clientWidth);
+    const go=i=>tr.scrollTo({left:Math.max(0,Math.min(n-1,i))*tr.clientWidth,behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+    const mark=()=>{const c=idx();segs.forEach((s,i)=>s.className=i<=c?"on":"")};mark();
+    tr.addEventListener("scroll",mark,{passive:true});
+    el.querySelector(".sl-prev")?.addEventListener("click",()=>{stop();go(idx()-1)});
+    el.querySelector(".sl-next")?.addEventListener("click",()=>{stop();go(idx()+1)});
+    const play=el.querySelector("#slPlay");
+    function stop(){clearInterval(SL.timer);SL.playing=false;play.textContent="▶";play.setAttribute("aria-label","Play slideshow")}
+    play.onclick=()=>{if(SL.playing)return stop();SL.playing=true;play.textContent="❚❚";play.setAttribute("aria-label","Pause slideshow");SL.timer=setInterval(()=>{idx()>=n-1?go(0):go(idx()+1)},3800)};
+    tr.addEventListener("pointerdown",()=>{if(SL.playing)stop()});
+    SL.key=e=>{if(e.key==="Escape")closeSlides();else if(e.key==="ArrowRight")go(idx()+1);else if(e.key==="ArrowLeft")go(idx()-1)};document.addEventListener("keydown",SL.key);
+    el.querySelector("#slX").onclick=closeSlides;el.querySelector("#slX").focus();
+  }
+  function closeSlides(){if(!SL.el)return;clearInterval(SL.timer);document.removeEventListener("keydown",SL.key);SL.el.remove();SL.el=null;document.documentElement.style.overflow="";const u=new URL(location.href);if(u.searchParams.has("slides")){u.searchParams.delete("slides");history.replaceState(null,"",u.href)}}
+  {const row=document.querySelector(".share-row");if(row&&imgs.length){const b=document.createElement("button");b.type="button";b.className="btn btn-dark";b.id="slBtn";b.innerHTML="▶ View slides";b.onclick=openSlides;row.prepend(b)}}
+  if(new URLSearchParams(location.search).get("slides")==="1"&&imgs.length)setTimeout(openSlides,350);
+
+  {const url=shareUrl,msg=shareMsg(),enc=encodeURIComponent;
     $("shW").href="https://wa.me/?text="+enc(msg);$("shF").href="https://www.facebook.com/sharer/sharer.php?u="+enc(url)+"&quote="+enc(title+" — "+price);
     $("shT").href="https://t.me/share/url?url="+enc(url)+"&text="+enc(msg.replace(url,"").trim());$("shS").href="sms:?&body="+enc(msg);$("shE").href="mailto:?subject="+enc(title+" | Jaipur Property Consultant")+"&body="+enc(msg);
     $("shP").textContent=msg.replace(/\*/g,"");

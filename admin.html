@@ -501,7 +501,8 @@ const isConv=k=>["call","wa","whatsapp","visit","note"].includes(k);
 const lastNote=r=>{const t=Array.isArray(r.timeline)?r.timeline.filter(x=>x&&x.text&&isConv(x.kind)).sort((a,b)=>(b.at||0)-(a.at||0))[0]:null;return t?t.text:(clean(r.followUpNote)||"")};
 const fuState=r=>{if(TERM.includes(r.status)||!r.followUpDate)return"none";const t=iso();return r.followUpDate<t?"od":r.followUpDate===t?"td":"up"};
 const waNum=r=>{let n=String(r.whatsapp||r.mobile||"").replace(/\D/g,"");if(n.length===10)n="91"+n;return n.length>=11?n:""};
-const propLink=p=>p.publicVisible?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(p.id):"";
+const verOf=p=>{const k=[p.budgetMin,p.budgetMax,p.availability,(p.publicImageUrls||[])[0]||""].join("|");let h=5381;for(let i=0;i<k.length;i++)h=((h<<5)+h+k.charCodeAt(i))>>>0;return h.toString(36)};
+const propLink=p=>p.publicVisible?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(p.id)+"&v="+verOf(p):"";
 const dupKeys=()=>{const m={};recs.forEach(r=>{const k=r.type+last10(r.mobile);if(last10(r.mobile).length===10)m[k]=(m[k]||0)+1});return m};
 
 /* ---------- smart matching ---------- */
@@ -794,7 +795,7 @@ function genAd(kind,lang){
   const sizeTxt=[sz.replace(/x/gi,"×"),gaj?`${gaj} ${L.gaj}`:""].filter(Boolean).join(" • ");
   const rate=price&&gaj&&price/gaj>500?inr(Math.round(price/gaj))+"/"+L.gaj:"";
   const lines=s=>v(s).split(/\n|;/).map(x=>x.trim()).filter(Boolean);
-  const link=pEditId&&$("p_pub").checked?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(pEditId):"";
+  const link=pEditId&&$("p_pub").checked?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(pEditId)+"&v="+verOf({budgetMin:getMoney("p_price"),budgetMax:getMoney("p_price"),availability:$("p_av").value,publicImageUrls:(propById(pEditId)||{}).publicImageUrls}):"";
   const code=pEditId?(propById(pEditId)?.code||""):"";
   const phone=(window.SITE&&SITE.phone)||"6350566010";
   const roadLine=[v("p_facing")||v("p_road"),v("p_roadw")?L.road+" "+v("p_roadw"):"",v("p_corner")==="Yes"?L.corner:""].filter(Boolean).join(" | ");

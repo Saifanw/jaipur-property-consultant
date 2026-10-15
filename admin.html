@@ -167,6 +167,31 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 @media(max-width:1100px){.dash,.two{grid-template-columns:1fr}.mrow{grid-template-columns:80px minmax(0,1fr) 70px}.mrow>:nth-child(3),.mrow>:nth-child(5){grid-column:2/-1}}
 @media(max-width:900px){.tr,.todo{grid-template-columns:minmax(0,1fr)}}
 .bqr{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid var(--line)}.bqr .w{flex:1;min-width:0}.bqr .w b{display:block;font-size:13.5px}.bqr .w span{font-size:12px;color:var(--mut)}.bqr.done{opacity:.5}.bqp{height:6px;border-radius:9px;background:#eef2f8;overflow:hidden;margin:8px 0 4px}.bqp i{display:block;height:100%;background:#0f9d6a;width:0;transition:.25s}
+
+/* ---- Properties: List / Cards toggle ---- */
+.vtog{display:inline-flex;background:#eef2f8;border-radius:11px;padding:3px;gap:2px;margin-left:auto;align-self:flex-end}
+.vtog button{border:0;background:transparent;border-radius:9px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--mut)}
+.vtog button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px #0f172a1f}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;padding:16px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:box-shadow .15s,transform .15s}
+.pcard:hover{box-shadow:0 8px 24px #0f172a14;transform:translateY(-2px)}
+.pcard.open{border-color:var(--blue);box-shadow:0 0 0 2px #2f5bff30}
+.pc-img{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#eaf0ff,#fff3d6);display:grid;place-items:center;font-size:44px}
+.pc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pc-img .code{position:absolute;left:10px;top:10px;background:#fff;box-shadow:0 2px 8px #0f172a26}
+.pc-img .live{position:absolute;right:10px;top:10px;margin:0;background:#0f9d6a;color:#fff;box-shadow:0 2px 8px #0f172a26}
+.pc-img .pn{position:absolute;right:10px;bottom:10px;background:#0f172acc;color:#fff;font-size:11px;font-weight:700;border-radius:99px;padding:2px 9px}
+.pc-body{padding:13px 14px 8px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-body h3{font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.3}
+.pc-price{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pc-price b{font-size:19px;font-weight:800;color:var(--blue)}
+.pc-own{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-tags{display:flex;gap:6px;flex-wrap:wrap;min-height:24px}
+.pc-act{display:flex;gap:6px;padding:8px 14px 14px;flex-wrap:wrap}
+.pc-act .mini{flex:1;text-align:center;padding:8px 6px}
+.pcard-detail{grid-column:1/-1;background:#fff;border:1px solid var(--blue);border-radius:16px;padding:6px 18px 18px}
+@media(max-width:700px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px}.pc-body h3{font-size:13.5px}.pc-price b{font-size:16px}.pc-act .mini{font-size:11.5px;padding:7px 4px}.vtog{margin-left:0}}
+@media(max-width:380px){.pgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -215,15 +240,16 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
     <!-- PROPERTIES -->
     <section id="v_props" class="hidden">
-      <div class="hero"><div><h1>Properties</h1><p id="pSub"></p></div></div>
+      <div class="hero"><div><h1>Properties</h1><p id="pSub"></p></div><div class="vtog" id="pView"><button type="button" data-pv="list">☰ List</button><button type="button" data-pv="cards">▦ Cards</button></div></div>
       <section class="card tool">
         <div class="search"><input id="pq" type="text" placeholder="Search code, area, type, owner, customer name or mobile…" aria-label="Search properties"></div>
         <div class="filters"><label>Area<select id="pf_area"></select></label><label>Property type<select id="pf_type"></select></label><label>Availability<select id="pf_av"></select></label><label>Show<select id="pf_show"><option value="">All properties</option><option value="int">With interested customers</option><option value="due">Follow-up due</option><option value="none">No enquiry yet</option><option value="live">Live on website</option></select></label><button class="btn" id="pReset">Reset</button></div>
       </section>
-      <section class="card list">
+      <section class="card list" id="pListWrap">
         <div class="row head rp"><div>Code</div><div>Property</div><div>Price</div><div>Interested</div><div>Follow-ups</div><div style="text-align:right">Actions</div></div>
         <div id="pRows"></div>
       </section>
+      <div id="pCards" class="hidden"></div>
     </section>
 
     <!-- CONTACTS -->
@@ -601,8 +627,9 @@ function dash(){
 }
 
 /* ---------- PROPERTIES view ---------- */
+let pView="list";try{pView=localStorage.getItem("jpcPropView")==="cards"?"cards":"list"}catch(e){}
 function renderProps(){
-  if(!loaded){$("pRows").innerHTML=skRows("rp");return}
+  if(!loaded){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=skRows("rp");return}
   const q=$("pq").value.trim().toLowerCase(),F={a:$("pf_area").value,t:$("pf_type").value,v:$("pf_av").value,s:$("pf_show").value};
   const rows=props().map(p=>({p,c:buyersOf(p)})).filter(({p,c})=>{
     if(F.a&&areaOf(p)!==F.a)return false;if(F.t&&clean(p.propertyType)!==F.t)return false;if(F.v&&(p.availability||"Available")!==F.v)return false;
@@ -611,7 +638,21 @@ function renderProps(){
     if(q&&![p.code,p.area,p.propertyType,p.size,p.name,p.mobile,p.details,...c.map(x=>x.name+" "+x.mobile)].map(clean).join(" ").toLowerCase().includes(q))return false;return true})
     .sort((a,b)=>codeNum(b.p.code)-codeNum(a.p.code));
   $("pSub").textContent=`${rows.length} of ${props().length} properties · har property ke neeche uske interested customers`;
-  if(!rows.length){$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏘</div><b>${props().length?"Koi property match nahi hui":"Abhi koi property nahi hai"}</b>${props().length?"Search ya filter badal ke dekho.":"Pehli property add karo — usse automatic code mil jayega."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
+  if(!rows.length){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏘</div><b>${props().length?"Koi property match nahi hui":"Abhi koi property nahi hai"}</b>${props().length?"Search ya filter badal ke dekho.":"Pehli property add karo — usse automatic code mil jayega."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
+  const cardsOn=pView==="cards";
+  $("pListWrap").classList.toggle("hidden",cardsOn);$("pCards").classList.toggle("hidden",!cardsOn);
+  document.querySelectorAll("[data-pv]").forEach(b=>b.classList.toggle("on",b.dataset.pv===pView));
+  if(cardsOn){
+    $("pCards").innerHTML=`<div class="card pgrid">`+rows.map(({p,c})=>{
+      const d=c.filter(x=>["td","od"].includes(fuState(x))).length,open=openProp===p.id,av=p.availability||"Available",imgs=p.images||[];
+      const card=`<div class="pcard${open?" open":""}" data-pid="${esc(p.id)}"><div class="pc-img">${imgs[0]?`<img src="${esc(imgs[0])}" alt="" loading="lazy">`:"🏠"}<span class="code">${esc(p.code||"—")}</span>${p.publicVisible?'<span class="live">LIVE</span>':""}${imgs.length>1?`<span class="pn">📷 ${imgs.length}</span>`:""}</div>
+        <div class="pc-body"><h3>${esc(lbl(p))}</h3><div class="pc-price"><b>${esc(budgetText(p))}</b><span class="st ${cls(av)}" style="padding:1px 8px;font-size:11px">${esc(av)}</span></div>
+        <div class="pc-own">${esc(p.name||"Owner —")}${p.mobile?" · "+esc(p.mobile):""}</div>
+        <div class="pc-tags">${c.length?`<span class="intp">👥 ${c.length}</span>`:""}${d?`<span class="due">${d} due</span>`:""}</div></div>
+        <div class="pc-act">${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Buyers</button>`:""}<button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>`;
+      return card+(open?`<div class="pcard-detail">${propDetail(p,c)}</div>`:"");
+    }).join("")+`</div>`;
+    return}
   $("pRows").innerHTML=rows.map(({p,c})=>{
     const d=c.filter(x=>["td","od"].includes(fuState(x))).length,open=openProp===p.id,av=p.availability||"Available",img=(p.images||[])[0];
     return`<div class="row rp hv" data-pid="${esc(p.id)}"><div><span class="code">${esc(p.code||"—")}</span></div>
@@ -1075,6 +1116,7 @@ let st;[["pq",renderProps],["cq",()=>{cShown=60;renderContacts()}]].forEach(([i,
 ["cf_area","cf_status","cf_src","cf_sort"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
 [["cf_bmin","h_cbmin"],["cf_bmax","h_cbmax"]].forEach(([i,h])=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value);$(h).textContent=n?"= "+inr(n):"";clearTimeout(st);st=setTimeout(()=>{cShown=60;renderContacts()},200)}));
 $("cbQuick").addEventListener("click",e=>{const b=e.target.closest("[data-bq]");if(!b)return;$("cf_bmin").value=inr(+b.dataset.bq).replace("₹","");$("cf_bmax").value="";$("h_cbmin").textContent="= "+inr(+b.dataset.bq);$("h_cbmax").textContent="";cShown=60;renderContacts()});
+$("pView").addEventListener("click",e=>{const b=e.target.closest("[data-pv]");if(!b)return;pView=b.dataset.pv;try{localStorage.setItem("jpcPropView",pView)}catch(_){}renderProps()});
 $("pReset").onclick=()=>{$("pq").value="";["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps()};
 $("cReset").onclick=()=>{$("cq").value="";["cf_area","cf_status","cf_src","cf_bmin","cf_bmax"].forEach(i=>$(i).value="");$("h_cbmin").textContent=$("h_cbmax").textContent="";$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
 document.querySelectorAll("[data-mm]").forEach(b=>b.onclick=()=>{mMode=b.dataset.mm;document.querySelectorAll("[data-mm]").forEach(x=>x.classList.toggle("on",x===b));$("mPick").value="";renderMatch()});
@@ -1114,7 +1156,7 @@ document.addEventListener("click",async e=>{
     }catch(err){console.error(err);toast(err.message||"Kuch gadbad hui",true)}
     return}
   if(t.closest("a,button,input,select,label"))return;
-  const pr=t.closest(".row[data-pid]");if(pr){openProp=openProp===pr.dataset.pid?"":pr.dataset.pid;renderProps();return}
+  const pr=t.closest(".row[data-pid],.pcard[data-pid]");if(pr){openProp=openProp===pr.dataset.pid?"":pr.dataset.pid;renderProps();return}
   const cr=t.closest(".row[data-cid]");if(cr)openC(cr.dataset.cid)});
 ["mo","po","qo","so","wo","ko"].forEach(i=>$(i).addEventListener("click",e=>{if(e.target.id===i)$(i).classList.add("hidden")}));
 document.addEventListener("keydown",e=>{

@@ -92,6 +92,13 @@ button.code{cursor:pointer}button.code:hover{background:#dce6ff}
 .fu{margin-top:18px;padding:16px;background:#f8faff;border:1px solid var(--line);border-radius:14px}.fu h3{font-size:13.5px;font-weight:700;margin-bottom:10px}
 .qk{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.qk button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:12.5px;font-weight:600}.qk button:hover{border-color:var(--blue);color:var(--blue)}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fg label,.lbl{display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--mut)}.fg .full{grid-column:1/-1}
+.bfil{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.bfil label{display:grid;gap:4px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);min-width:150px}
+.bfil .qb{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.bfil .qb button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.bfil .qb button:hover{background:#eaf0ff;border-color:#b9ccff;color:var(--blue)}
+.bfil .bnote{flex-basis:100%;font-size:12px;color:var(--mut)}
+.bfil .bnote b{color:var(--ink)}
 .hint{font-size:11.5px;color:var(--green);font-weight:600;min-height:14px}
 .lbl{margin-top:14px}
 .mf{display:flex;gap:10px;justify-content:space-between;padding:14px 24px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
@@ -225,7 +232,8 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <div class="chips" id="cChips"></div>
       <section class="card tool">
         <div class="search"><input id="cq" type="text" placeholder="Search name, mobile, area, property code, notes…" aria-label="Search contacts"></div>
-        <div class="filters"><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option></select></label><button class="btn" id="cReset">Reset</button></div>
+        <div class="filters"><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option><option value="bhi">Budget: high → low</option><option value="blo">Budget: low → high</option></select></label><button class="btn" id="cReset">Reset</button></div>
+        <div class="bfil"><label>💰 Budget from (rate)<input id="cf_bmin" type="text" inputmode="decimal" placeholder="e.g. 40 L" autocomplete="off"><span class="hint" id="h_cbmin"></span></label><label>Budget up to (optional)<input id="cf_bmax" type="text" inputmode="decimal" placeholder="e.g. 1 Cr" autocomplete="off"><span class="hint" id="h_cbmax"></span></label><div class="qb" id="cbQuick"><span style="font-size:11px;font-weight:700;color:var(--mut)">Quick:</span><button data-bq="2000000">20 L+</button><button data-bq="4000000">40 L+</button><button data-bq="6000000">60 L+</button><button data-bq="8000000">80 L+</button><button data-bq="10000000">1 Cr+</button></div><div class="bnote" id="cbNote"></div></div>
       </section>
       <section class="card list">
         <div class="row head rc"><div>Contact</div><div>Requirement / Property</div><div>Status</div><div>Next follow-up</div><div style="text-align:right">Actions</div></div>
@@ -637,16 +645,22 @@ function subRow(x,p){
    <div class="ra">${waBtn(x,p.id)}${x.mobile?`<a class="mini" href="tel:${esc(x.mobile)}">Call</a>`:""}<button class="mini v" data-act="cEdit" data-id="${esc(x.id)}">Open</button><button class="mini x" title="Unlink" data-act="unlink" data-id="${esc(x.id)}" data-pid="${esc(p.id)}">✕</button></div></div>`}
 
 /* ---------- CONTACTS view ---------- */
+/* Budget filter: "40 L" => un sabhi ka budget jo 40 L ya usse upar tak jata hai (plot ka rate khareed sakte hain).
+   "Up to" bhi diya ho to us range se milte-julte budget wale. Jinka budget likha hi nahi, woh filter me nahi aate. */
+function budgetFilter(){const lo=parseINR($("cf_bmin").value),hi=parseINR($("cf_bmax").value);return(lo||hi)?{lo:lo||0,hi:hi||Infinity}:null}
+function budgetMatch(r,lo,hi){const a=Number(r.budgetMin||0),b=Number(r.budgetMax||0);if(!a&&!b)return false;const cl=a||0,ch=b||Infinity;return ch>=lo&&cl<=hi}
+const topBudget=r=>Number(r.budgetMax||r.budgetMin||0);
 function cList(){
-  const q=$("cq").value.trim().toLowerCase().replace(/\s+/g," "),F={a:$("cf_area").value,s:$("cf_status").value,r:$("cf_src").value,o:$("cf_sort").value},wk=Date.now()-7*864e5;
+  const BF=budgetFilter(),q=$("cq").value.trim().toLowerCase().replace(/\s+/g," "),F={a:$("cf_area").value,s:$("cf_status").value,r:$("cf_src").value,o:$("cf_sort").value},wk=Date.now()-7*864e5;
   let v=recs.filter(r=>{
     if(["customer","seller","broker"].includes(cChip)){if(r.type!==cChip)return false}else if(cChip==="od"){if(fuState(r)!=="od")return false}else if(cChip==="td"){if(fuState(r)!=="td")return false}
     else if(cChip==="nofu"){if(!(r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate))return false}
     else if(cChip==="noenq"){return false}
+    if(BF){if(r.type==="seller"&&cChip!=="seller")return false;if(!budgetMatch(r,BF.lo,BF.hi))return false}
     if(F.a&&areaOf(r)!==F.a)return false;if(F.s&&(r.status||"New")!==F.s)return false;if(F.r&&clean(r.source)!==F.r)return false;
     if(q&&![r.name,r.mobile,r.area,r.code,r.propertyType,r.details,r.notes,r.source,r.status,...interestsOf(r).map(i=>i.code+" "+i.label),lastNote(r)].map(clean).join(" ").toLowerCase().includes(q))return false;return true});
   const ts=r=>msOf(r.updatedAt)||msOf(r.createdAt);
-  if(F.o==="follow")v.sort((a,b)=>(a.followUpDate||"9999").localeCompare(b.followUpDate||"9999"));else if(F.o==="name")v.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));else v.sort((a,b)=>ts(b)-ts(a));
+  if(F.o==="follow")v.sort((a,b)=>(a.followUpDate||"9999").localeCompare(b.followUpDate||"9999"));else if(F.o==="name")v.sort((a,b)=>clean(a.name).localeCompare(clean(b.name)));else if(F.o==="bhi")v.sort((a,b)=>topBudget(b)-topBudget(a));else if(F.o==="blo")v.sort((a,b)=>topBudget(a)-topBudget(b));else v.sort((a,b)=>ts(b)-ts(a));
   return v}
 function renderContacts(){
   const cnt=t=>recs.filter(r=>r.type===t).length,od=recs.filter(r=>fuState(r)==="od").length,td=recs.filter(r=>fuState(r)==="td").length,nofu=recs.filter(r=>r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate).length;
@@ -654,6 +668,9 @@ function renderContacts(){
   $("cChips").innerHTML=C.map(c=>`<button class="chip${cChip===c[0]?" on":""}" data-chip="${c[0]}">${c[1]} <b>${c[2]}</b></button>`).join("");
   if(!loaded){$("cRows").innerHTML=skRows("rc");return}
   const v=cList();$("cSub").textContent=`${v.length} of ${recs.length} contacts · buyer, seller aur broker sab ek jagah`;
+  {const BF=budgetFilter(),n=$("cbNote");if(!BF)n.innerHTML="";else{const nb=recs.filter(r=>r.type!=="seller"&&!Number(r.budgetMin||0)&&!Number(r.budgetMax||0)).length;
+    const what=BF.hi===Infinity?`<b>${esc(inr(BF.lo))}</b> ya usse upar ka budget`:`<b>${esc(inr(BF.lo)||"₹0")} – ${esc(inr(BF.hi))}</b> ke beech ka budget`;
+    n.innerHTML=`✅ <b>${v.length}</b> contacts · ${what}.`+(nb?` (${nb} contacts ka budget likha nahi, woh yahan nahi aaye)`:"")}}
   const page=v.slice(0,cShown);
   $("cRows").innerHTML=page.length?page.map(cRow).join(""):`<div class="empty"><div style="font-size:30px">🔎</div><b>Koi contact nahi mila</b>Search ya filter badal ke dekho.<br><button class="btn p" data-act="addC">＋ Add Contact</button></div>`;
   const m=$("cMore");m.classList.toggle("hidden",v.length<=cShown);m.innerHTML=`Showing ${page.length} of ${v.length} · <button class="btn" data-act="more">Load more</button>`;
@@ -1056,8 +1073,10 @@ $("addC").onclick=()=>openC();$("addP").onclick=()=>openP();$("fabC").onclick=()
 let st;[["pq",renderProps],["cq",()=>{cShown=60;renderContacts()}]].forEach(([i,f])=>$(i).addEventListener("input",()=>{clearTimeout(st);st=setTimeout(f,150)}));
 ["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).addEventListener("change",renderProps));
 ["cf_area","cf_status","cf_src","cf_sort"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
+[["cf_bmin","h_cbmin"],["cf_bmax","h_cbmax"]].forEach(([i,h])=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value);$(h).textContent=n?"= "+inr(n):"";clearTimeout(st);st=setTimeout(()=>{cShown=60;renderContacts()},200)}));
+$("cbQuick").addEventListener("click",e=>{const b=e.target.closest("[data-bq]");if(!b)return;$("cf_bmin").value=inr(+b.dataset.bq).replace("₹","");$("cf_bmax").value="";$("h_cbmin").textContent="= "+inr(+b.dataset.bq);$("h_cbmax").textContent="";cShown=60;renderContacts()});
 $("pReset").onclick=()=>{$("pq").value="";["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps()};
-$("cReset").onclick=()=>{$("cq").value="";["cf_area","cf_status","cf_src"].forEach(i=>$(i).value="");$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
+$("cReset").onclick=()=>{$("cq").value="";["cf_area","cf_status","cf_src","cf_bmin","cf_bmax"].forEach(i=>$(i).value="");$("h_cbmin").textContent=$("h_cbmax").textContent="";$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
 document.querySelectorAll("[data-mm]").forEach(b=>b.onclick=()=>{mMode=b.dataset.mm;document.querySelectorAll("[data-mm]").forEach(x=>x.classList.toggle("on",x===b));$("mPick").value="";renderMatch()});
 document.addEventListener("click",async e=>{
   const t=e.target;

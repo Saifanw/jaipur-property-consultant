@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Jaipur Property Consultant","image":"storefront.jpg","telephone":"+91-6350566010","address":{"@type":"PostalAddress","streetAddress":"58A, Gosai Marg, Udyog Nagar, Jhotwara","addressLocality":"Jaipur","addressRegion":"Rajasthan","postalCode":"302012","addressCountry":"IN"},"areaServed":"Jaipur"}
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Jaipur Property Consultant","image":"storefront.jpg","telephone":"+91-6350566010","email":"saif.anwar1618@gmail.com","address":{"@type":"PostalAddress","streetAddress":"58A, Gosai Marg, Udyog Nagar, Jhotwara","addressLocality":"Jaipur","addressRegion":"Rajasthan","postalCode":"302012","addressCountry":"IN"},"areaServed":"Jaipur"}
 </script>
 
 <!-- Google Analytics 4 -->
@@ -27,6 +27,7 @@
 
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/i18n.js"></script>
 </head>
 <body>
 
@@ -58,15 +59,16 @@
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
   </defs>
 </svg>
 
 <div class="topbar">
   <div class="container topbar-inner">
-    <div class="topbar-left">Jaipur &amp; Jhotwara Property Consultation</div>
+    <div class="lang-toggle" data-lang-toggle role="group" aria-label="Language"></div>
     <div class="top-right">
       <a href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>6350566010</a>
-      <a href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg>WhatsApp</a>
+      <a href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg><span data-i18n="wa">WhatsApp</span></a>
     </div>
   </div>
 </div>
@@ -75,23 +77,17 @@
   <nav class="container nav" aria-label="Main">
     <a class="brand" href="#home" aria-label="Jaipur Property Consultant home">
       <div class="brand-mark"><svg class="icon"><use href="#i-logo"/></svg></div>
-      <div>
-        <div class="brand-name">Jaipur Property Consultant</div>
-        <div class="brand-sub">Property • Consultation • Assistance</div>
-      </div>
+      <div><div class="brand-name">Jaipur Property Consultant</div><div class="brand-sub" data-i18n="tag">Plots, land &amp; property in Jaipur</div></div>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="properties.html" class="nav-primary">Properties</a>
-      <a href="#requirements">Buyers</a>
-      <a href="partner.html">Sell &amp; earn</a>
-      <a href="#services">Services</a>
-      <a href="#areas">Areas</a>
-      <a href="#reviews">Reviews</a>
-      <a class="nav-call" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>Call Now</a>
-      <a href="properties.html?saved=1" class="nav-saved"><svg class="icon"><use href="#i-heart"/></svg>Saved<span class="saved-count" style="display:none"></span></a>
-      <a class="nav-wa" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur."><svg class="icon" style="width:17px;height:17px;fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a>
+      <a href="properties.html" class="nav-primary" data-i18n="nav.properties">Properties</a>
+      <a href="partner.html" data-i18n="nav.sell">Sell &amp; earn</a>
+      <a href="reviews.html" data-i18n="nav.reviews">Reviews</a>
+      <a class="nav-call" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg><span data-i18n="nav.call">Call Now</span></a>
+      <a href="properties.html?saved=1" class="nav-saved"><svg class="icon"><use href="#i-heart"/></svg><span data-i18n="nav.saved">Saved</span><span class="saved-count" style="display:none"></span></a>
+      <a class="nav-wa" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur."><svg class="icon" style="width:17px;height:17px;fill:#fff;stroke:none"><use href="#i-wa"/></svg><span data-i18n="wa">WhatsApp</span></a>
     </div>
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" data-i18n-aria="menu" aria-expanded="false" aria-controls="navLinks"><svg class="icon"><use href="#i-menu"/></svg></button>
   </nav>
 </header>
 
@@ -99,314 +95,173 @@
 <section class="hero" id="home">
   <div class="container hero-compact">
     <div class="hero-text">
-      <div class="eyebrow">Real Estate Consultant • Jaipur</div>
-      <h1>Find the Right <em>Property in Jaipur</em></h1>
-      <p class="hero-lead">Verified plots, houses and land in Jaipur &amp; Jhotwara — from a real local office.</p>
+      <h1 data-i18n="h1">Find the right property in Jaipur</h1>
+      <p class="hero-lead" data-i18n="lead">Verified plots, houses and land from a real local office.</p>
       <div class="hero-actions">
-        <button class="btn btn-gold btn-sm" type="button" data-open-form="buyer"><svg class="icon"><use href="#i-home"/></svg>I want to Buy</button>
-        <button class="btn btn-ghost btn-sm" type="button" data-open-form="seller"><svg class="icon"><use href="#i-key"/></svg>I want to Sell</button>
-        <a class="btn btn-ghost btn-sm" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>Call us</a>
+        <button class="btn btn-gold btn-sm" type="button" data-open-form="buyer"><svg class="icon"><use href="#i-home"/></svg><span data-i18n="buy">I want to Buy</span></button>
+        <button class="btn btn-ghost btn-sm" type="button" data-open-form="seller"><svg class="icon"><use href="#i-key"/></svg><span data-i18n="sell">I want to Sell</span></button>
       </div>
     </div>
     <div class="search-card">
-      <div class="search-title">Search approved properties</div>
       <form class="search-row" id="homeSearchForm" role="search">
-        <input id="homeSearch" placeholder="Location, e.g. Jhotwara" aria-label="Location or keyword">
-        <select id="homeType" aria-label="Property type"><option value="">All Types</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option></select>
-        <select id="homeBudget" aria-label="Budget"><option value="">Any Budget</option><option value="2500000">Up to ₹25 Lakh</option><option value="5000000">Up to ₹50 Lakh</option><option value="10000000">Up to ₹1 Crore</option><option value="20000000">Up to ₹2 Crore</option></select>
-        <button class="btn btn-gold" type="submit"><svg class="icon"><use href="#i-search"/></svg>Search</button>
+        <input id="homeSearch" placeholder="Location, e.g. Jhotwara" data-i18n-ph="search.ph" aria-label="Location">
+        <select id="homeType" aria-label="Property type">
+          <option value="" data-i18n="allTypes">All types</option>
+          <option value="Plot" data-i18n="t.Plot">Plot</option><option value="House" data-i18n="t.House">House</option><option value="Flat" data-i18n="t.Flat">Flat</option><option value="Villa" data-i18n="t.Villa">Villa</option><option value="Land" data-i18n="t.Land">Land</option><option value="Shop" data-i18n="t.Shop">Shop</option><option value="Commercial" data-i18n="t.Commercial">Commercial</option>
+        </select>
+        <select id="homeBudget" aria-label="Budget">
+          <option value="" data-i18n="anyBudget">Any budget</option>
+          <option value="2500000" data-i18n="b25">Up to ₹25 Lakh</option><option value="5000000" data-i18n="b50">Up to ₹50 Lakh</option><option value="10000000" data-i18n="b100">Up to ₹1 Crore</option><option value="20000000" data-i18n="b200">Up to ₹2 Crore</option>
+        </select>
+        <button class="btn btn-gold" type="submit"><svg class="icon"><use href="#i-search"/></svg><span data-i18n="search">Search</span></button>
       </form>
-      <div class="search-note"><svg class="icon"><use href="#i-lock"/></svg>Approved listings only. Owner contact stays private.</div>
     </div>
   </div>
 </section>
 
-<section class="section props" id="properties">
+<section class="mini-sec" id="properties">
   <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="kicker">Available now</div>
-        <h2 class="title">Properties Available in Jaipur</h2>
-        <p>Latest approved listings — swipe for more photos, tap a photo to view it full size.</p>
-      </div>
-      <a class="link-arrow" href="properties.html">View all properties <svg class="icon" style="width:16px;height:16px"><use href="#i-right"/></svg></a>
+    <div class="mini-head">
+      <h2 data-i18n="props.title">Properties in Jaipur</h2>
+      <a class="link-arrow" href="properties.html"><span data-i18n="props.all">View all</span> <svg class="icon" style="width:16px;height:16px"><use href="#i-right"/></svg></a>
     </div>
-    <div class="cards" id="propertyGrid" aria-live="polite">
-      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
-    </div>
+    <div class="cards" id="propertyGrid" aria-live="polite"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
   </div>
 </section>
 
-<section class="section alt" id="requirements">
+<section class="mini-sec alt" id="requirements">
   <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="kicker">Buyer requirements</div>
-        <h2 class="title">Customers Looking for Property in Jaipur</h2>
-        <p>Approved buyer requirements. Have a matching property? Contact us — buyer phone numbers are kept private.</p>
-      </div>
-      <button class="btn btn-dark" type="button" data-open-form="buyer">+ Post your requirement</button>
+    <div class="mini-head">
+      <div><h2 data-i18n="buyers.title">Buyer requirements</h2><p data-i18n="buyers.sub">Have a matching property? Contact us. Buyer numbers stay private.</p></div>
+      <button class="btn btn-dark btn-sm" type="button" data-open-form="buyer" data-i18n="buyers.post">+ Post requirement</button>
     </div>
-    <div class="cards" id="buyerGrid" aria-live="polite">
-      <div class="skel" style="height:220px"></div><div class="skel" style="height:220px"></div><div class="skel" style="height:220px"></div>
-    </div>
+    <div class="cards" id="buyerGrid" aria-live="polite"><div class="skel" style="height:200px"></div><div class="skel" style="height:200px"></div><div class="skel" style="height:200px"></div></div>
   </div>
 </section>
 
-<section class="section" id="enquiry">
+<section class="mini-sec" id="enquiry">
   <div class="container enq-wrap">
     <div>
-      <div class="kicker">Quick enquiry</div>
-      <h2 class="title">Tell us what you need — we’ll find it</h2>
-      <p style="color:var(--muted);margin:10px 0 22px;max-width:520px">Share your requirement and our office will reply on WhatsApp with matching options.</p>
-      <div class="trust-list" id="trustGrid">
-        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-store"/></svg></div><div><strong>Real office in Jhotwara</strong><span>58A Gosai Marg, Udyog Nagar</span></div></div>
-        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>Approved listings only</strong><span>Every listing is reviewed first</span></div></div>
-        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-lock"/></svg></div><div><strong>Owner details private</strong><span>Contact only through our office</span></div></div>
-        <div class="trust-item"><div class="trust-ico"><svg class="icon"><use href="#i-pin"/></svg></div><div><strong>Site visit assistance</strong><span>We coordinate your shortlisted visits</span></div></div>
+      <h2 class="title" data-i18n="enq.title">Quick enquiry</h2>
+      <p style="color:var(--muted);margin:8px 0 0" data-i18n="enq.sub">Share your need. We reply on WhatsApp.</p>
+      <div class="trust-line">
+        <span><svg class="icon"><use href="#i-store"/></svg><span data-i18n="trust">Real office in Jhotwara</span></span>
+        <span><svg class="icon"><use href="#i-shield"/></svg><span data-i18n="trust2">Approved listings only</span></span>
+        <span><svg class="icon"><use href="#i-lock"/></svg><span data-i18n="trust3">Owner details stay private</span></span>
       </div>
     </div>
-    <aside class="enq" aria-labelledby="enqTitle">
-      <h2 id="enqTitle">Quick Enquiry</h2>
-      <p>Tell us what you are looking for — we’ll reply on WhatsApp.</p>
+    <aside class="enq" aria-label="Quick enquiry">
       <form id="enqForm" novalidate>
-        <input id="name" placeholder="Your name" autocomplete="name" required aria-label="Your name">
-        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number (10 digits)" autocomplete="tel-national" required aria-label="Mobile number">
+        <input id="name" placeholder="Your name" data-i18n-ph="enq.name" autocomplete="name" required aria-label="Your name">
+        <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number (10 digits)" data-i18n-ph="enq.mobile" autocomplete="tel-national" required aria-label="Mobile number">
         <select id="requirement" required aria-label="I want to">
-          <option value="">I want to…</option>
-          <option>Buy a Plot</option><option>Sell a Plot</option><option>Buy Property</option><option>Sell Property</option>
-          <option>Property Investment</option><option>Property Site Visit</option><option>Agent / Broker Enquiry</option>
+          <option value="" data-i18n="enq.want">I want to…</option>
+          <option value="Buy a Plot" data-i18n="enq.o1">Buy a plot</option><option value="Sell a Plot" data-i18n="enq.o2">Sell a plot</option><option value="Buy Property" data-i18n="enq.o3">Buy property</option><option value="Sell Property" data-i18n="enq.o4">Sell property</option><option value="Property Investment" data-i18n="enq.o5">Investment</option><option value="Property Site Visit" data-i18n="enq.o6">Site visit</option><option value="Agent / Broker Enquiry" data-i18n="enq.o7">Agent / broker</option>
         </select>
-        <input id="location" placeholder="Preferred Jaipur location (optional)" aria-label="Preferred location">
-        <textarea id="message" placeholder="Plot size, budget or other requirement (optional)" aria-label="Requirement details"></textarea>
+        <input id="location" placeholder="Preferred location (optional)" data-i18n-ph="enq.loc" aria-label="Preferred location">
+        <textarea id="message" placeholder="Size, budget or details (optional)" data-i18n-ph="enq.msg" aria-label="Details"></textarea>
         <div class="field-err" id="enqErr" role="alert"></div>
-        <button class="btn btn-green btn-block" type="submit"><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>Send Enquiry on WhatsApp</button>
-        <div class="note"><svg class="icon" style="width:14px;height:14px"><use href="#i-lock"/></svg>Your number is never shown publicly.</div>
+        <button class="btn btn-green btn-block" type="submit"><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg><span data-i18n="enq.send">Send on WhatsApp</span></button>
+        <div class="note"><svg class="icon" style="width:14px;height:14px"><use href="#i-lock"/></svg><span data-i18n="enq.priv">Your number is never shown publicly.</span></div>
       </form>
     </aside>
   </div>
 </section>
 
-<section class="section alt" id="how">
-  <div class="container">
-    <div class="section-head center">
-      <div class="kicker">How it works</div>
-      <h2 class="title">Simple, Transparent Process</h2>
-      <p>From first enquiry to site visit, you deal directly with our office.</p>
+<section class="mini-sec" style="padding-top:0" id="sell">
+  <div class="container"><div class="sell-band">
+    <div><h2 data-i18n="sellband.t">Want to sell? Reach genuine buyers.</h2><p data-i18n="sellband.p">Your number stays private. Listing goes live after our review.</p></div>
+    <div class="btns">
+      <button class="btn btn-gold" type="button" data-open-form="seller" data-i18n="sellband.b1">List my property</button>
+      <a class="btn btn-ghost" href="partner.html" data-i18n="sellband.b2">Agents &amp; earn</a>
     </div>
-    <div class="steps">
-      <div class="step"><h3>Share your requirement</h3><p>Tell us your location, budget, plot size or what you want to sell — by form, WhatsApp or call.</p></div>
-      <div class="step"><h3>We shortlist &amp; verify</h3><p>We match you with suitable options and guide you on documentation and verification steps.</p></div>
-      <div class="step"><h3>Site visit &amp; deal support</h3><p>We coordinate the visit and the discussion between buyer and seller until you are comfortable.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="sell">
-  <div class="container two-col">
-    <div class="panel">
-      <div class="kicker">For property owners</div>
-      <h3>Want to sell your plot or property?</h3>
-      <p>List it with us and reach genuine buyers without giving out your phone number publicly.</p>
-      <ul class="ticks">
-        <li><svg class="icon"><use href="#i-check"/></svg>Add up to 3 photos of your property</li>
-        <li><svg class="icon"><use href="#i-check"/></svg>Listing goes live only after our review</li>
-        <li><svg class="icon"><use href="#i-check"/></svg>Buyer enquiries handled by our office</li>
-        <li><svg class="icon"><use href="#i-check"/></svg>Site visit coordination</li>
-      </ul>
-      <div class="btns">
-        <button class="btn btn-gold" type="button" data-open-form="seller">List my property</button>
-        <a class="btn btn-light" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20to%20sell%20my%20property%20in%20Jaipur.">WhatsApp us</a>
-      </div>
-    </div>
-    <div class="panel dark" id="agents">
-      <div class="kicker" style="color:var(--gold2)">For agents &amp; brokers</div>
-      <h3>Collaborate with our desk</h3>
-      <p>Share buyer requirements and property opportunities with us and work together on genuine deals.</p>
-      <ul class="ticks">
-        <li><svg class="icon"><use href="#i-check"/></svg>Share your buyer requirements</li>
-        <li><svg class="icon"><use href="#i-check"/></svg>Get access to current opportunities</li>
-        <li><svg class="icon"><use href="#i-check"/></svg>Direct call / WhatsApp with the desk</li>
-      </ul>
-      <div class="btns">
-        <a class="btn btn-gold" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20am%20a%20property%20agent%20and%20want%20to%20discuss%20collaboration%20in%20Jaipur.">Contact agent desk</a>
-        <a class="btn btn-ghost" href="tel:+916350566010">Call 6350566010</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="earn" style="padding-top:0">
-  <div class="container"><div class="cta-band">
-    <div><h2>Know someone who wants to sell? Earn when the deal closes.</h2><p id="earnLine">See our commission rates and try the calculator.</p></div>
-    <a class="btn btn-gold" href="partner.html">See rates &amp; calculator</a>
   </div></div>
 </section>
 
-<section class="section alt" id="services">
+<section class="mini-sec alt" id="areas">
   <div class="container">
-    <div class="section-head center">
-      <div class="kicker">Our services</div>
-      <h2 class="title">Buying, Selling &amp; Consultation</h2>
-      <p>Requirement-based help for buyers, sellers, investors and property professionals.</p>
-    </div>
-    <div class="services">
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-plot"/></svg></div><div><h3>Residential Plots</h3><p>Plot buying and selling in Jaipur’s growing areas.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-home"/></svg></div><div><h3>Houses, Flats &amp; Villas</h3><p>Residential property consultation.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-building"/></svg></div><div><h3>Commercial Property</h3><p>Shops, offices and commercial buy/sell help.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-tree"/></svg></div><div><h3>Land Assistance</h3><p>Land-related buying and selling requirements.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-pin"/></svg></div><div><h3>Site Visit Support</h3><p>We coordinate your shortlisted property visits.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-doc"/></svg></div><div><h3>Documentation Guidance</h3><p>General guidance on property paperwork and verification steps.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-search"/></svg></div><div><h3>Property Shortlisting</h3><p>Compare options by area, budget and size.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-trend"/></svg></div><div><h3>Investment Consultation</h3><p>Discuss location, budget and investment goals.</p></div></div>
-      <div class="service"><div class="trust-ico"><svg class="icon"><use href="#i-users"/></svg></div><div><h3>Agent Collaboration</h3><p>Work with our desk on buyer and seller requirements.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="areas">
-  <div class="container">
-    <div class="section-head center">
-      <div class="kicker">Locations</div>
-      <h2 class="title">Areas We Cover in Jaipur</h2>
-      <p>Tap an area to see approved properties there.</p>
-    </div>
+    <div class="mini-head"><h2 data-i18n="areas.title">Areas we cover</h2></div>
     <div class="pills" id="areaPills"></div>
   </div>
 </section>
 
-<section class="section alt" id="reviews">
+<section class="mini-sec" id="reviews">
   <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="kicker">Customer reviews</div>
-        <h2 class="title">What Our Customers Say</h2>
-        <p>Reviews are published only after approval.</p>
-      </div>
-      <a class="btn btn-dark" href="reviews.html">Read all / Add your review</a>
+    <div class="mini-head">
+      <h2 data-i18n="rev.title">Customer reviews</h2>
+      <a class="link-arrow" href="reviews.html"><span data-i18n="rev.all">All reviews</span> <svg class="icon" style="width:16px;height:16px"><use href="#i-right"/></svg></a>
     </div>
     <div class="cards" id="reviewGrid" aria-live="polite"></div>
   </div>
 </section>
 
-<section class="section" id="contact">
+<section class="mini-sec alt" id="contact">
   <div class="container">
-    <div class="section-head center">
-      <div class="kicker">Visit / Contact</div>
-      <h2 class="title">Visit Our Office in Jhotwara</h2>
-      <p>Talk to us in person, on the phone or on WhatsApp.</p>
-    </div>
-    <div class="office">
-      <div class="office-photo">
-        <img src="storefront.jpg" alt="Jaipur Property Consultant office, 58A Gosai Marg, Udyog Nagar, Jhotwara, Jaipur" loading="lazy" width="1400" height="1052">
-        <div class="cap"><b>Our office</b> — 58A, Gosai Marg, Udyog Nagar, Jhotwara</div>
+    <div class="mini-head"><h2 data-i18n="contact.title">Visit our office</h2></div>
+    <div class="contact-min">
+      <div class="cl"><span class="lab" data-i18n="contact.addr">Address</span><span data-i18n="contact.addrText">58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur 302012</span></div>
+      <div class="cl"><span class="lab" data-i18n="contact.phone">Phone</span><a href="tel:+916350566010">6350566010</a></div>
+      <div class="cl"><span class="lab" data-i18n="contact.email">Email</span><a href="mailto:saif.anwar1618@gmail.com">saif.anwar1618@gmail.com</a></div>
+      <div id="clExtra"></div>
+      <div class="btns">
+        <a class="btn btn-gold" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg><span data-i18n="call">Call</span></a>
+        <a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur."><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg><span data-i18n="wa">WhatsApp</span></a>
+        <a class="btn btn-light" href="mailto:saif.anwar1618@gmail.com"><svg class="icon"><use href="#i-mail"/></svg><span data-i18n="contact.emailBtn">Email us</span></a>
+        <a class="btn btn-light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=58A%2C%20Gosai%20Marg%2C%20Udyog%20Nagar%2C%20Jhotwara%2C%20Jaipur%2C%20Rajasthan%20302012"><svg class="icon"><use href="#i-pin"/></svg><span data-i18n="contact.directions">Directions</span></a>
       </div>
-      <div class="contact-box">
-        <h3>Jaipur Property Consultant</h3>
-        <div class="cl"><span class="lab">Address</span><span>58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur, Rajasthan 302012</span></div>
-        <div class="cl"><span class="lab">Phone</span><a href="tel:+916350566010"><strong>6350566010</strong></a></div>
-        <div class="cl"><span class="lab">We deal in</span><span>Plots • Houses &amp; Flats • Land • Commercial • Investment</span></div>
-        <div class="cl" id="clExtra" style="display:none"></div>
-        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-gold" href="tel:+916350566010"><svg class="icon"><use href="#i-phone"/></svg>Call now</a>
-          <a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20consultation%20in%20Jaipur."><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a>
-          <a class="btn btn-light" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=58A%2C%20Gosai%20Marg%2C%20Udyog%20Nagar%2C%20Jhotwara%2C%20Jaipur%2C%20Rajasthan%20302012"><svg class="icon"><use href="#i-pin"/></svg>Directions</a>
-        </div>
-      </div>
-    </div>
-    <div class="map">
-      <iframe title="Office location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=58A%20Gosai%20Marg%2C%20Udyog%20Nagar%2C%20Jhotwara%2C%20Jaipur%20302012&amp;output=embed"></iframe>
-    </div>
-  </div>
-</section>
-
-<section style="padding:70px 0 0">
-  <div class="container">
-    <div class="cta-band">
-      <div>
-        <h2>Plot kharidna ya bechna hai?</h2>
-        <p>Apni location, budget ya selling requirement WhatsApp par bhejein — hum current options ke saath aapse sampark karenge.</p>
-      </div>
-      <a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20mujhe%20Jaipur%20mein%20plot%20kharidna%20ya%20bechna%20hai."><svg class="icon" style="fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp Enquiry</a>
     </div>
   </div>
 </section>
 </main>
 
-<footer class="footer">
+<footer class="footer mini-foot">
   <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="margin-bottom:12px"><div class="brand-mark"><svg class="icon"><use href="#i-logo"/></svg></div><div><div class="brand-name">Jaipur Property Consultant</div></div></div>
-        <p>Real estate consultation for plots, land and property buying, selling and investment in Jaipur &amp; Jhotwara.</p>
-      </div>
-      <div>
-        <h4>Quick links</h4>
-        <a href="properties.html">Properties</a>
-        <a href="#requirements">Buyer requirements</a>
-        <a href="partner.html">Sell &amp; earn</a>
-        <a href="reviews.html">Reviews</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <a href="tel:+916350566010">6350566010</a>
-        <span style="display:block;padding:3px 0">58A, Gosai Marg, Udyog Nagar,<br>Jhotwara, Jaipur 302012</span>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Jaipur Property Consultant. All rights reserved.</span>
-      <a href="admin.html" rel="nofollow">Staff login</a>
-    </div>
+    <div class="mf-links"><a href="tel:+916350566010">6350566010</a><a href="mailto:saif.anwar1618@gmail.com">saif.anwar1618@gmail.com</a><a href="properties.html" data-i18n="nav.properties">Properties</a><a href="partner.html" data-i18n="nav.sell">Sell &amp; earn</a></div>
+    <div class="mf-bottom"><span data-i18n="foot.rights">© 2026 Jaipur Property Consultant</span><a href="admin.html" rel="nofollow" data-i18n="foot.staff">Staff login</a></div>
   </div>
 </footer>
 
 <a class="float-wa" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur." aria-label="Chat on WhatsApp"><svg class="icon"><use href="#i-wa"/></svg></a>
 <div class="mobile-bar">
-  <a class="c" href="tel:+916350566010"><svg class="icon" style="width:18px;height:18px"><use href="#i-phone"/></svg>Call</a>
-  <a class="w" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur."><svg class="icon" style="width:18px;height:18px;fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="c" href="tel:+916350566010"><svg class="icon" style="width:18px;height:18px"><use href="#i-phone"/></svg><span data-i18n="call">Call</span></a>
+  <a class="w" target="_blank" rel="noopener" href="https://wa.me/916350566010?text=Hello%2C%20I%20want%20property%20details%20in%20Jaipur."><svg class="icon" style="width:18px;height:18px;fill:#fff;stroke:none"><use href="#i-wa"/></svg><span data-i18n="wa">WhatsApp</span></a>
 </div>
 
-<!-- Submission modal -->
 <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
   <div class="modal-card">
     <div class="modal-head">
-      <div><h2 id="formTitle">मुझे प्रॉपर्टी खरीदनी है</h2><p id="formSub">Submit your requirement. Our team reviews it before anything is published.</p></div>
-      <button class="x-btn" type="button" data-close-form aria-label="Close">×</button>
+      <div><h2 id="formTitle" data-i18n="m.buyTitle">I want to buy property</h2><p id="formSub" data-i18n="m.buySub">Submit your requirement.</p></div>
+      <button class="x-btn" type="button" data-close-form aria-label="Close" data-i18n-aria="close">×</button>
     </div>
     <form id="submitForm">
       <input type="hidden" id="subType" value="buyer">
       <div class="fgrid">
-        <div class="fld"><label for="sName">Name *</label><input id="sName" required placeholder="Your name" autocomplete="name"></div>
-        <div class="fld"><label for="sMobile">Mobile / WhatsApp * <span style="color:#b42318;font-weight:500">(private)</span></label><input id="sMobile" required inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" autocomplete="tel-national"></div>
-        <div class="fld"><label for="sArea">Area / Location *</label><input id="sArea" required placeholder="e.g. Jhotwara, Vaishali Nagar"></div>
-        <div class="fld"><label for="sCity">City</label><input id="sCity" value="Jaipur"></div>
-        <div class="fld"><label for="sType">Property type *</label><select id="sType" required><option value="">Select type</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Land</option><option>Shop</option><option>Commercial</option><option>Other</option></select></div>
-        <div class="fld"><label for="sSize">Size / Area</label><input id="sSize" placeholder="e.g. 50 Gaj / 1200 sqft"></div>
-        <div class="fld"><label for="sMin" id="sMinL">Minimum budget (₹)</label><input id="sMin" type="number" min="0" inputmode="numeric" placeholder="₹"></div>
-        <div class="fld"><label for="sMax" id="sMaxL">Maximum budget (₹)</label><input id="sMax" type="number" min="0" inputmode="numeric" placeholder="₹"></div>
-        <div class="fld full"><label for="sDetails">Details / requirement *</label><textarea id="sDetails" required placeholder="Describe your requirement or property…"></textarea></div>
+        <div class="fld"><label for="sName" data-i18n="m.name">Name *</label><input id="sName" required autocomplete="name"></div>
+        <div class="fld"><label for="sMobile"><span data-i18n="m.mobile">Mobile / WhatsApp *</span> <span style="color:#b42318;font-weight:500" data-i18n="m.private">(private)</span></label><input id="sMobile" required inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" data-i18n-ph="m.mobilePh" autocomplete="tel-national"></div>
+        <div class="fld"><label for="sArea" data-i18n="m.area">Area / location *</label><input id="sArea" required placeholder="e.g. Jhotwara, Vaishali Nagar" data-i18n-ph="m.areaPh"></div>
+        <div class="fld"><label for="sCity" data-i18n="m.city">City</label><input id="sCity" value="Jaipur"></div>
+        <div class="fld"><label for="sType" data-i18n="m.type">Property type *</label><select id="sType" required><option value="" data-i18n="m.selType">Select type</option><option value="Plot" data-i18n="t.Plot">Plot</option><option value="House" data-i18n="t.House">House</option><option value="Flat" data-i18n="t.Flat">Flat</option><option value="Villa" data-i18n="t.Villa">Villa</option><option value="Land" data-i18n="t.Land">Land</option><option value="Shop" data-i18n="t.Shop">Shop</option><option value="Commercial" data-i18n="t.Commercial">Commercial</option><option value="Other" data-i18n="t.Other">Other</option></select></div>
+        <div class="fld"><label for="sSize" data-i18n="m.size">Size</label><input id="sSize" placeholder="e.g. 50 Gaj / 1200 sqft" data-i18n-ph="m.sizePh"></div>
+        <div class="fld"><label for="sMin" id="sMinL" data-i18n="m.minB">Minimum budget (₹)</label><input id="sMin" type="number" min="0" inputmode="numeric" placeholder="₹"></div>
+        <div class="fld"><label for="sMax" id="sMaxL" data-i18n="m.maxB">Maximum budget (₹)</label><input id="sMax" type="number" min="0" inputmode="numeric" placeholder="₹"></div>
+        <div class="fld full"><label for="sDetails" data-i18n="m.details">Details *</label><textarea id="sDetails" required placeholder="Describe your requirement or property…" data-i18n-ph="m.detailsPh"></textarea></div>
         <div class="fld full" id="sPhotoField" style="display:none">
-          <label for="sPhotos">Property photos (up to 3)</label>
+          <label for="sPhotos" data-i18n="m.photos">Photos (up to 3)</label>
           <input id="sPhotos" type="file" accept="image/*" multiple>
           <div class="thumbs" id="sThumbs"></div>
-          <div style="font-size:12.5px;color:var(--muted)">Clear photos help buyers trust the listing. Shown only after approval.</div>
+          <div style="font-size:12.5px;color:var(--muted)" data-i18n="m.photoHelp">Clear photos build trust. Shown only after approval.</div>
         </div>
-        <div class="fld full"><div class="privacy"><strong>Privacy &amp; approval:</strong> your mobile, WhatsApp and exact address are never published. Your submission is reviewed by our team first; only approved details appear on the website.</div></div>
-        <div class="fld full"><label style="display:flex;gap:9px;align-items:flex-start;font-weight:500;cursor:pointer"><input id="sConsent" type="checkbox" required style="width:18px;height:18px;margin-top:2px;flex:none"><span>I agree that the selected details of my property / requirement may be shown publicly after approval.</span></label></div>
+        <div class="fld full"><div class="privacy" data-i18n="m.privacy">Your mobile and exact address are never published. Only approved details appear on the website.</div></div>
+        <div class="fld full"><label style="display:flex;gap:9px;align-items:flex-start;font-weight:500;cursor:pointer"><input id="sConsent" type="checkbox" required style="width:18px;height:18px;margin-top:2px;flex:none"><span data-i18n="m.consent">I agree that selected details may be shown publicly after approval.</span></label></div>
       </div>
       <div id="formMsg" role="status"></div>
-      <div class="modal-actions"><button type="button" class="btn btn-light" data-close-form>Cancel</button><button type="submit" id="subBtn" class="btn btn-gold">Submit for approval</button></div>
+      <div class="modal-actions"><button type="button" class="btn btn-light" data-close-form data-i18n="m.cancel">Cancel</button><button type="submit" id="subBtn" class="btn btn-gold" data-i18n="m.submit">Submit for approval</button></div>
     </form>
   </div>
 </div>
 
-
-</div>
-
 <script src="assets/config.js"></script>
 <script src="assets/app.js"></script>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getFirestore, collection, addDoc, query, where, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
@@ -422,23 +277,25 @@ const firebaseConfig = {
 };
 const db = getFirestore(initializeApp(firebaseConfig, "publicSite"));
 
+const T = JPC_T;
 const { $, esc, ico, wa, hidden, millis, tidy, cleanArea, unitSize, inr, priceText, photosOf, propertyCard } = JPC;
 const unused = null;
 
 function buyerCard(r){
   const area = cleanArea(r.area);
   const what = `${unitSize(r.size) ? tidy(r.size) + " " : ""}${r.propertyType || "Property"}`;
+  const whatL = `${unitSize(r.size) ? tidy(r.size) + " " : ""}${T("t."+(r.propertyType||"Property"), null, r.propertyType || "Property")}`;
   const msg = `Hello, I have a ${what} available in ${area} that may match a buyer requirement I saw on your website. Please connect.`;
   return `<article class="bcard">
-    <div class="bcard-top"><div class="bavatar">${ico("user")}</div><div><div class="btag">${ico("shield")}Approved requirement</div><div class="ploc">${ico("pin")}${esc(area)}, ${esc(tidy(r.city) || "Jaipur")}</div></div></div>
-    <h3>Looking for ${esc(what)} in ${esc(area)}</h3>
-    <div class="price">${esc(priceText(r.budgetMin, r.budgetMax, "Budget on discussion"))}</div>
+    <div class="bcard-top"><div class="bavatar">${ico("user")}</div><div><div class="btag">${ico("shield")}${T("buyers.tag")}</div><div class="ploc">${ico("pin")}${esc(area)}, ${esc(tidy(r.city) || "Jaipur")}</div></div></div>
+    <h3>${esc(T("buyers.looking",{what:whatL,area}))}</h3>
+    <div class="price">${esc(priceText(r.budgetMin, r.budgetMax, T("budgetTalk")))}</div>
     ${tidy(r.details) ? `<div class="pdesc">${esc(tidy(r.details))}</div>` : ""}
-    <a class="btn btn-light btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">I have a matching property</a>
+    <a class="btn btn-light btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">${T("buyers.match")}</a>
   </article>`;
 }
 
-function emptyBox(title, text, btn){ return `<div class="empty-box"><strong>${title}</strong>${text}<br>${btn}</div>`; }
+function emptyBox(tk, xk, btn){ return `<div class="empty-box"><strong data-i18n="${tk}"></strong><span data-i18n="${xk}"></span><br>${btn}</div>`; }
 
 /* ---------- live data ---------- */
 function listen(type, onData, onErr){
@@ -450,19 +307,21 @@ function listen(type, onData, onErr){
     }, onErr);
   }catch(e){ onErr(e); }
 }
-const failBox = `<div class="empty-box"><strong>Listings could not be loaded right now</strong>Please check your internet connection or message us on WhatsApp for current options.<br><a class="btn btn-green" style="margin-top:14px" target="_blank" rel="noopener" href="${wa("Hello, I want to see current property options in Jaipur.")}">WhatsApp us</a></div>`;
+const failBox = `<div class="empty-box"><strong data-i18n="fail">Listings could not be loaded</strong><span data-i18n="failText">Check your internet or message us on WhatsApp.</span><br><a class="btn btn-green btn-sm" style="margin-top:12px" target="_blank" rel="noopener" href="${wa("Hello, I want to see current property options in Jaipur.")}"><span data-i18n="wa">WhatsApp</span></a></div>`;
 
 listen("seller", rows => {
   const live = rows.filter(r => String(r.availability||"Available") !== "Not Available").slice(0, 6);
   $("propertyGrid").innerHTML = live.length ? live.map(propertyCard).join("") :
-    emptyBox("New listings are being added", "Tell us what you need and we’ll find options for you.", `<a class="btn btn-gold" target="_blank" rel="noopener" href="${wa("Hello, I am looking for a property in Jaipur.")}">Ask on WhatsApp</a>`);
+    emptyBox("props.empty", "props.emptyText", `<a class="btn btn-gold btn-sm" target="_blank" rel="noopener" href="${wa("Hello, I am looking for a property in Jaipur.")}" data-i18n="props.ask">Ask on WhatsApp</a>`);
 }, () => { $("propertyGrid").innerHTML = failBox; });
 
-listen("customer", rows => {
-  const live = rows.slice(0, 6);
+let buyerRows = null;
+function paintBuyers(){ if(!buyerRows) return; const live = buyerRows.slice(0, 6);
   $("buyerGrid").innerHTML = live.length ? live.map(buyerCard).join("") :
-    emptyBox("No public buyer requirements yet", "Looking to buy? Post your requirement and owners and agents can reach us.", `<button class="btn btn-dark" type="button" data-open-form="buyer">Post your requirement</button>`);
-}, () => { $("buyerGrid").innerHTML = failBox; });
+    emptyBox("buyers.empty", "buyers.emptyText", `<button class="btn btn-dark btn-sm" type="button" data-open-form="buyer" data-i18n="buyers.post">+ Post requirement</button>`);
+}
+listen("customer", rows => { buyerRows = rows; paintBuyers(); }, () => { $("buyerGrid").innerHTML = failBox; });
+document.addEventListener("jpc:lang", paintBuyers);
 
 /* reviews */
 try{
@@ -470,10 +329,10 @@ try{
     const rows = snap.docs.map(d => d.data()).sort((a,b) => millis(b.submittedAt) - millis(a.submittedAt)).slice(0,3);
     $("reviewGrid").innerHTML = rows.length ? rows.map(r => {
       const n = Math.max(1, Math.min(5, Number(r.rating)||5));
-      const nm = r.name || "Customer";
-      return `<article class="rcard"><div class="stars" aria-label="${n} out of 5">${"★".repeat(n)}${"☆".repeat(5-n)}</div><p>“${esc(r.comment||"")}”</p><div class="who"><div class="rav">${esc(nm.trim().charAt(0).toUpperCase()||"C")}</div><div><b>${esc(nm)}</b><span>${esc([r.area, r.propertyType].filter(Boolean).join(" • ") || "Customer")}</span></div></div></article>`;
-    }).join("") : emptyBox("No reviews yet", "Worked with us? Your honest feedback helps other buyers and sellers.", `<a class="btn btn-gold" href="reviews.html">Write a review</a>`);
-  }, () => { $("reviewGrid").innerHTML = emptyBox("Reviews", "See what customers say.", `<a class="btn btn-gold" href="reviews.html">Open reviews</a>`); });
+      const nm = r.name || T("rev.cust");
+      return `<article class="rcard"><div class="stars" aria-label="${n} out of 5">${"★".repeat(n)}${"☆".repeat(5-n)}</div><p>“${esc(r.comment||"")}”</p><div class="who"><div class="rav">${esc(nm.trim().charAt(0).toUpperCase()||"C")}</div><div><b>${esc(nm)}</b><span>${esc([r.area, r.propertyType].filter(Boolean).join(" • ") || T("rev.cust"))}</span></div></div></article>`;
+    }).join("") : emptyBox("rev.empty", "rev.emptyText", `<a class="btn btn-gold btn-sm" href="reviews.html" data-i18n="rev.write">Write a review</a>`);
+  }, () => { $("reviewGrid").innerHTML = emptyBox("rev.title", "rev.all", `<a class="btn btn-gold btn-sm" href="reviews.html" data-i18n="rev.all">All reviews</a>`); });
 }catch(e){}
 
 /* ---------- global clicks / keys (slider, lightbox, save, share live in assets/app.js) ---------- */
@@ -504,9 +363,9 @@ $("enqForm").addEventListener("submit", e => {
   const err = $("enqErr"); err.style.display = "none";
   const name = $("name").value.trim(), phone = $("phone").value.trim(), req = $("requirement").value;
   const fail = m => { err.textContent = m; err.style.display = "block"; };
-  if(!name) return fail("Please enter your name.");
-  if(!/^[6-9]\d{9}$/.test(phone)) return fail("Please enter a valid 10-digit mobile number.");
-  if(!req) return fail("Please choose what you want to do.");
+  if(!name) return fail(T("enq.e1"));
+  if(!/^[6-9]\d{9}$/.test(phone)) return fail(T("enq.e2"));
+  if(!req) return fail(T("enq.e3"));
   const loc = $("location").value.trim(), m = $("message").value.trim();
   const text = `Hello, my name is ${name}.\nI want to: ${req}${loc ? "\nLocation: " + loc : ""}${m ? "\nDetails: " + m : ""}\nMy mobile: ${phone}`;
   window.open(wa(text), "_blank", "noopener");
@@ -518,11 +377,12 @@ let photoData = [];
 function openForm(type){
   const buyer = type === "buyer";
   $("subType").value = type;
-  $("formTitle").textContent = buyer ? "मुझे प्रॉपर्टी खरीदनी है" : "मुझे प्रॉपर्टी बेचनी है";
-  $("formSub").textContent = buyer ? "Submit your requirement. Our team reviews it before any detail is published." : "Submit your property details and photos. Your listing goes live only after our review.";
+  $("formTitle").dataset.i18n = buyer ? "m.buyTitle" : "m.sellTitle";
+  $("formSub").dataset.i18n = buyer ? "m.buySub" : "m.sellSub";
   $("sPhotoField").style.display = buyer ? "none" : "flex";
-  $("sMinL").textContent = buyer ? "Minimum budget (₹)" : "Minimum / expected price (₹)";
-  $("sMaxL").textContent = buyer ? "Maximum budget (₹)" : "Maximum price (₹)";
+  $("sMinL").dataset.i18n = buyer ? "m.minB" : "m.minP";
+  $("sMaxL").dataset.i18n = buyer ? "m.maxB" : "m.maxP";
+  JPC_APPLY();
   $("formMsg").innerHTML = "";
   $("formModal").classList.add("open");
   document.body.style.overflow = "hidden";
@@ -545,7 +405,7 @@ function compress(file){
 $("sPhotos").addEventListener("change", async e => {
   const files = [...e.target.files];
   const box = $("sThumbs"); box.innerHTML = ""; photoData = [];
-  if(files.length > 3){ $("formMsg").innerHTML = '<div class="msg err">Please select a maximum of 3 photos.</div>'; e.target.value = ""; return; }
+  if(files.length > 3){ $("formMsg").innerHTML = `<div class="msg err">${T("m.max3")}</div>`; e.target.value = ""; return; }
   $("formMsg").innerHTML = "";
   for(const f of files){
     if(!f.type.startsWith("image/")) continue;
@@ -556,13 +416,13 @@ $("sPhotos").addEventListener("change", async e => {
 
 $("submitForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const btn = $("subBtn"), msg = $("formMsg"); btn.disabled = true; btn.textContent = "Submitting…"; msg.innerHTML = "";
+  const btn = $("subBtn"), msg = $("formMsg"); btn.disabled = true; btn.textContent = T("m.sending"); msg.innerHTML = "";
   try{
     const type = $("subType").value;
     const mobile = $("sMobile").value.trim();
-    if(!/^[6-9]\d{9}$/.test(mobile)) throw new Error("Please enter a valid 10-digit mobile number.");
+    if(!/^[6-9]\d{9}$/.test(mobile)) throw new Error(T("enq.e2"));
     const total = photoData.reduce((a,b) => a + b.length, 0);
-    if(total > 850000) throw new Error("Photos are too large together. Please choose smaller photos or fewer photos.");
+    if(total > 850000) throw new Error(T("m.big"));
     const num = id => $(id).value ? Number($(id).value) : null;
     await addDoc(collection(db,"publicSubmissions"), {
       type: type === "buyer" ? "customer" : "seller",
@@ -576,33 +436,22 @@ $("submitForm").addEventListener("submit", async e => {
       consentPublic: $("sConsent").checked,
       status: "pending", source: "Public Website", submittedAt: serverTimestamp()
     });
-    msg.innerHTML = '<div class="msg ok">✅ Thank you! Your details were submitted. Our team will review them and contact you.</div>';
+    msg.innerHTML = `<div class="msg ok">${T("m.ok")}</div>`;
     e.target.reset(); $("sCity").value = "Jaipur"; $("sThumbs").innerHTML = ""; photoData = [];
     if(typeof gtag === "function") gtag("event","generate_lead",{method:"public_submission_"+type});
     setTimeout(closeForm, 2200);
-  }catch(err){ msg.innerHTML = `<div class="msg err">${esc(err.message || "Could not submit. Please try again.")}</div>`; }
-  finally{ btn.disabled = false; btn.textContent = "Submit for approval"; }
+  }catch(err){ msg.innerHTML = `<div class="msg err">${esc(err.message || T("m.err"))}</div>`; }
+  finally{ btn.disabled = false; btn.textContent = T("m.submit"); }
 });
 
 /* ---------- static bits driven by SITE settings ---------- */
-(function earn(){ const c = SITE.commission; if(c) $("earnLine").textContent = `Owners pay ${c.sellerPct}% only when sold. Referrers earn ${c.referralSharePct}% of our brokerage. Agents split ${c.agentSplitPct}:${100-c.agentSplitPct} on joint deals.`; })();
 if("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 $("areaPills").innerHTML = SITE.areas.map(a => `<a class="pill" href="properties.html?q=${encodeURIComponent(a)}">${ico("pin")}${esc(a)}</a>`).join("");
-(function trustExtras(){
-  const extra = [];
-  if(SITE.reraNo) extra.push({i:"shield", t:"RERA registered", s:SITE.reraNo});
-  if(SITE.yearsExperience) extra.push({i:"clock", t:SITE.yearsExperience, s:"in Jaipur real estate"});
-  if(SITE.propertiesHelped) extra.push({i:"home", t:SITE.propertiesHelped, s:"buyers & sellers helped"});
-  if(extra.length){
-    const grid = $("trustGrid");
-    // replace the least-specific generic items so the strip stays 4 wide
-    const items = [...grid.children];
-    extra.slice(0,2).forEach((x,k) => { items[items.length-1-k].outerHTML = `<div class="trust-item"><div class="trust-ico">${ico(x.i)}</div><div><strong>${esc(x.t)}</strong><span>${esc(x.s)}</span></div></div>`; });
-  }
+(function contactExtras(){
   const rows = [];
-  if(SITE.officeHours) rows.push(`<span class="lab">Hours</span><span>${esc(SITE.officeHours)}</span>`);
+  if(SITE.officeHours) rows.push(`<span class="lab" data-i18n="contact.hours">Hours</span><span>${esc(SITE.officeHours)}</span>`);
   if(SITE.reraNo) rows.push(`<span class="lab">RERA</span><span>${esc(SITE.reraNo)}</span>`);
-  if(rows.length){ const c = $("clExtra"); c.style.display = "block"; c.style.padding = "0"; c.innerHTML = rows.map(r => `<div class="cl">${r}</div>`).join(""); }
+  if(rows.length){ const c = $("clExtra"); c.innerHTML = rows.map(r => `<div class="cl">${r}</div>`).join(""); }
 })();
 </script>
 <script type="module" src="assets/jpc-analytics-tracker.js"></script>

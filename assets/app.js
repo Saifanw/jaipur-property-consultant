@@ -85,7 +85,7 @@ async function share(id){
   if(navigator.share){ try{ await navigator.share({ title: m.title || "Property", text, url }); return; }catch(e){ if(e && e.name === "AbortError") return; } }
   let s = $("shareSheet");
   if(!s){
-    s = document.createElement("div"); s.id = "shareSheet"; s.className = "sheet"; s.innerHTML = `<div class="sheet-box" role="dialog" aria-modal="true" aria-label="Share property"><div class="sheet-head"><b>Share this property</b><button type="button" class="sheet-x" data-sheet-close aria-label="Close">${ico("close")}</button></div><div class="sheet-title" id="shTitle"></div><div class="sheet-acts"><a id="shWa" class="btn btn-green" target="_blank" rel="noopener">${ico("wa")}WhatsApp</a><button id="shCopy" class="btn btn-light" type="button">${ico("link")}Copy link</button></div></div>`;
+    s = document.createElement("div"); s.id = "shareSheet"; s.className = "sheet"; s.innerHTML = `<div class="sheet-box" role="dialog" aria-modal="true" aria-label="Share property" data-i18n-aria="card.share"><div class="sheet-head"><b>Share this property</b><button type="button" class="sheet-x" data-sheet-close aria-label="Close">${ico("close")}</button></div><div class="sheet-title" id="shTitle"></div><div class="sheet-acts"><a id="shWa" class="btn btn-green" target="_blank" rel="noopener">${ico("wa")}WhatsApp</a><button id="shCopy" class="btn btn-light" type="button">${ico("link")}Copy link</button></div></div>`;
     document.body.appendChild(s);
     s.addEventListener("click", e => { if(e.target === s || e.target.closest("[data-sheet-close]")) s.classList.remove("open"); });
     $("shCopy").onclick = async () => { try{ await navigator.clipboard.writeText($("shCopy").dataset.url); toast("Link copied"); }catch(_){ window.prompt("Copy this link", $("shCopy").dataset.url); } s.classList.remove("open"); };
@@ -105,7 +105,7 @@ function priceParts(p){
 }
 function priceTag(p){
   const t = priceParts(p); if(!t) return "";
-  return `<div class="ptag" aria-label="Price ${esc(t.num + " " + t.unit)}"><span class="ptag-rs">₹</span><span class="ptag-num">${esc(t.num)}</span>${t.unit ? `<span class="ptag-unit">${t.unit}</span>` : ""}${t.range ? `<span class="ptag-unit">onwards</span>` : ""}</div>`;
+  return `<div class="ptag" aria-label="Price ${esc(t.num + " " + t.unit)}"><span class="ptag-rs">₹</span><span class="ptag-num">${esc(t.num)}</span>${t.unit ? `<span class="ptag-unit" data-i18n="${t.unit}">${t.unit}</span>` : ""}${t.range ? `<span class="ptag-unit" data-i18n="card.onwards">onwards</span>` : ""}</div>`;
 }
 
 /* ---------------- gallery slider + cards ---------------- */
@@ -114,10 +114,10 @@ function sliderHTML(p, opts = {}){
   const imgs = photosOf(p); GALLERY[p.id] = imgs;
   META[p.id] = { title: titleOf(p), price: priceText(p.budgetMin, p.budgetMax, ""), v: verOf(p) };
   const a = String(p.availability || "Available");
-  const badge = `<span class="avail ${availClass(a)}">${esc(a)}</span>`;
+  const badge = `<span class="avail ${availClass(a)}" data-i18n="v.${esc(a)}">${esc(a)}</span>`;
   const pt = priceTag(p);
-  const fab = opts.noFab ? "" : `<div class="fabs"><button type="button" class="fab" data-save="${esc(p.id)}" aria-pressed="false" aria-label="Save property">${ico("heart")}</button><button type="button" class="fab" data-share="${esc(p.id)}" aria-label="Share property">${ico("share")}</button></div>`;
-  if(!imgs.length) return `<div class="slider">${badge}${fab}${pt}<div class="no-photo">${ico("camera")}<span>Photos on request</span></div></div>`;
+  const fab = opts.noFab ? "" : `<div class="fabs"><button type="button" class="fab" data-save="${esc(p.id)}" aria-pressed="false" aria-label="Save property" data-i18n-aria="card.save">${ico("heart")}</button><button type="button" class="fab" data-share="${esc(p.id)}" aria-label="Share property" data-i18n-aria="card.share">${ico("share")}</button></div>`;
+  if(!imgs.length) return `<div class="slider">${badge}${fab}${pt}<div class="no-photo">${ico("camera")}<span data-i18n="card.noPhoto">Photos on request</span></div></div>`;
   const slides = imgs.map((u,i) => `<div class="slide" data-zoom="${esc(p.id)}" data-i="${i}"><img class="bg" src="${esc(u)}" alt="" aria-hidden="true" loading="lazy"><img class="fg" src="${esc(u)}" alt="${esc(titleOf(p))} — photo ${i+1}" loading="${i?"lazy":"lazy"}"></div>`).join("");
   const multi = imgs.length > 1;
   return `<div class="slider" data-n="${imgs.length}">${badge}${fab}${pt}<div class="slides">${slides}</div>${multi ? `<button class="s-btn prev" type="button" data-slide="-1" aria-label="Previous photo">${ico("left")}</button><button class="s-btn next" type="button" data-slide="1" aria-label="Next photo">${ico("right")}</button><div class="dots">${imgs.map((_,i)=>`<span class="dot${i===0?" on":""}"></span>`).join("")}</div><span class="s-count">${ico("camera")}<span><b>1</b> / ${imgs.length}</span></span>` : ""}</div>`;
@@ -129,10 +129,10 @@ function propertyCard(p){
   const chips = [
     p.size ? `<span class="chip">${ico("ruler")}${esc(tidy(p.size))}</span>` : "",
     p.roadFacing ? `<span class="chip">${esc(tidy(p.roadFacing))}</span>` : "",
-    n > 1 ? `<span class="chip">${ico("camera")}${n} photos</span>` : "",
-    p.videoUrl ? `<span class="chip">${ico("video")}Video</span>` : ""
+    n > 1 ? `<span class="chip">${ico("camera")}${n} <span data-i18n="card.photos">photos</span></span>` : "",
+    p.videoUrl ? `<span class="chip">${ico("video")}<span data-i18n="card.video">Video</span></span>` : ""
   ].join("");
-  return `<article class="pcard">${sliderHTML(p)}<div class="pbody"><div class="ptype">${esc(p.propertyType || "Property")}</div><h3><a href="property.html?id=${encodeURIComponent(p.id)}">${esc(title)}</a></h3><div class="ploc">${ico("pin")}${esc(area)}, ${esc(tidy(p.city) || "Jaipur")}</div>${chips ? `<div class="chips">${chips}</div>` : ""}${tidy(p.details) ? `<div class="pdesc">${esc(tidy(p.details))}</div>` : ""}<div class="pfoot"><div><div class="price">${esc(priceText(p.budgetMin, p.budgetMax, "Price on enquiry"))}</div>${pg ? `<div class="pergaj">${esc(pg)}</div>` : ""}</div><div class="pactions"><a class="btn btn-green btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">${ico("wa")}Enquire</a><a class="btn btn-dark btn-sm" href="property.html?id=${encodeURIComponent(p.id)}">View details</a></div></div></div></article>`;
+  return `<article class="pcard">${sliderHTML(p)}<div class="pbody"><div class="ptype" data-i18n="t.${esc(p.propertyType || "Property")}">${esc(p.propertyType || "Property")}</div><h3><a href="property.html?id=${encodeURIComponent(p.id)}">${esc(title)}</a></h3><div class="ploc">${ico("pin")}${esc(area)}, ${esc(tidy(p.city) || "Jaipur")}</div>${chips ? `<div class="chips">${chips}</div>` : ""}${tidy(p.details) ? `<div class="pdesc">${esc(tidy(p.details))}</div>` : ""}<div class="pfoot"><div><div class="price">${esc(priceText(p.budgetMin, p.budgetMax, "Price on enquiry"))}</div>${pg ? `<div class="pergaj">${esc(pg)}</div>` : ""}</div><div class="pactions"><a class="btn btn-green btn-sm" target="_blank" rel="noopener" href="${wa(msg)}">${ico("wa")}<span data-i18n="card.enquire">Enquire</span></a><a class="btn btn-dark btn-sm" href="property.html?id=${encodeURIComponent(p.id)}"><span data-i18n="card.details">View details</span></a></div></div></div></article>`;
 }
 
 /* ---------------- lightbox ---------------- */
@@ -183,6 +183,7 @@ document.addEventListener("touchend", e => { if(tx == null) return; const dx = e
 /* ---------------- icons + chrome ---------------- */
 const EXTRA_ICONS = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-logo" viewBox="0 0 32 32"><path d="M5 28V14.5C5 9 9.5 5 16 3c6.5 2 11 6 11 11.500V28" fill="none"/><path d="M10 28v-9a6 6 0 0 1 12 0v9" fill="none"/><path d="M3 28h26" fill="none"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
 <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></symbol>
 <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.600 13.500l6.800 4M15.400 6.500l-6.800 4"/></symbol>
 <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
@@ -195,15 +196,15 @@ const EXTRA_ICONS = `<svg width="0" height="0" style="position:absolute" aria-hi
 function chrome(){
   const root = document.querySelector("[data-chrome]"); if(!root) return;
   const page = root.dataset.chrome;
-  const nav = (href, label, key) => `<a href="${href}"${page===key?' class="nav-primary" aria-current="page"':""}>${label}</a>`;
+  const nav = (href, label, key, i) => `<a href="${href}"${page===key?' class="nav-primary" aria-current="page"':""} data-i18n="${i}">${label}</a>`;
   const waHello = wa("Hello, I want property consultation in Jaipur.");
-  document.body.insertAdjacentHTML("afterbegin", `<div class="topbar"><div class="container topbar-inner"><div class="topbar-left">Jaipur &amp; Jhotwara property consultation</div><div class="top-right"><a href="tel:+91${esc(SITE.phone)}">${ico("phone")}${esc(SITE.phone)}</a><a href="${waHello}" target="_blank" rel="noopener">${ico("wa")}WhatsApp</a></div></div></div>
-  <header class="nav-wrap"><nav class="container nav" aria-label="Main"><a class="brand" href="index.html" aria-label="${esc(SITE.brand.name)} home"><div class="brand-mark">${ico("logo")}</div><div><div class="brand-name">${esc(SITE.brand.name)}</div><div class="brand-sub">${esc(SITE.brand.tagline)}</div></div></a>
-  <div class="nav-links" id="navLinks">${nav("properties.html","Properties","properties")}${nav("partner.html","Sell &amp; earn","partner")}${nav("reviews.html","Reviews","reviews")}<a class="nav-call" href="tel:+91${esc(SITE.phone)}">${ico("phone")}Call Now</a><a href="properties.html?saved=1" class="nav-saved">${ico("heart")}Saved<span class="saved-count" style="display:none"></span></a><a class="nav-wa" target="_blank" rel="noopener" href="${waHello}">${ico("wa")}WhatsApp</a></div>
+  document.body.insertAdjacentHTML("afterbegin", `<div class="topbar"><div class="container topbar-inner"><div class="lang-toggle" data-lang-toggle role="group" aria-label="Language"></div><div class="top-right"><a href="tel:+91${esc(SITE.phone)}">${ico("phone")}${esc(SITE.phone)}</a><a class="top-wa" href="${waHello}" target="_blank" rel="noopener">${ico("wa")}<span data-i18n="wa">WhatsApp</span></a></div></div></div>
+  <header class="nav-wrap"><nav class="container nav" aria-label="Main"><a class="brand" href="index.html" aria-label="${esc(SITE.brand.name)} home"><div class="brand-mark">${ico("logo")}</div><div><div class="brand-name">${esc(SITE.brand.name)}</div><div class="brand-sub" data-i18n="tag">${esc(SITE.brand.tagline)}</div></div></a>
+  <div class="nav-links" id="navLinks">${nav("properties.html","Properties","properties","nav.properties")}${nav("partner.html","Sell &amp; earn","partner","nav.sell")}${nav("reviews.html","Reviews","reviews","nav.reviews")}<a class="nav-call" href="tel:+91${esc(SITE.phone)}">${ico("phone")}<span data-i18n="nav.call">Call Now</span></a><a href="properties.html?saved=1" class="nav-saved">${ico("heart")}<span data-i18n="nav.saved">Saved</span><span class="saved-count" style="display:none"></span></a><a class="nav-wa" target="_blank" rel="noopener" href="${waHello}">${ico("wa")}<span data-i18n="wa">WhatsApp</span></a></div>
   <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">${ico("menu")}</button></nav></header>`);
-  document.body.insertAdjacentHTML("beforeend", `<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand" style="margin-bottom:12px"><div class="brand-mark">${ico("logo")}</div><div><div class="brand-name">${esc(SITE.brand.name)}</div></div></div><p>Real estate consultation for plots, land and property buying, selling and investment in Jaipur &amp; Jhotwara.</p></div><div><h4>Explore</h4><a href="properties.html">Properties</a><a href="partner.html">Sell with us</a><a href="partner.html#agents">Agent programme</a><a href="reviews.html">Reviews</a></div><div><h4>Contact</h4><a href="tel:+91${esc(SITE.phone)}">${esc(SITE.phone)}</a><span style="display:block;padding:3px 0">${esc(SITE.address)}</span>${SITE.officeHours ? `<span style="display:block;padding:3px 0">${esc(SITE.officeHours)}</span>` : ""}</div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} ${esc(SITE.brand.name)}. All rights reserved.${SITE.reraNo ? " RERA " + esc(SITE.reraNo) : ""}</span><a href="admin.html" rel="nofollow">Staff login</a></div></div></footer>
+  document.body.insertAdjacentHTML("beforeend", `<footer class="footer mini-foot"><div class="container"><div class="mf-links"><a href="tel:+91${esc(SITE.phone)}">${esc(SITE.phone)}</a>${SITE.email ? `<a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a>` : ""}<a href="index.html" data-i18n="home">Home</a></div><div class="mf-bottom"><span data-i18n="foot.rights">© 2026 Jaipur Property Consultant</span><a href="admin.html" rel="nofollow" data-i18n="foot.staff">Staff login</a></div></div></footer>
   <a class="float-wa" target="_blank" rel="noopener" href="${waHello}" aria-label="Chat on WhatsApp"><svg class="icon" style="width:28px;height:28px;fill:#fff;stroke:none"><use href="#i-wa"/></svg></a>
-  <div class="mobile-bar"><a class="c" href="tel:+91${esc(SITE.phone)}">${ico("phone")}Call</a><a class="w" target="_blank" rel="noopener" href="${waHello}"><svg class="icon" style="width:18px;height:18px;fill:#fff;stroke:none"><use href="#i-wa"/></svg>WhatsApp</a></div>`);
+  <div class="mobile-bar"><a class="c" href="tel:+91${esc(SITE.phone)}">${ico("phone")}<span data-i18n="call">Call</span></a><a class="w" target="_blank" rel="noopener" href="${waHello}"><svg class="icon" style="width:18px;height:18px;fill:#fff;stroke:none"><use href="#i-wa"/></svg><span data-i18n="wa">WhatsApp</span></a></div>`);
   const mb = $("menuBtn"), nl = $("navLinks");
   mb.onclick = () => { const o = nl.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); };
   nl.addEventListener("click", e => { if(e.target.closest("a")){ nl.classList.remove("open"); mb.setAttribute("aria-expanded","false"); } });

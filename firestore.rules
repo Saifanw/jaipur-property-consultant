@@ -149,6 +149,31 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    // ---- Property Market Intelligence (PMI) — private research data, admin only ----
+    // Separate from CRM and public collections. No public read or write anywhere in this block.
+    // Observations and audit logs are append-only: an existing document may only be re-written with IDENTICAL
+    // content (so a replayed collection run is idempotent) and can never be changed or deleted.
+    match /pmiSources/{docId}          { allow read, write: if isAdmin(); }
+    match /pmiCollectionRuns/{docId}   { allow read, write: if isAdmin(); }
+    match /pmiListings/{docId}         { allow read, write: if isAdmin(); }
+    match /pmiProperties/{docId}       { allow read, write: if isAdmin(); }
+    match /pmiDuplicateGroups/{docId}  { allow read, write: if isAdmin(); }
+    match /pmiOpportunityFlags/{docId} { allow read, write: if isAdmin(); }
+    match /pmiSettings/{docId}         { allow read, write: if isAdmin(); }
+
+    match /pmiObservations/{docId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update: if isAdmin() && request.resource.data == resource.data;
+      allow delete: if false;
+    }
+    match /pmiAuditLogs/{docId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update: if isAdmin() && request.resource.data == resource.data;
+      allow delete: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

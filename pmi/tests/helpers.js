@@ -1,0 +1,11 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+const here = dirname(fileURLToPath(import.meta.url));
+export const loadFixture = () => JSON.parse(readFileSync(join(here, "fixtures", "magicbricks-jaipur-sale-2026-10-24.json"), "utf8"));
+export const clone = o => JSON.parse(JSON.stringify(o));
+export const T0 = "2026-10-24T15:11:13.787Z";
+export const T1 = "2026-10-25T06:00:00.000Z";
+export const T2 = "2026-10-26T06:00:00.000Z";
+export const T3 = "2026-10-27T06:00:00.000Z";
+export const run = (runId, status = "complete", scopeKey = "magicbricks|jaipur|sale") => ({ runId, sourceId: "magicbricks", scopeKey, status });

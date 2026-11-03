@@ -113,6 +113,7 @@ async function propertyPage(request, env) {
 /* ---------- site-wide helpers: robots, sitemap, geo, headers, canonical ---------- */
 const SECURE = { "x-content-type-options": "nosniff", "referrer-policy": "strict-origin-when-cross-origin", "permissions-policy": "camera=(), microphone=(), geolocation=()" };
 const PRIVATE_PAGE = /^\/(admin|crm-smart|visitor-analytics|property-os|properties-crm)(\.html)?\/?$/;
+const BLOCKED = /^\/(src|functions|pmi|docs|tests|node_modules|\.git)(\/|$)|^\/(wrangler\.jsonc|assetsignore|\.assetsignore|firestore\.rules|storage\.rules|crm-demo(\.html)?)$|\.md$/i;
 const finish = (res, extra = {}) => { const h = new Headers(res.headers); for (const k in SECURE) h.set(k, SECURE[k]); for (const k in extra) h.set(k, extra[k]); return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h }); };
 
 const robots = origin => new Response(`User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /crm-smart\nDisallow: /visitor-analytics\nDisallow: /property-os\nDisallow: /properties-crm\n\nSitemap: ${origin}/sitemap.xml\n`, { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600" } });
@@ -159,6 +160,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url), { pathname } = url;
     const get = request.method === "GET";
+    if (BLOCKED.test(pathname)) return finish(new Response("Not found", { status: 404 }));
     if (get && pathname === "/robots.txt") return finish(robots(url.origin));
     if (get && pathname === "/sitemap.xml") return finish(await sitemap(url.origin));
     if (get && pathname === "/geo") return finish(geo(request));

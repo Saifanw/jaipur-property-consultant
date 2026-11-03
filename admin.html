@@ -192,6 +192,44 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 .pcard-detail{grid-column:1/-1;background:#fff;border:1px solid var(--blue);border-radius:16px;padding:6px 18px 18px}
 @media(max-width:700px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px}.pc-body h3{font-size:13.5px}.pc-price b{font-size:16px}.pc-act .mini{font-size:11.5px;padding:7px 4px}.vtog{margin-left:0}}
 @media(max-width:380px){.pgrid{grid-template-columns:1fr}}
+
+/* ---- Share sheet + mobile property cards (v6) ---- */
+.pc-act .mini.sh{background:#0f9d6a;border-color:#0f9d6a;color:#fff;font-weight:700}
+.row .ra .mini.sh{background:#0f9d6a;border-color:#0f9d6a;color:#fff;font-weight:700}
+.shov{align-items:end}
+.shbox{background:#fff;border-radius:20px 20px 0 0;width:min(520px,100%);max-height:92vh;overflow:auto;padding:14px 16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 -10px 40px #0f172a40}
+@media(min-width:701px){.shov{align-items:center}.shbox{border-radius:18px}}
+.shh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.shh b{display:block;font-size:16px;letter-spacing:-.01em}.shh span{font-size:12.5px;color:var(--mut)}
+.shx{border:0;background:#eef2f8;border-radius:99px;width:34px;height:34px;font-size:15px;flex:none}
+.shprev{display:flex;gap:12px;align-items:center;background:#f6f8fc;border-radius:14px;padding:10px}
+.shprev img{width:64px;height:64px;border-radius:10px;object-fit:cover;background:#e6ecf7;flex:none}
+.shprev .pt{font-weight:800;font-size:17px;color:var(--blue)}
+.shwarn{background:#fff7e6;border:1px solid #f5d28a;color:#7a5200;border-radius:12px;padding:10px 12px;font-size:13px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+#shsMsg{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:13.5px;line-height:1.5;resize:vertical;min-height:150px}
+.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.shgrid .btn{justify-content:center;padding:12px 10px;font-size:14px}
+.shgrid .wa-b{grid-column:1/-1;background:#0f9d6a;border-color:#0f9d6a;color:#fff;font-size:15px;padding:14px}
+.shbuy{display:flex;flex-direction:column;gap:6px}
+.shbuy .q{font-size:12px;font-weight:700;color:var(--mut)}
+.shbuy .r{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:12px}
+.shbuy .r b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13.5px}
+.shbuy .r small{color:var(--mut)}
+@media(max-width:700px){
+  .pgrid{grid-template-columns:1fr;gap:10px;padding:10px}
+  .pcard{display:grid;grid-template-columns:104px minmax(0,1fr)}
+  .pcard:hover{transform:none}
+  .pc-img{aspect-ratio:auto;min-height:104px;height:100%;font-size:30px}
+  .pc-img .pn,.pc-img .live{display:none}
+  .pc-img .code{left:6px;top:6px;font-size:10px;padding:1px 6px}
+  .pc-body{padding:10px 12px 6px;gap:4px}
+  .pc-body h3{font-size:14px}.pc-price b{font-size:16px}
+  .pc-own{display:none}.pc-tags{min-height:0}
+  .pc-act{grid-column:1/-1;padding:4px 10px 10px;flex-wrap:nowrap;gap:6px}
+  .pc-act .mini{flex:0 0 44px;padding:10px 0;font-size:15px}
+  .pc-act .mini .lbl{display:none}
+  .pc-act .mini.sh{flex:1}.pc-act .mini.sh .lbl{display:inline;font-size:13.5px}
+}
 </style>
 </head>
 <body>
@@ -451,6 +489,20 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 <!-- COMMAND SEARCH -->
 <div id="ko" class="ov ko hidden"><div class="kb"><input id="k_in" type="text" placeholder="Name, mobile, code (JPC-012), area…" autocomplete="off"><div id="k_res"></div></div></div>
 
+<div id="shs" class="ov shov hidden"><div class="shbox" role="dialog" aria-modal="true" aria-labelledby="shsT">
+  <div class="shh"><div><b id="shsT">Share property</b><span id="shsS"></span></div><button class="shx" id="shsX" type="button" aria-label="Close">✕</button></div>
+  <div class="shprev"><img id="shsImg" alt="" class="hidden"><div><span class="code" id="shsCode"></span><div class="pt" id="shsPrice"></div></div></div>
+  <div class="shwarn hidden" id="shsWarn"><span>Ye property website par live nahi hai, isliye message mein link nahi hai.</span><button class="btn sm" id="shsLive" type="button">Live karo</button></div>
+  <textarea id="shsMsg" aria-label="Message to share"></textarea>
+  <div class="shgrid">
+    <button class="btn wa-b" id="shsWa" type="button">💬 WhatsApp par bhejo</button>
+    <button class="btn" id="shsNative" type="button">📤 Share…</button>
+    <button class="btn" id="shsPhoto" type="button">📷 Photo ke saath</button>
+    <button class="btn" id="shsCopyMsg" type="button">Copy message</button>
+    <button class="btn" id="shsCopyLink" type="button">Copy link</button>
+  </div>
+  <div class="shbuy" id="shsBuyers"></div>
+</div></div>
 <div id="toast" class="toast hidden"></div>
 
 <script src="assets/config.js"></script>
@@ -627,7 +679,7 @@ function dash(){
 }
 
 /* ---------- PROPERTIES view ---------- */
-let pView="list";try{pView=localStorage.getItem("jpcPropView")==="cards"?"cards":"list"}catch(e){}
+let pView="list";try{const sv=localStorage.getItem("jpcPropView");pView=sv?(sv==="cards"?"cards":"list"):(matchMedia("(max-width:700px)").matches?"cards":"list")}catch(e){}
 function renderProps(){
   if(!loaded){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=skRows("rp");return}
   const q=$("pq").value.trim().toLowerCase(),F={a:$("pf_area").value,t:$("pf_type").value,v:$("pf_av").value,s:$("pf_show").value};
@@ -649,7 +701,7 @@ function renderProps(){
         <div class="pc-body"><h3>${esc(lbl(p))}</h3><div class="pc-price"><b>${esc(budgetText(p))}</b><span class="st ${cls(av)}" style="padding:1px 8px;font-size:11px">${esc(av)}</span></div>
         <div class="pc-own">${esc(p.name||"Owner —")}${p.mobile?" · "+esc(p.mobile):""}</div>
         <div class="pc-tags">${c.length?`<span class="intp">👥 ${c.length}</span>`:""}${d?`<span class="due">${d} due</span>`:""}</div></div>
-        <div class="pc-act">${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Buyers</button>`:""}<button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>`;
+        <div class="pc-act"><button class="mini sh" data-act="pShare" data-id="${esc(p.id)}" aria-label="Share property"><span class="ic">📤</span><span class="lbl"> Share</span></button>${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}" aria-label="Matching buyers"><span class="ic">📲</span><span class="lbl"> Buyers</span></button>`:""}<button class="mini" data-act="pLink" data-id="${esc(p.id)}" aria-label="Add customer"><span class="ic">＋</span><span class="lbl"> Customer</span></button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}" aria-label="Edit property"><span class="ic">✏️</span><span class="lbl"> Edit</span></button></div></div>`;
       return card+(open?`<div class="pcard-detail">${propDetail(p,c)}</div>`:"");
     }).join("")+`</div>`;
     return}
@@ -660,7 +712,7 @@ function renderProps(){
       <div class="cell"><b>${esc(budgetText(p))}</b><span><span class="st ${cls(av)}" style="padding:1px 8px;font-size:11px">${esc(av)}</span></span></div>
       <div>${c.length?`<span class="intp">👥 ${c.length}</span>`:`<span style="color:var(--mut)">—</span>`}</div>
       <div>${d?`<span class="due">${d} due</span>`:`<span style="color:var(--mut)">—</span>`}</div>
-      <div class="ra">${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Buyers</button>`:""}<button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>
+      <div class="ra"><button class="mini sh" data-act="pShare" data-id="${esc(p.id)}" aria-label="Share property"><span class="ic">📤</span><span class="lbl"> Share</span></button>${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Buyers</button>`:""}<button class="mini" data-act="pLink" data-id="${esc(p.id)}">＋ Customer</button><button class="mini ed" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit</button></div></div>
       ${open?`<div class="detail">${propDetail(p,c)}</div>`:""}`}).join("");
 }
 function propDetail(p,c){
@@ -670,7 +722,7 @@ function propDetail(p,c){
   const imgs=(p.images||[]).slice(0,6).map(u=>`<img class="thumb" style="width:64px;height:64px" src="${esc(u)}" alt="" loading="lazy">`).join("");
   const lk=propLink(p);
   const avNow=p.availability||"Available";
-  const tools=`<div class="ptools"><button class="btn p" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit property</button><div class="avs">Status: ${["Available","Under Offer","Sold","Hold"].map(v=>`<button type="button" class="${avNow===v?"on":""}" data-act="pAv" data-id="${esc(p.id)}" data-v="${v}">${v}</button>`).join("")}</div></div>`;
+  const tools=`<div class="ptools"><button class="btn p" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit property</button><button class="btn" data-act="pShare" data-id="${esc(p.id)}">📤 Share</button><div class="avs">Status: ${["Available","Under Offer","Sold","Hold"].map(v=>`<button type="button" class="${avNow===v?"on":""}" data-act="pAv" data-id="${esc(p.id)}" data-v="${v}">${v}</button>`).join("")}</div></div>`;
   return`${tools}${imgs?`<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">${imgs}</div>`:""}
    <div class="pinfo" style="margin-top:12px">${info||"<span>Aur details nahi bhari.</span>"}</div>
    ${p.followUpDate?`<div class="pinfo"><span>Owner follow-up: <b>${fmtFu(p.followUpDate)}</b> ${esc(p.followUpNote||"")}</span></div>`:""}
@@ -853,7 +905,7 @@ function genAd(kind,lang){
   const sizeTxt=[sz.replace(/x/gi,"×"),gaj?`${gaj} ${L.gaj}`:""].filter(Boolean).join(" • ");
   const rate=price&&gaj&&price/gaj>500?inr(Math.round(price/gaj))+"/"+L.gaj:"";
   const lines=s=>v(s).split(/\n|;/).map(x=>x.trim()).filter(Boolean);
-  const link=pEditId&&$("p_pub").checked?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(pEditId)+"&v="+verOf({budgetMin:getMoney("p_price"),budgetMax:getMoney("p_price"),availability:$("p_av").value,publicImageUrls:(propById(pEditId)||{}).publicImageUrls}):"";
+  const link=pEditId&&$("p_pub").checked?PUBLIC_BASE()+"property.html?id="+encodeURIComponent(pEditId)+"&v="+verOf({budgetMin:getMoney("p_price"),budgetMax:getMoney("p_price"),availability:$("p_av").value,publicImageUrls:(propById(pEditId)||{}).publicImageUrls}):"";
   const code=pEditId?(propById(pEditId)?.code||""):"";
   const phone=(window.SITE&&SITE.phone)||"6350566010";
   const roadLine=[v("p_facing")||v("p_road"),v("p_roadw")?L.road+" "+v("p_roadw"):"",v("p_corner")==="Yes"?L.corner:""].filter(Boolean).join(" | ");
@@ -902,6 +954,43 @@ async function saveP(){
     if(pub&&photos.length&&photos.some(x=>x.url&&x.url.includes("crmContacts%2F")))toast("Dhyan: kuch purani photos private hain — website par dikhane ke liye dobara upload karo",true)
   }catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}finally{btn.disabled=false;btn.textContent="Save property"}}
 $("p_save").onclick=saveP;$("p_cancel").onclick=closeP;$("p_del").onclick=()=>softDelete(pEditId,closeP);
+
+
+/* ---------- SHARE PROPERTY (mobile friendly) ---------- */
+let shP=null;
+function shareMsg(p){
+  const L=[`🏡 *${lbl(p)}*`,`🆔 ${p.code||""}`];
+  const bt=budgetText(p);if(bt&&bt!=="—"){let m="💰 "+bt;const pr=Number(p.budgetMax||p.budgetMin),g=Number(p.areaGaj);if(pr>0&&g>0&&(!p.budgetMin||!p.budgetMax||p.budgetMin===p.budgetMax))m+=` (≈ ₹${Math.round(pr/g).toLocaleString("en-IN")}/gaj)`;L.push(m)}
+  const sz=[p.size&&clean(p.size),p.areaGaj&&!/gaj/i.test(p.size||"")?p.areaGaj+" gaj":""].filter(Boolean).join(" · ");if(sz)L.push("📐 "+sz);
+  const fc=[clean(p.facing||p.roadFacing),p.roadWidth?"Road "+clean(p.roadWidth):""].filter(Boolean).join(" | ");if(fc)L.push("🧭 "+fc);
+  const lg=[p.pattaType,p.registry].map(clean).filter(Boolean).join(" | ");if(lg)L.push("📄 "+lg);
+  const hl=clean(p.highlights);if(hl)L.push("✨ "+hl.slice(0,140));
+  const lk=propLink(p);if(lk)L.push("","👉 Photos & full details:",lk);
+  L.push("",`📞 ${BRAND}: ${(window.SITE&&SITE.phone)||""}`);return L.join("\n")}
+function openShare(id){
+  const p=propById(id);if(!p)return;shP=p;
+  $("shsT").textContent="Share "+(p.code||"property");$("shsS").textContent=lbl(p);$("shsCode").textContent=p.code||"—";$("shsPrice").textContent=budgetText(p);
+  const im=(p.images||[])[0],ie=$("shsImg");if(im){ie.src=im;ie.classList.remove("hidden")}else ie.classList.add("hidden");
+  const live=!!propLink(p);$("shsWarn").classList.toggle("hidden",live);$("shsCopyLink").classList.toggle("hidden",!live);
+  $("shsPhoto").classList.toggle("hidden",!(navigator.canShare&&(p.images||[]).length));$("shsNative").classList.toggle("hidden",!navigator.share);
+  $("shsMsg").value=shareMsg(p);
+  const m=availableP(p)?matchesForProp(p).slice(0,3):[];
+  $("shsBuyers").innerHTML=m.length?`<div class="q">Is property ke liye best buyers</div>`+m.map(x=>`<div class="r"><b>${esc(x.c.name||"Customer")} <small>· ${x.score}%</small></b>${waNum(x.c)?`<button class="btn sm" type="button" data-sbw="${esc(x.c.id)}">💬 Bhejo</button>`:'<small>no mobile</small>'}</div>`).join(""):"";
+  $("shs").classList.remove("hidden")}
+const closeShare=()=>{$("shs").classList.add("hidden");shP=null};
+async function copyText(t,ok){try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();try{document.execCommand("copy")}catch(_){}x.remove()}toast(ok)}
+$("shsX").onclick=closeShare;$("shs").addEventListener("click",e=>{if(e.target===$("shs"))closeShare()});
+$("shsWa").onclick=()=>{window.open("https://wa.me/?text="+encodeURIComponent($("shsMsg").value),"_blank","noopener")};
+$("shsNative").onclick=async()=>{try{await navigator.share({title:shP?lbl(shP):BRAND,text:$("shsMsg").value})}catch(e){}};
+$("shsCopyMsg").onclick=()=>copyText($("shsMsg").value,"Message copy ho gaya");
+$("shsCopyLink").onclick=()=>shP&&copyText(propLink(shP),"Website link copy ho gaya");
+$("shsLive").onclick=()=>{const id=shP&&shP.id;closeShare();if(id){openP(id);toast("'Website par dikhao' on karke save karo")}};
+$("shsPhoto").onclick=async()=>{
+  const p=shP;if(!p)return;const msg=$("shsMsg").value;
+  try{const files=[];for(const u of (p.images||[]).slice(0,3)){const r=await fetch(u);if(!r.ok)throw 0;const b=await r.blob();files.push(new File([b],(p.code||"property")+"-"+(files.length+1)+".jpg",{type:b.type||"image/jpeg"}))}
+    if(files.length&&navigator.canShare({files})){await navigator.share({files,text:msg});return}throw 0}
+  catch(e){if(e&&e.name==="AbortError")return;toast("Photo load nahi hui — link ke saath share kar rahe hain",true);try{await navigator.share({text:msg})}catch(_){}}};
+$("shsBuyers").onclick=e=>{const b=e.target.closest("[data-sbw]");if(!b||!shP)return;const pid=shP.id;closeShare();openW(b.dataset.sbw,pid)};
 
 /* ---------- ADD INTERESTED CUSTOMER TO A PROPERTY ---------- */
 function openQ(pid){qProp=propById(pid);if(!qProp)return;$("qSub").textContent=(qProp.code||"")+" · "+lbl(qProp);
@@ -1128,7 +1217,7 @@ document.addEventListener("click",async e=>{
   if(a){const id=a.dataset.id,act=a.dataset.act;
     try{
     if(act==="addP")openP();else if(act==="addC")openC();else if(act==="more"){cShown+=60;renderContacts()}
-    else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="pAv"){const p=propById(id),v=a.dataset.v;if(p&&v&&v!==(p.availability||"Available")){await updateDoc(doc(db,COL,id),{availability:v,updatedAt:serverTimestamp()});await publishSync(id,{...p,availability:v});toast(p.code+" → "+v)}}else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
+    else if(act==="pShare")openShare(id);else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="pAv"){const p=propById(id),v=a.dataset.v;if(p&&v&&v!==(p.availability||"Available")){await updateDoc(doc(db,COL,id),{availability:v,updatedAt:serverTimestamp()});await publishSync(id,{...p,availability:v});toast(p.code+" → "+v)}}else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
     else if(act==="wa")openW(id,a.dataset.pid);else if(act==="bq")openBQ(id);
     else if(act==="go"){const to=a.dataset.to;if(to==="nofu"){setView("contacts");cChip="nofu";cShown=60;renderContacts()}else if(to==="noenq"){setView("props");$("pf_show").value="none";renderProps()}else setView(to)}
     else if(act==="copyLink"){const p=propById(id);if(p){await navigator.clipboard.writeText(propLink(p));toast("Website link copy ho gaya")}}

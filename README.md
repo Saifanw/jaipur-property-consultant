@@ -49,3 +49,9 @@ Google Analytics 4 is included on the public pages using measurement ID `G-0DW0N
 - `.assetsignore` is now correctly named (it was `assetsignore`), `crm-demo.html` and the 2.5 MB `storefront.png` were removed.
 - Firestore rules: public forms have size limits; admin also needs a verified email. **Re-deploy `firestore.rules` and `storage.rules`.**
 - New `privacy.html` (draft - have it reviewed) linked from the footer.
+
+## v6 — property sharing from mobile
+- Admin → Properties: every property (card, list row and detail) has a green **Share** button. It opens a bottom sheet with an editable message, WhatsApp, native Share, Photo ke saath, Copy message/link, and the 3 best-matching buyers.
+- Owner name, mobile and exact address are never added to the shared message.
+- On phones, Properties opens in a compact card view by default (photo, price, status, one-tap Share).
+- `src/worker.js` now returns 404 for internal files (`.md`, rules, `src/`, `pmi/`, `docs/`, `crm-demo`) even if `.assetsignore` is missing.

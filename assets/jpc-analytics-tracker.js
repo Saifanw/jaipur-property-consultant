@@ -152,7 +152,7 @@ import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, serverTimesta
     (async () => {
       try {
         const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 4000);
-        const r = await fetch("https://ipwho.is/?fields=success,country,country_code,region,city", { signal: ctl.signal, cache: "no-store" });
+        const r = await fetch("/geo", { signal: ctl.signal, cache: "no-store" });
         clearTimeout(t);
         const j = await r.json();
         if (!j || !j.success) return;

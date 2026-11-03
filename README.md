@@ -38,3 +38,14 @@ Google Analytics 4 is included on the public pages using measurement ID `G-0DW0N
 - **Ad post** (Admin > property form): auto-generates a ready post (WhatsApp short or OLX/99acres full, Hindi/English) from the property details + public link + your phone. Edit, Copy, send on WhatsApp; the text is saved privately with the property (`adPost`).
 
 - **Comments & questions are Facebook-style threads**: visitor comment/question -> Admin > Inbox -> Publish (optionally with your reply) -> shown on the property page with your replies under it (gold "Owner" badge). You can add more replies later, delete a reply, or unpublish. Re-deploy `firestore.rules`.
+
+
+## v5 — smart search, smarter matching, SEO and safety
+- `assets/match.js` is the one engine for search and matching (tests: `node tests/match.test.js`).
+- Website search understands sentences: `50 gaj plot jhotwara under 40 lakh`, `2 bhk flat vaishali`, `JPC-005`, Hindi/Hinglish words (zameen, makaan, dukan) and spelling mistakes. All filters now stay in the page link, so a shared search link opens the same results. When nothing matches, the closest properties are shown.
+- CRM matching now scores area (same / nearby), type family, budget (graded), and size (gaj / BHK). Contacts have a new **Size / BHK** field. Edit `NEARBY` in `assets/match.js` to change which areas count as close.
+- Set `siteUrl` in `assets/config.js` so links sent from Admin on WhatsApp always use your public domain.
+- Worker now serves `/robots.txt`, `/sitemap.xml` (includes live properties), `/geo`, canonical links, favicon and security headers; admin/CRM pages send `noindex`.
+- `.assetsignore` is now correctly named (it was `assetsignore`), `crm-demo.html` and the 2.5 MB `storefront.png` were removed.
+- Firestore rules: public forms have size limits; admin also needs a verified email. **Re-deploy `firestore.rules` and `storage.rules`.**
+- New `privacy.html` (draft - have it reviewed) linked from the footer.

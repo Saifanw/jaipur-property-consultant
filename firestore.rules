@@ -5,7 +5,8 @@ service cloud.firestore {
 
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email == "saif.anwar1618@gmail.com";
+        && request.auth.token.email == "saif.anwar1618@gmail.com"
+        && request.auth.token.email_verified == true;
     }
 
     match /crmContacts/{docId} {
@@ -24,7 +25,13 @@ service cloud.firestore {
         && request.resource.data.mobile is string
         && request.resource.data.area is string
         && request.resource.data.propertyType is string
-        && request.resource.data.details is string;
+        && request.resource.data.details is string
+        && request.resource.data.keys().size() <= 25
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.mobile.size() <= 15
+        && request.resource.data.area.size() <= 120
+        && request.resource.data.propertyType.size() <= 40
+        && request.resource.data.details.size() <= 3000;
       allow read, update, delete: if isAdmin();
     }
 
@@ -33,7 +40,10 @@ service cloud.firestore {
       allow create: if request.resource.data.status == "pending"
         && request.resource.data.source == "Public Website"
         && request.resource.data.name is string
-        && request.resource.data.comment is string;
+        && request.resource.data.comment is string
+        && request.resource.data.keys().size() <= 12
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.comment.size() <= 1500;
       allow read, update, delete: if isAdmin();
     }
 

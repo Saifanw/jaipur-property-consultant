@@ -17,6 +17,7 @@ window.SITE = {
   analytics: { geo: true },        // approx. city/state/country for visitors (no IP stored). Set false to switch off.
   whatsapp: "916350566010",
   address: "58A, Gosai Marg, Udyog Nagar, Jhotwara, Jaipur 302012",
+  siteUrl: "",                     // your public website, e.g. "https://jaipurpropertyconsultant.in" (used in WhatsApp links sent from Admin)
   mapUrl: "",                      // optional Google Maps link
   reraNo: "",                      // e.g. "RAJ/A/2021/1234"  <- add your real RERA number
   yearsExperience: "",             // e.g. "8+ years"

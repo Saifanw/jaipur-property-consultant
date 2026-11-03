@@ -331,6 +331,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
         <label>Source<select id="m_src"><option>Phone</option><option>WhatsApp</option><option>Walk-in</option><option>Referral</option><option>Website</option><option>Facebook</option><option>Instagram</option><option>Google</option><option>Other</option></select></label>
         <label>Area / Location<input id="m_area" type="text" placeholder="e.g. Jagatpura, Mansarovar"></label>
         <label>Property type<select id="m_ptype"><option value="">—</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Shop</option><option>Land</option><option>Commercial</option><option>Other</option></select></label>
+        <label>Size / BHK<input id="m_size" type="text" placeholder="e.g. 50 gaj, 2 BHK"></label>
         <label>Budget min<input id="m_bmin" type="text" placeholder="e.g. 40 lakh"><span class="hint" id="h_bmin"></span></label>
         <label>Budget max<input id="m_bmax" type="text" placeholder="e.g. 1.2 cr"><span class="hint" id="h_bmax"></span></label>
         <label class="full">Requirement details<textarea id="m_details" rows="2" placeholder="Size, facing, loan, kab tak lena hai…"></textarea></label>
@@ -452,6 +453,8 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
 <div id="toast" class="toast hidden"></div>
 
+<script src="assets/config.js"></script>
+<script src="assets/match.js"></script>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
@@ -536,20 +539,17 @@ const lastNote=r=>{const t=Array.isArray(r.timeline)?r.timeline.filter(x=>x&&x.t
 const fuState=r=>{if(TERM.includes(r.status)||!r.followUpDate)return"none";const t=iso();return r.followUpDate<t?"od":r.followUpDate===t?"td":"up"};
 const waNum=r=>{let n=String(r.whatsapp||r.mobile||"").replace(/\D/g,"");if(n.length===10)n="91"+n;return n.length>=11?n:""};
 const verOf=p=>{const k=[p.budgetMin,p.budgetMax,p.availability,(p.publicImageUrls||[])[0]||""].join("|");let h=5381;for(let i=0;i<k.length;i++)h=((h<<5)+h+k.charCodeAt(i))>>>0;return h.toString(36)};
-const propLink=p=>p.publicVisible?location.origin+location.pathname.replace(/[^\/]*$/,"")+"property.html?id="+encodeURIComponent(p.id)+"&v="+verOf(p):"";
+const PUBLIC_BASE=()=>{const u=String((window.SITE&&SITE.siteUrl)||"").trim();return u?u.replace(/\/*$/,"/"):location.origin+location.pathname.replace(/[^\/]*$/,"")};
+const propLink=p=>p.publicVisible?PUBLIC_BASE()+"property.html?id="+encodeURIComponent(p.id)+"&v="+verOf(p):"";
 const dupKeys=()=>{const m={};recs.forEach(r=>{const k=r.type+last10(r.mobile);if(last10(r.mobile).length===10)m[k]=(m[k]||0)+1});return m};
 
 /* ---------- smart matching ---------- */
 function overlap(aMin,aMax,bMin,bMax){const a1=Number(aMin||0),a2=Number(aMax||aMin||0),b1=Number(bMin||0),b2=Number(bMax||bMin||0);if((!a1&&!a2)||(!b1&&!b2))return 0;if(Math.max(a1,b1)<=Math.min(a2||Infinity,b2||Infinity))return 2;const gap=Math.max(a1,b1)-Math.min(a2||Infinity,b2||Infinity),ref=Math.max(b2||b1,1);return gap/ref<=.15?1:0}
 function tok(a){return String(a||"").toLowerCase().split(/[,\/|]+/).map(x=>x.trim()).filter(x=>x.length>2)}
-function matchScore(c,p){let score=0;const why=[];
-  const ca=tok(c.area),pa=tok(p.area);if(ca.length&&pa.length&&ca.some(x=>pa.some(y=>x.includes(y)||y.includes(x)))){score+=40;why.push("Same area")}
-  const ct=String(c.propertyType||"").toLowerCase(),pt=String(p.propertyType||"").toLowerCase();if(ct&&pt&&(pt.includes(ct)||ct.includes(pt))){score+=30;why.push("Same type")}
-  const o=overlap(c.budgetMin,c.budgetMax,p.budgetMin,p.budgetMax);if(o===2){score+=30;why.push("Budget fits")}else if(o===1){score+=15;why.push("Budget thoda door")}
-  return{score,why}}
+function matchScore(c,p){return JPCMatch.score(c,p)}
 const availableP=p=>!["Sold","Not Available"].includes(p.availability);
-const matchesForBuyer=c=>props().filter(availableP).map(p=>({p,...matchScore(c,p)})).filter(x=>x.score>=30).sort((a,b)=>b.score-a.score).slice(0,15);
-const matchesForProp=p=>recs.filter(r=>r.type==="customer"&&!TERM.includes(r.status)).map(c=>({c,...matchScore(c,p)})).filter(x=>x.score>=30).sort((a,b)=>b.score-a.score).slice(0,15);
+const matchesForBuyer=c=>props().filter(availableP).map(p=>({p,...matchScore(c,p)})).filter(x=>x.score>=40).sort((a,b)=>b.score-a.score).slice(0,15);
+const matchesForProp=p=>recs.filter(r=>r.type==="customer"&&!TERM.includes(r.status)).map(c=>({c,...matchScore(c,p)})).filter(x=>x.score>=40).sort((a,b)=>b.score-a.score).slice(0,15);
 const scCls=s=>s>=70?"":s>=50?" m":" l";
 
 /* ---------- code backfill ---------- */
@@ -762,7 +762,7 @@ const hint=(i,h)=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value
 hint("m_bmin","h_bmin");hint("m_bmax","h_bmax");hint("p_price","h_price");
 function drawTL(r){const t=(Array.isArray(r?.timeline)?r.timeline:[]).filter(x=>x&&x.text).sort((a,b)=>(b.at||0)-(a.at||0));
   $("tl").innerHTML=t.length?t.map(x=>`<div class="tle"><div><b>${KIND[x.kind]||"📝"} ${esc(x.text)}</b><span>${fmtMs(x.at)} · ${fmtTime(x.at)}</span></div></div>`).join(""):`<div class="empty" style="padding:24px">Abhi koi baat-cheet record nahi hui.</div>`}
-function formBuyer(){return{area:$("m_area").value,propertyType:$("m_ptype").value,budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax")}}
+function formBuyer(){return{area:$("m_area").value,propertyType:$("m_ptype").value,size:$("m_size").value,details:$("m_details").value,budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax")}}
 function drawMM(){
   const list=matchesForBuyer(formBuyer()).filter(x=>!mLinks.some(i=>i.id===x.p.id)).slice(0,6);
   $("mmList").innerHTML=list.length?`<div class="mq">Is requirement se milti properties</div>`+list.map(x=>`<div class="mrow" style="grid-template-columns:80px minmax(0,1fr) 64px auto"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(budgetText(x.p))} · <span class="why">${esc(x.why.join(" • "))}</span></span></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div><button class="btn sm" type="button" data-mmlink="${esc(x.p.id)}">Link</button></div></div>`).join(""):`<div class="empty" style="padding:30px">Details tab mein area, property type aur budget bharo — yahan matching properties aa jayengi.</div>`}
@@ -772,7 +772,7 @@ function openC(id,o={}){
   editId=id||"";const r=r0||{},pf=o.prefill||{};
   $("mt").textContent=id?clean(r.name)||"Contact":"Add contact";$("ms").textContent=id?[TYPE_LBL[r.type],r.mobile].filter(Boolean).join(" · "):"Saved to your private CRM.";
   $("m_type").value=r.type||o.type||(pf.type==="broker"?"broker":"customer");$("m_name").value=r.name||pf.name||"";$("m_mobile").value=r.mobile||pf.mobile||"";$("m_src").value=r.source||pf.source||"Phone";
-  $("m_area").value=r.area||pf.area||"";$("m_ptype").value=r.propertyType||pf.ptype||"";setMoney("m_bmin",r.budgetMin||pf.bmin);setMoney("m_bmax",r.budgetMax||pf.bmax);
+  $("m_area").value=r.area||pf.area||"";$("m_ptype").value=r.propertyType||pf.ptype||"";$("m_size").value=r.size||pf.size||"";setMoney("m_bmin",r.budgetMin||pf.bmin);setMoney("m_bmax",r.budgetMax||pf.bmax);
   $("h_bmin").textContent=$("h_bmax").textContent="";$("m_details").value=r.details||pf.details||"";$("m_notes").value=r.notes||"";$("m_date").value=r.followUpDate||"";$("m_fnote").value=r.followUpNote||"";
   $("m_email").value=r.email||"";$("m_alt").value=r.altMobile||"";$("m_company").value=r.company||"";$("m_areas").value=r.areasServed||"";$("m_pub").checked=!!r.publicVisible;
   mLinks=interestsOf(r).map(i=>({...i}));if(o.link&&!mLinks.some(i=>i.id===o.link.id))mLinks.push(mkInt(o.link));
@@ -791,7 +791,7 @@ async function saveC(){
   const type=$("m_type").value,mobile=clean($("m_mobile").value),m10=last10(mobile);
   if(m10&&recs.some(c=>c.id!==editId&&last10(c.mobile)===m10&&c.type===type))return toast("Is mobile ka contact pehle se hai",true);
   const old=editId?recs.find(x=>x.id===editId)||{}:{};
-  const d={type,name,mobile,whatsapp:mobile,source:$("m_src").value,status:mStatus,area:clean($("m_area").value),propertyType:$("m_ptype").value,
+  const d={type,name,mobile,whatsapp:mobile,source:$("m_src").value,status:mStatus,area:clean($("m_area").value),propertyType:$("m_ptype").value,size:clean($("m_size").value),
     budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax"),details:clean($("m_details").value),notes:$("m_notes").value.trim(),email:clean($("m_email").value),altMobile:clean($("m_alt").value),
     company:clean($("m_company").value),areasServed:clean($("m_areas").value),followUpDate:$("m_date").value||"",followUpNote:clean($("m_fnote").value),updatedAt:serverTimestamp()};
   if(type==="customer"){d.interests=mLinks;d.interestCode=mLinks[0]?.code||"";d.publicVisible=$("m_pub").checked;d.publicDisplayName="Buyer Requirement"}else{d.publicVisible=false}

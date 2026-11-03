@@ -24,17 +24,18 @@
 <div class="fbar" role="search">
   <div class="container">
     <div class="fbar-in" id="fbarIn">
-      <label class="fs"><span class="sr-only">Search</span><input id="q" type="search" placeholder="Search area, type, or code like JPC-003" autocomplete="off"></label>
+      <label class="fs"><span class="sr-only">Search</span><input id="q" type="search" placeholder="Try: 50 gaj plot Jhotwara under 40 lakh" autocomplete="off"></label>
       <button class="btn btn-light ft" id="ft" type="button" aria-expanded="false">Filters<span class="saved-count" id="fcount" style="display:none;margin-left:6px"></span></button>
       <label class="fsel"><span class="sr-only">Area</span><select id="fArea"><option value="">All areas</option></select></label>
       <label class="fsel"><span class="sr-only">Type</span><select id="fType"><option value="">All types</option></select></label>
       <label class="fsel"><span class="sr-only">Budget</span><select id="fBudget"><option value="">Any budget</option><option value="2500000">Up to ₹25 Lakh</option><option value="5000000">Up to ₹50 Lakh</option><option value="10000000">Up to ₹1 Crore</option><option value="20000000">Up to ₹2 Crore</option><option value="999999999">Above ₹2 Crore</option></select></label>
-      <label class="fsel"><span class="sr-only">Sort</span><select id="fSort"><option value="new">Newest first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label>
+      <label class="fsel"><span class="sr-only">Sort</span><select id="fSort"><option value="rel">Best match</option><option value="new">Newest first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label>
     </div>
   </div>
 </div>
 
 <div class="container">
+  <div class="fchips" id="tryRow" style="padding-top:12px"></div>
   <div class="rbar"><b id="count">Loading…</b><div class="fchips" id="chips"></div></div>
   <div class="grid-p" id="grid"><div class="empty-box">Loading properties…</div></div>
   <div class="morewrap"><button class="btn btn-light" id="more" type="button" style="display:none">Show more properties</button></div>
@@ -47,6 +48,7 @@
 
 <script src="assets/i18n.js"></script>
 <script src="assets/config.js"></script>
+<script src="assets/match.js"></script>
 <script src="assets/sprite.js"></script>
 <script src="assets/app.js"></script>
 <script type="module">
@@ -55,7 +57,7 @@ import { getFirestore, collection, onSnapshot, query, where } from "https://www.
 const db = getFirestore(initializeApp({apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"},"publicSite"));
 const { $, esc, tidy, cleanArea, hidden, millis, propertyCard, savedList, inr, SITE } = JPC;
 const PAGE = 9;
-let all = [], shown = PAGE, savedOnly = false;
+let all = [], shown = PAGE, savedOnly = false, scores = new Map();
 const P = new URLSearchParams(location.search);
 savedOnly = P.get("saved") === "1";
 $("q").value = P.get("q") || ""; 
@@ -71,25 +73,40 @@ function fillOptions(){
   $("fArea").value = areas.includes(keep.a) ? keep.a : ""; $("fType").value = types.includes(keep.t) ? keep.t : "";
 }
 function filtered(){
-  const q = $("q").value.trim().toLowerCase(), area = $("fArea").value, type = $("fType").value, bud = Number($("fBudget").value || 0), saved = savedList();
+  const raw = $("q").value.trim(), area = $("fArea").value, type = $("fType").value, bud = Number($("fBudget").value || 0), saved = savedList();
   let list = all.filter(p => {
     if(savedOnly && !saved.includes(p.id)) return false;
-    const text = [p.area, p.city, p.propertyType, p.size, p.code, tidy(p.details), p.roadFacing].join(" ").toLowerCase();
-    if(q && !text.includes(q)) return false;
     if(area && cleanArea(p.area) !== area) return false;
     if(type && p.propertyType !== type) return false;
     if(bud){ const pr = price(p); if(bud === 999999999 ? pr <= 20000000 : (!pr || pr > bud)) return false; }
     return true;
   });
+  scores = new Map();
+  if(raw){ const hits = JPCMatch.search(list, raw); hits.forEach(h => scores.set(h.p.id, h.score)); list = hits.map(h => h.p); }
   const s = $("fSort").value;
   if(s === "low") list.sort((a,b) => (price(a)||1e12) - (price(b)||1e12));
   else if(s === "high") list.sort((a,b) => price(b) - price(a));
+  else if(s === "rel" && raw) list.sort((a,b) => (scores.get(b.id)||0) - (scores.get(a.id)||0) || millis(b.updatedAt) - millis(a.updatedAt));
   else list.sort((a,b) => millis(b.updatedAt) - millis(a.updatedAt));
   return list;
 }
+/* nothing matched: show the closest properties instead of a dead end */
+function closest(){
+  const q = JPCMatch.parseQuery($("q").value), bud = Number($("fBudget").value || 0);
+  const buyer = JPCMatch.queryAsBuyer(q);
+  if(!buyer.area && $("fArea").value) buyer.area = $("fArea").value;
+  if(!buyer.propertyType && $("fType").value) buyer.propertyType = $("fType").value;
+  if(!buyer.budgetMax && bud && bud < 999999999) buyer.budgetMax = bud;
+  if(!buyer.area && !buyer.propertyType && !buyer.budgetMax && !buyer.budgetMin) return [];
+  return all.map(p => ({ p, s: JPCMatch.score(buyer, p).score })).filter(x => x.s >= 45).sort((a,b) => b.s - a.s).slice(0, 6).map(x => x.p);
+}
 function sync(){
-  const p = new URLSearchParams();
-  if($("q").value.trim()) p.set("q", $("q").value.trim());
+  const p = new URLSearchParams(), g = id => $(id).value;
+  if(g("q").trim()) p.set("q", g("q").trim());
+  if(g("fArea")) p.set("area", g("fArea"));
+  if(g("fType")) p.set("type", g("fType"));
+  if(g("fBudget")) p.set("budget", g("fBudget"));
+  if(g("fSort") && g("fSort") !== "rel") p.set("sort", g("fSort"));
   if(savedOnly) p.set("saved", "1");
   history.replaceState(null, "", location.pathname + (p.toString() ? "?" + p : ""));
 }
@@ -105,8 +122,20 @@ function render(){
   if($("fBudget").value) chips.push(["fBudget", BLABEL[$("fBudget").value]]);
   $("chips").innerHTML = chips.map(c => `<button class="fchip" type="button" data-clear="${c[0]}">${esc(c[1])} ×</button>`).join("") + (chips.length ? '<button class="fchip" type="button" data-clear="all">Clear all</button>' : "");
   const n = chips.filter(c => c[0] !== "q" && c[0] !== "saved").length; $("fcount").textContent = n || ""; $("fcount").style.display = n ? "inline-grid" : "none";
-  $("grid").innerHTML = vis.length ? vis.map(propertyCard).join("") :
-    `<div class="empty-box"><strong>${savedOnly ? "You have not saved any property yet" : "No property matches these filters"}</strong>${savedOnly ? "Tap the heart on a property to keep it here." : "Try a wider budget or another area, or tell us what you need."}<br><a class="btn btn-gold" style="margin-top:14px" target="_blank" rel="noopener" href="${JPC.wa("Hello, I am looking for a property in Jaipur. Please share options.")}">Ask on WhatsApp</a></div>`;
+  const rawQ = $("q").value.trim();
+  let gridHtml;
+  if(vis.length) gridHtml = vis.map(propertyCard).join("");
+  else {
+    const near = savedOnly ? [] : closest();
+    const wa = JPC.wa("Hello, I am looking for a property in Jaipur" + (rawQ ? ": " + rawQ : "") + ". Please share options.");
+    gridHtml = `<div class="empty-box"><strong>${savedOnly ? "You have not saved any property yet" : "No exact match found"}</strong>${savedOnly ? "Tap the heart on a property to keep it here." : (near.length ? "These are the closest properties. You can also tell us exactly what you need." : "Try a wider budget or another area, or tell us what you need.")}<br><a class="btn btn-gold" style="margin-top:14px" target="_blank" rel="noopener" href="${wa}">Tell us your requirement on WhatsApp</a></div>`;
+    if(near.length) gridHtml += `<h2 style="grid-column:1/-1;font-size:20px;margin:18px 0 0">Closest matches</h2>` + near.map(propertyCard).join("");
+  }
+  $("grid").innerHTML = gridHtml;
+  const areas0 = [...$("fArea").options].map(o => o.value).filter(Boolean), types0 = [...$("fType").options].map(o => o.value).filter(Boolean);
+  const ta = areas0[0] || "Jhotwara", tt = types0[0] || "Plot";
+  const tries = [`${tt} in ${ta}`, `${tt} under 50 lakh`, `100 gaj ${ta}`];
+  $("tryRow").innerHTML = (rawQ || chips.length || savedOnly) ? "" : '<span style="font-size:13px;color:var(--mut);align-self:center">Try:</span>' + tries.map(t => `<button class="fchip" type="button" data-try="${esc(t)}">${esc(t)}</button>`).join("");
   $("more").style.display = list.length > shown ? "inline-flex" : "none";
   document.dispatchEvent(new Event("jpc:rendered")); sync();
 }
@@ -119,15 +148,18 @@ $("chips").addEventListener("click", e => {
   else if(k === "saved") savedOnly = false; else $(k).value = "";
   shown = PAGE; render();
 });
+$("tryRow").addEventListener("click", e => { const b = e.target.closest("[data-try]"); if(!b) return; $("q").value = b.dataset.try; shown = PAGE; render(); });
 $("ft").onclick = () => { const c = $("fbarIn").classList.toggle("closed"); $("ft").setAttribute("aria-expanded", String(!c)); };
 if(matchMedia("(max-width:640px)").matches) $("fbarIn").classList.add("closed");
 document.addEventListener("jpc:saved", () => { if(savedOnly) render(); });
 
+if(P.get("sort") && [...$("fSort").options].some(o => o.value === P.get("sort"))) $("fSort").value = P.get("sort");
 if(P.get("type")) setTimeout(() => { $("fType").value = P.get("type"); render(); }, 0);
 if(P.get("budget")) setTimeout(() => { $("fBudget").value = P.get("budget"); render(); }, 0);
 onSnapshot(query(collection(db, "publicRequirements"), where("type", "==", "seller")), snap => {
   all = snap.docs.map(d => ({ id:d.id, ...d.data() })).filter(r => !hidden(r.status) && String(r.availability || "Available") !== "Not Available");
   fillOptions();
+  if(P.get("area") && [...$("fArea").options].some(o => o.value === P.get("area"))) $("fArea").value = P.get("area");
   if(P.get("type") && [...$("fType").options].some(o => o.value === P.get("type"))) $("fType").value = P.get("type");
   if(P.get("budget") && [...$("fBudget").options].some(o => o.value === P.get("budget"))) $("fBudget").value = P.get("budget");
   render();

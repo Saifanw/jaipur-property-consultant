@@ -81,7 +81,7 @@ function verOf(p){
 function pageUrl(id){ const v = META[id] && META[id].v; return new URL("property.html?id=" + encodeURIComponent(id) + (v ? "&v=" + v : ""), location.href).href; }
 async function share(id){
   const m = META[id] || {}, url = pageUrl(id);
-  const text = `${m.title || "Property in Jaipur"}${m.price ? " — " + m.price : ""}\nJaipur Property Consultant`;
+  const text = `🏡 ${m.title || "Property in Jaipur"}${m.price ? "\n💰 " + m.price : ""}\n📞 ${SITE.brand.name}: ${SITE.phone}\n\n👉 Photos & full details:`;
   if(navigator.share){ try{ await navigator.share({ title: m.title || "Property", text, url }); return; }catch(e){ if(e && e.name === "AbortError") return; } }
   let s = $("shareSheet");
   if(!s){
@@ -202,7 +202,7 @@ function chrome(){
   <header class="nav-wrap"><nav class="container nav" aria-label="Main"><a class="brand" href="index.html" aria-label="${esc(SITE.brand.name)} home"><div class="brand-mark">${ico("logo")}</div><div><div class="brand-name">${esc(SITE.brand.name)}</div><div class="brand-sub" data-i18n="tag">${esc(SITE.brand.tagline)}</div></div></a>
   <div class="nav-links" id="navLinks">${nav("properties.html","Properties","properties","nav.properties")}${nav("partner.html","Sell &amp; earn","partner","nav.sell")}${nav("reviews.html","Reviews","reviews","nav.reviews")}<a class="nav-call" href="tel:+91${esc(SITE.phone)}">${ico("phone")}<span data-i18n="nav.call">Call Now</span></a><a href="properties.html?saved=1" class="nav-saved">${ico("heart")}<span data-i18n="nav.saved">Saved</span><span class="saved-count" style="display:none"></span></a><a class="nav-wa" target="_blank" rel="noopener" href="${waHello}">${ico("wa")}<span data-i18n="wa">WhatsApp</span></a></div>
   <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">${ico("menu")}</button></nav></header>`);
-  document.body.insertAdjacentHTML("beforeend", `<footer class="footer mini-foot"><div class="container"><div class="mf-links"><a href="tel:+91${esc(SITE.phone)}">${esc(SITE.phone)}</a>${SITE.email ? `<a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a>` : ""}<a href="index.html" data-i18n="home">Home</a></div><div class="mf-bottom"><span data-i18n="foot.rights">© 2026 Jaipur Property Consultant</span><a href="admin.html" rel="nofollow" data-i18n="foot.staff">Staff login</a></div></div></footer>
+  document.body.insertAdjacentHTML("beforeend", `<footer class="footer mini-foot"><div class="container"><div class="mf-links"><a href="tel:+91${esc(SITE.phone)}">${esc(SITE.phone)}</a>${SITE.email ? `<a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a>` : ""}<a href="index.html" data-i18n="home">Home</a><a href="privacy.html">Privacy</a></div><div class="mf-bottom"><span data-i18n="foot.rights">© 2026 Jaipur Property Consultant</span><a href="admin.html" rel="nofollow" data-i18n="foot.staff">Staff login</a></div></div></footer>
   <a class="float-wa" target="_blank" rel="noopener" href="${waHello}" aria-label="Chat on WhatsApp"><svg class="icon" style="width:28px;height:28px;fill:#fff;stroke:none"><use href="#i-wa"/></svg></a>
   <div class="mobile-bar"><a class="c" href="tel:+91${esc(SITE.phone)}">${ico("phone")}<span data-i18n="call">Call</span></a><a class="w" target="_blank" rel="noopener" href="${waHello}"><svg class="icon" style="width:18px;height:18px;fill:#fff;stroke:none"><use href="#i-wa"/></svg><span data-i18n="wa">WhatsApp</span></a></div>`);
   const mb = $("menuBtn"), nl = $("navLinks");

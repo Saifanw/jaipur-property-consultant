@@ -6,7 +6,8 @@ service firebase.storage {
     // Replace saif.anwar1618@gmail.com with your actual Google admin email.
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email == "saif.anwar1618@gmail.com";
+        && request.auth.token.email == "saif.anwar1618@gmail.com"
+        && request.auth.token.email_verified == true;
     }
 
     match /crmContacts/{allPaths=**} {

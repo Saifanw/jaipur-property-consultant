@@ -263,7 +263,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <div class="hero"><div><h1 id="greet">Namaste 👋</h1><p id="dSub"></p></div></div>
       <section class="kpis" id="kpis"></section>
       <div class="dash">
-        <section class="card panel"><h3>📞 Aaj ka kaam <small id="todoSub"></small></h3><div id="todo"></div></section>
+        <section class="card panel"><h3>📞 Today's tasks <small id="todoSub"></small></h3><div id="todo"></div></section>
         <section class="card panel"><h3>⚡ Dhyan do</h3><div id="attn"></div></section>
       </div>
       <div class="two">
@@ -308,13 +308,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
     <!-- FOLLOW-UPS -->
     <section id="v_follow" class="hidden">
-      <div class="hero"><div><h1>Follow-ups</h1><p>Overdue, aaj aur aane wale 7 din.</p></div></div>
+      <div class="hero"><div><h1>Follow-ups</h1><p>Overdue, today and the next 7 days.</p></div></div>
       <div id="fRows"></div>
     </section>
 
     <!-- INBOX -->
     <section id="v_inbox" class="hidden">
-      <div class="hero"><div><h1>Inbox</h1><p>Website se aayi enquiries, forms aur reviews.</p></div>
+      <div class="hero"><div><h1>Inbox</h1><p>Website enquiries, forms and reviews.</p></div>
         <div class="chips" style="margin:0"><button class="chip on" data-ib="sub">📨 Submissions <b id="ibSub">0</b></button><button class="chip" data-ib="rev">⭐ Reviews <b id="ibRev">0</b></button><button class="chip" data-ib="qa">❓ Questions <b id="ibQa">0</b></button></div></div>
       <section class="card tool" style="padding:12px 16px"><label style="display:flex;gap:10px;align-items:center;font-size:12px;font-weight:700;color:var(--mut)">Show <select id="ibFilter" style="max-width:180px"><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select></label></section>
       <div id="ibNote"></div>
@@ -323,7 +323,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
     <!-- MATCH -->
     <section id="v_match" class="hidden">
-      <div class="hero"><div><h1>Smart Match</h1><p>Customer ki requirement se property, ya property se customers dhundo — area, type aur budget ke score ke saath.</p></div>
+      <div class="hero"><div><h1>Smart Match</h1><p>Find properties for a customer's requirement, or customers for a property — scored by area, type and budget.</p></div>
         <div class="chips" style="margin:0"><button class="chip on" data-mm="c2p">🧑 Customer → Property</button><button class="chip" data-mm="p2c">🏠 Property → Customers</button></div></div>
       <section class="card tool"><label class="lbl" style="margin:0"><span id="mPickLbl">Select customer</span><select id="mPick"></select></label><p id="mInfo" style="color:var(--mut);font-size:12.5px;margin-top:8px"></p></section>
       <div id="mRes"></div>
@@ -331,13 +331,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
     <!-- TOOLS -->
     <section id="v_tools" class="hidden">
-      <div class="hero"><div><h1>Tools</h1><p>Excel import / export, backup aur Trash.</p></div></div>
+      <div class="hero"><div><h1>Tools</h1><p>Excel import / export, backup and Trash.</p></div></div>
       <div class="two">
         <section class="card panel"><h3>⬆ Import (Excel / CSV)</h3>
-          <div class="drop"><b>Excel ya CSV file chuno</b>Columns: Type, Name, Mobile, Area, Property Type, Size, Budget Min, Budget Max, Status, Source, Details, Notes<br>Type = customer / seller / broker · same mobile wale skip ho jate hain · seller ko code automatic milta hai<br><br><button class="btn p" id="impBtn">Choose file</button><input id="impFile" type="file" accept=".xlsx,.xls,.csv" class="hidden"></div>
+          <div class="drop"><b>Choose an Excel or CSV file</b>Columns: Type, Name, Mobile, Area, Property Type, Size, Budget Min, Budget Max, Status, Source, Details, Notes<br>Type = customer / seller / broker · rows with an existing mobile number are skipped · sellers get a property code automatically<br><br><button class="btn p" id="impBtn">Choose file</button><input id="impFile" type="file" accept=".xlsx,.xls,.csv" class="hidden"></div>
           <p id="impMsg" style="margin-top:10px;font-size:13px"></p></section>
         <section class="card panel"><h3>⬇ Export & Backup</h3>
-          <p style="color:var(--mut);margin-bottom:12px">Poora CRM Excel mein, ya khali template jo import ke liye use ho sake.</p>
+          <p style="color:var(--mut);margin-bottom:12px">Export the full CRM to Excel, or download a blank import template.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn p" id="expX">Export all (Excel)</button><button class="btn" id="expT">Import template</button><button class="btn" id="expJ">Backup (JSON)</button></div></section>
       </div>
       <h3 style="margin:22px 0 10px;font-size:15px">🗑 Trash <span id="trashN" style="color:var(--mut);font-weight:600"></span></h3>
@@ -354,12 +354,12 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
   <div class="mtabs" id="mtabs"><button data-t="status" class="on">Status &amp; follow-up</button><button data-t="details">Details</button><button data-t="matches" id="matchTab">Matches</button><button data-t="conv" id="convTab">Conversation</button></div>
   <div class="mbody">
     <div id="tp_status">
-      <div class="mq">Abhi ye kahan hai?</div>
+      <div class="mq">Current stage</div>
       <div class="sc-grid" id="mChips"></div>
       <div class="fu"><h3>Next follow-up</h3>
-        <div class="fg"><label>Date<input id="m_date" type="date"></label><label>Kya karna hai<input id="m_fnote" type="text" placeholder="e.g. Site visit confirm karna hai"></label></div>
+        <div class="fg"><label>Date<input id="m_date" type="date"></label><label>Next action<input id="m_fnote" type="text" placeholder="e.g. Confirm site visit"></label></div>
         <div class="qk" id="qk"><button type="button" data-qd="0">Today</button><button type="button" data-qd="1">Tomorrow</button><button type="button" data-qd="3">In 3 days</button><button type="button" data-qd="7">Next week</button><button type="button" data-qd="x">Clear</button></div></div>
-      <label class="lbl">Notes (private)<textarea id="m_notes" rows="3" placeholder="Is customer ke baare mein kuch yaad rakhna ho"></textarea></label>
+      <label class="lbl">Notes (private)<textarea id="m_notes" rows="3" placeholder="Anything worth remembering about this contact"></textarea></label>
     </div>
     <div id="tp_details" class="hidden">
       <div class="fg">
@@ -372,23 +372,23 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
         <label>Size / BHK<input id="m_size" type="text" placeholder="e.g. 50 gaj, 2 BHK"></label>
         <label>Budget min<input id="m_bmin" type="text" placeholder="e.g. 40 lakh"><span class="hint" id="h_bmin"></span></label>
         <label>Budget max<input id="m_bmax" type="text" placeholder="e.g. 1.2 cr"><span class="hint" id="h_bmax"></span></label>
-        <label class="full">Requirement details<textarea id="m_details" rows="2" placeholder="Size, facing, loan, kab tak lena hai…"></textarea></label>
+        <label class="full">Requirement details<textarea id="m_details" rows="2" placeholder="Size, facing, loan, purchase timeline…"></textarea></label>
         <label>Email<input id="m_email" type="text"></label>
         <label>Alternate mobile<input id="m_alt" type="tel"></label>
         <label id="m_coL">Company / Agency<input id="m_company" type="text"></label>
         <label id="m_asL">Areas served<input id="m_areas" type="text"></label>
       </div>
       <div id="m_linkbox">
-        <div class="lbl">Interested property (code likho — JPC-012)</div>
+        <div class="lbl">Interested property (enter code — JPC-012)</div>
         <div class="lk" id="m_lk"></div>
-        <div class="lkadd"><input id="m_code" type="text" list="codeList" placeholder="JPC-012 ya sirf 12"><button class="btn" type="button" id="m_codeAdd">Link</button></div>
+        <div class="lkadd"><input id="m_code" type="text" list="codeList" placeholder="JPC-012 or just 12"><button class="btn" type="button" id="m_codeAdd">Link</button></div>
         <datalist id="codeList"></datalist>
       </div>
-      <label class="sw" id="m_pubBox"><input type="checkbox" id="m_pub"><span><b>🌐 Requirement website par dikhao</b>Sirf area, type, budget aur details dikhenge. Naam aur mobile kabhi nahi.</span></label>
+      <label class="sw" id="m_pubBox"><input type="checkbox" id="m_pub"><span><b>🌐 Show requirement on website</b>Only area, type, budget and details are shown. Name and mobile are never shown.</span></label>
     </div>
     <div id="tp_matches" class="hidden"><div id="mmList"></div></div>
     <div id="tp_conv" class="hidden">
-      <div class="noteadd"><select id="n_kind"><option value="call">📞 Call</option><option value="wa">💬 WhatsApp</option><option value="visit">🏠 Site visit</option><option value="note">📝 Note</option></select><input id="n_text" type="text" placeholder="Kya baat hui? Enter dabao"><button class="btn p" id="n_add" type="button">Add</button></div>
+      <div class="noteadd"><select id="n_kind"><option value="call">📞 Call</option><option value="wa">💬 WhatsApp</option><option value="visit">🏠 Site visit</option><option value="note">📝 Note</option></select><input id="n_text" type="text" placeholder="Discussion summary? Enter dabao"><button class="btn p" id="n_add" type="button">Add</button></div>
       <div class="tl" id="tl"></div>
     </div>
   </div>
@@ -397,7 +397,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
 <!-- PROPERTY MODAL -->
 <div id="po" class="ov hidden"><div class="modal" role="dialog" aria-modal="true">
-  <div class="mh"><div><h2 id="pt">Add property</h2><p>Code automatic milega — customers is code se link honge.</p></div><span class="code" id="pCode">JPC-—</span></div>
+  <div class="mh"><div><h2 id="pt">Add property</h2><p>The code is assigned automatically — customers are linked using this code.</p></div><span class="code" id="pCode">JPC-—</span></div>
   <div class="mbody">
     <div class="fg">
       <label>Property type *<select id="p_type"><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Shop</option><option>Land</option><option>Commercial</option><option>Other</option></select></label>
@@ -409,7 +409,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <label>Owner / Seller name *<input id="p_owner" type="text"></label>
       <label>Owner mobile<input id="p_mobile" type="tel" inputmode="tel"></label>
       <label class="full">Road / Facing<input id="p_road" type="text" placeholder="e.g. 30 ft road, East facing"></label>
-      <div class="full" style="font-weight:800;color:var(--navy);margin-top:8px">🌐 Website par dikhne wali details (jitni zyada, utna trust)</div>
+      <div class="full" style="font-weight:800;color:var(--navy);margin-top:8px">🌐 Details shown on the website (the more complete, the more trust)</div>
       <label>Facing<select id="p_facing"><option value="">—</option><option>East facing</option><option>West facing</option><option>North facing</option><option>South facing</option><option>North-East facing</option><option>North-West facing</option><option>South-East facing</option><option>South-West facing</option></select></label>
       <label>Bedrooms / Rooms<select id="p_bed"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option></select></label>
       <label>Bathrooms / Toilets<select id="p_bath"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option></select></label>
@@ -423,24 +423,24 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <label>Society / colony<input id="p_soc" type="text" placeholder="e.g. Hanuman Vatika II"></label>
       <label>Landmark<input id="p_land" type="text" placeholder="e.g. Kedia's The Kothi ke paas"></label>
       <label class="full">Google Maps link<input id="p_map" type="url" placeholder="https://maps.app.goo.gl/…"></label>
-      <label class="full">Khaas baatein / highlights (ek line mein ek)<textarea id="p_high" rows="3" placeholder="Corner ka plot&#10;Pakki sadak, light-paani ready&#10;School 500 m door"></textarea></label>
-      <label class="full">Aas-paas (ek line mein ek)<textarea id="p_near" rows="3" placeholder="School — 500 m&#10;Highway — 2 km&#10;Market — 1 km"></textarea></label>
+      <label class="full">Highlights (one per line)<textarea id="p_high" rows="3" placeholder="Corner ka plot&#10;Pakki sadak, light-paani ready&#10;School 500 m door"></textarea></label>
+      <label class="full">Nearby places (one per line)<textarea id="p_near" rows="3" placeholder="School — 500 m&#10;Highway — 2 km&#10;Market — 1 km"></textarea></label>
       <div class="full" id="p_score" style="font-size:12.5px;background:#f6edd5;border-radius:10px;padding:9px 12px"></div>
-      <div class="full" style="font-weight:800;color:var(--navy);margin-top:8px">📣 Ad post — ek baar banao, har jagah paste karo</div>
+      <div class="full" style="font-weight:800;color:var(--navy);margin-top:8px">📣 Ad post — create once, paste anywhere</div>
       <label>Type<select id="p_adk"><option value="wa">WhatsApp / Facebook (chhota)</option><option value="portal">OLX / 99acres / Magicbricks (poora)</option></select></label>
       <label>Bhasha<select id="p_adl"><option value="hi">हिंदी</option><option value="en">English</option></select></label>
-      <label class="full">Post (edit kar sakte ho, Save par property ke saath save hoga)<textarea id="p_ad" rows="9" placeholder="‘✨ Auto-banao’ dabao — upar bhari details se post ban jayegi"></textarea></label>
-      <div class="full" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn p sm" id="p_adgen">✨ Auto-banao</button><button type="button" class="btn sm" id="p_adcopy">📋 Copy</button><button type="button" class="btn sm" id="p_adwa">WhatsApp par bhejo</button></div>
+      <label class="full">Post (editable — saved with the property when you click Save)<textarea id="p_ad" rows="9" placeholder="Click ‘✨ Auto-generate’ — the post is built from the details above"></textarea></label>
+      <div class="full" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn p sm" id="p_adgen">✨ Auto-generate</button><button type="button" class="btn sm" id="p_adcopy">📋 Copy</button><button type="button" class="btn sm" id="p_adwa">Send on WhatsApp</button></div>
       <label>Owner follow-up date<input id="p_fdate" type="date"></label>
-      <label>Follow-up note<input id="p_fnote" type="text" placeholder="e.g. Rate confirm karna hai"></label>
+      <label>Follow-up note<input id="p_fnote" type="text" placeholder="e.g. Confirm rate"></label>
       <label class="full">Property details<textarea id="p_details" rows="2" placeholder="Documents, patta/registry, condition…"></textarea></label>
-      <label class="full">Exact address (private)<input id="p_addr" type="text" placeholder="Sirf aapke liye — website par nahi jayega"></label>
-      <label class="full">Private notes<textarea id="p_notes" rows="2" placeholder="Sirf aapke liye"></textarea></label>
+      <label class="full">Exact address (private)<input id="p_addr" type="text" placeholder="Private — never shown on the website"></label>
+      <label class="full">Private notes<textarea id="p_notes" rows="2" placeholder="Private"></textarea></label>
     </div>
     <div class="lbl" style="margin-top:16px">Photos <span id="phCount" style="font-weight:500"></span></div>
     <div class="photos" id="photos"></div><input id="phFile" type="file" accept="image/*" multiple class="hidden">
     <label class="lbl">Video (optional, max 50 MB; Cloudinary par upload hogi)<input id="p_video" type="file" accept="video/*"><span class="hint" id="p_vidNote"></span></label>
-    <label class="sw"><input type="checkbox" id="p_pub"><span><b>🌐 Website par dikhao</b>Area, type, size, price, photos aur details public honge. Owner ka naam, mobile, exact address aur notes kabhi nahi. <b style="color:var(--amber);margin-top:4px">Tip: photos public karne ke liye pehle ye ON karo, phir photos upload karo.</b></span></label>
+    <label class="sw"><input type="checkbox" id="p_pub"><span><b>🌐 Show on website</b>Area, type, size, price, photos and details become public. Owner name, mobile, exact address and notes are never published. <b style="color:var(--amber);margin-top:4px">Tip: turn this ON before uploading photos so they can be published.</b></span></label>
   </div>
   <div class="mf"><div><button class="btn d hidden" id="p_del">Delete</button></div><div style="display:flex;gap:8px"><button class="btn" id="p_cancel">Cancel</button><button class="btn p" id="p_save">Save property</button></div></div>
 </div></div>
@@ -450,11 +450,11 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
   <div class="mh"><div><h2>Add interested customer</h2><p id="qSub"></p></div></div>
   <div class="mbody" style="min-height:0">
     <div class="fg">
-      <label class="full">Name *<input id="q_name" type="text" list="custList" autocomplete="off" placeholder="Naya naam likho ya purane customer ko chuno"></label>
+      <label class="full">Name *<input id="q_name" type="text" list="custList" autocomplete="off" placeholder="Enter a new name or pick an existing customer"></label>
       <datalist id="custList"></datalist>
       <label>Mobile<input id="q_mobile" type="tel" inputmode="tel"></label>
       <label>Follow-up date<input id="q_date" type="date"></label>
-      <label class="full">Kya baat hui<input id="q_note" type="text" placeholder="e.g. 85 lakh mein ready, Sunday visit chahiye"></label>
+      <label class="full">Discussion summary<input id="q_note" type="text" placeholder="e.g. Ready at 85 lakh, wants a Sunday visit"></label>
     </div>
     <p class="hint" id="q_hint" style="margin-top:10px"></p>
   </div>
@@ -463,9 +463,9 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 
 <!-- SMART PASTE -->
 <div id="so" class="ov hidden"><div class="modal" style="width:min(560px,100%)" role="dialog" aria-modal="true">
-  <div class="mh"><div><h2>⚡ Quick add</h2><p>Enquiry ka message ya line paste karo — naam, mobile, area, type aur budget apne aap nikal jayenge.</p></div></div>
+  <div class="mh"><div><h2>⚡ Quick add</h2><p>Paste an enquiry message — name, mobile, area, type and budget are extracted automatically.</p></div></div>
   <div class="mbody" style="min-height:0">
-    <textarea id="s_text" rows="5" placeholder="e.g. Ramesh Sharma 9876543210 Jagatpura mein 100 gaj plot chahiye, budget 60-80 lakh"></textarea>
+    <textarea id="s_text" rows="5" placeholder="e.g. Ramesh Sharma 9876543210 needs a 100 gaj plot in Jagatpura, budget 60-80 lakh"></textarea>
     <div id="s_prev" style="margin-top:12px;font-size:13px"></div>
   </div>
   <div class="mf"><span></span><div style="display:flex;gap:8px"><button class="btn" id="s_cancel">Cancel</button><button class="btn p" id="s_go">Aage badho →</button></div></div>
@@ -479,10 +479,10 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 </div></div>
 
 <div id="bq" class="ov hidden"><div class="modal" style="width:min(600px,100%)" role="dialog" aria-modal="true">
-  <div class="mh"><div><h2>📲 Matching buyers ko WhatsApp</h2><p id="bq_sub"></p></div></div>
-  <div class="mbody" style="min-height:0"><label style="font-size:12px;font-weight:700;color:var(--mut)">Message (har buyer ke liye {name} aur property details apne aap bhar jayengi)</label><textarea id="bq_text" rows="4"></textarea>
+  <div class="mh"><div><h2>📲 WhatsApp matching buyers</h2><p id="bq_sub"></p></div></div>
+  <div class="mbody" style="min-height:0"><label style="font-size:12px;font-weight:700;color:var(--mut)">Message ({name} and property details are filled in automatically for each buyer)</label><textarea id="bq_text" rows="4"></textarea>
    <div class="bqp"><i id="bq_bar"></i></div><div id="bq_prog" style="font-size:12px;font-weight:700;color:var(--mut);margin-bottom:6px"></div><div id="bq_list" style="max-height:38vh;overflow:auto"></div>
-   <div style="font-size:11.5px;color:var(--mut);margin-top:8px">WhatsApp Web mein Send aapko khud dabana hota hai. Jisko bhej diya wo ✓ ho jata hai aur timeline mein likh jata hai, to dobara nahi jayega.</div></div>
+   <div style="font-size:11.5px;color:var(--mut);margin-top:8px">You must press Send yourself in WhatsApp Web. Contacts you have messaged are marked ✓ and logged in the timeline, so they are not messaged twice.</div></div>
   <div class="mf"><span></span><div style="display:flex;gap:8px"><button class="btn" id="bq_close">Close</button><button class="btn p" id="bq_next" style="background:#0f9d6a;border-color:#0f9d6a">Next</button></div></div>
 </div></div>
 
@@ -492,12 +492,12 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
 <div id="shs" class="ov shov hidden"><div class="shbox" role="dialog" aria-modal="true" aria-labelledby="shsT">
   <div class="shh"><div><b id="shsT">Share property</b><span id="shsS"></span></div><button class="shx" id="shsX" type="button" aria-label="Close">✕</button></div>
   <div class="shprev"><img id="shsImg" alt="" class="hidden"><div><span class="code" id="shsCode"></span><div class="pt" id="shsPrice"></div></div></div>
-  <div class="shwarn hidden" id="shsWarn"><span>Ye property website par live nahi hai, isliye message mein link nahi hai.</span><button class="btn sm" id="shsLive" type="button">Live karo</button></div>
+  <div class="shwarn hidden" id="shsWarn"><span>This property is not live on the website, so the message has no link.</span><button class="btn sm" id="shsLive" type="button">Publish</button></div>
   <textarea id="shsMsg" aria-label="Message to share"></textarea>
   <div class="shgrid">
-    <button class="btn wa-b" id="shsWa" type="button">💬 WhatsApp par bhejo</button>
+    <button class="btn wa-b" id="shsWa" type="button">💬 Send on WhatsApp</button>
     <button class="btn" id="shsNative" type="button">📤 Share…</button>
-    <button class="btn" id="shsPhoto" type="button">📷 Photo ke saath</button>
+    <button class="btn" id="shsPhoto" type="button">📷 With photo</button>
     <button class="btn" id="shsCopyMsg" type="button">Copy message</button>
     <button class="btn" id="shsCopyLink" type="button">Copy link</button>
   </div>
@@ -521,7 +521,7 @@ async function uploadToCloudinary(file,resourceType="image",onProgress){
   const endpoint=`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`;
   const form=new FormData();form.append("file",file);form.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);form.append("folder",resourceType==="video"?"property-videos":"property-images");
   const response=await fetch(endpoint,{method:"POST",body:form});let data={};try{data=await response.json()}catch{}
-  if(!response.ok||!data.secure_url)throw new Error(data?.error?.message||`Cloudinary upload fail (${response.status}). Upload preset aur allowed formats check karo.`);
+  if(!response.ok||!data.secure_url)throw new Error(data?.error?.message||`Cloudinary upload fail (${response.status}). Check the upload preset and allowed formats.`);
   return data.secure_url;
 }
 const BRAND="Jaipur Property Consultant";
@@ -556,16 +556,16 @@ function beep(){try{const C=window.AudioContext||window.webkitAudioContext,c=new
 function popup(m){
   let box=$("ntf");if(!box){box=document.createElement("div");box.id="ntf";box.style.cssText="position:fixed;top:74px;right:16px;z-index:200;display:grid;gap:10px;width:min(340px,calc(100vw - 32px))";document.body.appendChild(box)}
   const el=document.createElement("div");el.style.cssText="background:#fff;border:1px solid #dbe3f3;border-left:5px solid #3558ff;border-radius:12px;box-shadow:0 14px 40px #0f172a30;padding:12px 14px;display:grid;gap:4px;cursor:pointer";
-  el.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><b>${m.ic} ${esc(m.t)}</b><span data-x style="cursor:pointer;color:#8896aa">✕</span></div><div style="font-size:13px;color:#4b5a73;overflow-wrap:anywhere">${esc(String(m.b).slice(0,140))}</div><div style="font-size:12px;color:#3558ff;font-weight:700">Inbox kholne ke liye click karo →</div>`;
+  el.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><b>${m.ic} ${esc(m.t)}</b><span data-x style="cursor:pointer;color:#8896aa">✕</span></div><div style="font-size:13px;color:#4b5a73;overflow-wrap:anywhere">${esc(String(m.b).slice(0,140))}</div><div style="font-size:12px;color:#3558ff;font-weight:700">Click to open Inbox →</div>`;
   el.onclick=e=>{if(!e.target.closest("[data-x]")){ibMode=m.mode;setView("inbox");renderInbox()}el.remove()};
   box.prepend(el);setTimeout(()=>el.remove(),20000);beep();
   try{if("Notification" in window&&Notification.permission==="granted"&&document.hidden)new Notification(m.t,{body:String(m.b).slice(0,120)})}catch(e){}}
 function ping(kind,s){
   if(!ready[kind]){ready[kind]=1;return}
   s.docChanges().forEach(c=>{if(c.type!=="added")return;const d=c.doc.data();if((d.status||"pending")!=="pending")return;
-    popup({subs:{ic:"📨",t:d.kind==="enquiry"?"Naya property enquiry":d.kind==="partner"?"Sell & earn form aaya":"Nayi website submission",b:`${d.name||""} • ${d.mobile||""} ${d.details||""}`,mode:"sub"},
-      qs:{ic:"❓",t:"Naya sawaal",b:`${d.name||""}: ${d.question||""}`,mode:"qa"},
-      revs:{ic:"⭐",t:"Naya comment / review",b:`${d.name||""}: ${d.comment||""}`,mode:"rev"}}[kind])})}
+    popup({subs:{ic:"📨",t:d.kind==="enquiry"?"New property enquiry":d.kind==="partner"?"New Sell & Earn form":"New website submission",b:`${d.name||""} • ${d.mobile||""} ${d.details||""}`,mode:"sub"},
+      qs:{ic:"❓",t:"New question",b:`${d.name||""}: ${d.question||""}`,mode:"qa"},
+      revs:{ic:"⭐",t:"New comment / review",b:`${d.name||""}: ${d.comment||""}`,mode:"rev"}}[kind])})}
 document.addEventListener("click",()=>{try{if("Notification" in window&&Notification.permission==="default")Notification.requestPermission()}catch(e){}},{once:true});
 function toast(m,bad){const t=$("toast");t.textContent=m;t.className="toast"+(bad?" bad":"");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add("hidden"),3000)}
 
@@ -617,13 +617,13 @@ async function backfillCodes(){
 let urlDone=false;
 function openFromUrl(){if(urlDone)return;const id=new URLSearchParams(location.search).get("edit");if(!id){urlDone=true;return}
   urlDone=true;history.replaceState(null,"",location.pathname);
-  if(propById(id)){setView("props");openProp=id;renderProps();openP(id)}else toast("Ye property admin me nahi mili",true)}
+  if(propById(id)){setView("props");openProp=id;renderProps();openP(id)}else toast("Property not found",true)}
 function listen(){
   unsubs.forEach(u=>u());unsubs=[];
   unsubs.push(onSnapshot(collection(db,COL),s=>{
     all=s.docs.map(d=>({id:d.id,...d.data({serverTimestamps:"estimate"})}));recs=all.filter(r=>!r.deletedAt);loaded=true;
     $("err").classList.add("hidden");refreshAll();backfillCodes();openFromUrl();
-  },e=>{loaded=true;$("err").textContent="Data load nahi hua: "+(e.code||e.message);$("err").classList.remove("hidden");refreshAll()}));
+  },e=>{loaded=true;$("err").textContent="Could not load data: "+(e.code||e.message);$("err").classList.remove("hidden");refreshAll()}));
   unsubs.push(onSnapshot(collection(db,"publicSubmissions"),s=>{ping("subs",s);subs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("subs",e)));
   unsubs.push(onSnapshot(collection(db,"publicQuestions"),s=>{ping("qs",s);qs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("qs",e)));
   unsubs.push(onSnapshot(collection(db,"publicReviews"),s=>{ping("revs",s);revs=s.docs.map(d=>({id:d.id,...d.data()}));renderInbox();dash()},e=>console.warn("revs",e)));
@@ -650,7 +650,7 @@ const skRows=c=>Array(5).fill(`<div class="row ${c}"><div class="sk"></div><div 
 const waBtn=(r,pid)=>waNum(r)?`<button class="mini wa" data-act="wa" data-id="${esc(r.id)}"${pid?` data-pid="${esc(pid)}"`:""}>WhatsApp</button>`:"";
 function fuCell(r){const s=fuState(r);if(s==="none")return`<button class="setf" data-act="cEdit" data-id="${esc(r.id)}">+ Set follow-up</button>`;
   return`<div class="cell nx ${s}"><b>${s==="td"?"Today":fmtFu(r.followUpDate)}${s==="od"?" · overdue":""}</b><span>${esc(r.followUpNote||"—")}</span></div>`}
-const barsHTML=a=>{const max=Math.max(1,...a.map(x=>x[1]));return a.length?a.map(x=>`<div class="bar-row"><span>${esc(x[0])}</span><div class="b"><i style="width:${Math.round(x[1]/max*100)}%"></i></div><b>${x[1]}</b></div>`).join(""):`<div style="color:var(--mut);font-size:13px">Abhi data nahi.</div>`};
+const barsHTML=a=>{const max=Math.max(1,...a.map(x=>x[1]));return a.length?a.map(x=>`<div class="bar-row"><span>${esc(x[0])}</span><div class="b"><i style="width:${Math.round(x[1]/max*100)}%"></i></div><b>${x[1]}</b></div>`).join(""):`<div style="color:var(--mut);font-size:13px">No data yet.</div>`};
 const tally=(arr,f)=>{const m={};arr.forEach(x=>{const k=clean(f(x));if(k)m[k]=(m[k]||0)+1});return Object.entries(m).sort((a,b)=>b[1]-a[1])};
 
 /* ---------- DASHBOARD ---------- */
@@ -665,13 +665,13 @@ function dash(){
   $("kpis").innerHTML=[["",P.filter(availableP).length,"Available properties"],["",act.length,"Active buyers"],["g",hot.length,"Hot buyers"],["a",td.length,"Follow-ups today"],["w",od.length,"Overdue"],["",pend,"Inbox pending"]].map(k=>`<div class="card kpi ${k[0]}"><b>${k[1]}</b><span>${k[2]}</span></div>`).join("");
   const work=[...od.sort((a,b)=>a.followUpDate.localeCompare(b.followUpDate)),...td];$("todoSub").textContent=work.length?work.length+" pending":"";
   $("todo").innerHTML=work.length?work.slice(0,8).map(r=>{const s=fuState(r),ints=interestsOf(r);
-    return`<div class="todo"><div class="dt ${s}">${s==="td"?"Today":daysLate(r.followUpDate)+"d late"}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(r.name||"Unnamed")}<span class="tag ${r.type}">${TYPE_LBL[r.type]||""}</span></b><div style="font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc([r.type==="seller"?r.code:ints.map(i=>i.code).join(", "),r.followUpNote||lastNote(r)].filter(Boolean).join(" · ")||"Follow-up")}</div></div><div class="ra">${waBtn(r)}<button class="mini" data-act="fDone" data-id="${esc(r.id)}">✓</button><button class="mini v" data-act="cEdit" data-id="${esc(r.id)}">Open</button></div></div>`}).join("")+(work.length>8?`<div style="padding-top:10px"><button class="btn sm" data-act="go" data-to="follow">Sab ${work.length} dekho →</button></div>`:""):`<div class="empty" style="padding:26px">🎉 Aaj koi follow-up pending nahi.</div>`;
+    return`<div class="todo"><div class="dt ${s}">${s==="td"?"Today":daysLate(r.followUpDate)+"d late"}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(r.name||"Unnamed")}<span class="tag ${r.type}">${TYPE_LBL[r.type]||""}</span></b><div style="font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc([r.type==="seller"?r.code:ints.map(i=>i.code).join(", "),r.followUpNote||lastNote(r)].filter(Boolean).join(" · ")||"Follow-up")}</div></div><div class="ra">${waBtn(r)}<button class="mini" data-act="fDone" data-id="${esc(r.id)}">✓</button><button class="mini v" data-act="cEdit" data-id="${esc(r.id)}">Open</button></div></div>`}).join("")+(work.length>8?`<div style="padding-top:10px"><button class="btn sm" data-act="go" data-to="follow">View all ${work.length} →</button></div>`:""):`<div class="empty" style="padding:26px">🎉 No follow-ups pending today.</div>`;
   const items=[],nofu=hot.filter(r=>!r.followUpDate).length,wk=Date.now()-7*864e5,noenq=P.filter(p=>availableP(p)&&!buyersOf(p).length&&(msOf(p.createdAt)||Date.now())<wk).length,nophoto=P.filter(p=>availableP(p)&&!(p.images||[]).length).length;
-  if(pend)items.push(["📥",`${pend} naye submissions / reviews`,"Inbox mein approve ya reject karo","go","inbox"]);
-  if(nofu)items.push(["🔥",`${nofu} hot buyers ka follow-up set nahi`,"Interested / Site Visit / Negotiation par date lagao","go","nofu"]);
-  if(noenq)items.push(["🏘",`${noenq} properties par 7+ din se enquiry nahi`,"Matching buyers ko share karo","go","noenq"]);
-  if(nophoto)items.push(["📷",`${nophoto} properties ki photo nahi`,"Photo wali property zyada enquiry laati hai","go","props"]);
-  $("attn").innerHTML=items.length?items.map(i=>`<button class="att" data-act="${i[3]}" data-to="${i[4]}"><i>${i[0]}</i><div><b>${i[1]}</b><span>${i[2]}</span></div></button>`).join(""):`<div class="empty" style="padding:26px">✓ Sab theek hai — kuch pending nahi.</div>`;
+  if(pend)items.push(["📥",`${pend} new submissions / reviews`,"Approve or reject in Inbox","go","inbox"]);
+  if(nofu)items.push(["🔥",`${nofu} hot buyers without a follow-up date`,"Set a date for Interested / Site Visit / Negotiation","go","nofu"]);
+  if(noenq)items.push(["🏘",`${noenq} properties with no enquiry for 7+ days`,"Share with matching buyers","go","noenq"]);
+  if(nophoto)items.push(["📷",`${nophoto} properties without photos`,"Properties with photos get more enquiries","go","props"]);
+  $("attn").innerHTML=items.length?items.map(i=>`<button class="att" data-act="${i[3]}" data-to="${i[4]}"><i>${i[0]}</i><div><b>${i[1]}</b><span>${i[2]}</span></div></button>`).join(""):`<div class="empty" style="padding:26px">✓ All clear — nothing pending.</div>`;
   $("pipe").innerHTML=barsHTML(STATUSES.map(s=>[s,B.filter(r=>(r.status||"New")===s).length]));
   $("areaBars").innerHTML=barsHTML(tally(P,areaOf).slice(0,6));
   $("srcBars").innerHTML=barsHTML(tally(B,r=>r.source).slice(0,6));
@@ -690,7 +690,7 @@ function renderProps(){
     if(q&&![p.code,p.area,p.propertyType,p.size,p.name,p.mobile,p.details,...c.map(x=>x.name+" "+x.mobile)].map(clean).join(" ").toLowerCase().includes(q))return false;return true})
     .sort((a,b)=>codeNum(b.p.code)-codeNum(a.p.code));
   $("pSub").textContent=`${rows.length} of ${props().length} properties · interested customers are listed under each property`;
-  if(!rows.length){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏘</div><b>${props().length?"No matching property found":"Abhi koi property nahi hai"}</b>${props().length?"Try changing your search or filters.":"Pehli property add karo — usse automatic code mil jayega."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
+  if(!rows.length){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏘</div><b>${props().length?"No matching property found":"No properties yet"}</b>${props().length?"Try changing your search or filters.":"Add your first property — it gets an automatic code."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
   const cardsOn=pView==="cards";
   $("pListWrap").classList.toggle("hidden",cardsOn);$("pCards").classList.toggle("hidden",!cardsOn);
   document.querySelectorAll("[data-pv]").forEach(b=>b.classList.toggle("on",b.dataset.pv===pView));
@@ -724,17 +724,17 @@ function propDetail(p,c){
   const avNow=p.availability||"Available";
   const tools=`<div class="ptools"><button class="btn p" data-act="pEdit" data-id="${esc(p.id)}">✏️ Edit property</button><button class="btn" data-act="pShare" data-id="${esc(p.id)}">📤 Share</button><div class="avs">Status: ${["Available","Under Offer","Sold","Hold"].map(v=>`<button type="button" class="${avNow===v?"on":""}" data-act="pAv" data-id="${esc(p.id)}" data-v="${v}">${v}</button>`).join("")}</div></div>`;
   return`${tools}${imgs?`<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">${imgs}</div>`:""}
-   <div class="pinfo" style="margin-top:12px">${info||"<span>Aur details nahi bhari.</span>"}</div>
+   <div class="pinfo" style="margin-top:12px">${info||"<span>No further details added.</span>"}</div>
    ${p.followUpDate?`<div class="pinfo"><span>Owner follow-up: <b>${fmtFu(p.followUpDate)}</b> ${esc(p.followUpNote||"")}</span></div>`:""}
-   <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px">${waBtn(p)}${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Matching buyers ko bhejo</button>`:""}${lk?`<button class="mini" data-act="copyLink" data-id="${esc(p.id)}">🔗 Copy website link</button>`:""}</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px">${waBtn(p)}${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Send to matching buyers</button>`:""}${lk?`<button class="mini" data-act="copyLink" data-id="${esc(p.id)}">🔗 Copy website link</button>`:""}</div>
    <h4><span>Interested customers for this property (${c.length})</span><button class="btn p sm" data-act="pLink" data-id="${esc(p.id)}">＋ Add customer</button></h4>
    ${c.length?c.map(x=>subRow(x,p)).join(""):`<div class="empty" style="padding:22px">No customer is linked to this property yet.</div>`}
-   ${sug.length?`<h4><span>🎯 Matching buyers (abhi link nahi)</span></h4>${sug.map(x=>`<div class="sub" style="grid-template-columns:minmax(0,1.8fr) 90px minmax(0,1.6fr) auto"><div class="who"><div class="av">${esc(ini(x.c.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(budgetText(x.c))}</span></div></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="why">${esc(x.why.join(" • "))}</div><div class="ra">${waBtn(x.c,p.id)}<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button></div></div>`).join("")}`:""}`;
+   ${sug.length?`<h4><span>🎯 Matching buyers (not yet linked)</span></h4>${sug.map(x=>`<div class="sub" style="grid-template-columns:minmax(0,1.8fr) 90px minmax(0,1.6fr) auto"><div class="who"><div class="av">${esc(ini(x.c.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(budgetText(x.c))}</span></div></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="why">${esc(x.why.join(" • "))}</div><div class="ra">${waBtn(x.c,p.id)}<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button></div></div>`).join("")}`:""}`;
 }
 function subRow(x,p){
   return`<div class="sub"><div class="who"><div class="av">${esc(ini(x.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(x.name||"Unnamed")}</b><span>${esc(x.mobile||"No mobile")}${x.source?" · "+esc(x.source):""}</span></div></div>
    <div><span class="st ${cls(x.status||"New")}">${esc(x.status||"New")}</span></div>${fuCell(x)}
-   <div class="cell"><b>${esc(budgetText(x))}</b><span class="lastn">${esc(lastNote(x)||"Koi note nahi")}</span></div>
+   <div class="cell"><b>${esc(budgetText(x))}</b><span class="lastn">${esc(lastNote(x)||"No notes")}</span></div>
    <div class="ra">${waBtn(x,p.id)}${x.mobile?`<a class="mini" href="tel:${esc(x.mobile)}">Call</a>`:""}<button class="mini v" data-act="cEdit" data-id="${esc(x.id)}">Open</button><button class="mini x" title="Unlink" data-act="unlink" data-id="${esc(x.id)}" data-pid="${esc(p.id)}">✕</button></div></div>`}
 
 /* ---------- CONTACTS view ---------- */
@@ -763,8 +763,8 @@ function renderContacts(){
   if(!loaded){$("cRows").innerHTML=skRows("rc");return}
   const v=cList();$("cSub").textContent=`${v.length} of ${recs.length} contacts · buyers, sellers and brokers in one place`;
   {const BF=budgetFilter(),n=$("cbNote");if(!BF)n.innerHTML="";else{const nb=recs.filter(r=>r.type!=="seller"&&!Number(r.budgetMin||0)&&!Number(r.budgetMax||0)).length;
-    const what=BF.hi===Infinity?`<b>${esc(inr(BF.lo))}</b> ya usse upar ka budget`:`<b>${esc(inr(BF.lo)||"₹0")} – ${esc(inr(BF.hi))}</b> ke beech ka budget`;
-    n.innerHTML=`✅ <b>${v.length}</b> contacts · ${what}.`+(nb?` (${nb} contacts ka budget likha nahi, woh yahan nahi aaye)`:"")}}
+    const what=BF.hi===Infinity?`<b>${esc(inr(BF.lo))}</b> or higher budget`:`<b>${esc(inr(BF.lo)||"₹0")} – ${esc(inr(BF.hi))}</b> budget range`;
+    n.innerHTML=`✅ <b>${v.length}</b> contacts · ${what}.`+(nb?` (${nb} contacts have no budget recorded and are not shown)`:"")}}
   const page=v.slice(0,cShown);
   $("cRows").innerHTML=page.length?page.map(cRow).join(""):`<div class="empty"><div style="font-size:30px">🔎</div><b>No contacts found</b>Try changing your search or filters.<br><button class="btn p" data-act="addC">＋ Add Contact</button></div>`;
   const m=$("cMore");m.classList.toggle("hidden",v.length<=cShown);m.innerHTML=`Showing ${page.length} of ${v.length} · <button class="btn" data-act="more">Load more</button>`;
@@ -804,9 +804,9 @@ $("mChips").innerHTML=STATUSES.map(s=>`<button type="button" class="sc" data-s="
 $("mChips").onclick=e=>{const b=e.target.closest(".sc");if(b)setStatus(b.dataset.s,true)};
 $("mtabs").onclick=e=>{const b=e.target.closest("[data-t]");if(b)setTab(b.dataset.t)};
 $("qk").onclick=e=>{const b=e.target.closest("[data-qd]");if(!b)return;$("m_date").value=b.dataset.qd==="x"?"":addDays(Number(b.dataset.qd))};
-function drawLinks(){$("m_lk").innerHTML=mLinks.length?mLinks.map((i,k)=>`<span class="code">${esc(i.code||"—")} <i>${esc(i.label||"")}</i><button type="button" data-rm="${k}" aria-label="Remove">×</button></span>`).join(""):`<span style="color:var(--mut);font-size:12.5px">Koi property link nahi.</span>`}
+function drawLinks(){$("m_lk").innerHTML=mLinks.length?mLinks.map((i,k)=>`<span class="code">${esc(i.code||"—")} <i>${esc(i.label||"")}</i><button type="button" data-rm="${k}" aria-label="Remove">×</button></span>`).join(""):`<span style="color:var(--mut);font-size:12.5px">No property linked.</span>`}
 $("m_lk").onclick=e=>{const b=e.target.closest("[data-rm]");if(b){mLinks.splice(Number(b.dataset.rm),1);drawLinks()}};
-function addLinkByCode(){const raw=clean($("m_code").value);if(!raw)return;const p=propByCode(raw);if(!p)return toast("Is code ki property nahi mili: "+raw,true);if(mLinks.some(i=>i.id===p.id)){$("m_code").value="";return}mLinks.push(mkInt(p));$("m_code").value="";drawLinks();if(mStatus==="New")setStatus("Interested",true)}
+function addLinkByCode(){const raw=clean($("m_code").value);if(!raw)return;const p=propByCode(raw);if(!p)return toast("No property found for this code: "+raw,true);if(mLinks.some(i=>i.id===p.id)){$("m_code").value="";return}mLinks.push(mkInt(p));$("m_code").value="";drawLinks();if(mStatus==="New")setStatus("Interested",true)}
 $("m_codeAdd").onclick=addLinkByCode;$("m_code").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addLinkByCode()}});
 function typeUI(){const t=$("m_type").value,c=t==="customer";$("m_linkbox").classList.toggle("hidden",!c);$("m_pubBox").classList.toggle("hidden",!c);$("matchTab").classList.toggle("hidden",!c);
   $("m_coL").classList.toggle("hidden",t!=="broker");$("m_asL").classList.toggle("hidden",t!=="broker");$("convTab").classList.toggle("hidden",!editId)}
@@ -814,11 +814,11 @@ $("m_type").onchange=typeUI;
 const hint=(i,h)=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value);$(h).textContent=n?"= "+inr(n):""});
 hint("m_bmin","h_bmin");hint("m_bmax","h_bmax");hint("p_price","h_price");
 function drawTL(r){const t=(Array.isArray(r?.timeline)?r.timeline:[]).filter(x=>x&&x.text).sort((a,b)=>(b.at||0)-(a.at||0));
-  $("tl").innerHTML=t.length?t.map(x=>`<div class="tle"><div><b>${KIND[x.kind]||"📝"} ${esc(x.text)}</b><span>${fmtMs(x.at)} · ${fmtTime(x.at)}</span></div></div>`).join(""):`<div class="empty" style="padding:24px">Abhi koi baat-cheet record nahi hui.</div>`}
+  $("tl").innerHTML=t.length?t.map(x=>`<div class="tle"><div><b>${KIND[x.kind]||"📝"} ${esc(x.text)}</b><span>${fmtMs(x.at)} · ${fmtTime(x.at)}</span></div></div>`).join(""):`<div class="empty" style="padding:24px">No conversation recorded yet.</div>`}
 function formBuyer(){return{area:$("m_area").value,propertyType:$("m_ptype").value,size:$("m_size").value,details:$("m_details").value,budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax")}}
 function drawMM(){
   const list=matchesForBuyer(formBuyer()).filter(x=>!mLinks.some(i=>i.id===x.p.id)).slice(0,6);
-  $("mmList").innerHTML=list.length?`<div class="mq">Is requirement se milti properties</div>`+list.map(x=>`<div class="mrow" style="grid-template-columns:80px minmax(0,1fr) 64px auto"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(budgetText(x.p))} · <span class="why">${esc(x.why.join(" • "))}</span></span></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div><button class="btn sm" type="button" data-mmlink="${esc(x.p.id)}">Link</button></div></div>`).join(""):`<div class="empty" style="padding:30px">Details tab mein area, property type aur budget bharo — yahan matching properties aa jayengi.</div>`}
+  $("mmList").innerHTML=list.length?`<div class="mq">Properties matching this requirement</div>`+list.map(x=>`<div class="mrow" style="grid-template-columns:80px minmax(0,1fr) 64px auto"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(budgetText(x.p))} · <span class="why">${esc(x.why.join(" • "))}</span></span></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div><button class="btn sm" type="button" data-mmlink="${esc(x.p.id)}">Link</button></div></div>`).join(""):`<div class="empty" style="padding:30px">Fill in area, property type and budget in the Details tab to see matching properties here.</div>`}
 $("mmList").onclick=e=>{const b=e.target.closest("[data-mmlink]");if(!b)return;const p=propById(b.dataset.mmlink);if(p&&!mLinks.some(i=>i.id===p.id)){mLinks.push(mkInt(p));drawLinks();if(mStatus==="New")setStatus("Interested",true);drawMM();toast(p.code+" link ho gayi — Save dabao")}};
 function openC(id,o={}){
   const r0=id?recs.find(x=>x.id===id):null;if(r0&&r0.type==="seller")return openP(id);
@@ -840,9 +840,9 @@ async function publishSync(id,d){
       imageDataUrl:s&&(d.publicImageUrls||[])[0]||"",imageUrls:s?(d.publicImageUrls||[]):[],videoUrl:s?(d.publicVideoUrl||""):"",status:"Approved",crmStatus:d.status||"New",updatedAt:serverTimestamp()})
   }else await deleteDoc(pref).catch(()=>{})}
 async function saveC(){
-  const name=clean($("m_name").value);if(!name){setTab("details");$("m_name").focus();return toast("Name zaroori hai",true)}
+  const name=clean($("m_name").value);if(!name){setTab("details");$("m_name").focus();return toast("Name is required",true)}
   const type=$("m_type").value,mobile=clean($("m_mobile").value),m10=last10(mobile);
-  if(m10&&recs.some(c=>c.id!==editId&&last10(c.mobile)===m10&&c.type===type))return toast("Is mobile ka contact pehle se hai",true);
+  if(m10&&recs.some(c=>c.id!==editId&&last10(c.mobile)===m10&&c.type===type))return toast("A contact with this mobile already exists",true);
   const old=editId?recs.find(x=>x.id===editId)||{}:{};
   const d={type,name,mobile,whatsapp:mobile,source:$("m_src").value,status:mStatus,area:clean($("m_area").value),propertyType:$("m_ptype").value,size:clean($("m_size").value),
     budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax"),details:clean($("m_details").value),notes:$("m_notes").value.trim(),email:clean($("m_email").value),altMobile:clean($("m_alt").value),
@@ -858,10 +858,10 @@ async function saveC(){
     else{d.city="Jaipur";d.createdAt=serverTimestamp();d.images=[];if(!d.publicDisplayName)d.publicDisplayName=name;
       d.timeline=[tlEntry(type==="customer"&&mLinks.length?"Enquiry for "+mLinks.map(i=>i.code).join(", "):"Contact added","note")];id=(await addDoc(collection(db,COL),d)).id}
     if(type==="customer"||old.publicVisible)await publishSync(id,{...old,...d,city:old.city||d.city||"Jaipur",type});
-    closeC();toast(editId?"Saved":"Contact add ho gaya")}catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}finally{$("m_save").disabled=false}}
+    closeC();toast(editId?"Saved":"Contact added")}catch(e){console.error(e);toast(e.message||"Could not save",true)}finally{$("m_save").disabled=false}}
 $("m_save").onclick=saveC;$("m_cancel").onclick=closeC;
 $("m_del").onclick=()=>softDelete(editId,closeC);$("m_wa").onclick=()=>{closeC();openW(editId)};
-async function softDelete(id,after){const r=recs.find(x=>x.id===id);if(!r||!confirm(`"${r.name||"Record"}" ko Trash me bhejna hai? (Tools → Trash se restore ho sakta hai)`))return;
+async function softDelete(id,after){const r=recs.find(x=>x.id===id);if(!r||!confirm(`"${r.name||"Record"}" — move to Trash? (can be restored from Tools → Trash)`))return;
   try{await updateDoc(doc(db,COL,id),{deletedAt:serverTimestamp(),trashedWasPublic:!!r.publicVisible,publicVisible:false,updatedAt:serverTimestamp()});await deleteDoc(doc(db,"publicRequirements",id)).catch(()=>{});after&&after();toast("Trash me bhej diya")}catch(e){toast(e.message,true)}}
 async function addNote(){const text=clean($("n_text").value);if(!text||!editId)return;
   try{await updateDoc(doc(db,COL,editId),{timeline:arrayUnion(tlEntry(text,$("n_kind").value)),updatedAt:serverTimestamp()});$("n_text").value="";drawTL(recs.find(x=>x.id===editId))}catch(e){toast(e.message,true)}}
@@ -876,7 +876,7 @@ async function linkBuyer(c,p,note,fd){
 function drawPhotos(){$("photos").innerHTML=photos.map((p,i)=>`<div class="ph"><img src="${esc(p.preview||p.url)}" alt=""><button type="button" class="rm" data-ph="rm" data-i="${i}" aria-label="Remove">✕</button>${i?`<button type="button" class="cv" data-ph="cv" data-i="${i}" title="Cover banao">★</button>`:"<em>Cover</em>"}</div>`).join("")+(photos.length<8?`<label class="addph" for="phFile">＋ Photo</label>`:"");$("phCount").textContent=`(${photos.length}/8)`}
 $("photos").onclick=e=>{const b=e.target.closest("[data-ph]");if(!b)return;const i=Number(b.dataset.i);if(b.dataset.ph==="rm")photos.splice(i,1);else photos.unshift(...photos.splice(i,1));drawPhotos()};
 $("phFile").onchange=e=>{[...e.target.files].forEach(f=>{if(photos.length<8&&f.type.startsWith("image/"))photos.push({file:f,preview:URL.createObjectURL(f)})});e.target.value="";drawPhotos()};
-function compressImage(blob,max=1600,q=.82){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(blob);img.onload=()=>{let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);c.toBlob(b=>{URL.revokeObjectURL(u);b?res(b):rej(new Error("Photo compress nahi hui"))},"image/jpeg",q)};img.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("Photo load nahi hui"))};img.src=u})}
+function compressImage(blob,max=1600,q=.82){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(blob);img.onload=()=>{let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);c.toBlob(b=>{URL.revokeObjectURL(u);b?res(b):rej(new Error("Photo compress nahi hui"))},"image/jpeg",q)};img.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("Photo could not be loaded"))};img.src=u})}
 async function uploadPhotos(items,{id,pub},prog){const out=[];let n=0;const total=items.filter(i=>i.file).length;
   for(const it of items){if(it.file){const blob=await compressImage(it.file);const url=await uploadToCloudinary(new File([blob],`property-${id||"new"}-${Date.now()}-${n+1}.jpg`,{type:"image/jpeg"}),"image");out.push(url);n++;prog&&prog(n,total)}else out.push(it.url)}
   return out}
@@ -889,12 +889,12 @@ function openP(id,o={}){
   $("p_facing").value=p.facing||"";$("p_roadw").value=p.roadWidth||"";$("p_bed").value=p.bedrooms||"";$("p_bath").value=p.bathrooms||"";$("p_floors").value=p.floors||"";$("p_gaj").value=p.areaGaj||"";$("p_corner").value=p.cornerPlot||"";$("p_patta").value=p.pattaType||"";$("p_reg").value=p.registry||"";$("p_loan").value=p.loan||"";
   $("p_soc").value=p.society||"";$("p_land").value=/^https?:/i.test(p.propertyLocation||"")?"":(p.propertyLocation||"");$("p_map").value=p.mapUrl||(/^https?:/i.test(p.propertyLocation||"")?p.propertyLocation:"");$("p_high").value=p.highlights||"";$("p_ad").value=p.adPost||"";$("p_near").value=p.nearby||"";
   $("p_fdate").value=p.followUpDate||"";$("p_fnote").value=p.followUpNote||"";$("p_pub").checked=!!p.publicVisible;
-  photos=(p.images||[]).map(u=>({url:u}));drawPhotos();$("p_video").value="";$("p_vidNote").textContent=p.videoUrl?"✓ Video pehle se upload hai (nayi chunoge to replace hogi)":"";
+  photos=(p.images||[]).map(u=>({url:u}));drawPhotos();$("p_video").value="";$("p_vidNote").textContent=p.videoUrl?"✓ Video already uploaded (choosing a new one will replace it)":"";
   $("p_del").classList.toggle("hidden",!id);$("po").classList.remove("hidden");scoreP();$("p_area").focus()}
 
 function scoreP(){const v=i=>($(i).value||"").trim(),it=[["3+ photos",photos.length>=3,20],["Price",!!v("p_price"),10],["Size",!!v("p_size")||!!v("p_gaj"),10],["Facing",!!v("p_facing")||!!v("p_road"),5],["Patta",!!v("p_patta"),10],["Registry",!!v("p_reg"),10],["Society/landmark",!!v("p_soc")||!!v("p_land"),5],["Map link",!!v("p_map"),5],["Aas-paas",!!v("p_near"),5],["Highlights",!!v("p_high"),5],["Details (40+ akshar)",v("p_details").length>=40,10],["Road width",!!v("p_roadw"),5]];
   const sc=it.reduce((n,x)=>n+(x[1]?x[2]:0),0),miss=it.filter(x=>!x[1]).map(x=>x[0]);
-  $("p_score").innerHTML=`<b>Listing quality: ${Math.min(100,sc)}%</b>${miss.length?" — baaki: "+miss.join(", "):" ✓ Poori detail, website par best dikhegi"}`}
+  $("p_score").innerHTML=`<b>Listing quality: ${Math.min(100,sc)}%</b>${miss.length?" — missing: "+miss.join(", "):" ✓ Complete — will look best on the website"}`}
 $("po").addEventListener("input",scoreP);
 function genAd(kind,lang){
   const v=i=>($(i).value||"").trim(),hi=lang==="hi",wa=kind==="wa",B=s=>wa?`*${s}*`:s;
@@ -927,14 +927,14 @@ function genAd(kind,lang){
   out.push(L.visit);
   out.push("— Jaipur Property Consultant"+(code?` | ${L.ref}: ${code}`:""));
   return out.join("\n")}
-$("p_adgen").onclick=()=>{if($("p_ad").value.trim()&&!confirm("Purana post replace karna hai?"))return;if(!$("p_area").value.trim())return toast("Pehle area likho",true);$("p_ad").value=genAd($("p_adk").value,$("p_adl").value);if(pEditId&&!$("p_pub").checked)toast("Tip: link jodne ke liye ‘website par dikhao’ on karo",true)};
-$("p_adcopy").onclick=async()=>{const t=$("p_ad").value.trim();if(!t)return toast("Pehle post banao",true);try{await navigator.clipboard.writeText(t);toast("Post copy ho gayi ✓")}catch(e){$("p_ad").select();toast("Select ho gayi — Ctrl+C dabao",true)}};
-$("p_adwa").onclick=()=>{const t=$("p_ad").value.trim();if(!t)return toast("Pehle post banao",true);window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")};
+$("p_adgen").onclick=()=>{if($("p_ad").value.trim()&&!confirm("Replace the existing post?"))return;if(!$("p_area").value.trim())return toast("Enter the area first",true);$("p_ad").value=genAd($("p_adk").value,$("p_adl").value);if(pEditId&&!$("p_pub").checked)toast("Tip: turn on ‘Show on website’ to include a link",true)};
+$("p_adcopy").onclick=async()=>{const t=$("p_ad").value.trim();if(!t)return toast("Generate a post first",true);try{await navigator.clipboard.writeText(t);toast("Post copy ho gayi ✓")}catch(e){$("p_ad").select();toast("Select ho gayi — Ctrl+C dabao",true)}};
+$("p_adwa").onclick=()=>{const t=$("p_ad").value.trim();if(!t)return toast("Generate a post first",true);window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")};
 
 const closeP=()=>$("po").classList.add("hidden");
 async function saveP(){
   const area=clean($("p_area").value),owner=clean($("p_owner").value);
-  if(!area)return toast("Area likho",true);if(!owner)return toast("Owner ka naam likho",true);
+  if(!area)return toast("Enter the area",true);if(!owner)return toast("Enter the owner's name",true);
   const old=pEditId?propById(pEditId)||{}:{},pub=$("p_pub").checked,mobile=clean($("p_mobile").value),btn=$("p_save");
   let price=getMoney("p_price"),pmin=price,pmax=price;if(pEditId&&$("p_price").value===$("p_price").dataset.txt){pmin=old.budgetMin??price;pmax=old.budgetMax??price}
   const d={type:"seller",name:owner,mobile,whatsapp:mobile,propertyType:$("p_type").value,size:clean($("p_size").value),area,city:clean($("p_city").value)||"Jaipur",
@@ -945,15 +945,15 @@ async function saveP(){
     const urls=await uploadPhotos(photos,{id:pEditId,pub},(k,n)=>{btn.textContent=`Photo ${k}/${n}…`});
     d.images=urls;d.publicImageUrls=urls;d.publicVideoUrl=old.publicVideoUrl||"";
     const vf=$("p_video").files?.[0];
-    if(vf){if(!vf.type.startsWith("video/"))throw new Error("Sahi video file chuno.");if(vf.size>50*1024*1024)throw new Error("Video 50 MB se chhoti honi chahiye.");
+    if(vf){if(!vf.type.startsWith("video/"))throw new Error("Please choose a valid video file.");if(vf.size>50*1024*1024)throw new Error("Video must be smaller than 50 MB.");
       btn.textContent="Video Cloudinary par upload…";const vu=await uploadToCloudinary(vf,"video");d.videoUrl=vu;if(pub)d.publicVideoUrl=vu}
     let id=pEditId;
     if(pEditId)await updateDoc(doc(db,COL,pEditId),d);
     else{d.code=nextCode();d.status="New";d.source="Property Desk";d.createdAt=serverTimestamp();d.timeline=[tlEntry("Property listed as "+d.code,"note")];id=(await addDoc(collection(db,COL),d)).id;openProp=id}
     await publishSync(id,{...old,...d});
-    const isNew=!pEditId;closeP();toast(isNew?"Property add hui — code "+d.code:"Property save ho gayi");if(isNew&&availableP(d))setTimeout(()=>openBQ(id,{...d,id},true),600);
-    if(pub&&photos.length&&photos.some(x=>x.url&&x.url.includes("crmContacts%2F")))toast("Dhyan: kuch purani photos private hain — website par dikhane ke liye dobara upload karo",true)
-  }catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}finally{btn.disabled=false;btn.textContent="Save property"}}
+    const isNew=!pEditId;closeP();toast(isNew?"Property added — code "+d.code:"Property saved");if(isNew&&availableP(d))setTimeout(()=>openBQ(id,{...d,id},true),600);
+    if(pub&&photos.length&&photos.some(x=>x.url&&x.url.includes("crmContacts%2F")))toast("Note: some older photos are private — re-upload them to show on the website",true)
+  }catch(e){console.error(e);toast(e.message||"Could not save",true)}finally{btn.disabled=false;btn.textContent="Save property"}}
 $("p_save").onclick=saveP;$("p_cancel").onclick=closeP;$("p_del").onclick=()=>softDelete(pEditId,closeP);
 
 
@@ -976,21 +976,21 @@ function openShare(id){
   $("shsPhoto").classList.toggle("hidden",!(navigator.canShare&&(p.images||[]).length));$("shsNative").classList.toggle("hidden",!navigator.share);
   $("shsMsg").value=shareMsg(p);
   const m=availableP(p)?matchesForProp(p).slice(0,3):[];
-  $("shsBuyers").innerHTML=m.length?`<div class="q">Is property ke liye best buyers</div>`+m.map(x=>`<div class="r"><b>${esc(x.c.name||"Customer")} <small>· ${x.score}%</small></b>${waNum(x.c)?`<button class="btn sm" type="button" data-sbw="${esc(x.c.id)}">💬 Bhejo</button>`:'<small>no mobile</small>'}</div>`).join(""):"";
+  $("shsBuyers").innerHTML=m.length?`<div class="q">Best buyers for this property</div>`+m.map(x=>`<div class="r"><b>${esc(x.c.name||"Customer")} <small>· ${x.score}%</small></b>${waNum(x.c)?`<button class="btn sm" type="button" data-sbw="${esc(x.c.id)}">💬 Send</button>`:'<small>no mobile</small>'}</div>`).join(""):"";
   $("shs").classList.remove("hidden")}
 const closeShare=()=>{$("shs").classList.add("hidden");shP=null};
 async function copyText(t,ok){try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();try{document.execCommand("copy")}catch(_){}x.remove()}toast(ok)}
 $("shsX").onclick=closeShare;$("shs").addEventListener("click",e=>{if(e.target===$("shs"))closeShare()});
 $("shsWa").onclick=()=>{window.open("https://wa.me/?text="+encodeURIComponent($("shsMsg").value),"_blank","noopener")};
 $("shsNative").onclick=async()=>{try{await navigator.share({title:shP?lbl(shP):BRAND,text:$("shsMsg").value})}catch(e){}};
-$("shsCopyMsg").onclick=()=>copyText($("shsMsg").value,"Message copy ho gaya");
-$("shsCopyLink").onclick=()=>shP&&copyText(propLink(shP),"Website link copy ho gaya");
-$("shsLive").onclick=()=>{const id=shP&&shP.id;closeShare();if(id){openP(id);toast("'Website par dikhao' on karke save karo")}};
+$("shsCopyMsg").onclick=()=>copyText($("shsMsg").value,"Message copied");
+$("shsCopyLink").onclick=()=>shP&&copyText(propLink(shP),"Website link copied");
+$("shsLive").onclick=()=>{const id=shP&&shP.id;closeShare();if(id){openP(id);toast("Turn on 'Show on website' and save")}};
 $("shsPhoto").onclick=async()=>{
   const p=shP;if(!p)return;const msg=$("shsMsg").value;
   try{const files=[];for(const u of (p.images||[]).slice(0,3)){const r=await fetch(u);if(!r.ok)throw 0;const b=await r.blob();files.push(new File([b],(p.code||"property")+"-"+(files.length+1)+".jpg",{type:b.type||"image/jpeg"}))}
     if(files.length&&navigator.canShare({files})){await navigator.share({files,text:msg});return}throw 0}
-  catch(e){if(e&&e.name==="AbortError")return;toast("Photo load nahi hui — link ke saath share kar rahe hain",true);try{await navigator.share({text:msg})}catch(_){}}};
+  catch(e){if(e&&e.name==="AbortError")return;toast("Photo could not be loaded — sharing with link only",true);try{await navigator.share({text:msg})}catch(_){}}};
 $("shsBuyers").onclick=e=>{const b=e.target.closest("[data-sbw]");if(!b||!shP)return;const pid=shP.id;closeShare();openW(b.dataset.sbw,pid)};
 
 /* ---------- ADD INTERESTED CUSTOMER TO A PROPERTY ---------- */
@@ -999,16 +999,16 @@ function openQ(pid){qProp=propById(pid);if(!qProp)return;$("qSub").textContent=(
 const closeQ=()=>$("qo").classList.add("hidden");
 function matchCust(){const m10=last10($("q_mobile").value),n=clean($("q_name").value).toLowerCase();
   return recs.find(c=>c.type==="customer"&&((m10.length===10&&last10(c.mobile)===m10)||(!m10&&n&&clean(c.name).toLowerCase()===n)))}
-$("q_name").addEventListener("input",()=>{const c=recs.find(x=>x.type==="customer"&&clean(x.name).toLowerCase()===clean($("q_name").value).toLowerCase());if(c&&c.mobile&&!$("q_mobile").value)$("q_mobile").value=c.mobile;const m=matchCust();$("q_hint").textContent=m?"✓ Ye purana customer hai — duplicate nahi banega, sirf is property se link hoga.":""});
-$("q_mobile").addEventListener("input",()=>{const m=matchCust();$("q_hint").textContent=m?"✓ Is mobile ka customer pehle se hai — sirf link hoga ("+(m.name||"")+").":""});
+$("q_name").addEventListener("input",()=>{const c=recs.find(x=>x.type==="customer"&&clean(x.name).toLowerCase()===clean($("q_name").value).toLowerCase());if(c&&c.mobile&&!$("q_mobile").value)$("q_mobile").value=c.mobile;const m=matchCust();$("q_hint").textContent=m?"✓ Existing customer — no duplicate will be created; only linked to this property.":""});
+$("q_mobile").addEventListener("input",()=>{const m=matchCust();$("q_hint").textContent=m?"✓ A customer with this mobile already exists — will only be linked ("+(m.name||"")+").":""});
 async function saveQ(){
-  const name=clean($("q_name").value);if(!name||!qProp)return toast("Customer ka naam likho",true);
+  const name=clean($("q_name").value);if(!name||!qProp)return toast("Enter the customer's name",true);
   const mobile=clean($("q_mobile").value),note=clean($("q_note").value),fd=$("q_date").value,ex=matchCust(),it=mkInt(qProp);
   try{
-    if(ex){if(!(await linkBuyer(ex,qProp,note,fd))){closeQ();return toast("Ye customer pehle se linked hai")}}
+    if(ex){if(!(await linkBuyer(ex,qProp,note,fd))){closeQ();return toast("This customer is already linked")}}
     else await addDoc(collection(db,COL),{type:"customer",name,mobile,whatsapp:mobile,source:"Property Desk",status:"Interested",area:qProp.area||"",city:qProp.city||"Jaipur",propertyType:qProp.propertyType||"",budgetMin:null,budgetMax:null,details:"",notes:"",
       followUpDate:fd||"",followUpNote:note||(fd?"Follow-up":""),interests:[it],interestCode:it.code,timeline:[tlEntry("Enquiry for "+it.code+" "+it.label,"link"),...(note?[tlEntry(note,"call")]:[])],publicVisible:false,publicDisplayName:name,images:[],createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
-    closeQ();openProp=qProp.id;toast("Customer "+qProp.code+" ke neeche add ho gaya")}catch(e){console.error(e);toast(e.message||"Save nahi hua",true)}}
+    closeQ();openProp=qProp.id;toast("Customer "+qProp.code+" — customer added")}catch(e){console.error(e);toast(e.message||"Could not save",true)}}
 $("q_save").onclick=saveQ;$("q_cancel").onclick=closeQ;
 
 /* ---------- QUICK ADD (smart paste) ---------- */
@@ -1031,9 +1031,9 @@ function smartParse(t){
   o.name=w.join(" ");return o}
 function prevParse(){const o=smartParse($("s_text").value);if(!clean($("s_text").value)){$("s_prev").innerHTML="";return o}
   const row=(k,v)=>`<div style="display:flex;gap:8px;padding:4px 0"><span style="width:96px;color:var(--mut)">${k}</span><b>${v?esc(v):'<span style="color:#b0b8c9;font-weight:500">—</span>'}</b></div>`;
-  $("s_prev").innerHTML=`<div class="card" style="padding:12px 16px">${row("Kaun",{customer:"Buyer / Customer",seller:"Seller → Property add hogi",broker:"Broker"}[o.type])}${row("Naam",o.name)}${row("Mobile",o.mobile)}${row("Area",o.area)}${row("Type",o.ptype)}${row("Size",o.size)}${row("Budget",(o.bmin?inr(o.bmin)+" – ":"")+(o.bmax?inr(o.bmax):""))}</div>`;return o}
+  $("s_prev").innerHTML=`<div class="card" style="padding:12px 16px">${row("Type",{customer:"Buyer / Customer",seller:"Seller → property will be added",broker:"Broker"}[o.type])}${row("Naam",o.name)}${row("Mobile",o.mobile)}${row("Area",o.area)}${row("Type",o.ptype)}${row("Size",o.size)}${row("Budget",(o.bmin?inr(o.bmin)+" – ":"")+(o.bmax?inr(o.bmax):""))}</div>`;return o}
 $("s_text").addEventListener("input",prevParse);
-$("s_go").onclick=()=>{const o=prevParse();if(!clean($("s_text").value))return toast("Pehle message paste karo",true);$("so").classList.add("hidden");if(o.type==="seller")openP(null,{prefill:o});else openC(null,{prefill:o})};
+$("s_go").onclick=()=>{const o=prevParse();if(!clean($("s_text").value))return toast("Paste a message first",true);$("so").classList.add("hidden");if(o.type==="seller")openP(null,{prefill:o});else openC(null,{prefill:o})};
 $("s_cancel").onclick=()=>$("so").classList.add("hidden");
 
 
@@ -1051,7 +1051,7 @@ const firstName=r=>{const n=clean(String(r.name||"").replace(/\(.*?\)/g," "));re
 function tplFill(r,t,p){const bt=budgetText(r);
   return t.replaceAll("{name}",firstName(r)).replaceAll("{area}",areaOf(r)||"Jaipur").replaceAll("{propertyType}",(r.propertyType||"property").toLowerCase()).replaceAll("{budget}",bt==="—"?"aapka budget":bt)
     .replaceAll("{code}",p?.code||"").replaceAll("{property}",p?lbl(p):"").replaceAll("{price}",p?budgetText(p):"").replaceAll("{link}",p&&propLink(p)?"Photos & details: "+propLink(p)+"\n":"").replace(/  +/g," ").replace(/Namaste\s+ji/,"Namaste ji")}
-function openW(id,pid){const r=recs.find(x=>x.id===id);if(!r)return;if(!waNum(r))return toast("Is record mein mobile number nahi hai",true);
+function openW(id,pid){const r=recs.find(x=>x.id===id);if(!r)return;if(!waNum(r))return toast("This record has no mobile number",true);
   let p=pid?propById(pid):null;if(!p&&r.type==="customer"){const i=interestsOf(r)[0];p=i?propById(i.id):null}if(!p&&r.type==="seller")p=r;
   const list=TPL.filter(t=>t.f.includes(r.type)&&(t.k!=="prop"||p));wState={id,p,tpl:list[0]?.k,list};
   if(pid)wState.tpl="prop";
@@ -1070,15 +1070,15 @@ const bqSentBefore=(c,p)=>!!p.code&&(c.timeline||[]).some(t=>t.kind==="wa"&&Stri
 const bqList=p=>recs.filter(r=>r.type==="customer"&&!TERM.includes(r.status)&&waNum(r)).map(c=>({c,...matchScore(c,p)})).filter(x=>x.score>=30).sort((a,b)=>b.score-a.score);
 const bqDone=x=>bq.sent.has(x.c.id)||bqSentBefore(x.c,bq.p);
 function openBQ(pid,pObj,quiet){const p=propById(pid)||pObj;if(!p)return;p.id=p.id||pid;
-  if(!bqList(p).length){if(!quiet)toast("Is property ke liye abhi koi matching buyer (WhatsApp number ke saath) nahi hai",true);return}
+  if(!bqList(p).length){if(!quiet)toast("No matching buyer with a WhatsApp number for this property yet",true);return}
   bq={p,sent:new Set()};$("bq_text").value=TPL.find(x=>x.k==="prop").t;drawBQ();$("bq").classList.remove("hidden")}
 function drawBQ(){const p=bq.p;if(!p)return;const L=bqList(p),pend=L.filter(x=>!bqDone(x)),n=L.length-pend.length;
   $("bq_sub").textContent=`${p.code||""} · ${lbl(p)} · ${budgetText(p)} — ${L.length} matching buyers`;
   $("bq_prog").textContent=`${n} / ${L.length} bhej diye`;$("bq_bar").style.width=(L.length?n/L.length*100:0)+"%";
   $("bq_list").innerHTML=L.map(x=>`<div class="bqr${bqDone(x)?" done":""}"><span class="sc2${scCls(x.score)}">${x.score}%</span><div class="w"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.why.join(" • "))}${x.c.status?" · "+esc(x.c.status):""}</span></div>${bqDone(x)?'<span class="tag">✓ Bheja</span>':`<button class="mini wa" data-bqs="${esc(x.c.id)}">Send</button>`}</div>`).join("");
-  $("bq_next").disabled=!pend.length;$("bq_next").textContent=pend.length?`▶ Next: ${firstName(pend[0].c)||"buyer"} ko bhejo (${pend.length} baaki)`:"✓ Sab ho gaya"}
+  $("bq_next").disabled=!pend.length;$("bq_next").textContent=pend.length?`▶ Next: ${firstName(pend[0].c)||"buyer"} — send (${pend.length} remaining)`:"✓ All done"}
 async function bqSend(cid){const c=recs.find(r=>r.id===cid),p=bq.p;if(!c||!p)return;const num=waNum(c);if(!num)return;
-  const txt=tplFill(c,$("bq_text").value,p).trim();if(!txt)return toast("Message khaali hai",true);
+  const txt=tplFill(c,$("bq_text").value,p).trim();if(!txt)return toast("Message is empty",true);
   window.open(`https://wa.me/${num}?text=${encodeURIComponent(txt)}`,"_blank","noopener");bq.sent.add(cid);drawBQ();
   try{await updateDoc(doc(db,COL,cid),{timeline:arrayUnion(tlEntry(`WhatsApp bheja (${p.code||"property"}): `+txt.slice(0,60)+(txt.length>60?"…":""),"wa")),updatedAt:serverTimestamp()})}catch(_){}}
 $("bq_list").onclick=e=>{const b=e.target.closest("[data-bqs]");if(b)bqSend(b.dataset.bqs)};
@@ -1092,13 +1092,13 @@ function renderMatch(){
   else{$("mPickLbl").textContent="Select property";sel.innerHTML='<option value="">— select —</option>'+props().filter(availableP).sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.id)}">${esc(p.code||"")} · ${esc(lbl(p))} · ${esc(budgetText(p))}</option>`).join("")}
   if([...sel.options].some(o=>o.value===cur))sel.value=cur;drawMatchRes()}
 function drawMatchRes(){
-  const id=$("mPick").value,res=$("mRes");if(!id){$("mInfo").textContent=mMode==="c2p"?"Select customer — uski requirement se milti properties dikhengi.":"Select property — usse milte customers dikhenge.";res.innerHTML="";return}
+  const id=$("mPick").value,res=$("mRes");if(!id){$("mInfo").textContent=mMode==="c2p"?"Select a customer to see properties matching their requirement.":"Select a property to see matching customers.";res.innerHTML="";return}
   if(mMode==="c2p"){const c=recs.find(r=>r.id===id);if(!c)return;$("mInfo").textContent=`${areaOf(c)||"Area ?"} • ${c.propertyType||"Type ?"} • ${budgetText(c)}`;
     const L=matchesForBuyer(c),linked=new Set(interestsOf(c).map(i=>i.id));
-    res.innerHTML=L.length?L.map(x=>`<div class="mrow"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(x.p.name||"")} · ${esc(budgetText(x.p))}</span></div><div class="why">${esc(x.why.join(" • "))}</div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="ra">${waNum(c)?`<button class="mini wa" data-act="wa" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.p.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>No matching property found</b>Customer ki area, type ya budget update karke dekho.</div>`}
+    res.innerHTML=L.length?L.map(x=>`<div class="mrow"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(x.p.name||"")} · ${esc(budgetText(x.p))}</span></div><div class="why">${esc(x.why.join(" • "))}</div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="ra">${waNum(c)?`<button class="mini wa" data-act="wa" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.p.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>No matching property found</b>Update the customer's area, type or budget and try again.</div>`}
   else{const p=propById(id);if(!p)return;$("mInfo").textContent=`${p.code||""} • ${lbl(p)} • ${budgetText(p)}`;
     const L=matchesForProp(p),linked=new Set(buyersOf(p).map(c=>c.id));
-    res.innerHTML=L.length?`<div style="padding:4px 0 10px"><button class="btn p sm" data-act="bq" data-id="${esc(p.id)}" style="background:#0f9d6a;border-color:#0f9d6a">📲 Sab matching buyers ko WhatsApp queue</button></div>`+L.map(x=>`<div class="mrow"><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="cell"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(x.c.status||"New")}</span></div><div class="cell"><b>${esc([x.c.propertyType,areaOf(x.c)].filter(Boolean).join(" • ")||"—")}</b><span class="why">${esc(x.why.join(" • "))}</span></div><div>${esc(budgetText(x.c))}</div><div class="ra">${waNum(x.c)?`<button class="mini wa" data-act="wa" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.c.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>No matching customer found</b>Customers ki requirement mein area, type aur budget bharo.</div>`}}
+    res.innerHTML=L.length?`<div style="padding:4px 0 10px"><button class="btn p sm" data-act="bq" data-id="${esc(p.id)}" style="background:#0f9d6a;border-color:#0f9d6a">📲 WhatsApp queue for all matching buyers</button></div>`+L.map(x=>`<div class="mrow"><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="cell"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(x.c.status||"New")}</span></div><div class="cell"><b>${esc([x.c.propertyType,areaOf(x.c)].filter(Boolean).join(" • ")||"—")}</b><span class="why">${esc(x.why.join(" • "))}</span></div><div>${esc(budgetText(x.c))}</div><div class="ra">${waNum(x.c)?`<button class="mini wa" data-act="wa" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.c.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>No matching customer found</b>Add area, type and budget to customer requirements.</div>`}}
 $("mPick").onchange=drawMatchRes;
 
 /* ---------- INBOX (website submissions + reviews) ---------- */
@@ -1106,7 +1106,7 @@ const subImgs=s=>[...new Set([...(Array.isArray(s.imageDataUrls)?s.imageDataUrls
 const tsOf=s=>msOf(s.submittedAt)||msOf(s.createdAt)||msOf(s.askedAt);
 
 const rpList=r=>Array.isArray(r.replies)&&r.replies.length?r.replies:(r.answer?[{text:r.answer,at:0}]:[]);
-const rpBox=(r,c)=>`<div class="m" style="margin-top:8px">${rpList(r).map((x,i)=>`<div style="background:#eef3ff;border-radius:8px;padding:6px 9px;margin-top:4px;display:flex;gap:8px;justify-content:space-between;align-items:flex-start"><span>↳ ${esc(x.text)}</span><button class="btn sm" data-act="rpDel" data-c="${c}" data-i="${i}" data-id="${esc(r.id)}" title="Reply delete">✕</button></div>`).join("")}</div><textarea id="rp_${esc(r.id)}" rows="2" placeholder="Reply likho — public page par comment ke neeche dikhega…" style="width:100%;margin-top:8px"></textarea>`;
+const rpBox=(r,c)=>`<div class="m" style="margin-top:8px">${rpList(r).map((x,i)=>`<div style="background:#eef3ff;border-radius:8px;padding:6px 9px;margin-top:4px;display:flex;gap:8px;justify-content:space-between;align-items:flex-start"><span>↳ ${esc(x.text)}</span><button class="btn sm" data-act="rpDel" data-c="${c}" data-i="${i}" data-id="${esc(r.id)}" title="Reply delete">✕</button></div>`).join("")}</div><textarea id="rp_${esc(r.id)}" rows="2" placeholder="Write a reply — it appears under the comment on the public page…" style="width:100%;margin-top:8px"></textarea>`;
 function renderInbox(){
   const f=$("ibFilter").value||"pending",stt=x=>String(x.status||"pending");
   $("ibSub").textContent=subs.filter(s=>stt(s)==="pending").length;$("ibRev").textContent=revs.filter(s=>stt(s)==="pending").length;$("ibQa").textContent=qs.filter(s=>stt(s)==="pending").length;
@@ -1116,17 +1116,17 @@ function renderInbox(){
     box.innerHTML=L.length?L.map(r=>{const st=stt(r);
       return`<article class="card subc"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(r.name||"Visitor")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st==="approved"?"LIVE":st.toUpperCase()}</span></div>
        <div class="m" style="color:var(--mut)">${esc(r.propertyCode||"")} ${esc(r.propertyTitle||"")}</div><div class="m"><b>Q:</b> ${esc(r.question||"")}</div>${rpBox(r,"publicQuestions")}
-       <div class="ac">${st==="approved"?`<button class="btn p sm" data-act="rpAdd" data-c="publicQuestions" data-id="${esc(r.id)}">💬 Add reply</button><button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">Unpublish</button>`:`<button class="btn p sm" data-act="rpPub" data-c="publicQuestions" data-id="${esc(r.id)}">✓ Publish${""} (reply ke saath)</button>${st==="pending"?`<button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">✕ Hide</button>`:""}`}<button class="btn sm" data-act="qaDel" data-id="${esc(r.id)}">Delete</button>${r.propertyId?`<a class="btn sm" target="_blank" href="property.html?id=${encodeURIComponent(r.propertyId)}">Open page</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">❓</div><b>Koi sawaal nahi</b>Property page par customer ke sawaal yahan aayenge.</div>`;return}
+       <div class="ac">${st==="approved"?`<button class="btn p sm" data-act="rpAdd" data-c="publicQuestions" data-id="${esc(r.id)}">💬 Add reply</button><button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">Unpublish</button>`:`<button class="btn p sm" data-act="rpPub" data-c="publicQuestions" data-id="${esc(r.id)}">✓ Publish${""} (with reply)</button>${st==="pending"?`<button class="btn d sm" data-act="qaNo" data-id="${esc(r.id)}">✕ Hide</button>`:""}`}<button class="btn sm" data-act="qaDel" data-id="${esc(r.id)}">Delete</button>${r.propertyId?`<a class="btn sm" target="_blank" href="property.html?id=${encodeURIComponent(r.propertyId)}">Open page</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">❓</div><b>No questions</b>Questions from the property page appear here.</div>`;return}
   if(ibMode==="sub"){const L=subs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
     box.innerHTML=L.length?L.map(s=>{const st=stt(s),seller=s.type==="seller",ph=subImgs(s).map(u=>`<img src="${esc(u)}" alt="" loading="lazy">`).join("");
       return`<article class="card subc">${ph}${s.kind==="partner"?`<div class="k">Sell & earn form — ${esc(s.role||"")}</div>`:""}${s.kind==="enquiry"?`<div class="k">Property enquiry${s.interestCode?" — "+esc(s.interestCode):""} ${esc(s.interestLabel||"")}</div>`:""}
        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(s.name||"Unnamed")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st.toUpperCase()}</span></div>
        <div class="m"><b>${seller?"Seller / Owner":"Buyer / Customer"}</b><br>📞 ${esc(s.mobile||"—")}<br>📍 ${esc(s.area||"—")}, ${esc(s.city||"Jaipur")}<br>🏠 ${esc(s.propertyType||"—")}${s.size?" • "+esc(s.size):""}<br>💰 ${budgetText(s)}<br>📝 ${esc(s.details||"—")}</div>
-       <div class="ac">${st==="pending"?`<button class="btn p sm" data-act="subOk" data-id="${esc(s.id)}">${s.kind==="enquiry"||s.kind==="partner"?"＋ Add to CRM":"✓ Approve & Publish"}</button><button class="btn d sm" data-act="subNo" data-id="${esc(s.id)}">✕ Reject</button>`:`<button class="btn sm" data-act="subDel" data-id="${esc(s.id)}">Delete</button>`}${s.mobile?`<a class="btn sm" href="tel:${esc(s.mobile)}">Call</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">📭</div><b>Koi submission nahi</b>Website se enquiry aane par yahan dikhegi.</div>`}
+       <div class="ac">${st==="pending"?`<button class="btn p sm" data-act="subOk" data-id="${esc(s.id)}">${s.kind==="enquiry"||s.kind==="partner"?"＋ Add to CRM":"✓ Approve & Publish"}</button><button class="btn d sm" data-act="subNo" data-id="${esc(s.id)}">✕ Reject</button>`:`<button class="btn sm" data-act="subDel" data-id="${esc(s.id)}">Delete</button>`}${s.mobile?`<a class="btn sm" href="tel:${esc(s.mobile)}">Call</a>`:""}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">📭</div><b>No submissions</b>Website enquiries appear here.</div>`}
   else{const L=revs.filter(s=>f==="all"||stt(s)===f).sort((a,b)=>tsOf(b)-tsOf(a));
     box.innerHTML=L.length?L.map(r=>{const st=stt(r),n=Math.max(1,Math.min(5,Number(r.rating)||5));
       return`<article class="card subc"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(r.name||"Visitor")}</b><span class="st ${st==="approved"?"Closed":st==="rejected"?"Not-Interested":"Follow-up"}">${st.toUpperCase()}</span></div><div class="stars">${"★".repeat(n)}${"☆".repeat(5-n)}</div><div class="m">${esc(r.comment||"")}</div><div class="m" style="color:var(--mut)">${esc(r.area||"")}${r.propertyType?" • "+esc(r.propertyType):""}</div>
-       ${rpBox(r,"publicReviews")}<div class="ac">${st==="pending"?`<button class="btn p sm" data-act="rpPub" data-c="publicReviews" data-id="${esc(r.id)}">✓ Approve</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">✕ Reject</button>`:`<button class="btn p sm" data-act="rpAdd" data-c="publicReviews" data-id="${esc(r.id)}">💬 Add reply</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">Unpublish</button><button class="btn sm" data-act="revDel" data-id="${esc(r.id)}">Delete</button>`}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">⭐</div><b>Koi review nahi</b></div>`}
+       ${rpBox(r,"publicReviews")}<div class="ac">${st==="pending"?`<button class="btn p sm" data-act="rpPub" data-c="publicReviews" data-id="${esc(r.id)}">✓ Approve</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">✕ Reject</button>`:`<button class="btn p sm" data-act="rpAdd" data-c="publicReviews" data-id="${esc(r.id)}">💬 Add reply</button><button class="btn d sm" data-act="revNo" data-id="${esc(r.id)}">Unpublish</button><button class="btn sm" data-act="revDel" data-id="${esc(r.id)}">Delete</button>`}</div></article>`}).join(""):`<div class="card empty" style="grid-column:1/-1"><div style="font-size:30px">⭐</div><b>No reviews</b></div>`}
 }
 $("ibFilter").onchange=renderInbox;
 const ibMsg=(m,bad)=>{$("ibNote").innerHTML=m?`<div class="${bad?"err":"err"}" style="${bad?"":"background:#e9f9f1;border-color:#c5ecd9;color:#0a7a50"}">${esc(m)}</div>`:"";if(m)setTimeout(()=>$("ibNote").innerHTML="",5000)};
@@ -1136,29 +1136,29 @@ async function subApprove(id){
     if(s.kind==="partner"){const roleLbl={owner:"Owner wants to sell",agent:"Agent / broker",referrer:"Referrer"}[s.role]||"Partner",t=s.type==="seller"?"seller":"broker";
       const d={type:t,name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Website — Sell & earn",status:"New",area:s.area||"",city:"Jaipur",propertyType:s.propertyType||"",size:"",budgetMin:null,budgetMax:null,details:"",notes:`${roleLbl}. ${s.details||""}`.trim(),publicVisible:false,publicDisplayName:s.name||"",images:[],followUpDate:iso(),followUpNote:"Call back — "+roleLbl,timeline:[tlEntry("Submitted the Sell & earn form: "+roleLbl,"note")],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
       if(t==="seller"){d.code=nextCode();d.availability="Available"}
-      const c=await addDoc(collection(db,COL),d);await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:c.id},{merge:true});ibMsg("CRM mein "+TYPE_LBL[t]+" ke roop mein add ho gaya (private).");return}
+      const c=await addDoc(collection(db,COL),d);await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:c.id},{merge:true});ibMsg("CRM mein "+TYPE_LBL[t]+" added as a private contact.");return}
     if(s.kind==="enquiry"){const ints=s.interestPropertyId?[{id:s.interestPropertyId,code:s.interestCode||"",label:s.interestLabel||"",at:Date.now()}]:[];
       const d={type:"customer",name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Website enquiry",status:ints.length?"Interested":"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:"",notes:s.details||"",publicVisible:false,publicDisplayName:s.name||"",images:[],interests:ints,interestCode:ints[0]?.code||"",followUpDate:iso(),followUpNote:"Website enquiry — call back",timeline:[tlEntry(`Website enquiry${ints.length?" for "+(ints[0].code||"")+" "+ints[0].label:""}`,"note")],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
-      const c=await addDoc(collection(db,COL),d);await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:c.id},{merge:true});ibMsg("Enquiry customer ke roop mein add ho gayi"+(ints.length?" — "+ints[0].code+" ke neeche dikhegi.":"."));return}
-    if(!confirm("Is submission ko approve karke website par publish karna hai?"))return;
+      const c=await addDoc(collection(db,COL),d);await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:c.id},{merge:true});ibMsg("Enquiry added as a customer"+(ints.length?" — "+ints[0].code+" — it will appear under that property.":"."));return}
+    if(!confirm("Approve this submission and publish it on the website?"))return;
     const seller=s.type==="seller",code=seller?nextCode():"",imgs=subImgs(s);
     const d={type:s.type||"customer",code,name:s.name||"Website Lead",mobile:s.mobile||"",whatsapp:s.mobile||"",source:"Public Website",status:"New",area:s.area||"",city:s.city||"Jaipur",propertyType:s.propertyType||"Other",size:s.size||"",budgetMin:s.budgetMin??null,budgetMax:s.budgetMax??null,details:s.details||"",notes:"Submitted through public website. Approved by property manager.",publicVisible:true,publicDisplayName:seller?"Property Available":"Buyer Requirement",images:imgs,publicImageUrls:seller?imgs:[],availability:"Available",createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
     const c=await addDoc(collection(db,COL),d);await publishSync(c.id,d);
-    await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:c.id},{merge:true});ibMsg("Approve ho gaya aur website par publish hua"+(code?" — code "+code:"")+".")
+    await setDoc(doc(db,"publicSubmissions",id),{status:"approved",approvedAt:serverTimestamp(),approvedCrmId:c.id},{merge:true});ibMsg("Approved and published on the website"+(code?" — code "+code:"")+".")
   }catch(e){ibMsg(e.message,true)}}
-async function subReject(id){if(!confirm("Is submission ko reject karna hai?"))return;try{await setDoc(doc(db,"publicSubmissions",id),{status:"rejected",rejectedAt:serverTimestamp()},{merge:true});ibMsg("Reject ho gaya.")}catch(e){ibMsg(e.message,true)}}
+async function subReject(id){if(!confirm("Reject this submission?"))return;try{await setDoc(doc(db,"publicSubmissions",id),{status:"rejected",rejectedAt:serverTimestamp()},{merge:true});ibMsg("Rejected.")}catch(e){ibMsg(e.message,true)}}
 
 /* ---------- TOOLS (import / export / trash) ---------- */
 function renderTools(){
   const T=all.filter(r=>r.deletedAt).sort((a,b)=>msOf(b.deletedAt)-msOf(a.deletedAt));$("trashN").textContent=T.length?`(${T.length})`:"";
-  $("trashRows").innerHTML=T.length?T.map(r=>`<div class="tr"><div class="who"><div class="av">${esc(ini(r.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(r.name||"—")}<span class="tag ${r.type}">${TYPE_LBL[r.type]||""}</span></b><span>${esc(r.mobile||"")}${r.code?" · "+esc(r.code):""}</span></div></div><div class="cell"><b>${esc([r.propertyType,areaOf(r)].filter(Boolean).join(" • ")||"—")}</b></div><div class="cell"><span>Deleted ${fmtMs(msOf(r.deletedAt))}</span></div><div class="ra"><button class="mini wa" data-act="restore" data-id="${esc(r.id)}">Restore</button><button class="mini x" data-act="purge" data-id="${esc(r.id)}" style="padding:7px 10px">Delete forever</button></div></div>`).join(""):`<div class="empty" style="padding:30px">Trash khali hai.</div>`}
+  $("trashRows").innerHTML=T.length?T.map(r=>`<div class="tr"><div class="who"><div class="av">${esc(ini(r.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(r.name||"—")}<span class="tag ${r.type}">${TYPE_LBL[r.type]||""}</span></b><span>${esc(r.mobile||"")}${r.code?" · "+esc(r.code):""}</span></div></div><div class="cell"><b>${esc([r.propertyType,areaOf(r)].filter(Boolean).join(" • ")||"—")}</b></div><div class="cell"><span>Deleted ${fmtMs(msOf(r.deletedAt))}</span></div><div class="ra"><button class="mini wa" data-act="restore" data-id="${esc(r.id)}">Restore</button><button class="mini x" data-act="purge" data-id="${esc(r.id)}" style="padding:7px 10px">Delete forever</button></div></div>`).join(""):`<div class="empty" style="padding:30px">Trash is empty.</div>`}
 const normKeys=o=>{const m={};for(const k in o)m[String(k).toLowerCase().replace(/[^a-z0-9]/g,"")]=o[k];return m};
 const pick=(m,...ks)=>{for(const k of ks)if(m[k]!==undefined&&m[k]!=="")return m[k];return""};
 const toNum=v=>v===""||v==null?null:typeof v==="number"?v:parseINR(v);
 $("impBtn").onclick=()=>$("impFile").click();
 $("impFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;const msg=$("impMsg");msg.style.color="";
-  try{if(typeof XLSX==="undefined")throw new Error("Excel library load nahi hui — internet check karo.");
-    const wb=XLSX.read(await f.arrayBuffer(),{type:"array"}),rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:""});if(!rows.length)throw new Error("File mein koi row nahi mili.");
+  try{if(typeof XLSX==="undefined")throw new Error("Excel library failed to load — check your internet connection.");
+    const wb=XLSX.read(await f.arrayBuffer(),{type:"array"}),rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:""});if(!rows.length)throw new Error("No rows found in the file.");
     const have=new Set(recs.map(r=>r.type+last10(r.mobile)));let n=nextCodeNum(),add=0,skip=0,dup=0;const batch=[];
     for(const raw of rows){const m=normKeys(raw);let type=String(pick(m,"type","category")||"customer").toLowerCase();if(/sell|owner/.test(type))type="seller";else if(/brok|agent/.test(type))type="broker";else type="customer";
       const name=clean(pick(m,"name","customername","fullname")),mobile=clean(pick(m,"mobile","mobilenumber","phone","contact","whatsapp"));if(!name||!mobile){skip++;continue}
@@ -1169,25 +1169,25 @@ $("impFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;const msg
         followUpDate:"",followUpNote:"",publicVisible:false,publicDisplayName:"",images:[],interests:[],timeline:[tlEntry("Imported from Excel","note")],createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
       if(d.budgetMin==null&&d.budgetMax!=null&&type==="seller")d.budgetMin=d.budgetMax;
       if(type==="seller"){d.code=fmtCode(n++);d.availability="Available"}batch.push(d);add++}
-    if(!add){msg.textContent=`Kuch import nahi hua. ${dup} duplicate, ${skip} bina naam/mobile.`;msg.style.color="var(--red)";return}
-    if(!confirm(`${add} naye records import karne hain?\n(${dup} duplicate aur ${skip} bina naam/mobile wale skip honge)`))return;
+    if(!add){msg.textContent=`Nothing imported. ${dup} duplicates, ${skip} without name/mobile.`;msg.style.color="var(--red)";return}
+    if(!confirm(`Import ${add} new records?\n(${dup} duplicates and ${skip} without name/mobile will be skipped)`))return;
     for(let i=0;i<batch.length;i+=400){const wb2=writeBatch(db);batch.slice(i,i+400).forEach(d=>wb2.set(doc(collection(db,COL)),d));await wb2.commit()}
-    msg.textContent=`✓ ${add} records import hue · ${dup} duplicate skip · ${skip} bina naam/mobile skip`;msg.style.color="var(--green)"
+    msg.textContent=`✓ ${add} records imported · ${dup} duplicates skipped · ${skip} without name/mobile skipped`;msg.style.color="var(--green)"
   }catch(err){msg.textContent="Import fail: "+err.message;msg.style.color="var(--red)"}e.target.value=""};
 const dl=(blob,name)=>{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
-$("expX").onclick=()=>{if(typeof XLSX==="undefined")return toast("Excel library load nahi hui",true);
+$("expX").onclick=()=>{if(typeof XLSX==="undefined")return toast("Excel library failed to load",true);
   const rows=recs.map(r=>({Code:r.code||"",Type:r.type,Name:r.name||"",Mobile:r.mobile||"",Email:r.email||"",Area:r.area||"",City:r.city||"","Property Type":r.propertyType||"",Size:r.size||"","Budget Min":r.budgetMin??"","Budget Max":r.budgetMax??"",Status:r.status||"New",Source:r.source||"","Interested Properties":interestsOf(r).map(i=>i.code).join(", "),"Follow-up Date":r.followUpDate||"","Follow-up Note":r.followUpNote||"",Details:r.details||"",Notes:r.notes||"",Added:msOf(r.createdAt)?iso(new Date(msOf(r.createdAt))):""}));
   const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows),"CRM");XLSX.writeFile(wb,"jpc-crm-"+iso()+".xlsx");toast(rows.length+" records export hue")};
-$("expT").onclick=()=>{if(typeof XLSX==="undefined")return toast("Excel library load nahi hui",true);
+$("expT").onclick=()=>{if(typeof XLSX==="undefined")return toast("Excel library failed to load",true);
   const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet([{Type:"customer",Name:"Ramesh Sharma",Mobile:"9876543210",Area:"Jagatpura","Property Type":"Plot",Size:"100 gaj","Budget Min":"60 lakh","Budget Max":"80 lakh",Status:"New",Source:"Phone",Details:"East facing chahiye",Notes:""}]),"Template");XLSX.writeFile(wb,"jpc-import-template.xlsx")};
-$("expJ").onclick=()=>{dl(new Blob([JSON.stringify(all,null,1)],{type:"application/json"}),"jpc-backup-"+iso()+".json");toast("Backup download hua")};
+$("expJ").onclick=()=>{dl(new Blob([JSON.stringify(all,null,1)],{type:"application/json"}),"jpc-backup-"+iso()+".json");toast("Backup downloaded")};
 
 /* ---------- COMMAND SEARCH (Ctrl+K) ---------- */
 let kIdx=0,kList=[];
 function openK(){$("k_in").value="";drawK();$("ko").classList.remove("hidden");$("k_in").focus()}
 function drawK(){const q=$("k_in").value.trim().toLowerCase();
   kList=(q?recs.filter(r=>[r.name,r.mobile,r.code,r.area,r.propertyType,r.size,...interestsOf(r).map(i=>i.code)].map(clean).join(" ").toLowerCase().includes(q)):[...recs].sort((a,b)=>(msOf(b.updatedAt)||0)-(msOf(a.updatedAt)||0))).slice(0,8);kIdx=0;
-  $("k_res").innerHTML=kList.length?kList.map((r,i)=>`<button class="kr${i===0?" on":""}" data-k="${esc(r.id)}"><span class="tag ${r.type}" style="margin:0">${TYPE_LBL[r.type]||""}</span><div style="min-width:0"><b>${esc(r.type==="seller"?(r.code||"")+" · "+lbl(r):r.name||"Unnamed")}</b><br><span>${esc(r.type==="seller"?(r.name||"")+" · "+(r.mobile||""):[r.mobile,[r.propertyType,areaOf(r)].filter(Boolean).join(" • ")].filter(Boolean).join(" · "))}</span></div></button>`).join(""):`<div class="empty" style="padding:26px">Kuch nahi mila</div>`}
+  $("k_res").innerHTML=kList.length?kList.map((r,i)=>`<button class="kr${i===0?" on":""}" data-k="${esc(r.id)}"><span class="tag ${r.type}" style="margin:0">${TYPE_LBL[r.type]||""}</span><div style="min-width:0"><b>${esc(r.type==="seller"?(r.code||"")+" · "+lbl(r):r.name||"Unnamed")}</b><br><span>${esc(r.type==="seller"?(r.name||"")+" · "+(r.mobile||""):[r.mobile,[r.propertyType,areaOf(r)].filter(Boolean).join(" • ")].filter(Boolean).join(" · "))}</span></div></button>`).join(""):`<div class="empty" style="padding:26px">Nothing found</div>`}
 function pickK(id){$("ko").classList.add("hidden");const r=recs.find(x=>x.id===id);if(!r)return;if(r.type==="seller")goProp(id);else openC(id)}
 $("k_in").addEventListener("input",drawK);
 $("k_in").addEventListener("keydown",e=>{const rows=[...$("k_res").querySelectorAll(".kr")];
@@ -1222,29 +1222,29 @@ document.addEventListener("click",async e=>{
     else if(act==="pShare")openShare(id);else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="pAv"){const p=propById(id),v=a.dataset.v;if(p&&v&&v!==(p.availability||"Available")){await updateDoc(doc(db,COL,id),{availability:v,updatedAt:serverTimestamp()});await publishSync(id,{...p,availability:v});toast(p.code+" → "+v)}}else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
     else if(act==="wa")openW(id,a.dataset.pid);else if(act==="bq")openBQ(id);
     else if(act==="go"){const to=a.dataset.to;if(to==="nofu"){setView("contacts");cChip="nofu";cShown=60;renderContacts()}else if(to==="noenq"){setView("props");$("pf_show").value="none";renderProps()}else setView(to)}
-    else if(act==="copyLink"){const p=propById(id);if(p){await navigator.clipboard.writeText(propLink(p));toast("Website link copy ho gaya")}}
-    else if(act==="mLink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(c&&p){const ok=await linkBuyer(c,p);toast(ok?c.name+" → "+p.code+" link ho gaya":"Pehle se linked hai")}}
-    else if(act==="unlink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(!c||!p||!confirm(`${c.name} ko ${p.code} se unlink karna hai?`))return;
-      const nx=interestsOf(c).filter(i=>i.id!==p.id);await updateDoc(doc(db,COL,id),{interests:nx,interestCode:nx[0]?.code||"",timeline:arrayUnion(tlEntry(p.code+" link removed","link")),updatedAt:serverTimestamp()});toast("Unlink ho gaya")}
+    else if(act==="copyLink"){const p=propById(id);if(p){await navigator.clipboard.writeText(propLink(p));toast("Website link copied")}}
+    else if(act==="mLink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(c&&p){const ok=await linkBuyer(c,p);toast(ok?c.name+" → "+p.code+" linked":"Already linked")}}
+    else if(act==="unlink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(!c||!p||!confirm(`Unlink ${c.name} from ${p.code}?`))return;
+      const nx=interestsOf(c).filter(i=>i.id!==p.id);await updateDoc(doc(db,COL,id),{interests:nx,interestCode:nx[0]?.code||"",timeline:arrayUnion(tlEntry(p.code+" link removed","link")),updatedAt:serverTimestamp()});toast("Unlinked")}
     else if(act==="fDone"){await updateDoc(doc(db,COL,id),{followUpDate:"",followUpNote:"",timeline:arrayUnion(tlEntry("Follow-up done","note")),updatedAt:serverTimestamp()});toast("Follow-up done ✓")}
     else if(act==="subOk")subApprove(id);else if(act==="subNo")subReject(id);
-    else if(act==="subDel"){if(confirm("Is submission ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicSubmissions",id))}
-    else if(act==="rpAdd"||act==="rpPub"){const c=a.dataset.c,t=($("rp_"+id)?.value||"").trim();if(act==="rpAdd"&&!t)return toast("Pehle reply likho",true);
+    else if(act==="subDel"){if(confirm("Permanently delete this submission?"))await deleteDoc(doc(db,"publicSubmissions",id))}
+    else if(act==="rpAdd"||act==="rpPub"){const c=a.dataset.c,t=($("rp_"+id)?.value||"").trim();if(act==="rpAdd"&&!t)return toast("Write a reply first",true);
       const src=(c==="publicQuestions"?qs:revs).find(x=>x.id===id)||{},u={updatedAt:serverTimestamp()};
       if(act==="rpPub"){u.status="approved";u.approvedAt=serverTimestamp()}
       if(t){u.replies=[...rpList(src),{text:t,at:Date.now()}];if(src.answer)u.answer=deleteField()}
-      await updateDoc(doc(db,c,id),u);toast(act==="rpPub"?"Website par publish ho gaya ✓":"Reply public page par dikh rahi hai ✓")}
-    else if(act==="rpDel"){const c=a.dataset.c,i=Number(a.dataset.i),src=(c==="publicQuestions"?qs:revs).find(x=>x.id===id);if(!src||!confirm("Ye reply delete karni hai?"))return;
-      await updateDoc(doc(db,c,id),{replies:rpList(src).filter((_,k)=>k!==i),answer:deleteField()});toast("Reply delete ho gayi")}
-    else if(act==="qaOk"){const t=($("qa_"+id)?.value||"").trim();if(!t)return toast("Pehle jawab likho",true);await updateDoc(doc(db,"publicQuestions",id),{answer:t,status:"approved",answeredAt:serverTimestamp()});toast("Jawab website par publish ho gaya ✓")}
+      await updateDoc(doc(db,c,id),u);toast(act==="rpPub"?"Published on the website ✓":"Reply is now visible on the public page ✓")}
+    else if(act==="rpDel"){const c=a.dataset.c,i=Number(a.dataset.i),src=(c==="publicQuestions"?qs:revs).find(x=>x.id===id);if(!src||!confirm("Delete this reply?"))return;
+      await updateDoc(doc(db,c,id),{replies:rpList(src).filter((_,k)=>k!==i),answer:deleteField()});toast("Reply deleted")}
+    else if(act==="qaOk"){const t=($("qa_"+id)?.value||"").trim();if(!t)return toast("Write an answer first",true);await updateDoc(doc(db,"publicQuestions",id),{answer:t,status:"approved",answeredAt:serverTimestamp()});toast("Answer published on the website ✓")}
     else if(act==="qaNo")await updateDoc(doc(db,"publicQuestions",id),{status:"rejected",rejectedAt:serverTimestamp()});
-    else if(act==="qaDel"){if(confirm("Is sawaal ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicQuestions",id))}
+    else if(act==="qaDel"){if(confirm("Permanently delete this question?"))await deleteDoc(doc(db,"publicQuestions",id))}
     else if(act==="revOk")await updateDoc(doc(db,"publicReviews",id),{status:"approved",approvedAt:serverTimestamp()});
     else if(act==="revNo")await updateDoc(doc(db,"publicReviews",id),{status:"rejected",rejectedAt:serverTimestamp()});
-    else if(act==="revDel"){if(confirm("Is review ko hamesha ke liye delete karna hai?"))await deleteDoc(doc(db,"publicReviews",id))}
-    else if(act==="restore"){await updateDoc(doc(db,COL,id),{deletedAt:deleteField(),updatedAt:serverTimestamp()});toast("Restore ho gaya")}
-    else if(act==="purge"){const r=all.find(x=>x.id===id);if(confirm(`"${r?.name||"Record"}" hamesha ke liye delete karna hai? Wapas nahi aayega.`)){await deleteDoc(doc(db,COL,id));await deleteDoc(doc(db,"publicRequirements",id)).catch(()=>{});toast("Delete ho gaya")}}
-    }catch(err){console.error(err);toast(err.message||"Kuch gadbad hui",true)}
+    else if(act==="revDel"){if(confirm("Permanently delete this review?"))await deleteDoc(doc(db,"publicReviews",id))}
+    else if(act==="restore"){await updateDoc(doc(db,COL,id),{deletedAt:deleteField(),updatedAt:serverTimestamp()});toast("Restored")}
+    else if(act==="purge"){const r=all.find(x=>x.id===id);if(confirm(`"${r?.name||"Record"}" permanently? This cannot be undone.`)){await deleteDoc(doc(db,COL,id));await deleteDoc(doc(db,"publicRequirements",id)).catch(()=>{});toast("Deleted")}}
+    }catch(err){console.error(err);toast(err.message||"Something went wrong",true)}
     return}
   if(t.closest("a,button,input,select,label"))return;
   const pr=t.closest(".row[data-pid],.pcard[data-pid]");if(pr){openProp=openProp===pr.dataset.pid?"":pr.dataset.pid;renderProps();return}

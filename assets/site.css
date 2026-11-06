@@ -518,3 +518,13 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.15}
 .lang-toggle.lt-light button{color:#33445d}
 .lang-toggle.lt-light button[aria-pressed="true"]{background:var(--navy);color:#fff}
 @media(max-width:640px){.nav-right .nav-link{display:none}}
+
+
+/* ---- category tabs (House / Commercial / Others) ---- */
+.cat-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:16px 0 4px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.cat-tab{border:1px solid var(--line);background:#fff;color:var(--ink,#0f1b2d);border-radius:10px;padding:10px 20px;font-size:14.5px;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:all .15s;font-family:inherit}
+.cat-tab:hover{border-color:var(--gold)}
+.cat-tab.on{background:var(--ink,#0f1b2d);border-color:var(--ink,#0f1b2d);color:#fff;box-shadow:0 4px 12px rgba(15,27,45,.18)}
+.cat-tab .cnt{background:rgba(15,27,45,.08);border-radius:99px;padding:0 8px;font-size:12px;line-height:20px}
+.cat-tab.on .cnt{background:rgba(255,255,255,.2)}
+@media(max-width:640px){.cat-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}.cat-tab{padding:9px 16px;white-space:nowrap}}

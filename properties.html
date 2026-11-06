@@ -35,6 +35,12 @@
 </div>
 
 <div class="container">
+  <div class="cat-tabs" id="catTabs" role="tablist" aria-label="Property category">
+    <button type="button" class="cat-tab on" data-cat="" role="tab">All</button>
+    <button type="button" class="cat-tab" data-cat="House" role="tab">House</button>
+    <button type="button" class="cat-tab" data-cat="Commercial" role="tab">Commercial</button>
+    <button type="button" class="cat-tab" data-cat="Others" role="tab">Others</button>
+  </div>
   <div class="fchips" id="tryRow" style="padding-top:12px"></div>
   <div class="rbar"><b id="count">Loading…</b><div class="fchips" id="chips"></div></div>
   <div class="grid-p" id="grid"><div class="empty-box">Loading properties…</div></div>
@@ -57,9 +63,10 @@ import { getFirestore, collection, onSnapshot, query, where } from "https://www.
 const db = getFirestore(initializeApp({apiKey:"AIzaSyBVkbB7kLROVu_dB-ghT906PHRSq2kscnU",authDomain:"jaipur-property-consultant.firebaseapp.com",projectId:"jaipur-property-consultant",storageBucket:"jaipur-property-consultant.firebasestorage.app",messagingSenderId:"502971407075",appId:"1:502971407075:web:ee4dabc90db9f592ebc3d6"},"publicSite"));
 const { $, esc, tidy, cleanArea, hidden, millis, propertyCard, savedList, inr, SITE } = JPC;
 const PAGE = 9;
-let all = [], shown = PAGE, savedOnly = false, scores = new Map();
+let all = [], shown = PAGE, savedOnly = false, scores = new Map(), cat = "";
 const P = new URLSearchParams(location.search);
 savedOnly = P.get("saved") === "1";
+if(["House","Commercial","Others"].includes(P.get("cat"))) cat = P.get("cat");
 $("q").value = P.get("q") || ""; 
 const BLABEL = { 2500000:"Up to ₹25 Lakh", 5000000:"Up to ₹50 Lakh", 10000000:"Up to ₹1 Crore", 20000000:"Up to ₹2 Crore", 999999999:"Above ₹2 Crore" };
 
@@ -78,6 +85,7 @@ function filtered(){
     if(savedOnly && !saved.includes(p.id)) return false;
     if(area && cleanArea(p.area) !== area) return false;
     if(type && p.propertyType !== type) return false;
+    if(cat && SITE.categoryOf(p.propertyType) !== cat) return false;
     if(bud){ const pr = price(p); if(bud === 999999999 ? pr <= 20000000 : (!pr || pr > bud)) return false; }
     return true;
   });
@@ -105,6 +113,7 @@ function sync(){
   if(g("q").trim()) p.set("q", g("q").trim());
   if(g("fArea")) p.set("area", g("fArea"));
   if(g("fType")) p.set("type", g("fType"));
+  if(cat) p.set("cat", cat);
   if(g("fBudget")) p.set("budget", g("fBudget"));
   if(g("fSort") && g("fSort") !== "rel") p.set("sort", g("fSort"));
   if(savedOnly) p.set("saved", "1");
@@ -112,12 +121,18 @@ function sync(){
 }
 function render(){
   const list = filtered(), vis = list.slice(0, shown);
+  document.querySelectorAll(".cat-tab").forEach(b => {
+    const c = b.dataset.cat; b.classList.toggle("on", c === cat);
+    const n = all.filter(p => !c || SITE.categoryOf(p.propertyType) === c).length;
+    b.innerHTML = (c || "All") + (all.length ? ` <span class="cnt">${n}</span>` : "");
+  });
   $("h1").textContent = savedOnly ? "Your saved properties" : "Properties for sale in Jaipur";
   $("count").textContent = list.length ? `${list.length} ${list.length === 1 ? "property" : "properties"}` : "No properties found";
   const chips = [];
   if(savedOnly) chips.push(["saved", "Saved only"]);
   if($("q").value.trim()) chips.push(["q", `“${$("q").value.trim()}”`]);
   if($("fArea").value) chips.push(["fArea", $("fArea").value]);
+  if(cat) chips.push(["cat", cat]);
   if($("fType").value) chips.push(["fType", $("fType").value]);
   if($("fBudget").value) chips.push(["fBudget", BLABEL[$("fBudget").value]]);
   $("chips").innerHTML = chips.map(c => `<button class="fchip" type="button" data-clear="${c[0]}">${esc(c[1])} ×</button>`).join("") + (chips.length ? '<button class="fchip" type="button" data-clear="all">Clear all</button>' : "");
@@ -140,11 +155,13 @@ function render(){
   document.dispatchEvent(new Event("jpc:rendered")); sync();
 }
 ["q"].forEach(id => $(id).addEventListener("input", () => { shown = PAGE; render(); }));
+$("catTabs").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if(!b) return; cat = b.dataset.cat; shown = PAGE; render(); });
 ["fArea","fType","fBudget","fSort"].forEach(id => $(id).addEventListener("change", () => { shown = PAGE; render(); }));
 $("more").onclick = () => { shown += PAGE; render(); };
 $("chips").addEventListener("click", e => {
   const b = e.target.closest("[data-clear]"); if(!b) return; const k = b.dataset.clear;
-  if(k === "all"){ savedOnly = false; ["q","fArea","fType","fBudget"].forEach(id => $(id).value = ""); }
+  if(k === "cat"){ cat = ""; shown = PAGE; render(); return; }
+  if(k === "all"){ savedOnly = false; cat = ""; ["q","fArea","fType","fBudget"].forEach(id => $(id).value = ""); }
   else if(k === "saved") savedOnly = false; else $(k).value = "";
   shown = PAGE; render();
 });

@@ -23,6 +23,12 @@ window.SITE = {
   yearsExperience: "",             // e.g. "8+ years"
   propertiesHelped: "",            // e.g. "150+ properties"
   officeHours: "",                 // e.g. "Mon–Sat, 10 AM – 7 PM"
+  /* property category groups used by the filters (edit here to change grouping) */
+  categories: {
+    House:      ["House","Flat","Villa"],
+    Commercial: ["Shop","Commercial"],
+    Others:     ["Plot","Land","Other"]
+  },
   areas: ["Jhotwara","Jagatpura","Sanganer","Mansarovar","Vaishali Nagar","Ajmer Road","Tonk Road","Kalwar Road","Mahapura","Bhankrota","Khatipura","Bindayaka","Vatika","Chaksu"],
 
   /* ---- commission / partner programme (shown on partner.html) ----
@@ -37,4 +43,11 @@ window.SITE = {
     payoutNote: "Payment is made after the registry is done and our brokerage is received.",
     disclaimer: "Rates shown are indicative. Exact terms are agreed in writing before any deal."
   }
+};
+
+/* helper: which category does a property type belong to? */
+window.SITE.categoryOf = function(type){
+  const t=String(type||"").trim().toLowerCase();
+  for(const [cat,list] of Object.entries(window.SITE.categories)) if(list.some(x=>x.toLowerCase()===t)) return cat;
+  return "Others";
 };

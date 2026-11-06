@@ -281,7 +281,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <div class="hero"><div><h1>Properties</h1><p id="pSub"></p></div><div class="vtog" id="pView"><button type="button" data-pv="list">☰ List</button><button type="button" data-pv="cards">▦ Cards</button></div></div>
       <section class="card tool">
         <div class="search"><input id="pq" type="text" placeholder="Search code, area, type, owner, customer name or mobile…" aria-label="Search properties"></div>
-        <div class="filters"><label>Area<select id="pf_area"></select></label><label>Property type<select id="pf_type"></select></label><label>Availability<select id="pf_av"></select></label><label>Show<select id="pf_show"><option value="">All properties</option><option value="int">With interested customers</option><option value="due">Follow-up due</option><option value="none">No enquiry yet</option><option value="live">Live on website</option></select></label><button class="btn" id="pReset">Reset</button></div>
+        <div class="filters"><label>Area<select id="pf_area"></select></label><label>Category<select id="pf_cat"><option value="">All categories</option><option>House</option><option>Commercial</option><option>Others</option></select></label><label>Property type<select id="pf_type"></select></label><label>Availability<select id="pf_av"></select></label><label>Show<select id="pf_show"><option value="">All properties</option><option value="int">With interested customers</option><option value="due">Follow-up due</option><option value="none">No enquiry yet</option><option value="live">Live on website</option></select></label><button class="btn" id="pReset">Reset</button></div>
       </section>
       <section class="card list" id="pListWrap">
         <div class="row head rp"><div>Code</div><div>Property</div><div>Price</div><div>Interested</div><div>Follow-ups</div><div style="text-align:right">Actions</div></div>
@@ -296,7 +296,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <div class="chips" id="cChips"></div>
       <section class="card tool">
         <div class="search"><input id="cq" type="text" placeholder="Search name, mobile, area, property code, notes…" aria-label="Search contacts"></div>
-        <div class="filters"><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option><option value="bhi">Budget: high → low</option><option value="blo">Budget: low → high</option></select></label><button class="btn" id="cReset">Reset</button></div>
+        <div class="filters"><label>Contact type<select id="cf_who"><option value="">All contacts</option><option value="customer">Buyers / Customers</option><option value="seller">Sellers / Owners</option><option value="broker">Brokers / Agents</option></select></label><label>Category<select id="cf_cat"><option value="">All categories</option><option>House</option><option>Commercial</option><option>Others</option></select></label><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option><option value="bhi">Budget: high → low</option><option value="blo">Budget: low → high</option></select></label><button class="btn" id="cReset">Reset</button></div>
         <div class="bfil"><label>💰 Budget from (rate)<input id="cf_bmin" type="text" inputmode="decimal" placeholder="e.g. 40 L" autocomplete="off"><span class="hint" id="h_cbmin"></span></label><label>Budget up to (optional)<input id="cf_bmax" type="text" inputmode="decimal" placeholder="e.g. 1 Cr" autocomplete="off"><span class="hint" id="h_cbmax"></span></label><div class="qb" id="cbQuick"><span style="font-size:11px;font-weight:700;color:var(--mut)">Quick:</span><button data-bq="2000000">20 L+</button><button data-bq="4000000">40 L+</button><button data-bq="6000000">60 L+</button><button data-bq="8000000">80 L+</button><button data-bq="10000000">1 Cr+</button></div><div class="bnote" id="cbNote"></div></div>
       </section>
       <section class="card list">
@@ -325,7 +325,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
     <section id="v_match" class="hidden">
       <div class="hero"><div><h1>Smart Match</h1><p>Customer ki requirement se property, ya property se customers dhundo — area, type aur budget ke score ke saath.</p></div>
         <div class="chips" style="margin:0"><button class="chip on" data-mm="c2p">🧑 Customer → Property</button><button class="chip" data-mm="p2c">🏠 Property → Customers</button></div></div>
-      <section class="card tool"><label class="lbl" style="margin:0"><span id="mPickLbl">Customer chuno</span><select id="mPick"></select></label><p id="mInfo" style="color:var(--mut);font-size:12.5px;margin-top:8px"></p></section>
+      <section class="card tool"><label class="lbl" style="margin:0"><span id="mPickLbl">Select customer</span><select id="mPick"></select></label><p id="mInfo" style="color:var(--mut);font-size:12.5px;margin-top:8px"></p></section>
       <div id="mRes"></div>
     </section>
 
@@ -363,7 +363,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
     </div>
     <div id="tp_details" class="hidden">
       <div class="fg">
-        <label>Kaun hai *<select id="m_type"><option value="customer">Customer / Buyer</option><option value="broker">Broker / Agent</option></select></label>
+        <label>Contact type *<select id="m_type"><option value="customer">Customer / Buyer</option><option value="broker">Broker / Agent</option></select></label>
         <label>Name *<input id="m_name" type="text"></label>
         <label>Mobile<input id="m_mobile" type="tel" inputmode="tel"></label>
         <label>Source<select id="m_src"><option>Phone</option><option>WhatsApp</option><option>Walk-in</option><option>Referral</option><option>Website</option><option>Facebook</option><option>Instagram</option><option>Google</option><option>Other</option></select></label>
@@ -533,7 +533,7 @@ const ini=n=>clean(n||"?").split(" ").map(x=>x[0]).join("").slice(0,2).toUpperCa
 const last10=m=>String(m||"").replace(/\D/g,"").slice(-10);
 const STATUSES=["New","Contacted","Interested","Site Visit","Negotiation","Follow-up","Closed","Not Interested"];
 const HOT=["Interested","Site Visit","Negotiation"],TERM=["Closed","Not Interested"];
-const TYPE_LBL={customer:"Buyer",seller:"Seller",broker:"Broker"};
+const TYPE_LBL={customer:"Buyer",seller:"Seller",broker:"Broker / Agent"};
 const cls=s=>String(s||"").replace(/\s+/g,"-");
 const iso=(d=new Date())=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const addDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
@@ -682,15 +682,15 @@ function dash(){
 let pView="list";try{const sv=localStorage.getItem("jpcPropView");pView=sv?(sv==="cards"?"cards":"list"):(matchMedia("(max-width:700px)").matches?"cards":"list")}catch(e){}
 function renderProps(){
   if(!loaded){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=skRows("rp");return}
-  const q=$("pq").value.trim().toLowerCase(),F={a:$("pf_area").value,t:$("pf_type").value,v:$("pf_av").value,s:$("pf_show").value};
+  const q=$("pq").value.trim().toLowerCase(),F={a:$("pf_area").value,t:$("pf_type").value,v:$("pf_av").value,s:$("pf_show").value,g:$("pf_cat").value};
   const rows=props().map(p=>({p,c:buyersOf(p)})).filter(({p,c})=>{
-    if(F.a&&areaOf(p)!==F.a)return false;if(F.t&&clean(p.propertyType)!==F.t)return false;if(F.v&&(p.availability||"Available")!==F.v)return false;
+    if(F.a&&areaOf(p)!==F.a)return false;if(F.g&&SITE.categoryOf(p.propertyType)!==F.g)return false;if(F.t&&clean(p.propertyType)!==F.t)return false;if(F.v&&(p.availability||"Available")!==F.v)return false;
     const due=c.filter(x=>["td","od"].includes(fuState(x))).length;
     if(F.s==="int"&&!c.length)return false;if(F.s==="due"&&!due)return false;if(F.s==="none"&&c.length)return false;if(F.s==="live"&&!p.publicVisible)return false;
     if(q&&![p.code,p.area,p.propertyType,p.size,p.name,p.mobile,p.details,...c.map(x=>x.name+" "+x.mobile)].map(clean).join(" ").toLowerCase().includes(q))return false;return true})
     .sort((a,b)=>codeNum(b.p.code)-codeNum(a.p.code));
-  $("pSub").textContent=`${rows.length} of ${props().length} properties · har property ke neeche uske interested customers`;
-  if(!rows.length){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏘</div><b>${props().length?"Koi property match nahi hui":"Abhi koi property nahi hai"}</b>${props().length?"Search ya filter badal ke dekho.":"Pehli property add karo — usse automatic code mil jayega."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
+  $("pSub").textContent=`${rows.length} of ${props().length} properties · interested customers are listed under each property`;
+  if(!rows.length){$("pListWrap").classList.remove("hidden");$("pCards").classList.add("hidden");$("pRows").innerHTML=`<div class="empty"><div style="font-size:30px">🏘</div><b>${props().length?"No matching property found":"Abhi koi property nahi hai"}</b>${props().length?"Try changing your search or filters.":"Pehli property add karo — usse automatic code mil jayega."}<br><button class="btn p" data-act="addP">＋ Add Property</button></div>`;return}
   const cardsOn=pView==="cards";
   $("pListWrap").classList.toggle("hidden",cardsOn);$("pCards").classList.toggle("hidden",!cardsOn);
   document.querySelectorAll("[data-pv]").forEach(b=>b.classList.toggle("on",b.dataset.pv===pView));
@@ -727,8 +727,8 @@ function propDetail(p,c){
    <div class="pinfo" style="margin-top:12px">${info||"<span>Aur details nahi bhari.</span>"}</div>
    ${p.followUpDate?`<div class="pinfo"><span>Owner follow-up: <b>${fmtFu(p.followUpDate)}</b> ${esc(p.followUpNote||"")}</span></div>`:""}
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px">${waBtn(p)}${availableP(p)?`<button class="mini wa" data-act="bq" data-id="${esc(p.id)}">📲 Matching buyers ko bhejo</button>`:""}${lk?`<button class="mini" data-act="copyLink" data-id="${esc(p.id)}">🔗 Copy website link</button>`:""}</div>
-   <h4><span>Is property ke interested customers (${c.length})</span><button class="btn p sm" data-act="pLink" data-id="${esc(p.id)}">＋ Add customer</button></h4>
-   ${c.length?c.map(x=>subRow(x,p)).join(""):`<div class="empty" style="padding:22px">Abhi koi customer is property ke liye link nahi hua.</div>`}
+   <h4><span>Interested customers for this property (${c.length})</span><button class="btn p sm" data-act="pLink" data-id="${esc(p.id)}">＋ Add customer</button></h4>
+   ${c.length?c.map(x=>subRow(x,p)).join(""):`<div class="empty" style="padding:22px">No customer is linked to this property yet.</div>`}
    ${sug.length?`<h4><span>🎯 Matching buyers (abhi link nahi)</span></h4>${sug.map(x=>`<div class="sub" style="grid-template-columns:minmax(0,1.8fr) 90px minmax(0,1.6fr) auto"><div class="who"><div class="av">${esc(ini(x.c.name))}</div><div style="min-width:0"><b style="font-size:13.5px">${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(budgetText(x.c))}</span></div></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="why">${esc(x.why.join(" • "))}</div><div class="ra">${waBtn(x.c,p.id)}<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button></div></div>`).join("")}`:""}`;
 }
 function subRow(x,p){
@@ -744,11 +744,12 @@ function budgetFilter(){const lo=parseINR($("cf_bmin").value),hi=parseINR($("cf_
 function budgetMatch(r,lo,hi){const a=Number(r.budgetMin||0),b=Number(r.budgetMax||0);if(!a&&!b)return false;const cl=a||0,ch=b||Infinity;return ch>=lo&&cl<=hi}
 const topBudget=r=>Number(r.budgetMax||r.budgetMin||0);
 function cList(){
-  const BF=budgetFilter(),q=$("cq").value.trim().toLowerCase().replace(/\s+/g," "),F={a:$("cf_area").value,s:$("cf_status").value,r:$("cf_src").value,o:$("cf_sort").value},wk=Date.now()-7*864e5;
+  const BF=budgetFilter(),q=$("cq").value.trim().toLowerCase().replace(/\s+/g," "),F={a:$("cf_area").value,s:$("cf_status").value,r:$("cf_src").value,o:$("cf_sort").value,g:$("cf_cat").value,w:$("cf_who").value},wk=Date.now()-7*864e5;
   let v=recs.filter(r=>{
     if(["customer","seller","broker"].includes(cChip)){if(r.type!==cChip)return false}else if(cChip==="od"){if(fuState(r)!=="od")return false}else if(cChip==="td"){if(fuState(r)!=="td")return false}
     else if(cChip==="nofu"){if(!(r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate))return false}
     else if(cChip==="noenq"){return false}
+    if(F.w&&r.type!==F.w)return false;if(F.g&&SITE.categoryOf(r.propertyType)!==F.g)return false;
     if(BF){if(r.type==="seller"&&cChip!=="seller")return false;if(!budgetMatch(r,BF.lo,BF.hi))return false}
     if(F.a&&areaOf(r)!==F.a)return false;if(F.s&&(r.status||"New")!==F.s)return false;if(F.r&&clean(r.source)!==F.r)return false;
     if(q&&![r.name,r.mobile,r.area,r.code,r.propertyType,r.details,r.notes,r.source,r.status,...interestsOf(r).map(i=>i.code+" "+i.label),lastNote(r)].map(clean).join(" ").toLowerCase().includes(q))return false;return true});
@@ -757,15 +758,15 @@ function cList(){
   return v}
 function renderContacts(){
   const cnt=t=>recs.filter(r=>r.type===t).length,od=recs.filter(r=>fuState(r)==="od").length,td=recs.filter(r=>fuState(r)==="td").length,nofu=recs.filter(r=>r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate).length;
-  const C=[["","All",recs.length],["customer","🧑 Buyers",cnt("customer")],["seller","🏠 Sellers",cnt("seller")],["broker","🤝 Brokers",cnt("broker")],["td","📅 Today",td],["od","⚠ Overdue",od],["nofu","🔥 Hot, no follow-up",nofu]];
+  const C=[["","All",recs.length],["customer","🧑 Buyers / Customers",cnt("customer")],["seller","🏠 Sellers / Owners",cnt("seller")],["broker","🤝 Brokers / Agents",cnt("broker")],["td","📅 Today",td],["od","⚠ Overdue",od],["nofu","🔥 Hot, no follow-up",nofu]];
   $("cChips").innerHTML=C.map(c=>`<button class="chip${cChip===c[0]?" on":""}" data-chip="${c[0]}">${c[1]} <b>${c[2]}</b></button>`).join("");
   if(!loaded){$("cRows").innerHTML=skRows("rc");return}
-  const v=cList();$("cSub").textContent=`${v.length} of ${recs.length} contacts · buyer, seller aur broker sab ek jagah`;
+  const v=cList();$("cSub").textContent=`${v.length} of ${recs.length} contacts · buyers, sellers and brokers in one place`;
   {const BF=budgetFilter(),n=$("cbNote");if(!BF)n.innerHTML="";else{const nb=recs.filter(r=>r.type!=="seller"&&!Number(r.budgetMin||0)&&!Number(r.budgetMax||0)).length;
     const what=BF.hi===Infinity?`<b>${esc(inr(BF.lo))}</b> ya usse upar ka budget`:`<b>${esc(inr(BF.lo)||"₹0")} – ${esc(inr(BF.hi))}</b> ke beech ka budget`;
     n.innerHTML=`✅ <b>${v.length}</b> contacts · ${what}.`+(nb?` (${nb} contacts ka budget likha nahi, woh yahan nahi aaye)`:"")}}
   const page=v.slice(0,cShown);
-  $("cRows").innerHTML=page.length?page.map(cRow).join(""):`<div class="empty"><div style="font-size:30px">🔎</div><b>Koi contact nahi mila</b>Search ya filter badal ke dekho.<br><button class="btn p" data-act="addC">＋ Add Contact</button></div>`;
+  $("cRows").innerHTML=page.length?page.map(cRow).join(""):`<div class="empty"><div style="font-size:30px">🔎</div><b>No contacts found</b>Try changing your search or filters.<br><button class="btn p" data-act="addC">＋ Add Contact</button></div>`;
   const m=$("cMore");m.classList.toggle("hidden",v.length<=cShown);m.innerHTML=`Showing ${page.length} of ${v.length} · <button class="btn" data-act="more">Load more</button>`;
 }
 function cRow(r){
@@ -785,7 +786,7 @@ function renderFollow(){
   if(!loaded){$("fRows").innerHTML="";return}
   const t=iso(),w=addDays(7),act=recs.filter(r=>r.followUpDate&&!TERM.includes(r.status));
   const G=[["⚠ Overdue",act.filter(r=>r.followUpDate<t).sort((a,b)=>a.followUpDate.localeCompare(b.followUpDate))],["📅 Today",act.filter(r=>r.followUpDate===t)],["⏭ Next 7 days",act.filter(r=>r.followUpDate>t&&r.followUpDate<=w).sort((a,b)=>a.followUpDate.localeCompare(b.followUpDate))]];
-  if(!G.some(g=>g[1].length)){$("fRows").innerHTML=`<div class="card empty"><div style="font-size:30px">🎉</div><b>Koi follow-up pending nahi</b>Customer ya seller ke andar jaakar follow-up date set karo.</div>`;return}
+  if(!G.some(g=>g[1].length)){$("fRows").innerHTML=`<div class="card empty"><div style="font-size:30px">🎉</div><b>No follow-ups pending</b>Open a customer or seller record to set a follow-up date.</div>`;return}
   $("fRows").innerHTML=G.filter(g=>g[1].length).map(g=>`<div class="fgrp"><h3>${g[0]} <span style="color:var(--mut);font-weight:600">(${g[1].length})</span></h3><section class="card list">${g[1].map(r=>{
     const ints=interestsOf(r);
     return`<div class="fl"><div><span class="nx ${fuState(r)}"><b style="color:inherit">${fmtFu(r.followUpDate)}</b></span></div>
@@ -1087,17 +1088,17 @@ $("bq_close").onclick=()=>$("bq").classList.add("hidden");
 /* ---------- SMART MATCH view ---------- */
 function renderMatch(){
   const sel=$("mPick"),cur=sel.value;
-  if(mMode==="c2p"){$("mPickLbl").textContent="Customer chuno";sel.innerHTML='<option value="">— select —</option>'+recs.filter(r=>r.type==="customer"&&!TERM.includes(r.status)).sort((a,b)=>clean(a.name).localeCompare(clean(b.name))).map(r=>`<option value="${esc(r.id)}">${esc(r.name||"Unnamed")} — ${esc(areaOf(r)||"area ?")} · ${esc(budgetText(r))}</option>`).join("")}
-  else{$("mPickLbl").textContent="Property chuno";sel.innerHTML='<option value="">— select —</option>'+props().filter(availableP).sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.id)}">${esc(p.code||"")} · ${esc(lbl(p))} · ${esc(budgetText(p))}</option>`).join("")}
+  if(mMode==="c2p"){$("mPickLbl").textContent="Select customer";sel.innerHTML='<option value="">— select —</option>'+recs.filter(r=>r.type==="customer"&&!TERM.includes(r.status)).sort((a,b)=>clean(a.name).localeCompare(clean(b.name))).map(r=>`<option value="${esc(r.id)}">${esc(r.name||"Unnamed")} — ${esc(areaOf(r)||"area ?")} · ${esc(budgetText(r))}</option>`).join("")}
+  else{$("mPickLbl").textContent="Select property";sel.innerHTML='<option value="">— select —</option>'+props().filter(availableP).sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.id)}">${esc(p.code||"")} · ${esc(lbl(p))} · ${esc(budgetText(p))}</option>`).join("")}
   if([...sel.options].some(o=>o.value===cur))sel.value=cur;drawMatchRes()}
 function drawMatchRes(){
-  const id=$("mPick").value,res=$("mRes");if(!id){$("mInfo").textContent=mMode==="c2p"?"Customer chuno — uski requirement se milti properties dikhengi.":"Property chuno — usse milte customers dikhenge.";res.innerHTML="";return}
+  const id=$("mPick").value,res=$("mRes");if(!id){$("mInfo").textContent=mMode==="c2p"?"Select customer — uski requirement se milti properties dikhengi.":"Select property — usse milte customers dikhenge.";res.innerHTML="";return}
   if(mMode==="c2p"){const c=recs.find(r=>r.id===id);if(!c)return;$("mInfo").textContent=`${areaOf(c)||"Area ?"} • ${c.propertyType||"Type ?"} • ${budgetText(c)}`;
     const L=matchesForBuyer(c),linked=new Set(interestsOf(c).map(i=>i.id));
-    res.innerHTML=L.length?L.map(x=>`<div class="mrow"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(x.p.name||"")} · ${esc(budgetText(x.p))}</span></div><div class="why">${esc(x.why.join(" • "))}</div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="ra">${waNum(c)?`<button class="mini wa" data-act="wa" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.p.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>Koi property match nahi hui</b>Customer ki area, type ya budget update karke dekho.</div>`}
+    res.innerHTML=L.length?L.map(x=>`<div class="mrow"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(x.p.name||"")} · ${esc(budgetText(x.p))}</span></div><div class="why">${esc(x.why.join(" • "))}</div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="ra">${waNum(c)?`<button class="mini wa" data-act="wa" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.p.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(c.id)}" data-pid="${esc(x.p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>No matching property found</b>Customer ki area, type ya budget update karke dekho.</div>`}
   else{const p=propById(id);if(!p)return;$("mInfo").textContent=`${p.code||""} • ${lbl(p)} • ${budgetText(p)}`;
     const L=matchesForProp(p),linked=new Set(buyersOf(p).map(c=>c.id));
-    res.innerHTML=L.length?`<div style="padding:4px 0 10px"><button class="btn p sm" data-act="bq" data-id="${esc(p.id)}" style="background:#0f9d6a;border-color:#0f9d6a">📲 Sab matching buyers ko WhatsApp queue</button></div>`+L.map(x=>`<div class="mrow"><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="cell"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(x.c.status||"New")}</span></div><div class="cell"><b>${esc([x.c.propertyType,areaOf(x.c)].filter(Boolean).join(" • ")||"—")}</b><span class="why">${esc(x.why.join(" • "))}</span></div><div>${esc(budgetText(x.c))}</div><div class="ra">${waNum(x.c)?`<button class="mini wa" data-act="wa" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.c.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>Koi customer match nahi hua</b>Customers ki requirement mein area, type aur budget bharo.</div>`}}
+    res.innerHTML=L.length?`<div style="padding:4px 0 10px"><button class="btn p sm" data-act="bq" data-id="${esc(p.id)}" style="background:#0f9d6a;border-color:#0f9d6a">📲 Sab matching buyers ko WhatsApp queue</button></div>`+L.map(x=>`<div class="mrow"><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div class="cell"><b>${esc(x.c.name||"Unnamed")}</b><span>${esc(x.c.mobile||"")} · ${esc(x.c.status||"New")}</span></div><div class="cell"><b>${esc([x.c.propertyType,areaOf(x.c)].filter(Boolean).join(" • ")||"—")}</b><span class="why">${esc(x.why.join(" • "))}</span></div><div>${esc(budgetText(x.c))}</div><div class="ra">${waNum(x.c)?`<button class="mini wa" data-act="wa" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Share on WhatsApp</button>`:""}${linked.has(x.c.id)?`<span class="st Closed">Linked</span>`:`<button class="mini v" data-act="mLink" data-id="${esc(x.c.id)}" data-pid="${esc(p.id)}">Link</button>`}</div></div>`).join(""):`<div class="card empty"><b>No matching customer found</b>Customers ki requirement mein area, type aur budget bharo.</div>`}}
 $("mPick").onchange=drawMatchRes;
 
 /* ---------- INBOX (website submissions + reviews) ---------- */
@@ -1197,22 +1198,23 @@ $("k_res").onclick=e=>{const b=e.target.closest("[data-k]");if(b)pickK(b.dataset
 
 /* ---------- navigation + global events ---------- */
 function setView(v){view=v;document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));["dash","props","contacts","follow","inbox","match","tools"].forEach(k=>$("v_"+k).classList.toggle("hidden",k!==v));window.scrollTo({top:0})}
-function goProp(id){setView("props");openProp=id;["pq"].forEach(i=>$(i).value="");["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps();setTimeout(()=>document.querySelector(`[data-pid="${CSS.escape(id)}"]`)?.scrollIntoView({block:"center",behavior:"smooth"}),60)}
+function goProp(id){setView("props");openProp=id;["pq"].forEach(i=>$(i).value="");["pf_area","pf_cat","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps();setTimeout(()=>document.querySelector(`[data-pid="${CSS.escape(id)}"]`)?.scrollIntoView({block:"center",behavior:"smooth"}),60)}
 $("nav").onclick=e=>{const b=e.target.closest("[data-v]");if(b)setView(b.dataset.v)};
 $("addC").onclick=()=>openC();$("addP").onclick=()=>openP();$("fabC").onclick=()=>openC();$("fabP").onclick=()=>openP();
 let st;[["pq",renderProps],["cq",()=>{cShown=60;renderContacts()}]].forEach(([i,f])=>$(i).addEventListener("input",()=>{clearTimeout(st);st=setTimeout(f,150)}));
-["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).addEventListener("change",renderProps));
-["cf_area","cf_status","cf_src","cf_sort"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
+["pf_area","pf_cat","pf_type","pf_av","pf_show"].forEach(i=>$(i).addEventListener("change",renderProps));
+["cf_area","cf_status","cf_src","cf_sort","cf_cat"].forEach(i=>$(i).addEventListener("change",()=>{cShown=60;renderContacts()}));
+$("cf_who").addEventListener("change",()=>{if(["customer","seller","broker"].includes(cChip))cChip="";cShown=60;renderContacts()});
 [["cf_bmin","h_cbmin"],["cf_bmax","h_cbmax"]].forEach(([i,h])=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value);$(h).textContent=n?"= "+inr(n):"";clearTimeout(st);st=setTimeout(()=>{cShown=60;renderContacts()},200)}));
 $("cbQuick").addEventListener("click",e=>{const b=e.target.closest("[data-bq]");if(!b)return;$("cf_bmin").value=inr(+b.dataset.bq).replace("₹","");$("cf_bmax").value="";$("h_cbmin").textContent="= "+inr(+b.dataset.bq);$("h_cbmax").textContent="";cShown=60;renderContacts()});
 $("pView").addEventListener("click",e=>{const b=e.target.closest("[data-pv]");if(!b)return;pView=b.dataset.pv;try{localStorage.setItem("jpcPropView",pView)}catch(_){}renderProps()});
-$("pReset").onclick=()=>{$("pq").value="";["pf_area","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps()};
-$("cReset").onclick=()=>{$("cq").value="";["cf_area","cf_status","cf_src","cf_bmin","cf_bmax"].forEach(i=>$(i).value="");$("h_cbmin").textContent=$("h_cbmax").textContent="";$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
+$("pReset").onclick=()=>{$("pq").value="";["pf_area","pf_cat","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps()};
+$("cReset").onclick=()=>{$("cq").value="";["cf_who","cf_cat","cf_area","cf_status","cf_src","cf_bmin","cf_bmax"].forEach(i=>$(i).value="");$("h_cbmin").textContent=$("h_cbmax").textContent="";$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
 document.querySelectorAll("[data-mm]").forEach(b=>b.onclick=()=>{mMode=b.dataset.mm;document.querySelectorAll("[data-mm]").forEach(x=>x.classList.toggle("on",x===b));$("mPick").value="";renderMatch()});
 document.addEventListener("click",async e=>{
   const t=e.target;
   const ib=t.closest("[data-ib]");if(ib){ibMode=ib.dataset.ib;renderInbox();return}
-  const chip=t.closest("[data-chip]");if(chip){cChip=chip.dataset.chip===cChip?"":chip.dataset.chip;cShown=60;renderContacts();return}
+  const chip=t.closest("[data-chip]");if(chip){cChip=chip.dataset.chip===cChip?"":chip.dataset.chip;if(["customer","seller","broker"].includes(chip.dataset.chip))$("cf_who").value=cChip;else if($("cf_who").value&&["td","od","nofu"].includes(cChip)&&cChip!=="nofu")$("cf_who").value=$("cf_who").value;cShown=60;renderContacts();return}
   const a=t.closest("[data-act]");
   if(a){const id=a.dataset.id,act=a.dataset.act;
     try{

@@ -223,7 +223,8 @@
       else { capType = true; why.push("Type alag"); }
     }
 
-    const bMin = Number(c.budgetMin) || 0, bMax = Number(c.budgetMax) || 0, [lo, hi] = priceRange(p);
+    let bMin = Number(c.budgetMin) || 0, bMax = Number(c.budgetMax) || 0; const [lo, hi] = priceRange(p);
+    if (bMin && !bMax) { bMax = bMin; bMin = 0; }   /* ek hi budget likha ho to wo 'kitna tak' hai, 'kam se kam' nahi */
     if ((bMin || bMax) && lo) {
       known += W.budget;
       const top = bMax || Infinity;

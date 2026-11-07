@@ -296,7 +296,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
       <div class="chips" id="cChips"></div>
       <section class="card tool">
         <div class="search"><input id="cq" type="text" placeholder="Search name, mobile, area, property code, notes…" aria-label="Search contacts"></div>
-        <div class="filters"><label>Contact type<select id="cf_who"><option value="">All contacts</option><option value="customer">Buyers / Customers</option><option value="seller">Sellers / Owners</option><option value="broker">Brokers / Agents</option></select></label><label>Category<select id="cf_cat"><option value="">All categories</option><option>House</option><option>Commercial</option><option>Others</option></select></label><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option><option value="bhi">Budget: high → low</option><option value="blo">Budget: low → high</option></select></label><button class="btn" id="cReset">Reset</button></div>
+        <div class="filters"><label>Contact type<select id="cf_who"><option value="">All contacts</option><option value="customer">Buyers / Customers</option><option value="seller">Sellers / Owners</option><option value="broker">Brokers / Agents</option></select></label><label>Category<select id="cf_cat"><option value="">All categories</option><option>House</option><option>Commercial</option><option>Others</option></select></label><label>Area<select id="cf_area"></select></label><label>Status<select id="cf_status"></select></label><label>Source<select id="cf_src"></select></label><label>Sort<select id="cf_sort"><option value="latest">Latest first</option><option value="follow">Next follow-up</option><option value="name">Name A–Z</option><option value="bhi">Budget: high → low</option><option value="blo">Budget: low → high</option></select></label><button class="btn" id="cMoreBtn" type="button">⚙ More</button><button class="btn" id="cReset">Reset</button></div>
         <div class="bfil"><label>💰 Budget from (rate)<input id="cf_bmin" type="text" inputmode="decimal" placeholder="e.g. 40 L" autocomplete="off"><span class="hint" id="h_cbmin"></span></label><label>Budget up to (optional)<input id="cf_bmax" type="text" inputmode="decimal" placeholder="e.g. 1 Cr" autocomplete="off"><span class="hint" id="h_cbmax"></span></label><div class="qb" id="cbQuick"><span style="font-size:11px;font-weight:700;color:var(--mut)">Quick:</span><button data-bq="2000000">20 L+</button><button data-bq="4000000">40 L+</button><button data-bq="6000000">60 L+</button><button data-bq="8000000">80 L+</button><button data-bq="10000000">1 Cr+</button></div><div class="bnote" id="cbNote"></div></div>
       </section>
       <section class="card list">
@@ -367,11 +367,11 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
         <label>Name *<input id="m_name" type="text"></label>
         <label>Mobile<input id="m_mobile" type="tel" inputmode="tel"></label>
         <label>Source<select id="m_src"><option>Phone</option><option>WhatsApp</option><option>Walk-in</option><option>Referral</option><option>Website</option><option>Facebook</option><option>Instagram</option><option>Google</option><option>Other</option></select></label>
-        <label>Area / Location<input id="m_area" type="text" placeholder="e.g. Jagatpura, Mansarovar"></label>
+        <label>Area / Location<input id="m_area" list="areaDL" autocomplete="off" type="text" placeholder="e.g. Jagatpura, Mansarovar"></label>
         <label>Property type<select id="m_ptype"><option value="">—</option><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Shop</option><option>Land</option><option>Commercial</option><option>Other</option></select></label>
         <label>Size / BHK<input id="m_size" type="text" placeholder="e.g. 50 gaj, 2 BHK"></label>
-        <label>Budget min<input id="m_bmin" type="text" placeholder="e.g. 40 lakh"><span class="hint" id="h_bmin"></span></label>
-        <label>Budget max<input id="m_bmax" type="text" placeholder="e.g. 1.2 cr"><span class="hint" id="h_bmax"></span></label>
+        <label>💰 Budget — kitna tak *<input id="m_bmax" type="text" placeholder="e.g. 1.2 cr"><span class="hint" id="h_bmax"></span></label>
+        <label>Kam se kam (optional)<input id="m_bmin" type="text" placeholder="e.g. 40 lakh"><span class="hint" id="h_bmin"></span></label>
         <label class="full">Requirement details<textarea id="m_details" rows="2" placeholder="Size, facing, loan, purchase timeline…"></textarea></label>
         <label>Email<input id="m_email" type="text"></label>
         <label>Alternate mobile<input id="m_alt" type="tel"></label>
@@ -382,7 +382,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
         <div class="lbl">Interested property (enter code — JPC-012)</div>
         <div class="lk" id="m_lk"></div>
         <div class="lkadd"><input id="m_code" type="text" list="codeList" placeholder="JPC-012 or just 12"><button class="btn" type="button" id="m_codeAdd">Link</button></div>
-        <datalist id="codeList"></datalist>
+        <datalist id="codeList"></datalist><datalist id="areaDL"></datalist>
       </div>
       <label class="sw" id="m_pubBox"><input type="checkbox" id="m_pub"><span><b>🌐 Show requirement on website</b>Only area, type, budget and details are shown. Name and mobile are never shown.</span></label>
     </div>
@@ -402,7 +402,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;background:#fff;border-
     <div class="fg">
       <label>Property type *<select id="p_type"><option>Plot</option><option>House</option><option>Flat</option><option>Villa</option><option>Shop</option><option>Land</option><option>Commercial</option><option>Other</option></select></label>
       <label>Size<input id="p_size" type="text" placeholder="e.g. 100 gaj, 2 BHK, 1200 sq ft"></label>
-      <label>Area / Colony *<input id="p_area" type="text" placeholder="e.g. Jagatpura"></label>
+      <label>Area / Colony *<input id="p_area" list="areaDL" autocomplete="off" type="text" placeholder="e.g. Jagatpura"></label>
       <label>City<input id="p_city" type="text" value="Jaipur"></label>
       <label>Price (maang)<input id="p_price" type="text" placeholder="e.g. 85 lakh, 1.2 cr"><span class="hint" id="h_price"></span></label>
       <label>Availability<select id="p_av"><option value="Available">🟢 Available</option><option value="Under Offer">🟡 Under Offer</option><option value="Sold">🔴 Sold</option><option value="Not Available">⚫ Not Available</option></select></label>
@@ -543,12 +543,12 @@ const fmtTime=ms=>new Date(ms).toLocaleTimeString("en-IN",{hour:"numeric",minute
 const msOf=v=>{const m=v?.toMillis?v.toMillis():(v?.seconds?v.seconds*1000:(typeof v==="number"?v:0));return m>1e11?m:0};
 const fmtFu=s=>{if(!s)return"";const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d).toLocaleDateString("en-GB",{day:"2-digit",month:"short"})};
 const daysLate=s=>{const[y,m,d]=s.split("-").map(Number);return Math.round((new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())-new Date(y,m-1,d))/864e5)};
-function inr(n){n=Number(n);if(!Number.isFinite(n)||n<=0)return"";const r=v=>String(Math.round(v*100)/100);if(n>=1e7)return"₹"+r(n/1e7)+" Cr";if(n>=1e5)return"₹"+r(n/1e5)+" L";return"₹"+n.toLocaleString("en-IN")}
+function inr(n){n=Number(n);if(!Number.isFinite(n)||n<=0)return"";const r=v=>String(Math.round(v*100)/100);if(n>=1e7)return"₹"+r(n/1e7)+" Cr";if(n>=1e5){const l=Math.round(n/1e3)/100;if(l>=100)return"₹"+r(n/1e7)+" Cr";return"₹"+r(l)+" L"}return"₹"+n.toLocaleString("en-IN")}
 function parseINR(t){t=String(t??"").toLowerCase().replace(/,/g,"").trim();if(!t)return null;const m=t.match(/(\d+(?:\.\d+)?)\s*(cr|crore|karod|l|lac|lakh|lakhs|k|thousand|hazar)?/);if(!m)return null;let n=parseFloat(m[1]);const u=m[2]||"";if(/^(cr|crore|karod)/.test(u))n*=1e7;else if(/^(l|lac|lakh)/.test(u))n*=1e5;else if(/^(k|thousand|hazar)/.test(u))n*=1e3;return Math.round(n)}
 /* "unchanged field keeps the exact stored number" — avoids rounding loss like 4,53,210 -> 4.53 L */
 function setMoney(id,val){const el=$(id);el.value=val?inr(val).replace("₹",""):"";el.dataset.txt=el.value;el.dataset.val=val||""}
 function getMoney(id){const el=$(id);return el.value===el.dataset.txt&&el.dataset.val?Number(el.dataset.val):parseINR(el.value)}
-function budgetText(r){const a=inr(r.budgetMin),b=inr(r.budgetMax);if(a&&b)return a===b?a:a+" – "+b;if(b)return"Up to "+b;if(a)return"From "+a;return"—"}
+function budgetText(r){const a=inr(r.budgetMin),b=inr(r.budgetMax);if(a&&b)return a===b?a:a+" – "+b;if(b)return"Up to "+b;if(a)return r.type==="seller"?a:"Up to "+a;return"—"}
 
 /* ---------- LIVE ALERTS: popup + sound + tab title when something new arrives ---------- */
 const BASE_TITLE=document.title,ready={};
@@ -570,7 +570,7 @@ document.addEventListener("click",()=>{try{if("Notification" in window&&Notifica
 function toast(m,bad){const t=$("toast");t.textContent=m;t.className="toast"+(bad?" bad":"");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add("hidden"),3000)}
 
 /* ---------- state ---------- */
-let user,unsubs=[],all=[],recs=[],subs=[],revs=[],qs=[],loaded=false,view="dash",cChip="",openProp="",cShown=60,editId="",pEditId="",qProp=null,ibMode="sub",mMode="c2p",mStatus="New",mLinks=[],photos=[],wState={},pOrigVideo="";
+let user,unsubs=[],all=[],recs=[],subs=[],revs=[],qs=[],loaded=false,view="dash",cChip="customer",cQ="",cMoreOn=false,openProp="",cShown=60,editId="",pEditId="",qProp=null,ibMode="sub",mMode="c2p",mStatus="New",mLinks=[],photos=[],wState={},pOrigVideo="";
 const isAdmin=u=>u?.email&&ADMIN_EMAILS.map(x=>x.toLowerCase()).includes(u.email.toLowerCase());
 const codeNum=c=>{const m=String(c||"").match(/(\d+)$/);return m?Number(m[1]):0};
 const fmtCode=n=>"JPC-"+String(n).padStart(3,"0");
@@ -644,7 +644,8 @@ function navBadges(){const n=recs.filter(r=>["td","od"].includes(fuState(r))).le
   const i=subs.filter(s=>(s.status||"pending")==="pending").length+revs.filter(r=>(r.status||"pending")==="pending").length+qs.filter(r=>(r.status||"pending")==="pending").length;$("navIn").textContent=i;document.title=(i?"("+i+") ":"")+BASE_TITLE;$("navIn").classList.toggle("hidden",!i)}
 function opts(){fillSel("pf_area","All areas",props().map(areaOf));fillSel("pf_type","All types",props().map(p=>p.propertyType));fillSel("pf_av","Any availability",props().map(p=>p.availability||"Available"));
   fillSel("cf_area","All areas",recs.map(areaOf));fillSel("cf_status","All statuses",[...STATUSES,...recs.map(r=>r.status)]);fillSel("cf_src","All sources",recs.map(r=>r.source))}
-function datalists(){$("codeList").innerHTML=props().sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.code||"")}">${esc(lbl(p))}</option>`).join("");
+function datalists(){try{const base=Object.keys((window.JPCMatch&&JPCMatch.ALIASES)||{}).map(k=>k.replace(/\b\w/g,c=>c.toUpperCase()));const have=recs.map(r=>clean(r.area)).filter(Boolean);const seen=new Set(),L=[];[...base,...have].forEach(x=>{const k=x.toLowerCase();if(!seen.has(k)){seen.add(k);L.push(x)}});$("areaDL").innerHTML=L.sort().map(x=>`<option value="${esc(x)}">`).join("")}catch(_){}
+$("codeList").innerHTML=props().sort((a,b)=>codeNum(b.code)-codeNum(a.code)).map(p=>`<option value="${esc(p.code||"")}">${esc(lbl(p))}</option>`).join("");
   $("custList").innerHTML=recs.filter(r=>r.type==="customer").map(c=>`<option value="${esc(c.name||"")}">${esc(c.mobile||"")}</option>`).join("")}
 const skRows=c=>Array(5).fill(`<div class="row ${c}"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div></div></div>`).join("");
 const waBtn=(r,pid)=>waNum(r)?`<button class="mini wa" data-act="wa" data-id="${esc(r.id)}"${pid?` data-pid="${esc(pid)}"`:""}>WhatsApp</button>`:"";
@@ -740,17 +741,18 @@ function subRow(x,p){
 /* ---------- CONTACTS view ---------- */
 /* Budget filter: "40 L" => un sabhi ka budget jo 40 L ya usse upar tak jata hai (plot ka rate khareed sakte hain).
    "Up to" bhi diya ho to us range se milte-julte budget wale. Jinka budget likha hi nahi, woh filter me nahi aate. */
+const isInc=r=>r.type==="customer"&&!TERM.includes(r.status)&&(!clean(areaOf(r))||!(Number(r.budgetMin)||Number(r.budgetMax))||!clean(r.propertyType));
+function syncCF(){const show=(id,on)=>{const l=$(id).closest("label");if(l)l.style.display=on?"":"none"},t=cChip;show("cf_who",false);show("cf_cat",t!=="broker");show("cf_status",t!=="seller");show("cf_src",cMoreOn);show("cf_sort",cMoreOn);const bf=document.querySelector(".bfil");if(bf)bf.style.display=t==="broker"?"none":"";const b=$("cMoreBtn");if(b)b.textContent=cMoreOn?"⚙ Less":"⚙ More"}
 function budgetFilter(){const lo=parseINR($("cf_bmin").value),hi=parseINR($("cf_bmax").value);return(lo||hi)?{lo:lo||0,hi:hi||Infinity}:null}
-function budgetMatch(r,lo,hi){const a=Number(r.budgetMin||0),b=Number(r.budgetMax||0);if(!a&&!b)return false;const cl=a||0,ch=b||Infinity;return ch>=lo&&cl<=hi}
+function budgetMatch(r,lo,hi){let a=Number(r.budgetMin||0),b=Number(r.budgetMax||0);if(!a&&!b)return false;if(a&&!b&&r.type!=="seller"){b=a;a=0}const cl=a||0,ch=b||Infinity;return ch>=lo&&cl<=hi}
 const topBudget=r=>Number(r.budgetMax||r.budgetMin||0);
 function cList(){
   const BF=budgetFilter(),q=$("cq").value.trim().toLowerCase().replace(/\s+/g," "),F={a:$("cf_area").value,s:$("cf_status").value,r:$("cf_src").value,o:$("cf_sort").value,g:$("cf_cat").value,w:$("cf_who").value},wk=Date.now()-7*864e5;
   let v=recs.filter(r=>{
-    if(["customer","seller","broker"].includes(cChip)){if(r.type!==cChip)return false}else if(cChip==="od"){if(fuState(r)!=="od")return false}else if(cChip==="td"){if(fuState(r)!=="td")return false}
-    else if(cChip==="nofu"){if(!(r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate))return false}
-    else if(cChip==="noenq"){return false}
+    if(cChip&&r.type!==cChip)return false;if(cQ==="od"){if(fuState(r)!=="od")return false}else if(cQ==="td"){if(fuState(r)!=="td")return false}
+    else if(cQ==="nofu"){if(!(r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate))return false}else if(cQ==="inc"){if(!isInc(r))return false}
     if(F.w&&r.type!==F.w)return false;if(F.g&&SITE.categoryOf(r.propertyType)!==F.g)return false;
-    if(BF){if(r.type==="seller"&&cChip!=="seller")return false;if(!budgetMatch(r,BF.lo,BF.hi))return false}
+    if(BF){if(r.type==="broker")return false;if(r.type==="seller"&&cChip!=="seller")return false;if(!budgetMatch(r,BF.lo,BF.hi))return false}
     if(F.a&&areaOf(r)!==F.a)return false;if(F.s&&(r.status||"New")!==F.s)return false;if(F.r&&clean(r.source)!==F.r)return false;
     if(q&&![r.name,r.mobile,r.area,r.code,r.propertyType,r.details,r.notes,r.source,r.status,...interestsOf(r).map(i=>i.code+" "+i.label),lastNote(r)].map(clean).join(" ").toLowerCase().includes(q))return false;return true});
   const ts=r=>msOf(r.updatedAt)||msOf(r.createdAt);
@@ -758,8 +760,10 @@ function cList(){
   return v}
 function renderContacts(){
   const cnt=t=>recs.filter(r=>r.type===t).length,od=recs.filter(r=>fuState(r)==="od").length,td=recs.filter(r=>fuState(r)==="td").length,nofu=recs.filter(r=>r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate).length;
-  const C=[["","All",recs.length],["customer","🧑 Buyers / Customers",cnt("customer")],["seller","🏠 Sellers / Owners",cnt("seller")],["broker","🤝 Brokers / Agents",cnt("broker")],["td","📅 Today",td],["od","⚠ Overdue",od],["nofu","🔥 Hot, no follow-up",nofu]];
-  $("cChips").innerHTML=C.map(c=>`<button class="chip${cChip===c[0]?" on":""}" data-chip="${c[0]}">${c[1]} <b>${c[2]}</b></button>`).join("");
+  const T=cChip,ty=r=>!T||r.type===T,qn=k=>recs.filter(r=>ty(r)&&(k==="od"?fuState(r)==="od":k==="td"?fuState(r)==="td":k==="nofu"?(r.type==="customer"&&HOT.includes(r.status)&&!r.followUpDate):isInc(r))).length;
+  const tabs=[["customer","🧑 Buyers",cnt("customer")],["seller","🏠 Sellers",cnt("seller")],["broker","🤝 Brokers",cnt("broker")],["","All",recs.length]];
+  const qk2=[["td","📅 Today"],["od","⚠ Overdue"],["nofu","🔥 Hot, no follow-up"],["inc","📝 Data adhoora"]].filter(q=>T!=="broker"||q[0]==="od"||q[0]==="td").filter(q=>T!=="seller"||q[0]==="od"||q[0]==="td");
+  $("cChips").innerHTML=tabs.map(c=>`<button class="chip${cChip===c[0]?" on":""}" data-chip="${c[0]}">${c[1]} <b>${c[2]}</b></button>`).join("")+`<span style="width:1px;background:var(--line);margin:0 6px"></span>`+qk2.map(q=>`<button class="chip${cQ===q[0]?" on":""}" data-q="${q[0]}">${q[1]} <b>${qn(q[0])}</b></button>`).join("");syncCF();
   if(!loaded){$("cRows").innerHTML=skRows("rc");return}
   const v=cList();$("cSub").textContent=`${v.length} of ${recs.length} contacts · buyers, sellers and brokers in one place`;
   {const BF=budgetFilter(),n=$("cbNote");if(!BF)n.innerHTML="";else{const nb=recs.filter(r=>r.type!=="seller"&&!Number(r.budgetMin||0)&&!Number(r.budgetMax||0)).length;
@@ -770,11 +774,12 @@ function renderContacts(){
   const m=$("cMore");m.classList.toggle("hidden",v.length<=cShown);m.innerHTML=`Showing ${page.length} of ${v.length} · <button class="btn" data-act="more">Load more</button>`;
 }
 function cRow(r){
-  const nm=clean(r.name)||"Unnamed",ints=interestsOf(r),created=msOf(r.createdAt),dk=dupKeys()[r.type+last10(r.mobile)]>1;
+  const miss=r.type==="customer"?[!clean(areaOf(r))&&"Area",!(Number(r.budgetMin)||Number(r.budgetMax))&&"Budget"].filter(Boolean):[],nm=clean(r.name)||"Unnamed",ints=interestsOf(r),created=msOf(r.createdAt),dk=dupKeys()[r.type+last10(r.mobile)]>1;
   const req=r.type==="seller"?`<b>${esc(r.code||"")} · ${esc(lbl(r))}</b><span>${esc(budgetText(r))}</span>`
-    :`<b>${esc([r.propertyType,areaOf(r)].filter(Boolean).join(" • ")||"No requirement noted")}</b><span>${esc(budgetText(r))}</span>`;
+    :r.type==="broker"?`<b>${esc(r.company||"Broker / Agent")}</b><span>${esc(r.areasServed||"")}</span>`
+    :`<b>${esc([r.propertyType,areaOf(r),r.size].filter(Boolean).join(" • ")||"No requirement noted")}</b>${budgetText(r)!=="—"?`<span style="font-weight:800;color:#0f7a55">💰 ${esc(budgetText(r))}</span>`:""}${miss.length?`<span style="color:#b45309;font-size:11px;font-weight:700">⚠ ${miss.join(", ")} nahi likha</span>`:""}`;
   const chips=ints.length?`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">${ints.map(i=>`<button class="code" data-act="goProp" data-id="${esc(i.id)}" title="${esc(i.label||"")}">${esc(i.code||"Property")}</button>`).join("")}</div>`:"";
-  const ln=lastNote(r);
+  const ln0=lastNote(r),ln=/^(Contact added|Property listed as)/i.test(ln0||"")?"":ln0;
   return`<div class="row rc hv" data-cid="${esc(r.id)}"><div class="who"><div class="av">${esc(ini(nm))}</div><div style="min-width:0"><b>${esc(nm)}<span class="tag ${r.type}">${TYPE_LBL[r.type]||"Contact"}</span>${dk?'<span class="dupt">Duplicate?</span>':""}</b><span>${esc(r.mobile||"No mobile")}${r.source?" · "+esc(r.source):""}</span></div></div>
    <div class="cell">${req}${chips}${ln?`<span class="lastn" style="margin-top:3px">“${esc(ln)}”</span>`:""}</div>
    <div><span class="st ${cls(r.status||"New")}">${esc(r.status||"New")}</span><small class="ad">${created?"Added "+fmtMs(created):"—"}</small></div>
@@ -815,7 +820,8 @@ const hint=(i,h)=>$(i).addEventListener("input",()=>{const n=parseINR($(i).value
 hint("m_bmin","h_bmin");hint("m_bmax","h_bmax");hint("p_price","h_price");
 function drawTL(r){const t=(Array.isArray(r?.timeline)?r.timeline:[]).filter(x=>x&&x.text).sort((a,b)=>(b.at||0)-(a.at||0));
   $("tl").innerHTML=t.length?t.map(x=>`<div class="tle"><div><b>${KIND[x.kind]||"📝"} ${esc(x.text)}</b><span>${fmtMs(x.at)} · ${fmtTime(x.at)}</span></div></div>`).join(""):`<div class="empty" style="padding:24px">No conversation recorded yet.</div>`}
-function formBuyer(){return{area:$("m_area").value,propertyType:$("m_ptype").value,size:$("m_size").value,details:$("m_details").value,budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax")}}
+function bud(){let a=getMoney("m_bmin"),b=getMoney("m_bmax");if(a&&!b){b=a;a=null}return{budgetMin:a,budgetMax:b}}
+function formBuyer(){return{area:$("m_area").value,propertyType:$("m_ptype").value,size:$("m_size").value,details:$("m_details").value,...bud()}}
 function drawMM(){
   const list=matchesForBuyer(formBuyer()).filter(x=>!mLinks.some(i=>i.id===x.p.id)).slice(0,6);
   $("mmList").innerHTML=list.length?`<div class="mq">Properties matching this requirement</div>`+list.map(x=>`<div class="mrow" style="grid-template-columns:80px minmax(0,1fr) 64px auto"><div><span class="code">${esc(x.p.code||"—")}</span></div><div class="cell"><b>${esc(lbl(x.p))}</b><span>${esc(budgetText(x.p))} · <span class="why">${esc(x.why.join(" • "))}</span></span></div><div><span class="sc2${scCls(x.score)}">${x.score}%</span></div><div><button class="btn sm" type="button" data-mmlink="${esc(x.p.id)}">Link</button></div></div>`).join(""):`<div class="empty" style="padding:30px">Fill in area, property type and budget in the Details tab to see matching properties here.</div>`}
@@ -845,7 +851,7 @@ async function saveC(){
   if(m10&&recs.some(c=>c.id!==editId&&last10(c.mobile)===m10&&c.type===type))return toast("A contact with this mobile already exists",true);
   const old=editId?recs.find(x=>x.id===editId)||{}:{};
   const d={type,name,mobile,whatsapp:mobile,source:$("m_src").value,status:mStatus,area:clean($("m_area").value),propertyType:$("m_ptype").value,size:clean($("m_size").value),
-    budgetMin:getMoney("m_bmin"),budgetMax:getMoney("m_bmax"),details:clean($("m_details").value),notes:$("m_notes").value.trim(),email:clean($("m_email").value),altMobile:clean($("m_alt").value),
+    ...bud(),details:clean($("m_details").value),notes:$("m_notes").value.trim(),email:clean($("m_email").value),altMobile:clean($("m_alt").value),
     company:clean($("m_company").value),areasServed:clean($("m_areas").value),followUpDate:$("m_date").value||"",followUpNote:clean($("m_fnote").value),updatedAt:serverTimestamp()};
   if(type==="customer"){d.interests=mLinks;d.interestCode=mLinks[0]?.code||"";d.publicVisible=$("m_pub").checked;d.publicDisplayName="Buyer Requirement"}else{d.publicVisible=false}
   $("m_save").disabled=true;
@@ -1209,19 +1215,21 @@ $("cf_who").addEventListener("change",()=>{if(["customer","seller","broker"].inc
 $("cbQuick").addEventListener("click",e=>{const b=e.target.closest("[data-bq]");if(!b)return;$("cf_bmin").value=inr(+b.dataset.bq).replace("₹","");$("cf_bmax").value="";$("h_cbmin").textContent="= "+inr(+b.dataset.bq);$("h_cbmax").textContent="";cShown=60;renderContacts()});
 $("pView").addEventListener("click",e=>{const b=e.target.closest("[data-pv]");if(!b)return;pView=b.dataset.pv;try{localStorage.setItem("jpcPropView",pView)}catch(_){}renderProps()});
 $("pReset").onclick=()=>{$("pq").value="";["pf_area","pf_cat","pf_type","pf_av","pf_show"].forEach(i=>$(i).value="");renderProps()};
-$("cReset").onclick=()=>{$("cq").value="";["cf_who","cf_cat","cf_area","cf_status","cf_src","cf_bmin","cf_bmax"].forEach(i=>$(i).value="");$("h_cbmin").textContent=$("h_cbmax").textContent="";$("cf_sort").value="latest";cChip="";cShown=60;renderContacts()};
+$("cMoreBtn").onclick=()=>{cMoreOn=!cMoreOn;renderContacts()};
+$("cReset").onclick=()=>{$("cq").value="";["cf_who","cf_cat","cf_area","cf_status","cf_src","cf_bmin","cf_bmax"].forEach(i=>$(i).value="");$("h_cbmin").textContent=$("h_cbmax").textContent="";$("cf_sort").value="latest";cChip="customer";cQ="";cShown=60;renderContacts()};
 document.querySelectorAll("[data-mm]").forEach(b=>b.onclick=()=>{mMode=b.dataset.mm;document.querySelectorAll("[data-mm]").forEach(x=>x.classList.toggle("on",x===b));$("mPick").value="";renderMatch()});
 document.addEventListener("click",async e=>{
   const t=e.target;
   const ib=t.closest("[data-ib]");if(ib){ibMode=ib.dataset.ib;renderInbox();return}
-  const chip=t.closest("[data-chip]");if(chip){cChip=chip.dataset.chip===cChip?"":chip.dataset.chip;if(["customer","seller","broker"].includes(chip.dataset.chip))$("cf_who").value=cChip;else if($("cf_who").value&&["td","od","nofu"].includes(cChip)&&cChip!=="nofu")$("cf_who").value=$("cf_who").value;cShown=60;renderContacts();return}
+  const chip=t.closest("[data-chip]");if(chip){cChip=chip.dataset.chip;cShown=60;renderContacts();return}
+  const qc=t.closest("[data-q]");if(qc){cQ=qc.dataset.q===cQ?"":qc.dataset.q;cShown=60;renderContacts();return}
   const a=t.closest("[data-act]");
   if(a){const id=a.dataset.id,act=a.dataset.act;
     try{
     if(act==="addP")openP();else if(act==="addC")openC();else if(act==="more"){cShown+=60;renderContacts()}
     else if(act==="pShare")openShare(id);else if(act==="pLink")openQ(id);else if(act==="pEdit")openP(id);else if(act==="pAv"){const p=propById(id),v=a.dataset.v;if(p&&v&&v!==(p.availability||"Available")){await updateDoc(doc(db,COL,id),{availability:v,updatedAt:serverTimestamp()});await publishSync(id,{...p,availability:v});toast(p.code+" → "+v)}}else if(act==="cEdit")openC(id);else if(act==="goProp")goProp(id);
     else if(act==="wa")openW(id,a.dataset.pid);else if(act==="bq")openBQ(id);
-    else if(act==="go"){const to=a.dataset.to;if(to==="nofu"){setView("contacts");cChip="nofu";cShown=60;renderContacts()}else if(to==="noenq"){setView("props");$("pf_show").value="none";renderProps()}else setView(to)}
+    else if(act==="go"){const to=a.dataset.to;if(to==="nofu"){setView("contacts");cChip="customer";cQ="nofu";cShown=60;renderContacts()}else if(to==="noenq"){setView("props");$("pf_show").value="none";renderProps()}else setView(to)}
     else if(act==="copyLink"){const p=propById(id);if(p){await navigator.clipboard.writeText(propLink(p));toast("Website link copied")}}
     else if(act==="mLink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(c&&p){const ok=await linkBuyer(c,p);toast(ok?c.name+" → "+p.code+" linked":"Already linked")}}
     else if(act==="unlink"){const c=recs.find(x=>x.id===id),p=propById(a.dataset.pid);if(!c||!p||!confirm(`Unlink ${c.name} from ${p.code}?`))return;

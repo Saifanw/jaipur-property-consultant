@@ -6,7 +6,7 @@
 <title>Properties for Sale in Jaipur | Jaipur Property Consultant</title>
 <meta name="description" content="Browse approved plots, houses, shops and land for sale in Jaipur and Jhotwara. Filter by area, type and budget. Save and share properties.">
 <meta name="theme-color" content="#0f1b2d">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
@@ -183,5 +183,6 @@ onSnapshot(query(collection(db, "publicRequirements"), where("type", "==", "sell
 }, () => { $("count").textContent = "Could not load"; $("grid").innerHTML = '<div class="empty-box"><strong>Properties could not be loaded right now</strong>Please check your internet connection or message us on WhatsApp.</div>'; });
 </script>
 <script type="module" src="assets/jpc-analytics-tracker.js"></script>
+<script src="/assets/pwa.js" defer></script>
 </body>
 </html>

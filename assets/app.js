@@ -245,7 +245,6 @@ function init(){
   chrome(); paintSaved(); adminTools();
   document.addEventListener("jpc:rendered", paintSaved);
 }
-if("serviceWorker" in navigator && location.protocol !== "file:") addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 
 window.JPC = { verOf, priceTag, SITE, $, esc, ico, wa, hidden, millis, tidy, cleanArea, unitSize, inr, priceText, photosOf, availClass, perGaj, titleOf, GALLERY, META, sliderHTML, propertyCard, openLightbox, closeLightbox, savedList, isSaved, toggleSaved, paintSaved, toast, share, pageUrl };

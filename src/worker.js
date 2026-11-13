@@ -170,6 +170,14 @@ export default {
       const u = new URL(request.url);
       return finish(new Response(tagSvg({ num: (u.searchParams.get("n") || "").slice(0, 12), unit: (u.searchParams.get("u") || "").slice(0, 8) }), { headers: { "content-type": "image/svg+xml", "cache-control": "public, max-age=86400" } }));
     }
+    if (get && (pathname === "/sw.js" || pathname === "/manifest.json")) {
+      // installability: right content-type, never stale, service worker allowed to control the whole site
+      const r = await env.ASSETS.fetch(request);
+      if (!r.ok) return finish(r);
+      return finish(r, pathname === "/sw.js"
+        ? { "content-type": "text/javascript; charset=utf-8", "cache-control": "no-cache", "service-worker-allowed": "/" }
+        : { "content-type": "application/manifest+json; charset=utf-8", "cache-control": "no-cache" });
+    }
     const res = await env.ASSETS.fetch(request);
     if (get && PRIVATE_PAGE.test(pathname)) return finish(res, { "x-robots-tag": "noindex, nofollow", "cache-control": "no-store" });
     if (get && res.ok && (res.headers.get("content-type") || "").includes("text/html")) return finish(decorate(res, url));

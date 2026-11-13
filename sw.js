@@ -1,6 +1,6 @@
 /* Service worker: makes the site installable (Chrome needs a fetch handler) and keeps the app shell offline.
    Firebase / admin / CRM pages are never cached. Bump VERSION when you change shared files. */
-const VERSION = "jpc-v7";
+const VERSION = "jpc-v8";
 const SHELL = ["/", "/assets/site.css", "/assets/config.js", "/assets/sprite.js", "/assets/i18n.js", "/assets/app.js", "/assets/match.js", "/assets/pwa.js", "/manifest.json", "/assets/icons/icon-192.png"];
 const PRIVATE = /^\/(admin|crm-smart|visitor-analytics|property-os|properties-crm|crm-demo)(\.html)?\/?$/;
 
